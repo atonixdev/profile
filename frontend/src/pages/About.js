@@ -32,7 +32,7 @@ const About = () => {
     <div className="py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8 text-center">About Realm</h1>
+          <h1 className="text-4xl font-bold mb-8 text-center">About Samuel Realm</h1>
 
           {/* Profile Image and Bio */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -63,12 +63,12 @@ const About = () => {
                   <div className="text-sm text-gray-600">Years Experience</div>
                 </div>
                 <div className="text-center p-4 bg-primary-50 rounded-lg">
-                  <div className="text-2xl font-bold text-primary-600">50+</div>
-                  <div className="text-sm text-gray-600">Projects Completed</div>
+                  <div className="text-2xl font-bold text-primary-600">Sovereign</div>
+                  <div className="text-sm text-gray-600">Infrastructure Focus</div>
                 </div>
                 <div className="text-center p-4 bg-primary-50 rounded-lg">
-                  <div className="text-2xl font-bold text-primary-600">100%</div>
-                  <div className="text-sm text-gray-600">Client Satisfaction</div>
+                  <div className="text-2xl font-bold text-primary-600">Africa</div>
+                  <div className="text-sm text-gray-600">Digital Independence</div>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@ const About = () => {
 
           {/* Detailed About Section */}
           <div className="mb-12">
-            <h3 className="text-2xl font-bold mb-6">About Realm</h3>
+            <h3 className="text-2xl font-bold mb-6">About Samuel Realm</h3>
             <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
               {profile?.about ? (
                 <div className="space-y-6">

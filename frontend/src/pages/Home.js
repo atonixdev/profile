@@ -61,19 +61,19 @@ const Home = () => {
             {/* Hero Content */}
             <div className="text-center lg:text-left">
               <div className="inline-block bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                <span className="text-sm font-semibold">Welcome to my portfolio</span>
+                <span className="text-sm font-semibold">Sovereign Infrastructure Architect</span>
               </div>
 
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-                Hi, I'm <span className="text-yellow-300">Realm</span>
+                Hi, I'm <span className="text-yellow-300">Samuel Realm</span>
               </h1>
 
               <p className="text-xl lg:text-2xl mb-4 text-primary-100">
-                {profile?.title || 'Founder & Technical Architect at AtonixCorp'}
+                Founder & Technical Architect at AtonixCorp
               </p>
 
               <p className="text-lg mb-8 text-gray-200 max-w-2xl">
-                {profile?.bio || 'Building scalable, secure, and developer-ready ecosystems for Africa and the global market. Specializing in cloud infrastructure, AI systems, DevOps pipelines, and high-performance computing.'}
+                Building sovereign infrastructure for Africa with cloud architecture, AI systems, DevOps pipelines, and high-performance computing under a mission of digital independence and long-term innovation.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -161,7 +161,7 @@ const Home = () => {
                   <span className="font-bold">8+ Years</span>
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-green-400 text-white px-4 py-2 rounded-lg shadow-lg animate-pulse">
-                  <span className="font-bold">50+ Projects</span>
+                  <span className="font-bold">Sovereign Infrastructure</span>
                 </div>
               </div>
 
@@ -184,19 +184,19 @@ const Home = () => {
       <section className="py-12 bg-gradient-to-r from-primary-600 to-primary-700">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Ready to Build Sovereign Infrastructure?</h2>
             <p className="text-xl text-primary-100 mb-8">
-              Get a detailed quote tailored to your specific needs and timeline
+              Get a detailed consultation for your cloud architecture, AI systems, or DevOps pipeline needs
             </p>
             <Link
               to="/contact"
               onClick={() => {
                 // This will be handled by the contact page
-                sessionStorage.setItem('selectedInquiryType', 'quote');
+                sessionStorage.setItem('selectedInquiryType', 'consultation');
               }}
               className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
-              Get Free Quote
+              Get Free Consultation
             </Link>
           </div>
         </div>

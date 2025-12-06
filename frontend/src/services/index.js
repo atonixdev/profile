@@ -49,21 +49,3 @@ export const inquiryService = {
   create: (data) => api.post('/contact/inquiries/', data),
   updateStatus: (id, status) => api.patch(`/contact/inquiries/${id}/update_status/`, { status }),
 };
-
-// Blog
-export const blogService = {
-  getAll: (params = {}) => api.get('/blog/posts/', { params }),
-  getPublished: (params = {}) => api.get('/blog/posts/published/', { params }),
-  getById: (id) => api.get(`/blog/posts/${id}/`),
-  getBySlug: (slug) => api.get('/blog/posts/', { params: { slug } }),
-  create: (data, token) => api.post('/blog/posts/', data, {
-    headers: { 'Authorization': `Bearer ${token}` }
-  }),
-  update: (id, data, token) => api.put(`/blog/posts/${id}/`, data, {
-    headers: { 'Authorization': `Bearer ${token}` }
-  }),
-  delete: (id, token) => api.delete(`/blog/posts/${id}/`, {
-    headers: { 'Authorization': `Bearer ${token}` }
-  }),
-  getCategories: () => api.get('/blog/posts/categories/'),
-};
