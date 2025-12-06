@@ -15,7 +15,7 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     ordering = ['-published_at']
 
     def get_permissions(self):
-        if self.action in ['list', 'retrieve']:
+        if self.action in ['list', 'retrieve', 'published', 'categories']:
             permission_classes = [permissions.AllowAny]
         else:
             permission_classes = [permissions.IsAuthenticated]
