@@ -111,6 +111,14 @@ const Dashboard = () => {
           </Link>
 
           <Link
+            to="/admin/blog"
+            className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+          >
+            <h3 className="text-xl font-bold mb-2">Manage Blog</h3>
+            <p className="text-gray-600">Create and publish blog posts</p>
+          </Link>
+
+          <Link
             to="/admin/inquiries"
             className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
           >
