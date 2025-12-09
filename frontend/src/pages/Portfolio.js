@@ -8,7 +8,7 @@ const Portfolio = () => {
   const projects = [
     {
       id: 1,
-      title: 'OpenStack Private Cloud - Stellenbosch University',
+      title: 'OpenStack Private Cloud ',
       description: 'Designed and deployed a comprehensive OpenStack cloud infrastructure supporting AI research workloads.',
       category: 'cloud',
       technologies: ['OpenStack', 'OVN', 'Kubernetes', 'Ceph'],

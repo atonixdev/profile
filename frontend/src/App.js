@@ -7,6 +7,8 @@ import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import ProjectDetail from './pages/ProjectDetail';
 import Testimonials from './pages/Testimonials';
+import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
@@ -31,6 +33,8 @@ function App() {
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="portfolio/:id" element={<ProjectDetail />} />
             <Route path="testimonials" element={<Testimonials />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="contact" element={<Contact />} />
           </Route>
 
@@ -48,6 +52,7 @@ function App() {
       </Router>
     </AuthProvider>
   );
+
 }
 
 export default App;
