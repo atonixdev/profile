@@ -112,7 +112,7 @@ const AdminProjects = () => {
                     </button>
                   </td>
                   <td className="px-6 py-4">
-                    {project.is_featured ? '⭐ Featured' : '-'}
+                    {project.is_featured ? 'Featured' : '-'}
                   </td>
                   <td className="px-6 py-4">
                     <button

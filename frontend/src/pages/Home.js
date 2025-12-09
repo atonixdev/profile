@@ -76,6 +76,26 @@ const Home = () => {
                 Building sovereign infrastructure for Africa with cloud architecture, AI systems, DevOps pipelines, and high-performance computing under a mission of digital independence and long-term innovation.
               </p>
 
+              {/* Key Expertise */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="text-center">
+                  <div className="text-sm font-semibold">OpenStack</div>
+                  <div className="text-xs text-gray-300">Cloud Architecture</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-sm font-semibold">AI/ML</div>
+                  <div className="text-xs text-gray-300">Neuron Data Centers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-sm font-semibold">DevOps</div>
+                  <div className="text-xs text-gray-300">CI/CD Pipelines</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-sm font-semibold">Sovereign</div>
+                  <div className="text-xs text-gray-300">African Infrastructure</div>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link
                   to="/portfolio"
@@ -177,6 +197,158 @@ const Home = () => {
           <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
           </svg>
+        </div>
+      </section>
+
+      {/* Core Expertise Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Core Infrastructure Expertise</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Specialized in building sovereign, scalable infrastructure that powers Africa's digital future
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* OpenStack Cloud Architecture */}
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold mb-4 text-primary-600">OpenStack Cloud Architecture</h3>
+              <ul className="text-gray-700 space-y-2">
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Full cloud orchestration</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Bare-metal & virtualized clusters</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>OVN/OVS networking & CNI plugins</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Multi-region replication & failover</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Neuron Data Center Engineering */}
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold mb-4 text-primary-600">Neuron Data Center Engineering</h3>
+              <ul className="text-gray-700 space-y-2">
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>AI/ML workload optimization</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>GPU & Neuron accelerators</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Containerized microservices</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Edge-to-cloud data pipelines</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* DevOps & CI/CD */}
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold mb-4 text-primary-600">DevOps & CI/CD Pipelines</h3>
+              <ul className="text-gray-700 space-y-2">
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Git, GitHub, Gerrit workflows</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Jenkins, GitLab CI, GitHub Actions</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Docker & nerdctl containerization</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Zero-downtime deployments</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* AI & Systems Programming */}
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold mb-4 text-primary-600">AI & Systems Programming</h3>
+              <ul className="text-gray-700 space-y-2">
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>C/C++ low-level systems</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Python, TensorFlow, PyTorch</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>GPU/Neuron model deployment</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>AI-powered API design</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Communication Infrastructure */}
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold mb-4 text-primary-600">Communication Infrastructure</h3>
+              <ul className="text-gray-700 space-y-2">
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Custom SMTP servers</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>DKIM, SPF, DMARC authentication</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>AI-driven marketing automation</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Multi-channel delivery systems</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Vision & Mission */}
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold mb-4 text-primary-600">Vision & Mission</h3>
+              <ul className="text-gray-700 space-y-2">
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Sovereign African infrastructure</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Innovation hubs in Stellenbosch</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Digital independence & autonomy</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Finance, science & community empowerment</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 

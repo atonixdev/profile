@@ -230,6 +230,16 @@ const About = () => {
                   <span className="mr-2">🐦</span> Twitter
                 </a>
               )}
+              {profile?.gitlab_url && (
+                <a
+                  href={profile.gitlab_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors"
+                >
+                  <span className="mr-2">📚</span> GitLab
+                </a>
+              )}
               {profile?.website_url && (
                 <a
                   href={profile.website_url}

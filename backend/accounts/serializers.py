@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'full_name', 'title', 'bio', 'about', 'avatar', 'resume',
             'email', 'phone', 'location', 'linkedin_url', 'github_url',
-            'twitter_url', 'website_url', 'skills', 'is_active',
+            'twitter_url', 'gitlab_url', 'website_url', 'skills', 'is_active',
             'updated_at', 'created_at'
         ]
         read_only_fields = ['created_at', 'updated_at']
