@@ -61,7 +61,54 @@ profile/
         └── App.js
 ```
 
-## 🚀 Getting Started
+## 🐳 Docker Deployment (Quick Start)
+
+The easiest way to run the entire project is with Docker.
+
+### Prerequisites
+- Docker Desktop installed and running
+
+### Quick Start
+
+1. **Copy environment file:**
+```bash
+cp .env.example .env
+```
+
+2. **Build and start containers:**
+```bash
+# Windows (PowerShell)
+.\docker-build.ps1 build-all
+.\docker-build.ps1 start
+
+# macOS/Linux
+./docker-build.sh build-all
+./docker-build.sh start
+```
+
+3. **Access your application:**
+- Backend API: http://localhost:8000
+- Frontend: http://localhost:3000
+- Database: localhost:5432
+
+4. **Useful commands:**
+```bash
+# View logs
+.\docker-build.ps1 logs
+
+# Add sample data
+.\docker-build.ps1 add-sample
+
+# Create admin user
+.\docker-build.ps1 create-user
+
+# Stop services
+.\docker-build.ps1 stop
+```
+
+📚 **For detailed Docker commands, see [DOCKER_QUICKSTART.md](DOCKER_QUICKSTART.md) or [DOCKER_GUIDE.md](DOCKER_GUIDE.md)**
+
+## 🚀 Getting Started (Manual Setup)
 
 ### Prerequisites
 - Python 3.9+
