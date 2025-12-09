@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { authService } from '../services';
+import axios from 'axios';
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -11,25 +11,62 @@ export const AuthProvider = ({ children }) => {
     // Check if user is logged in on mount
     const token = localStorage.getItem('access_token');
     if (token) {
-      setUser({ token });
+      // Try to fetch user details
+      axios
+        .get('http://localhost:8000/api/accounts/profiles/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.data && response.data.length > 0) {
+            setUser(response.data[0]);
+          }
+        })
+        .catch(() => {
+          // If token is invalid, clear it
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+          setUser(null);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   const login = async (username, password) => {
     try {
-      const response = await authService.login({ username, password });
+      const response = await axios.post(
+        'http://localhost:8000/api/token/',
+        { username, password }
+      );
       const { access, refresh } = response.data;
-      
+
       localStorage.setItem('access_token', access);
       localStorage.setItem('refresh_token', refresh);
-      
-      setUser({ token: access });
+
+      // Fetch user details
+      const userResponse = await axios.get(
+        'http://localhost:8000/api/accounts/profiles/',
+        {
+          headers: {
+            Authorization: `Bearer ${access}`,
+          },
+        }
+      );
+
+      if (userResponse.data && userResponse.data.length > 0) {
+        setUser(userResponse.data[0]);
+      }
+
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error.response?.data?.detail || 'Login failed' 
+      return {
+        success: false,
+        error: error.response?.data?.detail || 'Login failed',
       };
     }
   };
@@ -42,6 +79,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     user,
+    setUser,
     login,
     logout,
     loading,

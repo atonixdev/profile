@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'testimonials',
     'contact',
     'blog',
+    'community',
 ]
 
 MIDDLEWARE = [

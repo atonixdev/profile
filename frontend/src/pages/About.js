@@ -38,7 +38,7 @@ const About = () => {
             <div className="text-center">
               <h1 className="text-5xl font-bold mb-4 text-gray-900">About Samuel Realm</h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Architect of sovereign infrastructure solutions empowering Africa's digital independence and innovation
+                Architect of sovereign infrastructure solutions enabling digital independence and innovation globally, with deep expertise in emerging markets
               </p>
             </div>
           </div>
@@ -92,8 +92,8 @@ const About = () => {
                   <div className="text-sm text-gray-600 mt-1">Projects Delivered</div>
                 </div>
                 <div className="bg-white p-4 rounded-lg border-l-4 border-primary-600 shadow-sm">
-                  <div className="text-3xl font-bold text-primary-600">Africa</div>
-                  <div className="text-sm text-gray-600 mt-1">Primary Focus Region</div>
+                  <div className="text-3xl font-bold text-primary-600">Global</div>
+                  <div className="text-sm text-gray-600 mt-1">Emerging Markets Focus</div>
                 </div>
               </div>
 

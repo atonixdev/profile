@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -10,6 +10,13 @@ import Testimonials from './pages/Testimonials';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import CommunityDashboard from './pages/CommunityDashboard';
+import Discussions from './pages/Discussions';
+import Members from './pages/Members';
+import Events from './pages/Events';
+import Resources from './pages/Resources';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -38,21 +45,36 @@ function App() {
             <Route path="contact" element={<Contact />} />
           </Route>
 
+          {/* Auth Routes */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Protected Community Routes */}
+          <Route element={<Layout><ProtectedRoute /></Layout>}>
+            <Route path="community" element={<CommunityDashboard />} />
+            <Route path="community/discussions" element={<Discussions />} />
+            <Route path="community/members" element={<Members />} />
+            <Route path="community/events" element={<Events />} />
+            <Route path="community/resources" element={<Resources />} />
+          </Route>
+
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<ProtectedRoute />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="projects" element={<AdminProjects />} />
-            <Route path="services" element={<AdminServices />} />
-            <Route path="testimonials" element={<AdminTestimonials />} />
-            <Route path="inquiries" element={<AdminInquiries />} />
-            <Route path="profile" element={<AdminProfile />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/projects" element={<AdminProjects />} />
+            <Route path="/admin/services" element={<AdminServices />} />
+            <Route path="/admin/testimonials" element={<AdminTestimonials />} />
+            <Route path="/admin/inquiries" element={<AdminInquiries />} />
+            <Route path="/admin/profile" element={<AdminProfile />} />
           </Route>
+
+          {/* Catch all - redirect to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </AuthProvider>
   );
-
 }
 
 export default App;

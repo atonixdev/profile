@@ -73,7 +73,7 @@ const Home = () => {
               </p>
 
               <p className="text-lg mb-8 text-gray-200 max-w-2xl">
-                Building sovereign infrastructure for Africa with cloud architecture, AI systems, DevOps pipelines, and high-performance computing under a mission of digital independence and long-term innovation.
+                Building scalable, sovereign infrastructure globally with cloud architecture, AI systems, DevOps pipelines, and high-performance computing. Specialized in emerging markets and digital independence solutions.
               </p>
 
               {/* Key Expertise */}
@@ -91,8 +91,8 @@ const Home = () => {
                   <div className="text-xs text-gray-300">CI/CD Pipelines</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-sm font-semibold">Sovereign</div>
-                  <div className="text-xs text-gray-300">African Infrastructure</div>
+                  <div className="text-sm font-semibold">Global</div>
+                  <div className="text-xs text-gray-300">Emerging Markets</div>
                 </div>
               </div>
 
@@ -206,7 +206,7 @@ const Home = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Core Infrastructure Expertise</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Specialized in building sovereign, scalable infrastructure that powers Africa's digital future
+              Specialized in building sovereign, scalable infrastructure for global markets, with deep expertise in emerging economies and digital independence solutions
             </p>
           </div>
 
@@ -332,11 +332,11 @@ const Home = () => {
               <ul className="text-gray-700 space-y-2">
                 <li className="flex items-start">
                   <span className="text-primary-500 mr-2">•</span>
-                  <span>Sovereign African infrastructure</span>
+                  <span>Global sovereign infrastructure solutions</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary-500 mr-2">•</span>
-                  <span>Innovation hubs in Stellenbosch</span>
+                  <span>Emerging markets expertise & innovation</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary-500 mr-2">•</span>

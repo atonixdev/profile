@@ -89,12 +89,12 @@ const Services = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Infrastructure & Technology Services</h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-6">
-            Sovereign infrastructure solutions for Africa and beyond. From cloud architecture to AI systems, DevOps pipelines to high-performance computing — we build the foundation for digital independence and innovation.
+            Sovereign infrastructure solutions for global markets. From cloud architecture to AI systems, DevOps pipelines to high-performance computing — we build the foundation for digital independence and innovation worldwide, with specialized expertise in emerging markets.
           </p>
           <div className="bg-primary-50 rounded-lg p-6 max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-primary-800 mb-2">AtonixCorp's Mission</h2>
             <p className="text-gray-700">
-              Building scalable, secure, and developer-ready ecosystems that empower African innovation and reduce dependency on external infrastructure providers.
+              Building scalable, secure, and developer-ready ecosystems that empower global innovation and digital sovereignty, with deep expertise in emerging markets and developing regions.
             </p>
           </div>
         </div>
