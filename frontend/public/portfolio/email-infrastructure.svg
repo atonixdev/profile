@@ -1,0 +1,105 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="infraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#infraGradient)"/>
+  
+  <!-- Data center rack -->
+  <g>
+    <!-- Left rack -->
+    <rect x="40" y="60" width="50" height="180" rx="4" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+    
+    <!-- Rack units -->
+    <rect x="50" y="75" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="58" cy="81" r="2" fill="#10B981"/>
+    <circle cx="72" cy="81" r="2" fill="#EF4444"/>
+    
+    <rect x="50" y="95" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="58" cy="101" r="2" fill="#10B981"/>
+    <circle cx="72" cy="101" r="2" fill="#10B981"/>
+    
+    <rect x="50" y="115" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="58" cy="121" r="2" fill="#F59E0B"/>
+    <circle cx="72" cy="121" r="2" fill="#EF4444"/>
+    
+    <rect x="50" y="135" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="58" cy="141" r="2" fill="#10B981"/>
+    <circle cx="72" cy="141" r="2" fill="#10B981"/>
+    
+    <rect x="50" y="155" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="58" cy="161" r="2" fill="#F59E0B"/>
+    <circle cx="72" cy="161" r="2" fill="#EF4444"/>
+    
+    <rect x="50" y="175" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="58" cy="181" r="2" fill="#10B981"/>
+    <circle cx="72" cy="181" r="2" fill="#10B981"/>
+    
+    <rect x="50" y="195" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="58" cy="201" r="2" fill="#10B981"/>
+    <circle cx="72" cy="201" r="2" fill="#EF4444"/>
+    
+    <!-- Middle rack -->
+    <rect x="155" y="60" width="50" height="180" rx="4" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+    
+    <!-- Duplicate units for middle rack -->
+    <rect x="165" y="75" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="173" cy="81" r="2" fill="#10B981"/>
+    <circle cx="187" cy="81" r="2" fill="#10B981"/>
+    
+    <rect x="165" y="95" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="173" cy="101" r="2" fill="#EF4444"/>
+    <circle cx="187" cy="101" r="2" fill="#10B981"/>
+    
+    <rect x="165" y="115" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="173" cy="121" r="2" fill="#10B981"/>
+    <circle cx="187" cy="121" r="2" fill="#EF4444"/>
+    
+    <rect x="165" y="135" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="173" cy="141" r="2" fill="#10B981"/>
+    <circle cx="187" cy="141" r="2" fill="#10B981"/>
+    
+    <rect x="165" y="155" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="173" cy="161" r="2" fill="#F59E0B"/>
+    <circle cx="187" cy="161" r="2" fill="#EF4444"/>
+    
+    <rect x="165" y="175" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="173" cy="181" r="2" fill="#10B981"/>
+    <circle cx="187" cy="181" r="2" fill="#EF4444"/>
+    
+    <!-- Right rack -->
+    <rect x="270" y="60" width="50" height="180" rx="4" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+    
+    <!-- Duplicate units for right rack -->
+    <rect x="280" y="75" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="288" cy="81" r="2" fill="#10B981"/>
+    <circle cx="302" cy="81" r="2" fill="#10B981"/>
+    
+    <rect x="280" y="95" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="288" cy="101" r="2" fill="#10B981"/>
+    <circle cx="302" cy="101" r="2" fill="#EF4444"/>
+    
+    <rect x="280" y="115" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="288" cy="121" r="2" fill="#10B981"/>
+    <circle cx="302" cy="121" r="2" fill="#10B981"/>
+    
+    <rect x="280" y="135" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="288" cy="141" r="2" fill="#EF4444"/>
+    <circle cx="302" cy="141" r="2" fill="#10B981"/>
+    
+    <rect x="280" y="155" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="288" cy="161" r="2" fill="#10B981"/>
+    <circle cx="302" cy="161" r="2" fill="#10B981"/>
+    
+    <rect x="280" y="175" width="30" height="12" fill="rgba(255,255,255,0.8)" rx="2"/>
+    <circle cx="288" cy="181" r="2" fill="#10B981"/>
+    <circle cx="302" cy="181" r="2" fill="#EF4444"/>
+  </g>
+  
+  <!-- Text overlay -->
+  <text x="200" y="280" text-anchor="middle" font-size="16" font-weight="bold" fill="white">Enterprise Email Infrastructure</text>
+</svg>

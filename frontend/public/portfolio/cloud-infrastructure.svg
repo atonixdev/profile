@@ -1,0 +1,50 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#cloudGradient)"/>
+  
+  <!-- Cloud shapes -->
+  <path d="M 80 180 Q 60 160 80 140 Q 70 120 90 120 Q 100 100 120 110 Q 130 90 150 100 Q 160 80 180 90 Q 185 70 200 75 L 200 200 Z" fill="rgba(255,255,255,0.3)" opacity="0.8"/>
+  
+  <!-- Server icons -->
+  <rect x="50" y="120" width="40" height="60" fill="rgba(255,255,255,0.9)" rx="4"/>
+  <rect x="50" y="120" width="40" height="15" fill="#60A5FA" rx="2"/>
+  <circle cx="60" cy="145" r="3" fill="#10B981"/>
+  <circle cx="75" cy="145" r="3" fill="#10B981"/>
+  <circle cx="60" cy="165" r="3" fill="#F59E0B"/>
+  <circle cx="75" cy="165" r="3" fill="#EF4444"/>
+  
+  <!-- Server 2 -->
+  <rect x="180" y="140" width="40" height="60" fill="rgba(255,255,255,0.9)" rx="4"/>
+  <rect x="180" y="140" width="40" height="15" fill="#60A5FA" rx="2"/>
+  <circle cx="190" cy="165" r="3" fill="#10B981"/>
+  <circle cx="205" cy="165" r="3" fill="#10B981"/>
+  <circle cx="190" cy="185" r="3" fill="#F59E0B"/>
+  <circle cx="205" cy="185" r="3" fill="#EF4444"/>
+  
+  <!-- Server 3 -->
+  <rect x="310" y="120" width="40" height="60" fill="rgba(255,255,255,0.9)" rx="4"/>
+  <rect x="310" y="120" width="40" height="15" fill="#60A5FA" rx="2"/>
+  <circle cx="320" cy="145" r="3" fill="#10B981"/>
+  <circle cx="335" cy="145" r="3" fill="#10B981"/>
+  <circle cx="320" cy="165" r="3" fill="#F59E0B"/>
+  <circle cx="335" cy="165" r="3" fill="#EF4444"/>
+  
+  <!-- Network lines connecting servers -->
+  <line x1="90" y1="150" x2="180" y2="170" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="220" y1="170" x2="310" y2="150" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Database cylinder -->
+  <ellipse cx="200" cy="80" rx="25" ry="12" fill="rgba(255,255,255,0.9)"/>
+  <rect x="175" y="80" width="50" height="35" fill="rgba(255,255,255,0.85)"/>
+  <ellipse cx="200" cy="115" rx="25" ry="12" fill="rgba(255,255,255,0.8)"/>
+  
+  <!-- Text overlay -->
+  <text x="200" y="260" text-anchor="middle" font-size="18" font-weight="bold" fill="white">OpenStack Cloud Infrastructure</text>
+</svg>

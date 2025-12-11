@@ -14,7 +14,8 @@ const Portfolio = () => {
       technologies: ['OpenStack', 'OVN', 'Kubernetes', 'Ceph'],
       client: 'Stellenbosch University',
       completion_date: '2024-06-15',
-      is_featured: true
+      is_featured: true,
+      image: '/portfolio/cloud-infrastructure.svg'
     },
     {
       id: 2,
@@ -24,7 +25,8 @@ const Portfolio = () => {
       technologies: ['AWS Neuron', 'GPU', 'Docker', 'TensorFlow'],
       client: 'AI Research Consortium',
       completion_date: '2024-08-20',
-      is_featured: true
+      is_featured: true,
+      image: '/portfolio/ai-ml-hub.svg'
     },
     {
       id: 3,
@@ -34,7 +36,8 @@ const Portfolio = () => {
       technologies: ['Jenkins', 'GitLab CI', 'Docker', 'Kubernetes'],
       client: 'FinTech Solutions SA',
       completion_date: '2024-05-10',
-      is_featured: false
+      is_featured: false,
+      image: '/portfolio/devops-pipeline.svg'
     },
     {
       id: 4,
@@ -44,7 +47,8 @@ const Portfolio = () => {
       technologies: ['Postfix', 'DKIM', 'SPF', 'Redis'],
       client: 'Corporate Communications Ltd',
       completion_date: '2024-07-25',
-      is_featured: false
+      is_featured: false,
+      image: '/portfolio/email-infrastructure.svg'
     },
     {
       id: 5,
@@ -54,7 +58,8 @@ const Portfolio = () => {
       technologies: ['Python', 'TensorFlow', 'React', 'PostgreSQL'],
       client: 'Digital Marketing Agency',
       completion_date: '2024-09-05',
-      is_featured: true
+      is_featured: true,
+      image: '/portfolio/ai-ml-hub.svg'
     },
     {
       id: 6,
@@ -64,7 +69,8 @@ const Portfolio = () => {
       technologies: ['C++', 'Python', 'CUDA', 'Hadoop'],
       client: 'Pan-African Research Network',
       completion_date: '2024-04-30',
-      is_featured: false
+      is_featured: false,
+      image: '/portfolio/scientific-computing.svg'
     }
   ];
 
@@ -134,10 +140,12 @@ const Portfolio = () => {
                 </div>
               )}
 
-              <div className="h-48 bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="text-sm">{getCategoryDisplayName(project.category)}</div>
-                </div>
+              <div className="h-48 bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                />
               </div>
 
               <div className="p-6">
