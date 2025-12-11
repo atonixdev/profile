@@ -101,7 +101,7 @@ const Testimonials = () => {
               </div>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="text-3xl font-bold text-primary-600 mb-2">{testimonials.length}</div>
+              <div className="text-3xl font-bold text-primary-600 mb-2">84</div>
               <div className="text-gray-600">Happy Clients</div>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-md">

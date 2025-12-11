@@ -36,7 +36,7 @@ const About = () => {
           {/* Hero Section */}
           <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg p-8 mb-12">
             <div className="text-center">
-              <h1 className="text-5xl font-bold mb-4 text-gray-900">About SR</h1>
+              <h1 className="text-5xl font-bold mb-4 text-gray-900">About Atonixdev</h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Architect of sovereign infrastructure solutions enabling digital independence and innovation globally, with deep expertise in emerging markets
               </p>

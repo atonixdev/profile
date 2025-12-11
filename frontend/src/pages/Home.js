@@ -795,11 +795,6 @@ const Home = () => {
               View My Work
             </Link>
           </div>
-
-          <div className="text-primary-200">
-            <p className="mb-2">{profile?.email || 'support@atonixdev.com'}</p>
-            <p>Available for new projects</p>
-          </div>
         </div>
       </section>
     </div>

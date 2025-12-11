@@ -10,13 +10,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg w-8 h-8 rounded-lg flex items-center justify-center">
-                atonixdev
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                AD
               </div>
               <h3 className="text-xl font-bold">atonixdev</h3>
             </div>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-sm leading-relaxed">
               Founder & Technical Architect at AtonixCorp. Building scalable, secure, and developer-ready ecosystems for Africa and the global market.
             </p>
           </div>
