@@ -1,0 +1,100 @@
+<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0C4A6E;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="250" fill="#F9FAFB"/>
+  
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-size="18" font-weight="bold" fill="#1F2937">Data Processing Pipeline</text>
+  
+  <!-- Input Source -->
+  <g filter="url(#shadow2)">
+    <rect x="20" y="70" width="50" height="50" rx="6" fill="#10B981"/>
+    <text x="45" y="100" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Input</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 70 95 L 95 95" stroke="#06B6D4" stroke-width="3" fill="none" marker-end="url(#arrowCyan)"/>
+  
+  <!-- Processing Stage 1 -->
+  <g filter="url(#shadow2)">
+    <rect x="95" y="70" width="50" height="50" rx="6" fill="url(#dataGrad)"/>
+    <text x="120" y="100" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Extract</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 145 95 L 170 95" stroke="#06B6D4" stroke-width="3" fill="none" marker-end="url(#arrowCyan)"/>
+  
+  <!-- Processing Stage 2 -->
+  <g filter="url(#shadow2)">
+    <rect x="170" y="70" width="50" height="50" rx="6" fill="#8B5CF6"/>
+    <text x="195" y="100" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Transform</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 220 95 L 245 95" stroke="#06B6D4" stroke-width="3" fill="none" marker-end="url(#arrowCyan)"/>
+  
+  <!-- Processing Stage 3 -->
+  <g filter="url(#shadow2)">
+    <rect x="245" y="70" width="50" height="50" rx="6" fill="#EC4899"/>
+    <text x="270" y="100" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Load</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 295 95 L 320 95" stroke="#06B6D4" stroke-width="3" fill="none" marker-end="url(#arrowCyan)"/>
+  
+  <!-- Output -->
+  <g filter="url(#shadow2)">
+    <rect x="320" y="70" width="50" height="50" rx="6" fill="#F59E0B"/>
+    <text x="345" y="100" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Output</text>
+  </g>
+  
+  <!-- Processing Details -->
+  <g>
+    <!-- Extract Details -->
+    <rect x="95" y="135" width="50" height="80" rx="4" fill="#E0F2FE" stroke="#0284C7" stroke-width="1"/>
+    <text x="120" y="150" text-anchor="middle" font-size="9" font-weight="bold" fill="#0C4A6E">Extract</text>
+    <line x1="100" y1="155" x2="140" y2="155" stroke="#0284C7" stroke-width="1"/>
+    <text x="100" y="165" font-size="8" fill="#0C4A6E">• Source APIs</text>
+    <text x="100" y="175" font-size="8" fill="#0C4A6E">• Databases</text>
+    <text x="100" y="185" font-size="8" fill="#0C4A6E">• Log streams</text>
+    <text x="100" y="195" font-size="8" fill="#0C4A6E">• File systems</text>
+  </g>
+  
+  <g>
+    <!-- Transform Details -->
+    <rect x="170" y="135" width="50" height="80" rx="4" fill="#F3E8FF" stroke="#A855F7" stroke-width="1"/>
+    <text x="195" y="150" text-anchor="middle" font-size="9" font-weight="bold" fill="#6B21A8">Transform</text>
+    <line x1="175" y1="155" x2="215" y2="155" stroke="#A855F7" stroke-width="1"/>
+    <text x="175" y="165" font-size="8" fill="#6B21A8">• Cleanup</text>
+    <text x="175" y="175" font-size="8" fill="#6B21A8">• Validate</text>
+    <text x="175" y="185" font-size="8" fill="#6B21A8">• Enrich</text>
+    <text x="175" y="195" font-size="8" fill="#6B21A8">• Aggregate</text>
+  </g>
+  
+  <g>
+    <!-- Load Details -->
+    <rect x="245" y="135" width="50" height="80" rx="4" fill="#FCE7F3" stroke="#EC4899" stroke-width="1"/>
+    <text x="270" y="150" text-anchor="middle" font-size="9" font-weight="bold" fill="#831843">Load</text>
+    <line x1="250" y1="155" x2="290" y2="155" stroke="#EC4899" stroke-width="1"/>
+    <text x="250" y="165" font-size="8" fill="#831843">• Database</text>
+    <text x="250" y="175" font-size="8" fill="#831843">• Cache</text>
+    <text x="250" y="185" font-size="8" fill="#831843">• Data Lake</text>
+    <text x="250" y="195" font-size="8" fill="#831843">• Warehouse</text>
+  </g>
+  
+  <!-- Arrow definitions -->
+  <defs>
+    <marker id="arrowCyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 10 3, 0 6" fill="#06B6D4" />
+    </marker>
+  </defs>
+</svg>

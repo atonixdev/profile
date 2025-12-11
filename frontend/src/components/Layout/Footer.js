@@ -12,9 +12,9 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg w-8 h-8 rounded-lg flex items-center justify-center">
-                SR
+                atonixdev
               </div>
-              <h3 className="text-xl font-bold">Realm</h3>
+              <h3 className="text-xl font-bold">atonixdev</h3>
             </div>
             <p className="text-gray-400">
               Founder & Technical Architect at AtonixCorp. Building scalable, secure, and developer-ready ecosystems for Africa and the global market.
@@ -101,7 +101,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} Realm - AtonixCorp. All rights reserved.</p>
+          <p>&copy; {currentYear} Atonixdev - AtonixCorp. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -12,7 +12,7 @@ const Portfolio = () => {
       description: 'Designed and deployed a comprehensive OpenStack cloud infrastructure supporting AI research workloads.',
       category: 'cloud',
       technologies: ['OpenStack', 'OVN', 'Kubernetes', 'Ceph'],
-      client: 'Stellenbosch University',
+      client: 'atonixdev',
       completion_date: '2024-06-15',
       is_featured: true,
       image: '/portfolio/cloud-infrastructure.svg'
@@ -23,7 +23,7 @@ const Portfolio = () => {
       description: 'Built a high-performance computing environment optimized for AI/ML workloads with GPU acceleration.',
       category: 'ai',
       technologies: ['AWS Neuron', 'GPU', 'Docker', 'TensorFlow'],
-      client: 'AI Research Consortium',
+      client: 'atonixdev',
       completion_date: '2024-08-20',
       is_featured: true,
       image: '/portfolio/ai-ml-hub.svg'
@@ -34,7 +34,7 @@ const Portfolio = () => {
       description: 'Implemented comprehensive CI/CD pipelines with automated testing and zero-downtime deployments.',
       category: 'devops',
       technologies: ['Jenkins', 'GitLab CI', 'Docker', 'Kubernetes'],
-      client: 'FinTech Solutions SA',
+      client: 'atonixdev',
       completion_date: '2024-05-10',
       is_featured: false,
       image: '/portfolio/devops-pipeline.svg'
@@ -45,7 +45,7 @@ const Portfolio = () => {
       description: 'Developed secure, scalable communication systems with custom SMTP servers and encryption.',
       category: 'infrastructure',
       technologies: ['Postfix', 'DKIM', 'SPF', 'Redis'],
-      client: 'Corporate Communications Ltd',
+      client: 'atonixdev',
       completion_date: '2024-07-25',
       is_featured: false,
       image: '/portfolio/email-infrastructure.svg'
@@ -56,7 +56,7 @@ const Portfolio = () => {
       description: 'Created automated marketing workflows with segmentation engines and behavioral triggers.',
       category: 'ai',
       technologies: ['Python', 'TensorFlow', 'React', 'PostgreSQL'],
-      client: 'Digital Marketing Agency',
+      client: 'atonixdev',
       completion_date: '2024-09-05',
       is_featured: true,
       image: '/portfolio/ai-ml-hub.svg'
@@ -67,7 +67,7 @@ const Portfolio = () => {
       description: 'Architected high-performance computing systems for scientific research with optimizations.',
       category: 'systems',
       technologies: ['C++', 'Python', 'CUDA', 'Hadoop'],
-      client: 'Pan-African Research Network',
+      client: 'atonixdev',
       completion_date: '2024-04-30',
       is_featured: false,
       image: '/portfolio/scientific-computing.svg'

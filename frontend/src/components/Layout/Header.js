@@ -33,11 +33,11 @@ const Header = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-xl w-10 h-10 rounded-lg flex items-center justify-center shadow-lg">
-              SR
+            <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg w-10 h-10 rounded-lg flex items-center justify-center shadow-lg">
+              AD
             </div>
             <span className="text-xl font-bold text-gray-800 hidden sm:block">
-              Realm
+              atonixdev
             </span>
           </Link>
 

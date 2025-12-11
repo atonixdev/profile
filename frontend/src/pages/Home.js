@@ -65,7 +65,7 @@ const Home = () => {
               </div>
 
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-                Hi, I'm <span className="text-yellow-300">SR</span>
+                Hi, I'm <span className="text-yellow-300">atonixdev</span>
               </h1>
 
               <p className="text-xl lg:text-2xl mb-4 text-primary-100">
@@ -171,7 +171,7 @@ const Home = () => {
                 ) : (
                   <div className="w-80 h-80 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 mx-auto shadow-2xl border-8 border-white border-opacity-20 flex items-center justify-center">
                     <span className="text-8xl text-white font-bold">
-                      {profile?.full_name?.charAt(0)?.toUpperCase() || 'J'}
+                      AD
                     </span>
                   </div>
                 )}
@@ -197,6 +197,158 @@ const Home = () => {
           <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
           </svg>
+        </div>
+      </section>
+
+      {/* Production Pipeline Visualization Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">How I Build & Deploy</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              End-to-end pipelines from development to production with robust monitoring and automation
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Production Pipeline */}
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+              <div className="w-full bg-white border-b border-gray-200 flex items-center justify-center" style={{ minHeight: '280px' }}>
+                <img 
+                  src="/portfolio/production-pipeline.svg" 
+                  alt="Production Pipeline"
+                  className="w-full h-full object-contain p-4"
+                  style={{ maxHeight: '280px' }}
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-2xl font-bold mb-3 text-primary-600">Production Pipeline</h3>
+                <p className="text-gray-600 mb-4 text-base leading-relaxed">
+                  Automated CI/CD workflows that take code from development through testing, review, and production with comprehensive monitoring.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-3 flex-grow">
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Continuous Integration & Deployment</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Automated Testing & Validation</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Real-time Monitoring & Alerts</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Data Pipeline */}
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+              <div className="w-full bg-white border-b border-gray-200 flex items-center justify-center" style={{ minHeight: '280px' }}>
+                <img 
+                  src="/portfolio/data-pipeline.svg" 
+                  alt="Data Pipeline"
+                  className="w-full h-full object-contain p-4"
+                  style={{ maxHeight: '280px' }}
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-2xl font-bold mb-3 text-primary-600">Data Processing Pipeline</h3>
+                <p className="text-gray-600 mb-4 text-base leading-relaxed">
+                  Extract, Transform, Load pipelines that process data efficiently from multiple sources to analytics and storage systems.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-3 flex-grow">
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">ETL/ELT Processing</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Data Validation & Quality</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Scalable Data Warehousing</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {/* Infrastructure Deployment */}
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+              <div className="w-full bg-white border-b border-gray-200 flex items-center justify-center" style={{ minHeight: '280px' }}>
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" className="p-4" style={{ maxHeight: '280px' }}>
+                  <rect width="400" height="320" fill="#f3f4f6"/>
+                  <text x="200" y="30" textAnchor="middle" fontSize="24" fontWeight="700" fill="#111827">Infrastructure Deployment</text>
+                  
+                  <circle cx="60" cy="110" r="32" fill="#3b82f6"/>
+                  <text x="60" y="115" textAnchor="middle" fontSize="15" fontWeight="700" fill="#ffffff">Plan</text>
+                  
+                  <line x1="92" y1="110" x2="108" y2="110" stroke="#d1d5db" strokeWidth="3"/>
+                  <polygon points="108,110 118,105 118,115" fill="#d1d5db"/>
+                  
+                  <circle cx="160" cy="110" r="32" fill="#8b5cf6"/>
+                  <text x="160" y="115" textAnchor="middle" fontSize="14" fontWeight="700" fill="#ffffff">Provision</text>
+                  
+                  <line x1="192" y1="110" x2="208" y2="110" stroke="#d1d5db" strokeWidth="3"/>
+                  <polygon points="208,110 218,105 218,115" fill="#d1d5db"/>
+                  
+                  <circle cx="270" cy="110" r="32" fill="#f59e0b"/>
+                  <text x="270" y="115" textAnchor="middle" fontSize="14" fontWeight="700" fill="#ffffff">Configure</text>
+                  
+                  <line x1="302" y1="110" x2="318" y2="110" stroke="#d1d5db" strokeWidth="3"/>
+                  <polygon points="318,110 328,105 328,115" fill="#d1d5db"/>
+                  
+                  <circle cx="340" cy="110" r="32" fill="#10b981"/>
+                  <text x="340" y="115" textAnchor="middle" fontSize="14" fontWeight="700" fill="#ffffff">Monitor</text>
+                  
+                  <text x="60" y="170" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151">Infrastructure</text>
+                  <text x="60" y="185" textAnchor="middle" fontSize="10" fill="#6b7280">as Code</text>
+                  
+                  <text x="160" y="170" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151">Create</text>
+                  <text x="160" y="185" textAnchor="middle" fontSize="10" fill="#6b7280">Resources</text>
+                  
+                  <text x="270" y="170" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151">Setup</text>
+                  <text x="270" y="185" textAnchor="middle" fontSize="10" fill="#6b7280">Services</text>
+                  
+                  <text x="340" y="170" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151">Health</text>
+                  <text x="340" y="185" textAnchor="middle" fontSize="10" fill="#6b7280">Monitoring</text>
+                  
+                  <line x1="20" y1="220" x2="380" y2="220" stroke="#e5e7eb" strokeWidth="1"/>
+                  
+                  <rect x="20" y="240" width="175" height="65" rx="6" fill="#ecfdf5" stroke="#10b981" strokeWidth="2"/>
+                  <text x="32" y="262" fontSize="13" fontWeight="700" fill="#047857">Compute Layer</text>
+                  <text x="32" y="280" fontSize="10" fill="#059669">Virtual Machines</text>
+                  <text x="32" y="297" fontSize="10" fill="#059669">Load Balancers</text>
+                  
+                  <rect x="205" y="240" width="175" height="65" rx="6" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+                  <text x="217" y="262" fontSize="13" fontWeight="700" fill="#92400e">Storage & Network</text>
+                  <text x="217" y="280" fontSize="10" fill="#b45309">Distributed Storage</text>
+                  <text x="217" y="297" fontSize="10" fill="#b45309">Cloud Networking</text>
+                </svg>
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-2xl font-bold mb-3 text-primary-600">Infrastructure Deployment</h3>
+                <p className="text-gray-600 mb-4 text-base leading-relaxed">
+                  Infrastructure as Code approach to plan, provision, configure, and monitor cloud resources with full automation.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-3 flex-grow">
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Infrastructure as Code</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Cloud Resource Management</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 font-bold text-lg">→</span>
+                    <span className="font-medium">Automated Health Monitoring</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -645,7 +797,7 @@ const Home = () => {
           </div>
 
           <div className="text-primary-200">
-            <p className="mb-2">{profile?.email || 'john@example.com'}</p>
+            <p className="mb-2">{profile?.email || 'support@atonixdev.com'}</p>
             <p>Available for new projects</p>
           </div>
         </div>
