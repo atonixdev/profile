@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { inquiryService } from '../services';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -46,7 +47,18 @@ const Contact = () => {
     setError('');
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Send form data to backend
+      const response = await inquiryService.create({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        inquiry_type: formData.inquiry_type,
+        subject: formData.subject,
+        message: formData.message,
+        budget: formData.budget,
+      });
+
       setSuccess(true);
       setFormData({
         name: '',
@@ -60,8 +72,11 @@ const Contact = () => {
         timeline: '',
         project_type: '',
       });
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
-      setError('Failed to send message. Please try again.');
+      setError(err.response?.data?.message || 'Failed to send message. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -313,12 +328,12 @@ const Contact = () => {
                   <div>
                     <div className="font-semibold">Email</div>
                     <a href="mailto:admin@atonixdev.com" className="text-primary-600 hover:underline">
-                      admin@atonixdev.com
+                      admin@atonixdev.org
                     </a>
                   </div>
                   <div>
                     <div className="font-semibold">Location</div>
-                    <div>Stellenbosch, South Africa</div>
+                    <div>Stellenbosch & Johannesburg, South Africa</div>
                   </div>
                   <div>
                     <div className="font-semibold">Response</div>

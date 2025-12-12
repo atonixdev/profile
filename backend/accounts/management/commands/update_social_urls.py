@@ -13,10 +13,10 @@ class Command(BaseCommand):
             profile, created = Profile.objects.get_or_create(
                 user=user,
                 defaults={
-                    'full_name': 'Samuel Realm',
+                    'full_name': 'atonixdev',
                     'title': 'Founder & Technical Architect at AtonixCorp',
                     'bio': 'Building sovereign infrastructure for Africa with cloud architecture, AI systems, DevOps pipelines, and high-performance computing under a mission of digital independence and long-term innovation.',
-                    'about': '''Samuel is the founder and technical architect behind AtonixCorp, an infrastructure company focused on building scalable, secure, and developer-ready ecosystems for Africa and the global market. His work spans cloud infrastructure, AI systems, DevOps pipelines, and high-performance computing — all unified under a mission of digital independence and long-term innovation.
+                    'about': '''atonixdev is the founder and technical architect behind AtonixCorp, an infrastructure company focused on building scalable, secure, and developer-ready ecosystems for Africa and the global market. Their work spans cloud infrastructure, AI systems, DevOps pipelines, and high-performance computing — all unified under a mission of digital independence and long-term innovation.
 
 Core Infrastructure Expertise:
 • OpenStack Cloud Architecture: Designs and deploys distributed cloud environments using OpenStack for full cloud orchestration, bare-metal and virtualized compute clusters, OVN/OVS networking and custom CNI plugins, multi-region replication and failover, secure tenant isolation and role-based access.
@@ -29,7 +29,7 @@ Core Infrastructure Expertise:
 
 • Systems Programming & AI Development: Low-level systems programming in C/C++, backend service optimization, AI application development (Python, TensorFlow, PyTorch), model deployment on GPU and Neuron clusters, API design for AI-powered features.
 
-Vision & Mission: Samuel's long-term mission is to build sovereign African infrastructure, innovation hubs in Stellenbosch, Techno Park, and beyond, platforms that combine finance, science, and community empowerment, systems that reduce dependency and increase digital autonomy.''',
+Vision & Mission: atonixdev's long-term mission is to build sovereign African infrastructure, innovation hubs in Stellenbosch, Techno Park, and beyond, platforms that combine finance, science, and community empowerment, systems that reduce dependency and increase digital autonomy.''',
                     'email': 'admin@atonixdev.com',
                     'location': 'Stellenbosch, South Africa',
                     'skills': [

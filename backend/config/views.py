@@ -15,7 +15,7 @@ def api_status(request):
     """
     return JsonResponse({
         'status': 'running',
-        'message': 'Realm - Personal Brand Hub API',
+        'message': 'atonixdev - Personal Brand Hub API',
         'version': '1.0.0',
         'endpoints': {
             'profile': '/api/accounts/profile/',

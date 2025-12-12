@@ -6,7 +6,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True)
     excerpt = models.TextField(max_length=500)
     content = models.TextField()
-    author = models.CharField(max_length=100, default='Samuel Realm')
+    author = models.CharField(max_length=100, default='atonixdev')
     category = models.CharField(
         max_length=50,
         choices=[

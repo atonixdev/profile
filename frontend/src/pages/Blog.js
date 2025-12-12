@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { blogService } from '../services';
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -15,21 +15,16 @@ const Blog = () => {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      let url = 'http://localhost:8000/api/blog/posts/';
-      const params = new URLSearchParams();
+      const params = {};
 
       if (selectedCategory !== 'all') {
-        params.append('category', selectedCategory);
+        params.category = selectedCategory;
       }
       if (searchTerm) {
-        params.append('search', searchTerm);
+        params.search = searchTerm;
       }
 
-      if (params.toString()) {
-        url += `?${params.toString()}`;
-      }
-
-      const response = await axios.get(url);
+      const response = await blogService.getAll(params);
       setPosts(response.data.results || response.data);
     } catch (error) {
       console.error('Error fetching blog posts:', error);

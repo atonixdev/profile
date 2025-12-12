@@ -35,6 +35,8 @@ class Inquiry(models.Model):
     
     # Metadata
     ip_address = models.GenericIPAddressField(null=True, blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    country_code = models.CharField(max_length=2, blank=True)
     user_agent = models.TextField(blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)

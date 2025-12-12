@@ -1,6 +1,7 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+import requests
 from .models import Inquiry
 from .serializers import InquirySerializer, InquiryCreateSerializer
 
@@ -31,10 +32,29 @@ class InquiryViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
+        # Get client IP
+        client_ip = self.get_client_ip(request)
+        country = ''
+        country_code = ''
+        
+        # Get country from IP using ip-api.com (free service)
+        try:
+            if client_ip and client_ip != '127.0.0.1':
+                response = requests.get(f'http://ip-api.com/json/{client_ip}', timeout=5)
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get('status') == 'success':
+                        country = data.get('country', '')
+                        country_code = data.get('countryCode', '')
+        except Exception as e:
+            print(f"Error getting country info: {e}")
+        
         # Add metadata
         inquiry = serializer.save(
-            ip_address=self.get_client_ip(request),
-            user_agent=request.META.get('HTTP_USER_AGENT', '')
+            ip_address=client_ip,
+            user_agent=request.META.get('HTTP_USER_AGENT', ''),
+            country=country,
+            country_code=country_code
         )
         
         return Response(

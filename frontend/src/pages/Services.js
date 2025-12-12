@@ -80,6 +80,45 @@ const Services = () => {
         'Multi-channel delivery (email, SMS, in-app)'
       ],
       pricing: 'Starting at $2,000'
+    },
+    {
+      id: 7,
+      title: 'Android Mobile Development',
+      description: 'Build native Android applications with Kotlin/Java, Material Design UI, offline-first architecture, cloud synchronization, and enterprise-grade security integration.',
+      features: [
+        'Native Android development (Kotlin/Java)',
+        'Material Design UI/UX',
+        'Offline-first data synchronization',
+        'Cloud backend integration',
+        'Push notifications and analytics'
+      ],
+      pricing: 'Starting at $2,500'
+    },
+    {
+      id: 8,
+      title: 'iOS Mobile Development',
+      description: 'Develop iOS applications using Swift, SwiftUI, CoreData, CloudKit integration, and secure API communication with enterprise authentication.',
+      features: [
+        'Native iOS development (Swift/SwiftUI)',
+        'CoreData and CloudKit integration',
+        'Advanced security features',
+        'Apple ecosystem integration',
+        'Performance optimization and testing'
+      ],
+      pricing: 'Starting at $2,500'
+    },
+    {
+      id: 9,
+      title: 'Security & Infrastructure Hardening',
+      description: 'Comprehensive security solutions including penetration testing, vulnerability assessments, secure architecture design, compliance frameworks, and incident response planning.',
+      features: [
+        'Penetration testing & audits',
+        'Vulnerability assessments',
+        'Secure architecture design',
+        'Compliance (GDPR, HIPAA, ISO 27001)',
+        'Incident response planning'
+      ],
+      pricing: 'Starting at $3,000'
     }
   ];
 

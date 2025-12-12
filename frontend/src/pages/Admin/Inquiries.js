@@ -93,6 +93,11 @@ const AdminInquiries = () => {
                 <span className="bg-gray-100 px-3 py-1 rounded text-sm capitalize">
                   {inquiry.inquiry_type.replace('_', ' ')}
                 </span>
+                {inquiry.country && (
+                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm">
+                    📍 {inquiry.country} {inquiry.country_code && `(${inquiry.country_code})`}
+                  </span>
+                )}
                 {inquiry.budget && (
                   <span className="bg-gray-100 px-3 py-1 rounded text-sm">
                     Budget: {inquiry.budget}

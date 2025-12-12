@@ -49,3 +49,11 @@ export const inquiryService = {
   create: (data) => api.post('/contact/inquiries/', data),
   updateStatus: (id, status) => api.patch(`/contact/inquiries/${id}/update_status/`, { status }),
 };
+
+// Blog
+export const blogService = {
+  getAll: (params) => api.get('/blog/posts/', { params }),
+  getOne: (slug) => api.get(`/blog/posts/${slug}/`),
+  incrementViews: (slug) => api.post(`/blog/posts/${slug}/increment_views/`),
+  addComment: (slug, data) => api.post(`/blog/posts/${slug}/add_comment/`, data),
+};

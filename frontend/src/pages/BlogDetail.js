@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import { blogService } from '../services';
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -20,12 +20,12 @@ const BlogDetail = () => {
   const fetchPost = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:8000/api/blog/posts/${slug}/`);
+      const response = await blogService.getOne(slug);
       setPost(response.data);
       setComments(response.data.comments || []);
       
       // Increment view count
-      await axios.post(`http://localhost:8000/api/blog/posts/${slug}/increment_views/`);
+      await blogService.incrementViews(slug);
     } catch (error) {
       console.error('Error fetching blog post:', error);
     } finally {
@@ -36,10 +36,7 @@ const BlogDetail = () => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `http://localhost:8000/api/blog/posts/${slug}/add_comment/`,
-        commentForm
-      );
+      const response = await blogService.addComment(slug, commentForm);
       setComments([response.data, ...comments]);
       setCommentForm({ name: '', email: '', content: '' });
       alert('Comment submitted! It will appear after approval.');
