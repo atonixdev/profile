@@ -328,7 +328,7 @@ const Contact = () => {
                   <div>
                     <div className="font-semibold">Email</div>
                     <a href="mailto:admin@atonixdev.com" className="text-primary-600 hover:underline">
-                      admin@atonixdev.org
+                      info@atonixdev.org
                     </a>
                   </div>
                   <div>

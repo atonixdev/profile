@@ -353,152 +353,222 @@ const Home = () => {
       </section>
 
       {/* Core Expertise Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Core Infrastructure Expertise</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M50 50c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm-2 0c0 4.4-3.6 8-8 8s-8-3.6-8-8 3.6-8 8-8 8 3.6 8 8zm-8-6c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
+        </div>
+
+        <div className="relative container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text animate-fade-in-up">
+              Core Expertise
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
               Specialized in building sovereign, scalable infrastructure for global markets, with deep expertise in emerging economies and digital independence solutions
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* OpenStack Cloud Architecture */}
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-bold mb-4 text-primary-600">OpenStack Cloud Architecture</h3>
-              <ul className="text-gray-700 space-y-2">
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl card-hover border border-gray-100 animate-slide-in-up">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">OpenStack Cloud Architecture</h3>
+              <ul className="text-gray-700 space-y-3 mb-6">
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Full cloud orchestration</span>
+                  <span className="text-blue-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Full cloud orchestration and management</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Bare-metal & virtualized clusters</span>
+                  <span className="text-blue-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Bare-metal & virtualized clusters</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>OVN/OVS networking & CNI plugins</span>
+                  <span className="text-blue-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">OVN/OVS networking & CNI plugins</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Multi-region replication & failover</span>
+                  <span className="text-blue-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Multi-region replication & failover</span>
                 </li>
               </ul>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">OpenStack</span>
+                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Kubernetes</span>
+                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">OVN</span>
+              </div>
             </div>
 
             {/* Neuron Data Center Engineering */}
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-bold mb-4 text-primary-600">Neuron Data Center Engineering</h3>
-              <ul className="text-gray-700 space-y-2">
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl card-hover border border-gray-100 animate-slide-in-up delay-200">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Neuron Data Center Engineering</h3>
+              <ul className="text-gray-700 space-y-3 mb-6">
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>AI/ML workload optimization</span>
+                  <span className="text-purple-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">AI/ML workload optimization</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>GPU & Neuron accelerators</span>
+                  <span className="text-purple-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">GPU & Neuron accelerators</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Containerized microservices</span>
+                  <span className="text-purple-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Containerized microservices</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Edge-to-cloud data pipelines</span>
+                  <span className="text-purple-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Edge-to-cloud data pipelines</span>
                 </li>
               </ul>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">AWS Neuron</span>
+                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">GPU</span>
+                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">TensorFlow</span>
+              </div>
             </div>
 
             {/* DevOps & CI/CD */}
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-bold mb-4 text-primary-600">DevOps & CI/CD Pipelines</h3>
-              <ul className="text-gray-700 space-y-2">
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl card-hover border border-gray-100 animate-slide-in-up delay-400">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">DevOps & CI/CD Pipelines</h3>
+              <ul className="text-gray-700 space-y-3 mb-6">
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Git, GitHub, Gerrit workflows</span>
+                  <span className="text-green-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Git, GitHub, Gerrit workflows</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Jenkins, GitLab CI, GitHub Actions</span>
+                  <span className="text-green-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Jenkins, GitLab CI, GitHub Actions</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Docker & nerdctl containerization</span>
+                  <span className="text-green-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Docker & nerdctl containerization</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Zero-downtime deployments</span>
+                  <span className="text-green-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Zero-downtime deployments</span>
                 </li>
               </ul>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Jenkins</span>
+                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Docker</span>
+                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">GitOps</span>
+              </div>
             </div>
 
             {/* AI & Systems Programming */}
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-bold mb-4 text-primary-600">AI & Systems Programming</h3>
-              <ul className="text-gray-700 space-y-2">
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl card-hover border border-gray-100 animate-slide-in-up delay-600">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">AI & Systems Programming</h3>
+              <ul className="text-gray-700 space-y-3 mb-6">
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>C/C++ low-level systems</span>
+                  <span className="text-orange-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">C/C++ low-level systems</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Python, TensorFlow, PyTorch</span>
+                  <span className="text-orange-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Python, TensorFlow, PyTorch</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>GPU/Neuron model deployment</span>
+                  <span className="text-orange-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">GPU/Neuron model deployment</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>AI-powered API design</span>
+                  <span className="text-orange-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Performance optimization</span>
                 </li>
               </ul>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">C/C++</span>
+                <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">Python</span>
+                <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">CUDA</span>
+              </div>
             </div>
 
-            {/* Communication Infrastructure */}
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-bold mb-4 text-primary-600">Communication Infrastructure</h3>
-              <ul className="text-gray-700 space-y-2">
+            {/* Sovereign Infrastructure */}
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl card-hover border border-gray-100 animate-slide-in-up delay-800">
+              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Sovereign Infrastructure</h3>
+              <ul className="text-gray-700 space-y-3 mb-6">
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Custom SMTP servers</span>
+                  <span className="text-cyan-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Digital independence solutions</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>DKIM, SPF, DMARC authentication</span>
+                  <span className="text-cyan-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Regulatory compliance frameworks</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>AI-driven marketing automation</span>
+                  <span className="text-cyan-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Data sovereignty & privacy</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Multi-channel delivery systems</span>
+                  <span className="text-cyan-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Emerging markets specialization</span>
                 </li>
               </ul>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium">GDPR</span>
+                <span className="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium">CCPA</span>
+                <span className="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium">Sovereignty</span>
+              </div>
             </div>
 
-            {/* Vision & Mission */}
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-bold mb-4 text-primary-600">Vision & Mission</h3>
-              <ul className="text-gray-700 space-y-2">
+            {/* Enterprise Solutions */}
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl card-hover border border-gray-100 animate-slide-in-up delay-1000">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Enterprise Solutions</h3>
+              <ul className="text-gray-700 space-y-3 mb-6">
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Global sovereign infrastructure solutions</span>
+                  <span className="text-red-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Large-scale system architecture</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Emerging markets expertise & innovation</span>
+                  <span className="text-red-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Migration & modernization</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Digital independence & autonomy</span>
+                  <span className="text-red-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">Performance optimization</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Finance, science & community empowerment</span>
+                  <span className="text-red-500 mr-3 font-bold text-lg">•</span>
+                  <span className="leading-relaxed">24/7 production support</span>
                 </li>
               </ul>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">Enterprise</span>
+                <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">Migration</span>
+                <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">Support</span>
+              </div>
             </div>
           </div>
         </div>
@@ -527,60 +597,107 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
+        </div>
+
+        <div className="relative container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">8+</div>
-              <div className="text-gray-600">Years Experience</div>
+            <div className="text-center group animate-fade-in-up">
+              <div className="text-5xl md:text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                8+
+              </div>
+              <div className="text-slate-300 text-lg font-medium">Years Experience</div>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto mt-3 rounded-full"></div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">50+</div>
-              <div className="text-gray-600">Projects Completed</div>
+            <div className="text-center group animate-fade-in-up delay-200">
+              <div className="text-5xl md:text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                50+
+              </div>
+              <div className="text-slate-300 text-lg font-medium">Projects Completed</div>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto mt-3 rounded-full"></div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">100%</div>
-              <div className="text-gray-600">Client Satisfaction</div>
+            <div className="text-center group animate-fade-in-up delay-400">
+              <div className="text-5xl md:text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                100%
+              </div>
+              <div className="text-slate-300 text-lg font-medium">Client Satisfaction</div>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto mt-3 rounded-full"></div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">24/7</div>
-              <div className="text-gray-600">Support Available</div>
+            <div className="text-center group animate-fade-in-up delay-600">
+              <div className="text-5xl md:text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                24/7
+              </div>
+              <div className="text-slate-300 text-lg font-medium">Support Available</div>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto mt-3 rounded-full"></div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Services Preview */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">What I Do</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+      <section className="py-24 bg-gradient-to-br from-slate-50 to-white relative">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Ccircle cx='50' cy='50' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
+        </div>
+
+        <div className="relative container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text animate-fade-in-up">
+              What I Do
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
               Comprehensive technology solutions tailored to your business needs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service) => (
-              <div key={service.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            {services.map((service, index) => (
+              <div
+                key={service.id}
+                className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl card-hover border border-gray-100 animate-slide-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl text-white font-bold">
+                    {service.title.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-4 text-gray-900 group-hover:text-primary-600 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3">
+                  {service.description}
+                </p>
                 <Link
                   to="/services"
-                  className="text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+                  className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors group-hover:translate-x-1 transform duration-300"
                 >
-                  Learn More →
+                  <span>Learn More</span>
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </Link>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-12 animate-fade-in-up delay-800">
             <Link
               to="/services"
-              className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+              className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-primary-500/25"
             >
-              View All Services
+              <span>View All Services</span>
+              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -767,7 +884,7 @@ const Home = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="relative bg-gradient-to-r from-primary-600 to-primary-800 text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-24 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -775,25 +892,65 @@ const Home = () => {
           }}></div>
         </div>
 
-        <div className="relative container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Start Your Project?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Let's collaborate to transform your vision into a digital reality that drives results and exceeds expectations.
-          </p>
+        {/* Floating Elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-primary-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-primary-400/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Link
-              to="/contact"
-              className="inline-block bg-white text-primary-600 px-10 py-4 rounded-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Get Free Consultation
-            </Link>
-            <Link
-              to="/portfolio"
-              className="inline-block border-2 border-white px-10 py-4 rounded-lg font-bold hover:bg-white hover:text-primary-600 transition-all duration-300 transform hover:scale-105"
-            >
-              View My Work
-            </Link>
+        <div className="relative container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up leading-tight">
+              Ready to Start Your
+              <span className="block gradient-text">Digital Transformation?</span>
+            </h2>
+            <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-slate-300 leading-relaxed animate-fade-in-up delay-200">
+              Let's collaborate to transform your vision into a digital reality that drives results and exceeds expectations.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12 animate-fade-in-up delay-400">
+              <Link
+                to="/contact"
+                onClick={() => {
+                  sessionStorage.setItem('selectedInquiryType', 'consultation');
+                }}
+                className="group inline-flex items-center px-10 py-5 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-bold rounded-2xl hover:from-primary-600 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-primary-500/25 text-lg"
+              >
+                <span>Get Free Consultation</span>
+                <svg className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <Link
+                to="/portfolio"
+                className="group inline-flex items-center px-10 py-5 border-2 border-white/30 text-white font-bold rounded-2xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm text-lg"
+              >
+                <span>View My Work</span>
+                <svg className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap justify-center items-center gap-8 text-slate-400 animate-fade-in-up delay-600">
+              <div className="flex items-center space-x-2">
+                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-medium">Free Initial Consultation</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-medium">24/7 Support</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-medium">100% Satisfaction Guarantee</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
