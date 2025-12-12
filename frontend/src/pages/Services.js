@@ -119,6 +119,38 @@ const Services = () => {
         'Incident response planning'
       ],
       pricing: 'Starting at $3,000'
+    },
+    {
+      id: 10,
+      title: 'IoT Solutions',
+      description: 'Comprehensive Internet of Things solutions for smart devices, sensor networks, and connected systems. We design, develop, and deploy IoT solutions that enable real-time data collection, monitoring, and automation across various industries.',
+      features: [
+        'Device connectivity and integration',
+        'Real-time data collection and processing',
+        'Sensor network design and deployment',
+        'Cloud IoT platform integration',
+        'Edge computing solutions',
+        'IoT security and data encryption',
+        'Dashboard and visualization',
+        'Scalable IoT infrastructure'
+      ],
+      pricing: 'Starting at $2,000'
+    },
+    {
+      id: 11,
+      title: 'Data Migration',
+      description: 'Professional data migration services for seamless transition of your critical business data. We handle complex migrations with zero downtime, ensuring data integrity, security, and compliance throughout the process.',
+      features: [
+        'Data assessment and planning',
+        'ETL (Extract, Transform, Load) processes',
+        'Zero-downtime migration',
+        'Data validation and verification',
+        'Legacy system integration',
+        'Cloud migration support',
+        'Data backup and rollback plans',
+        'Post-migration support'
+      ],
+      pricing: 'Starting at $1,500'
     }
   ];
 
