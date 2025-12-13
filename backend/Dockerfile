@@ -29,9 +29,9 @@ RUN mkdir -p /app/staticfiles /app/media
 # Collect static files
 RUN python manage.py collectstatic --noinput || true
 
-# Create non-root user for security
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
+# Create non-root user for security (match host user preference)
+RUN useradd -m -u 1000 atonixdev && chown -R atonixdev:atonixdev /app
+USER atonixdev
 
 # Expose port
 EXPOSE 8000
