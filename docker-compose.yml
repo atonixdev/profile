@@ -54,7 +54,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      target: build
+      target: development
     container_name: profile_frontend
     volumes:
       - ./frontend:/app

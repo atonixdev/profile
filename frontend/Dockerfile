@@ -1,5 +1,5 @@
 # Development stage
-FROM node:18-alpine as development
+FROM node:18-alpine AS development
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy project files
 COPY . .
@@ -18,7 +18,7 @@ EXPOSE 3000
 CMD ["npm", "start"]
 
 # Build stage
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
@@ -26,7 +26,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+# Use npm install to avoid lockfile sync errors when package-lock.json is absent
+RUN npm install --omit=dev
 
 # Copy project files
 COPY . .
