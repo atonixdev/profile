@@ -36,5 +36,5 @@ USER atonixdev
 # Expose port
 EXPOSE 8000
 
-# Run migrations and start gunicorn
-CMD ["sh", "-c", "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120"]
+# Run init script (wait DB, create DB, makemigrations, migrate, seed, start gunicorn)
+CMD ["sh", "/app/init.sh"]
