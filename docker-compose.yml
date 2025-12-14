@@ -25,19 +25,20 @@ services:
       dockerfile: Dockerfile
     container_name: profile_backend
     user: "1000:1000"
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py add_sample_discussions &&
-             python manage.py add_sample_blogs &&
-             gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    command: ["sh", "-c", "chmod +x /app/init.sh && /app/init.sh"]
     volumes:
       - ./backend:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/media
     ports:
       - "${BACKEND_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys;\n\ntry:\n    resp=urllib.request.urlopen('http://localhost:8000/api/status/', timeout=3)\n    sys.exit(0 if (200 <= resp.status < 400) else 1)\nexcept Exception:\n    sys.exit(1)\" "]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
-      - DEBUG=${DEBUG:-False}
+      - DEBUG=${DEBUG:-True}
       - SECRET_KEY=${SECRET_KEY:-dev-secret-key-change-in-production}
       - DB_NAME=${DB_NAME:-personal_brand_hub}
       - DB_USER=${DB_USER:-postgres}

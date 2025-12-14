@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'contact',
     'blog',
     'community',
+    'activity',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'activity.middleware.ActivityLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -173,3 +175,14 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     X_FRAME_OPTIONS = 'DENY'
+
+# Activity tracking settings
+ACTIVITY_TRACKING_ENABLED = config('ACTIVITY_TRACKING_ENABLED', default=True, cast=bool)
+ACTIVITY_EXCLUDE_PATHS = config(
+    'ACTIVITY_EXCLUDE_PATHS',
+    default='/admin/,/static/,/media/',
+    cast=Csv()
+)
+ACTIVITY_INCLUDE_APPS = config('ACTIVITY_INCLUDE_APPS', default='', cast=Csv())
+ACTIVITY_EXCLUDE_APPS = config('ACTIVITY_EXCLUDE_APPS', default='', cast=Csv())
+
