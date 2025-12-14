@@ -48,8 +48,10 @@ else
 fi
 
 # Make and run migrations, then seed sample data
-echo "Running Django makemigrations and migrate..."
-python manage.py makemigrations --noinput || true
+echo "Running Django migrations (ordered)..."
+# Ensure core dependencies are migrated first to avoid inconsistent history
+python manage.py migrate contenttypes --noinput
+python manage.py migrate auth --noinput || true
 python manage.py migrate --noinput
 python manage.py add_sample_discussions || true
 python manage.py add_sample_blogs || true
