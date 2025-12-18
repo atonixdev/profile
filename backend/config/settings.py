@@ -162,6 +162,13 @@ CORS_ALLOWED_ORIGINS = config(
 
 CORS_ALLOW_CREDENTIALS = True
 
+# CSRF Trusted Origins (required for HTTPS with different origins)
+CSRF_TRUSTED_ORIGINS = [
+    'https://atonixdev.org',
+    'https://www.atonixdev.org',
+    'https://api.atonixdev.org',
+]
+
 # Security Settings
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
