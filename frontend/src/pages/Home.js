@@ -61,38 +61,38 @@ const Home = () => {
             {/* Hero Content */}
             <div className="text-center lg:text-left">
               <div className="inline-block bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                <span className="text-sm font-semibold">Sovereign Infrastructure Architect</span>
+                <span className="text-sm font-semibold">Modern Software Engineering Company</span>
               </div>
 
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-                Hi, I'm <span className="text-yellow-300">atonixdev</span>
+                Welcome to <span className="text-yellow-300">AtonixDev</span>
               </h1>
 
               <p className="text-xl lg:text-2xl mb-4 text-primary-100">
-                Founder & Technical Architect at AtonixCorp
+                Founder & Technical Architect: Samuel Realm
               </p>
 
               <p className="text-lg mb-8 text-gray-200 max-w-2xl">
-                Building scalable, sovereign infrastructure globally with cloud architecture, AI systems, DevOps pipelines, and high-performance computing. Specialized in emerging markets and digital independence solutions.
+                A modern, high-precision software engineering and technology architecture company specializing in building intelligent, scalable, and future-proof digital systems. We operate at the intersection of advanced software development, AI-driven automation, and financial technology innovation.
               </p>
 
               {/* Key Expertise */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div className="text-center">
-                  <div className="text-sm font-semibold">OpenStack</div>
-                  <div className="text-xs text-gray-300">Cloud Architecture</div>
+                  <div className="text-sm font-semibold">Software Engineering</div>
+                  <div className="text-xs text-gray-300">Custom Development</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-sm font-semibold">AI/ML</div>
-                  <div className="text-xs text-gray-300">Neuron Data Centers</div>
+                  <div className="text-sm font-semibold">AI Automation</div>
+                  <div className="text-xs text-gray-300">Intelligent Systems</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-sm font-semibold">DevOps</div>
-                  <div className="text-xs text-gray-300">CI/CD Pipelines</div>
+                  <div className="text-sm font-semibold">FinTech</div>
+                  <div className="text-xs text-gray-300">Financial Platforms</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-sm font-semibold">Global</div>
-                  <div className="text-xs text-gray-300">Emerging Markets</div>
+                  <div className="text-sm font-semibold">Technical Architecture</div>
+                  <div className="text-xs text-gray-300">Systems Design</div>
                 </div>
               </div>
 

@@ -5,152 +5,73 @@ const Services = () => {
   const services = [
     {
       id: 1,
-      title: 'OpenStack Cloud Architecture',
-      description: 'Design and deploy distributed cloud environments using OpenStack for full cloud orchestration, bare-metal and virtualized compute clusters, OVN/OVS networking, and multi-region replication.',
+      title: 'Software Engineering & Product Development',
+      description: 'AtonixDev builds custom applications, platforms, and digital tools tailored to the unique needs of each client. From backend systems and APIs to full user-facing applications, the company delivers clean, maintainable, and scalable codebases that support long-term growth.',
       features: [
-        'Full cloud orchestration with OpenStack',
-        'Bare-metal and virtualized compute clusters',
-        'OVN/OVS networking and custom CNI plugins',
-        'Multi-region replication and failover',
-        'Secure tenant isolation and role-based access'
+        'Custom application development',
+        'Full-stack engineering',
+        'Backend systems and APIs',
+        'User-facing application design',
+        'Clean, maintainable codebases',
+        'Scalable architecture solutions'
       ],
       pricing: 'Custom Quote'
     },
     {
       id: 2,
-      title: 'Neuron Data Center Engineering',
-      description: 'Architect high-performance compute environments optimized for AI/ML workloads, GPU and Neuron accelerators, containerized microservices, and edge-to-cloud data pipelines.',
+      title: 'AI-Driven Automation & Intelligence',
+      description: 'The company integrates artificial intelligence into business workflows, enabling smarter decision-making, automated processes, and intelligent data analysis. AtonixDev focuses on practical, high-impact AI implementations that enhance efficiency and reduce human error.',
       features: [
-        'AI/ML workload optimization',
-        'GPU and Neuron accelerator integration',
-        'Containerized microservices architecture',
-        'Scientific and financial computation',
-        'Edge-to-cloud data pipelines'
+        'AI-powered workflow automation',
+        'Intelligent data analysis',
+        'Smart decision-making systems',
+        'Automated business processes',
+        'Machine learning integration',
+        'Efficiency optimization'
       ],
       pricing: 'Custom Quote'
     },
     {
       id: 3,
-      title: 'DevOps & CI/CD Pipelines',
-      description: 'Build end-to-end DevOps pipelines using Git, Jenkins, GitLab CI, Docker containerization, automated testing, security scanning, and zero-downtime deployment workflows.',
+      title: 'Technical Architecture & Systems Design',
+      description: 'AtonixDev provides expert architectural planning for complex systems, ensuring that every component — from databases to user interfaces — is harmonized, secure, and optimized for performance. This includes multi-country logic, financial engines, and enterprise-grade infrastructure.',
       features: [
-        'Git, GitHub, Gerrit integration',
-        'Jenkins, GitLab CI, GitHub Actions',
-        'Docker & nerdctl containerization',
-        'Automated testing and security scanning',
-        'Zero-downtime deployment workflows'
+        'Complex systems architecture',
+        'Database design and optimization',
+        'User interface harmonization',
+        'Multi-country logic implementation',
+        'Financial engine design',
+        'Enterprise-grade infrastructure'
       ],
-      pricing: 'Starting at $2,500'
+      pricing: 'Custom Quote'
     },
     {
       id: 4,
-      title: 'AI & Systems Programming',
-      description: 'Low-level systems programming in C/C++, backend service optimization, AI application development with Python/TensorFlow/PyTorch, and model deployment on GPU/Neuron clusters.',
+      title: 'FinTech Engineering & Financial Logic Harmonization',
+      description: 'With deep expertise in financial systems, AtonixDev builds platforms that handle tax calculations, multi-currency logic, compliance workflows, and financial reporting with precision. The company\'s approach ensures accuracy, transparency, and regulatory alignment.',
       features: [
-        'Low-level systems programming (C/C++)',
-        'Backend service optimization',
-        'AI development (Python, TensorFlow, PyTorch)',
-        'Model deployment on GPU/Neuron clusters',
-        'API design for AI-powered features'
+        'Tax calculation systems',
+        'Multi-currency logic',
+        'Compliance workflow automation',
+        'Financial reporting platforms',
+        'Regulatory alignment',
+        'Transparent financial insights'
       ],
-      pricing: 'Starting at $3,000'
+      pricing: 'Custom Quote'
     },
     {
       id: 5,
-      title: 'Enterprise Communication Infrastructure',
-      description: 'Build secure, scalable communication systems with custom SMTP servers, DKIM/SPF/DMARC authentication, encrypted mail routing, notification APIs, and synthetic email datasets.',
+      title: 'Strategic Consulting & Developer-Ready Specifications',
+      description: 'AtonixDev helps businesses clarify their product vision, define technical requirements, and create detailed documentation that developers can execute without confusion. This reduces development time, prevents costly errors, and ensures alignment across teams.',
       features: [
-        'Custom SMTP server implementation',
-        'DKIM, SPF, DMARC authentication',
-        'Encrypted mail routing',
-        'Notification APIs for apps/platforms',
-        'Synthetic email datasets for testing'
+        'Product vision clarification',
+        'Technical requirement definition',
+        'Detailed documentation creation',
+        'Developer-ready specifications',
+        'Cross-team alignment',
+        'Error prevention strategies'
       ],
-      pricing: 'Starting at $1,500'
-    },
-    {
-      id: 6,
-      title: 'AI-Driven Marketing Automation',
-      description: 'Design automated marketing workflows with segmentation engines, behavioral triggers, AI-generated outreach, campaign analytics, and multi-channel delivery systems.',
-      features: [
-        'Segmentation engines',
-        'Behavioral triggers',
-        'AI-generated outreach',
-        'Campaign analytics',
-        'Multi-channel delivery (email, SMS, in-app)'
-      ],
-      pricing: 'Starting at $2,000'
-    },
-    {
-      id: 7,
-      title: 'Android Mobile Development',
-      description: 'Build native Android applications with Kotlin/Java, Material Design UI, offline-first architecture, cloud synchronization, and enterprise-grade security integration.',
-      features: [
-        'Native Android development (Kotlin/Java)',
-        'Material Design UI/UX',
-        'Offline-first data synchronization',
-        'Cloud backend integration',
-        'Push notifications and analytics'
-      ],
-      pricing: 'Starting at $2,500'
-    },
-    {
-      id: 8,
-      title: 'iOS Mobile Development',
-      description: 'Develop iOS applications using Swift, SwiftUI, CoreData, CloudKit integration, and secure API communication with enterprise authentication.',
-      features: [
-        'Native iOS development (Swift/SwiftUI)',
-        'CoreData and CloudKit integration',
-        'Advanced security features',
-        'Apple ecosystem integration',
-        'Performance optimization and testing'
-      ],
-      pricing: 'Starting at $2,500'
-    },
-    {
-      id: 9,
-      title: 'Security & Infrastructure Hardening',
-      description: 'Comprehensive security solutions including penetration testing, vulnerability assessments, secure architecture design, compliance frameworks, and incident response planning.',
-      features: [
-        'Penetration testing & audits',
-        'Vulnerability assessments',
-        'Secure architecture design',
-        'Compliance (GDPR, HIPAA, ISO 27001)',
-        'Incident response planning'
-      ],
-      pricing: 'Starting at $3,000'
-    },
-    {
-      id: 10,
-      title: 'IoT Solutions',
-      description: 'Comprehensive Internet of Things solutions for smart devices, sensor networks, and connected systems. We design, develop, and deploy IoT solutions that enable real-time data collection, monitoring, and automation across various industries.',
-      features: [
-        'Device connectivity and integration',
-        'Real-time data collection and processing',
-        'Sensor network design and deployment',
-        'Cloud IoT platform integration',
-        'Edge computing solutions',
-        'IoT security and data encryption',
-        'Dashboard and visualization',
-        'Scalable IoT infrastructure'
-      ],
-      pricing: 'Starting at $2,000'
-    },
-    {
-      id: 11,
-      title: 'Data Migration',
-      description: 'Professional data migration services for seamless transition of your critical business data. We handle complex migrations with zero downtime, ensuring data integrity, security, and compliance throughout the process.',
-      features: [
-        'Data assessment and planning',
-        'ETL (Extract, Transform, Load) processes',
-        'Zero-downtime migration',
-        'Data validation and verification',
-        'Legacy system integration',
-        'Cloud migration support',
-        'Data backup and rollback plans',
-        'Post-migration support'
-      ],
-      pricing: 'Starting at $1,500'
+      pricing: 'Custom Quote'
     }
   ];
 
@@ -158,28 +79,28 @@ const Services = () => {
     <div className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Infrastructure & Technology Services</h1>
+          <h1 className="text-4xl font-bold mb-4">AtonixDev Services</h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-6">
-            Sovereign infrastructure solutions for global markets. From cloud architecture to AI systems, DevOps pipelines to high-performance computing — we build the foundation for digital independence and innovation worldwide, with specialized expertise in emerging markets.
+            AtonixDev specializes in custom software development, full-stack engineering, AI-driven automation, and technical architecture for complex platforms. The company is known for its ability to translate high-level business goals into clean, modular, and developer-ready specifications that eliminate ambiguity and reduce operational risk.
           </p>
           <div className="bg-primary-50 rounded-lg p-6 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-primary-800 mb-2">AtonixCorp's Mission</h2>
+            <h2 className="text-2xl font-bold text-primary-800 mb-2">Our Mission</h2>
             <p className="text-gray-700">
-              Building scalable, secure, and developer-ready ecosystems that empower global innovation and digital sovereignty, with deep expertise in emerging markets and developing regions.
+              Building intelligent, scalable, and future-proof digital systems. At its core, AtonixDev is built on the belief that technology should not merely solve problems — it should create new possibilities.
             </p>
           </div>
         </div>
 
         {/* Quote CTA Section */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-8 mb-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Build Sovereign Infrastructure?</h2>
+          <h2 className="text-3xl font-bold mb-4">Ready to Build Intelligent Digital Systems?</h2>
           <p className="text-xl mb-6 text-primary-100">
-            Get a detailed consultation for your cloud architecture, AI systems, or DevOps pipeline needs.
+            Get a detailed consultation for your software development, AI automation, or technical architecture needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="text-primary-100">Custom infrastructure design</div>
-            <div className="text-primary-100">High-performance computing</div>
-            <div className="text-primary-100">Enterprise-grade security</div>
+            <div className="text-primary-100">Custom software solutions</div>
+            <div className="text-primary-100">AI-driven automation</div>
+            <div className="text-primary-100">Future-proof architecture</div>
           </div>
         </div>
 
