@@ -192,7 +192,7 @@ const About = () => {
                     {[
                       {
                         title: 'Cloud Infrastructure & Architecture',
-                        items: ['OpenStack', 'AWS', 'Kubernetes', 'Ceph', 'OVN', 'High-availability systems', 'Load Balancing', 'Service Mesh (Istio)', 'Network Architecture', 'Disaster Recovery'],
+                        items: ['OpenStack', 'AWS', 'Google Cloud', 'Microsoft Azure', 'IBM Cloud', 'Red Hat', 'Kubernetes', 'Ceph', 'OVN', 'Private cloud', 'Public cloud', 'Hybrid cloud', 'Multi-cloud architecture', 'High-availability systems', 'Load Balancing', 'Auto-scaling', 'Service Mesh (Istio)', 'Linkerd', 'Network Architecture', 'Disaster Recovery', 'Backup & Recovery', 'Broadcom', 'NVIDIA', 'Computing infrastructure', 'vSphere', 'VMware', 'Hypervisor technology', 'Container orchestration', 'CDN & Edge computing', 'API Gateway', 'Monitoring & Observability'],
                         icon: (
                           <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
@@ -201,7 +201,7 @@ const About = () => {
                       },
                       {
                         title: 'AI & Machine Learning',
-                        items: ['Model development', 'TensorFlow', 'PyTorch', 'LLM Integration', 'Deployment pipelines', 'Research platforms', 'Data preprocessing', 'Model training & optimization', 'GPU acceleration', 'MLOps & Model Serving'],
+                        items: ['Model development', 'TensorFlow', 'PyTorch', 'LLM Integration', 'Deployment pipelines', 'Research platforms', 'Data preprocessing', 'Model training & optimization', 'GPU acceleration', 'MLOps & Model Serving', 'Neural Networks', 'Computer Vision', 'Natural Language Processing', 'Transformers', 'Scikit-learn', 'XGBoost', 'Deep Learning', 'Fine-tuning', 'RAG (Retrieval-Augmented Generation)', 'Prompt Engineering', 'Vector Databases', 'Model Optimization', 'Inference Optimization', 'Distributed Training', 'Transfer Learning'],
                         icon: (
                           <svg className="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
@@ -210,7 +210,7 @@ const About = () => {
                       },
                       {
                         title: 'DevOps & CI/CD',
-                        items: ['Jenkins', 'GitLab CI', 'Docker', 'Rootless containers', 'BuildKit', 'Kubernetes', 'Terraform', 'Ansible', 'Kafka', 'Zero-downtime deployments', 'Infrastructure as Code', 'Monitoring & Logging'],
+                        items: ['Jenkins', 'GitLab CI', 'Docker', 'Rootless containers', 'BuildKit', 'Kubernetes', 'Helm', 'Terraform', 'Ansible', 'Kafka', 'Prometheus', 'Grafana', 'ELK Stack', 'Splunk', 'Zero-downtime deployments', 'Blue-green deployments', 'Canary deployments', 'Infrastructure as Code', 'Monitoring & Logging', 'Log aggregation', 'Distributed tracing', 'ArgoCD', 'GitOps', 'CI/CD pipelines', 'Container registry', 'Service discovery', 'Configuration management', 'Health checks & alerting', 'Load testing', 'Rollback strategies', 'Change management', 'Release management', 'Incident response', 'SRE practices'],
                         icon: (
                           <svg className="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
@@ -219,7 +219,7 @@ const About = () => {
                       },
                       {
                         title: 'Full-Stack Development',
-                        items: ['React', 'Next.js', 'JavaScript/TypeScript', 'Django', 'FastAPI', 'Python', 'REST APIs', 'GraphQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Enterprise applications'],
+                        items: ['React', 'Next.js', 'Vue.js', 'Angular', 'Svelte', 'JavaScript/TypeScript', 'Node.js', 'Express.js', 'Django', 'FastAPI', 'Python', 'REST APIs', 'GraphQL', 'WebSockets', 'PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Elasticsearch', 'Docker', 'Tailwind CSS', 'Bootstrap', 'Material UI', 'API design & documentation', 'Database optimization', 'Caching strategies', 'Authentication & OAuth', 'Payment integration', 'Testing frameworks', 'Microservices architecture', 'Scalability & performance', 'Enterprise applications'],
                         icon: (
                           <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
@@ -228,10 +228,19 @@ const About = () => {
                       },
                       {
                         title: 'IoT & Embedded Systems',
-                        items: ['Raspberry Pi', 'Arduino', 'ROS (Robotics Operating System)', 'MQTT', 'Edge Computing', 'Microcontroller programming', 'IoT protocols', 'Embedded Linux', 'Sensor integration', 'Real-time systems'],
+                        items: ['Raspberry Pi', 'Arduino', 'ROS (Robotics Operating System)', 'MQTT', 'Zigbee', 'Z-Wave', 'BLE (Bluetooth Low Energy)', 'LoRaWAN', 'NB-IoT', 'LTE-M', 'Edge Computing', 'Microcontroller programming', 'IoT protocols', 'CoAP (Constrained Application Protocol)', 'Embedded Linux', 'FreeRTOS', 'Zephyr OS', 'Sensor integration', 'Real-time systems', 'CAN bus', 'Modbus', 'Power management', 'Battery optimization', 'Firmware development', 'Hardware debugging', 'JTAG/SWD', 'OTA (Over-the-air) updates', 'TinyML & Edge AI', 'Circuit design', 'Telemetry', 'Wearable technology', 'Industrial IoT (IIoT)', 'Smart home integration', 'Hardware interfacing', 'Peripheral drivers'],
                         icon: (
                           <svg className="w-8 h-8 text-amber-600" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9l-7-7z M6 4h5v5h5v12H6V4z M8 10h2v2H8v-2zm4 0h2v2h-2v-2zm-4 4h2v2H8v-2zm4 0h2v2h-2v-2zm-4 4h8v2H8v-2z"/>
+                          </svg>
+                        )
+                      },
+                      {
+                        title: 'Security & Compliance',
+                        items: ['Application Security', 'Network Security', 'Cloud Security', 'API Security', 'Cryptography', 'SSL/TLS', 'OAuth & JWT', 'Multi-factor authentication (MFA)', 'OWASP standards', 'Penetration testing', 'Vulnerability assessment', 'Security hardening', 'Identity & Access Management', 'GDPR & HIPAA compliance', 'SOC 2 & ISO 27001 compliance', 'PCI-DSS compliance', 'Data encryption', 'Secure coding practices', 'SAST & DAST scanning', 'Code review & auditing', 'Zero Trust Architecture', 'DevSecOps', 'Security monitoring & auditing', 'SIEM (Security Information Event Management)', 'IDS/IPS (Intrusion Detection/Prevention)', 'WAF (Web Application Firewall)', 'Container security', 'Supply chain security', 'Secret management & Vault', 'Key management', 'Incident response & Forensics', 'Threat modeling & Risk assessment', 'Bug bounty programs', 'Security compliance reporting', 'CORS & CSP policies', 'DLP (Data Loss Prevention)', 'Endpoint security'],
+                        icon: (
+                          <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z M10 17h4v-4h4v-4H10v8z"/>
                           </svg>
                         )
                       }
