@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
+import FloatingChatbot from './components/FloatingChatbot';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -32,7 +33,8 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-          <Routes>
+        <FloatingChatbot />
+        <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'community',
     'activity',
+    'chatbot_service',
 ]
 
 MIDDLEWARE = [
