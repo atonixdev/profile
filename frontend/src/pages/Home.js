@@ -68,10 +68,7 @@ const Home = () => {
                 Welcome to <span className="text-yellow-300">AtonixDev</span>
               </h1>
 
-              <p className="text-xl lg:text-2xl mb-4 text-primary-100">
-                Founder & Technical Architect: Samuel Realm
-              </p>
-
+              
               <p className="text-lg mb-8 text-gray-200 max-w-2xl">
                 A modern, high-precision software engineering and technology architecture company specializing in building intelligent, scalable, and future-proof digital systems. We operate at the intersection of advanced software development, AI-driven automation, and financial technology innovation.
               </p>
