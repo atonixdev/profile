@@ -102,3 +102,5 @@ Not Found: /api/accounts/profiles/public/
 [20/Dec/2025 18:27:26] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
 Not Found: /api/accounts/profiles/public/
 [20/Dec/2025 18:27:29] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:38:43] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
