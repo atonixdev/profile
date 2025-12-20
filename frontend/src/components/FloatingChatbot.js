@@ -5,6 +5,12 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const FloatingChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [conversationId, setConversationId] = useState(null);
+  const [visitorInfo, setVisitorInfo] = useState({
+    name: '',
+    email: ''
+  });
+  const [showInfoForm, setShowInfoForm] = useState(true);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -15,6 +21,7 @@ const FloatingChatbot = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [conversationStatus, setConversationStatus] = useState('active');
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -29,6 +36,13 @@ const FloatingChatbot = () => {
     scrollToBottom();
   }, [messages]);
 
+  const handleInfoSubmit = (e) => {
+    e.preventDefault();
+    if (visitorInfo.name.trim() && visitorInfo.email.trim()) {
+      setShowInfoForm(false);
+    }
+  };
+
   const handleSendMessage = async (e) => {
     e.preventDefault();
     
@@ -42,19 +56,31 @@ const FloatingChatbot = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const messageToSend = inputValue;
     setInputValue('');
     setIsLoading(true);
 
     try {
       const response = await axios.post(
         `${API_BASE_URL}/api/chatbot/chat/`,
-        { message: inputValue },
+        {
+          message: messageToSend,
+          conversation_id: conversationId,
+          visitor_name: visitorInfo.name,
+          visitor_email: visitorInfo.email
+        },
         {
           headers: {
             'Content-Type': 'application/json'
           }
         }
       );
+
+      if (!conversationId) {
+        setConversationId(response.data.conversation_id);
+      }
+      
+      setConversationStatus(response.data.status);
 
       const botMessage = {
         id: messages.length + 2,
@@ -67,6 +93,17 @@ const FloatingChatbot = () => {
       };
 
       setMessages(prev => [...prev, botMessage]);
+
+      // If handoff requested, show system message
+      if (response.data.should_handoff) {
+        const systemMessage = {
+          id: messages.length + 3,
+          type: 'system',
+          text: '⏳ Connecting you with our expert team...',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, systemMessage]);
+      }
     } catch (error) {
       console.error('Chat error:', error);
       const errorMessage = {
@@ -142,9 +179,62 @@ const FloatingChatbot = () => {
               Expert Assistant
             </h3>
             <p style={{ margin: '0', fontSize: '12px', opacity: 0.9 }}>
-              Ask about our services & expertise
+              {conversationStatus === 'waiting_support' ? '⏳ Support team contacted' : 
+               conversationStatus === 'in_support' ? '✅ Human support active' :
+               'Ask about our services & expertise'}
             </p>
           </div>
+
+          {/* Visitor Info Form */}
+          {showInfoForm && (
+            <div style={{ padding: '16px', backgroundColor: '#f0f4f8', borderBottom: '1px solid rgb(229, 231, 235)' }}>
+              <form onSubmit={handleInfoSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  value={visitorInfo.name}
+                  onChange={(e) => setVisitorInfo({ ...visitorInfo, name: e.target.value })}
+                  style={{
+                    padding: '8px 12px',
+                    border: '1px solid rgb(209, 213, 219)',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    fontFamily: 'inherit'
+                  }}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={visitorInfo.email}
+                  onChange={(e) => setVisitorInfo({ ...visitorInfo, email: e.target.value })}
+                  style={{
+                    padding: '8px 12px',
+                    border: '1px solid rgb(209, 213, 219)',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    fontFamily: 'inherit'
+                  }}
+                  required
+                />
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: 'rgb(37, 99, 235)',
+                    color: 'white',
+                    padding: '8px 12px',
+                    borderRadius: '6px',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    fontWeight: '500'
+                  }}
+                >
+                  Start Chat
+                </button>
+              </form>
+            </div>
+          )}
 
           {/* Messages Container */}
           <div style={{
@@ -167,11 +257,14 @@ const FloatingChatbot = () => {
                     maxWidth: '80%',
                     padding: '12px 16px',
                     borderRadius: '12px',
-                    backgroundColor: msg.type === 'user' ? 'rgb(37, 99, 235)' : 'white',
+                    backgroundColor: msg.type === 'user' ? 'rgb(37, 99, 235)' : 
+                                    msg.type === 'system' ? 'rgb(249, 250, 251)' : 'white',
                     color: msg.type === 'user' ? 'white' : 'rgb(17, 24, 39)',
                     fontSize: '14px',
                     lineHeight: '1.4',
-                    border: msg.type === 'bot' ? '1px solid rgb(229, 231, 235)' : 'none'
+                    border: msg.type === 'bot' || msg.type === 'system' ? '1px solid rgb(229, 231, 235)' : 'none',
+                    fontWeight: msg.type === 'system' ? '500' : 'normal',
+                    fontStyle: msg.type === 'system' ? 'italic' : 'normal'
                   }}
                 >
                   <p style={{ margin: '0', whiteSpace: 'pre-wrap' }}>{msg.text}</p>
@@ -202,22 +295,6 @@ const FloatingChatbot = () => {
                           </span>
                         )}
                       </div>
-                    </div>
-                  )}
-
-                  {msg.suggested_page && (
-                    <div style={{ marginTop: '12px' }}>
-                      <a
-                        href={`/${msg.suggested_page.toLowerCase()}`}
-                        style={{
-                          fontSize: '12px',
-                          textDecoration: 'underline',
-                          opacity: 0.7,
-                          color: 'inherit'
-                        }}
-                      >
-                        View {msg.suggested_page} →
-                      </a>
                     </div>
                   )}
                 </div>
@@ -263,49 +340,51 @@ const FloatingChatbot = () => {
           </div>
 
           {/* Input Area */}
-          <div style={{
-            borderTop: '1px solid rgb(229, 231, 235)',
-            padding: '12px',
-            backgroundColor: 'white',
-            flex: '0 0 auto'
-          }}>
-            <form onSubmit={handleSendMessage} style={{ display: 'flex', gap: '8px' }}>
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask about our services..."
-                disabled={isLoading}
-                style={{
-                  flex: '1',
-                  border: '1px solid rgb(209, 213, 219)',
-                  borderRadius: '8px',
-                  padding: '8px 12px',
-                  fontSize: '14px',
-                  outline: 'none',
-                  fontFamily: 'inherit'
-                }}
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !inputValue.trim()}
-                style={{
-                  backgroundColor: 'rgb(37, 99, 235)',
-                  color: 'white',
-                  padding: '8px 16px',
-                  borderRadius: '8px',
-                  border: 'none',
-                  cursor: isLoading || !inputValue.trim() ? 'not-allowed' : 'pointer',
-                  opacity: isLoading || !inputValue.trim() ? 0.5 : 1,
-                  fontSize: '14px',
-                  fontWeight: '500',
-                  transition: 'all 0.2s'
-                }}
-              >
-                Send
-              </button>
-            </form>
-          </div>
+          {!showInfoForm && (
+            <div style={{
+              borderTop: '1px solid rgb(229, 231, 235)',
+              padding: '12px',
+              backgroundColor: 'white',
+              flex: '0 0 auto'
+            }}>
+              <form onSubmit={handleSendMessage} style={{ display: 'flex', gap: '8px' }}>
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Ask about our services..."
+                  disabled={isLoading}
+                  style={{
+                    flex: '1',
+                    border: '1px solid rgb(209, 213, 219)',
+                    borderRadius: '8px',
+                    padding: '8px 12px',
+                    fontSize: '14px',
+                    outline: 'none',
+                    fontFamily: 'inherit'
+                  }}
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !inputValue.trim()}
+                  style={{
+                    backgroundColor: 'rgb(37, 99, 235)',
+                    color: 'white',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    cursor: isLoading || !inputValue.trim() ? 'not-allowed' : 'pointer',
+                    opacity: isLoading || !inputValue.trim() ? 0.5 : 1,
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  Send
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       )}
 

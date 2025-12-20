@@ -93,8 +93,23 @@ INTENTS = {
     'timeline': {
         'patterns': ['timeline', 'how long', 'duration', 'deadline', 'schedule', 'when', 'time frame'],
         'response': "Project timelines depend on complexity and scope. A simple web app might take weeks, while complex systems can take months. Let's discuss your specific needs!"
+    },
+    'handoff': {
+        'patterns': ['connect with human', 'speak to human', 'talk to person', 'connect to support', 'ready to discuss', 'discuss with team', 'speak with expert', 'talk to expert'],
+        'response': "Perfect! I'm connecting you with our expert team for a personalized discussion about your project. A team member will be with you shortly to discuss your requirements, timeline, and budget. What's your name and email so we can reach you?",
+        'should_handoff': True
     }
 }
+
+def detect_handoff(user_input):
+    """Detect if user wants to be handed off to human support"""
+    user_input_lower = user_input.lower()
+    for intent_key, intent_data in INTENTS.items():
+        if intent_data.get('should_handoff'):
+            for pattern in intent_data.get('patterns', []):
+                if pattern in user_input_lower:
+                    return True
+    return False
 
 def match_intent(user_input):
     """Match user input to an intent and return appropriate response"""
@@ -117,7 +132,8 @@ def match_intent(user_input):
                     'response': response,
                     'intent': intent_key,
                     'specialization': intent_data.get('specialization'),
-                    'technologies': SPECIALIZATIONS[intent_data.get('specialization')]['technologies'] if 'specialization' in intent_data else None
+                    'technologies': SPECIALIZATIONS[intent_data.get('specialization')]['technologies'] if 'specialization' in intent_data else None,
+                    'should_handoff': intent_data.get('should_handoff', False)
                 }
     
     # Default response if no match
@@ -125,7 +141,8 @@ def match_intent(user_input):
         'response': "That's interesting! Could you tell me more about what you're looking to build or improve? Are you interested in web development, cloud infrastructure, AI/ML, DevOps, IoT, or security?",
         'intent': 'unknown',
         'specialization': None,
-        'technologies': None
+        'technologies': None,
+        'should_handoff': False
     }
 
 def get_recommendations(user_input):
@@ -137,6 +154,7 @@ def get_recommendations(user_input):
         'specialization': match.get('specialization'),
         'technologies': match.get('technologies', []),
         'suggested_page': None,
+        'should_handoff': match.get('should_handoff', False),
         'related_services': []
     }
     

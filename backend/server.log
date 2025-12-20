@@ -222,3 +222,63 @@ Not Found: /api/accounts/profiles/public/
 [20/Dec/2025 19:37:24] "OPTIONS /api/chatbot/chat/ HTTP/1.1" 200 0
 [20/Dec/2025 19:37:24] "POST /api/chatbot/chat/ HTTP/1.1" 200 795
 [20/Dec/2025 19:37:47] "POST /api/chatbot/chat/ HTTP/1.1" 200 795
+/home/atonixdev/profile/backend/chatbot_service/responses.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:28:04
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+/home/atonixdev/profile/backend/chatbot_service/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:40:40
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+/home/atonixdev/profile/backend/chatbot_service/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:40:52
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:42:24] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:42:25] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:43:16] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 19:43:16] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 19:43:17] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:43:18] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:43:18] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:43:19] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+/home/atonixdev/profile/backend/chatbot_service/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:40:55
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
