@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { inquiryService } from '../services';
+import { getCountryByName } from '../utils/countries';
+import SearchableCountryDropdown from '../components/SearchableCountryDropdown';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    country: '',
+    country_code: '',
     company: '',
     inquiry_type: 'general',
     subject: '',
@@ -22,12 +26,12 @@ const Contact = () => {
     const selectedType = sessionStorage.getItem('selectedInquiryType');
     const selectedService = sessionStorage.getItem('selectedService');
 
-    if (selectedType === 'quote') {
+    if (selectedType === 'quote' || selectedType === 'project') {
       setFormData(prev => ({
         ...prev,
-        inquiry_type: 'quote',
-        subject: selectedService ? `Quote Request: ${selectedService}` : 'Infrastructure Project Quote',
-        message: selectedService ? `I am interested in your ${selectedService} service. Please provide a detailed quote for my infrastructure project.\n\nProject Details:` : prev.message
+        inquiry_type: 'project',
+        subject: selectedService ? `Project Request: ${selectedService}` : 'Infrastructure Project Request',
+        message: selectedService ? `I am interested in your ${selectedService} service. Please provide information for my infrastructure project.\n\nProject Details:` : prev.message
       }));
       sessionStorage.removeItem('selectedInquiryType');
       sessionStorage.removeItem('selectedService');
@@ -35,10 +39,21 @@ const Contact = () => {
   }, []);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    
+    if (name === 'country') {
+      const selectedCountry = getCountryByName(value);
+      setFormData({
+        ...formData,
+        country: value,
+        country_code: selectedCountry ? selectedCountry.code : '',
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,22 +63,32 @@ const Contact = () => {
 
     try {
       // Send form data to backend
-      const response = await inquiryService.create({
+      const payload = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
+        country: formData.country,
+        country_code: formData.country_code,
         company: formData.company,
         inquiry_type: formData.inquiry_type,
         subject: formData.subject,
         message: formData.message,
         budget: formData.budget,
-      });
+      };
+
+      console.log('Sending inquiry payload:', payload);
+
+      const response = await inquiryService.create(payload);
+
+      console.log('Inquiry submitted successfully:', response);
 
       setSuccess(true);
       setFormData({
         name: '',
         email: '',
         phone: '',
+        country: '',
+        country_code: '',
         company: '',
         inquiry_type: 'general',
         subject: '',
@@ -76,7 +101,35 @@ const Contact = () => {
       // Reset success message after 5 seconds
       setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to send message. Please try again.');
+      console.error('Inquiry submission error:', err);
+      console.error('Error response:', err.response);
+      
+      let errorMessage = 'Failed to send message. Please try again.';
+      
+      if (err.response?.data) {
+        // Handle validation errors
+        if (typeof err.response.data === 'object') {
+          const errors = Object.entries(err.response.data)
+            .map(([key, value]) => {
+              if (Array.isArray(value)) {
+                return `${key}: ${value.join(', ')}`;
+              }
+              return `${key}: ${value}`;
+            })
+            .join('\n');
+          errorMessage = errors || errorMessage;
+        } else if (err.response.data.message) {
+          errorMessage = err.response.data.message;
+        } else if (err.response.data.detail) {
+          errorMessage = err.response.data.detail;
+        }
+      } else if (err.message === 'Network Error') {
+        errorMessage = 'Network error. Please check your connection and try again.';
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -84,12 +137,10 @@ const Contact = () => {
 
   const inquiryTypes = [
     { value: 'general', label: 'General Inquiry' },
-    { value: 'quote', label: 'Request Quote' },
-    { value: 'consultation', label: 'Free Consultation' },
-    { value: 'cloud', label: 'Cloud Infrastructure' },
-    { value: 'ai', label: 'AI & Machine Learning' },
-    { value: 'devops', label: 'DevOps & CI/CD' },
-    { value: 'infrastructure', label: 'Systems Infrastructure' }
+    { value: 'project', label: 'Project Request' },
+    { value: 'job', label: 'Job Opportunity' },
+    { value: 'collaboration', label: 'Collaboration' },
+    { value: 'other', label: 'Other' }
   ];
 
   const projectTypes = [
@@ -137,13 +188,15 @@ const Contact = () => {
 
                 {success && (
                   <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6">
-                    Thank you! I'll respond within 24 hours.
+                    <div className="font-semibold">✓ Success!</div>
+                    <div className="text-sm">Thank you! I'll respond within 24 hours.</div>
                   </div>
                 )}
 
                 {error && (
                   <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
-                    {error}
+                    <div className="font-semibold">✕ Error</div>
+                    <div className="text-sm whitespace-pre-wrap">{error}</div>
                   </div>
                 )}
 
@@ -193,6 +246,39 @@ const Contact = () => {
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       />
                     </div>
+                    <div>
+                      <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
+                        Country
+                      </label>
+                      <SearchableCountryDropdown
+                        value={formData.country}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+
+                  {formData.country && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Country Code
+                        </label>
+                        <div className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-700 font-semibold">
+                          {formData.country_code}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Dial Code
+                        </label>
+                        <div className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-700 font-semibold">
+                          {getCountryByName(formData.country)?.dialCode || '-'}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
                         Company
