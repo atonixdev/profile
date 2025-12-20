@@ -11,17 +11,17 @@ class InquiryAdmin(admin.ModelAdmin):
     readonly_fields = ['created_at', 'updated_at', 'ip_address', 'user_agent', 'country', 'country_code', 'contact_info']
     
     fieldsets = (
-        ('📞 Contact Information', {
+        ('Contact Information', {
             'fields': ('contact_info', 'name', 'email', 'phone', 'company'),
             'description': 'Use this information to contact the user back'
         }),
-        ('📝 Inquiry Details', {
+        ('Inquiry Details', {
             'fields': ('inquiry_type', 'subject', 'message', 'budget')
         }),
-        ('✅ Management', {
+        ('Management', {
             'fields': ('status', 'notes')
         }),
-        ('📊 Metadata', {
+        ('Metadata', {
             'fields': ('country', 'country_code', 'ip_address', 'user_agent', 'created_at', 'updated_at'),
             'classes': ('collapse',)
         }),
@@ -32,9 +32,9 @@ class InquiryAdmin(admin.ModelAdmin):
         if obj.email or obj.phone:
             info = "<strong>Ways to contact this user:</strong><br>"
             if obj.email:
-                info += f"📧 Email: <a href='mailto:{obj.email}'>{obj.email}</a><br>"
+                info += f"Email: <a href='mailto:{obj.email}'>{obj.email}</a><br>"
             if obj.phone:
-                info += f"📱 Phone: <a href='tel:{obj.phone}'>{obj.phone}</a>"
+                info += f"Phone: <a href='tel:{obj.phone}'>{obj.phone}</a>"
             return info
         return "No contact information provided"
     
