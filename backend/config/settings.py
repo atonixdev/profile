@@ -97,6 +97,10 @@ else:
         }
     }
 
+# Session Configuration - Use file-based sessions for reliability
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+SESSION_FILE_PATH = BASE_DIR / 'sessions'
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
