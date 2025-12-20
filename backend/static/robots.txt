@@ -1,35 +1,22 @@
-# robots.txt for AtonixDev.org
-# Allow search engines to crawl the website
+# robots.txt for atonixdev.org
+# Valid syntax for Google, Bing, and other search engines
 
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /admin-panel/
 Disallow: /api/
 Disallow: /static/admin/
 Disallow: /static/rest_framework/
 Disallow: /accounts/
 Disallow: /sessions/
-Disallow: /*.json$
-Disallow: /?*
-Disallow: /*?*sort=
-Disallow: /*?*order=
 
-# Specific rules for Googlebot
+# Googlebot specific rules
 User-agent: Googlebot
 Allow: /
-Disallow: /admin/
-Disallow: /api/
 
-# Specific rules for Bingbot
+# Bingbot specific rules
 User-agent: Bingbot
 Allow: /
-Disallow: /admin/
-Disallow: /api/
 
-# Sitemap location
-Sitemap: https://www.atonixdev.org/sitemap.xml
+# Sitemap references
 Sitemap: https://atonixdev.org/sitemap.xml
-
-# Crawl delay (milliseconds) - optional
-Crawl-delay: 1

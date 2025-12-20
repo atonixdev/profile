@@ -197,3 +197,31 @@ ACTIVITY_EXCLUDE_PATHS = config(
 ACTIVITY_INCLUDE_APPS = config('ACTIVITY_INCLUDE_APPS', default='', cast=Csv())
 ACTIVITY_EXCLUDE_APPS = config('ACTIVITY_EXCLUDE_APPS', default='', cast=Csv())
 
+# Cache Configuration for Better Performance
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 300,
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
+
+# Cache Control Headers
+CACHE_MIDDLEWARE_SECONDS = 600
+CACHE_MIDDLEWARE_KEY_PREFIX = 'atonixdev'
+
+# HTTP Cache Middleware
+MIDDLEWARE += [
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+]
+
+# Set default caching headers for responses
+DEFAULT_CACHE_HEADERS = {
+    'public': True,
+    'max_age': 3600,
+}
+
