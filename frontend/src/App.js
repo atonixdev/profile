@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AnalyticsBrowser } from '@segment/analytics-next';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -29,10 +28,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
-  const analytics = AnalyticsBrowser.load({
-    writeKey: "gN5V9AU5bJgBO6DqRpOnZFFdef7vcCYZ"
-  });
-
   return (
     <AuthProvider>
       <Router>
