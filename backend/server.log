@@ -39,3 +39,15 @@ Bad Request: /api/contact/inquiries/
 [20/Dec/2025 03:00:15] "POST /api/contact/inquiries/ HTTP/1.1" 201 67
 [20/Dec/2025 03:01:06] "GET /admin/ HTTP/1.1" 302 0
 [20/Dec/2025 03:04:31] "POST /api/contact/inquiries/ HTTP/1.1" 201 67
+/home/atonixdev/profile/backend/contact/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 02:54:24
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
