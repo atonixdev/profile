@@ -46,3 +46,33 @@ Quit the server with CONTROL-C.
 /home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   from pkg_resources import DistributionNotFound, get_distribution
 Watching for file changes with StatReloader
+[20/Dec/2025 05:33:44] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:33:45] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 05:33:46] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 05:33:47] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:33:47] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 05:33:47] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 05:35:52] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 17:19:25] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 17:20:27] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 17:20:28] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 17:20:28] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:28] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:29] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 17:20:30] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:51] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:52] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 17:26:03] "GET /api/services/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:26:03] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:26:04] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 17:26:05] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 17:26:06] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 17:26:07] "GET /api/portfolio/projects/ HTTP/1.1" 200 52

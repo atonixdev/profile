@@ -17,7 +17,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold">atonixdev</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Founder & Technical Architect at AtonixCorp. Building scalable, secure, and developer-ready ecosystems for Africa and the global market.
+              AtonixDev specializes in custom software development, full-stack engineering, AI-driven automation, and technical architecture for complex platforms. 
             </p>
           </div>
 
