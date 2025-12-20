@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { profileService, projectService, testimonialService, serviceService } from '../services';
+import InteractiveProjects from '../components/InteractiveProjects';
 
 const Home = () => {
   const [profile, setProfile] = useState(null);
-  const [featuredProjects, setFeaturedProjects] = useState([]);
   const [featuredTestimonials, setFeaturedTestimonials] = useState([]);
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,6 @@ const Home = () => {
         ]);
 
         setProfile(profileRes.data);
-        setFeaturedProjects(projectsRes.data.slice(0, 3));
         setFeaturedTestimonials(testimonialsRes.data.slice(0, 3));
         // Handle paginated response for services
         const servicesData = servicesRes.data.results || servicesRes.data;
@@ -700,7 +699,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Projects */}
+      {/* Featured Projects - Interactive Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -710,73 +709,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <Link
-                key={project.id}
-                to={`/portfolio/${project.id}`}
-                className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="relative overflow-hidden h-48">
-                  {project.thumbnail ? (
-                    <img
-                      src={project.thumbnail}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                      <span className="text-4xl text-white font-bold">
-                        {project.title.charAt(0).toUpperCase()}
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                    <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-50 group-hover:scale-100">
-                      <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm capitalize font-semibold">
-                      {project.category}
-                    </span>
-                    {project.is_featured && (
-                      <span className="text-yellow-500 text-lg">★</span>
-                    )}
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary-600 transition-colors">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies?.slice(0, 3).map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="text-primary-600 font-semibold group-hover:text-primary-700 transition-colors">
-                    View Project →
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <Link
-              to="/portfolio"
-              className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-all duration-300 transform hover:scale-105"
-            >
-              View All Projects
-            </Link>
-          </div>
+          <InteractiveProjects limit={6} showViewAll={true} />
         </div>
       </section>
 

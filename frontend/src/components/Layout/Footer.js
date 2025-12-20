@@ -40,17 +40,24 @@ const Footer = () => {
                   Portfolio
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* Connect */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Connect</h3>
+            <ul className="space-y-2 mb-6">
               <li>
                 <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link to="/help" className="text-gray-400 hover:text-white transition-colors">
+                  Help & FAQ
+                </Link>
+              </li>
             </ul>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a
                 href="https://linkedin.com/in/atonixdev"

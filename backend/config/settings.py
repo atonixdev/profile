@@ -2,6 +2,7 @@
 Django settings for Personal Brand Hub project.
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
 from decouple import config, Csv
@@ -224,4 +225,10 @@ DEFAULT_CACHE_HEADERS = {
     'public': True,
     'max_age': 3600,
 }
+
+# Hugging Face API Configuration
+HUGGINGFACE_API_KEY = os.getenv(
+    'HUGGINGFACE_API_KEY',
+    'hf_YOUR_API_KEY_HERE'  # Replace with actual key
+)
 

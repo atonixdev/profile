@@ -10,6 +10,7 @@ import Testimonials from './pages/Testimonials';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import CommunityDashboard from './pages/CommunityDashboard';
@@ -31,7 +32,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
+          <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -43,6 +44,8 @@ function App() {
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="help" element={<FAQ />} />
+            <Route path="faq" element={<FAQ />} />
           </Route>
 
           {/* Auth Routes */}
