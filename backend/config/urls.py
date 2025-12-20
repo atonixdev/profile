@@ -13,6 +13,8 @@ from . import views
 
 urlpatterns = [
     path('', views.landing_page, name='landing_page'),
+    path('sitemap.xml', views.sitemap, name='sitemap'),
+    path('robots.txt', views.robots, name='robots'),
     path('api/status/', views.api_status, name='api_status'),
     path('admin/', admin.site.urls),
 

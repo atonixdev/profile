@@ -32,3 +32,29 @@ Watching for file changes with StatReloader
 [20/Dec/2025 03:16:41] "GET / HTTP/1.1" 200 26116
 [20/Dec/2025 03:18:19] "GET / HTTP/1.1" 200 26045
 [20/Dec/2025 03:22:07] "GET / HTTP/1.1" 200 26059
+/home/atonixdev/profile/backend/config/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 03:13:48
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+/home/atonixdev/profile/backend/config/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 03:33:57
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+[20/Dec/2025 03:34:07] "GET /sitemap.xml HTTP/1.1" 200 1166
+[20/Dec/2025 03:34:16] "GET /robots.txt HTTP/1.1" 200 688
