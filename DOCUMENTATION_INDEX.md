@@ -314,7 +314,7 @@ After reviewing the documentation:
 **License:** MIT License - Free for personal and commercial use
 
 **Built With:**
-- Django & Django REST Framework
+
 - React & React Router
 - TailwindCSS
 - Axios
