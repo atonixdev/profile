@@ -26,6 +26,7 @@ import AdminServices from './pages/Admin/Services';
 import AdminTestimonials from './pages/Admin/Testimonials';
 import AdminInquiries from './pages/Admin/Inquiries';
 import AdminProfile from './pages/Admin/Profile';
+import ChatbotAdmin from './pages/Admin/ChatbotAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 
@@ -72,6 +73,7 @@ function App() {
             <Route path="/admin/testimonials" element={<AdminTestimonials />} />
             <Route path="/admin/inquiries" element={<AdminInquiries />} />
             <Route path="/admin/profile" element={<AdminProfile />} />
+            <Route path="/admin/chat" element={<ChatbotAdmin />} />
           </Route>
 
           {/* Catch all - redirect to home */}
