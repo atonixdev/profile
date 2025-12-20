@@ -195,10 +195,17 @@ const Contact = () => {
 
                 {error && (
                   <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
-                    <div className="font-semibold">✕ Error</div>
+                    <div className="font-semibold">Error</div>
                     <div className="text-sm whitespace-pre-wrap">{error}</div>
                   </div>
                 )}
+
+                {/* Contact Information Notice */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-blue-900">
+                    <span className="font-semibold">How we'll contact you:</span> Please provide your <strong>Email</strong> and <strong>Phone Number</strong> so we can reach you with our response. Both are essential for quick communication.
+                  </p>
+                </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -235,7 +242,7 @@ const Contact = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone
+                        Phone Number (Recommended)
                       </label>
                       <input
                         type="tel"
@@ -243,8 +250,10 @@ const Contact = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
+                        placeholder="e.g., +27 123 456 7890"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       />
+                      <p className="text-xs text-gray-500 mt-1">We'll use this to reach you faster</p>
                     </div>
                     <div>
                       <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
