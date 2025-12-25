@@ -44,8 +44,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy built assets from build stage
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Create non-root user for nginx
-RUN addgroup -g 1001 -S nginx && adduser -S nginx -G nginx
+# Use existing non-root nginx user provided by the base image
 USER nginx
 
 EXPOSE 80
