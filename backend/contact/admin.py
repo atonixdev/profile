@@ -35,6 +35,19 @@ class InquiryAdmin(admin.ModelAdmin):
         }),
     )
 
+    def contact_info(self, obj):
+        """Display contact information in a friendly format"""
+        if obj.email or obj.phone:
+            parts = ["Ways to contact this user:"]
+            if obj.email:
+                parts.append(f"Email: {obj.email}")
+            if obj.phone:
+                parts.append(f"Phone: {obj.phone}")
+            return " | ".join(parts)
+        return "No contact information provided"
+
+    contact_info.short_description = "Contact Information"
+
 
 @admin.register(AdminReply)
 class AdminReplyAdmin(admin.ModelAdmin):
