@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
+import FloatingChatbot from './components/FloatingChatbot';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -10,6 +11,7 @@ import Testimonials from './pages/Testimonials';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import CommunityDashboard from './pages/CommunityDashboard';
@@ -25,6 +27,7 @@ import AdminTestimonials from './pages/Admin/Testimonials';
 import AdminInquiries from './pages/Admin/Inquiries';
 import AdminProfile from './pages/Admin/Profile';
 import CV from './components/CV';
+import ChatbotAdmin from './pages/Admin/ChatbotAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 
@@ -32,6 +35,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <FloatingChatbot />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Layout />}>
@@ -44,7 +48,12 @@ function App() {
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="contact" element={<Contact />} />
+<<<<<<< HEAD
             <Route path="cv" element={<CV />} />
+=======
+            <Route path="help" element={<FAQ />} />
+            <Route path="faq" element={<FAQ />} />
+>>>>>>> aaa2a14c636db724a5b4227059ddfc54fd5501ff
           </Route>
 
           {/* Auth Routes */}
@@ -69,6 +78,7 @@ function App() {
             <Route path="/admin/testimonials" element={<AdminTestimonials />} />
             <Route path="/admin/inquiries" element={<AdminInquiries />} />
             <Route path="/admin/profile" element={<AdminProfile />} />
+            <Route path="/admin/chat" element={<ChatbotAdmin />} />
           </Route>
 
           {/* Catch all - redirect to home */}

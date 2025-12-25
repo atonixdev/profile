@@ -17,7 +17,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold">atonixdev</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Founder & Technical Architect at AtonixCorp. Building scalable, secure, and developer-ready ecosystems for Africa and the global market.
+              Principal Architect & Technical Innovator at AtonixCorp. Building sovereign infrastructure and intelligent systems for Africa and the global market. Specializing in custom software development, full-stack engineering, AI-driven automation, and complex technical architecture.
             </p>
             <Link to="/cv" className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
               Download CV
@@ -43,22 +43,29 @@ const Footer = () => {
                   Portfolio
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* Connect */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Connect</h3>
+            <ul className="space-y-2 mb-6">
               <li>
                 <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
+<<<<<<< HEAD
                 <Link to="/cv" className="text-gray-400 hover:text-white transition-colors">
                   CV / Resume
+=======
+                <Link to="/help" className="text-gray-400 hover:text-white transition-colors">
+                  Help & FAQ
+>>>>>>> aaa2a14c636db724a5b4227059ddfc54fd5501ff
                 </Link>
               </li>
             </ul>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a
                 href="https://linkedin.com/in/atonixdev"

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Test</title>
+    <script>
+        // Test the chatbot API directly
+        function testChatAPI() {
+            const message = document.getElementById('testMessage').value;
+            fetch('http://localhost:8000/api/chatbot/chat/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('API Response:', data);
+                document.getElementById('result').innerHTML = `
+                    <h3>Response:</h3>
+                    <p><strong>Message:</strong> ${data.message}</p>
+                    <p><strong>Specialization:</strong> ${data.specialization || 'None'}</p>
+                    <p><strong>Technologies:</strong> ${data.technologies ? data.technologies.join(', ').substring(0, 200) + '...' : 'None'}</p>
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            });
+        }
+    </script>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 50px auto; }
+        input, button { padding: 10px; margin: 10px 0; width: 100%; }
+        #result { border: 1px solid #ccc; padding: 20px; margin-top: 20px; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h1>Chatbot API Test</h1>
+    <p>Test the chatbot API without opening the app.</p>
+    <input type="text" id="testMessage" placeholder="Enter your message" value="I need help with cloud infrastructure">
+    <button onclick="testChatAPI()">Send Message</button>
+    <div id="result"></div>
+    <hr>
+    <h3>Check Backend Status:</h3>
+    <p>Make sure Django server is running on port 8000</p>
+    <p>Command: <code>cd backend && source venv/bin/activate && python manage.py runserver</code></p>
+</body>
+</html>

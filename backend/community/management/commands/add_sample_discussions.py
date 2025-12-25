@@ -21,27 +21,30 @@ class Command(BaseCommand):
 
         users = []
         for user_data in users_data:
-            user, created = User.objects.get_or_create(
-                username=user_data['username'],
-                defaults={
-                    'email': user_data['email'],
-                    'first_name': user_data['first_name'],
-                    'last_name': user_data['last_name'],
-                }
-            )
-            users.append(user)
-            
-            # Create community member
-            CommunityMember.objects.get_or_create(
-                user=user,
-                defaults={
-                    'role': random.choice(['member', 'contributor', 'moderator']),
-                    'bio': f'{user_data["first_name"]} is a passionate {user_data["last_name"]} from our community.',
-                    'expertise_areas': 'Python, JavaScript, React, Django',
-                    'is_active': True,
-                    'contribution_points': random.randint(50, 500)
-                }
-            )
+            try:
+                user, created = User.objects.get_or_create(
+                    username=user_data['username'],
+                    defaults={
+                        'email': user_data['email'],
+                        'first_name': user_data['first_name'],
+                        'last_name': user_data['last_name'],
+                    }
+                )
+                users.append(user)
+                
+                # Create community member
+                CommunityMember.objects.get_or_create(
+                    user=user,
+                    defaults={
+                        'role': random.choice(['member', 'contributor', 'moderator']),
+                        'bio': f'{user_data["first_name"]} is a passionate {user_data["last_name"]} from our community.',
+                        'expertise_areas': 'Python, JavaScript, React, Django',
+                        'is_active': True,
+                        'contribution_points': random.randint(50, 500)
+                    }
+                )
+            except Exception as e:
+                self.stdout.write(self.style.WARNING(f'Failed to create user/member {user_data["username"]}: {str(e)}'))
 
         # Sample discussions
         discussions_data = [

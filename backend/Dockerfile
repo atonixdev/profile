@@ -29,12 +29,12 @@ RUN mkdir -p /app/staticfiles /app/media
 # Collect static files
 RUN python manage.py collectstatic --noinput || true
 
-# Create non-root user for security
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
+# Create non-root user for security (match host user preference)
+RUN useradd -m -u 1000 atonixdev && chown -R atonixdev:atonixdev /app
+USER atonixdev
 
 # Expose port
 EXPOSE 8000
 
-# Run migrations and start gunicorn
-CMD ["sh", "-c", "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120"]
+# Run init script (wait DB, create DB, makemigrations, migrate, seed, start gunicorn)
+CMD ["sh", "/app/init.sh"]

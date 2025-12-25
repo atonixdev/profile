@@ -1,0 +1,360 @@
+nohup: ignoring input
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+[20/Dec/2025 05:16:38] "GET /api/status/ HTTP/1.1" 200 346
+[20/Dec/2025 05:16:49] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 05:17:36] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 05:17:37] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:17:37] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 05:17:38] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 05:17:38] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:17:39] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:18:13] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:18:13] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 05:19:05] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 05:19:06] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:19:06] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:19:07] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 05:19:07] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 05:19:08] "GET /api/services/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:21:58] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:21:58] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:23:31] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:23:32] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+/home/atonixdev/profile/backend/config/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 05:16:35
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+[20/Dec/2025 05:33:44] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:33:45] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 05:33:46] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 05:33:47] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 05:33:47] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 05:33:47] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 05:35:52] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 17:19:25] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 17:20:27] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 17:20:28] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 17:20:28] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:28] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:29] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 17:20:30] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:51] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:20:52] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 17:26:03] "GET /api/services/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:26:03] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:26:04] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 17:26:05] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 17:26:06] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 17:26:07] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:33:56] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:33:56] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:34:56] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:34:57] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:38:26] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:38:26] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:39:31] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:41:45] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 17:43:30] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:26:30] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:26:39] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:27:26] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:27:29] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:38:43] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:51:39] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:55:36] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:56:22] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 18:58:03] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:05:06] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:06:11] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:07:55] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:10:03] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:11:45] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:17:14] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:17:15] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+/home/atonixdev/profile/backend/config/settings.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 05:24:05
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+/home/atonixdev/profile/backend/config/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:25:41
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:26:11] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:26:11] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+/home/atonixdev/profile/backend/config/settings.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:25:45
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:28:48] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:28:49] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:28:52] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:28:53] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:28:53] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:28:54] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 19:28:54] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 19:28:55] "GET /api/services/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:29:07] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:29:08] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:29:58] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:29:58] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:30:30] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:30:31] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:32:10] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:32:11] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:32:22] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:32:23] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:32:44] "POST /api/chatbot/chat/ HTTP/1.1" 200 265
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:34:22] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:34:23] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:34:38] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:34:39] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:35:15] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:35:16] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:36:10] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:36:10] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:36:29] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:36:29] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:37:24] "OPTIONS /api/chatbot/chat/ HTTP/1.1" 200 0
+[20/Dec/2025 19:37:24] "POST /api/chatbot/chat/ HTTP/1.1" 200 795
+[20/Dec/2025 19:37:47] "POST /api/chatbot/chat/ HTTP/1.1" 200 795
+/home/atonixdev/profile/backend/chatbot_service/responses.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:28:04
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+/home/atonixdev/profile/backend/chatbot_service/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:40:40
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+/home/atonixdev/profile/backend/chatbot_service/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:40:52
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:42:24] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:42:25] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:43:16] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 19:43:16] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 19:43:17] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:43:18] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:43:18] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:43:19] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+/home/atonixdev/profile/backend/chatbot_service/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 20, 2025 - 19:40:55
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+/home/atonixdev/profile/backend/venv/lib/python3.12/site-packages/rest_framework_simplejwt/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+Watching for file changes with StatReloader
+[20/Dec/2025 19:45:27] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 19:45:28] "GET /api/services/ HTTP/1.1" 200 52
+[20/Dec/2025 19:45:29] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:45:29] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:45:30] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:45:31] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:45:43] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:45:44] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Session data corrupted
+[20/Dec/2025 19:45:47] "GET /admin/ HTTP/1.1" 302 0
+Session data corrupted
+[20/Dec/2025 19:45:47] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4253
+[20/Dec/2025 19:47:08] "GET /api/blog/posts/ HTTP/1.1" 200 52
+Session data corrupted
+[20/Dec/2025 19:47:59] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[20/Dec/2025 19:47:59] "GET /admin/ HTTP/1.1" 200 14256
+[20/Dec/2025 19:47:59] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[20/Dec/2025 19:47:59] "GET /static/img/favicon.svg HTTP/1.1" 304 0
+[20/Dec/2025 19:48:19] "GET /admin/accounts/profile/ HTTP/1.1" 200 13905
+[20/Dec/2025 19:48:19] "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+[20/Dec/2025 19:48:19] "GET /static/admin/js/core.js HTTP/1.1" 200 5682
+[20/Dec/2025 19:48:19] "GET /static/admin/css/changelists.css HTTP/1.1" 200 6566
+[20/Dec/2025 19:48:19] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 8943
+[20/Dec/2025 19:48:19] "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+[20/Dec/2025 19:48:19] "GET /static/admin/js/actions.js HTTP/1.1" 200 7872
+[20/Dec/2025 19:48:19] "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+[20/Dec/2025 19:48:19] "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+[20/Dec/2025 19:48:19] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 292458
+[20/Dec/2025 19:48:19] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+[20/Dec/2025 19:48:19] "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+[20/Dec/2025 19:48:19] "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+[20/Dec/2025 19:48:19] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+[20/Dec/2025 19:48:32] "GET /admin/contact/inquiry/ HTTP/1.1" 200 19660
+[20/Dec/2025 19:48:32] "GET /static/admin/css/forms.css HTTP/1.1" 200 9047
+[20/Dec/2025 19:48:32] "GET /static/admin/css/widgets.css HTTP/1.1" 200 11900
+[20/Dec/2025 19:48:32] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+[20/Dec/2025 19:52:25] "GET /admin/contact/inquiry/ HTTP/1.1" 200 19660
+[20/Dec/2025 19:52:31] "GET /admin/services/service/ HTTP/1.1" 200 14759
+[20/Dec/2025 19:52:34] "GET /admin/community/discussion/ HTTP/1.1" 200 16300
+[20/Dec/2025 19:52:40] "GET /admin/community/discussionreply/ HTTP/1.1" 200 15179
+[20/Dec/2025 19:52:46] "GET /admin/auth/user/ HTTP/1.1" 200 17114
+[20/Dec/2025 19:52:46] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+[20/Dec/2025 19:53:49] "GET /api/portfolio/projects/featured/ HTTP/1.1" 200 2
+[20/Dec/2025 19:53:50] "GET /api/services/ HTTP/1.1" 200 52
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:53:51] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:53:51] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:53:52] "GET /api/portfolio/projects/ HTTP/1.1" 200 52
+[20/Dec/2025 19:53:52] "GET /api/testimonials/featured/ HTTP/1.1" 200 2
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:59:38] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+Not Found: /api/accounts/profiles/public/
+[20/Dec/2025 19:59:38] "GET /api/accounts/profiles/public/ HTTP/1.1" 404 35
+[20/Dec/2025 19:59:55] "GET /admin/activity/activityevent/ HTTP/1.1" 200 67779
+[20/Dec/2025 19:59:55] "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+[20/Dec/2025 20:00:07] "GET /admin/activity/activityevent/33383/change/ HTTP/1.1" 200 25225
+[20/Dec/2025 20:00:07] "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+[20/Dec/2025 20:00:07] "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+[20/Dec/2025 20:00:07] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+[20/Dec/2025 20:00:07] "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+[20/Dec/2025 20:00:21] "GET /admin/activity/activityevent/33383/change/ HTTP/1.1" 200 25225
+[20/Dec/2025 20:00:24] "GET /admin/activity/activityevent/33383/change/ HTTP/1.1" 200 25225
+[20/Dec/2025 20:00:38] "GET /admin/community/discussion/ HTTP/1.1" 200 16300

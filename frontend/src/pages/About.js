@@ -33,12 +33,11 @@ const About = () => {
     <div className="py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          {/* Hero Section */}
           <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg p-8 mb-12">
             <div className="text-center">
-              <h1 className="text-5xl font-bold mb-4 text-gray-900">About Atonixdev</h1>
+              <h1 className="text-5xl font-bold mb-4 text-gray-900">About AtonixDev</h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Architect of sovereign infrastructure solutions enabling digital independence and innovation globally, with deep expertise in emerging markets
+                A modern, high-precision software engineering and technology architecture company specializing in building intelligent, scalable, and future-proof digital systems. Founded by visionary technical architect Samuel Realm, AtonixDev operates at the intersection of advanced software development, AI-driven automation, and financial technology innovation.
               </p>
             </div>
           </div>
@@ -103,13 +102,13 @@ const About = () => {
                   to="/services"
                   className="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
                 >
-                  View My Services
+                  View our Services
                 </Link>
                 <Link
                   to="/portfolio"
                   className="bg-gray-200 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
                 >
-                  Explore My Work
+                  Explore our Work
                 </Link>
               </div>
             </div>
@@ -117,53 +116,199 @@ const About = () => {
 
           {/* Detailed About Section */}
           <div className="mb-16">
-            <h3 className="text-3xl font-bold mb-8 text-center">My Journey</h3>
-            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-              {profile?.about ? (
-                <div className="space-y-6">
-                  {profile.about.split('\n\n').map((section, index) => {
-                    // Check if this is a header section
-                    if (section.startsWith('## ')) {
-                      return (
-                        <div key={index} className="mt-8 pt-8 border-t border-gray-200">
-                          <h4 className="text-2xl font-bold text-primary-600 mb-4">
-                            {section.replace('## ', '')}
-                          </h4>
-                        </div>
-                      );
-                    }
-                    
-                    // Check if this contains bullet points
-                    if (section.includes('• ')) {
-                      const lines = section.split('\n');
-                      return (
-                        <div key={index} className="mb-6">
-                          {lines.map((line, lineIndex) => {
-                            if (line.trim().startsWith('• ')) {
-                              return (
-                                <div key={lineIndex} className="flex items-start mb-3 pl-4">
-                                  <span className="text-primary-600 font-bold mr-3 mt-1">▸</span>
-                                  <span className="flex-1 text-gray-700">{line.replace('• ', '')}</span>
-                                </div>
-                              );
-                            }
-                            return line ? <p key={lineIndex} className="mb-2 text-gray-700">{line}</p> : null;
-                          })}
-                        </div>
-                      );
-                    }
-                    
-                    // Regular paragraph
-                    return section ? (
-                      <p key={index} className="mb-4 text-gray-700 leading-relaxed text-base">
-                        {section}
-                      </p>
-                    ) : null;
-                  })}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-gray-900">Our Journey</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                From vision to impact, building the future of technology in Africa and beyond
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {/* From Vision to Impact */}
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-8 border-l-4 border-blue-600 hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-blue-900 mb-3">From Vision to Impact</h3>
+                    <p className="text-gray-800 leading-relaxed">
+                      AtonixDev was founded with a clear mission: to bridge the gap between advanced technology innovation and practical business solutions. Starting as a solo venture, I've grown the organization into a trusted partner for enterprises seeking cutting-edge infrastructure, AI-powered solutions, and transformative digital strategies.
+                    </p>
+                  </div>
                 </div>
-              ) : (
-                <p className="text-gray-600">Loading detailed information...</p>
-              )}
+              </div>
+
+              {/* Core Philosophy */}
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-1 h-8 bg-primary-600"></div>
+                  <h3 className="text-2xl font-bold text-gray-900">Core Philosophy</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    {
+                      title: 'Sovereign Technology',
+                      desc: 'Building infrastructure that gives organizations true control over their data and systems',
+                      color: 'from-purple-500 to-purple-600'
+                    },
+                    {
+                      title: 'Intelligent Automation',
+                      desc: 'Leveraging AI and machine learning to solve complex challenges efficiently',
+                      color: 'from-pink-500 to-pink-600'
+                    },
+                    {
+                      title: 'Scalable Architecture',
+                      desc: 'Designing systems that grow with your business without compromising performance',
+                      color: 'from-orange-500 to-orange-600'
+                    },
+                    {
+                      title: 'Developer Excellence',
+                      desc: 'Creating platforms and tools that empower developers to do their best work',
+                      color: 'from-green-500 to-green-600'
+                    }
+                  ].map((item, index) => (
+                    <div key={index} className="bg-white rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all p-6 border-t-4 border-gray-200">
+                      <div className={`inline-block w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center mb-4`}>
+                        <span className="text-white font-bold text-lg">{index + 1}</span>
+                      </div>
+                      <h4 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h4>
+                      <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Specializations */}
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-1 h-8 bg-primary-600"></div>
+                  <h3 className="text-2xl font-bold text-gray-900">Specializations</h3>
+                </div>
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    {[
+                      {
+                        title: 'Cloud Infrastructure & Architecture',
+                        items: ['OpenStack', 'AWS', 'Google Cloud', 'Microsoft Azure', 'IBM Cloud', 'Red Hat', 'Kubernetes', 'Ceph', 'OVN', 'Private cloud', 'Public cloud', 'Hybrid cloud', 'Multi-cloud architecture', 'High-availability systems', 'Load Balancing', 'Auto-scaling', 'Service Mesh (Istio)', 'Linkerd', 'Network Architecture', 'Disaster Recovery', 'Backup & Recovery', 'Broadcom', 'NVIDIA', 'Computing infrastructure', 'vSphere', 'VMware', 'Hypervisor technology', 'Container orchestration', 'CDN & Edge computing', 'API Gateway', 'Monitoring & Observability'],
+                        icon: (
+                          <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+                          </svg>
+                        )
+                      },
+                      {
+                        title: 'AI & Machine Learning',
+                        items: ['Model development', 'TensorFlow', 'PyTorch', 'LLM Integration', 'Deployment pipelines', 'Research platforms', 'Data preprocessing', 'Model training & optimization', 'GPU acceleration', 'MLOps & Model Serving', 'Neural Networks', 'Computer Vision', 'Natural Language Processing', 'Transformers', 'Scikit-learn', 'XGBoost', 'Deep Learning', 'Fine-tuning', 'RAG (Retrieval-Augmented Generation)', 'Prompt Engineering', 'Vector Databases', 'Model Optimization', 'Inference Optimization', 'Distributed Training', 'Transfer Learning'],
+                        icon: (
+                          <svg className="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                          </svg>
+                        )
+                      },
+                      {
+                        title: 'DevOps & CI/CD',
+                        items: ['Jenkins', 'GitLab CI', 'Docker', 'Rootless containers', 'BuildKit', 'Kubernetes', 'Helm', 'Terraform', 'Ansible', 'Kafka', 'Prometheus', 'Grafana', 'ELK Stack', 'Splunk', 'Zero-downtime deployments', 'Blue-green deployments', 'Canary deployments', 'Infrastructure as Code', 'Monitoring & Logging', 'Log aggregation', 'Distributed tracing', 'ArgoCD', 'GitOps', 'CI/CD pipelines', 'Container registry', 'Service discovery', 'Configuration management', 'Health checks & alerting', 'Load testing', 'Rollback strategies', 'Change management', 'Release management', 'Incident response', 'SRE practices'],
+                        icon: (
+                          <svg className="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                          </svg>
+                        )
+                      },
+                      {
+                        title: 'Full-Stack Development',
+                        items: ['React', 'Next.js', 'Vue.js', 'Angular', 'Svelte', 'JavaScript/TypeScript', 'Node.js', 'Express.js', 'Django', 'FastAPI', 'Python', 'REST APIs', 'GraphQL', 'WebSockets', 'PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Elasticsearch', 'Docker', 'Tailwind CSS', 'Bootstrap', 'Material UI', 'API design & documentation', 'Database optimization', 'Caching strategies', 'Authentication & OAuth', 'Payment integration', 'Testing frameworks', 'Microservices architecture', 'Scalability & performance', 'Enterprise applications'],
+                        icon: (
+                          <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+                          </svg>
+                        )
+                      },
+                      {
+                        title: 'IoT & Embedded Systems',
+                        items: ['Raspberry Pi', 'Arduino', 'ROS (Robotics Operating System)', 'MQTT', 'Zigbee', 'Z-Wave', 'BLE (Bluetooth Low Energy)', 'LoRaWAN', 'NB-IoT', 'LTE-M', 'Edge Computing', 'Microcontroller programming', 'IoT protocols', 'CoAP (Constrained Application Protocol)', 'Embedded Linux', 'FreeRTOS', 'Zephyr OS', 'Sensor integration', 'Real-time systems', 'CAN bus', 'Modbus', 'Power management', 'Battery optimization', 'Firmware development', 'Hardware debugging', 'JTAG/SWD', 'OTA (Over-the-air) updates', 'TinyML & Edge AI', 'Circuit design', 'Telemetry', 'Wearable technology', 'Industrial IoT (IIoT)', 'Smart home integration', 'Hardware interfacing', 'Peripheral drivers'],
+                        icon: (
+                          <svg className="w-8 h-8 text-amber-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9l-7-7z M6 4h5v5h5v12H6V4z M8 10h2v2H8v-2zm4 0h2v2h-2v-2zm-4 4h2v2H8v-2zm4 0h2v2h-2v-2zm-4 4h8v2H8v-2z"/>
+                          </svg>
+                        )
+                      },
+                      {
+                        title: 'Security & Compliance',
+                        items: ['Application Security', 'Network Security', 'Cloud Security', 'API Security', 'Cryptography', 'SSL/TLS', 'OAuth & JWT', 'Multi-factor authentication (MFA)', 'OWASP standards', 'Penetration testing', 'Vulnerability assessment', 'Security hardening', 'Identity & Access Management', 'GDPR & HIPAA compliance', 'SOC 2 & ISO 27001 compliance', 'PCI-DSS compliance', 'Data encryption', 'Secure coding practices', 'SAST & DAST scanning', 'Code review & auditing', 'Zero Trust Architecture', 'DevSecOps', 'Security monitoring & auditing', 'SIEM (Security Information Event Management)', 'IDS/IPS (Intrusion Detection/Prevention)', 'WAF (Web Application Firewall)', 'Container security', 'Supply chain security', 'Secret management & Vault', 'Key management', 'Incident response & Forensics', 'Threat modeling & Risk assessment', 'Bug bounty programs', 'Security compliance reporting', 'CORS & CSP policies', 'DLP (Data Loss Prevention)', 'Endpoint security'],
+                        icon: (
+                          <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z M10 17h4v-4h4v-4H10v8z"/>
+                          </svg>
+                        )
+                      }
+                    ].map((spec, index) => (
+                      <div key={index} className={`p-6 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} border-b ${index < 2 ? 'md:border-r border-gray-200' : 'border-gray-200'}`}>
+                        <div className="mb-3">{spec.icon}</div>
+                        <h4 className="text-lg font-bold text-gray-900 mb-3">{spec.title}</h4>
+                        <ul className="space-y-2">
+                          {spec.items.map((item, idx) => (
+                            <li key={idx} className="flex items-center gap-2 text-gray-700">
+                              <span className="w-2 h-2 bg-primary-600 rounded-full"></span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Impact & Achievements */}
+              <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg p-8 border-l-4 border-primary-600">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-primary-900 mb-3">Impact & Achievements</h3>
+                    <p className="text-gray-800 leading-relaxed mb-4">
+                      Over the years, I've successfully delivered <strong>50+ projects</strong> across multiple sectors, from startups to enterprises. My work spans cloud migration initiatives, AI research platforms, DevOps transformations, and financial technology solutions.
+                    </p>
+                    <div className="grid grid-cols-3 gap-4 mt-6">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary-600">50+</div>
+                        <div className="text-sm text-gray-700">Projects</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary-600">8+</div>
+                        <div className="text-sm text-gray-700">Years</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary-600">Global</div>
+                        <div className="text-sm text-gray-700">Reach</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Looking Forward */}
+              <div className="bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-lg p-8 border-l-4 border-indigo-600">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-indigo-900 mb-3">Looking Forward</h3>
+                    <p className="text-gray-800 leading-relaxed">
+                      As technology continues to evolve, AtonixDev remains committed to staying at the forefront of innovation. We focus on emerging technologies, ethical AI implementation, and building systems that are not just powerful but also sustainable and responsible. Our vision is to empower organizations across Africa and globally to compete at the highest level using cutting-edge technology.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -243,7 +388,7 @@ const About = () => {
 
           {/* Approach/Values Section */}
           <div className="mb-16">
-            <h3 className="text-3xl font-bold mb-8 text-center">My Approach</h3>
+            <h3 className="text-3xl font-bold mb-8 text-center">Our Approach</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg shadow-md">
                 <div className="text-3xl font-bold text-blue-600 mb-3">1</div>

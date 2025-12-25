@@ -127,6 +127,14 @@ const Dashboard = () => {
           </Link>
 
           <Link
+            to="/admin/chat"
+            className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+          >
+            <h3 className="text-xl font-bold mb-2">💬 Manage Chats</h3>
+            <p className="text-gray-600">View and respond to visitor messages</p>
+          </Link>
+
+          <Link
             to="/admin/profile"
             className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
           >

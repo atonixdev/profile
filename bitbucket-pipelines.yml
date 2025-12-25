@@ -1,0 +1,128 @@
+image: atlassian/default-image:4
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Test & Build
+          trigger: manual
+          script:
+            - echo "Running tests and build..."
+  branches:
+    main:
+      - step:
+          name: Backend Tests
+          image: python:3.11-slim
+          services:
+            - postgres:15
+          caches:
+            - pip
+          script:
+            - cd backend
+            - pip install -r requirements.txt
+            - python manage.py test --settings=config.settings
+            - python manage.py migrate --settings=config.settings
+      - step:
+          name: Frontend Tests
+          image: node:18-alpine
+          caches:
+            - node
+          script:
+            - cd frontend
+            - npm ci
+            - npm run lint || true
+            - npm run build
+          artifacts:
+            - frontend/build/**
+      - step:
+          name: Build Backend Docker Image
+          services:
+            - docker
+          script:
+            - docker build -t atonixdev/profile-backend:$BITBUCKET_COMMIT ./backend
+            - docker build -t atonixdev/profile-backend:latest ./backend
+            - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+            - docker push atonixdev/profile-backend:$BITBUCKET_COMMIT
+            - docker push atonixdev/profile-backend:latest
+      - step:
+          name: Build Frontend Docker Image
+          services:
+            - docker
+          script:
+            - docker build -t atonixdev/profile-frontend:$BITBUCKET_COMMIT ./frontend
+            - docker build -t atonixdev/profile-frontend:latest ./frontend
+            - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+            - docker push atonixdev/profile-frontend:$BITBUCKET_COMMIT
+            - docker push atonixdev/profile-frontend:latest
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - echo "Deploying to production..."
+            - pipe: atlassian/ssh-run:0.4.5
+              variables:
+                SSH_HOST: $PRODUCTION_HOST
+                SSH_USER: $PRODUCTION_USER
+                SSH_KEY: $SSH_PRIVATE_KEY
+                COMMAND: |
+                  cd /app/profile
+                  docker pull atonixdev/profile-backend:latest
+                  docker pull atonixdev/profile-frontend:latest
+                  docker-compose up -d
+    develop:
+      - step:
+          name: Backend Tests
+          image: python:3.11-slim
+          services:
+            - postgres:15
+          caches:
+            - pip
+          script:
+            - cd backend
+            - pip install -r requirements.txt
+            - python manage.py test --settings=config.settings
+      - step:
+          name: Frontend Tests
+          image: node:18-alpine
+          caches:
+            - node
+          script:
+            - cd frontend
+            - npm ci
+            - npm run lint || true
+            - npm run build
+      - step:
+          name: Build Images
+          services:
+            - docker
+          script:
+            - docker build -t atonixdev/profile-backend:develop ./backend
+            - docker build -t atonixdev/profile-frontend:develop ./frontend
+            - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+            - docker push atonixdev/profile-backend:develop
+            - docker push atonixdev/profile-frontend:develop
+      - step:
+          name: Deploy to Staging
+          deployment: staging
+          script:
+            - echo "Deploying to staging..."
+            - pipe: atlassian/ssh-run:0.4.5
+              variables:
+                SSH_HOST: $STAGING_HOST
+                SSH_USER: $STAGING_USER
+                SSH_KEY: $SSH_PRIVATE_KEY
+                COMMAND: |
+                  cd /app/profile
+                  docker pull atonixdev/profile-backend:develop
+                  docker pull atonixdev/profile-frontend:develop
+                  docker-compose up -d
+
+definitions:
+  services:
+    postgres:
+      image: postgres:15
+      environment:
+        POSTGRES_DB: test_personal_brand_hub
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres

@@ -2,6 +2,7 @@
 Django settings for Personal Brand Hub project.
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
 from decouple import config, Csv
@@ -15,7 +16,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-in-produc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+ALLOWED_HOSTS = ["atonixdev.org", "www.atonixdev.org", "api.atonixdev.org", "localhost", "127.0.0.1", "144.202.110.159"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'contact',
     'blog',
     'community',
+    'activity',
+    'chatbot_service',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'activity.middleware.ActivityLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -75,24 +79,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Use PostgreSQL when DB_HOST is provided via environment; fall back to SQLite for local dev.
+if config('DB_HOST', default=None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME', default='personal_brand_hub'),
+            'USER': config('DB_USER', default='postgres'),
+            'PASSWORD': config('DB_PASSWORD', default='postgres'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT', default='5432'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
-# Uncomment for PostgreSQL in production
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST', default='localhost'),
-#         'PORT': config('DB_PORT', default='5432'),
-#     }
-# }
+# Session Configuration - Use file-based sessions for reliability
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+SESSION_FILE_PATH = BASE_DIR / 'sessions'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -153,8 +162,74 @@ SIMPLE_JWT = {
 # CORS Settings
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001',
+    default='http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,https://atonixdev.org,https://www.atonixdev.org',
     cast=Csv()
 )
 
 CORS_ALLOW_CREDENTIALS = True
+
+# CSRF Trusted Origins (required for HTTPS with different origins)
+CSRF_TRUSTED_ORIGINS = [
+    'https://atonixdev.org',
+    'https://www.atonixdev.org',
+    'https://api.atonixdev.org',
+]
+
+# Security Settings
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    USE_X_FORWARDED_HOST = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
+
+# Activity tracking settings
+ACTIVITY_TRACKING_ENABLED = config('ACTIVITY_TRACKING_ENABLED', default=True, cast=bool)
+ACTIVITY_EXCLUDE_PATHS = config(
+    'ACTIVITY_EXCLUDE_PATHS',
+    default='/admin/,/static/,/media/',
+    cast=Csv()
+)
+ACTIVITY_INCLUDE_APPS = config('ACTIVITY_INCLUDE_APPS', default='', cast=Csv())
+ACTIVITY_EXCLUDE_APPS = config('ACTIVITY_EXCLUDE_APPS', default='', cast=Csv())
+
+# Cache Configuration for Better Performance
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 300,
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
+
+# Cache Control Headers
+CACHE_MIDDLEWARE_SECONDS = 600
+CACHE_MIDDLEWARE_KEY_PREFIX = 'atonixdev'
+
+# HTTP Cache Middleware
+MIDDLEWARE += [
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+]
+
+# Set default caching headers for responses
+DEFAULT_CACHE_HEADERS = {
+    'public': True,
+    'max_age': 3600,
+}
+
+# Hugging Face API Configuration
+HUGGINGFACE_API_KEY = os.getenv(
+    'HUGGINGFACE_API_KEY',
+    'hf_YOUR_API_KEY_HERE'  # Replace with actual key
+)
+

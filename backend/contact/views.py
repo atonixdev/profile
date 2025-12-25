@@ -34,20 +34,23 @@ class InquiryViewSet(viewsets.ModelViewSet):
         
         # Get client IP
         client_ip = self.get_client_ip(request)
-        country = ''
-        country_code = ''
         
-        # Get country from IP using ip-api.com (free service)
-        try:
-            if client_ip and client_ip != '127.0.0.1':
-                response = requests.get(f'http://ip-api.com/json/{client_ip}', timeout=5)
-                if response.status_code == 200:
-                    data = response.json()
-                    if data.get('status') == 'success':
-                        country = data.get('country', '')
-                        country_code = data.get('countryCode', '')
-        except Exception as e:
-            print(f"Error getting country info: {e}")
+        # Get country from request data first (user-submitted), fallback to IP geolocation
+        country = request.data.get('country', '')
+        country_code = request.data.get('country_code', '')
+        
+        # If country not provided, try to get from IP using ip-api.com (free service)
+        if not country and not country_code:
+            try:
+                if client_ip and client_ip != '127.0.0.1':
+                    response = requests.get(f'http://ip-api.com/json/{client_ip}', timeout=5)
+                    if response.status_code == 200:
+                        data = response.json()
+                        if data.get('status') == 'success':
+                            country = data.get('country', '')
+                            country_code = data.get('countryCode', '')
+            except Exception as e:
+                print(f"Error getting country info: {e}")
         
         # Add metadata
         inquiry = serializer.save(

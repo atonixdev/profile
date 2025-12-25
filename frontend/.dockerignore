@@ -14,4 +14,3 @@ dist
 *.swo
 *~
 .DS_Store
-public/index.html

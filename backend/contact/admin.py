@@ -11,16 +11,17 @@ class AdminReplyInline(admin.TabularInline):
 
 @admin.register(Inquiry)
 class InquiryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'country', 'inquiry_type', 'subject', 'status', 'assigned_to', 'created_at']
+    list_display = ['name', 'email', 'phone', 'country', 'inquiry_type', 'subject', 'status', 'assigned_to', 'created_at']
     list_filter = ['status', 'inquiry_type', 'country', 'created_at', 'assigned_to']
-    search_fields = ['name', 'email', 'subject', 'message', 'country']
+    search_fields = ['name', 'email', 'phone', 'subject', 'message', 'country', 'company']
     list_editable = ['status', 'assigned_to']
-    readonly_fields = ['created_at', 'updated_at', 'ip_address', 'user_agent', 'country', 'country_code']
+    readonly_fields = ['created_at', 'updated_at', 'ip_address', 'user_agent', 'country', 'country_code', 'contact_info']
     inlines = [AdminReplyInline]
     
     fieldsets = (
         ('Contact Information', {
-            'fields': ('name', 'email', 'phone', 'company')
+            'fields': ('contact_info', 'name', 'email', 'phone', 'company'),
+            'description': 'Use this information to contact the user back'
         }),
         ('Inquiry Details', {
             'fields': ('inquiry_type', 'subject', 'message', 'budget')
@@ -34,6 +35,7 @@ class InquiryAdmin(admin.ModelAdmin):
         }),
     )
 
+<<<<<<< HEAD
 
 @admin.register(AdminReply)
 class AdminReplyAdmin(admin.ModelAdmin):
@@ -78,3 +80,24 @@ class EventAdmin(admin.ModelAdmin):
             'fields': ('related_inquiry', 'notes')
         }),
     )
+=======
+    def contact_info(self, obj):
+        """Display contact information prominently"""
+        if obj.email or obj.phone:
+            info = "<strong>Ways to contact this user:</strong><br>"
+            if obj.email:
+                info += f"Email: <a href='mailto:{obj.email}'>{obj.email}</a><br>"
+            if obj.phone:
+                info += f"Phone: <a href='tel:{obj.phone}'>{obj.phone}</a>"
+            return info
+        return "No contact information provided"
+    
+    contact_info.short_description = "Contact Information"
+    
+    def get_readonly_fields(self, request, obj=None):
+        """Make certain fields read-only when viewing"""
+        readonly = list(self.readonly_fields)
+        if obj:  # Editing existing object
+            readonly.extend(['created_at', 'updated_at'])
+        return readonly
+>>>>>>> aaa2a14c636db724a5b4227059ddfc54fd5501ff

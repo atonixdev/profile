@@ -203,13 +203,13 @@ const Login = () => {
           {/* Footer Text */}
           <p className="text-center text-sm text-gray-600 mt-6">
             By signing in, you agree to our{' '}
-            <a href="#" className="text-primary-600 hover:underline">
+            <button className="text-primary-600 hover:underline bg-transparent border-0 cursor-pointer p-0">
               Terms of Service
-            </a>{' '}
+            </button>{' '}
             and{' '}
-            <a href="#" className="text-primary-600 hover:underline">
+            <button className="text-primary-600 hover:underline bg-transparent border-0 cursor-pointer p-0">
               Privacy Policy
-            </a>
+            </button>
           </p>
         </div>
 
@@ -220,14 +220,14 @@ const Login = () => {
           </h3>
           <ul className="space-y-2 text-sm text-gray-600">
             <li>
-              <a href="#" className="hover:text-primary-600 transition">
+              <button className="hover:text-primary-600 transition bg-transparent border-0 cursor-pointer text-left p-0">
                 Reset your password
-              </a>
+              </button>
             </li>
             <li>
-              <a href="#" className="hover:text-primary-600 transition">
+              <button className="hover:text-primary-600 transition bg-transparent border-0 cursor-pointer text-left p-0">
                 Contact support
-              </a>
+              </button>
             </li>
             <li>
               <a href="/about" className="hover:text-primary-600 transition">
