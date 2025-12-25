@@ -15,7 +15,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     fetchPost();
-  }, [slug]);
+  }, [slug, fetchPost]);
 
   const fetchPost = async () => {
     try {

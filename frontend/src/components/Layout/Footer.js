@@ -16,9 +16,12 @@ const Footer = () => {
               </div>
               <h3 className="text-xl font-bold">atonixdev</h3>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Founder & Technical Architect at AtonixCorp. Building scalable, secure, and developer-ready ecosystems for Africa and the global market.
             </p>
+            <Link to="/cv" className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+              Download CV
+            </Link>
           </div>
 
           {/* Quick Links */}
@@ -43,6 +46,11 @@ const Footer = () => {
               <li>
                 <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link to="/cv" className="text-gray-400 hover:text-white transition-colors">
+                  CV / Resume
                 </Link>
               </li>
             </ul>
