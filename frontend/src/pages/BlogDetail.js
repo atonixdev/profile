@@ -14,24 +14,24 @@ const BlogDetail = () => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    fetchPost();
-  }, [slug, fetchPost]);
+    const fetchPost = async () => {
+      try {
+        setLoading(true);
+        const response = await blogService.getOne(slug);
+        setPost(response.data);
+        setComments(response.data.comments || []);
+        
+        // Increment view count
+        await blogService.incrementViews(slug);
+      } catch (error) {
+        console.error('Error fetching blog post:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const fetchPost = async () => {
-    try {
-      setLoading(true);
-      const response = await blogService.getOne(slug);
-      setPost(response.data);
-      setComments(response.data.comments || []);
-      
-      // Increment view count
-      await blogService.incrementViews(slug);
-    } catch (error) {
-      console.error('Error fetching blog post:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchPost();
+  }, [slug]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();

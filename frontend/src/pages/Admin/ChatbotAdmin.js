@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
@@ -11,11 +11,7 @@ const ChatbotAdmin = () => {
   const [replyMessage, setReplyMessage] = useState('');
   const [sending, setSending] = useState(false);
 
-  useEffect(() => {
-    fetchConversations();
-  }, [filter]);
-
-  const fetchConversations = async () => {
+  const fetchConversations = useCallback(async () => {
     try {
       setLoading(true);
       const response = await axios.get(
@@ -33,7 +29,11 @@ const ChatbotAdmin = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchConversations();
+  }, [fetchConversations]);
 
   const fetchConversationDetail = async (id) => {
     try {

@@ -9,29 +9,29 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        const params = {};
+
+        if (selectedCategory !== 'all') {
+          params.category = selectedCategory;
+        }
+        if (searchTerm) {
+          params.search = searchTerm;
+        }
+
+        const response = await blogService.getAll(params);
+        setPosts(response.data.results || response.data);
+      } catch (error) {
+        console.error('Error fetching blog posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchPosts();
-  }, [selectedCategory, searchTerm, fetchPosts]);
-
-  const fetchPosts = async () => {
-    try {
-      setLoading(true);
-      const params = {};
-
-      if (selectedCategory !== 'all') {
-        params.category = selectedCategory;
-      }
-      if (searchTerm) {
-        params.search = searchTerm;
-      }
-
-      const response = await blogService.getAll(params);
-      setPosts(response.data.results || response.data);
-    } catch (error) {
-      console.error('Error fetching blog posts:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [selectedCategory, searchTerm]);
 
   const categories = [
     { value: 'all', label: 'All Posts' },

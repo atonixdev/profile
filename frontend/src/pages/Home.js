@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [profileRes, projectsRes, testimonialsRes, servicesRes] = await Promise.all([
+        const [profileRes, , testimonialsRes, servicesRes] = await Promise.all([
           profileService.getPublicProfile(),
           projectService.getFeatured(),
           testimonialService.getFeatured(),

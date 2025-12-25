@@ -10,47 +10,47 @@ const InteractiveProjects = ({ limit = 6, showViewAll = true }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  const fetchProjects = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get('http://localhost:8000/api/portfolio/projects/');
-      
-      if (Array.isArray(response.data)) {
-        setProjects(response.data.slice(0, limit));
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:8000/api/portfolio/projects/');
         
-        // Extract unique categories
-        const uniqueCategories = ['all', ...new Set(response.data.map(p => p.category))];
-        setCategories(uniqueCategories);
-      }
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-      // Fallback to sample data
-      setProjects([
-        {
-          id: 1,
-          title: 'OpenStack Private Cloud',
-          description: 'Designed and deployed a comprehensive OpenStack cloud infrastructure.',
-          category: 'cloud',
-          technologies: ['OpenStack', 'OVN', 'Kubernetes', 'Ceph'],
-          is_featured: true,
-        },
-        {
-          id: 2,
-          title: 'AI Research Hub',
-          description: 'High-performance computing environment optimized for AI/ML workloads.',
-          category: 'ai',
-          technologies: ['GPU', 'Docker', 'TensorFlow', 'PyTorch'],
-          is_featured: true,
+        if (Array.isArray(response.data)) {
+          setProjects(response.data.slice(0, limit));
+          
+          // Extract unique categories
+          const uniqueCategories = ['all', ...new Set(response.data.map(p => p.category))];
+          setCategories(uniqueCategories);
         }
-      ]);
-      setCategories(['all', 'cloud', 'ai', 'devops']);
-    } finally {
-      setLoading(false);
-    }
-  };
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+        // Fallback to sample data
+        setProjects([
+          {
+            id: 1,
+            title: 'OpenStack Private Cloud',
+            description: 'Designed and deployed a comprehensive OpenStack cloud infrastructure.',
+            category: 'cloud',
+            technologies: ['OpenStack', 'OVN', 'Kubernetes', 'Ceph'],
+            is_featured: true,
+          },
+          {
+            id: 2,
+            title: 'AI Research Hub',
+            description: 'High-performance computing environment optimized for AI/ML workloads.',
+            category: 'ai',
+            technologies: ['GPU', 'Docker', 'TensorFlow', 'PyTorch'],
+            is_featured: true,
+          }
+        ]);
+        setCategories(['all', 'cloud', 'ai', 'devops']);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, [limit]);
 
   const filteredProjects = projects.filter(project => 
     selectedCategory === 'all' || project.category === selectedCategory

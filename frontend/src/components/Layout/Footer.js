@@ -56,13 +56,13 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-<<<<<<< HEAD
                 <Link to="/cv" className="text-gray-400 hover:text-white transition-colors">
                   CV / Resume
-=======
+                </Link>
+              </li>
+              <li>
                 <Link to="/help" className="text-gray-400 hover:text-white transition-colors">
                   Help & FAQ
->>>>>>> aaa2a14c636db724a5b4227059ddfc54fd5501ff
                 </Link>
               </li>
             </ul>
