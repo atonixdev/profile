@@ -48,12 +48,9 @@ function App() {
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="contact" element={<Contact />} />
-<<<<<<< HEAD
             <Route path="cv" element={<CV />} />
-=======
             <Route path="help" element={<FAQ />} />
             <Route path="faq" element={<FAQ />} />
->>>>>>> aaa2a14c636db724a5b4227059ddfc54fd5501ff
           </Route>
 
           {/* Auth Routes */}
