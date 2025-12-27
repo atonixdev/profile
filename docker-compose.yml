@@ -39,7 +39,7 @@ services:
       retries: 5
     environment:
       - DEBUG=${DEBUG:-True}
-      - SECRET_KEY=${SECRET_KEY:-!s9g(4l%hn$k8hqq6sodks2ni22!%6l+=8r3xygj%ho6vx2c%k}
+      - SECRET_KEY=${SECRET_KEY:-dev-secret-key-change-in-production}
       - NASA_API_KEY=${NASA_API_KEY:-DEMO_KEY}
       - DB_NAME=${DB_NAME:-personal_brand_hub}
       - DB_USER=${DB_USER:-postgres}
