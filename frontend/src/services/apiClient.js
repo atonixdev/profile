@@ -9,9 +9,10 @@ const deriveBaseUrl = () => {
   const host = typeof window !== 'undefined' ? window.location.hostname : '';
   const protocol = typeof window !== 'undefined' ? window.location.protocol : 'http:';
 
-  // Production: any atonixdev.org host points to the API subdomain
+  // Production: use same-origin /api so the frontend reverse-proxy can route it
+  // (works for atonixdev.org and www.atonixdev.org, and avoids cross-origin issues)
   if (host.endsWith('atonixdev.org')) {
-    return 'https://api.atonixdev.org/api';
+    return `${protocol}//${host}/api`;
   }
 
   // Local dev fallbacks
@@ -25,8 +26,7 @@ const deriveBaseUrl = () => {
   // LAN / non-local host (e.g., testing from phone on same Wi‑Fi)
   // Default to same host on port 8000; override with REACT_APP_API_URL if needed.
   if (host) {
-    const safeProtocol = protocol === 'https:' ? 'http:' : protocol;
-    return `${safeProtocol}//${host}:8000/api`;
+    return `${protocol}//${host}:8000/api`;
   }
   // Default local
   return 'http://localhost:8000/api';
