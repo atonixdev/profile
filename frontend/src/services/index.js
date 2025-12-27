@@ -82,3 +82,20 @@ export const aiLabService = {
   listModels: () => api.get('/ai-lab/models/'),
   createModel: (formData) => api.post('/ai-lab/models/', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
 };
+
+// IoT Lab
+export const iotLabService = {
+  listDevices: (params) => api.get('/iot-lab/devices/', params ? { params } : undefined),
+  createDevice: (data) => api.post('/iot-lab/devices/', data),
+  updateDevice: (id, data) => api.patch(`/iot-lab/devices/${id}/`, data),
+
+  listTelemetry: (params) => api.get('/iot-lab/telemetry/', params ? { params } : undefined),
+  createTelemetry: (data) => api.post('/iot-lab/telemetry/', data),
+
+  listAutomations: () => api.get('/iot-lab/automations/'),
+  createAutomation: (data) => api.post('/iot-lab/automations/', data),
+  updateAutomation: (id, data) => api.patch(`/iot-lab/automations/${id}/`, data),
+  runAutomation: (id) => api.post(`/iot-lab/automations/${id}/run/`),
+
+  getNetworkSummary: () => api.get('/iot-lab/network/summary/'),
+};

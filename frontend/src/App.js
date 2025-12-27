@@ -35,6 +35,10 @@ import AILabTuning from './pages/Lab/AILabTuning';
 import AILabDatasets from './pages/Lab/AILabDatasets';
 import AILabRegistry from './pages/Lab/AILabRegistry';
 import IoTLabOverview from './pages/Lab/IoTLabOverview';
+import IoTLabDevices from './pages/Lab/IoTLabDevices';
+import IoTLabTelemetry from './pages/Lab/IoTLabTelemetry';
+import IoTLabAutomation from './pages/Lab/IoTLabAutomation';
+import IoTLabNetwork from './pages/Lab/IoTLabNetwork';
 import PlaceholderPage from './pages/Lab/PlaceholderPage';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
@@ -117,10 +121,10 @@ function App() {
 
                 {/* IoT Lab */}
                 <Route path="iot" element={<IoTLabOverview />} />
-                <Route path="iot/devices" element={<PlaceholderPage title="Device Manager" description="Configure and monitor IoT devices" domain="IoT Lab" />} />
-                <Route path="iot/telemetry" element={<PlaceholderPage title="Sensor Telemetry" description="View real-time sensor data streams" domain="IoT Lab" />} />
-                <Route path="iot/automation" element={<PlaceholderPage title="Automation Experiments" description="Build and test automation workflows" domain="IoT Lab" />} />
-                <Route path="iot/network" element={<PlaceholderPage title="Network Health" description="Monitor network status and connectivity" domain="IoT Lab" />} />
+                <Route path="iot/devices" element={<IoTLabDevices />} />
+                <Route path="iot/telemetry" element={<IoTLabTelemetry />} />
+                <Route path="iot/automation" element={<IoTLabAutomation />} />
+                <Route path="iot/network" element={<IoTLabNetwork />} />
                 <Route path="iot/settings" element={<LabSettings />} />
               </Route>
             </Route>

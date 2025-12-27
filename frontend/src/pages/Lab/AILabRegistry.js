@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { aiLabService } from '../../services';
 
 const AILabRegistry = () => {
@@ -26,7 +26,7 @@ const AILabRegistry = () => {
     return e?.message || fallback;
   };
 
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
@@ -39,11 +39,11 @@ const AILabRegistry = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
 
   const handleUpload = async (e) => {
     e.preventDefault();

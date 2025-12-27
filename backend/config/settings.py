@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'chatbot_service',
     'research_lab',
     'ai_lab',
+    'iot_lab',
 ]
 
 MIDDLEWARE = [

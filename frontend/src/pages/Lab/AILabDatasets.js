@@ -1,5 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { aiLabService } from '../../services';
+
+const formatApiError = (e, fallback) => {
+  const status = e?.response?.status;
+  const data = e?.response?.data;
+  if (typeof data === 'string') {
+    const looksLikeHtml = data.trim().startsWith('<!DOCTYPE') || data.trim().startsWith('<html');
+    return `${fallback}${status ? ` (HTTP ${status})` : ''}${looksLikeHtml ? ' (received HTML, check /api proxy)' : ''}`;
+  }
+  if (data?.detail) return String(data.detail);
+  if (data?.error) return String(data.error);
+  if (status) return `${fallback} (HTTP ${status})`;
+  return e?.message || fallback;
+};
 
 const AILabDatasets = () => {
   const [items, setItems] = useState([]);
@@ -10,20 +23,7 @@ const AILabDatasets = () => {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  const formatApiError = (e, fallback) => {
-    const status = e?.response?.status;
-    const data = e?.response?.data;
-    if (typeof data === 'string') {
-      const looksLikeHtml = data.trim().startsWith('<!DOCTYPE') || data.trim().startsWith('<html');
-      return `${fallback}${status ? ` (HTTP ${status})` : ''}${looksLikeHtml ? ' (received HTML, check /api proxy)' : ''}`;
-    }
-    if (data?.detail) return String(data.detail);
-    if (data?.error) return String(data.error);
-    if (status) return `${fallback} (HTTP ${status})`;
-    return e?.message || fallback;
-  };
-
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
@@ -36,11 +36,11 @@ const AILabDatasets = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
 
   const handleUpload = async (e) => {
     e.preventDefault();

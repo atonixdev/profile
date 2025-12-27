@@ -4,6 +4,14 @@ import { FiCrosshair, FiGlobe, FiTarget, FiDatabase, FiPlayCircle, FiTrendingUp,
 
 import { spaceService } from '../../services';
 
+const isPlainObject = (value) => {
+  if (!value || typeof value !== 'object') return false;
+  if (Array.isArray(value)) return false;
+  return true;
+};
+
+const asObjectOrNull = (value) => (isPlainObject(value) ? value : null);
+
 const StatCard = ({ icon: Icon, label, value, trend, color = 'blue' }) => {
   const colorClasses = {
     blue: 'from-[#1A4FFF]/20 to-[#1A4FFF]/5 border-[#1A4FFF]/30',
@@ -52,14 +60,6 @@ const SpaceLabOverview = () => {
     neo: null,
     donki: null,
   });
-
-  const isPlainObject = (value) => {
-    if (!value || typeof value !== 'object') return false;
-    if (Array.isArray(value)) return false;
-    return true;
-  };
-
-  const asObjectOrNull = (value) => (isPlainObject(value) ? value : null);
 
   useEffect(() => {
     let cancelled = false;
