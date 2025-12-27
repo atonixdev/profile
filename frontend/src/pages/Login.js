@@ -82,8 +82,8 @@ const Login = () => {
         });
       }
 
-      // Redirect to community or home
-      const redirectPath = location.state?.from || '/community';
+      // Redirect to the originally requested page, or default to Lab
+      const redirectPath = location.state?.from || '/lab';
       navigate(redirectPath);
     } catch (err) {
       if (!err.response) {
