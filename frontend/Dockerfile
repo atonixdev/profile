@@ -1,5 +1,5 @@
-# Development stage
-FROM node:18-alpine AS development
+# Base image
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
@@ -12,41 +12,24 @@ RUN npm install
 # Copy project files
 COPY . .
 
-# Expose port
-EXPOSE 3000
-
-CMD ["npm", "start"]
-
-# Build stage
-FROM node:18-alpine AS build
-
-WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-# Use npm install to avoid lockfile sync errors when package-lock.json is absent
-RUN npm install --omit=dev
-
-# Copy project files
-COPY . .
-
 # Build the app
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
+# -----------------------------
+# Production stage (Node server)
+# -----------------------------
+FROM node:18-alpine AS production
 
-# Copy nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-# Copy built assets from build stage
-COPY --from=build /app/build /usr/share/nginx/html
+# Install a lightweight static server
+RUN npm install -g serve
 
-# Use existing non-root nginx user provided by the base image
-USER nginx
+# Copy build output from previous stage
+COPY --from=build /app/build ./build
 
-EXPOSE 80
+# Expose port
+EXPOSE 3000
 
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the production build
+CMD ["serve", "-s", "build", "-l", "3000"]
