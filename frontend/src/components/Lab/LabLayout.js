@@ -7,7 +7,7 @@ import ResearchDomainNav from './ResearchDomainNav';
 const LabLayout = () => {
   const location = useLocation();
   const [search, setSearch] = useState('');
-  const [theme, setTheme] = useState(() => localStorage.getItem('lab_theme') || 'dark');
+  const [theme, setTheme] = useState(() => localStorage.getItem('lab_theme') || 'light');
   const [settings, setSettings] = useState(() => {
     const defaults = {
       compareCap: 5,
