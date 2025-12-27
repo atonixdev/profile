@@ -74,27 +74,38 @@ const domainConfigs = {
   },
 };
 
-const DomainSidebar = ({ domain = 'experimentation', domainsMeta = {}, onNavigate, variant = 'default' }) => {
+const DomainSidebar = ({ domain = 'experimentation', domainsMeta = {}, collapsed = false, onNavigate, variant = 'default' }) => {
   const config = domainConfigs[domain] || domainConfigs.experimentation;
   const meta = domainsMeta?.[domain] || {};
   const title = meta.label || config.title;
   const subtitle = meta.description || config.subtitle;
 
+  const abbrev = (value) => {
+    const s = String(value || '').trim();
+    if (!s) return 'LAB';
+    const parts = s.split(/\s+/).filter(Boolean);
+    const initials = parts.slice(0, 3).map((p) => p[0]?.toUpperCase()).join('');
+    return initials || s.slice(0, 3).toUpperCase();
+  };
+
   const baseClassName =
     variant === 'drawer'
       ? 'w-72 bg-gradient-to-b from-[#0A0F1F] to-[#0D1425] border-r border-[#1A4FFF]/20'
-      : 'w-full md:w-72 bg-gradient-to-b from-[#0A0F1F] to-[#0D1425] border-r border-[#1A4FFF]/20';
+      : 'w-full bg-gradient-to-b from-[#0A0F1F] to-[#0D1425] border-r border-[#1A4FFF]/20';
 
   return (
     <aside className={baseClassName}>
-      <div className="px-6 py-5 border-b border-[#1A4FFF]/20">
-        <div className="text-lg font-bold text-white font-['Poppins']">
-          {title}
+      <div className={collapsed ? 'px-3 py-4 border-b border-[#1A4FFF]/20' : 'px-6 py-5 border-b border-[#1A4FFF]/20'}>
+        <div
+          className={collapsed ? 'text-sm font-bold text-white font-[\'Poppins\'] text-center' : "text-lg font-bold text-white font-['Poppins']"}
+          title={title}
+        >
+          {collapsed ? abbrev(title) : title}
         </div>
-        <div className="text-xs text-gray-400 mt-1">{subtitle}</div>
+        {!collapsed && <div className="text-xs text-gray-400 mt-1">{subtitle}</div>}
       </div>
 
-      <nav className="p-3 space-y-1">
+      <nav className={collapsed ? 'p-2 space-y-1' : 'p-3 space-y-1'}>
         {config.items.map((item) => {
           const Icon = item.icon;
           return (
@@ -105,9 +116,13 @@ const DomainSidebar = ({ domain = 'experimentation', domainsMeta = {}, onNavigat
               onClick={() => {
                 if (typeof onNavigate === 'function') onNavigate();
               }}
+              title={item.label}
+              aria-label={item.label}
               className={({ isActive }) =>
                 [
-                  'flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all duration-200',
+                  collapsed
+                    ? 'flex items-center justify-center px-2 py-2.5 rounded-lg font-semibold transition-all duration-200'
+                    : 'flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all duration-200',
                   isActive
                     ? 'bg-[#1A4FFF]/20 text-[#00E0FF] shadow-lg shadow-[#1A4FFF]/25'
                     : 'text-gray-400 hover:bg-white/5 hover:text-white',
@@ -115,7 +130,7 @@ const DomainSidebar = ({ domain = 'experimentation', domainsMeta = {}, onNavigat
               }
             >
               <Icon className="text-lg" />
-              <span className="text-sm">{item.label}</span>
+              {!collapsed && <span className="text-sm">{item.label}</span>}
             </NavLink>
           );
         })}

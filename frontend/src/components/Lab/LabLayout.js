@@ -9,6 +9,7 @@ const LabLayout = () => {
   const [search, setSearch] = useState('');
   const [theme, setTheme] = useState(() => localStorage.getItem('lab_theme') || 'light');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => localStorage.getItem('lab_sidebar_collapsed') === '1');
   const [settings, setSettings] = useState(() => {
     const defaults = {
       compareCap: 5,
@@ -72,6 +73,14 @@ const LabLayout = () => {
     });
   };
 
+  const toggleSidebarCollapsed = () => {
+    setSidebarCollapsed((prev) => {
+      const next = !prev;
+      localStorage.setItem('lab_sidebar_collapsed', next ? '1' : '0');
+      return next;
+    });
+  };
+
   const currentDomain = useMemo(() => {
     const path = location.pathname;
     if (path.startsWith('/lab/space')) return 'space';
@@ -90,13 +99,13 @@ const LabLayout = () => {
   const domainsMeta = useMemo(() => settings?.domains || {}, [settings?.domains]);
 
   return (
-    <div className={`min-h-[calc(100vh-64px)] ${themeClasses}`}>
+    <div className={`min-h-screen ${themeClasses}`}>
       <ResearchDomainNav domainsMeta={domainsMeta} />
       
       <div className="flex flex-col md:flex-row">
         {/* Desktop sidebar */}
-        <div className="hidden md:block">
-          <DomainSidebar domain={currentDomain} domainsMeta={domainsMeta} />
+        <div className={sidebarCollapsed ? 'hidden md:block w-20' : 'hidden md:block w-72'}>
+          <DomainSidebar domain={currentDomain} domainsMeta={domainsMeta} collapsed={sidebarCollapsed} />
         </div>
 
         {/* Mobile drawer */}
@@ -125,6 +134,8 @@ const LabLayout = () => {
             setSearch={setSearch}
             theme={theme}
             toggleTheme={toggleTheme}
+            sidebarCollapsed={sidebarCollapsed}
+            toggleSidebarCollapsed={toggleSidebarCollapsed}
             isMenuOpen={mobileMenuOpen}
             onToggleMenu={() => setMobileMenuOpen((v) => !v)}
           />

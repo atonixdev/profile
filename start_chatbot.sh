@@ -80,6 +80,15 @@ echo ""
 echo "Starting Frontend (React)..."
 echo "================================"
 cd /home/atonixdev/profile/frontend
+
+# Optional: Mapbox token for Space Lab Earth map
+if ! grep -q "^REACT_APP_MAPBOX_TOKEN=" /home/atonixdev/profile/frontend/.env 2>/dev/null; then
+    echo ""
+    echo "⚠️  Optional: Mapbox token not configured"
+    echo "   The Space Lab 'Earth Imagery Map' requires REACT_APP_MAPBOX_TOKEN."
+    echo "   Add it to /home/atonixdev/profile/frontend/.env then restart frontend."
+fi
+
 npm install --silent > /dev/null 2>&1 || true
 nohup npm start > /dev/null 2>&1 &
 FRONTEND_PID=$!

@@ -3,6 +3,12 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
+# CRA reads REACT_APP_* at build time. These can be provided as Docker build args.
+ARG REACT_APP_API_URL
+ARG REACT_APP_MAPBOX_TOKEN
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+ENV REACT_APP_MAPBOX_TOKEN=$REACT_APP_MAPBOX_TOKEN
+
 # Copy package files
 COPY package*.json ./
 

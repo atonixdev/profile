@@ -1,8 +1,17 @@
 import React from 'react';
-import { FiBell, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
+import { FiBell, FiChevronsLeft, FiChevronsRight, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
-const LabTopBar = ({ search, setSearch, theme, toggleTheme, isMenuOpen, onToggleMenu }) => {
+const LabTopBar = ({
+  search,
+  setSearch,
+  theme,
+  toggleTheme,
+  sidebarCollapsed,
+  toggleSidebarCollapsed,
+  isMenuOpen,
+  onToggleMenu,
+}) => {
   const { user } = useAuth();
 
   const displayName =
@@ -19,6 +28,17 @@ const LabTopBar = ({ search, setSearch, theme, toggleTheme, isMenuOpen, onToggle
         >
           {isMenuOpen ? <FiX /> : <FiMenu />}
         </button>
+
+        <button
+          type="button"
+          onClick={toggleSidebarCollapsed}
+          className="hidden md:inline-flex px-3 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 font-semibold"
+          aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          {sidebarCollapsed ? <FiChevronsRight /> : <FiChevronsLeft />}
+        </button>
+
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
