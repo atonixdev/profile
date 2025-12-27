@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 
-NASA_API_KEY = config('NASA_API_KEY', default='DEMO_KEY')
+NASA_API_KEY = config('NASA_API_KEY', default='DEMO_KEY').strip()
 
 NASA_APOD_URL = 'https://api.nasa.gov/planetary/apod'
 NASA_NEO_FEED_URL = 'https://api.nasa.gov/neo/rest/v1/feed'
@@ -37,7 +37,10 @@ def _cache_key(prefix: str, params: dict) -> str:
 def _get_json(url: str, params: dict, timeout_s: int = 15):
     resp = requests.get(url, params=params, timeout=timeout_s)
     resp.raise_for_status()
-    return resp.json()
+    try:
+        return resp.json()
+    except ValueError as exc:
+        raise requests.RequestException(f"Invalid JSON response: {exc}") from exc
 
 
 @api_view(['GET'])
