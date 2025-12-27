@@ -13,9 +13,15 @@ const CV = () => {
     const opt = {
       margin: 8,
       filename: 'Samuel_Obiora_Principal_Architect_CV.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, allowTaint: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      // Smaller file size: lower raster scale + slightly lower JPEG quality.
+      image: { type: 'jpeg', quality: 0.78 },
+      html2canvas: {
+        scale: 1.15,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
     
@@ -31,7 +37,7 @@ const CV = () => {
             onClick={handleDownloadPDF}
             className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
           >
-            ⬇ Download PDF
+            Download PDF
           </button>
         </div>
 
