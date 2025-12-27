@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'research_lab',
     'ai_lab',
     'iot_lab',
+    'self_lab',
 ]
 
 MIDDLEWARE = [

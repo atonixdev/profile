@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/research-lab/', include('research_lab.urls')),
     path('api/ai-lab/', include('ai_lab.urls')),
     path('api/iot-lab/', include('iot_lab.urls')),
+    path('api/self-lab/', include('self_lab.urls')),
 ]
 
 # Serve media files in development
