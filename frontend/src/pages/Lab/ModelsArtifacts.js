@@ -66,10 +66,8 @@ const ModelsArtifacts = () => {
         </select>
 
         {runs.length === 0 && !error && (
-          <div className="text-sm text-gray-600 mt-2">No runs yet. Create one in Run Experiment.</div>
+          <div className="text-sm text-gray-600 mt-2">No runs yet.</div>
         )}
-
-        <div className="text-xs text-gray-500 mt-2">Local SQLite path: {selected?.local_sqlite_path || '—'}</div>
       </div>
 
       {selected && (

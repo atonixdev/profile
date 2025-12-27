@@ -188,7 +188,6 @@ const History = () => {
               <div className="text-sm text-gray-600">
                 {selectedRun.experiment?.name || selectedRun.experiment?.slug} • {selectedRun.status}
               </div>
-              <div className="text-xs text-gray-500 mt-1">Local SQLite path: {selectedRun.local_sqlite_path || '—'}</div>
             </div>
           </div>
 
