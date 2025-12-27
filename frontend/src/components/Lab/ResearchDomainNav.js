@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FiZap, FiActivity, FiCpu, FiRadio, FiBarChart } from 'react-icons/fi';
 
 const domains = [
@@ -42,6 +42,15 @@ const domains = [
 ];
 
 const ResearchDomainNav = () => {
+  const location = useLocation();
+
+  const isExperimentationActive = useMemo(() => {
+    const p = location.pathname || '';
+    if (!p.startsWith('/lab')) return false;
+    const otherDomains = ['/lab/space', '/lab/self', '/lab/ai', '/lab/iot'];
+    return !otherDomains.some((prefix) => p === prefix || p.startsWith(`${prefix}/`));
+  }, [location.pathname]);
+
   return (
     <div className="bg-gradient-to-r from-[#0A0F1F] via-[#0D1425] to-[#0A0F1F] border-b border-[#1A4FFF]/20 shadow-xl">
       <div className="max-w-[1800px] mx-auto px-6 py-4">
@@ -62,22 +71,26 @@ const ResearchDomainNav = () => {
         <div className="flex gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-[#1A4FFF] scrollbar-track-transparent">
           {domains.map((domain) => {
             const Icon = domain.icon;
+
             return (
               <NavLink
                 key={domain.id}
                 to={domain.path}
                 end={domain.exact}
-                className={({ isActive }) =>
+                className={({ isActive: navIsActive }) => {
+                  const isActive = domain.id === 'experimentation' ? isExperimentationActive : navIsActive;
                   [
                     'group flex items-center gap-3 px-5 py-3 rounded-lg transition-all duration-300',
                     'border backdrop-blur-md min-w-fit',
                     isActive
                       ? 'bg-[#1A4FFF]/20 border-[#1A4FFF] shadow-lg shadow-[#1A4FFF]/25'
                       : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-[#00E0FF]/50',
-                  ].join(' ')
-                }
+                  ].join(' ');
+                }}
               >
-                {({ isActive }) => (
+                {({ isActive: navIsActive }) => {
+                  const isActive = domain.id === 'experimentation' ? isExperimentationActive : navIsActive;
+                  return (
                   <>
                     <Icon
                       className={`text-xl transition-colors ${
@@ -97,7 +110,8 @@ const ResearchDomainNav = () => {
                       </span>
                     </div>
                   </>
-                )}
+                  );
+                }}
               </NavLink>
             );
           })}
