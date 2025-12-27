@@ -86,6 +86,10 @@ const Login = () => {
       const redirectPath = location.state?.from || '/community';
       navigate(redirectPath);
     } catch (err) {
+      if (!err.response) {
+        setError('Cannot reach the API server. Check that the backend is running and that your browser is not forcing HTTPS for localhost/IP addresses.');
+        return;
+      }
       if (err.response?.status === 401) {
         setError('Invalid username or password');
       } else {

@@ -61,6 +61,12 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (error) {
+      if (!error.response) {
+        return {
+          success: false,
+          error: 'Cannot reach the API server. Check backend connectivity and HTTPS-only browser settings.',
+        };
+      }
       return {
         success: false,
         error: error.response?.data?.detail || 'Login failed',

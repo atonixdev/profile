@@ -66,3 +66,11 @@ export const labService = {
   getRun: (runId) => api.get(`/research-lab/runs/${runId}/`),
   getRunLogs: (runId, limit = 200) => api.get(`/research-lab/runs/${runId}/logs/`, { params: { limit } }),
 };
+
+// Space Lab (backend-proxied space APIs)
+export const spaceService = {
+  getApod: (params) => api.get('/research-lab/space/apod/', { params }),
+  getIssNow: () => api.get('/research-lab/space/iss/'),
+  getNeoSummary: (params) => api.get('/research-lab/space/neo/', { params }),
+  getDonkiSummary: (params) => api.get('/research-lab/space/donki/', { params }),
+};

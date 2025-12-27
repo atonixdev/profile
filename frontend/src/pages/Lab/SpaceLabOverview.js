@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiCrosshair, FiGlobe, FiTarget, FiDatabase, FiPlayCircle, FiTrendingUp } from 'react-icons/fi';
+import { FiCrosshair, FiGlobe, FiTarget, FiDatabase, FiPlayCircle, FiTrendingUp, FiActivity } from 'react-icons/fi';
+
+import { spaceService } from '../../services';
 
 const StatCard = ({ icon: Icon, label, value, trend, color = 'blue' }) => {
   const colorClasses = {
@@ -42,6 +44,56 @@ const QuickAction = ({ icon: Icon, label, to, description }) => (
 );
 
 const SpaceLabOverview = () => {
+  const [feeds, setFeeds] = useState({
+    loading: true,
+    error: null,
+    apod: null,
+    iss: null,
+    neo: null,
+    donki: null,
+  });
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const [apodRes, issRes, neoRes, donkiRes] = await Promise.all([
+          spaceService.getApod(),
+          spaceService.getIssNow(),
+          spaceService.getNeoSummary(),
+          spaceService.getDonkiSummary(),
+        ]);
+
+        if (cancelled) return;
+        setFeeds({
+          loading: false,
+          error: null,
+          apod: apodRes.data,
+          iss: issRes.data,
+          neo: neoRes.data,
+          donki: donkiRes.data,
+        });
+      } catch (err) {
+        if (cancelled) return;
+        setFeeds((prev) => ({
+          ...prev,
+          loading: false,
+          error: err?.response?.data?.detail || err?.message || 'Failed to load space feeds',
+        }));
+      }
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const issLabel = feeds.iss?.latitude != null && feeds.iss?.longitude != null
+    ? `${Number(feeds.iss.latitude).toFixed(2)}, ${Number(feeds.iss.longitude).toFixed(2)}`
+    : '—';
+
   return (
     <div className="space-y-8">
       <div className="flex items-start justify-between gap-4">
@@ -60,11 +112,71 @@ const SpaceLabOverview = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatCard icon={FiCrosshair} label="Active Simulations" value="12" trend="+3 this week" color="blue" />
-        <StatCard icon={FiGlobe} label="Cosmic Events Tracked" value="847" trend="+45 today" color="cyan" />
-        <StatCard icon={FiTarget} label="Orbital Calculations" value="2.3K" trend="+120 today" color="purple" />
+      {feeds.error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-sm text-red-200">
+          {feeds.error}
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <StatCard
+          icon={FiGlobe}
+          label="APOD"
+          value={feeds.loading ? 'Loading…' : (feeds.apod?.date || '—')}
+          trend={feeds.apod?.title || ''}
+          color="cyan"
+        />
+        <StatCard
+          icon={FiCrosshair}
+          label="NEO Count"
+          value={feeds.loading ? 'Loading…' : (feeds.neo?.total_near_earth_objects ?? '—')}
+          trend={feeds.neo ? `Hazardous: ${feeds.neo.potentially_hazardous_count}` : ''}
+          color="blue"
+        />
+        <StatCard
+          icon={FiTarget}
+          label="ISS Position"
+          value={feeds.loading ? 'Loading…' : issLabel}
+          trend={feeds.iss?.altitude_km != null ? `Alt: ${Number(feeds.iss.altitude_km).toFixed(0)} km` : ''}
+          color="purple"
+        />
+        <StatCard
+          icon={FiActivity}
+          label="Space Weather"
+          value={feeds.loading ? 'Loading…' : (feeds.donki?.count ?? '—')}
+          trend={feeds.donki ? 'DONKI notifications (7d)' : ''}
+          color="cyan"
+        />
       </div>
+
+      {feeds.apod?.media_type === 'image' && feeds.apod?.url && (
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-xl">
+          <h2 className="text-xl font-bold text-white mb-4 font-['Poppins']">Astronomy Picture of the Day</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+            <a
+              href={feeds.apod.hdurl || feeds.apod.url}
+              target="_blank"
+              rel="noreferrer"
+              className="block rounded-lg overflow-hidden border border-white/10"
+            >
+              <img
+                src={feeds.apod.url}
+                alt={feeds.apod.title || 'APOD'}
+                className="w-full h-64 object-cover"
+                loading="lazy"
+              />
+            </a>
+            <div className="space-y-2">
+              <div className="text-white font-semibold">{feeds.apod.title}</div>
+              <div className="text-xs text-gray-400">{feeds.apod.date}</div>
+              <div className="text-sm text-gray-300 leading-relaxed">
+                {String(feeds.apod.explanation || '').slice(0, 260)}
+                {feeds.apod.explanation && String(feeds.apod.explanation).length > 260 ? '…' : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-xl">
         <h2 className="text-xl font-bold text-white mb-4 font-['Poppins']">Quick Actions</h2>

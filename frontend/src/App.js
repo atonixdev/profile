@@ -27,6 +27,7 @@ import LabCompare from './pages/Lab/Compare';
 import LabModelsArtifacts from './pages/Lab/ModelsArtifacts';
 import LabSettings from './pages/Lab/Settings';
 import SpaceLabOverview from './pages/Lab/SpaceLabOverview';
+import SpaceModulePage from './pages/Lab/SpaceModulePage';
 import SelfLabOverview from './pages/Lab/SelfLabOverview';
 import AILabOverview from './pages/Lab/AILabOverview';
 import IoTLabOverview from './pages/Lab/IoTLabOverview';
@@ -87,10 +88,11 @@ function App() {
 
                 {/* Space Lab */}
                 <Route path="space" element={<SpaceLabOverview />} />
-                <Route path="space/simulations" element={<PlaceholderPage title="Orbital Simulations" description="Run gravitational and trajectory models" domain="Space Lab" />} />
-                <Route path="space/telemetry" element={<PlaceholderPage title="Satellite Telemetry" description="Monitor real-time satellite data" domain="Space Lab" />} />
-                <Route path="space/models" element={<PlaceholderPage title="Cosmic Event Models" description="Analyze supernovae, black holes, and more" domain="Space Lab" />} />
-                <Route path="space/datasets" element={<PlaceholderPage title="Datasets" description="Browse astrophysics research data" domain="Space Lab" />} />
+                <Route path="space/astrophysics" element={<SpaceModulePage kind="astrophysics" title="Astrophysics & Orbital Mechanics" description="Orbital fundamentals, near-earth objects, and astrophysics signals" />} />
+                <Route path="space/simulations" element={<SpaceModulePage kind="simulations" title="Orbital Simulations" description="Run gravitational and trajectory models" />} />
+                <Route path="space/telemetry" element={<SpaceModulePage kind="telemetry" title="Satellite Telemetry" description="Monitor real-time satellite data" />} />
+                <Route path="space/models" element={<SpaceModulePage kind="models" title="Cosmic Event Models" description="Analyze solar storms and space weather signals" />} />
+                <Route path="space/datasets" element={<SpaceModulePage kind="datasets" title="Datasets" description="Browse space datasets and activity summaries" />} />
                 <Route path="space/settings" element={<LabSettings />} />
 
                 {/* Self Lab */}
