@@ -36,173 +36,157 @@ const CV = () => {
         </div>
 
         {/* CV Content */}
-        <div ref={componentRef} className="bg-white shadow-2xl rounded-lg p-10 print:shadow-none print:p-7 print:max-w-none" style={{fontFamily: "'Inter', 'Segoe UI', sans-serif"}}>
+        <div ref={componentRef} className="bg-white shadow-2xl rounded-lg p-16 print:shadow-none print:p-7 print:max-w-none" style={{fontFamily: "'Inter', 'Segoe UI', sans-serif"}}>
           
           {/* Premium Header */}
-          <div className="mb-8 pb-7 border-b-4 border-blue-700">
-            <div className="text-center mb-5">
-              <h1 className="text-6xl font-bold text-gray-900 mb-2 print:text-5xl tracking-tight" style={{letterSpacing: '-0.5px'}}>Samuel Obiora</h1>
-              <p className="text-2xl text-blue-700 font-semibold mb-4 print:text-xl tracking-wide">
+          <div className="mb-12 pb-10 border-b-4 border-blue-700">
+            <div className="text-center mb-8">
+              <h1 className="text-8xl font-bold text-gray-900 mb-4 print:text-5xl tracking-tight" style={{letterSpacing: '-0.5px'}}>Samuel Obiora</h1>
+              <p className="text-3xl text-blue-700 font-semibold mb-6 print:text-xl tracking-wide">
                 Principal Architect | Cloud Infrastructure & AI Systems
               </p>
-              <p className="text-base text-gray-700 max-w-3xl mx-auto leading-relaxed mb-4 font-light">
+              <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed mb-6 font-light">
                 Visionary technologist specializing in sovereign technology infrastructure, intelligent automation, and scalable architectures that drive organizational transformation at enterprise scale.
               </p>
             </div>
-            <div className="flex justify-center gap-6 text-xl text-gray-700">
+            <div className="flex justify-center gap-8 text-2xl text-gray-700">
               <a href="mailto:devatonix@gmail.com" className="hover:text-blue-700 transition-colors" title="Email">
-                <MdEmail size={22} />
+                <MdEmail size={28} />
               </a>
               <a href="https://www.linkedin.com/in/atonixdev" target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition-colors" title="LinkedIn">
-                <FaLinkedin size={22} />
+                <FaLinkedin size={28} />
               </a>
               <a href="https://github.com/atonixdev" target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition-colors" title="GitHub">
-                <FaGithub size={22} />
+                <FaGithub size={28} />
               </a>
               <a href="https://gitlab.com/atonixdev" target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition-colors" title="GitLab">
-                <FaGitlab size={22} />
+                <FaGitlab size={28} />
               </a>
               <a href="https://atonixdev.org" target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition-colors" title="Website">
-                <FaGlobe size={22} />
+                <FaGlobe size={28} />
               </a>
               <a href="https://wa.me/27664173157" target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition-colors" title="WhatsApp: +27664173157">
-                <FaWhatsapp size={22} />
+                <FaWhatsapp size={28} />
               </a>
             </div>
           </div>
 
           {/* Executive Summary */}
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Executive Summary</h2>
-            <p className="text-gray-800 leading-relaxed text-base font-light">
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Executive Summary</h2>
+            <p className="text-gray-800 leading-relaxed text-lg font-light">
               Principal-level architect with 8+ years of experience transforming enterprises through sovereign cloud infrastructure, intelligent AI automation, and developer-first platforms. Architected 50+ production systems serving millions of users. Expert in designing resilient, high-performance architectures across AWS, Google Cloud, Azure, and private cloud environments. Deep specialization in FinTech systems, AI/ML integration, DevOps transformation, and security compliance. Proven track record of reducing operational costs by 40%, accelerating deployment cycles, and enabling organizations to compete globally with cutting-edge technology.
             </p>
           </section>
 
           {/* Core Philosophy */}
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Core Philosophy</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-700">
-                <h3 className="font-semibold text-gray-900 mb-2 text-blue-700 text-sm">Sovereign Technology</h3>
-                <p className="text-gray-700 text-sm leading-relaxed font-light">Building infrastructure that gives organizations true control over their data and systems</p>
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Core Philosophy</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-700">
+                <h3 className="font-semibold text-gray-900 mb-3 text-blue-700 text-base">Sovereign Technology</h3>
+                <p className="text-gray-700 text-base leading-relaxed font-light">Building infrastructure that gives organizations true control over their data and systems</p>
               </div>
-              <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-700">
-                <h3 className="font-semibold text-gray-900 mb-2 text-blue-700 text-sm">Intelligent Automation</h3>
-                <p className="text-gray-700 text-sm leading-relaxed font-light">Leveraging AI and machine learning to solve complex challenges efficiently</p>
+              <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-700">
+                <h3 className="font-semibold text-gray-900 mb-3 text-blue-700 text-base">Intelligent Automation</h3>
+                <p className="text-gray-700 text-base leading-relaxed font-light">Leveraging AI and machine learning to solve complex challenges efficiently</p>
               </div>
-              <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-700">
-                <h3 className="font-semibold text-gray-900 mb-2 text-blue-700 text-sm">Scalable Architecture</h3>
-                <p className="text-gray-700 text-sm leading-relaxed font-light">Designing systems that grow with your business without compromising performance</p>
+              <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-700">
+                <h3 className="font-semibold text-gray-900 mb-3 text-blue-700 text-base">Scalable Architecture</h3>
+                <p className="text-gray-700 text-base leading-relaxed font-light">Designing systems that grow with your business without compromising performance</p>
               </div>
-              <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-700">
-                <h3 className="font-semibold text-gray-900 mb-2 text-blue-700 text-sm">Developer Excellence</h3>
-                <p className="text-gray-700 text-sm leading-relaxed font-light">Creating platforms and tools that empower developers to do their best work</p>
+              <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-700">
+                <h3 className="font-semibold text-gray-900 mb-3 text-blue-700 text-base">Developer Excellence</h3>
+                <p className="text-gray-700 text-base leading-relaxed font-light">Creating platforms and tools that empower developers to do their best work</p>
               </div>
             </div>
           </section>
 
           {/* Technical Expertise - Comprehensive */}
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Technical Expertise</h2>
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Technical Expertise</h2>
             
-            <div className="space-y-5">
+            <div className="space-y-6">
               {/* Cloud Infrastructure */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">Cloud Infrastructure & Architecture</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Cloud Providers</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">AWS • Google Cloud • Microsoft Azure • OpenStack • IBM Cloud • Red Hat</p>
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">Cloud Infrastructure & Architecture</h3>
+                <div>
+                  <div className="grid grid-cols-5 gap-4 mb-4">
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Cloud Providers</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Deployment Models</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Service Models</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Containerization &amp; Orchestration</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Infrastructure &amp; Architecture</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Deployment Models</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Public Cloud • Private Cloud • Hybrid Cloud • Community Cloud • Multi-Cloud Architecture</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Service Models</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">IaaS • PaaS • SaaS • Serverless Computing • Event-driven Architecture</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Containerization &amp; Orchestration</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Kubernetes • Docker • Helm • Containerd • BuildKit • Rootless Containers</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Infrastructure &amp; Architecture</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Terraform • Ansible • Service Mesh (Istio, Linkerd) • High-Availability • Load Balancing • Auto-scaling • Disaster Recovery</p>
+                  <div className="grid grid-cols-5 gap-4">
+                    <p className="text-gray-700 text-base font-light leading-relaxed">AWS • Google Cloud • Microsoft Azure • OpenStack • IBM Cloud • Red Hat</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Public Cloud • Private Cloud • Hybrid Cloud • Community Cloud • Multi-Cloud Architecture</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">IaaS • PaaS • SaaS • Serverless Computing • Event-driven Architecture</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Kubernetes • Docker • Helm • Containerd • BuildKit • Rootless Containers</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Terraform • Ansible • Service Mesh (Istio, Linkerd) • High-Availability • Load Balancing • Auto-scaling • Disaster Recovery</p>
                   </div>
                 </div>
               </div>
 
               {/* AI & Machine Learning */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">AI & Machine Learning</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Frameworks & Libraries</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">TensorFlow • PyTorch • Scikit-learn • XGBoost • Transformers</p>
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">AI & Machine Learning</h3>
+                <div>
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Frameworks & Libraries</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Specializations</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Infrastructure & Deployment</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Specializations</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">LLM Integration • RAG Systems • Prompt Engineering • Fine-tuning • Computer Vision • NLP • Deep Learning • Model Optimization</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Infrastructure & Deployment</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">GPU Acceleration • MLOps • Distributed Training • Model Serving • Vector Databases • Research Platforms</p>
+                  <div className="grid grid-cols-3 gap-4">
+                    <p className="text-gray-700 text-base font-light leading-relaxed">TensorFlow • PyTorch • Scikit-learn • XGBoost • Transformers</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">LLM Integration • RAG Systems • Prompt Engineering • Fine-tuning • Computer Vision • NLP • Deep Learning • Model Optimization</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">GPU Acceleration • MLOps • Distributed Training • Model Serving • Vector Databases • Research Platforms</p>
                   </div>
                 </div>
               </div>
 
               {/* DevOps & CI/CD */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">DevOps, CI/CD & Infrastructure Automation</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">CI/CD Tools &amp; Platforms</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Jenkins • GitLab CI • GitHub Actions • ArgoCD • GitOps Workflows</p>
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">DevOps, CI/CD & Infrastructure Automation</h3>
+                <div>
+                  <div className="grid grid-cols-4 gap-4 mb-4">
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">CI/CD Tools &amp; Platforms</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Infrastructure as Code</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Monitoring & Observability</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Deployment Strategies</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Infrastructure as Code</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Terraform • Ansible • Helm Charts • Configuration Management • Infrastructure Automation</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Monitoring & Observability</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Prometheus • Grafana • ELK Stack • Splunk • Distributed Tracing • Log Aggregation</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Deployment Strategies</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Zero-downtime • Blue-green • Canary • Rolling Updates • Health Checks & Alerting • SRE Practices</p>
+                  <div className="grid grid-cols-4 gap-4">
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Jenkins • GitLab CI • GitHub Actions • ArgoCD • GitOps Workflows</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Terraform • Ansible • Helm Charts • Configuration Management • Infrastructure Automation</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Prometheus • Grafana • ELK Stack • Splunk • Distributed Tracing • Log Aggregation</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Zero-downtime • Blue-green • Canary • Rolling Updates • Health Checks & Alerting • SRE Practices</p>
                   </div>
                 </div>
               </div>
 
               {/* Programming Languages */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">Programming Languages & Development</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Backend Languages</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Python • JavaScript/TypeScript • Go • Java • C++ • Rust • Bash/Shell</p>
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">Programming Languages & Development</h3>
+                <div>
+                  <div className="grid grid-cols-4 gap-4 mb-4">
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Backend Languages</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Backend Frameworks</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Frontend Technologies</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">API & Database</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Backend Frameworks</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Django • FastAPI • Node.js • Express.js • Spring Boot • Kafka</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Frontend Technologies</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">React • Next.js • Vue.js • Angular • Svelte • Tailwind CSS • Bootstrap</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">API & Database</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">REST • GraphQL • WebSockets • gRPC • PostgreSQL • MongoDB • MySQL • Redis • Elasticsearch</p>
+                  <div className="grid grid-cols-4 gap-4">
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Python • JavaScript/TypeScript • Go • Java • C++ • Rust • Bash/Shell</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Django • FastAPI • Node.js • Express.js • Spring Boot • Kafka</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">React • Next.js • Vue.js • Angular • Svelte • Tailwind CSS • Bootstrap</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">REST • GraphQL • WebSockets • gRPC • PostgreSQL • MongoDB • MySQL • Redis • Elasticsearch</p>
                   </div>
                 </div>
               </div>
 
               {/* Full-Stack Development */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">Full-Stack Development & Architecture</h3>
-                <div className="grid md:grid-cols-2 gap-4 text-sm">
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">Full-Stack Development & Architecture</h3>
+                <div className="grid md:grid-cols-2 gap-6 text-base">
                   <p className="text-gray-700 font-light leading-relaxed">Microservices Architecture</p>
                   <p className="text-gray-700 font-light leading-relaxed">API Design & Documentation</p>
                   <p className="text-gray-700 font-light leading-relaxed">Performance Optimization</p>
@@ -215,62 +199,54 @@ const CV = () => {
               </div>
 
               {/* IoT & Embedded */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">IoT & Embedded Systems</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Platforms & Boards</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Raspberry Pi • Arduino • NVIDIA Jetson • ROS (Robotics OS)</p>
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">IoT & Embedded Systems</h3>
+                <div>
+                  <div className="grid grid-cols-4 gap-4 mb-4">
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Platforms & Boards</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Protocols & Communication</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Operating Systems</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Specializations</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Protocols & Communication</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">MQTT • Zigbee • Z-Wave • BLE • LoRaWAN • NB-IoT • LTE-M • CoAP • Modbus • CAN Bus</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Operating Systems</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Embedded Linux • FreeRTOS • Zephyr OS • Real-time Systems</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Specializations</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Edge Computing • Firmware Development • Hardware Debugging • TinyML & Edge AI • Industrial IoT • Smart Home Integration</p>
+                  <div className="grid grid-cols-4 gap-4">
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Raspberry Pi • Arduino • NVIDIA Jetson • ROS (Robotics OS)</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">MQTT • Zigbee • Z-Wave • BLE • LoRaWAN • NB-IoT • LTE-M • CoAP • Modbus • CAN Bus</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Embedded Linux • FreeRTOS • Zephyr OS • Real-time Systems</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Edge Computing • Firmware Development • Hardware Debugging • TinyML & Edge AI • Industrial IoT • Smart Home Integration</p>
                   </div>
                 </div>
               </div>
 
               {/* Security & Compliance */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">Security, Compliance & Risk Management</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Compliance & Standards</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">SOC 2 • ISO 27001 • GDPR • HIPAA • PCI-DSS • OWASP • Zero Trust Architecture</p>
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">Security, Compliance & Risk Management</h3>
+                <div>
+                  <div className="grid grid-cols-4 gap-4 mb-4">
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Compliance & Standards</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Security Technologies</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Data Migration & Protection</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Advanced Practices</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Security Technologies</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">SSL/TLS • OAuth 2.0 • JWT • MFA/2FA • Cryptography • Data Encryption • Vault • WAF • IDS/IPS • SIEM</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Data Migration & Protection</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Secure Data Migration • Data Classification • DLP • Backup & Recovery • Cross-cloud Portability • Compliance-aware Migration</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Advanced Practices</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">DevSecOps • Penetration Testing • Incident Response • Threat Modeling • Supply Chain Security • Code Auditing</p>
+                  <div className="grid grid-cols-4 gap-4">
+                    <p className="text-gray-700 text-base font-light leading-relaxed">SOC 2 • ISO 27001 • GDPR • HIPAA • PCI-DSS • OWASP • Zero Trust Architecture</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">SSL/TLS • OAuth 2.0 • JWT • MFA/2FA • Cryptography • Data Encryption • Vault • WAF • IDS/IPS • SIEM</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Secure Data Migration • Data Classification • DLP • Backup & Recovery • Cross-cloud Portability • Compliance-aware Migration</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">DevSecOps • Penetration Testing • Incident Response • Threat Modeling • Supply Chain Security • Code Auditing</p>
                   </div>
                 </div>
               </div>
 
               {/* Cloud Models & Migration */}
-              <div className="border-l-4 border-blue-600 pl-4 py-2">
-                <h3 className="font-bold text-gray-900 text-blue-700 mb-3 text-base">Cloud Deployment Models & Data Migration</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Deployment Models</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed"><strong>Public:</strong> AWS, Google Cloud, Azure • <strong>Private:</strong> OpenStack, IBM Cloud • <strong>Hybrid:</strong> Seamless Integration • <strong>Community:</strong> Industry Collaboration • <strong>Multi-Cloud:</strong> Resilience & Optimization</p>
+              <div className="border-l-4 border-blue-600 pl-6 py-4">
+                <h3 className="font-bold text-gray-900 text-blue-700 mb-4 text-lg">Cloud Deployment Models & Data Migration</h3>
+                <div>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Deployment Models</p>
+                    <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Data Migration Expertise</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-900 mb-1 uppercase tracking-wide">Data Migration Expertise</p>
-                    <p className="text-gray-700 text-sm font-light leading-relaxed">Secure Cross-cloud Migration • Zero-downtime Strategies • Data Validation & Integrity • Compliance-aware Approach • Database Replication & Sync • Multi-region Distribution</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <p className="text-gray-700 text-base font-light leading-relaxed"><strong>Public:</strong> AWS, Google Cloud, Azure • <strong>Private:</strong> OpenStack, IBM Cloud • <strong>Hybrid:</strong> Seamless Integration • <strong>Community:</strong> Industry Collaboration • <strong>Multi-Cloud:</strong> Resilience & Optimization</p>
+                    <p className="text-gray-700 text-base font-light leading-relaxed">Secure Cross-cloud Migration • Zero-downtime Strategies • Data Validation & Integrity • Compliance-aware Approach • Database Replication & Sync • Multi-region Distribution</p>
                   </div>
                 </div>
               </div>
@@ -278,29 +254,29 @@ const CV = () => {
           </section>
 
           {/* Impact & Achievements */}
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Impact &amp; Achievements</h2>
-            <div className="grid md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-6 rounded-lg text-center shadow-md">
-                <p className="text-5xl font-bold mb-1">50+</p>
-                <p className="text-sm font-semibold leading-tight">Production Projects</p>
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Impact &amp; Achievements</h2>
+            <div className="grid md:grid-cols-4 gap-6 mb-8">
+              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-8 rounded-lg text-center shadow-md">
+                <p className="text-6xl font-bold mb-2">50+</p>
+                <p className="text-base font-semibold leading-tight">Production Projects</p>
               </div>
-              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-6 rounded-lg text-center shadow-md">
-                <p className="text-5xl font-bold mb-1">8+</p>
-                <p className="text-sm font-semibold leading-tight">Years Experience</p>
+              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-8 rounded-lg text-center shadow-md">
+                <p className="text-6xl font-bold mb-2">8+</p>
+                <p className="text-base font-semibold leading-tight">Years Experience</p>
               </div>
-              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-6 rounded-lg text-center shadow-md">
-                <p className="text-5xl font-bold mb-1">Global</p>
-                <p className="text-sm font-semibold leading-tight">Reach & Impact</p>
+              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-8 rounded-lg text-center shadow-md">
+                <p className="text-6xl font-bold mb-2">Global</p>
+                <p className="text-base font-semibold leading-tight">Reach & Impact</p>
               </div>
-              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-6 rounded-lg text-center shadow-md">
-                <p className="text-5xl font-bold mb-1">40%</p>
-                <p className="text-sm font-semibold leading-tight">Cost Reduction</p>
+              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-8 rounded-lg text-center shadow-md">
+                <p className="text-6xl font-bold mb-2">40%</p>
+                <p className="text-base font-semibold leading-tight">Cost Reduction</p>
               </div>
             </div>
-            <div className="space-y-2">
-              <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Key Achievements</h3>
-              <ul className="space-y-2 text-sm text-gray-700 ml-5 font-light leading-relaxed">
+            <div className="space-y-3">
+              <h3 className="text-lg font-bold text-gray-900 mb-4 uppercase tracking-wide">Key Achievements</h3>
+              <ul className="space-y-3 text-base text-gray-700 ml-6 font-light leading-relaxed">
                 <li>✓ Architected and deployed 50+ production systems across AWS, Google Cloud, Azure, OpenStack, IBM Cloud</li>
                 <li>✓ Led enterprise cloud migrations (public → hybrid → multi-cloud) with zero-downtime deployment</li>
                 <li>✓ Designed FinTech platforms with multi-country logic, compliance, and tax engines across 5+ regions</li>
@@ -315,17 +291,17 @@ const CV = () => {
           </section>
 
           {/* Professional Experience */}
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Professional Experience</h2>
-            <div className="space-y-6">
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b-2 border-blue-700 uppercase tracking-wide font-semibold">Professional Experience</h2>
+            <div className="space-y-8">
               
-              <div className="border-l-4 border-blue-700 pl-4">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-base font-bold text-gray-900">Principal Architect &amp; Full-Stack Engineer</h3>
-                  <span className="text-xs text-gray-600 font-semibold bg-blue-100 px-2 py-1 rounded whitespace-nowrap ml-2">2016 - Present</span>
+              <div className="border-l-4 border-blue-700 pl-6">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-lg font-bold text-gray-900">Principal Architect &amp; Full-Stack Engineer</h3>
+                  <span className="text-sm text-gray-600 font-semibold bg-blue-100 px-3 py-1 rounded whitespace-nowrap ml-2">2016 - Present</span>
                 </div>
-                <p className="text-blue-700 font-semibold text-sm mb-3">AtonixDev / Freelance & Enterprise Clients</p>
-                <ul className="space-y-2 text-gray-700 text-sm leading-relaxed font-light">
+                <p className="text-blue-700 font-semibold text-base mb-4">AtonixDev / Freelance & Enterprise Clients</p>
+                <ul className="space-y-3 text-gray-700 text-base leading-relaxed font-light">
                   <li>• Architected and deployed 50+ production-grade systems across AWS, Google Cloud, Azure, OpenStack, and IBM Cloud</li>
                   <li>• Led enterprise-wide cloud migration initiatives with zero-downtime data migration and compliance verification</li>
                   <li>• Designed and built AI/ML integration platforms enabling intelligent workflow automation and predictive analytics with GPU acceleration</li>
