@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -52,7 +55,7 @@ const Register = () => {
 
       setSuccess('Account created successfully! Redirecting to login...');
       setTimeout(() => {
-        navigate('/login', { state: { email: formData.email } });
+        navigate('/login', { state: { email: formData.email, from: location.state?.from } });
       }, 2000);
     } catch (err) {
       if (err.response?.data) {
@@ -158,16 +161,26 @@ const Register = () => {
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              placeholder="••••••••"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="w-full pr-20 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-primary-600 hover:text-primary-700"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
             <p className="text-xs text-gray-500 mt-1">At least 8 characters</p>
           </div>
 
@@ -175,16 +188,26 @@ const Register = () => {
             <label htmlFor="password_confirm" className="block text-sm font-medium text-gray-700 mb-1">
               Confirm Password
             </label>
-            <input
-              type="password"
-              id="password_confirm"
-              name="password_confirm"
-              value={formData.password_confirm}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              placeholder="••••••••"
-            />
+            <div className="relative">
+              <input
+                type={showPasswordConfirm ? 'text' : 'password'}
+                id="password_confirm"
+                name="password_confirm"
+                value={formData.password_confirm}
+                onChange={handleChange}
+                required
+                className="w-full pr-20 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPasswordConfirm((v) => !v)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-primary-600 hover:text-primary-700"
+                aria-label={showPasswordConfirm ? 'Hide password confirmation' : 'Show password confirmation'}
+              >
+                {showPasswordConfirm ? 'Hide' : 'Show'}
+              </button>
+            </div>
           </div>
 
           <button

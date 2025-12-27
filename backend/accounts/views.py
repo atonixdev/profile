@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from .models import Profile
-from .serializers import ProfileSerializer
+from .serializers import ProfileSerializer, CurrentUserProfileSerializer
 from community.models import CommunityMember
 
 
@@ -64,8 +64,20 @@ def register_user(request):
             last_name=last_name
         )
 
-        # Create profile
-        profile, created = Profile.objects.get_or_create(user=user)
+        # Create profile (Profile has required fields, so populate sensible defaults)
+        full_name = f"{first_name} {last_name}".strip() or username
+        Profile.objects.get_or_create(
+            user=user,
+            defaults={
+                'full_name': full_name,
+                'title': 'Community Member',
+                'bio': 'New community member.',
+                'about': 'New community member.',
+                'email': email,
+                'skills': [],
+                'is_active': True,
+            },
+        )
 
         # Create community member
         CommunityMember.objects.get_or_create(
@@ -100,18 +112,25 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = [IsAdminOrReadOnly]
     
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
     def me(self, request):
         """Get the current user's profile"""
-        try:
-            profile = Profile.objects.get(user=request.user)
-            serializer = self.get_serializer(profile)
-            return Response(serializer.data)
-        except Profile.DoesNotExist:
-            return Response(
-                {'error': 'Profile not found'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+        user = request.user
+        full_name = f"{getattr(user, 'first_name', '')} {getattr(user, 'last_name', '')}".strip() or getattr(user, 'username', 'User')
+        profile, _ = Profile.objects.get_or_create(
+            user=user,
+            defaults={
+                'full_name': full_name,
+                'title': 'Community Member',
+                'bio': 'New community member.',
+                'about': 'New community member.',
+                'email': getattr(user, 'email', '') or '',
+                'skills': [],
+                'is_active': True,
+            },
+        )
+        serializer = CurrentUserProfileSerializer(profile, context={'request': request})
+        return Response(serializer.data)
     
     @action(detail=False, methods=['get'])
     def public(self, request):

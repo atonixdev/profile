@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
@@ -9,14 +9,22 @@ const Login = () => {
     password: '',
     rememberMe: false,
   });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { setUser } = useContext(AuthContext);
 
-  // Pre-fill email from registration redirect if available
-  const from = location.state?.email || '';
+  // Pre-fill email/username from registration redirect if available
+  const prefill = location.state?.email || '';
+
+  useEffect(() => {
+    if (prefill && !formData.username) {
+      setFormData((prev) => ({ ...prev, username: prefill }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefill]);
 
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
@@ -56,7 +64,7 @@ const Login = () => {
       // Fetch user details
       try {
         const userResponse = await axios.get(
-          'http://localhost:8000/api/accounts/profiles/',
+          'http://localhost:8000/api/accounts/profiles/me/',
           {
             headers: {
               Authorization: `Bearer ${access}`,
@@ -64,11 +72,7 @@ const Login = () => {
           }
         );
 
-        // Get current user from profiles
-        if (userResponse.data && userResponse.data.length > 0) {
-          const currentUser = userResponse.data[0];
-          setUser(currentUser);
-        }
+        if (userResponse.data) setUser(userResponse.data);
       } catch (err) {
         // If profile fetch fails, set user to basic info
         setUser({
@@ -126,7 +130,6 @@ const Login = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                defaultValue={from}
                 placeholder="Enter your username or email"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
                 disabled={loading}
@@ -138,16 +141,27 @@ const Login = () => {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-                disabled={loading}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Enter your password"
+                  className="w-full pr-20 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-primary-600 hover:text-primary-700"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  disabled={loading}
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              </div>
             </div>
 
             {/* Remember Me */}

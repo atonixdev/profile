@@ -5,10 +5,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_simplejwt.views import TokenRefreshView
+from accounts.jwt import EmailOrUsernameTokenObtainPairView
 from . import views
 
 urlpatterns = [
@@ -19,7 +17,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # JWT Authentication
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/', EmailOrUsernameTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # App URLs
@@ -32,6 +30,7 @@ urlpatterns = [
     path('api/community/', include('community.urls')),
     path('api/', include('activity.urls')),
     path('api/chatbot/', include('chatbot_service.urls')),
+    path('api/research-lab/', include('research_lab.urls')),
 ]
 
 # Serve media files in development

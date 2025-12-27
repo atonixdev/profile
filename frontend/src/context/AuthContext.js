@@ -13,15 +13,13 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       // Try to fetch user details
       axios
-        .get('http://localhost:8000/api/accounts/profiles/', {
+        .get('http://localhost:8000/api/accounts/profiles/me/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
-          if (response.data && response.data.length > 0) {
-            setUser(response.data[0]);
-          }
+          if (response.data) setUser(response.data);
         })
         .catch(() => {
           // If token is invalid, clear it
@@ -50,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 
       // Fetch user details
       const userResponse = await axios.get(
-        'http://localhost:8000/api/accounts/profiles/',
+        'http://localhost:8000/api/accounts/profiles/me/',
         {
           headers: {
             Authorization: `Bearer ${access}`,
@@ -58,9 +56,7 @@ export const AuthProvider = ({ children }) => {
         }
       );
 
-      if (userResponse.data && userResponse.data.length > 0) {
-        setUser(userResponse.data[0]);
-      }
+      if (userResponse.data) setUser(userResponse.data);
 
       return { success: true };
     } catch (error) {
