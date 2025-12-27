@@ -72,11 +72,16 @@ const domainConfigs = {
   },
 };
 
-const DomainSidebar = ({ domain = 'experimentation' }) => {
+const DomainSidebar = ({ domain = 'experimentation', onNavigate, variant = 'default' }) => {
   const config = domainConfigs[domain] || domainConfigs.experimentation;
 
+  const baseClassName =
+    variant === 'drawer'
+      ? 'w-72 bg-gradient-to-b from-[#0A0F1F] to-[#0D1425] border-r border-[#1A4FFF]/20'
+      : 'w-full md:w-72 bg-gradient-to-b from-[#0A0F1F] to-[#0D1425] border-r border-[#1A4FFF]/20';
+
   return (
-    <aside className="w-full md:w-72 bg-gradient-to-b from-[#0A0F1F] to-[#0D1425] border-r border-[#1A4FFF]/20">
+    <aside className={baseClassName}>
       <div className="px-6 py-5 border-b border-[#1A4FFF]/20">
         <div className="text-lg font-bold text-white font-['Poppins']">
           {config.title}
@@ -92,6 +97,9 @@ const DomainSidebar = ({ domain = 'experimentation' }) => {
               key={item.to}
               to={item.to}
               end={item.end}
+              onClick={() => {
+                if (typeof onNavigate === 'function') onNavigate();
+              }}
               className={({ isActive }) =>
                 [
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all duration-200',

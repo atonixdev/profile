@@ -1,8 +1,8 @@
 import React from 'react';
-import { FiBell, FiMoon, FiSun } from 'react-icons/fi';
+import { FiBell, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
-const LabTopBar = ({ search, setSearch, theme, toggleTheme }) => {
+const LabTopBar = ({ search, setSearch, theme, toggleTheme, isMenuOpen, onToggleMenu }) => {
   const { user } = useAuth();
 
   const displayName =
@@ -10,7 +10,15 @@ const LabTopBar = ({ search, setSearch, theme, toggleTheme }) => {
 
   return (
     <div className="bg-white border-b border-gray-200 px-4 md:px-6 py-4 flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
-      <div className="flex-1">
+      <div className="flex items-center gap-3 flex-1">
+        <button
+          type="button"
+          onClick={onToggleMenu}
+          className="md:hidden px-3 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 font-semibold"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isMenuOpen ? <FiX /> : <FiMenu />}
+        </button>
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}

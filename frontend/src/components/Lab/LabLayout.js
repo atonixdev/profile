@@ -8,6 +8,7 @@ const LabLayout = () => {
   const location = useLocation();
   const [search, setSearch] = useState('');
   const [theme, setTheme] = useState(() => localStorage.getItem('lab_theme') || 'light');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [settings, setSettings] = useState(() => {
     const defaults = {
       compareCap: 5,
@@ -62,7 +63,29 @@ const LabLayout = () => {
       <ResearchDomainNav />
       
       <div className="flex flex-col md:flex-row">
-        <DomainSidebar domain={currentDomain} />
+        {/* Desktop sidebar */}
+        <div className="hidden md:block">
+          <DomainSidebar domain={currentDomain} />
+        </div>
+
+        {/* Mobile drawer */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 md:hidden">
+            <button
+              type="button"
+              className="absolute inset-0 bg-black/40"
+              aria-label="Close menu"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <div className="relative h-full">
+              <DomainSidebar
+                domain={currentDomain}
+                variant="drawer"
+                onNavigate={() => setMobileMenuOpen(false)}
+              />
+            </div>
+          </div>
+        )}
 
         <div className="flex-1 min-w-0">
           <LabTopBar
@@ -70,6 +93,8 @@ const LabLayout = () => {
             setSearch={setSearch}
             theme={theme}
             toggleTheme={toggleTheme}
+            isMenuOpen={mobileMenuOpen}
+            onToggleMenu={() => setMobileMenuOpen((v) => !v)}
           />
 
           <div className="px-4 md:px-6 py-6">
