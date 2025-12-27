@@ -68,7 +68,7 @@ const ResearchDomainNav = () => {
           </div>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-[#1A4FFF] scrollbar-track-transparent">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {domains.map((domain) => {
             const Icon = domain.icon;
 
@@ -79,9 +79,9 @@ const ResearchDomainNav = () => {
                 end={domain.exact}
                 className={({ isActive: navIsActive }) => {
                   const isActive = domain.id === 'experimentation' ? isExperimentationActive : navIsActive;
-                  [
+                  return [
                     'group flex items-center gap-3 px-5 py-3 rounded-lg transition-all duration-300',
-                    'border backdrop-blur-md min-w-fit',
+                    'border backdrop-blur-md w-full',
                     isActive
                       ? 'bg-[#1A4FFF]/20 border-[#1A4FFF] shadow-lg shadow-[#1A4FFF]/25'
                       : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-[#00E0FF]/50',
@@ -91,25 +91,25 @@ const ResearchDomainNav = () => {
                 {({ isActive: navIsActive }) => {
                   const isActive = domain.id === 'experimentation' ? isExperimentationActive : navIsActive;
                   return (
-                  <>
-                    <Icon
-                      className={`text-xl transition-colors ${
-                        isActive ? 'text-[#00E0FF]' : 'text-gray-400 group-hover:text-[#00E0FF]'
-                      }`}
-                    />
-                    <div className="flex flex-col">
-                      <span
-                        className={`text-sm font-semibold transition-colors ${
-                          isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                    <>
+                      <Icon
+                        className={`text-xl transition-colors ${
+                          isActive ? 'text-[#00E0FF]' : 'text-gray-400 group-hover:text-[#00E0FF]'
                         }`}
-                      >
-                        {domain.label}
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        {domain.description}
-                      </span>
-                    </div>
-                  </>
+                      />
+                      <div className="flex flex-col">
+                        <span
+                          className={`text-sm font-semibold transition-colors ${
+                            isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                          }`}
+                        >
+                          {domain.label}
+                        </span>
+                        <span className="text-xs text-gray-500">
+                          {domain.description}
+                        </span>
+                      </div>
+                    </>
                   );
                 }}
               </NavLink>
