@@ -10,6 +10,19 @@ const AILabDatasets = () => {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
+  const formatApiError = (e, fallback) => {
+    const status = e?.response?.status;
+    const data = e?.response?.data;
+    if (typeof data === 'string') {
+      const looksLikeHtml = data.trim().startsWith('<!DOCTYPE') || data.trim().startsWith('<html');
+      return `${fallback}${status ? ` (HTTP ${status})` : ''}${looksLikeHtml ? ' (received HTML, check /api proxy)' : ''}`;
+    }
+    if (data?.detail) return String(data.detail);
+    if (data?.error) return String(data.error);
+    if (status) return `${fallback} (HTTP ${status})`;
+    return e?.message || fallback;
+  };
+
   const load = async () => {
     setLoading(true);
     setError('');
@@ -18,7 +31,7 @@ const AILabDatasets = () => {
       const list = res.data?.results || res.data || [];
       setItems(Array.isArray(list) ? list : []);
     } catch (e) {
-      setError(e?.response?.data?.detail || 'Failed to load datasets');
+      setError(formatApiError(e, 'Failed to load datasets'));
       setItems([]);
     } finally {
       setLoading(false);
@@ -50,7 +63,7 @@ const AILabDatasets = () => {
       setFile(null);
       await load();
     } catch (e2) {
-      setError(e2?.response?.data?.detail || 'Upload failed');
+      setError(formatApiError(e2, 'Upload failed'));
     } finally {
       setUploading(false);
     }
