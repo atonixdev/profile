@@ -9,6 +9,22 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const normalizeList = (data) => {
+    const list = data?.results ?? data;
+    return Array.isArray(list) ? list : [];
+  };
+
+  const normalizeSkills = (skills) => {
+    if (Array.isArray(skills)) return skills;
+    if (typeof skills === 'string') {
+      return skills
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+    }
+    return [];
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,13 +35,23 @@ const Home = () => {
           serviceService.getAll(),
         ]);
 
-        setProfile(profileRes.data);
-        setFeaturedTestimonials(testimonialsRes.data.slice(0, 3));
-        // Handle paginated response for services
-        const servicesData = servicesRes.data.results || servicesRes.data;
+        const safeProfile = profileRes?.data || null;
+        // Ensure we never crash if the backend stored JSON as string or null.
+        if (safeProfile && typeof safeProfile === 'object') {
+          safeProfile.skills = normalizeSkills(safeProfile.skills);
+        }
+        setProfile(safeProfile);
+
+        const testimonialsData = normalizeList(testimonialsRes?.data);
+        setFeaturedTestimonials(testimonialsData.slice(0, 3));
+
+        const servicesData = normalizeList(servicesRes?.data);
         setServices(servicesData.slice(0, 4));
       } catch (error) {
         console.error('Error fetching data:', error);
+        setProfile(null);
+        setFeaturedTestimonials([]);
+        setServices([]);
       } finally {
         setLoading(false);
       }

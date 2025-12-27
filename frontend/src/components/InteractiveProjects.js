@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { projectService } from '../services';
 
 const InteractiveProjects = ({ limit = 6, showViewAll = true }) => {
   const [projects, setProjects] = useState([]);
@@ -13,15 +13,15 @@ const InteractiveProjects = ({ limit = 6, showViewAll = true }) => {
     const fetchProjects = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:8000/api/portfolio/projects/');
-        
-        if (Array.isArray(response.data)) {
-          setProjects(response.data.slice(0, limit));
-          
-          // Extract unique categories
-          const uniqueCategories = ['all', ...new Set(response.data.map(p => p.category))];
-          setCategories(uniqueCategories);
-        }
+        const response = await projectService.getAll();
+        const list = response?.data?.results ?? response?.data;
+        const safeList = Array.isArray(list) ? list : [];
+
+        setProjects(safeList.slice(0, limit));
+
+        // Extract unique categories
+        const uniqueCategories = ['all', ...new Set(safeList.map((p) => p.category).filter(Boolean))];
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error('Error fetching projects:', error);
         // Fallback to sample data
