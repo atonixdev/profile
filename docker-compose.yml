@@ -69,7 +69,7 @@ services:
       # If set to localhost, phones/tablets will call *their own* localhost and the app will appear broken.
       # Leave unset to let the frontend derive the API base URL from window.location.hostname,
       # or explicitly set REACT_APP_API_URL=http://<YOUR_LAN_IP>:8000/api for LAN testing.
-      - REACT_APP_API_URL=${REACT_APP_API_URL}
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-}
       - NODE_ENV=${NODE_ENV:-development}
       - WATCHPACK_POLLING=true
     depends_on:
