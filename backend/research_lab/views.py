@@ -15,6 +15,9 @@ class ExperimentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = Experiment.objects.all()
+        exp_type = self.request.query_params.get('experiment_type')
+        if exp_type:
+            qs = qs.filter(experiment_type=exp_type)
         if not (self.request.user and self.request.user.is_staff):
             qs = qs.filter(is_active=True)
         return qs
@@ -99,6 +102,11 @@ class ExperimentRunViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         qs = ExperimentRun.objects.select_related('experiment', 'user')
+
+        exp_type = self.request.query_params.get('experiment_type')
+        if exp_type:
+            qs = qs.filter(experiment__experiment_type=exp_type)
+
         if self.request.user and self.request.user.is_staff:
             return qs
         return qs.filter(user=self.request.user)

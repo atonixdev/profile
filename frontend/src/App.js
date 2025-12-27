@@ -30,6 +30,10 @@ import SpaceLabOverview from './pages/Lab/SpaceLabOverview';
 import SpaceModulePage from './pages/Lab/SpaceModulePage';
 import SelfLabOverview from './pages/Lab/SelfLabOverview';
 import AILabOverview from './pages/Lab/AILabOverview';
+import AILabTraining from './pages/Lab/AILabTraining';
+import AILabTuning from './pages/Lab/AILabTuning';
+import AILabDatasets from './pages/Lab/AILabDatasets';
+import AILabRegistry from './pages/Lab/AILabRegistry';
 import IoTLabOverview from './pages/Lab/IoTLabOverview';
 import PlaceholderPage from './pages/Lab/PlaceholderPage';
 import AdminLogin from './pages/Admin/Login';
@@ -105,10 +109,10 @@ function App() {
 
                 {/* AI Lab */}
                 <Route path="ai" element={<AILabOverview />} />
-                <Route path="ai/training" element={<PlaceholderPage title="Model Training" description="Train neural networks and ML models" domain="AI Lab" />} />
-                <Route path="ai/datasets" element={<PlaceholderPage title="Dataset Manager" description="Upload and manage training data" domain="AI Lab" />} />
-                <Route path="ai/experiments" element={<PlaceholderPage title="Hyperparameter Tuning" description="Optimize model parameters" domain="AI Lab" />} />
-                <Route path="ai/registry" element={<PlaceholderPage title="Model Registry" description="Browse and deploy trained models" domain="AI Lab" />} />
+                <Route path="ai/training" element={<AILabTraining />} />
+                <Route path="ai/datasets" element={<AILabDatasets />} />
+                <Route path="ai/experiments" element={<AILabTuning />} />
+                <Route path="ai/registry" element={<AILabRegistry />} />
                 <Route path="ai/settings" element={<LabSettings />} />
 
                 {/* IoT Lab */}

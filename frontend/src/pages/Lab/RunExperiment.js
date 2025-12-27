@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { labService } from '../../services';
 import JsonPanel from '../../components/Lab/JsonPanel';
 
-const RunExperiment = () => {
+const RunExperiment = ({ experimentType, titleOverride } = {}) => {
   const { search } = useOutletContext();
   const [experiments, setExperiments] = useState([]);
   const [selectedExperimentId, setSelectedExperimentId] = useState('');
@@ -19,7 +19,7 @@ const RunExperiment = () => {
       setLoading(true);
       setError('');
       try {
-        const res = await labService.getExperiments();
+        const res = await labService.getExperiments(experimentType ? { experiment_type: experimentType } : undefined);
         const list = res.data?.results || res.data || [];
         const exps = Array.isArray(list) ? list : [];
         setExperiments(exps);
@@ -33,7 +33,7 @@ const RunExperiment = () => {
       }
     };
     load();
-  }, []);
+  }, [experimentType]);
 
   const filteredExperiments = useMemo(() => {
     if (!search) return experiments;
@@ -83,7 +83,7 @@ const RunExperiment = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Run Experiment</h1>
+        <h1 className="text-3xl font-bold">{titleOverride || 'Run Experiment'}</h1>
         <p className="text-gray-600 mt-1">
           Select an experiment, set parameters, optionally upload a dataset, then run.
         </p>

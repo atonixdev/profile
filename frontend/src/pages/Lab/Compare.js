@@ -14,7 +14,7 @@ const pickNumericMetricKeys = (runs) => {
   return Array.from(keys);
 };
 
-const Compare = () => {
+const Compare = ({ experimentType, titleOverride } = {}) => {
   const { search, settings, setSettings } = useOutletContext();
   const [runs, setRuns] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -31,12 +31,12 @@ const Compare = () => {
 
   useEffect(() => {
     const load = async () => {
-      const res = await labService.getRuns();
+      const res = await labService.getRuns(experimentType ? { experiment_type: experimentType } : undefined);
       const list = res.data?.results || res.data || [];
       setRuns(Array.isArray(list) ? list : []);
     };
     load();
-  }, []);
+  }, [experimentType]);
 
   const filteredRuns = useMemo(() => {
     if (!search) return runs;
@@ -129,7 +129,7 @@ const Compare = () => {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Compare Experiments</h1>
+          <h1 className="text-3xl font-bold">{titleOverride || 'Compare Experiments'}</h1>
           <p className="text-gray-600 mt-1">Select 2–5 runs to compare metrics, parameters, and outputs.</p>
         </div>
 

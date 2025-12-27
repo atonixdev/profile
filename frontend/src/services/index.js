@@ -60,9 +60,9 @@ export const blogService = {
 
 // Research Lab
 export const labService = {
-  getExperiments: () => api.get('/research-lab/experiments/'),
+  getExperiments: (params) => api.get('/research-lab/experiments/', params ? { params } : undefined),
   runExperiment: (experimentId, params) => api.post(`/research-lab/experiments/${experimentId}/run/`, { params }),
-  getRuns: () => api.get('/research-lab/runs/'),
+  getRuns: (params) => api.get('/research-lab/runs/', params ? { params } : undefined),
   getRun: (runId) => api.get(`/research-lab/runs/${runId}/`),
   getRunLogs: (runId, limit = 200) => api.get(`/research-lab/runs/${runId}/logs/`, { params: { limit } }),
 };
@@ -73,4 +73,12 @@ export const spaceService = {
   getIssNow: () => api.get('/research-lab/space/iss/'),
   getNeoSummary: (params) => api.get('/research-lab/space/neo/', { params }),
   getDonkiSummary: (params) => api.get('/research-lab/space/donki/', { params }),
+};
+
+// AI Lab
+export const aiLabService = {
+  listDatasets: () => api.get('/ai-lab/datasets/'),
+  createDataset: (formData) => api.post('/ai-lab/datasets/', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  listModels: () => api.get('/ai-lab/models/'),
+  createModel: (formData) => api.post('/ai-lab/models/', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
 };
