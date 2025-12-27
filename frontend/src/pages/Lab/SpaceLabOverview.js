@@ -71,15 +71,30 @@ const SpaceLabOverview = () => {
       const fetchOne = async (key, fn, label) => {
         try {
           const res = await fn();
-          const obj = asObjectOrNull(res?.data);
+          const data = res?.data;
+          const obj = asObjectOrNull(data);
           if (!obj) {
-            errors.push(`${label}: invalid response`);
+            if (typeof data === 'string') {
+              const trimmed = data.trim();
+              const looksLikeHtml = trimmed.startsWith('<!DOCTYPE') || trimmed.startsWith('<html');
+              errors.push(`${label}: invalid response${looksLikeHtml ? ' (received HTML, check /api proxy)' : ''}`);
+            } else {
+              errors.push(`${label}: invalid response`);
+            }
             return;
           }
           next[key] = obj;
         } catch (err) {
-          const msg = err?.response?.data?.detail || err?.message || 'request failed';
-          errors.push(`${label}: ${msg}`);
+          const status = err?.response?.status;
+          const respData = err?.response?.data;
+          if (typeof respData === 'string') {
+            const trimmed = respData.trim();
+            const looksLikeHtml = trimmed.startsWith('<!DOCTYPE') || trimmed.startsWith('<html');
+            errors.push(`${label}: request failed${status ? ` (HTTP ${status})` : ''}${looksLikeHtml ? ' (received HTML, check /api proxy)' : ''}`);
+          } else {
+            const msg = err?.response?.data?.detail || err?.message || 'request failed';
+            errors.push(`${label}: ${msg}${status ? ` (HTTP ${status})` : ''}`);
+          }
         }
       };
 
