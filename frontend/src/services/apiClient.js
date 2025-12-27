@@ -9,9 +9,13 @@ const deriveBaseUrl = () => {
   const host = typeof window !== 'undefined' ? window.location.hostname : '';
   const protocol = typeof window !== 'undefined' ? window.location.protocol : 'http:';
 
-  // Production: use same-origin /api so the frontend reverse-proxy can route it
-  // (works for atonixdev.org and www.atonixdev.org, and avoids cross-origin issues)
-  if (host.endsWith('atonixdev.org')) {
+  // Production: call the API subdomain directly.
+  // This avoids relying on a reverse-proxy at /api on the frontend host (which can
+  // otherwise return the React HTML and cause "invalid response").
+  if (host === 'atonixdev.org' || host === 'www.atonixdev.org') {
+    return 'https://api.atonixdev.org/api';
+  }
+  if (host === 'api.atonixdev.org') {
     return `${protocol}//${host}/api`;
   }
 
