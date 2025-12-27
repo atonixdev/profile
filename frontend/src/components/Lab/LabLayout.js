@@ -1,11 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import LabSidebar from './LabSidebar';
+import { Outlet, useLocation } from 'react-router-dom';
+import DomainSidebar from './DomainSidebar';
 import LabTopBar from './LabTopBar';
+import ResearchDomainNav from './ResearchDomainNav';
 
 const LabLayout = () => {
+  const location = useLocation();
   const [search, setSearch] = useState('');
-  const [theme, setTheme] = useState(() => localStorage.getItem('lab_theme') || 'light');
+  const [theme, setTheme] = useState(() => localStorage.getItem('lab_theme') || 'dark');
   const [settings, setSettings] = useState(() => {
     const defaults = {
       compareCap: 5,
@@ -40,16 +42,27 @@ const LabLayout = () => {
     });
   };
 
+  const currentDomain = useMemo(() => {
+    const path = location.pathname;
+    if (path.startsWith('/lab/space')) return 'space';
+    if (path.startsWith('/lab/self')) return 'self';
+    if (path.startsWith('/lab/ai')) return 'ai';
+    if (path.startsWith('/lab/iot')) return 'iot';
+    return 'experimentation';
+  }, [location.pathname]);
+
   const themeClasses = useMemo(() => {
     return theme === 'dark'
-      ? 'bg-gray-900 text-gray-100'
+      ? 'bg-[#0A0F1F] text-gray-100'
       : 'bg-gray-50 text-gray-900';
   }, [theme]);
 
   return (
     <div className={`min-h-[calc(100vh-64px)] ${themeClasses}`}>
+      <ResearchDomainNav />
+      
       <div className="flex flex-col md:flex-row">
-        <LabSidebar />
+        <DomainSidebar domain={currentDomain} />
 
         <div className="flex-1 min-w-0">
           <LabTopBar
@@ -60,7 +73,7 @@ const LabLayout = () => {
           />
 
           <div className="px-4 md:px-6 py-6">
-            <Outlet context={{ search, theme, settings, setSettings: updateSettings }} />
+            <Outlet context={{ search, theme, settings, setSettings: updateSettings, domain: currentDomain }} />
           </div>
         </div>
       </div>
