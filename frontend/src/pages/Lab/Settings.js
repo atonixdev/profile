@@ -9,6 +9,33 @@ const Settings = () => {
 
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
+  const domainSettings = useMemo(() => settings?.domains || {}, [settings]);
+
+  const domains = useMemo(
+    () => [
+      { id: 'space', fallbackLabel: 'Space Lab', fallbackDescription: 'Astrophysics & Orbital Mechanics' },
+      { id: 'self', fallbackLabel: 'Self Lab', fallbackDescription: 'Biometrics & Personal Evolution' },
+      { id: 'ai', fallbackLabel: 'AI Lab', fallbackDescription: 'Machine Learning & Model Training' },
+      { id: 'iot', fallbackLabel: 'IoT Lab', fallbackDescription: 'Devices & Sensor Networks' },
+      { id: 'experimentation', fallbackLabel: 'Experimentation Lab', fallbackDescription: 'A/B Testing & Research Engine' },
+    ],
+    []
+  );
+
+  const updateDomain = (domainId, patch) => {
+    setSettings?.((prev) => {
+      const prevDomains = prev?.domains || {};
+      const nextDomains = {
+        ...prevDomains,
+        [domainId]: {
+          ...(prevDomains[domainId] || {}),
+          ...(patch || {}),
+        },
+      };
+      return { ...prev, domains: nextDomains };
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -53,6 +80,71 @@ const Settings = () => {
 
         <div className="text-xs text-gray-500 mt-4">
           Saved locally in your browser (per device).
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="mb-4">
+          <div className="text-lg font-bold text-gray-900">Lab Dashboard Settings</div>
+          <div className="text-sm text-gray-600 mt-1">
+            Configure the name and tagline shown in the lab navigation and sidebars.
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {domains.map((d) => {
+            const current = domainSettings?.[d.id] || {};
+            const enabled = current.enabled !== false;
+            const label = current.label || d.fallbackLabel;
+            const description = current.description || d.fallbackDescription;
+
+            return (
+              <div key={d.id} className="border border-gray-200 rounded-lg p-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-semibold text-gray-800">{d.fallbackLabel}</div>
+                    <div className="text-xs text-gray-500 mt-1">Domain key: <span className="font-mono">{d.id}</span></div>
+                  </div>
+
+                  <label className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 select-none">
+                    <input
+                      type="checkbox"
+                      checked={enabled}
+                      onChange={(e) => updateDomain(d.id, { enabled: e.target.checked })}
+                      className="h-4 w-4"
+                    />
+                    Enabled
+                  </label>
+                </div>
+
+                <div className="mt-4 space-y-4">
+                  <div>
+                    <div className="text-xs font-semibold text-gray-700">Label</div>
+                    <input
+                      type="text"
+                      value={label}
+                      onChange={(e) => updateDomain(d.id, { label: e.target.value })}
+                      className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="text-xs font-semibold text-gray-700">Tagline</div>
+                    <input
+                      type="text"
+                      value={description}
+                      onChange={(e) => updateDomain(d.id, { description: e.target.value })}
+                      className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="text-xs text-gray-500 mt-4">
+          These settings are saved locally in your browser.
         </div>
       </div>
     </div>

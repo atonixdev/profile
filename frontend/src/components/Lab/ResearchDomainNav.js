@@ -2,48 +2,33 @@ import React, { useMemo, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { FiZap, FiActivity, FiCpu, FiRadio, FiBarChart, FiMenu, FiX } from 'react-icons/fi';
 
-const domains = [
-  { 
-    id: 'space', 
-    label: 'Space Lab', 
-    icon: FiZap, 
-    path: '/lab/space',
-    description: 'Astrophysics & Orbital Mechanics' 
-  },
-  { 
-    id: 'self', 
-    label: 'Self Lab', 
-    icon: FiActivity, 
-    path: '/lab/self',
-    description: 'Biometrics & Personal Evolution' 
-  },
-  { 
-    id: 'ai', 
-    label: 'AI Lab', 
-    icon: FiCpu, 
-    path: '/lab/ai',
-    description: 'Machine Learning & Model Training' 
-  },
-  { 
-    id: 'iot', 
-    label: 'IoT Lab', 
-    icon: FiRadio, 
-    path: '/lab/iot',
-    description: 'Devices & Sensor Networks' 
-  },
-  { 
-    id: 'experimentation', 
-    label: 'Experimentation Lab', 
-    icon: FiBarChart, 
-    path: '/lab',
-    description: 'A/B Testing & Research Engine',
-    exact: true
-  },
-];
-
-const ResearchDomainNav = () => {
+const ResearchDomainNav = ({ domainsMeta = {} }) => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const domains = useMemo(() => {
+    const base = [
+      { id: 'space', icon: FiZap, path: '/lab/space' },
+      { id: 'self', icon: FiActivity, path: '/lab/self' },
+      { id: 'ai', icon: FiCpu, path: '/lab/ai' },
+      { id: 'iot', icon: FiRadio, path: '/lab/iot' },
+      { id: 'experimentation', icon: FiBarChart, path: '/lab', exact: true },
+    ];
+
+    const hydrated = base.map((d) => {
+      const meta = domainsMeta?.[d.id] || {};
+      return {
+        ...d,
+        enabled: meta.enabled !== false,
+        label:
+          meta.label ||
+          (d.id === 'experimentation' ? 'Experimentation Lab' : `${d.id.charAt(0).toUpperCase()}${d.id.slice(1)} Lab`),
+        description: meta.description || '',
+      };
+    });
+
+    return hydrated.filter((d) => d.enabled);
+  }, [domainsMeta]);
 
   const isExperimentationActive = useMemo(() => {
     const p = location.pathname || '';
@@ -56,9 +41,9 @@ const ResearchDomainNav = () => {
     const p = location.pathname || '';
     const matched = domains.find((d) => d.id !== 'experimentation' && (p === d.path || p.startsWith(`${d.path}/`)));
     if (matched) return matched;
-    if (isExperimentationActive) return domains.find((d) => d.id === 'experimentation') || domains[0];
-    return domains[0];
-  }, [location.pathname, isExperimentationActive]);
+    if (isExperimentationActive) return domains.find((d) => d.id === 'experimentation') || domains[0] || null;
+    return domains[0] || null;
+  }, [location.pathname, isExperimentationActive, domains]);
 
   return (
     <div className="bg-gradient-to-r from-[#0A0F1F] via-[#0D1425] to-[#0A0F1F] border-b border-[#1A4FFF]/20 shadow-xl">

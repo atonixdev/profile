@@ -72,8 +72,11 @@ const domainConfigs = {
   },
 };
 
-const DomainSidebar = ({ domain = 'experimentation', onNavigate, variant = 'default' }) => {
+const DomainSidebar = ({ domain = 'experimentation', domainsMeta = {}, onNavigate, variant = 'default' }) => {
   const config = domainConfigs[domain] || domainConfigs.experimentation;
+  const meta = domainsMeta?.[domain] || {};
+  const title = meta.label || config.title;
+  const subtitle = meta.description || config.subtitle;
 
   const baseClassName =
     variant === 'drawer'
@@ -84,9 +87,9 @@ const DomainSidebar = ({ domain = 'experimentation', onNavigate, variant = 'defa
     <aside className={baseClassName}>
       <div className="px-6 py-5 border-b border-[#1A4FFF]/20">
         <div className="text-lg font-bold text-white font-['Poppins']">
-          {config.title}
+          {title}
         </div>
-        <div className="text-xs text-gray-400 mt-1">{config.subtitle}</div>
+        <div className="text-xs text-gray-400 mt-1">{subtitle}</div>
       </div>
 
       <nav className="p-3 space-y-1">

@@ -14,13 +14,42 @@ const LabLayout = () => {
       compareCap: 5,
       compareMetric: 'duration_ms',
       logsLimit: 200,
+      domains: {
+        space: {
+          enabled: true,
+          label: 'Space Lab',
+          description: 'Astrophysics & Orbital Mechanics',
+        },
+        self: {
+          enabled: true,
+          label: 'Self Lab',
+          description: 'Biometrics & Personal Evolution',
+        },
+        ai: {
+          enabled: true,
+          label: 'AI Lab',
+          description: 'Machine Learning & Model Training',
+        },
+        iot: {
+          enabled: true,
+          label: 'IoT Lab',
+          description: 'Devices & Sensor Networks',
+        },
+        experimentation: {
+          enabled: true,
+          label: 'Experimentation Lab',
+          description: 'A/B Testing & Research Engine',
+        },
+      },
     };
 
     try {
       const raw = localStorage.getItem('lab_settings');
       if (!raw) return defaults;
       const parsed = JSON.parse(raw);
-      return { ...defaults, ...(parsed || {}) };
+      const merged = { ...defaults, ...(parsed || {}) };
+      merged.domains = { ...defaults.domains, ...((parsed || {}).domains || {}) };
+      return merged;
     } catch {
       return defaults;
     }
@@ -58,14 +87,16 @@ const LabLayout = () => {
       : 'bg-gray-50 text-gray-900';
   }, [theme]);
 
+  const domainsMeta = useMemo(() => settings?.domains || {}, [settings?.domains]);
+
   return (
     <div className={`min-h-[calc(100vh-64px)] ${themeClasses}`}>
-      <ResearchDomainNav />
+      <ResearchDomainNav domainsMeta={domainsMeta} />
       
       <div className="flex flex-col md:flex-row">
         {/* Desktop sidebar */}
         <div className="hidden md:block">
-          <DomainSidebar domain={currentDomain} />
+          <DomainSidebar domain={currentDomain} domainsMeta={domainsMeta} />
         </div>
 
         {/* Mobile drawer */}
@@ -80,6 +111,7 @@ const LabLayout = () => {
             <div className="relative h-full">
               <DomainSidebar
                 domain={currentDomain}
+                domainsMeta={domainsMeta}
                 variant="drawer"
                 onNavigate={() => setMobileMenuOpen(false)}
               />
