@@ -59,7 +59,9 @@ def apod(request):
 
     try:
         data = _get_json(NASA_APOD_URL, params)
+        print(f"APOD data received: {data.get('title', 'no title')}")
     except requests.RequestException as exc:
+        print(f"APOD request failed: {exc}")
         return Response({'detail': 'Upstream NASA APOD request failed', 'error': str(exc)}, status=502)
 
     payload = {

@@ -40,7 +40,7 @@ services:
     environment:
       - DEBUG=${DEBUG:-True}
       - SECRET_KEY=${SECRET_KEY:-dev-secret-key-change-in-production}
-      - NASA_API_KEY=${NASA_API_KEY:-DEMO_KEY}
+      - NASA_API_KEY=${NASA_API_KEY:-mTlSlpfJrM9oUYUYhPAujfVzr160n31ORn24ewTI}
       - DB_NAME=${DB_NAME:-personal_brand_hub}
       - DB_USER=${DB_USER:-postgres}
       - DB_PASSWORD=${DB_PASSWORD:-postgres}
