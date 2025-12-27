@@ -59,7 +59,7 @@ services:
       dockerfile: Dockerfile
     container_name: profile_frontend
     volumes:
-      - ./frontend:/app
+      # - ./frontend:/app  # Commented out to prevent overwriting build output
       - /app/node_modules
     ports:
       - "${FRONTEND_PORT:-3000}:3000"
