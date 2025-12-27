@@ -19,7 +19,7 @@ const LabTopBar = ({ search, setSearch, theme, toggleTheme }) => {
         />
       </div>
 
-      <div className="flex items-center gap-3 justify-end">
+      <div className="flex flex-wrap items-center gap-3 justify-end">
         <button
           type="button"
           onClick={toggleTheme}
