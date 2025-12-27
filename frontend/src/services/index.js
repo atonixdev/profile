@@ -99,3 +99,24 @@ export const iotLabService = {
 
   getNetworkSummary: () => api.get('/iot-lab/network/summary/'),
 };
+
+// Self Lab
+export const selfLabService = {
+  getSummary: () => api.get('/self-lab/overview/summary/'),
+
+  listBiometrics: (params) => api.get('/self-lab/biometrics/', params ? { params } : undefined),
+  createBiometric: (data) => api.post('/self-lab/biometrics/', data),
+  deleteBiometric: (id) => api.delete(`/self-lab/biometrics/${id}/`),
+
+  listCognitiveTests: (params) => api.get('/self-lab/cognitive-tests/', params ? { params } : undefined),
+  createCognitiveTest: (data) => api.post('/self-lab/cognitive-tests/', data),
+  deleteCognitiveTest: (id) => api.delete(`/self-lab/cognitive-tests/${id}/`),
+
+  listEvolutionMetrics: (params) => api.get('/self-lab/evolution-metrics/', params ? { params } : undefined),
+  createEvolutionMetric: (data) => api.post('/self-lab/evolution-metrics/', data),
+  deleteEvolutionMetric: (id) => api.delete(`/self-lab/evolution-metrics/${id}/`),
+
+  listJournals: (params) => api.get('/self-lab/journals/', params ? { params } : undefined),
+  createJournal: (data) => api.post('/self-lab/journals/', data),
+  deleteJournal: (id) => api.delete(`/self-lab/journals/${id}/`),
+};

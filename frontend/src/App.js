@@ -29,6 +29,10 @@ import LabSettings from './pages/Lab/Settings';
 import SpaceLabOverview from './pages/Lab/SpaceLabOverview';
 import SpaceModulePage from './pages/Lab/SpaceModulePage';
 import SelfLabOverview from './pages/Lab/SelfLabOverview';
+import SelfLabBiometrics from './pages/Lab/SelfLabBiometrics';
+import SelfLabCognitive from './pages/Lab/SelfLabCognitive';
+import SelfLabEvolution from './pages/Lab/SelfLabEvolution';
+import SelfLabJournals from './pages/Lab/SelfLabJournals';
 import AILabOverview from './pages/Lab/AILabOverview';
 import AILabTraining from './pages/Lab/AILabTraining';
 import AILabTuning from './pages/Lab/AILabTuning';
@@ -39,7 +43,6 @@ import IoTLabDevices from './pages/Lab/IoTLabDevices';
 import IoTLabTelemetry from './pages/Lab/IoTLabTelemetry';
 import IoTLabAutomation from './pages/Lab/IoTLabAutomation';
 import IoTLabNetwork from './pages/Lab/IoTLabNetwork';
-import PlaceholderPage from './pages/Lab/PlaceholderPage';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -105,10 +108,10 @@ function App() {
 
                 {/* Self Lab */}
                 <Route path="self" element={<SelfLabOverview />} />
-                <Route path="self/biometrics" element={<PlaceholderPage title="Biometrics" description="Track heart rate, sleep, and vitals" domain="Self Lab" />} />
-                <Route path="self/cognitive" element={<PlaceholderPage title="Cognitive Experiments" description="Run memory, focus, and cognition tests" domain="Self Lab" />} />
-                <Route path="self/evolution" element={<PlaceholderPage title="Personal Evolution" description="Analyze growth metrics over time" domain="Self Lab" />} />
-                <Route path="self/journals" element={<PlaceholderPage title="Journals & Logs" description="Review daily entries and reflections" domain="Self Lab" />} />
+                <Route path="self/biometrics" element={<SelfLabBiometrics />} />
+                <Route path="self/cognitive" element={<SelfLabCognitive />} />
+                <Route path="self/evolution" element={<SelfLabEvolution />} />
+                <Route path="self/journals" element={<SelfLabJournals />} />
                 <Route path="self/settings" element={<LabSettings />} />
 
                 {/* AI Lab */}

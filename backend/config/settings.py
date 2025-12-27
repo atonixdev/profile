@@ -16,7 +16,12 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-in-produc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ["atonixdev.org", "www.atonixdev.org", "api.atonixdev.org", "localhost", "127.0.0.1", "144.202.110.159"]
+# Host / origin settings
+# In DEBUG, allow LAN testing (e.g. opening the site from a phone on the same Wi‑Fi).
+# In production, keep an explicit allow-list.
+_default_allowed_hosts = 'atonixdev.org,www.atonixdev.org,api.atonixdev.org,localhost,127.0.0.1,144.202.110.159'
+_configured_allowed_hosts = config('ALLOWED_HOSTS', default=_default_allowed_hosts, cast=Csv())
+ALLOWED_HOSTS = ['*'] if DEBUG else list(_configured_allowed_hosts)
 
 # Application definition
 INSTALLED_APPS = [
@@ -169,6 +174,11 @@ CORS_ALLOWED_ORIGINS = config(
     default='http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,https://atonixdev.org,https://www.atonixdev.org',
     cast=Csv()
 )
+
+# For LAN testing (phone/tablet hitting http://<LAN_IP>:3000), the backend will be on a different origin
+# (http://<LAN_IP>:8000) and CORS would otherwise block requests.
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
