@@ -57,3 +57,12 @@ export const blogService = {
   incrementViews: (slug) => api.post(`/blog/posts/${slug}/increment_views/`),
   addComment: (slug, data) => api.post(`/blog/posts/${slug}/add_comment/`, data),
 };
+
+// Research Lab
+export const labService = {
+  getExperiments: () => api.get('/research-lab/experiments/'),
+  runExperiment: (experimentId, params) => api.post(`/research-lab/experiments/${experimentId}/run/`, { params }),
+  getRuns: () => api.get('/research-lab/runs/'),
+  getRun: (runId) => api.get(`/research-lab/runs/${runId}/`),
+  getRunLogs: (runId, limit = 200) => api.get(`/research-lab/runs/${runId}/logs/`, { params: { limit } }),
+};

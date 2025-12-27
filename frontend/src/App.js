@@ -19,6 +19,13 @@ import Discussions from './pages/Discussions';
 import Members from './pages/Members';
 import Events from './pages/Events';
 import Resources from './pages/Resources';
+import LabLayout from './components/Lab/LabLayout';
+import LabOverview from './pages/Lab/Overview';
+import LabRunExperiment from './pages/Lab/RunExperiment';
+import LabHistory from './pages/Lab/History';
+import LabCompare from './pages/Lab/Compare';
+import LabModelsArtifacts from './pages/Lab/ModelsArtifacts';
+import LabSettings from './pages/Lab/Settings';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -37,8 +44,9 @@ function App() {
       <Router>
         <FloatingChatbot />
         <Routes>
-          {/* Public Routes */}
+          {/* Public + Layout Routes */}
           <Route path="/" element={<Layout />}>
+            {/* Public Routes */}
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="services" element={<Services />} />
@@ -51,20 +59,32 @@ function App() {
             <Route path="cv" element={<CV />} />
             <Route path="help" element={<FAQ />} />
             <Route path="faq" element={<FAQ />} />
+
+            {/* Protected Community Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="community" element={<CommunityDashboard />} />
+              <Route path="community/discussions" element={<Discussions />} />
+              <Route path="community/members" element={<Members />} />
+              <Route path="community/events" element={<Events />} />
+              <Route path="community/resources" element={<Resources />} />
+            </Route>
+
+            {/* Protected Lab Route (requires registration) */}
+            <Route element={<ProtectedRoute redirectTo="/register" />}>
+              <Route path="lab" element={<LabLayout />}>
+                <Route index element={<LabOverview />} />
+                <Route path="run" element={<LabRunExperiment />} />
+                <Route path="history" element={<LabHistory />} />
+                <Route path="compare" element={<LabCompare />} />
+                <Route path="models" element={<LabModelsArtifacts />} />
+                <Route path="settings" element={<LabSettings />} />
+              </Route>
+            </Route>
           </Route>
 
           {/* Auth Routes */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
-          {/* Protected Community Routes */}
-          <Route element={<Layout><ProtectedRoute /></Layout>}>
-            <Route path="community" element={<CommunityDashboard />} />
-            <Route path="community/discussions" element={<Discussions />} />
-            <Route path="community/members" element={<Members />} />
-            <Route path="community/events" element={<Events />} />
-            <Route path="community/resources" element={<Resources />} />
-          </Route>
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />

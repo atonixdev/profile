@@ -12,3 +12,23 @@ console.error = (...args) => {
   }
   originalError.call(console, ...args);
 };
+
+// Also suppress the dev overlay/runtime error event for this benign ResizeObserver issue
+// (otherwise Create React App may show a full-screen red error overlay).
+window.addEventListener(
+  'error',
+  (event) => {
+    const message = event?.message || '';
+    if (
+      typeof message === 'string' &&
+      (message.includes('ResizeObserver loop limit exceeded') ||
+        message.includes('ResizeObserver loop completed with undelivered notifications'))
+    ) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      return false;
+    }
+    return undefined;
+  },
+  true
+);

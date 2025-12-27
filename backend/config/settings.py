@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'community',
     'activity',
     'chatbot_service',
+    'research_lab',
 ]
 
 MIDDLEWARE = [

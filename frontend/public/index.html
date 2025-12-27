@@ -12,6 +12,35 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Atonixdev - Principal Architect & Technology Innovation</title>
+
+    <!-- Suppress benign ResizeObserver loop errors that can trigger CRA dev overlay -->
+    <script>
+      (function () {
+        function shouldSuppress(message) {
+          return (
+            typeof message === 'string' &&
+            (message.indexOf('ResizeObserver loop limit exceeded') !== -1 ||
+              message.indexOf('ResizeObserver loop completed with undelivered notifications') !== -1)
+          );
+        }
+
+        window.addEventListener(
+          'error',
+          function (event) {
+            try {
+              if (shouldSuppress(event && event.message)) {
+                event.preventDefault && event.preventDefault();
+                event.stopImmediatePropagation && event.stopImmediatePropagation();
+                return false;
+              }
+            } catch (e) {
+              // no-op
+            }
+          },
+          true
+        );
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
