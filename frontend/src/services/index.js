@@ -73,6 +73,23 @@ export const spaceService = {
   getIssNow: () => api.get('/research-lab/space/iss/'),
   getNeoSummary: (params) => api.get('/research-lab/space/neo/', { params }),
   getDonkiSummary: (params) => api.get('/research-lab/space/donki/', { params }),
+
+  // Additional NASA/space sources
+  getEonetEvents: (params) => api.get('/research-lab/space/eonet/', { params }),
+  getEpicLatest: () => api.get('/research-lab/space/epic/'),
+  getExoplanetSample: (params) => api.get('/research-lab/space/exoplanet/', { params }),
+  searchNasaImages: (params) => api.get('/research-lab/space/images/', { params }),
+  getTechportProjects: (params) => api.get('/research-lab/space/techport/', { params }),
+  searchTechtransferPatents: (params) => api.get('/research-lab/space/techtransfer/', { params }),
+  getSsdCneosCad: (params) => api.get('/research-lab/space/ssd-cneos/', { params }),
+  getTle: (params) => api.get('/research-lab/space/tle/', { params }),
+
+  // Info endpoints
+  getGibsInfo: () => api.get('/research-lab/space/gibs/'),
+  getTrekWmtsInfo: () => api.get('/research-lab/space/trek-wmts/'),
+  getInsightInfo: () => api.get('/research-lab/space/insight/'),
+  getOsdrInfo: () => api.get('/research-lab/space/osdr/'),
+  getSscInfo: () => api.get('/research-lab/space/ssc/'),
 };
 
 // AI Lab

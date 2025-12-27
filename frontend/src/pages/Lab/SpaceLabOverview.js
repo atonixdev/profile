@@ -51,6 +51,16 @@ const QuickAction = ({ icon: Icon, label, to, description }) => (
   </Link>
 );
 
+const ApiCard = ({ label, description, to }) => (
+  <Link
+    to={to}
+    className="flex flex-col gap-2 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#00E0FF]/50 rounded-lg transition-all duration-200 backdrop-blur-md"
+  >
+    <div className="font-semibold text-white">{label}</div>
+    <div className="text-xs text-gray-400 leading-snug">{description}</div>
+  </Link>
+);
+
 const SpaceLabOverview = () => {
   const [feeds, setFeeds] = useState({
     loading: true,
@@ -211,6 +221,18 @@ const SpaceLabOverview = () => {
         <h2 className="text-xl font-bold text-white mb-4 font-['Poppins']">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <QuickAction
+            icon={FiGlobe}
+            label="Earth Imagery Map"
+            to="/lab/space/map"
+            description="Explore NASA GIBS satellite imagery on a map"
+          />
+          <QuickAction
+            icon={FiGlobe}
+            label="Mars Trek Map"
+            to="/lab/space/mars-map"
+            description="Explore Mars basemap imagery (Trek)"
+          />
+          <QuickAction
             icon={FiCrosshair}
             label="Orbital Simulations"
             to="/lab/space/simulations"
@@ -234,6 +256,31 @@ const SpaceLabOverview = () => {
             to="/lab/space/datasets"
             description="Browse astrophysics research data"
           />
+        </div>
+      </div>
+
+      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-xl">
+        <h2 className="text-xl font-bold text-white mb-4 font-['Poppins']">NASA / Space APIs</h2>
+        <div className="text-sm text-gray-400 mb-5">
+          Open any integration to see a live response preview (via your backend proxy).
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ApiCard label="APOD" description="Astronomy Picture of the Day" to="/lab/space/apis/apod" />
+          <ApiCard label="Asteroids NeoWs" description="Near Earth Object Web Service" to="/lab/space/apis/neows" />
+          <ApiCard label="DONKI" description="Space Weather notifications" to="/lab/space/apis/donki" />
+          <ApiCard label="EONET" description="Earth Observatory Natural Event Tracker" to="/lab/space/apis/eonet" />
+          <ApiCard label="EPIC" description="Earth Polychromatic Imaging Camera" to="/lab/space/apis/epic" />
+          <ApiCard label="Exoplanet Archive" description="Programmatic access to exoplanet database" to="/lab/space/apis/exoplanet" />
+          <ApiCard label="NASA Image & Video Library" description="Search images.nasa.gov" to="/lab/space/apis/images" />
+          <ApiCard label="Open Science Data Repository" description="OSDR datasets + metadata (info endpoint)" to="/lab/space/apis/osdr" />
+          <ApiCard label="Satellite Situation Center" description="Geocentric spacecraft regions (info endpoint)" to="/lab/space/apis/ssc" />
+          <ApiCard label="SSD/CNEOS" description="JPL Solar System dynamics + NEO close approaches" to="/lab/space/apis/ssd_cneos" />
+          <ApiCard label="Techport" description="NASA technology project data" to="/lab/space/apis/techport" />
+          <ApiCard label="TechTransfer" description="Patents, software, tech transfer" to="/lab/space/apis/techtransfer" />
+          <ApiCard label="TLE API" description="Two-line element data for Earth-orbiting objects" to="/lab/space/apis/tle" />
+          <ApiCard label="GIBS" description="Global full-resolution satellite imagery (WMTS info)" to="/lab/space/apis/gibs" />
+          <ApiCard label="Vesta/Moon/Mars Trek WMTS" description="Planetary Trek imagery tiles (WMTS info)" to="/lab/space/apis/trek_wmts" />
+          <ApiCard label="InSight" description="Mars Weather (status/info endpoint)" to="/lab/space/apis/insight" />
         </div>
       </div>
 

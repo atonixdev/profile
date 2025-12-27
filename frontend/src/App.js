@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import FloatingChatbot from './components/FloatingChatbot';
@@ -55,6 +55,10 @@ import ChatbotAdmin from './pages/Admin/ChatbotAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 
+const SpaceApiPage = lazy(() => import('./pages/Lab/SpaceApiPage'));
+const SpaceMapPage = lazy(() => import('./pages/Lab/SpaceMapPage'));
+const MarsTrekMapPage = lazy(() => import('./pages/Lab/MarsTrekMapPage'));
+
 function App() {
   return (
     <AuthProvider>
@@ -99,6 +103,30 @@ function App() {
 
                 {/* Space Lab */}
                 <Route path="space" element={<SpaceLabOverview />} />
+                <Route
+                  path="space/map"
+                  element={
+                    <Suspense fallback={<div className="py-6">Loading map…</div>}>
+                      <SpaceMapPage />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="space/mars-map"
+                  element={
+                    <Suspense fallback={<div className="py-6">Loading map…</div>}>
+                      <MarsTrekMapPage />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="space/apis/:apiId"
+                  element={
+                    <Suspense fallback={<div className="py-6">Loading…</div>}>
+                      <SpaceApiPage />
+                    </Suspense>
+                  }
+                />
                 <Route path="space/astrophysics" element={<SpaceModulePage kind="astrophysics" title="Astrophysics & Orbital Mechanics" description="Orbital fundamentals, near-earth objects, and astrophysics signals" />} />
                 <Route path="space/simulations" element={<SpaceModulePage kind="simulations" title="Orbital Simulations" description="Run gravitational and trajectory models" />} />
                 <Route path="space/telemetry" element={<SpaceModulePage kind="telemetry" title="Satellite Telemetry" description="Monitor real-time satellite data" />} />

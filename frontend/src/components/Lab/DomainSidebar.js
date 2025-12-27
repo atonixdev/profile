@@ -26,6 +26,8 @@ const domainConfigs = {
     subtitle: 'Astrophysics & Orbital Mechanics',
     items: [
       { to: '/lab/space', label: 'Dashboard Overview', icon: FiActivity, end: true },
+      { to: '/lab/space/map', label: 'Earth Imagery Map', icon: FiGlobe },
+      { to: '/lab/space/mars-map', label: 'Mars Trek Map', icon: FiGlobe },
       { to: '/lab/space/astrophysics', label: 'Astrophysics & Orbital Mechanics', icon: FiGlobe },
       { to: '/lab/space/simulations', label: 'Orbital Simulations', icon: FiCrosshair },
       { to: '/lab/space/telemetry', label: 'Satellite Telemetry', icon: FiTarget },
