@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+import api from '../services/api';
 
 const FloatingChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,21 +58,27 @@ const FloatingChatbot = () => {
     setInputValue('');
     setIsLoading(true);
 
+    const formatApiError = (err) => {
+      const status = err?.response?.status;
+      const data = err?.response?.data;
+      if (typeof data === 'string') {
+        const t = data.trim();
+        const looksLikeHtml = t.startsWith('<!DOCTYPE') || t.startsWith('<html');
+        return `Chat request failed${status ? ` (HTTP ${status})` : ''}${looksLikeHtml ? ' (received HTML, check /api proxy)' : ''}`;
+      }
+      if (data?.error) return String(data.error);
+      if (data?.detail) return String(data.detail);
+      if (status) return `Chat request failed (HTTP ${status})`;
+      return 'Chat request failed.';
+    };
+
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/api/chatbot/chat/`,
-        {
-          message: messageToSend,
-          conversation_id: conversationId,
-          visitor_name: visitorInfo.name,
-          visitor_email: visitorInfo.email
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+      const response = await api.post('/chatbot/chat/', {
+        message: messageToSend,
+        conversation_id: conversationId,
+        visitor_name: visitorInfo.name,
+        visitor_email: visitorInfo.email,
+      });
 
       if (!conversationId) {
         setConversationId(response.data.conversation_id);
@@ -109,7 +113,7 @@ const FloatingChatbot = () => {
       const errorMessage = {
         id: messages.length + 2,
         type: 'bot',
-        text: "Sorry, I encountered an error. Please try again or contact us directly!",
+        text: formatApiError(error),
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);

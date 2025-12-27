@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+import api from '../../services/api';
 
 const ChatbotAdmin = () => {
   const [conversations, setConversations] = useState([]);
@@ -14,14 +12,7 @@ const ChatbotAdmin = () => {
   const fetchConversations = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${API_BASE_URL}/api/chatbot/conversations/?status=${filter}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-          }
-        }
-      );
+      const response = await api.get('/chatbot/conversations/', { params: { status: filter } });
       setConversations(response.data.conversations || []);
     } catch (error) {
       console.error('Error fetching conversations:', error);
@@ -37,14 +28,7 @@ const ChatbotAdmin = () => {
 
   const fetchConversationDetail = async (id) => {
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/api/chatbot/conversations/${id}/`,
-        {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-          }
-        }
-      );
+      const response = await api.get(`/chatbot/conversations/${id}/`);
       setSelectedConversation(response.data.conversation);
     } catch (error) {
       console.error('Error fetching conversation:', error);
@@ -57,16 +41,7 @@ const ChatbotAdmin = () => {
 
     try {
       setSending(true);
-      const response = await axios.post(
-        `${API_BASE_URL}/api/chatbot/conversations/${selectedConversation.id}/`,
-        { message: replyMessage },
-        {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+      const response = await api.post(`/chatbot/conversations/${selectedConversation.id}/`, { message: replyMessage });
       setSelectedConversation(response.data.conversation);
       setReplyMessage('');
       // Refresh conversations list
@@ -83,16 +58,7 @@ const ChatbotAdmin = () => {
     if (!selectedConversation) return;
     
     try {
-      const response = await axios.patch(
-        `${API_BASE_URL}/api/chatbot/conversations/${selectedConversation.id}/`,
-        { status: 'closed' },
-        {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+      const response = await api.patch(`/chatbot/conversations/${selectedConversation.id}/`, { status: 'closed' });
       setSelectedConversation(response.data.conversation);
       fetchConversations();
     } catch (error) {
