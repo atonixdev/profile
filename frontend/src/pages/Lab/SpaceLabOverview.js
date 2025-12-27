@@ -53,35 +53,44 @@ const SpaceLabOverview = () => {
     donki: null,
   });
 
+  const isPlainObject = (value) => {
+    if (!value || typeof value !== 'object') return false;
+    if (Array.isArray(value)) return false;
+    return true;
+  };
+
+  const asObjectOrNull = (value) => (isPlainObject(value) ? value : null);
+
   useEffect(() => {
     let cancelled = false;
 
     async function load() {
-      try {
-        const [apodRes, issRes, neoRes, donkiRes] = await Promise.all([
-          spaceService.getApod(),
-          spaceService.getIssNow(),
-          spaceService.getNeoSummary(),
-          spaceService.getDonkiSummary(),
-        ]);
+      const errors = [];
+      const next = { loading: false, error: null, apod: null, iss: null, neo: null, donki: null };
 
-        if (cancelled) return;
-        setFeeds({
-          loading: false,
-          error: null,
-          apod: apodRes.data,
-          iss: issRes.data,
-          neo: neoRes.data,
-          donki: donkiRes.data,
-        });
-      } catch (err) {
-        if (cancelled) return;
-        setFeeds((prev) => ({
-          ...prev,
-          loading: false,
-          error: err?.response?.data?.detail || err?.message || 'Failed to load space feeds',
-        }));
-      }
+      const fetchOne = async (key, fn, label) => {
+        try {
+          const res = await fn();
+          const obj = asObjectOrNull(res?.data);
+          if (!obj) {
+            errors.push(`${label}: invalid response`);
+            return;
+          }
+          next[key] = obj;
+        } catch (err) {
+          const msg = err?.response?.data?.detail || err?.message || 'request failed';
+          errors.push(`${label}: ${msg}`);
+        }
+      };
+
+      await fetchOne('apod', () => spaceService.getApod(), 'APOD');
+      await fetchOne('iss', () => spaceService.getIssNow(), 'ISS');
+      await fetchOne('neo', () => spaceService.getNeoSummary(), 'NEO');
+      await fetchOne('donki', () => spaceService.getDonkiSummary(), 'DONKI');
+
+      if (cancelled) return;
+      next.error = errors.length ? errors.join(' • ') : null;
+      setFeeds(next);
     }
 
     load();
@@ -93,6 +102,11 @@ const SpaceLabOverview = () => {
   const issLabel = feeds.iss?.latitude != null && feeds.iss?.longitude != null
     ? `${Number(feeds.iss.latitude).toFixed(2)}, ${Number(feeds.iss.longitude).toFixed(2)}`
     : '—';
+
+  const hazardousTrend =
+    feeds.neo && feeds.neo.potentially_hazardous_count != null
+      ? `Hazardous: ${feeds.neo.potentially_hazardous_count}`
+      : '';
 
   return (
     <div className="space-y-8">
@@ -130,7 +144,7 @@ const SpaceLabOverview = () => {
           icon={FiCrosshair}
           label="NEO Count"
           value={feeds.loading ? 'Loading…' : (feeds.neo?.total_near_earth_objects ?? '—')}
-          trend={feeds.neo ? `Hazardous: ${feeds.neo.potentially_hazardous_count}` : ''}
+          trend={hazardousTrend}
           color="blue"
         />
         <StatCard
