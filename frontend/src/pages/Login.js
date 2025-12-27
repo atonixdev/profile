@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../services/apiClient';
 import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
@@ -48,7 +49,7 @@ const Login = () => {
     try {
       // Try to get JWT token
       const response = await axios.post(
-        'http://localhost:8000/api/token/',
+        `${API_BASE_URL}/token/`,
         {
           username: formData.username,
           password: formData.password,
@@ -64,7 +65,7 @@ const Login = () => {
       // Fetch user details
       try {
         const userResponse = await axios.get(
-          'http://localhost:8000/api/accounts/profiles/me/',
+          `${API_BASE_URL}/accounts/profiles/me/`,
           {
             headers: {
               Authorization: `Bearer ${access}`,

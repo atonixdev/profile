@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../services/apiClient';
 
 export const AuthContext = createContext(null);
 
@@ -13,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       // Try to fetch user details
       axios
-        .get('http://localhost:8000/api/accounts/profiles/me/', {
+        .get(`${API_BASE_URL}/accounts/profiles/me/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const response = await axios.post(
-        'http://localhost:8000/api/token/',
+        `${API_BASE_URL}/token/`,
         { username, password }
       );
       const { access, refresh } = response.data;
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
       // Fetch user details
       const userResponse = await axios.get(
-        'http://localhost:8000/api/accounts/profiles/me/',
+        `${API_BASE_URL}/accounts/profiles/me/`,
         {
           headers: {
             Authorization: `Bearer ${access}`,
