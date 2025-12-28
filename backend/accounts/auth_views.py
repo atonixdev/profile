@@ -3,7 +3,7 @@ from __future__ import annotations
 from django.conf import settings
 from django.middleware.csrf import get_token
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
@@ -19,7 +19,7 @@ REFRESH_COOKIE = "refresh_token"
 
 def _cookie_params() -> dict:
     # In production behind HTTPS, cookies must be Secure.
-    secure = not settings.DEBUG
+    secure = bool(getattr(settings, 'SESSION_COOKIE_SECURE', (not settings.DEBUG)))
     params = {
         "httponly": True,
         "secure": secure,
@@ -35,6 +35,7 @@ def _cookie_params() -> dict:
 class CsrfView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @method_decorator(ensure_csrf_cookie)
     def get(self, request):
         # Ensure a CSRF cookie exists.
         token = get_token(request)

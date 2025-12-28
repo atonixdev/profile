@@ -1,11 +1,36 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import DeviceViewSet, TelemetryRecordViewSet, AutomationJobViewSet, NetworkViewSet
+from django.urls import path
+
+from .agent_views import (
+	AgentHeartbeatView,
+	AgentNextCommandView,
+	AgentCommandStartView,
+	AgentCommandLogView,
+	AgentCommandFinishView,
+)
+from .views import (
+	DeviceViewSet,
+	TelemetryRecordViewSet,
+	AutomationJobViewSet,
+	NetworkViewSet,
+	DeviceTokenViewSet,
+	DeviceCommandViewSet,
+)
 
 router = DefaultRouter()
 router.register(r'devices', DeviceViewSet, basename='iot-lab-devices')
 router.register(r'telemetry', TelemetryRecordViewSet, basename='iot-lab-telemetry')
 router.register(r'automations', AutomationJobViewSet, basename='iot-lab-automations')
 router.register(r'network', NetworkViewSet, basename='iot-lab-network')
+router.register(r'device-tokens', DeviceTokenViewSet, basename='iot-lab-device-tokens')
+router.register(r'commands', DeviceCommandViewSet, basename='iot-lab-commands')
 
-urlpatterns = router.urls
+urlpatterns = [
+	*router.urls,
+	path('agent/heartbeat/', AgentHeartbeatView.as_view(), name='iot-agent-heartbeat'),
+	path('agent/next-command/', AgentNextCommandView.as_view(), name='iot-agent-next-command'),
+	path('agent/commands/<int:command_id>/start/', AgentCommandStartView.as_view(), name='iot-agent-command-start'),
+	path('agent/commands/<int:command_id>/log/', AgentCommandLogView.as_view(), name='iot-agent-command-log'),
+	path('agent/commands/<int:command_id>/finish/', AgentCommandFinishView.as_view(), name='iot-agent-command-finish'),
+]

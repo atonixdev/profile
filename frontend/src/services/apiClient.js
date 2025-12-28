@@ -3,7 +3,24 @@
 const deriveBaseUrl = () => {
   const envUrl = process.env.REACT_APP_API_URL;
   if (envUrl && envUrl.trim().length > 0) {
-    return envUrl.trim().replace(/\/$/, '');
+    const cleaned = envUrl.trim().replace(/\/$/, '');
+    // Avoid CSRF/cookie issues caused by mixed loopback hostnames.
+    // Example: app served on http://localhost:3000 but API set to http://127.0.0.1:8000/api.
+    // Modern browsers treat this as cross-site, so SameSite=Lax cookies won't be sent.
+    try {
+      if (typeof window !== 'undefined' && window.location?.hostname) {
+        const apiUrl = new URL(cleaned);
+        const pageHost = window.location.hostname;
+        const loopbacks = new Set(['localhost', '127.0.0.1']);
+        if (loopbacks.has(apiUrl.hostname) && loopbacks.has(pageHost) && apiUrl.hostname !== pageHost) {
+          apiUrl.hostname = pageHost;
+          return apiUrl.toString().replace(/\/$/, '');
+        }
+      }
+    } catch {
+      // ignore
+    }
+    return cleaned;
   }
 
   const host = typeof window !== 'undefined' ? window.location.hostname : '';

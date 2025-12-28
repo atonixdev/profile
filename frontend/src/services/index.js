@@ -125,8 +125,18 @@ export const iotLabService = {
   createDevice: (data) => api.post('/iot-lab/devices/', data),
   updateDevice: (id, data) => api.patch(`/iot-lab/devices/${id}/`, data),
 
+  // Admin: mint device tokens (plaintext token returned once)
+  createDeviceToken: (data) => api.post('/iot-lab/device-tokens/', data),
+  revokeDeviceToken: (id) => api.post(`/iot-lab/device-tokens/${id}/revoke/`),
+
   listTelemetry: (params) => api.get('/iot-lab/telemetry/', params ? { params } : undefined),
   createTelemetry: (data) => api.post('/iot-lab/telemetry/', data),
+
+  // Commands (code execution / actions)
+  listCommands: (params) => api.get('/iot-lab/commands/', params ? { params } : undefined),
+  getCommand: (id) => api.get(`/iot-lab/commands/${id}/`),
+  createCommand: (data) => api.post('/iot-lab/commands/', data),
+  getCommandLogs: (id, params) => api.get(`/iot-lab/commands/${id}/logs/`, params ? { params } : undefined),
 
   listAutomations: () => api.get('/iot-lab/automations/'),
   createAutomation: (data) => api.post('/iot-lab/automations/', data),

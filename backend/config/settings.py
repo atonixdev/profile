@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'csp',
+
+    # WebSockets / realtime
+    'channels',
     
     # Local apps
     'accounts',
@@ -93,6 +96,23 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+# ASGI (Channels)
+ASGI_APPLICATION = 'config.asgi.application'
+
+# Channels layer
+# Prefer Redis in production when REDIS_URL is set.
+REDIS_URL = config('REDIS_URL', default='').strip()
+if REDIS_URL:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {'hosts': [REDIS_URL]},
+        }
+    }
+else:
+    # Dev fallback (single-process). For multi-instance deployments, use Redis.
+    CHANNEL_LAYERS = {'default': {'BACKEND': 'channels.layers.InMemoryChannelLayer'}}
 
 # Database
 # Prefer DATABASE_URL when provided (works for local dev + production), else fall back to DB_HOST-based Postgres,
@@ -252,7 +272,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://api.atonixdev.org',
 ]
 
-if DEBUG:
+ALLOW_LOCALHOST_ORIGINS = config('ALLOW_LOCALHOST_ORIGINS', default=DEBUG, cast=bool)
+
+if ALLOW_LOCALHOST_ORIGINS:
     CSRF_TRUSTED_ORIGINS += [
         'http://localhost:3000',
         'http://127.0.0.1:3000',
@@ -261,12 +283,25 @@ if DEBUG:
     ]
 
 # Security Settings
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+#
+# IMPORTANT: If you run with DEBUG=False on localhost over plain HTTP (common in Docker),
+# forcing Secure cookies will prevent the browser from storing csrftoken/session/JWT cookies
+# and login will fail with "CSRF cookie not set".
+#
+# You can override these via env:
+#   SECURE_SSL_REDIRECT=False
+#   SESSION_COOKIE_SECURE=False
+#   CSRF_COOKIE_SECURE=False
+#   ALLOW_LOCALHOST_ORIGINS=True
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=(not DEBUG), cast=bool)
+USE_X_FORWARDED_HOST = config('USE_X_FORWARDED_HOST', default=(not DEBUG), cast=bool)
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=(not DEBUG), cast=bool)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=(not DEBUG), cast=bool)
+
+if SECURE_SSL_REDIRECT:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    USE_X_FORWARDED_HOST = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+
+if not DEBUG and SECURE_SSL_REDIRECT:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_HSTS_SECONDS = 31536000  # 1 year
