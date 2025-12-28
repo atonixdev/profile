@@ -26,6 +26,8 @@ import LabHistory from './pages/Lab/History';
 import LabCompare from './pages/Lab/Compare';
 import LabModelsArtifacts from './pages/Lab/ModelsArtifacts';
 import LabSettings from './pages/Lab/Settings';
+import LabNotebooks from './pages/Lab/Notebooks';
+import LabNotebookEditor from './pages/Lab/NotebookEditor';
 import SpaceLabOverview from './pages/Lab/SpaceLabOverview';
 import SpaceModulePage from './pages/Lab/SpaceModulePage';
 import SelfLabOverview from './pages/Lab/SelfLabOverview';
@@ -99,6 +101,8 @@ function App() {
                 <Route path="history" element={<LabHistory />} />
                 <Route path="compare" element={<LabCompare />} />
                 <Route path="models" element={<LabModelsArtifacts />} />
+                <Route path="notebooks" element={<LabNotebooks />} />
+                <Route path="notebooks/:notebookId" element={<LabNotebookEditor />} />
                 <Route path="settings" element={<LabSettings />} />
 
                 {/* Space Lab */}

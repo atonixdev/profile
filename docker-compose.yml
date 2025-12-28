@@ -48,9 +48,25 @@ services:
       - DB_PORT=5432
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
       - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:3001}
+      - NOTEBOOK_KERNEL_URL=${NOTEBOOK_KERNEL_URL:-http://notebook-kernel:8000}
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - app-network
+
+  notebook-kernel:
+    build:
+      context: ./kernel_service
+      dockerfile: Dockerfile
+    container_name: notebook-kernel
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - KERNEL_TIMEOUT_SECONDS=${KERNEL_TIMEOUT_SECONDS:-15}
+      - KERNEL_MAX_OUTPUT_CHARS=${KERNEL_MAX_OUTPUT_CHARS:-20000}
     networks:
       - app-network
 
@@ -78,6 +94,7 @@ services:
       - WATCHPACK_POLLING=true
     depends_on:
       - backend
+      - notebook-kernel
     networks:
       - app-network
 

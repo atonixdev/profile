@@ -1,12 +1,15 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import ExperimentViewSet, ExperimentRunViewSet
+from .views import ExperimentViewSet, ExperimentRunViewSet, NotebookViewSet, NotebookCellViewSet, NotebookKernelViewSet
 from . import space_views
 
 router = DefaultRouter()
 router.register(r'experiments', ExperimentViewSet, basename='research-lab-experiment')
 router.register(r'runs', ExperimentRunViewSet, basename='research-lab-run')
+router.register(r'notebooks', NotebookViewSet, basename='research-lab-notebook')
+router.register(r'notebook-cells', NotebookCellViewSet, basename='research-lab-notebook-cell')
+router.register(r'notebook-kernel', NotebookKernelViewSet, basename='research-lab-notebook-kernel')
 
 urlpatterns = [
     path('', include(router.urls)),

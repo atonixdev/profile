@@ -13,7 +13,7 @@ import { addProjection } from 'ol/proj';
 const BASEMAPS = {
   eq: {
     label: 'Equirect (Global)',
-    projection: { code: 'EPSG:104905', units: 'degrees', extent: [-180, -90, 180, 90], center: [0, 0], zoom: 1 },
+    projection: { code: 'EPSG:104905', units: 'degrees', extent: [-180, -90, 180, 90], center: [0, 0], zoom: 2 },
     url: 'https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Viking_MDIM21_ClrMosaic_global_232m/ImageServer',
   },
   np: {
@@ -23,7 +23,7 @@ const BASEMAPS = {
       units: 'm',
       extent: [-1820012.7356853096, -1819971.6340914431, 1820012.7356853096, 1820053.837279176],
       center: [0, 0],
-      zoom: 2,
+      zoom: 3,
     },
     url: 'https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Viking_MDIM21_ClrMosaic_global_232m_np/ImageServer',
   },
@@ -34,7 +34,7 @@ const BASEMAPS = {
       units: 'm',
       extent: [-1809300.1269719196, -1809259.2673023306, 1809300.1269719196, 1809341.4148377852],
       center: [0, 0],
-      zoom: 2,
+      zoom: 3,
     },
     url: 'https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Viking_MDIM21_ClrMosaic_global_232m_sp/ImageServer',
   },
@@ -198,7 +198,7 @@ const MarsTrekMapPage = () => {
       )}
 
       <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl">
-        <div ref={containerRef} className="w-full h-[520px] rounded-lg overflow-hidden" />
+        <div ref={containerRef} className="w-full h-[75vh] min-h-[620px] rounded-lg overflow-hidden" />
       </div>
 
       <div className="text-xs text-gray-400">

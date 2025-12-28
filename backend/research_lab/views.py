@@ -1,12 +1,14 @@
 from django.utils import timezone
+from django.db.models import Max
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Experiment, ExperimentRun
+from .models import Experiment, ExperimentRun, Notebook, NotebookCell
 from .permissions import IsAdminOrReadOnly, IsOwnerOrAdminReadOnly
 from .runner import run_experiment
 from .local_sqlite import append_log, read_logs
+from .notebook_kernel import kernel_run, kernel_install, kernel_status
 
 
 class ExperimentViewSet(viewsets.ModelViewSet):
@@ -136,3 +138,107 @@ class ExperimentRunViewSet(viewsets.ReadOnlyModelViewSet):
             ],
             status=200,
         )
+
+
+class NotebookViewSet(viewsets.ModelViewSet):
+    serializer_class = None
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        qs = Notebook.objects.all()
+        if self.request.user and self.request.user.is_staff:
+            return qs
+        return qs.filter(user=self.request.user)
+
+    def get_serializer_class(self):
+        from .serializers import NotebookSerializer
+
+        return NotebookSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class NotebookCellViewSet(viewsets.ModelViewSet):
+    serializer_class = None
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        qs = NotebookCell.objects.select_related('notebook', 'notebook__user')
+        notebook_id = self.request.query_params.get('notebook')
+        if notebook_id:
+            qs = qs.filter(notebook_id=notebook_id)
+
+        if self.request.user and self.request.user.is_staff:
+            return qs
+        return qs.filter(notebook__user=self.request.user)
+
+    def get_serializer_class(self):
+        from .serializers import NotebookCellSerializer
+
+        return NotebookCellSerializer
+
+    def perform_create(self, serializer):
+        notebook = serializer.validated_data.get('notebook')
+        if not (self.request.user.is_staff or notebook.user_id == self.request.user.id):
+            raise permissions.PermissionDenied('Not allowed.')
+
+        # If position isn't provided, append to end.
+        if 'position' not in serializer.validated_data:
+            max_pos = NotebookCell.objects.filter(notebook=notebook).aggregate(Max('position')).get('position__max')
+            serializer.save(position=(max_pos + 1) if max_pos is not None else 0)
+            return
+
+        serializer.save()
+
+    @action(detail=True, methods=['post'])
+    def run(self, request, pk=None):
+        cell = self.get_object()
+        code = request.data.get('code')
+        if code is None:
+            code = cell.code
+
+        try:
+            result = kernel_run(code)
+        except Exception as exc:
+            return Response({'detail': 'Kernel run failed', 'error': str(exc)}, status=502)
+
+        cell.last_stdout = result.get('stdout', '') or ''
+        cell.last_stderr = result.get('stderr', '') or ''
+        cell.last_exit_code = result.get('exit_code')
+        cell.last_duration_ms = result.get('duration_ms')
+        cell.last_executed_at = timezone.now()
+        cell.save(update_fields=[
+            'last_stdout',
+            'last_stderr',
+            'last_exit_code',
+            'last_duration_ms',
+            'last_executed_at',
+            'updated_at',
+        ])
+
+        from .serializers import NotebookCellSerializer
+
+        return Response(NotebookCellSerializer(cell).data, status=200)
+
+
+class NotebookKernelViewSet(viewsets.ViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
+    @action(detail=False, methods=['get'])
+    def status(self, request):
+        try:
+            return Response(kernel_status(), status=200)
+        except Exception as exc:
+            return Response({'status': 'error', 'error': str(exc)}, status=502)
+
+    @action(detail=False, methods=['post'])
+    def install(self, request):
+        package = (request.data.get('package') or '').strip()
+        if not package:
+            return Response({'detail': 'package is required'}, status=400)
+
+        try:
+            return Response(kernel_install(package), status=200)
+        except Exception as exc:
+            return Response({'detail': 'Kernel install failed', 'error': str(exc)}, status=502)

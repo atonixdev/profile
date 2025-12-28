@@ -18,6 +18,7 @@ const domainConfigs = {
       { to: '/lab/history', label: 'Experiment History', icon: FiClock },
       { to: '/lab/compare', label: 'Compare Experiments', icon: FiBarChart2 },
       { to: '/lab/models', label: 'Models & Artifacts', icon: FiSliders },
+      { to: '/lab/notebooks', label: 'Notebooks', icon: FiBook },
       { to: '/lab/settings', label: 'Settings', icon: FiSettings },
     ],
   },

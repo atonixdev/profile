@@ -67,6 +67,23 @@ export const labService = {
   getRunLogs: (runId, limit = 200) => api.get(`/research-lab/runs/${runId}/logs/`, { params: { limit } }),
 };
 
+// Experimental Lab: Jupyter-style notebooks
+export const notebookService = {
+  listNotebooks: () => api.get('/research-lab/notebooks/'),
+  getNotebook: (id) => api.get(`/research-lab/notebooks/${id}/`),
+  createNotebook: (data) => api.post('/research-lab/notebooks/', data),
+  updateNotebook: (id, data) => api.patch(`/research-lab/notebooks/${id}/`, data),
+  deleteNotebook: (id) => api.delete(`/research-lab/notebooks/${id}/`),
+
+  listCells: (notebookId) => api.get('/research-lab/notebook-cells/', { params: { notebook: notebookId } }),
+  createCell: (notebookId, data) => api.post('/research-lab/notebook-cells/', { notebook_id: notebookId, ...(data || {}) }),
+  updateCell: (cellId, data) => api.patch(`/research-lab/notebook-cells/${cellId}/`, data),
+  runCell: (cellId, code) => api.post(`/research-lab/notebook-cells/${cellId}/run/`, code !== undefined ? { code } : {}),
+
+  kernelStatus: () => api.get('/research-lab/notebook-kernel/status/'),
+  installPackage: (pkg) => api.post('/research-lab/notebook-kernel/install/', { package: pkg }),
+};
+
 // Space Lab (backend-proxied space APIs)
 export const spaceService = {
   getApod: (params) => api.get('/research-lab/space/apod/', { params }),
