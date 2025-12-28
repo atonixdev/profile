@@ -18,7 +18,6 @@ const RunExperiment = ({ experimentType, titleOverride } = {}) => {
   const headerMutedClass = theme === 'dark' ? 'text-gray-300' : 'text-gray-600';
   const panelClass = theme === 'dark' ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6';
   const panelClassSpaced = `${panelClass} space-y-4`;
-  const titleClass = theme === 'dark' ? 'text-white' : 'text-gray-900';
   const labelClass = theme === 'dark' ? 'text-gray-200' : 'text-gray-700';
   const subtleTextClass = theme === 'dark' ? 'text-gray-300' : 'text-gray-600';
   const metaTextClass = theme === 'dark' ? 'text-gray-400' : 'text-gray-500';
