@@ -280,6 +280,13 @@ SESSION_COOKIE_SAMESITE = config('SESSION_COOKIE_SAMESITE', default='Lax')
 CSRF_COOKIE_SAMESITE = config('CSRF_COOKIE_SAMESITE', default='Lax')
 CSRF_COOKIE_HTTPONLY = False
 
+# Share cookies across subdomains when needed (e.g. atonixdev.org + api.atonixdev.org).
+# Set COOKIE_DOMAIN=.atonixdev.org in production if the frontend needs to read csrftoken.
+COOKIE_DOMAIN = config('COOKIE_DOMAIN', default='').strip() or None
+if COOKIE_DOMAIN:
+    SESSION_COOKIE_DOMAIN = COOKIE_DOMAIN
+    CSRF_COOKIE_DOMAIN = COOKIE_DOMAIN
+
 # Content Security Policy (start in report-only to avoid breaking third-party assets)
 CSP_REPORT_ONLY = config('CSP_REPORT_ONLY', default=True, cast=bool)
 CSP_DEFAULT_SRC = ("'self'", 'https:', 'data:')

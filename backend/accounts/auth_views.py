@@ -20,12 +20,16 @@ REFRESH_COOKIE = "refresh_token"
 def _cookie_params() -> dict:
     # In production behind HTTPS, cookies must be Secure.
     secure = not settings.DEBUG
-    return {
+    params = {
         "httponly": True,
         "secure": secure,
         "samesite": "Lax",
         "path": "/",
     }
+    domain = getattr(settings, 'COOKIE_DOMAIN', None)
+    if domain:
+        params["domain"] = domain
+    return params
 
 
 class CsrfView(APIView):
