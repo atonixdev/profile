@@ -8,8 +8,8 @@ from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.utils import timezone
 
-from .models import Device, DeviceCommand, DeviceCommandLog, TelemetryRecord
-from .realtime import command_group, device_group, telemetry_group, network_group
+from .models import Device, DeviceCommand, DeviceCommandLog, TelemetryRecord, Alert
+from .realtime import command_group, device_group, telemetry_group, network_group, alerts_group
 
 
 class _AuthRequiredConsumer(AsyncWebsocketConsumer):
@@ -297,3 +297,59 @@ class NetworkStreamConsumer(_AuthRequiredConsumer):
             'devices': {'total': total, 'online': online, 'offline': offline},
             'telemetry': {'last_hour_count': telemetry_last_hour, 'last_day_count': telemetry_last_day},
         }
+
+
+class AlertsStreamConsumer(_AuthRequiredConsumer):
+    """Stream automation/security alerts.
+
+    WS path: /ws/iot-lab/alerts/
+    Messages:
+      - {type: "init", alerts: [...]}
+      - {type: "alert", alert: {...}}
+    """
+
+    group: str = alerts_group()
+
+    async def connect(self):
+        await super().connect()
+        await self.channel_layer.group_add(self.group, self.channel_name)
+        await self.accept()
+
+        init = await self._build_init()
+        await self.send(text_data=json.dumps({'type': 'init', 'alerts': init}))
+
+    async def disconnect(self, code):
+        try:
+            await self.channel_layer.group_discard(self.group, self.channel_name)
+        except Exception:
+            pass
+
+    async def receive(self, text_data=None, bytes_data=None):
+        return
+
+    async def iot_alert(self, event: Dict[str, Any]):
+        payload = event.get('payload') or {}
+        await self.send(text_data=json.dumps({'type': 'alert', 'alert': payload}))
+
+    @database_sync_to_async
+    def _build_init(self) -> List[Dict[str, Any]]:
+        qs = Alert.objects.select_related('device').order_by('-created_at', '-id')[:50]
+        rows = list(qs)
+        rows.reverse()
+        out: List[Dict[str, Any]] = []
+        for a in rows:
+            out.append(
+                {
+                    'id': a.id,
+                    'device': a.device_id,
+                    'device_name': a.device.name if a.device_id and a.device else None,
+                    'title': a.title,
+                    'message': a.message,
+                    'severity': a.severity,
+                    'category': a.category,
+                    'metadata': a.metadata,
+                    'created_at': a.created_at.isoformat() if a.created_at else None,
+                    'resolved_at': a.resolved_at.isoformat() if a.resolved_at else None,
+                }
+            )
+        return out

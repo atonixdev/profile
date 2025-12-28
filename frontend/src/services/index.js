@@ -143,6 +143,10 @@ export const iotLabService = {
   updateAutomation: (id, data) => api.patch(`/iot-lab/automations/${id}/`, data),
   runAutomation: (id) => api.post(`/iot-lab/automations/${id}/run/`),
 
+  // Alerts
+  listAlerts: (params) => api.get('/iot-lab/alerts/', params ? { params } : undefined),
+  resolveAlert: (id) => api.post(`/iot-lab/alerts/${id}/resolve/`),
+
   getNetworkSummary: () => api.get('/iot-lab/network/summary/'),
 };
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Device, TelemetryRecord, AutomationJob, DeviceToken, DeviceCommand, DeviceCommandLog
+from .models import Device, TelemetryRecord, AutomationJob, DeviceToken, DeviceCommand, DeviceCommandLog, Alert, SecurityEvent
 
 
 class DeviceSerializer(serializers.ModelSerializer):
@@ -115,3 +115,42 @@ class DeviceCommandLogSerializer(serializers.ModelSerializer):
         model = DeviceCommandLog
         fields = ['id', 'command', 'stream', 'message', 'ts']
         read_only_fields = ['id', 'ts']
+
+
+class AlertSerializer(serializers.ModelSerializer):
+    device_name = serializers.CharField(source='device.name', read_only=True)
+
+    class Meta:
+        model = Alert
+        fields = [
+            'id',
+            'device',
+            'device_name',
+            'title',
+            'message',
+            'severity',
+            'category',
+            'metadata',
+            'created_by',
+            'created_at',
+            'resolved_at',
+        ]
+        read_only_fields = ['created_by', 'created_at', 'device_name']
+
+
+class SecurityEventSerializer(serializers.ModelSerializer):
+    device_name = serializers.CharField(source='device.name', read_only=True)
+
+    class Meta:
+        model = SecurityEvent
+        fields = [
+            'id',
+            'device',
+            'device_name',
+            'event_type',
+            'message',
+            'metadata',
+            'created_by',
+            'created_at',
+        ]
+        read_only_fields = ['created_by', 'created_at', 'device_name']

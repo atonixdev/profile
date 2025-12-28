@@ -147,3 +147,47 @@ class AutomationJob(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Alert(models.Model):
+    class Severity(models.TextChoices):
+        INFO = 'info', 'Info'
+        WARNING = 'warning', 'Warning'
+        CRITICAL = 'critical', 'Critical'
+
+    device = models.ForeignKey(Device, null=True, blank=True, on_delete=models.SET_NULL, related_name='alerts')
+    title = models.CharField(max_length=200)
+    message = models.TextField(blank=True, default='')
+    severity = models.CharField(max_length=20, choices=Severity.choices, default=Severity.INFO)
+    category = models.CharField(max_length=60, blank=True, default='')
+    metadata = models.JSONField(default=dict, blank=True)
+
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name='iot_alerts'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    resolved_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at', '-id']
+
+    def __str__(self):
+        return f"{self.severity}:{self.title}"
+
+
+class SecurityEvent(models.Model):
+    device = models.ForeignKey(Device, null=True, blank=True, on_delete=models.SET_NULL, related_name='security_events')
+    event_type = models.CharField(max_length=80)
+    message = models.TextField(blank=True, default='')
+    metadata = models.JSONField(default=dict, blank=True)
+
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name='iot_security_events'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at', '-id']
+
+    def __str__(self):
+        return self.event_type

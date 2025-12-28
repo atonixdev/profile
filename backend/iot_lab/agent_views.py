@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from .agent_auth import authenticate_agent
 from .models import Device, DeviceCommand, DeviceCommandLog
 from .realtime import publish_command_log, publish_command_status, publish_device_update, publish_network_update
+from .automation_engine import run_jobs_for_event
 
 
 class AgentHeartbeatView(APIView):
@@ -47,6 +48,12 @@ class AgentHeartbeatView(APIView):
 
         # Let Network Health update automatically.
         publish_network_update({'reason': 'device_heartbeat', 'device_id': device.id})
+
+        # Fire any heartbeat-driven automations.
+        try:
+            run_jobs_for_event(event_type='heartbeat', device=device)
+        except Exception:
+            pass
 
         return Response({'detail': 'ok', 'device_id': device.id, 'status': status})
 

@@ -19,6 +19,10 @@ def network_group() -> str:
     return "iot_network"
 
 
+def alerts_group() -> str:
+    return "iot_alerts"
+
+
 def _send(group: str, message: Dict[str, Any]) -> None:
     """Best-effort group_send from sync code (views).
 
@@ -83,6 +87,16 @@ def publish_network_update(payload: Dict[str, Any]) -> None:
         network_group(),
         {
             'type': 'iot.network_update',
+            'payload': payload,
+        },
+    )
+
+
+def publish_alert(payload: Dict[str, Any]) -> None:
+    _send(
+        alerts_group(),
+        {
+            'type': 'iot.alert',
             'payload': payload,
         },
     )

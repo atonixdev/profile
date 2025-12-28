@@ -9,10 +9,11 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status as drf_status
+from rest_framework.exceptions import ValidationError
 
 from rest_framework.permissions import IsAdminUser
 
-from .models import Device, TelemetryRecord, AutomationJob, DeviceToken, DeviceCommand, DeviceCommandLog
+from .models import Device, TelemetryRecord, AutomationJob, DeviceToken, DeviceCommand, DeviceCommandLog, Alert, SecurityEvent
 from .permissions import ReadOnlyOrAuthenticatedWrite
 from .serializers import (
     DeviceSerializer,
@@ -22,9 +23,12 @@ from .serializers import (
     DeviceCommandSerializer,
     DeviceCommandCreateSerializer,
     DeviceCommandLogSerializer,
+    AlertSerializer,
+    SecurityEventSerializer,
 )
 
 from .realtime import publish_command_status, publish_telemetry_record, publish_network_update
+from .automation_engine import run_job, run_jobs_for_event, AutomationContext
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
@@ -61,6 +65,13 @@ class TelemetryRecordViewSet(viewsets.ModelViewSet):
         # Update device heartbeat/status
         Device.objects.filter(id=record.device_id).update(last_seen_at=record.timestamp, status=Device.Status.ONLINE)
 
+        # Fire any telemetry-driven automations
+        try:
+            run_jobs_for_event(event_type='telemetry', telemetry=record, actor=self.request.user if self.request.user.is_authenticated else None)
+        except Exception:
+            # Avoid breaking telemetry ingestion if an automation fails.
+            pass
+
         publish_telemetry_record(
             record.device_id,
             {
@@ -93,10 +104,48 @@ class AutomationJobViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def run(self, request, pk=None):
         job = self.get_object()
-        job.last_run_at = timezone.now()
-        job.last_run_status = AutomationJob.LastRunStatus.SUCCEEDED
-        job.save(update_fields=['last_run_at', 'last_run_status'])
-        return Response({'detail': 'Automation executed', 'id': job.id, 'last_run_at': job.last_run_at, 'last_run_status': job.last_run_status})
+        ctx = AutomationContext(event_type='manual')
+        try:
+            result = run_job(job, ctx, actor=request.user if request.user.is_authenticated else None)
+            job.refresh_from_db(fields=['last_run_at', 'last_run_status'])
+            return Response({'detail': 'Automation executed', 'id': job.id, 'last_run_at': job.last_run_at, 'last_run_status': job.last_run_status, 'result': result})
+        except Exception as e:
+            job.refresh_from_db(fields=['last_run_at', 'last_run_status'])
+            return Response({'detail': str(e), 'id': job.id, 'last_run_at': job.last_run_at, 'last_run_status': job.last_run_status}, status=drf_status.HTTP_400_BAD_REQUEST)
+
+
+class AlertViewSet(viewsets.ModelViewSet):
+    serializer_class = AlertSerializer
+    permission_classes = [ReadOnlyOrAuthenticatedWrite]
+
+    def get_queryset(self):
+        qs = Alert.objects.select_related('device').all()
+        device_id = self.request.query_params.get('device')
+        if device_id:
+            qs = qs.filter(device_id=device_id)
+        return qs.order_by('-created_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
+
+    @action(detail=True, methods=['post'])
+    def resolve(self, request, pk=None):
+        row = self.get_object()
+        row.resolved_at = timezone.now()
+        row.save(update_fields=['resolved_at'])
+        return Response({'detail': 'resolved', 'id': row.id, 'resolved_at': row.resolved_at})
+
+
+class SecurityEventViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = SecurityEventSerializer
+    permission_classes = [IsAdminUser]
+
+    def get_queryset(self):
+        qs = SecurityEvent.objects.select_related('device').all()
+        device_id = self.request.query_params.get('device')
+        if device_id:
+            qs = qs.filter(device_id=device_id)
+        return qs.order_by('-created_at', '-id')
 
 
 class NetworkViewSet(viewsets.ViewSet):
@@ -189,7 +238,28 @@ class DeviceCommandViewSet(viewsets.ModelViewSet):
         return qs.order_by('-queued_at', '-id')
 
     def perform_create(self, serializer):
-        cmd = serializer.save(requested_by=self.request.user if self.request.user.is_authenticated else None)
+        # Optional per-device policy enforcement.
+        req_user = self.request.user if self.request.user.is_authenticated else None
+        kind = serializer.validated_data.get('kind')
+        device = serializer.validated_data.get('device')
+
+        policy = (device.metadata or {}).get('policy') if device else None
+        allowed_kinds = None
+        if isinstance(policy, dict):
+            allowed_kinds = policy.get('allowed_kinds')
+
+        if allowed_kinds is not None:
+            if not isinstance(allowed_kinds, list) or kind not in allowed_kinds:
+                SecurityEvent.objects.create(
+                    device=device,
+                    event_type='command_blocked',
+                    message='Command kind blocked by device policy',
+                    metadata={'kind': kind, 'allowed_kinds': allowed_kinds},
+                    created_by=req_user,
+                )
+                raise ValidationError({'detail': 'Command blocked by device policy'})
+
+        cmd = serializer.save(requested_by=req_user)
         publish_command_status(
             cmd.id,
             {

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Device, TelemetryRecord, AutomationJob, DeviceToken, DeviceCommand, DeviceCommandLog
+from .models import Device, TelemetryRecord, AutomationJob, DeviceToken, DeviceCommand, DeviceCommandLog, Alert, SecurityEvent
 
 
 @admin.register(Device)
@@ -44,3 +44,17 @@ class DeviceCommandLogAdmin(admin.ModelAdmin):
     list_display = ('id', 'command', 'stream', 'ts')
     list_filter = ('stream',)
     search_fields = ('command__device__name', 'message')
+
+
+@admin.register(Alert)
+class AlertAdmin(admin.ModelAdmin):
+    list_display = ('id', 'severity', 'category', 'title', 'device', 'created_at', 'resolved_at')
+    list_filter = ('severity', 'category')
+    search_fields = ('title', 'message', 'device__name')
+
+
+@admin.register(SecurityEvent)
+class SecurityEventAdmin(admin.ModelAdmin):
+    list_display = ('id', 'event_type', 'device', 'created_at')
+    list_filter = ('event_type',)
+    search_fields = ('event_type', 'message', 'device__name')

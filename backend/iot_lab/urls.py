@@ -16,6 +16,8 @@ from .views import (
 	NetworkViewSet,
 	DeviceTokenViewSet,
 	DeviceCommandViewSet,
+	AlertViewSet,
+	SecurityEventViewSet,
 )
 
 router = DefaultRouter()
@@ -25,6 +27,8 @@ router.register(r'automations', AutomationJobViewSet, basename='iot-lab-automati
 router.register(r'network', NetworkViewSet, basename='iot-lab-network')
 router.register(r'device-tokens', DeviceTokenViewSet, basename='iot-lab-device-tokens')
 router.register(r'commands', DeviceCommandViewSet, basename='iot-lab-commands')
+router.register(r'alerts', AlertViewSet, basename='iot-lab-alerts')
+router.register(r'security-events', SecurityEventViewSet, basename='iot-lab-security-events')
 
 urlpatterns = [
 	*router.urls,
