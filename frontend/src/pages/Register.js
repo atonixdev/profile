@@ -45,6 +45,7 @@ const Register = () => {
     setLoading(true);
 
     try {
+      await api.get('/auth/csrf/');
       await api.post('/accounts/register/', {
         username: formData.username,
         email: formData.email,

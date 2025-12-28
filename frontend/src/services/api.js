@@ -6,17 +6,30 @@ const API_URL = API_BASE_URL;
 
 const api = axios.create({
   baseURL: API_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Request interceptor to add auth token
+function getCookie(name) {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
+const unsafeMethods = new Set(['post', 'put', 'patch', 'delete']);
+
+// Request interceptor to add CSRF token for unsafe methods
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const method = (config.method || 'get').toLowerCase();
+    if (unsafeMethods.has(method)) {
+      const csrf = getCookie('csrftoken');
+      if (csrf) {
+        config.headers = config.headers || {};
+        config.headers['X-CSRFToken'] = csrf;
+      }
     }
     return config;
   },
@@ -25,7 +38,7 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle token refresh
+// Response interceptor to handle cookie refresh
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -35,19 +48,14 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem('refresh_token');
-        const response = await axios.post(`${API_URL}/token/refresh/`, {
-          refresh: refreshToken,
+        // Refresh will use HttpOnly refresh cookie and set a new access cookie
+        const csrf = getCookie('csrftoken');
+        await axios.post(`${API_URL}/auth/refresh/`, null, {
+          withCredentials: true,
+          headers: csrf ? { 'X-CSRFToken': csrf } : undefined,
         });
-
-        const { access } = response.data;
-        localStorage.setItem('access_token', access);
-
-        originalRequest.headers.Authorization = `Bearer ${access}`;
         return api(originalRequest);
       } catch (refreshError) {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
         window.location.href = '/login';
         return Promise.reject(refreshError);
       }

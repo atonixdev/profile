@@ -177,7 +177,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'accounts.authentication.CookieJWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -211,6 +211,26 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
+# Optional: asymmetric JWT signing (recommended for production)
+# Defaults to HS256 for backwards compatibility.
+JWT_ALGORITHM = config('JWT_ALGORITHM', default='HS256')
+if JWT_ALGORITHM and JWT_ALGORITHM != 'HS256':
+    SIMPLE_JWT['ALGORITHM'] = JWT_ALGORITHM
+    SIMPLE_JWT['SIGNING_KEY'] = config('JWT_SIGNING_KEY', default='')
+    SIMPLE_JWT['VERIFYING_KEY'] = config('JWT_VERIFYING_KEY', default='')
+    if not SIMPLE_JWT['SIGNING_KEY'] or not SIMPLE_JWT['VERIFYING_KEY']:
+        if not DEBUG:
+            raise RuntimeError('JWT_SIGNING_KEY and JWT_VERIFYING_KEY are required when using non-HS256 in production')
+
+# Field-level encryption key (AES-256-GCM)
+# Provide FIELD_ENCRYPTION_KEY_B64 in production.
+FIELD_ENCRYPTION_KEY_B64 = os.getenv('FIELD_ENCRYPTION_KEY_B64', '')
+
+# Blog signing keys (Ed25519) for integrity/authenticity of posts
+BLOG_SIGNING_KEY_ID = os.getenv('BLOG_SIGNING_KEY_ID', 'v1')
+BLOG_SIGNING_PRIVATE_KEY_B64 = os.getenv('BLOG_SIGNING_PRIVATE_KEY_B64', '')
+BLOG_SIGNING_PUBLIC_KEY_B64 = os.getenv('BLOG_SIGNING_PUBLIC_KEY_B64', '')
+
 # CORS Settings
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
@@ -232,6 +252,14 @@ CSRF_TRUSTED_ORIGINS = [
     'https://api.atonixdev.org',
 ]
 
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS += [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:3001',
+        'http://127.0.0.1:3001',
+    ]
+
 # Security Settings
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
@@ -250,6 +278,7 @@ if not DEBUG:
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = config('SESSION_COOKIE_SAMESITE', default='Lax')
 CSRF_COOKIE_SAMESITE = config('CSRF_COOKIE_SAMESITE', default='Lax')
+CSRF_COOKIE_HTTPONLY = False
 
 # Content Security Policy (start in report-only to avoid breaking third-party assets)
 CSP_REPORT_ONLY = config('CSP_REPORT_ONLY', default=True, cast=bool)

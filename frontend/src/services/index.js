@@ -2,8 +2,10 @@ import api from './api';
 
 // Authentication
 export const authService = {
-  login: (credentials) => api.post('/token/', credentials),
-  refresh: (refreshToken) => api.post('/token/refresh/', { refresh: refreshToken }),
+  csrf: () => api.get('/auth/csrf/'),
+  login: (credentials) => api.post('/auth/login/', credentials),
+  refresh: () => api.post('/auth/refresh/'),
+  logout: () => api.post('/auth/logout/'),
 };
 
 // Profile

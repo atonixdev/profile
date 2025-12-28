@@ -1,7 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import axios from 'axios';
-import { API_BASE_URL } from '../services/apiClient';
 import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
@@ -17,7 +15,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { setUser } = useContext(AuthContext);
+  const { login: authLogin } = useContext(AuthContext);
 
   // Pre-fill email/username from registration redirect if available
   const prefill = location.state?.email || '';
@@ -49,68 +47,18 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // Try to get JWT token
-      const response = await axios.post(
-        `${API_BASE_URL}/token/`,
-        {
-          username: formData.username,
-          password: formData.password,
-          ...(formData.otp ? { otp: formData.otp } : {}),
-        }
-      );
-
-      const { access, refresh } = response.data;
-
-      // Store tokens
-      localStorage.setItem('access_token', access);
-      localStorage.setItem('refresh_token', refresh);
-
-      // Fetch user details
-      try {
-        const userResponse = await axios.get(
-          `${API_BASE_URL}/accounts/profiles/me/`,
-          {
-            headers: {
-              Authorization: `Bearer ${access}`,
-            },
-          }
-        );
-
-        if (userResponse.data) setUser(userResponse.data);
-      } catch (err) {
-        // If profile fetch fails, set user to basic info
-        setUser({
-          username: formData.username,
-          email: formData.username,
-        });
+      const result = await authLogin(formData.username, formData.password, formData.otp || undefined);
+      if (!result.success) {
+        if (result.requiresOtp) setShowOtp(true);
+        setError(result.error || 'Login failed. Please try again.');
+        return;
       }
 
       // Redirect to the originally requested page, or default to Lab
       const redirectPath = location.state?.from || '/lab';
       navigate(redirectPath);
     } catch (err) {
-      if (!err.response) {
-        setError('Cannot reach the API server. Check that the backend is running and that your browser is not forcing HTTPS for localhost/IP addresses.');
-        return;
-      }
-      if (err.response?.status === 429) {
-        setError('Too many login attempts. Please wait a moment and try again.');
-        return;
-      }
-
-      const data = err.response?.data;
-      const otpError = data?.otp;
-      if (err.response?.status === 400 && otpError) {
-        setShowOtp(true);
-        setError(Array.isArray(otpError) ? otpError[0] : String(otpError));
-        return;
-      }
-
-      if (err.response?.status === 401) {
-        setError('Invalid username or password');
-      } else {
-        setError(data?.detail || 'Login failed. Please try again.');
-      }
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
     }

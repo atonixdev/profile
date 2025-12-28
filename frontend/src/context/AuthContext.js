@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-import { API_BASE_URL } from '../services/apiClient';
+import api from '../services/api';
 
 export const AuthContext = createContext(null);
 
@@ -9,54 +8,30 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in on mount
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      // Try to fetch user details
-      axios
-        .get(`${API_BASE_URL}/accounts/profiles/me/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          if (response.data) setUser(response.data);
-        })
-        .catch(() => {
-          // If token is invalid, clear it
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
-          setUser(null);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+    // Ensure CSRF cookie exists, then attempt to load current user (cookie auth)
+    (async () => {
+      try {
+        await api.get('/auth/csrf/');
+      } catch {
+        // ignore
+      }
+
+      try {
+        const resp = await api.get('/accounts/profiles/me/');
+        if (resp.data) setUser(resp.data);
+      } catch {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, []);
 
   const login = async (username, password, otp) => {
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/token/`,
-        { username, password, ...(otp ? { otp } : {}) }
-      );
-      const { access, refresh } = response.data;
-
-      localStorage.setItem('access_token', access);
-      localStorage.setItem('refresh_token', refresh);
-
-      // Fetch user details
-      const userResponse = await axios.get(
-        `${API_BASE_URL}/accounts/profiles/me/`,
-        {
-          headers: {
-            Authorization: `Bearer ${access}`,
-          },
-        }
-      );
-
+      await api.get('/auth/csrf/');
+      await api.post('/auth/login/', { username, password, ...(otp ? { otp } : {}) });
+      const userResponse = await api.get('/accounts/profiles/me/');
       if (userResponse.data) setUser(userResponse.data);
 
       return { success: true };
@@ -86,10 +61,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    setUser(null);
+  const logout = async () => {
+    try {
+      await api.post('/auth/logout/');
+    } catch {
+      // ignore
+    } finally {
+      setUser(null);
+    }
   };
 
   const value = {

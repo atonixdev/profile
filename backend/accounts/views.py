@@ -6,7 +6,6 @@ from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from django.db import transaction
-from django.utils.crypto import get_random_string
 from .models import Profile
 from .serializers import ProfileSerializer, CurrentUserProfileSerializer, RegisterSerializer
 from community.models import CommunityMember

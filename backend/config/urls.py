@@ -7,6 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenRefreshView
 from accounts.jwt import EmailOrUsernameTokenObtainPairView
+from accounts.auth_views import CsrfView, CookieLoginView, CookieRefreshView, CookieLogoutView
 from . import views
 
 urlpatterns = [
@@ -19,6 +20,12 @@ urlpatterns = [
     # JWT Authentication
     path('api/token/', EmailOrUsernameTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    # Cookie-based auth (recommended for SPA)
+    path('api/auth/csrf/', CsrfView.as_view(), name='auth_csrf'),
+    path('api/auth/login/', CookieLoginView.as_view(), name='auth_login'),
+    path('api/auth/refresh/', CookieRefreshView.as_view(), name='auth_refresh'),
+    path('api/auth/logout/', CookieLogoutView.as_view(), name='auth_logout'),
 
     # App URLs
     path('api/accounts/', include('accounts.urls')),

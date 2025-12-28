@@ -69,6 +69,44 @@ def main() -> None:
     print("token_with_otp", resp.status_code, list(resp.data.keys()) if hasattr(resp, "data") else resp.content)
     assert resp.status_code == 200
 
+    # Cookie auth + CSRF flow
+    client3 = APIClient(enforce_csrf_checks=True)
+
+    resp = client3.get("/api/auth/csrf/")
+    print("csrf", resp.status_code)
+    assert resp.status_code == 200
+    csrf_token = client3.cookies.get("csrftoken").value
+
+    # Missing CSRF header should be rejected
+    resp = client3.post(
+        "/api/auth/login/",
+        {"username": email, "password": password, "otp": pyotp.TOTP(user.profile.mfa_totp_secret).now()},
+        format="json",
+    )
+    print("cookie_login_no_csrf", resp.status_code)
+    assert resp.status_code in (403, 400)
+
+    resp = client3.post(
+        "/api/auth/login/",
+        {"username": email, "password": password, "otp": pyotp.TOTP(user.profile.mfa_totp_secret).now()},
+        format="json",
+        HTTP_X_CSRFTOKEN=csrf_token,
+    )
+    print("cookie_login", resp.status_code)
+    assert resp.status_code == 200
+
+    resp = client3.get("/api/accounts/profiles/me/")
+    print("cookie_me", resp.status_code)
+    assert resp.status_code == 200
+
+    resp = client3.post("/api/auth/refresh/", {}, format="json", HTTP_X_CSRFTOKEN=csrf_token)
+    print("cookie_refresh", resp.status_code)
+    assert resp.status_code == 200
+
+    resp = client3.post("/api/auth/logout/", {}, format="json", HTTP_X_CSRFTOKEN=csrf_token)
+    print("cookie_logout", resp.status_code)
+    assert resp.status_code == 200
+
     print("OK")
 
 
