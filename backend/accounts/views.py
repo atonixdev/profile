@@ -94,7 +94,7 @@ class MFASetupView(APIView):
 
         # Generate a new secret for setup (does not enable MFA until verified)
         secret = pyotp.random_base32()
-        profile.mfa_totp_secret = secret
+        profile.set_totp_secret(secret)
         profile.mfa_enabled = False
         # Avoid update_fields here to handle edge cases where the instance is newly created
         # and an UPDATE would not affect any rows.
@@ -131,7 +131,10 @@ class MFAEnableView(APIView):
         if not profile.mfa_totp_secret:
             return Response({'detail': 'MFA not set up. Call /mfa/setup first.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        totp = pyotp.TOTP(profile.mfa_totp_secret)
+        secret = profile.get_totp_secret()
+        if not secret:
+            return Response({'detail': 'MFA secret unavailable'}, status=status.HTTP_400_BAD_REQUEST)
+        totp = pyotp.TOTP(secret)
         if not totp.verify(str(otp), valid_window=1):
             return Response({'detail': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -162,7 +165,10 @@ class MFADisableView(APIView):
         )
 
         if profile.mfa_enabled and profile.mfa_totp_secret:
-            totp = pyotp.TOTP(profile.mfa_totp_secret)
+            secret = profile.get_totp_secret()
+            if not secret:
+                return Response({'detail': 'MFA secret unavailable'}, status=status.HTTP_400_BAD_REQUEST)
+            totp = pyotp.TOTP(secret)
             if not totp.verify(str(otp), valid_window=1):
                 return Response({'detail': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
 

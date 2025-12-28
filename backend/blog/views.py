@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import BlogPost, BlogComment
 from .serializers import BlogPostSerializer, BlogPostListSerializer, BlogCommentSerializer
+from .signing import verify_post_signature
 
 
 class BlogPostViewSet(viewsets.ModelViewSet):
@@ -43,3 +44,17 @@ class BlogPostViewSet(viewsets.ModelViewSet):
         comments = post.comments.filter(is_approved=True)
         serializer = BlogCommentSerializer(comments, many=True)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def verify_signature(self, request, slug=None):
+        post = self.get_object()
+        result = verify_post_signature(post)
+        return Response(
+            {
+                'valid': result.valid,
+                'reason': result.reason,
+                'key_id': result.key_id,
+                'content_sha256': post.integrity_hash,
+                'signed_at': post.integrity_signed_at,
+            }
+        )

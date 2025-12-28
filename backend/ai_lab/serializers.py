@@ -14,11 +14,12 @@ class DatasetSerializer(serializers.ModelSerializer):
             'description',
             'file',
             'file_url',
+            'file_sha256',
             'created_by',
             'created_at',
             'is_active',
         )
-        read_only_fields = ('id', 'created_by', 'created_at')
+        read_only_fields = ('id', 'created_by', 'created_at', 'file_sha256')
 
     def get_file_url(self, obj):
         request = self.context.get('request')
@@ -45,12 +46,13 @@ class ModelArtifactSerializer(serializers.ModelSerializer):
             'description',
             'file',
             'file_url',
+            'file_sha256',
             'metrics',
             'created_by',
             'created_at',
             'is_active',
         )
-        read_only_fields = ('id', 'created_by', 'created_at')
+        read_only_fields = ('id', 'created_by', 'created_at', 'file_sha256')
 
     def get_file_url(self, obj):
         request = self.context.get('request')

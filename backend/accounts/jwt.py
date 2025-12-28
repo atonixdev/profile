@@ -47,6 +47,7 @@ class EmailOrUsernameTokenObtainPairSerializer(TokenObtainPairSerializer):
                 if not otp:
                     raise serializers.ValidationError({'otp': 'OTP required'}, code='otp_required')
                 secret = getattr(profile, 'mfa_totp_secret', '') or ''
+                secret = profile.get_totp_secret() if hasattr(profile, 'get_totp_secret') else secret
                 if not secret:
                     raise serializers.ValidationError({'otp': 'MFA misconfigured. Contact support.'})
                 totp = pyotp.TOTP(secret)

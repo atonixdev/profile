@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from hashlib import sha256
+
 
 def dataset_upload_path(instance, filename: str) -> str:
     return f"ai_lab/datasets/{instance.created_by_id or 'anonymous'}/{filename}"
@@ -15,6 +17,7 @@ class Dataset(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     file = models.FileField(upload_to=dataset_upload_path)
+    file_sha256 = models.CharField(max_length=64, blank=True, default='')
 
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -33,6 +36,44 @@ class Dataset(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._original_file_name = getattr(self.file, 'name', None)
+
+    @staticmethod
+    def _compute_sha256(field_file) -> str:
+        if not field_file:
+            return ''
+        h = sha256()
+        f = field_file.file
+        try:
+            pos = f.tell()
+        except Exception:
+            pos = None
+        try:
+            if hasattr(f, 'seek'):
+                try:
+                    f.seek(0)
+                except Exception:
+                    pass
+            for chunk in field_file.chunks():
+                h.update(chunk)
+        finally:
+            if pos is not None and hasattr(f, 'seek'):
+                try:
+                    f.seek(pos)
+                except Exception:
+                    pass
+        return h.hexdigest()
+
+    def save(self, *args, **kwargs):
+        current_name = getattr(self.file, 'name', None)
+        file_changed = current_name and current_name != self._original_file_name
+        if self.file and (not self.file_sha256 or file_changed):
+            self.file_sha256 = self._compute_sha256(self.file)
+        super().save(*args, **kwargs)
+        self._original_file_name = getattr(self.file, 'name', None)
+
 
 class ModelArtifact(models.Model):
     name = models.CharField(max_length=200)
@@ -40,6 +81,7 @@ class ModelArtifact(models.Model):
     description = models.TextField(blank=True)
 
     file = models.FileField(upload_to=model_upload_path)
+    file_sha256 = models.CharField(max_length=64, blank=True, default='')
     metrics = models.JSONField(default=dict, blank=True)
 
     created_by = models.ForeignKey(
@@ -60,3 +102,41 @@ class ModelArtifact(models.Model):
         if self.version:
             return f"{self.name} ({self.version})"
         return self.name
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._original_file_name = getattr(self.file, 'name', None)
+
+    @staticmethod
+    def _compute_sha256(field_file) -> str:
+        if not field_file:
+            return ''
+        h = sha256()
+        f = field_file.file
+        try:
+            pos = f.tell()
+        except Exception:
+            pos = None
+        try:
+            if hasattr(f, 'seek'):
+                try:
+                    f.seek(0)
+                except Exception:
+                    pass
+            for chunk in field_file.chunks():
+                h.update(chunk)
+        finally:
+            if pos is not None and hasattr(f, 'seek'):
+                try:
+                    f.seek(pos)
+                except Exception:
+                    pass
+        return h.hexdigest()
+
+    def save(self, *args, **kwargs):
+        current_name = getattr(self.file, 'name', None)
+        file_changed = current_name and current_name != self._original_file_name
+        if self.file and (not self.file_sha256 or file_changed):
+            self.file_sha256 = self._compute_sha256(self.file)
+        super().save(*args, **kwargs)
+        self._original_file_name = getattr(self.file, 'name', None)

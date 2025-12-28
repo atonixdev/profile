@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from .signing import compute_integrity_hash
+
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
@@ -27,6 +29,12 @@ class BlogPost(models.Model):
     read_time = models.IntegerField(default=5, help_text='Estimated read time in minutes')
     view_count = models.IntegerField(default=0)
 
+    # Integrity / authenticity
+    integrity_hash = models.CharField(max_length=64, blank=True, default='')
+    integrity_signature = models.TextField(blank=True, default='')
+    integrity_key_id = models.CharField(max_length=32, blank=True, default='')
+    integrity_signed_at = models.DateTimeField(null=True, blank=True)
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'Blog Post'
@@ -38,6 +46,15 @@ class BlogPost(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+
+        # Always recompute integrity hash; clear signature if content changed.
+        new_hash = compute_integrity_hash(self)
+        if self.integrity_hash and self.integrity_hash != new_hash:
+            self.integrity_signature = ''
+            self.integrity_key_id = ''
+            self.integrity_signed_at = None
+        self.integrity_hash = new_hash
+
         super().save(*args, **kwargs)
 
     def get_tags_list(self):

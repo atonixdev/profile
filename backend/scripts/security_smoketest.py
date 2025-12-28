@@ -51,7 +51,8 @@ def main() -> None:
     from django.contrib.auth.models import User
 
     user = User.objects.get(username=username)
-    otp = pyotp.TOTP(user.profile.mfa_totp_secret).now()
+    otp_secret = user.profile.get_totp_secret() if hasattr(user.profile, 'get_totp_secret') else user.profile.mfa_totp_secret
+    otp = pyotp.TOTP(otp_secret).now()
 
     resp = client.post("/api/accounts/mfa/enable/", {"otp": otp}, format="json")
     print("mfa_enable", resp.status_code, getattr(resp, "data", resp.content))
@@ -62,7 +63,7 @@ def main() -> None:
     print("token_no_otp", resp.status_code, getattr(resp, "data", resp.content))
     assert resp.status_code == 400
 
-    otp2 = pyotp.TOTP(user.profile.mfa_totp_secret).now()
+    otp2 = pyotp.TOTP(otp_secret).now()
     resp = client2.post(
         "/api/token/", {"username": email, "password": password, "otp": otp2}, format="json"
     )
@@ -80,7 +81,7 @@ def main() -> None:
     # Missing CSRF header should be rejected
     resp = client3.post(
         "/api/auth/login/",
-        {"username": email, "password": password, "otp": pyotp.TOTP(user.profile.mfa_totp_secret).now()},
+        {"username": email, "password": password, "otp": pyotp.TOTP(otp_secret).now()},
         format="json",
     )
     print("cookie_login_no_csrf", resp.status_code)
@@ -88,7 +89,7 @@ def main() -> None:
 
     resp = client3.post(
         "/api/auth/login/",
-        {"username": email, "password": password, "otp": pyotp.TOTP(user.profile.mfa_totp_secret).now()},
+        {"username": email, "password": password, "otp": pyotp.TOTP(otp_secret).now()},
         format="json",
         HTTP_X_CSRFTOKEN=csrf_token,
     )
