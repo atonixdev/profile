@@ -12,6 +12,7 @@ DB_HOST = os.environ.get('DB_HOST', 'db')
 DB_PORT = int(os.environ.get('DB_PORT', '5432'))
 DB_USER = os.environ.get('DB_USER', 'postgres')
 DB_PASSWORD = os.environ.get('DB_PASSWORD', 'postgres')
+WAIT_SECONDS = int(os.environ.get('DB_WAIT_SECONDS', '180'))
 
 # First check TCP port
 def tcp_ready():
@@ -21,20 +22,39 @@ def tcp_ready():
   except Exception:
     return False
 
-while not tcp_ready():
-  time.sleep(1)
+deadline = time.time() + WAIT_SECONDS
+last_err = None
+last_log = 0.0
 
-# Then check Postgres auth
-for _ in range(60):
+while time.time() < deadline:
+  if not tcp_ready():
+    time.sleep(1)
+    continue
+
   try:
     import psycopg2
-    conn = psycopg2.connect(host=DB_HOST, port=DB_PORT, user=DB_USER, password=DB_PASSWORD, dbname='postgres')
+    conn = psycopg2.connect(
+      host=DB_HOST,
+      port=DB_PORT,
+      user=DB_USER,
+      password=DB_PASSWORD,
+      dbname='postgres',
+      connect_timeout=3,
+    )
     conn.close()
     sys.exit(0)
-  except Exception:
-    time.sleep(1)
+  except Exception as e:
+    last_err = e
+    now = time.time()
+    if now - last_log >= 10:
+      print(f"Still waiting for Postgres... ({type(e).__name__}: {e})", file=sys.stderr)
+      last_log = now
+    time.sleep(2)
 
-print('Postgres not ready after timeout', file=sys.stderr)
+msg = f"Postgres not ready after {WAIT_SECONDS}s"
+if last_err is not None:
+  msg += f": {type(last_err).__name__}: {last_err}"
+print(msg, file=sys.stderr)
 sys.exit(1)
 PYWAIT
 echo "Postgres is up."
