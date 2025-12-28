@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import logging
+
 from django.conf import settings
 from django.middleware.csrf import get_token
 from django.utils.decorators import method_decorator
@@ -13,6 +15,9 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 
 from .jwt import EmailOrUsernameTokenObtainPairSerializer
+
+
+logger = logging.getLogger(__name__)
 
 
 ACCESS_COOKIE = "access_token"
@@ -66,6 +71,7 @@ class CookieLoginView(APIView):
         try:
             serializer.is_valid(raise_exception=True)
         except DatabaseError:
+            logger.exception("Database error during cookie login")
             return Response(
                 {"detail": "Login temporarily unavailable. Please try again."},
                 status=status.HTTP_503_SERVICE_UNAVAILABLE,

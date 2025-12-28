@@ -1,3 +1,4 @@
+import logging
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,6 +13,9 @@ from .serializers import ProfileSerializer, CurrentUserProfileSerializer, Regist
 from community.models import CommunityMember
 
 import pyotp
+
+
+logger = logging.getLogger(__name__)
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -35,6 +39,7 @@ class RegisterView(APIView):
         try:
             serializer.is_valid(raise_exception=True)
         except DatabaseError:
+            logger.exception("Database error during registration validation")
             # Validation may query the DB (e.g., uniqueness checks). If the DB is down,
             # avoid returning Django's HTML error page.
             return Response(
@@ -82,6 +87,7 @@ class RegisterView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         except (TransactionManagementError, DatabaseError):
+            logger.exception("Database/transaction error during registration")
             # Avoid leaking HTML debug pages to the client.
             return Response(
                 {'detail': 'Registration temporarily unavailable. Please try again.'},
