@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import api from '../services/api';
+import { setCsrfToken } from '../services/api';
 
 export const AuthContext = createContext(null);
 
@@ -11,7 +12,8 @@ export const AuthProvider = ({ children }) => {
     // Ensure CSRF cookie exists, then attempt to load current user (cookie auth)
     (async () => {
       try {
-        await api.get('/auth/csrf/');
+        const csrfResp = await api.get('/auth/csrf/');
+        if (csrfResp?.data?.csrfToken) setCsrfToken(csrfResp.data.csrfToken);
       } catch {
         // ignore
       }
@@ -29,7 +31,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password, otp) => {
     try {
-      await api.get('/auth/csrf/');
+      const csrfResp = await api.get('/auth/csrf/');
+      if (csrfResp?.data?.csrfToken) setCsrfToken(csrfResp.data.csrfToken);
       await api.post('/auth/login/', { username, password, ...(otp ? { otp } : {}) });
       const userResponse = await api.get('/accounts/profiles/me/');
       if (userResponse.data) setUser(userResponse.data);

@@ -12,6 +12,16 @@ const api = axios.create({
   },
 });
 
+// Some deployments use a separate API subdomain (api.atonixdev.org). In that case
+// the CSRF cookie may not be readable from the main site domain, even though the
+// browser still sends it to the API with withCredentials. Keep an in-memory copy
+// of the CSRF token returned by /auth/csrf/ as a fallback.
+let csrfTokenMemory = null;
+
+export function setCsrfToken(token) {
+  csrfTokenMemory = token || null;
+}
+
 function getCookie(name) {
   if (typeof document === 'undefined') return null;
   const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
@@ -25,7 +35,7 @@ api.interceptors.request.use(
   (config) => {
     const method = (config.method || 'get').toLowerCase();
     if (unsafeMethods.has(method)) {
-      const csrf = getCookie('csrftoken');
+      const csrf = getCookie('csrftoken') || csrfTokenMemory;
       if (csrf) {
         config.headers = config.headers || {};
         config.headers['X-CSRFToken'] = csrf;
@@ -49,7 +59,7 @@ api.interceptors.response.use(
 
       try {
         // Refresh will use HttpOnly refresh cookie and set a new access cookie
-        const csrf = getCookie('csrftoken');
+        const csrf = getCookie('csrftoken') || csrfTokenMemory;
         await axios.post(`${API_URL}/auth/refresh/`, null, {
           withCredentials: true,
           headers: csrf ? { 'X-CSRFToken': csrf } : undefined,
