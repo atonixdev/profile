@@ -41,6 +41,9 @@ services:
       - DEBUG=${DEBUG:-True}
       - SECRET_KEY=${SECRET_KEY:-dev-secret-key-change-in-production}
       - NASA_API_KEY=${NASA_API_KEY}
+      # IMPORTANT: backend/.env is mounted into /app and may define DATABASE_URL (sqlite) for local dev.
+      # Override it inside Docker so the container uses Postgres.
+      - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-personal_brand_hub}
       - DB_NAME=${DB_NAME:-personal_brand_hub}
       - DB_USER=${DB_USER:-postgres}
       - DB_PASSWORD=${DB_PASSWORD:-postgres}
