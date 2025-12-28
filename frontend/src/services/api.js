@@ -66,7 +66,22 @@ api.interceptors.response.use(
         });
         return api(originalRequest);
       } catch (refreshError) {
-        window.location.href = '/login';
+        // Don't force-redirect from public pages (e.g. Home). Let route guards handle
+        // protected areas, and only bounce to login when the user is already on a
+        // protected section of the app.
+        try {
+          const path = typeof window !== 'undefined' ? (window.location.pathname || '') : '';
+          const isProtectedPath =
+            path.startsWith('/community') ||
+            path.startsWith('/admin') ||
+            path.startsWith('/lab');
+          const isAuthPage = path.startsWith('/login') || path.startsWith('/register');
+          if (isProtectedPath && !isAuthPage) {
+            window.location.href = '/login';
+          }
+        } catch {
+          // ignore
+        }
         return Promise.reject(refreshError);
       }
     }
