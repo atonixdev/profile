@@ -60,9 +60,10 @@ PYWAIT
 echo "Postgres is up."
 
 echo "Ensuring database '$DB_NAME' exists..."
-EXISTS=$(psql "postgresql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/postgres" -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'" || true)
+export PGPASSWORD="$DB_PASSWORD"
+EXISTS=$(psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'" || true)
 if [ "$EXISTS" != "1" ]; then
-  psql "postgresql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/postgres" -v ON_ERROR_STOP=1 -c "CREATE DATABASE \"$DB_NAME\";" || echo "Could not create database (may already exist)."
+  psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d postgres -v ON_ERROR_STOP=1 -c "CREATE DATABASE \"$DB_NAME\";" || echo "Could not create database (may already exist)."
 else
   echo "Database '$DB_NAME' already exists."
 fi
