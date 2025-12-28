@@ -38,6 +38,8 @@ class RegisterView(APIView):
             with transaction.atomic():
                 user = serializer.save()
 
+                country = (serializer.validated_data.get('country') or '').strip()
+
                 first_name = getattr(user, 'first_name', '') or ''
                 last_name = getattr(user, 'last_name', '') or ''
                 full_name = f"{first_name} {last_name}".strip() or user.username
@@ -50,6 +52,7 @@ class RegisterView(APIView):
                         'bio': 'New community member.',
                         'about': 'New community member.',
                         'email': user.email,
+                        'location': country,
                         'skills': [],
                         'is_active': True,
                     },
@@ -60,6 +63,7 @@ class RegisterView(APIView):
                     defaults={
                         'role': 'member',
                         'bio': '',
+                        'location': country,
                         'is_active': True,
                     },
                 )

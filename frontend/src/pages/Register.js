@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import api from '../services/api';
+import SearchableCountryDropdown from '../components/SearchableCountryDropdown';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Register = () => {
     email: '',
     first_name: '',
     last_name: '',
+    country: '',
     password: '',
     password_confirm: '',
   });
@@ -51,6 +53,7 @@ const Register = () => {
         email: formData.email,
         first_name: formData.first_name,
         last_name: formData.last_name,
+        country: formData.country,
         password: formData.password,
       });
 
@@ -155,6 +158,16 @@ const Register = () => {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="john@example.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Country
+            </label>
+            <SearchableCountryDropdown
+              value={formData.country}
+              onChange={handleChange}
             />
           </div>
 
