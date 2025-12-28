@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import 'ol/ol.css';
@@ -41,6 +41,9 @@ const BASEMAPS = {
 };
 
 const MarsTrekMapPage = () => {
+  const { theme } = useOutletContext();
+  const isDark = theme === 'dark';
+
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const basemapLayerRef = useRef(null);
@@ -151,35 +154,47 @@ const MarsTrekMapPage = () => {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white font-['Poppins']">Mars Trek Map</h1>
-          <p className="text-gray-400 mt-2">
+          <h1 className={`text-3xl font-bold font-['Poppins'] ${isDark ? 'text-white' : 'text-gray-900'}`}>Mars Trek Map</h1>
+          <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
             Mars basemap (Viking MDIM21) rendered via OpenLayers.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <Link
             to="/lab/space"
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white font-semibold hover:bg-white/10"
+            className={`px-4 py-2 rounded-lg font-semibold ${
+              isDark
+                ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                : 'bg-white border border-gray-200 text-gray-900 hover:bg-gray-50'
+            }`}
           >
             <FiArrowLeft className="inline mr-2" />
             Space Lab
           </Link>
           <Link
             to="/lab/space/map"
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white font-semibold hover:bg-white/10"
+            className={`px-4 py-2 rounded-lg font-semibold ${
+              isDark
+                ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                : 'bg-white border border-gray-200 text-gray-900 hover:bg-gray-50'
+            }`}
           >
             Earth Map
           </Link>
         </div>
       </div>
 
-      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl">
+      <div className={`${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'} backdrop-blur-md border rounded-xl p-4 shadow-xl`}>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div className="text-sm text-gray-200 font-semibold">Basemap</div>
+          <div className={`text-sm font-semibold ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>Basemap</div>
           <select
             value={basemapId}
             onChange={(e) => setBasemapId(e.target.value)}
-            className="w-full md:w-72 px-3 py-2 rounded-lg bg-[#0A0F1F] border border-white/10 text-gray-100"
+            className={`w-full md:w-72 px-3 py-2 rounded-lg border ${
+              isDark
+                ? 'bg-[#0A0F1F] border-white/10 text-gray-100'
+                : 'bg-white border-gray-300 text-gray-900'
+            }`}
             aria-label="Select Mars basemap"
           >
             {Object.entries(BASEMAPS).map(([id, b]) => (
@@ -197,11 +212,11 @@ const MarsTrekMapPage = () => {
         </div>
       )}
 
-      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl">
+      <div className={`${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'} backdrop-blur-md border rounded-xl p-4 shadow-xl`}>
         <div ref={containerRef} className="w-full h-[75vh] min-h-[620px] rounded-lg overflow-hidden" />
       </div>
 
-      <div className="text-xs text-gray-400">
+      <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
         This page uses Trek’s ArcGIS ImageServer (planetary CRS). That’s why it’s separate from the Mapbox Earth map.
       </div>
     </div>
