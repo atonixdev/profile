@@ -36,11 +36,11 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = async (username, password) => {
+  const login = async (username, password, otp) => {
     try {
       const response = await axios.post(
         `${API_BASE_URL}/token/`,
-        { username, password }
+        { username, password, ...(otp ? { otp } : {}) }
       );
       const { access, refresh } = response.data;
 
@@ -65,6 +65,18 @@ export const AuthProvider = ({ children }) => {
         return {
           success: false,
           error: 'Cannot reach the API server. Check backend connectivity and HTTPS-only browser settings.',
+        };
+      }
+      if (error.response?.status === 429) {
+        return { success: false, error: 'Too many login attempts. Please wait and try again.' };
+      }
+
+      if (error.response?.status === 400 && error.response?.data?.otp) {
+        const otpError = error.response.data.otp;
+        return {
+          success: false,
+          error: Array.isArray(otpError) ? otpError[0] : String(otpError),
+          requiresOtp: true,
         };
       }
       return {

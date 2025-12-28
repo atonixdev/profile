@@ -9,8 +9,10 @@ const Login = () => {
     username: '',
     password: '',
     rememberMe: false,
+    otp: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showOtp, setShowOtp] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -53,6 +55,7 @@ const Login = () => {
         {
           username: formData.username,
           password: formData.password,
+          ...(formData.otp ? { otp: formData.otp } : {}),
         }
       );
 
@@ -90,10 +93,23 @@ const Login = () => {
         setError('Cannot reach the API server. Check that the backend is running and that your browser is not forcing HTTPS for localhost/IP addresses.');
         return;
       }
+      if (err.response?.status === 429) {
+        setError('Too many login attempts. Please wait a moment and try again.');
+        return;
+      }
+
+      const data = err.response?.data;
+      const otpError = data?.otp;
+      if (err.response?.status === 400 && otpError) {
+        setShowOtp(true);
+        setError(Array.isArray(otpError) ? otpError[0] : String(otpError));
+        return;
+      }
+
       if (err.response?.status === 401) {
         setError('Invalid username or password');
       } else {
-        setError(err.response?.data?.detail || 'Login failed. Please try again.');
+        setError(data?.detail || 'Login failed. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -168,6 +184,27 @@ const Login = () => {
                 </button>
               </div>
             </div>
+
+            {/* OTP (MFA) */}
+            {showOtp && (
+              <div>
+                <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-2">
+                  One-time code (OTP)
+                </label>
+                <input
+                  type="text"
+                  id="otp"
+                  name="otp"
+                  value={formData.otp}
+                  onChange={handleChange}
+                  placeholder="123456"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+                  disabled={loading}
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                />
+              </div>
+            )}
 
             {/* Remember Me */}
             <div className="flex items-center">

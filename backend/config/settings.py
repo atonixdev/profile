@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'django_filters',
+    'csp',
     
     # Local apps
     'accounts',
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -127,6 +129,16 @@ else:
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 SESSION_FILE_PATH = BASE_DIR / 'sessions'
 
+# Password hashing
+# Prefer Argon2 (strong + slow) when available; keep fallbacks for legacy hashes.
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
+]
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -172,6 +184,22 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+
+    # Rate limiting / brute-force protection
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+        'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        # General API protection (tune as needed)
+        'anon': config('DRF_THROTTLE_ANON', default='200/hour'),
+        'user': config('DRF_THROTTLE_USER', default='1000/hour'),
+
+        # Auth endpoints
+        'login': config('DRF_THROTTLE_LOGIN', default='10/min'),
+        'register': config('DRF_THROTTLE_REGISTER', default='5/min'),
+    },
 }
 
 # JWT Settings
@@ -217,6 +245,21 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     X_FRAME_OPTIONS = 'DENY'
+
+# Cookie hardening (applies to session/csrf cookies; JWT is currently bearer-token based)
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = config('SESSION_COOKIE_SAMESITE', default='Lax')
+CSRF_COOKIE_SAMESITE = config('CSRF_COOKIE_SAMESITE', default='Lax')
+
+# Content Security Policy (start in report-only to avoid breaking third-party assets)
+CSP_REPORT_ONLY = config('CSP_REPORT_ONLY', default=True, cast=bool)
+CSP_DEFAULT_SRC = ("'self'", 'https:', 'data:')
+CSP_SCRIPT_SRC = ("'self'", 'https:', "'unsafe-inline'", "'unsafe-eval'")
+CSP_STYLE_SRC = ("'self'", 'https:', "'unsafe-inline'")
+CSP_IMG_SRC = ("'self'", 'https:', 'data:')
+CSP_FONT_SRC = ("'self'", 'https:', 'data:')
+CSP_CONNECT_SRC = ("'self'", 'https:', 'http:')
+CSP_FRAME_ANCESTORS = ("'self'",)
 
 # Activity tracking settings
 ACTIVITY_TRACKING_ENABLED = config('ACTIVITY_TRACKING_ENABLED', default=True, cast=bool)

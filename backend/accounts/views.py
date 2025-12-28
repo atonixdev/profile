@@ -1,11 +1,17 @@
 from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework.throttling import ScopedRateThrottle
+from rest_framework.views import APIView
 from django.contrib.auth.models import User
+from django.db import transaction
+from django.utils.crypto import get_random_string
 from .models import Profile
-from .serializers import ProfileSerializer, CurrentUserProfileSerializer
+from .serializers import ProfileSerializer, CurrentUserProfileSerializer, RegisterSerializer
 from community.models import CommunityMember
+
+import pyotp
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -19,75 +25,43 @@ class IsAdminOrReadOnly(permissions.BasePermission):
         return request.user and request.user.is_staff
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def register_user(request):
-    """Register a new user"""
-    username = request.data.get('username')
-    email = request.data.get('email')
-    password = request.data.get('password')
-    first_name = request.data.get('first_name', '')
-    last_name = request.data.get('last_name', '')
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'register'
 
-    # Validation
-    if not username or not email or not password:
-        return Response(
-            {'error': 'username, email, and password are required'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-    if User.objects.filter(username=username).exists():
-        return Response(
-            {'error': 'Username already exists'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        with transaction.atomic():
+            user = serializer.save()
 
-    if User.objects.filter(email=email).exists():
-        return Response(
-            {'error': 'Email already exists'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+            first_name = getattr(user, 'first_name', '') or ''
+            last_name = getattr(user, 'last_name', '') or ''
+            full_name = f"{first_name} {last_name}".strip() or user.username
 
-    if len(password) < 8:
-        return Response(
-            {'error': 'Password must be at least 8 characters long'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+            Profile.objects.get_or_create(
+                user=user,
+                defaults={
+                    'full_name': full_name,
+                    'title': 'Community Member',
+                    'bio': 'New community member.',
+                    'about': 'New community member.',
+                    'email': user.email,
+                    'skills': [],
+                    'is_active': True,
+                },
+            )
 
-    try:
-        # Create user
-        user = User.objects.create_user(
-            username=username,
-            email=email,
-            password=password,
-            first_name=first_name,
-            last_name=last_name
-        )
-
-        # Create profile (Profile has required fields, so populate sensible defaults)
-        full_name = f"{first_name} {last_name}".strip() or username
-        Profile.objects.get_or_create(
-            user=user,
-            defaults={
-                'full_name': full_name,
-                'title': 'Community Member',
-                'bio': 'New community member.',
-                'about': 'New community member.',
-                'email': email,
-                'skills': [],
-                'is_active': True,
-            },
-        )
-
-        # Create community member
-        CommunityMember.objects.get_or_create(
-            user=user,
-            defaults={
-                'role': 'member',
-                'bio': '',
-                'is_active': True
-            }
-        )
+            CommunityMember.objects.get_or_create(
+                user=user,
+                defaults={
+                    'role': 'member',
+                    'bio': '',
+                    'is_active': True,
+                },
+            )
 
         return Response(
             {
@@ -96,15 +70,107 @@ def register_user(request):
                 'email': user.email,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'message': 'User registered successfully'
+                'message': 'User registered successfully',
             },
-            status=status.HTTP_201_CREATED
+            status=status.HTTP_201_CREATED,
         )
-    except Exception as e:
-        return Response(
-            {'error': str(e)},
-            status=status.HTTP_400_BAD_REQUEST
+
+
+class MFASetupView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        profile, _ = Profile.objects.get_or_create(
+            user=request.user,
+            defaults={
+                'full_name': getattr(request.user, 'username', 'User'),
+                'title': 'Community Member',
+                'bio': 'New community member.',
+                'about': 'New community member.',
+                'email': getattr(request.user, 'email', '') or '',
+                'skills': [],
+                'is_active': True,
+            },
         )
+
+        # Generate a new secret for setup (does not enable MFA until verified)
+        secret = pyotp.random_base32()
+        profile.mfa_totp_secret = secret
+        profile.mfa_enabled = False
+        # Avoid update_fields here to handle edge cases where the instance is newly created
+        # and an UPDATE would not affect any rows.
+        profile.save()
+
+        issuer = 'AtonixDev'
+        label = getattr(request.user, 'email', '') or request.user.get_username()
+        totp = pyotp.TOTP(secret)
+        otpauth_url = totp.provisioning_uri(name=label, issuer_name=issuer)
+
+        return Response({'otpauth_url': otpauth_url}, status=status.HTTP_200_OK)
+
+
+class MFAEnableView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        otp = request.data.get('otp')
+        if not otp:
+            return Response({'detail': 'otp is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        profile, _ = Profile.objects.get_or_create(
+            user=request.user,
+            defaults={
+                'full_name': getattr(request.user, 'username', 'User'),
+                'title': 'Community Member',
+                'bio': 'New community member.',
+                'about': 'New community member.',
+                'email': getattr(request.user, 'email', '') or '',
+                'skills': [],
+                'is_active': True,
+            },
+        )
+        if not profile.mfa_totp_secret:
+            return Response({'detail': 'MFA not set up. Call /mfa/setup first.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        totp = pyotp.TOTP(profile.mfa_totp_secret)
+        if not totp.verify(str(otp), valid_window=1):
+            return Response({'detail': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+
+        profile.mfa_enabled = True
+        profile.save()
+        return Response({'message': 'MFA enabled'}, status=status.HTTP_200_OK)
+
+
+class MFADisableView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        otp = request.data.get('otp')
+        if not otp:
+            return Response({'detail': 'otp is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        profile, _ = Profile.objects.get_or_create(
+            user=request.user,
+            defaults={
+                'full_name': getattr(request.user, 'username', 'User'),
+                'title': 'Community Member',
+                'bio': 'New community member.',
+                'about': 'New community member.',
+                'email': getattr(request.user, 'email', '') or '',
+                'skills': [],
+                'is_active': True,
+            },
+        )
+
+        if profile.mfa_enabled and profile.mfa_totp_secret:
+            totp = pyotp.TOTP(profile.mfa_totp_secret)
+            if not totp.verify(str(otp), valid_window=1):
+                return Response({'detail': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+
+        profile.mfa_enabled = False
+        profile.mfa_totp_secret = ''
+        profile.save()
+        return Response({'message': 'MFA disabled'}, status=status.HTTP_200_OK)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

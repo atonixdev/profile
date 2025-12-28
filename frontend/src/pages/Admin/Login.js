@@ -5,6 +5,8 @@ import { useAuth } from '../../context/AuthContext';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [otp, setOtp] = useState('');
+  const [showOtp, setShowOtp] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -15,12 +17,13 @@ const Login = () => {
     setLoading(true);
     setError('');
 
-    const result = await login(username, password);
+    const result = await login(username, password, otp);
     
     if (result.success) {
       navigate('/admin');
     } else {
       setError(result.error);
+      if (result.requiresOtp) setShowOtp(true);
     }
     
     setLoading(false);
@@ -68,6 +71,23 @@ const Login = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-600"
             />
           </div>
+
+          {showOtp && (
+            <div className="mb-6">
+              <label htmlFor="otp" className="block text-gray-700 font-semibold mb-2">
+                One-time code (OTP)
+              </label>
+              <input
+                type="text"
+                id="otp"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-600"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+              />
+            </div>
+          )}
 
           <button
             type="submit"

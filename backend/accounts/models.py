@@ -28,6 +28,11 @@ class Profile(models.Model):
     
     # Settings
     is_active = models.BooleanField(default=True)
+
+    # MFA (TOTP)
+    mfa_enabled = models.BooleanField(default=False)
+    mfa_totp_secret = models.CharField(max_length=64, blank=True, default='')
+
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
