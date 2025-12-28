@@ -4,6 +4,7 @@ from django.conf import settings
 from django.middleware.csrf import get_token
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
+from django.db import DatabaseError
 from rest_framework import permissions, status
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.response import Response
@@ -62,7 +63,13 @@ class CookieLoginView(APIView):
         serializer = EmailOrUsernameTokenObtainPairSerializer(
             data=request.data, context={"request": request}
         )
-        serializer.is_valid(raise_exception=True)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except DatabaseError:
+            return Response(
+                {"detail": "Login temporarily unavailable. Please try again."},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
         tokens = serializer.validated_data
 
         access = tokens.get("access")

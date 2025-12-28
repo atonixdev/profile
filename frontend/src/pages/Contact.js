@@ -108,7 +108,7 @@ const Contact = () => {
       
       if (err.response?.data) {
         // Handle validation errors
-        if (typeof err.response.data === 'object') {
+        if (err.response.data && typeof err.response.data === 'object') {
           const errors = Object.entries(err.response.data)
             .map(([key, value]) => {
               if (Array.isArray(value)) {
@@ -118,10 +118,13 @@ const Contact = () => {
             })
             .join('\n');
           errorMessage = errors || errorMessage;
-        } else if (err.response.data.message) {
-          errorMessage = err.response.data.message;
-        } else if (err.response.data.detail) {
-          errorMessage = err.response.data.detail;
+        } else if (typeof err.response.data === 'string') {
+          const s = err.response.data.trim().toLowerCase();
+          if (s.startsWith('<!doctype html') || s.startsWith('<html') || err.response.data.length > 300) {
+            errorMessage = 'Server error. Please try again later.';
+          } else {
+            errorMessage = err.response.data;
+          }
         }
       } else if (err.message === 'Network Error') {
         errorMessage = 'Network error. Please check your connection and try again.';
