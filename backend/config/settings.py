@@ -280,6 +280,9 @@ SESSION_COOKIE_SAMESITE = config('SESSION_COOKIE_SAMESITE', default='Lax')
 CSRF_COOKIE_SAMESITE = config('CSRF_COOKIE_SAMESITE', default='Lax')
 CSRF_COOKIE_HTTPONLY = False
 
+# Return JSON (not HTML) for CSRF failures on /api/*.
+CSRF_FAILURE_VIEW = 'config.csrf.csrf_failure'
+
 # Share cookies across subdomains when needed (e.g. atonixdev.org + api.atonixdev.org).
 # Set COOKIE_DOMAIN=.atonixdev.org in production if the frontend needs to read csrftoken.
 COOKIE_DOMAIN = config('COOKIE_DOMAIN', default='').strip() or None

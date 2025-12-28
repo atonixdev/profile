@@ -42,6 +42,10 @@ export const AuthProvider = ({ children }) => {
           error: 'Cannot reach the API server. Check backend connectivity and HTTPS-only browser settings.',
         };
       }
+
+      const status = error.response?.status;
+      const data = error.response?.data;
+
       if (error.response?.status === 429) {
         return { success: false, error: 'Too many login attempts. Please wait and try again.' };
       }
@@ -54,9 +58,32 @@ export const AuthProvider = ({ children }) => {
           requiresOtp: true,
         };
       }
+
+      // CSRF failures sometimes come back as plain text/HTML; prefer a clear message.
+      if (status === 403) {
+        if (data?.detail) return { success: false, error: data.detail };
+        if (typeof data === 'string' && data.toLowerCase().includes('csrf')) {
+          return { success: false, error: 'CSRF token missing/invalid. Refresh the page and try again.' };
+        }
+        return { success: false, error: 'Request forbidden. Please refresh and try again.' };
+      }
+
+      // Invalid credentials in SimpleJWT typically return 401 with a helpful detail.
+      if (status === 401) {
+        return { success: false, error: data?.detail || 'Invalid username/email or password.' };
+      }
+
+      // Generic validation errors (DRF returns a dict of field errors)
+      if (status === 400 && data && typeof data === 'object') {
+        const firstKey = Object.keys(data)[0];
+        const firstVal = data[firstKey];
+        const msg = Array.isArray(firstVal) ? firstVal[0] : String(firstVal);
+        return { success: false, error: msg || 'Login failed' };
+      }
+
       return {
         success: false,
-        error: error.response?.data?.detail || 'Login failed',
+        error: data?.detail || 'Login failed',
       };
     }
   };
