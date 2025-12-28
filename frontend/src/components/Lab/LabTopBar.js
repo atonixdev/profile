@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiBell, FiChevronsLeft, FiChevronsRight, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
+import { FiBell, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
 const LabTopBar = ({
@@ -7,8 +7,6 @@ const LabTopBar = ({
   setSearch,
   theme,
   toggleTheme,
-  sidebarCollapsed,
-  toggleSidebarCollapsed,
   isMenuOpen,
   onToggleMenu,
 }) => {
@@ -27,16 +25,6 @@ const LabTopBar = ({
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
           {isMenuOpen ? <FiX /> : <FiMenu />}
-        </button>
-
-        <button
-          type="button"
-          onClick={toggleSidebarCollapsed}
-          className="hidden md:inline-flex px-3 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 font-semibold"
-          aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        >
-          {sidebarCollapsed ? <FiChevronsRight /> : <FiChevronsLeft />}
         </button>
 
         <input

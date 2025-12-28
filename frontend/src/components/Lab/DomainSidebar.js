@@ -5,7 +5,8 @@ import {
   FiGlobe, FiCrosshair, FiTarget, FiDatabase,
   FiHeart, FiUser, FiTrendingUp, FiBook,
   FiCpu, FiLayers, FiGitBranch, FiBox,
-  FiRadio, FiHardDrive, FiZap, FiWifi
+  FiRadio, FiHardDrive, FiZap, FiWifi,
+  FiChevronsLeft, FiChevronsRight
 } from 'react-icons/fi';
 
 const domainConfigs = {
@@ -75,7 +76,14 @@ const domainConfigs = {
   },
 };
 
-const DomainSidebar = ({ domain = 'experimentation', domainsMeta = {}, collapsed = false, onNavigate, variant = 'default' }) => {
+const DomainSidebar = ({
+  domain = 'experimentation',
+  domainsMeta = {},
+  collapsed = false,
+  onToggleCollapse,
+  onNavigate,
+  variant = 'default',
+}) => {
   const config = domainConfigs[domain] || domainConfigs.experimentation;
   const meta = domainsMeta?.[domain] || {};
   const title = meta.label || config.title;
@@ -97,13 +105,29 @@ const DomainSidebar = ({ domain = 'experimentation', domainsMeta = {}, collapsed
   return (
     <aside className={baseClassName}>
       <div className={collapsed ? 'px-3 py-4 border-b border-[#1A4FFF]/20' : 'px-6 py-5 border-b border-[#1A4FFF]/20'}>
-        <div
-          className={collapsed ? 'text-sm font-bold text-white font-[\'Poppins\'] text-center' : "text-lg font-bold text-white font-['Poppins']"}
-          title={title}
-        >
-          {collapsed ? abbrev(title) : title}
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <div
+              className={collapsed ? 'text-sm font-bold text-white font-[\'Poppins\'] text-center' : "text-lg font-bold text-white font-['Poppins']"}
+              title={title}
+            >
+              {collapsed ? abbrev(title) : title}
+            </div>
+            {!collapsed && <div className="text-xs text-gray-400 mt-1">{subtitle}</div>}
+          </div>
+
+          {variant !== 'drawer' && (
+            <button
+              type="button"
+              onClick={() => onToggleCollapse?.()}
+              className="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10"
+              aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+              title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            >
+              {collapsed ? <FiChevronsRight /> : <FiChevronsLeft />}
+            </button>
+          )}
         </div>
-        {!collapsed && <div className="text-xs text-gray-400 mt-1">{subtitle}</div>}
       </div>
 
       <nav className={collapsed ? 'p-2 space-y-1' : 'p-3 space-y-1'}>

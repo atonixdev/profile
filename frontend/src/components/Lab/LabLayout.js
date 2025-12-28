@@ -105,7 +105,12 @@ const LabLayout = () => {
       <div className="flex flex-col md:flex-row">
         {/* Desktop sidebar */}
         <div className={sidebarCollapsed ? 'hidden md:block w-20' : 'hidden md:block w-72'}>
-          <DomainSidebar domain={currentDomain} domainsMeta={domainsMeta} collapsed={sidebarCollapsed} />
+          <DomainSidebar
+            domain={currentDomain}
+            domainsMeta={domainsMeta}
+            collapsed={sidebarCollapsed}
+            onToggleCollapse={toggleSidebarCollapsed}
+          />
         </div>
 
         {/* Mobile drawer */}
@@ -134,8 +139,6 @@ const LabLayout = () => {
             setSearch={setSearch}
             theme={theme}
             toggleTheme={toggleTheme}
-            sidebarCollapsed={sidebarCollapsed}
-            toggleSidebarCollapsed={toggleSidebarCollapsed}
             isMenuOpen={mobileMenuOpen}
             onToggleMenu={() => setMobileMenuOpen((v) => !v)}
           />
