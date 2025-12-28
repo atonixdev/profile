@@ -14,4 +14,5 @@ pyotp==2.9.0
 django-csp==3.8
 argon2-cffi==23.1.0
 cryptography>=42.0.0
-setuptools>=70.0.0
+# rest_framework_simplejwt==5.3.0 imports pkg_resources; setuptools plans to remove it in 81+.
+setuptools>=70.0.0,<81
