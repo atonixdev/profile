@@ -32,7 +32,15 @@ class RegisterView(APIView):
 
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except DatabaseError:
+            # Validation may query the DB (e.g., uniqueness checks). If the DB is down,
+            # avoid returning Django's HTML error page.
+            return Response(
+                {'detail': 'Registration temporarily unavailable. Please try again.'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
 
         try:
             with transaction.atomic():
