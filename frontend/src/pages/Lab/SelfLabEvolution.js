@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { selfLabService } from '../../services';
 
 const formatApiError = (e, fallback) => {
@@ -16,6 +17,8 @@ const formatApiError = (e, fallback) => {
 };
 
 const SelfLabEvolution = () => {
+  const { theme } = useOutletContext();
+  const isDark = theme === 'dark';
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -97,7 +100,7 @@ const SelfLabEvolution = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Personal Evolution</h1>
-        <p className="text-gray-600 mt-1">Log personal metrics over time.</p>
+        <p className={isDark ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>Log personal metrics over time.</p>
       </div>
 
       {error && (
@@ -106,37 +109,37 @@ const SelfLabEvolution = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Add Metric</h2>
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
+        <h2 className={isDark ? 'text-xl font-bold text-white mb-4' : 'text-xl font-bold text-gray-900 mb-4'}>Add Metric</h2>
         <form onSubmit={create} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Recorded at</label>
+              <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Recorded at</label>
               <input
                 type="datetime-local"
                 value={recordedAt}
                 onChange={(e) => setRecordedAt(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+                className={isDark ? 'w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
                 disabled={saving}
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Metric name</label>
+              <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Metric name</label>
               <input
                 value={metricName}
                 onChange={(e) => setMetricName(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+                className={isDark ? 'w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
                 disabled={saving}
                 placeholder="e.g. evolution_score"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Value</label>
+              <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Value</label>
               <input
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+                className={isDark ? 'w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
                 disabled={saving}
                 placeholder="e.g. 94.2"
               />
@@ -144,11 +147,11 @@ const SelfLabEvolution = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Notes</label>
+            <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Notes</label>
             <input
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+              className={isDark ? 'w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
               placeholder="optional"
               disabled={saving}
             />
@@ -164,13 +167,13 @@ const SelfLabEvolution = () => {
         </form>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="flex items-center justify-between gap-4 mb-4">
-          <h2 className="text-xl font-bold text-gray-900">History</h2>
+          <h2 className={isDark ? 'text-xl font-bold text-white' : 'text-xl font-bold text-gray-900'}>History</h2>
           <button
             type="button"
             onClick={load}
-            className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50"
+            className={isDark ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white' : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50'}
             disabled={loading}
           >
             Refresh
@@ -178,14 +181,14 @@ const SelfLabEvolution = () => {
         </div>
 
         {loading ? (
-          <div className="text-gray-600">Loading…</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>Loading…</div>
         ) : sorted.length === 0 ? (
-          <div className="text-gray-600">No metrics yet.</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>No metrics yet.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-600 border-b">
+                <tr className={isDark ? 'text-left text-gray-300 border-b border-white/10' : 'text-left text-gray-600 border-b'}>
                   <th className="py-2">Recorded</th>
                   <th className="py-2">Metric</th>
                   <th className="py-2">Value</th>
@@ -195,11 +198,11 @@ const SelfLabEvolution = () => {
               </thead>
               <tbody>
                 {sorted.map((m) => (
-                  <tr key={m.id} className="border-b last:border-b-0">
-                    <td className="py-2 text-gray-900 font-semibold">{m.recorded_at ? new Date(m.recorded_at).toLocaleString() : '—'}</td>
-                    <td className="py-2 text-gray-600">{m.metric_name}</td>
-                    <td className="py-2 text-gray-600">{m.value}</td>
-                    <td className="py-2 text-gray-600">{m.notes || '—'}</td>
+                  <tr key={m.id} className={isDark ? 'border-b border-white/10 last:border-b-0' : 'border-b last:border-b-0'}>
+                    <td className={isDark ? 'py-2 text-white font-semibold' : 'py-2 text-gray-900 font-semibold'}>{m.recorded_at ? new Date(m.recorded_at).toLocaleString() : '—'}</td>
+                    <td className={isDark ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{m.metric_name}</td>
+                    <td className={isDark ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{m.value}</td>
+                    <td className={isDark ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{m.notes || '—'}</td>
                     <td className="py-2 text-right">
                       <button
                         type="button"

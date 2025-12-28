@@ -7,7 +7,8 @@ const formatApiError = (e, fallback) => {
 };
 
 const Notebooks = () => {
-  const { search } = useOutletContext();
+  const { search, theme } = useOutletContext();
+  const isDark = theme === 'dark';
   const navigate = useNavigate();
   const [notebooks, setNotebooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -78,7 +79,9 @@ const Notebooks = () => {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">Notebooks</h1>
-          <p className="text-gray-600 mt-1">A Jupyter-style notebook environment inside Experimental Lab.</p>
+          <p className={isDark ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>
+            A Jupyter-style notebook environment inside Experimental Lab.
+          </p>
         </div>
         <button
           type="button"
@@ -96,14 +99,14 @@ const Notebooks = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         {filtered.length === 0 ? (
-          <div className="text-gray-600">No notebooks yet. Click “New Notebook”.</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>No notebooks yet. Click “New Notebook”.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-600 border-b">
+                <tr className={isDark ? 'text-left text-gray-300 border-b border-white/10' : 'text-left text-gray-600 border-b'}>
                   <th className="py-2">Name</th>
                   <th className="py-2">Updated</th>
                   <th className="py-2"></th>
@@ -111,8 +114,8 @@ const Notebooks = () => {
               </thead>
               <tbody>
                 {filtered.map((n) => (
-                  <tr key={n.id} className="border-b last:border-b-0">
-                    <td className="py-2 font-semibold text-gray-900">
+                  <tr key={n.id} className={isDark ? 'border-b border-white/10 last:border-b-0' : 'border-b last:border-b-0'}>
+                    <td className={isDark ? 'py-2 font-semibold text-white' : 'py-2 font-semibold text-gray-900'}>
                       <Link to={`/lab/notebooks/${n.id}`} className="hover:underline">
                         {n.name || 'Untitled Notebook'}
                       </Link>
@@ -122,7 +125,7 @@ const Notebooks = () => {
                       <button
                         type="button"
                         onClick={() => handleDelete(n.id)}
-                        className="px-3 py-1.5 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50"
+                        className={isDark ? 'px-3 py-1.5 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white' : 'px-3 py-1.5 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50'}
                       >
                         Delete
                       </button>

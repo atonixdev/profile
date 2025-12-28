@@ -4,7 +4,8 @@ import { labService } from '../../services';
 import JsonPanel from '../../components/Lab/JsonPanel';
 
 const ModelsArtifacts = () => {
-  const { search } = useOutletContext();
+  const { search, theme } = useOutletContext();
+  const isDark = theme === 'dark';
   const [runs, setRuns] = useState([]);
   const [selectedRunId, setSelectedRunId] = useState('');
   const [error, setError] = useState('');
@@ -40,23 +41,25 @@ const ModelsArtifacts = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Models & Artifacts</h1>
-        <p className="text-gray-600 mt-1">
+        <p className={isDark ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>
           Inspect stored outputs/metrics as artifacts. (File artifacts can be added later.)
         </p>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
             {error}
           </div>
         )}
-        <label className="block text-sm font-semibold text-gray-700 mb-2">Select Run</label>
+        <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>
+          Select Run
+        </label>
         <select
           value={selectedRunId}
           onChange={(e) => setSelectedRunId(e.target.value)}
           disabled={runs.length === 0}
-          className="w-full md:max-w-xl px-3 py-2 border border-gray-300 rounded-lg"
+          className={isDark ? 'w-full md:max-w-xl px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'w-full md:max-w-xl px-3 py-2 border border-gray-300 rounded-lg'}
         >
           {filteredRuns.map((r) => (
             <option key={r.id} value={r.id}>
@@ -66,14 +69,14 @@ const ModelsArtifacts = () => {
         </select>
 
         {runs.length === 0 && !error && (
-          <div className="text-sm text-gray-600 mt-2">No runs yet.</div>
+          <div className={isDark ? 'text-sm text-gray-300 mt-2' : 'text-sm text-gray-600 mt-2'}>No runs yet.</div>
         )}
       </div>
 
       {selected && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <JsonPanel title="Metrics Artifact" value={selected.metrics} />
-          <JsonPanel title="Output Artifact" value={selected.output} />
+          <JsonPanel title="Metrics Artifact" value={selected.metrics} theme={theme} />
+          <JsonPanel title="Output Artifact" value={selected.output} theme={theme} />
         </div>
       )}
     </div>

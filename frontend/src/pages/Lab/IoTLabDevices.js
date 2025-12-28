@@ -403,12 +403,20 @@ const IoTLabDevices = () => {
   const statusBadge = (status) => {
     const s = String(status || 'unknown');
     const cls = s === 'online'
-      ? 'bg-green-50 text-green-700 border-green-200'
+      ? theme === 'dark'
+        ? 'bg-green-500/20 text-green-200 border-green-500/20'
+        : 'bg-green-50 text-green-700 border-green-200'
       : s === 'offline'
-        ? 'bg-red-50 text-red-700 border-red-200'
+        ? theme === 'dark'
+          ? 'bg-red-500/20 text-red-200 border-red-500/20'
+          : 'bg-red-50 text-red-700 border-red-200'
         : s === 'maintenance'
-          ? 'bg-yellow-50 text-yellow-800 border-yellow-200'
-          : 'bg-gray-50 text-gray-700 border-gray-200';
+          ? theme === 'dark'
+            ? 'bg-yellow-500/20 text-yellow-100 border-yellow-500/20'
+            : 'bg-yellow-50 text-yellow-800 border-yellow-200'
+          : theme === 'dark'
+            ? 'bg-white/10 text-gray-200 border-white/10'
+            : 'bg-gray-50 text-gray-700 border-gray-200';
 
     return <span className={`inline-flex items-center px-2.5 py-1 text-xs font-semibold border rounded ${cls}`}>{s}</span>;
   };
@@ -421,7 +429,7 @@ const IoTLabDevices = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Device Manager</h1>
-        <p className="text-gray-600 mt-1">Register devices and manage their status.</p>
+        <p className={theme === 'dark' ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>Register devices and manage their status.</p>
       </div>
 
       {error && (
@@ -431,7 +439,7 @@ const IoTLabDevices = () => {
       )}
 
       <div className={theme === 'dark' ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Add Device</h2>
+        <h2 className={theme === 'dark' ? 'text-xl font-bold text-white mb-4' : 'text-xl font-bold text-gray-900 mb-4'}>Add Device</h2>
         <form onSubmit={createDevice} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -489,7 +497,7 @@ const IoTLabDevices = () => {
 
       <div className={theme === 'dark' ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="flex items-center justify-between gap-4 mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Devices</h2>
+          <h2 className={theme === 'dark' ? 'text-xl font-bold text-white' : 'text-xl font-bold text-gray-900'}>Devices</h2>
           <button
             type="button"
             onClick={load}
@@ -501,14 +509,14 @@ const IoTLabDevices = () => {
         </div>
 
         {loading ? (
-          <div className="text-gray-600">Loading…</div>
+          <div className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>Loading…</div>
         ) : sorted.length === 0 ? (
-          <div className="text-gray-600">No devices yet.</div>
+          <div className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>No devices yet.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-600 border-b">
+                <tr className={theme === 'dark' ? 'text-left text-gray-300 border-b border-white/10' : 'text-left text-gray-600 border-b'}>
                   <th className="py-2">Name</th>
                   <th className="py-2">Type</th>
                   <th className="py-2">Location</th>
@@ -537,10 +545,10 @@ const IoTLabDevices = () => {
                         {d.name}
                       </button>
                     </td>
-                    <td className="py-2 text-gray-600">{d.device_type || '—'}</td>
-                    <td className="py-2 text-gray-600">{d.location || '—'}</td>
+                    <td className={theme === 'dark' ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{d.device_type || '—'}</td>
+                    <td className={theme === 'dark' ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{d.location || '—'}</td>
                     <td className="py-2">{statusBadge(d.status)}</td>
-                    <td className="py-2 text-gray-600">{d.last_seen_at ? new Date(d.last_seen_at).toLocaleString() : '—'}</td>
+                    <td className={theme === 'dark' ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{d.last_seen_at ? new Date(d.last_seen_at).toLocaleString() : '—'}</td>
                   </tr>
                 ))}
               </tbody>
