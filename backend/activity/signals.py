@@ -6,6 +6,13 @@ from .models import ActivityEvent
 
 
 def _should_track(instance):
+    # Prevent infinite recursion: creating an ActivityEvent triggers post_save again.
+    if isinstance(instance, ActivityEvent):
+        return False
+    # Avoid tracking ContentType churn from get_for_model.
+    if isinstance(instance, ContentType):
+        return False
+
     # Allow configuration to limit tracked apps/models
     include_apps = getattr(settings, 'ACTIVITY_INCLUDE_APPS', [])
     exclude_apps = set(getattr(settings, 'ACTIVITY_EXCLUDE_APPS', []))

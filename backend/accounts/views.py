@@ -5,7 +5,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
-from django.db import transaction
+from django.db import transaction, IntegrityError, DatabaseError
+from django.db.transaction import TransactionManagementError
 from .models import Profile
 from .serializers import ProfileSerializer, CurrentUserProfileSerializer, RegisterSerializer
 from community.models import CommunityMember
@@ -33,33 +34,46 @@ class RegisterView(APIView):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        with transaction.atomic():
-            user = serializer.save()
+        try:
+            with transaction.atomic():
+                user = serializer.save()
 
-            first_name = getattr(user, 'first_name', '') or ''
-            last_name = getattr(user, 'last_name', '') or ''
-            full_name = f"{first_name} {last_name}".strip() or user.username
+                first_name = getattr(user, 'first_name', '') or ''
+                last_name = getattr(user, 'last_name', '') or ''
+                full_name = f"{first_name} {last_name}".strip() or user.username
 
-            Profile.objects.get_or_create(
-                user=user,
-                defaults={
-                    'full_name': full_name,
-                    'title': 'Community Member',
-                    'bio': 'New community member.',
-                    'about': 'New community member.',
-                    'email': user.email,
-                    'skills': [],
-                    'is_active': True,
-                },
+                Profile.objects.get_or_create(
+                    user=user,
+                    defaults={
+                        'full_name': full_name,
+                        'title': 'Community Member',
+                        'bio': 'New community member.',
+                        'about': 'New community member.',
+                        'email': user.email,
+                        'skills': [],
+                        'is_active': True,
+                    },
+                )
+
+                CommunityMember.objects.get_or_create(
+                    user=user,
+                    defaults={
+                        'role': 'member',
+                        'bio': '',
+                        'is_active': True,
+                    },
+                )
+        except IntegrityError:
+            # Covers uniqueness races (username/email) and OneToOne collisions.
+            return Response(
+                {'detail': 'Username or email already exists'},
+                status=status.HTTP_400_BAD_REQUEST,
             )
-
-            CommunityMember.objects.get_or_create(
-                user=user,
-                defaults={
-                    'role': 'member',
-                    'bio': '',
-                    'is_active': True,
-                },
+        except (TransactionManagementError, DatabaseError):
+            # Avoid leaking HTML debug pages to the client.
+            return Response(
+                {'detail': 'Registration temporarily unavailable. Please try again.'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
             )
 
         return Response(
