@@ -7,6 +7,11 @@ from pathlib import Path
 from datetime import timedelta
 from decouple import config, Csv
 
+try:
+    import dj_database_url
+except Exception:  # pragma: no cover
+    dj_database_url = None
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -88,8 +93,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
-# Use PostgreSQL when DB_HOST is provided via environment; fall back to SQLite for local dev.
-if config('DB_HOST', default=None):
+# Prefer DATABASE_URL when provided (works for local dev + production), else fall back to DB_HOST-based Postgres,
+# else fall back to SQLite.
+DATABASE_URL = config('DATABASE_URL', default='').strip()
+
+if DATABASE_URL and dj_database_url:
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=60,
+        )
+    }
+elif config('DB_HOST', default=None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
