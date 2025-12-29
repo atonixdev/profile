@@ -60,7 +60,7 @@ const LabDashboard = () => {
     <div className="py-16">
       <div className="container mx-auto px-4">
         <div className="mb-10">
-          <h1 className="text-4xl font-bold mb-3">Research Lab</h1>
+          <h1 className="text-4xl font-bold mb-3">Dashboard</h1>
           <p className="text-gray-600 max-w-3xl">
             Run experiments and store results (PostgreSQL/SQLite) via the backend API.
           </p>

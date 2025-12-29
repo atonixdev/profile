@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
-  FiActivity, FiPlayCircle, FiClock, FiBarChart2, FiSliders, FiSettings,
+  FiActivity, FiClock, FiSettings,
   FiGlobe, FiCrosshair, FiTarget, FiDatabase,
   FiHeart, FiUser, FiTrendingUp, FiBook,
   FiCpu, FiLayers, FiGitBranch, FiBox,
@@ -11,17 +11,9 @@ import {
 
 const domainConfigs = {
   experimentation: {
-    title: 'Experimentation Lab',
-    subtitle: 'A/B Testing & Research Engine',
-    items: [
-      { to: '/lab', label: 'Dashboard Overview', icon: FiActivity, end: true },
-      { to: '/lab/run', label: 'Run Experiment', icon: FiPlayCircle },
-      { to: '/lab/history', label: 'Experiment History', icon: FiClock },
-      { to: '/lab/compare', label: 'Compare Experiments', icon: FiBarChart2 },
-      { to: '/lab/models', label: 'Models & Artifacts', icon: FiSliders },
-      { to: '/lab/notebooks', label: 'Notebooks', icon: FiBook },
-      { to: '/lab/settings', label: 'Settings', icon: FiSettings },
-    ],
+    title: 'Dashboard',
+    subtitle: '',
+    items: [{ to: '/lab', label: 'Dashboard', icon: FiActivity, end: true }],
   },
   space: {
     title: 'Space Lab',

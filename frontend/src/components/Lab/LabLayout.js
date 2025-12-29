@@ -38,8 +38,8 @@ const LabLayout = () => {
         },
         experimentation: {
           enabled: true,
-          label: 'Experimentation Lab',
-          description: 'A/B Testing & Research Engine',
+          label: 'Dashboard',
+          description: '',
         },
       },
     };

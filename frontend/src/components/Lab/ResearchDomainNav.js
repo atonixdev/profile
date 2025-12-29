@@ -63,7 +63,7 @@ const ResearchDomainNav = ({ domainsMeta = {}, theme = 'light' }) => {
                   : "text-2xl font-bold text-gray-900 font-['Poppins']"
               }
             >
-              Atonix Research Lab
+              Dashboard
             </h1>
             <p className={theme === 'dark' ? 'text-xs text-gray-400 mt-1' : 'text-xs text-gray-600 mt-1'}>
               Unified Command Center for Multi-Domain Research

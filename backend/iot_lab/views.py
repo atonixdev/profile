@@ -40,6 +40,8 @@ from .models import (
     AgriSensor,
     IrrigationRule,
 )
+
+from .weather_providers import fetch_openweather_5day_3h
 from .permissions import ReadOnlyOrAuthenticatedWrite, AuthenticatedReadOnlyOrAdminWrite
 from .serializers import (
     DeviceSerializer,
@@ -709,11 +711,72 @@ class WeatherForecastViewSet(viewsets.ReadOnlyModelViewSet):
 
         provider = (request.query_params.get('provider') or '').strip()
 
+        # Default: if requesting openweather, refresh automatically when missing/stale.
+        auto_fetch = (request.query_params.get('auto_fetch') or '1').strip().lower() not in ('0', 'false', 'no')
+        max_age_minutes = _parse_int(request.query_params.get('max_age_minutes'), 60)
+        max_age_minutes = max(1, min(max_age_minutes, 24 * 60))
+
         qs = WeatherForecast.objects.select_related('site').filter(site_id=site_id)
         if provider:
             qs = qs.filter(provider=provider)
 
         row = qs.order_by('-forecast_time', '-id').first()
+
+        if provider == 'openweather' and auto_fetch:
+            needs_refresh = False
+            if not row:
+                needs_refresh = True
+            else:
+                try:
+                    age = timezone.now() - (row.fetched_at or timezone.now())
+                    needs_refresh = age.total_seconds() > (max_age_minutes * 60)
+                except Exception:
+                    needs_refresh = True
+
+            if needs_refresh:
+                api_key = str(getattr(settings, 'OPENWEATHER_API_KEY', '') or '').strip()
+                if api_key:
+                    site = FarmSite.objects.filter(id=site_id).first()
+                    if site:
+                        try:
+                            data, rows = fetch_openweather_5day_3h(
+                                lat=site.latitude,
+                                lon=site.longitude,
+                                api_key=api_key,
+                                hours=72,
+                            )
+                            fetched_at = timezone.now()
+
+                            # Persist city metadata
+                            try:
+                                city = data.get('city')
+                                if isinstance(city, dict):
+                                    meta = dict(site.metadata or {})
+                                    meta['openweather_city'] = city
+                                    site.metadata = meta
+                                    site.save(update_fields=['metadata'])
+                            except Exception:
+                                pass
+
+                            # Keep table bounded for this provider/site.
+                            WeatherForecast.objects.filter(site=site, provider='openweather').delete()
+                            for r in rows:
+                                WeatherForecast.objects.create(
+                                    site=site,
+                                    provider='openweather',
+                                    fetched_at=fetched_at,
+                                    forecast_time=r.forecast_time,
+                                    metrics=r.metrics,
+                                    raw=r.raw,
+                                )
+                            row = (
+                                WeatherForecast.objects.filter(site=site, provider='openweather')
+                                .order_by('-forecast_time', '-id')
+                                .first()
+                            )
+                        except Exception:
+                            # If the refresh fails, fall back to whatever we already have.
+                            pass
         if not row:
             return Response(None, status=drf_status.HTTP_200_OK)
 
