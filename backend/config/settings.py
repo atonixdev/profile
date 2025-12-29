@@ -126,6 +126,17 @@ if DATABASE_URL and dj_database_url:
             conn_max_age=60,
         )
     }
+    # If DATABASE_URL is sqlite:///db.sqlite3, dj_database_url yields NAME='db.sqlite3'
+    # which is relative to the process working directory. Make it absolute so the API
+    # keeps working even if the server is started from a different directory.
+    try:
+        default_db = DATABASES.get('default', {})
+        if default_db.get('ENGINE') == 'django.db.backends.sqlite3':
+            name = default_db.get('NAME')
+            if isinstance(name, str) and name and not os.path.isabs(name):
+                default_db['NAME'] = str((BASE_DIR / name).resolve())
+    except Exception:
+        pass
 elif config('DB_HOST', default=None):
     DATABASES = {
         'default': {
@@ -204,6 +215,9 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+
+    # Always return JSON error responses for API endpoints.
+    'EXCEPTION_HANDLER': 'config.exception_handler.api_exception_handler',
 
     # Rate limiting / brute-force protection
     'DEFAULT_THROTTLE_CLASSES': [
