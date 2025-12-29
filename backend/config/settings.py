@@ -375,12 +375,6 @@ CACHES = {
 CACHE_MIDDLEWARE_SECONDS = 600
 CACHE_MIDDLEWARE_KEY_PREFIX = 'atonixdev'
 
-# HTTP Cache Middleware
-MIDDLEWARE += [
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-]
-
 # Set default caching headers for responses
 DEFAULT_CACHE_HEADERS = {
     'public': True,

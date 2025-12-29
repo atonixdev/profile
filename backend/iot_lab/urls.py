@@ -4,6 +4,7 @@ from django.urls import path
 
 from .agent_views import (
 	AgentHeartbeatView,
+	AgentTelemetryIngestView,
 	AgentNextCommandView,
 	AgentCommandStartView,
 	AgentCommandLogView,
@@ -33,6 +34,7 @@ router.register(r'security-events', SecurityEventViewSet, basename='iot-lab-secu
 urlpatterns = [
 	*router.urls,
 	path('agent/heartbeat/', AgentHeartbeatView.as_view(), name='iot-agent-heartbeat'),
+	path('agent/telemetry/', AgentTelemetryIngestView.as_view(), name='iot-agent-telemetry'),
 	path('agent/next-command/', AgentNextCommandView.as_view(), name='iot-agent-next-command'),
 	path('agent/commands/<int:command_id>/start/', AgentCommandStartView.as_view(), name='iot-agent-command-start'),
 	path('agent/commands/<int:command_id>/log/', AgentCommandLogView.as_view(), name='iot-agent-command-log'),

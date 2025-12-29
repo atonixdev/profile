@@ -33,6 +33,10 @@ POLL_SECONDS = float(env('ATONIX_POLL_SECONDS', '2.0'))
 HEARTBEAT_SECONDS = float(env('ATONIX_HEARTBEAT_SECONDS', '10.0'))
 RUN_TIMEOUT_SECONDS = float(env('ATONIX_RUN_TIMEOUT_SECONDS', '15.0'))
 
+# Optional hardware integrations
+SERIAL_PORT = os.environ.get('ATONIX_SERIAL_PORT', '').strip()  # e.g. /dev/ttyACM0
+SERIAL_BAUD = int(os.environ.get('ATONIX_SERIAL_BAUD', '115200'))
+
 
 def headers():
     return {
@@ -78,6 +82,15 @@ def send_heartbeat():
                 'run_python': True,
             },
         },
+    })
+
+
+def send_telemetry(metrics: dict, raw_text: str = ''):
+    # Best-effort telemetry; backend accepts unauthenticated agent telemetry.
+    post_json('/iot-lab/agent/telemetry/', {
+        'timestamp': time.strftime('%Y-%m-%dT%H:%M:%S%z'),
+        'metrics': metrics,
+        'raw_text': raw_text,
     })
 
 
@@ -171,6 +184,108 @@ def run_python(command_id: int, code: str):
                 pass
 
 
+def gpio_write(command_id: int, payload: dict):
+    pin = payload.get('pin')
+    value = payload.get('value')
+    try:
+        pin_int = int(pin)
+        value_int = 1 if str(value).lower() in ('1', 'true', 'high', 'on') else 0
+    except Exception:
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'failed',
+            'exit_code': 2,
+            'stdout': '',
+            'stderr': '',
+            'error': 'Invalid pin/value',
+        })
+        return
+
+    try:
+        import RPi.GPIO as GPIO  # type: ignore
+    except Exception:
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'failed',
+            'exit_code': 3,
+            'stdout': '',
+            'stderr': '',
+            'error': 'RPi.GPIO not available on this device',
+        })
+        return
+
+    post_json(f"/iot-lab/agent/commands/{command_id}/start/", {})
+    try:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(pin_int, GPIO.OUT)
+        GPIO.output(pin_int, GPIO.HIGH if value_int else GPIO.LOW)
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'succeeded',
+            'exit_code': 0,
+            'stdout': f"GPIO {pin_int} set to {value_int}",
+            'stderr': '',
+            'error': '',
+        })
+    except Exception as e:
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'failed',
+            'exit_code': 1,
+            'stdout': '',
+            'stderr': '',
+            'error': str(e),
+        })
+
+
+def arduino_serial(command_id: int, payload: dict):
+    if not SERIAL_PORT:
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'failed',
+            'exit_code': 2,
+            'stdout': '',
+            'stderr': '',
+            'error': 'ATONIX_SERIAL_PORT not set on agent',
+        })
+        return
+
+    message = str(payload.get('message') or '')
+    timeout_s = float(payload.get('timeout_seconds') or 2.0)
+
+    try:
+        import serial  # type: ignore
+    except Exception:
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'failed',
+            'exit_code': 3,
+            'stdout': '',
+            'stderr': '',
+            'error': 'pyserial not installed on agent',
+        })
+        return
+
+    post_json(f"/iot-lab/agent/commands/{command_id}/start/", {})
+    try:
+        with serial.Serial(SERIAL_PORT, SERIAL_BAUD, timeout=timeout_s) as ser:
+            if message:
+                ser.write(message.encode('utf-8', errors='replace'))
+                if not message.endswith('\n'):
+                    ser.write(b'\n')
+            # Read one line back (best-effort)
+            resp = ser.readline().decode('utf-8', errors='replace').strip()
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'succeeded',
+            'exit_code': 0,
+            'stdout': resp,
+            'stderr': '',
+            'error': '',
+        })
+    except Exception as e:
+        post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
+            'status': 'failed',
+            'exit_code': 1,
+            'stdout': '',
+            'stderr': '',
+            'error': str(e),
+        })
+
+
 def handle_command(cmd: dict):
     command_id = int(cmd['id'])
     kind = cmd.get('kind')
@@ -183,6 +298,14 @@ def handle_command(cmd: dict):
 
     if kind == 'run_python':
         run_python(command_id, str(payload.get('code') or ''))
+        return
+
+    if kind == 'gpio_write':
+        gpio_write(command_id, payload)
+        return
+
+    if kind == 'arduino_serial':
+        arduino_serial(command_id, payload)
         return
 
     # Unsupported kinds in phase-1
@@ -203,6 +326,7 @@ def main():
     print(f"Atonix IoT Agent starting. API={API_BASE} device_id={DEVICE_ID}")
 
     next_hb = 0.0
+    next_telemetry = 0.0
 
     while True:
         now = time.time()
@@ -212,6 +336,18 @@ def main():
             except Exception as e:
                 print(f"heartbeat failed: {e}")
             next_hb = now + HEARTBEAT_SECONDS
+
+        # Periodic telemetry (best-effort; does not block agent loop)
+        if now >= next_telemetry:
+            try:
+                metrics = {}
+                if psutil:
+                    metrics['cpu_percent'] = psutil.cpu_percent(interval=0.0)
+                    metrics['mem_percent'] = psutil.virtual_memory().percent
+                send_telemetry(metrics)
+            except Exception:
+                pass
+            next_telemetry = now + max(HEARTBEAT_SECONDS, 10.0)
 
         try:
             data = get_json('/iot-lab/agent/next-command/')

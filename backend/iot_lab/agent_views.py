@@ -2,12 +2,14 @@ from __future__ import annotations
 
 from django.db import transaction
 from django.utils import timezone
+from django.conf import settings
+from django.db import connections
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .agent_auth import authenticate_agent
-from .models import Device, DeviceCommand, DeviceCommandLog
+from .models import Device, DeviceCommand, DeviceCommandLog, TelemetryRecord
 from .realtime import publish_command_log, publish_command_status, publish_device_update, publish_network_update
 from .automation_engine import run_jobs_for_event
 
@@ -65,6 +67,8 @@ class AgentNextCommandView(APIView):
         auth = authenticate_agent(request)
         device = auth.device
 
+        debug_enabled = bool(settings.DEBUG) and (str(request.query_params.get('debug') or '').strip() == '1')
+
         cmd = (
             DeviceCommand.objects.filter(device=device, status=DeviceCommand.Status.QUEUED)
             .order_by('queued_at', 'id')
@@ -72,6 +76,33 @@ class AgentNextCommandView(APIView):
         )
 
         if not cmd:
+            if debug_enabled:
+                try:
+                    db_name = connections['default'].settings_dict.get('NAME')
+                except Exception:
+                    db_name = None
+
+                try:
+                    total_for_device = DeviceCommand.objects.filter(device=device).count()
+                    queued_for_device = DeviceCommand.objects.filter(
+                        device=device, status=DeviceCommand.Status.QUEUED
+                    ).count()
+                except Exception:
+                    total_for_device = None
+                    queued_for_device = None
+
+                return Response(
+                    {
+                        'command': None,
+                        'debug': {
+                            'device_id': device.id,
+                            'db_name': db_name,
+                            'total_commands_for_device': total_for_device,
+                            'queued_commands_for_device': queued_for_device,
+                        },
+                    }
+                )
+
             return Response({'command': None})
 
         cmd.status = DeviceCommand.Status.DELIVERED
@@ -217,3 +248,73 @@ class AgentCommandFinishView(APIView):
         publish_network_update({'reason': 'command_finished', 'device_id': cmd.device_id, 'command_id': cmd.id})
 
         return Response({'detail': 'finished', 'id': cmd.id, 'status': cmd.status})
+
+
+class AgentTelemetryIngestView(APIView):
+    """Allow an edge agent to ingest telemetry using device token auth.
+
+    Payload:
+      - timestamp: optional ISO string
+      - metrics: dict
+      - raw_text: optional string
+    """
+
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        auth = authenticate_agent(request)
+        device = auth.device
+
+        ts_raw = request.data.get('timestamp')
+        metrics = request.data.get('metrics') or {}
+        raw_text = request.data.get('raw_text') or ''
+
+        # Parse timestamp if provided; otherwise use now.
+        timestamp = timezone.now()
+        if ts_raw:
+            try:
+                # Django parses ISO 8601 with fromisoformat for basic cases.
+                timestamp = timezone.datetime.fromisoformat(str(ts_raw).replace('Z', '+00:00'))
+                if timezone.is_naive(timestamp):
+                    timestamp = timezone.make_aware(timestamp, timezone=timezone.utc)
+            except Exception:
+                timestamp = timezone.now()
+
+        rec = TelemetryRecord.objects.create(
+            device=device,
+            timestamp=timestamp,
+            metrics=metrics if isinstance(metrics, dict) else {},
+            raw_text=str(raw_text)[:20000],
+            created_by=None,
+        )
+
+        # Mark device online.
+        Device.objects.filter(id=device.id).update(last_seen_at=timestamp, status=Device.Status.ONLINE)
+
+        # Fire any telemetry-driven automations.
+        try:
+            run_jobs_for_event(event_type='telemetry', telemetry=rec, actor=None)
+        except Exception:
+            pass
+
+        # Publish to WS dashboards.
+        try:
+            from .realtime import publish_telemetry_record
+
+            publish_telemetry_record(
+                rec.device_id,
+                {
+                    'id': rec.id,
+                    'device': rec.device_id,
+                    'device_name': getattr(device, 'name', None),
+                    'timestamp': rec.timestamp.isoformat() if rec.timestamp else None,
+                    'metrics': rec.metrics,
+                    'raw_text': rec.raw_text,
+                    'created_at': rec.created_at.isoformat() if rec.created_at else None,
+                },
+            )
+        except Exception:
+            pass
+
+        publish_network_update({'reason': 'agent_telemetry', 'device_id': device.id, 'telemetry_id': rec.id})
+        return Response({'detail': 'ok', 'device_id': device.id, 'telemetry_id': rec.id})
