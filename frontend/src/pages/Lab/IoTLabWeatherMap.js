@@ -18,42 +18,6 @@ import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 
 import { iotLabService } from '../../services';
 
-const pickBestForecastRow = (rows) => {
-  const list = Array.isArray(rows) ? rows : [];
-  if (list.length === 0) return null;
-
-  const now = new Date();
-
-  // Prefer OpenWeather if present.
-  const openWeather = list.filter((r) => String(r?.provider || '') === 'openweather');
-  const candidates = openWeather.length ? openWeather : list;
-
-  // Pick the nearest upcoming forecast; if none upcoming, pick the latest past.
-  let bestUpcoming = null;
-  let bestUpcomingDelta = Infinity;
-
-  let bestPast = null;
-  let bestPastTime = -Infinity;
-
-  for (const r of candidates) {
-    const t = r?.forecast_time ? new Date(r.forecast_time) : null;
-    if (!t || Number.isNaN(t.getTime())) continue;
-
-    const delta = t.getTime() - now.getTime();
-    if (delta >= 0 && delta < bestUpcomingDelta) {
-      bestUpcoming = r;
-      bestUpcomingDelta = delta;
-    }
-
-    if (delta < 0 && t.getTime() > bestPastTime) {
-      bestPast = r;
-      bestPastTime = t.getTime();
-    }
-  }
-
-  return bestUpcoming || bestPast || candidates[0];
-};
-
 const IoTLabWeatherMap = () => {
   const { theme } = useOutletContext();
   const isDark = theme === 'dark';
@@ -145,17 +109,34 @@ const IoTLabWeatherMap = () => {
         const site = feature.get('site');
         const forecast = feature.get('forecast');
 
-        const temp = forecast?.metrics?.temperature_c;
-        const hum = forecast?.metrics?.relative_humidity;
-        const pop = forecast?.metrics?.precipitation_probability;
+        const m = forecast?.metrics || {};
+        const raw = forecast?.raw || {};
+
+        const temp = m.temperature_c;
+        const feels = m.feels_like_c;
+        const hum = m.relative_humidity;
+        const pop = m.precipitation_probability;
+        const wind = m.wind_speed_mps;
+        const pressure = m.pressure_hpa;
+        const clouds = m.clouds_pct;
+        const visibility = m.visibility_m;
+        const desc =
+          m.weather_description ||
+          (Array.isArray(raw.weather) && raw.weather[0] ? raw.weather[0].description : null);
 
         popupEl.innerHTML = `
           <div style="font-weight:700;margin-bottom:6px">${String(site?.name || 'Farm Site')}</div>
           <div style="font-size:12px;opacity:.85">${forecast?.forecast_time ? new Date(forecast.forecast_time).toLocaleString() : 'No forecast cached yet'}</div>
           <div style="margin-top:8px;font-size:12px">
+            ${desc ? `<div style="text-transform:capitalize">${String(desc)}</div>` : ''}
             <div>Temp: <b>${temp ?? 'n/a'}</b> °C</div>
+            <div>Feels: <b>${feels ?? 'n/a'}</b> °C</div>
             <div>Humidity: <b>${hum ?? 'n/a'}</b>%</div>
             <div>Rain prob: <b>${pop ?? 'n/a'}</b>%</div>
+            <div>Wind: <b>${wind ?? 'n/a'}</b> m/s</div>
+            <div>Pressure: <b>${pressure ?? 'n/a'}</b> hPa</div>
+            <div>Clouds: <b>${clouds ?? 'n/a'}</b>%</div>
+            <div>Visibility: <b>${visibility ?? 'n/a'}</b> m</div>
           </div>
           <div style="margin-top:10px;font-size:12px;opacity:.85">Provider: ${forecast?.provider || 'n/a'}</div>
         `;
@@ -186,15 +167,18 @@ const IoTLabWeatherMap = () => {
       const arr = Array.isArray(list) ? list : [];
       setSites(arr);
 
-      // Fetch forecasts per site (time-series; endpoint is unpaginated).
+      // Fetch one latest forecast per site (includes provider raw payload).
       const byId = {};
       await Promise.all(
         arr.map(async (s) => {
           try {
-            const fRes = await iotLabService.listWeatherForecasts({ site: s.id });
-            const fList = fRes.data?.results || fRes.data || [];
-            const best = pickBestForecastRow(fList);
-            byId[String(s.id)] = best;
+            const ow = await iotLabService.getLatestWeatherForecast({ site: s.id, provider: 'openweather' });
+            if (ow?.data) {
+              byId[String(s.id)] = ow.data;
+              return;
+            }
+            const om = await iotLabService.getLatestWeatherForecast({ site: s.id, provider: 'open_meteo' });
+            byId[String(s.id)] = om?.data || null;
           } catch {
             byId[String(s.id)] = null;
           }

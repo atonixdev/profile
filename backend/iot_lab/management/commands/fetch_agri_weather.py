@@ -123,6 +123,17 @@ class Command(BaseCommand):
             resp.raise_for_status()
             data = resp.json() if resp.content else {}
 
+            # Save city metadata (once per fetch) to the site for easy display.
+            try:
+                city = data.get('city')
+                if isinstance(city, dict):
+                    meta = dict(site.metadata or {})
+                    meta['openweather_city'] = city
+                    site.metadata = meta
+                    site.save(update_fields=['metadata'])
+            except Exception:
+                pass
+
             items = data.get('list') or []
             if not isinstance(items, list):
                 items = []
@@ -162,6 +173,9 @@ class Command(BaseCommand):
                 wind = row.get('wind') or {}
                 rain = row.get('rain') or {}
                 snow = row.get('snow') or {}
+                clouds = row.get('clouds') or {}
+                weather_arr = row.get('weather') or []
+                weather0 = weather_arr[0] if isinstance(weather_arr, list) and weather_arr else {}
 
                 # OpenWeather pop is 0..1. Normalize to 0..100 to match Open-Meteo.
                 pop_raw = row.get('pop')
@@ -170,31 +184,50 @@ class Command(BaseCommand):
                 except Exception:
                     pop_pct = None
 
-                # Rain volume in last 3h
+                def _as_float(v):
+                    try:
+                        return float(v) if v is not None else None
+                    except Exception:
+                        return None
+
+                rain_mm = _as_float((rain or {}).get('3h')) if isinstance(rain, dict) else None
+                if rain_mm is None:
+                    rain_mm = _as_float((rain or {}).get('1h')) if isinstance(rain, dict) else None
+
+                snow_mm = _as_float((snow or {}).get('3h')) if isinstance(snow, dict) else None
+                if snow_mm is None:
+                    snow_mm = _as_float((snow or {}).get('1h')) if isinstance(snow, dict) else None
+
                 prec_mm = None
-                for key in ('3h', '1h'):
-                    if isinstance(rain, dict) and rain.get(key) is not None:
-                        try:
-                            prec_mm = float(rain.get(key))
-                        except Exception:
-                            prec_mm = None
-                        break
-                if prec_mm is None:
-                    for key in ('3h', '1h'):
-                        if isinstance(snow, dict) and snow.get(key) is not None:
-                            try:
-                                prec_mm = float(snow.get(key))
-                            except Exception:
-                                prec_mm = None
-                            break
+                if rain_mm is not None or snow_mm is not None:
+                    prec_mm = (rain_mm or 0.0) + (snow_mm or 0.0)
 
                 metrics = {
                     'temperature_c': main.get('temp'),
+                    'feels_like_c': main.get('feels_like'),
+                    'temp_min_c': main.get('temp_min'),
+                    'temp_max_c': main.get('temp_max'),
+
                     'relative_humidity': main.get('humidity'),
+                    'pressure_hpa': main.get('pressure'),
+                    'sea_level_hpa': main.get('sea_level'),
+                    'ground_level_hpa': main.get('grnd_level'),
+
                     'precipitation_probability': pop_pct,
                     'precipitation_mm': prec_mm,
-                    'pressure_hpa': main.get('pressure'),
+                    'rain_mm': rain_mm,
+                    'snow_mm': snow_mm,
+
                     'wind_speed_mps': wind.get('speed'),
+                    'wind_deg': wind.get('deg'),
+                    'wind_gust_mps': wind.get('gust'),
+
+                    'clouds_pct': clouds.get('all') if isinstance(clouds, dict) else None,
+                    'visibility_m': row.get('visibility'),
+
+                    'weather_main': weather0.get('main') if isinstance(weather0, dict) else None,
+                    'weather_description': weather0.get('description') if isinstance(weather0, dict) else None,
+                    'weather_icon': weather0.get('icon') if isinstance(weather0, dict) else None,
                 }
 
                 WeatherForecast.objects.create(
@@ -203,6 +236,7 @@ class Command(BaseCommand):
                     fetched_at=fetched_at,
                     forecast_time=dt,
                     metrics=metrics,
+                    raw=row if isinstance(row, dict) else {},
                 )
                 created += 1
 

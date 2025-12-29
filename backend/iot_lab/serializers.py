@@ -290,6 +290,15 @@ class WeatherForecastSerializer(serializers.ModelSerializer):
         read_only_fields = ['site_name']
 
 
+class WeatherForecastWithRawSerializer(serializers.ModelSerializer):
+    site_name = serializers.CharField(source='site.name', read_only=True)
+
+    class Meta:
+        model = WeatherForecast
+        fields = ['id', 'site', 'site_name', 'provider', 'fetched_at', 'forecast_time', 'metrics', 'raw']
+        read_only_fields = ['site_name']
+
+
 class IrrigationZoneSerializer(serializers.ModelSerializer):
     site_name = serializers.CharField(source='site.name', read_only=True)
     device_name = serializers.CharField(source='device.name', read_only=True)

@@ -156,6 +156,7 @@ export const iotLabService = {
   getFarmRecommendations: (id, params) => api.get(`/iot-lab/farm-sites/${id}/recommendations/`, params ? { params } : undefined),
 
   listWeatherForecasts: (params) => api.get('/iot-lab/weather-forecasts/', params ? { params } : undefined),
+  getLatestWeatherForecast: (params) => api.get('/iot-lab/weather-forecasts/latest/', params ? { params } : undefined),
 
   listIrrigationZones: (params) => api.get('/iot-lab/irrigation-zones/', params ? { params } : undefined),
   getIrrigationZoneStatus: (id) => api.get(`/iot-lab/irrigation-zones/${id}/status/`),

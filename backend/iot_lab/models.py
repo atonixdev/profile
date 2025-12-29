@@ -298,6 +298,7 @@ class WeatherForecast(models.Model):
 
     forecast_time = models.DateTimeField()
     metrics = models.JSONField(default=dict, blank=True)
+    raw = models.JSONField(default=dict, blank=True)
 
     class Meta:
         ordering = ['-forecast_time', '-id']

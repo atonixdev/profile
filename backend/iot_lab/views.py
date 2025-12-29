@@ -56,6 +56,7 @@ from .serializers import (
     AiInsightSerializer,
     FarmSiteSerializer,
     WeatherForecastSerializer,
+    WeatherForecastWithRawSerializer,
     IrrigationZoneSerializer,
     IrrigationEventSerializer,
     AgriFieldSerializer,
@@ -699,6 +700,25 @@ class WeatherForecastViewSet(viewsets.ReadOnlyModelViewSet):
 
         # Time-series data is best consumed in chronological order.
         return qs.order_by('forecast_time', 'id')
+
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def latest(self, request):
+        site_id = request.query_params.get('site')
+        if not site_id:
+            return Response({'detail': 'Missing site'}, status=drf_status.HTTP_400_BAD_REQUEST)
+
+        provider = (request.query_params.get('provider') or '').strip()
+
+        qs = WeatherForecast.objects.select_related('site').filter(site_id=site_id)
+        if provider:
+            qs = qs.filter(provider=provider)
+
+        row = qs.order_by('-forecast_time', '-id').first()
+        if not row:
+            return Response(None, status=drf_status.HTTP_200_OK)
+
+        ser = WeatherForecastWithRawSerializer(row)
+        return Response(ser.data)
 
 
 class IrrigationZoneViewSet(viewsets.ModelViewSet):
