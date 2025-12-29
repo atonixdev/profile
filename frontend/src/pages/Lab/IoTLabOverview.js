@@ -111,6 +111,13 @@ const IoTLabOverview = () => {
             description="Weather-aware irrigation and water management"
             isDark={isDark}
           />
+          <QuickAction
+            icon={FiActivity}
+            label="Weather Map"
+            to="/lab/iot/weather-map"
+            description="View farm sites and cached forecasts on a map"
+            isDark={isDark}
+          />
         </div>
       </div>
 

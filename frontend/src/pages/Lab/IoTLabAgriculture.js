@@ -215,7 +215,7 @@ const IoTLabAgriculture = () => {
               <tbody>
                 {forecastNext.length === 0 ? (
                   <tr>
-                    <td colSpan="5" className={`py-3 ${mutedClass}`}>No forecast stored yet. Run the backend command: <span className={theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}>python manage.py fetch_agri_weather --site {selectedSiteId || '<id>'}</span></td>
+                    <td colSpan="5" className={`py-3 ${mutedClass}`}>No forecast stored yet. Run the backend command: <span className={theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}>python manage.py fetch_agri_weather --site {selectedSiteId || '<id>'} --provider openweather</span> (or <span className={theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}>open_meteo</span>)</td>
                   </tr>
                 ) : (
                   forecastNext.map((row) => (

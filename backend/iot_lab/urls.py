@@ -30,6 +30,7 @@ from .views import (
 	AgriNodeViewSet,
 	AgriSensorViewSet,
 	IrrigationRuleViewSet,
+	OpenWeatherTileProxyView,
 )
 
 router = DefaultRouter()
@@ -55,6 +56,7 @@ router.register(r'irrigation-rules', IrrigationRuleViewSet, basename='iot-lab-ir
 
 urlpatterns = [
 	*router.urls,
+	path('weather-tiles/<str:layer>/<int:z>/<int:x>/<int:y>.png', OpenWeatherTileProxyView.as_view(), name='iot-weather-tiles'),
 	path('agent/heartbeat/', AgentHeartbeatView.as_view(), name='iot-agent-heartbeat'),
 	path('agent/telemetry/', AgentTelemetryIngestView.as_view(), name='iot-agent-telemetry'),
 	path('agent/next-command/', AgentNextCommandView.as_view(), name='iot-agent-next-command'),

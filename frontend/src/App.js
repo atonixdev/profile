@@ -49,6 +49,7 @@ import IoTLabAgriculture from './pages/Lab/IoTLabAgriculture';
 import IoTLabAgriFields from './pages/Lab/IoTLabAgriFields';
 import IoTLabAgriRules from './pages/Lab/IoTLabAgriRules';
 import IoTLabAgriEvents from './pages/Lab/IoTLabAgriEvents';
+import IoTLabWeatherMap from './pages/Lab/IoTLabWeatherMap';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -168,6 +169,7 @@ function App() {
                 <Route path="iot/agriculture/fields" element={<IoTLabAgriFields />} />
                 <Route path="iot/agriculture/rules" element={<IoTLabAgriRules />} />
                 <Route path="iot/agriculture/events" element={<IoTLabAgriEvents />} />
+                <Route path="iot/weather-map" element={<IoTLabWeatherMap />} />
                 <Route path="iot/settings" element={<LabSettings />} />
               </Route>
             </Route>

@@ -1,11 +1,14 @@
 from datetime import timedelta
 
 import secrets
+import requests
 
 from django.db.models import Count
 from django.contrib.auth.hashers import make_password
 from django.db import transaction
 from django.utils import timezone
+from django.http import HttpResponse
+from django.conf import settings
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -14,6 +17,7 @@ from rest_framework.exceptions import ValidationError
 
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
 
 from .models import (
     Device,
@@ -71,6 +75,56 @@ def _parse_int(value, default: int) -> int:
         return int(value)
     except Exception:
         return default
+
+
+class OpenWeatherTileProxyView(APIView):
+    """Proxy OpenWeather tile layers so the API key stays server-side.
+
+    URL pattern: /api/iot-lab/weather-tiles/<layer>/<z>/<x>/<y>.png
+
+    Note: This endpoint is intentionally lightweight and uses an allow-list for layer.
+    """
+
+    permission_classes = [AllowAny]
+
+    _ALLOWED_LAYERS = {
+        'precipitation_new',
+        'clouds_new',
+        'temp_new',
+        'wind_new',
+        'pressure_new',
+    }
+
+    def get(self, request, layer: str, z: int, x: int, y: int):
+        layer = (layer or '').strip()
+        if layer not in self._ALLOWED_LAYERS:
+            return Response({'detail': 'Unsupported layer'}, status=drf_status.HTTP_400_BAD_REQUEST)
+
+        # Basic bounds guard
+        if z < 0 or z > 19:
+            return Response({'detail': 'Invalid z'}, status=drf_status.HTTP_400_BAD_REQUEST)
+        if x < 0 or y < 0:
+            return Response({'detail': 'Invalid tile'}, status=drf_status.HTTP_400_BAD_REQUEST)
+
+        api_key = str(getattr(settings, 'OPENWEATHER_API_KEY', '') or '').strip()
+        if not api_key:
+            return Response({'detail': 'OpenWeather API key not configured'}, status=drf_status.HTTP_503_SERVICE_UNAVAILABLE)
+
+        # OpenWeather tile endpoint
+        url = f"https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png"
+
+        try:
+            resp = requests.get(url, params={'appid': api_key}, timeout=15)
+        except Exception:
+            return Response({'detail': 'Failed to fetch tile'}, status=drf_status.HTTP_502_BAD_GATEWAY)
+
+        if resp.status_code != 200 or not resp.content:
+            return Response({'detail': 'Tile unavailable'}, status=drf_status.HTTP_404_NOT_FOUND)
+
+        out = HttpResponse(resp.content, content_type='image/png')
+        # Short cache; tiles change but are safe to cache briefly.
+        out['Cache-Control'] = 'public, max-age=600'
+        return out
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
@@ -631,6 +685,7 @@ class FarmSiteViewSet(viewsets.ModelViewSet):
 class WeatherForecastViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = WeatherForecastSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = None
 
     def get_queryset(self):
         qs = WeatherForecast.objects.select_related('site')
@@ -642,7 +697,8 @@ class WeatherForecastViewSet(viewsets.ReadOnlyModelViewSet):
         if provider:
             qs = qs.filter(provider=provider)
 
-        return qs.order_by('-forecast_time', '-id')
+        # Time-series data is best consumed in chronological order.
+        return qs.order_by('forecast_time', 'id')
 
 
 class IrrigationZoneViewSet(viewsets.ModelViewSet):

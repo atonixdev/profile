@@ -239,6 +239,10 @@ REST_FRAMEWORK = {
     },
 }
 
+# Third-party integrations
+# OpenWeather API key (keep in environment; do not hardcode)
+OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY', default='').strip()
+
 # JWT Settings
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),

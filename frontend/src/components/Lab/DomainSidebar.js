@@ -71,6 +71,7 @@ const domainConfigs = {
       { to: '/lab/iot/agriculture/fields', label: 'Agriculture Fields', icon: FiLayers },
       { to: '/lab/iot/agriculture/rules', label: 'Agriculture Rules', icon: FiGitBranch },
       { to: '/lab/iot/agriculture/events', label: 'Agriculture Events', icon: FiClock },
+      { to: '/lab/iot/weather-map', label: 'Weather Map', icon: FiGlobe },
       { to: '/lab/iot/devices', label: 'Device Manager', icon: FiHardDrive },
       { to: '/lab/iot/telemetry', label: 'Sensor Telemetry', icon: FiRadio },
       { to: '/lab/iot/automation', label: 'Automation Experiments', icon: FiZap },
