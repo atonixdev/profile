@@ -162,6 +162,24 @@ export const iotLabService = {
   irrigateZone: (id, data) => api.post(`/iot-lab/irrigation-zones/${id}/irrigate/`, data || {}),
 
   listIrrigationEvents: (params) => api.get('/iot-lab/irrigation-events/', params ? { params } : undefined),
+
+  // Agriculture v1 (fields/nodes/sensors/rules)
+  listAgriFields: (params) => api.get('/iot-lab/agri-fields/', params ? { params } : undefined),
+  createAgriField: (data) => api.post('/iot-lab/agri-fields/', data),
+  updateAgriField: (id, data) => api.patch(`/iot-lab/agri-fields/${id}/`, data),
+
+  listAgriNodes: (params) => api.get('/iot-lab/agri-nodes/', params ? { params } : undefined),
+  createAgriNode: (data) => api.post('/iot-lab/agri-nodes/', data),
+  updateAgriNode: (id, data) => api.patch(`/iot-lab/agri-nodes/${id}/`, data),
+  ingestAgriNodeTelemetry: (id, data) => api.post(`/iot-lab/agri-nodes/${id}/telemetry/`, data || {}),
+
+  listAgriSensors: (params) => api.get('/iot-lab/agri-sensors/', params ? { params } : undefined),
+  createAgriSensor: (data) => api.post('/iot-lab/agri-sensors/', data),
+  updateAgriSensor: (id, data) => api.patch(`/iot-lab/agri-sensors/${id}/`, data),
+
+  listIrrigationRules: (params) => api.get('/iot-lab/irrigation-rules/', params ? { params } : undefined),
+  createIrrigationRule: (data) => api.post('/iot-lab/irrigation-rules/', data),
+  updateIrrigationRule: (id, data) => api.patch(`/iot-lab/irrigation-rules/${id}/`, data),
 };
 
 // Self Lab

@@ -17,6 +17,10 @@ from .models import (
     WeatherForecast,
     IrrigationZone,
     IrrigationEvent,
+    AgriField,
+    AgriNode,
+    AgriSensor,
+    IrrigationRule,
 )
 
 
@@ -289,6 +293,8 @@ class WeatherForecastSerializer(serializers.ModelSerializer):
 class IrrigationZoneSerializer(serializers.ModelSerializer):
     site_name = serializers.CharField(source='site.name', read_only=True)
     device_name = serializers.CharField(source='device.name', read_only=True)
+    field_name = serializers.CharField(source='field.name', read_only=True)
+    node_name = serializers.CharField(source='node.name', read_only=True)
 
     class Meta:
         model = IrrigationZone
@@ -296,12 +302,20 @@ class IrrigationZoneSerializer(serializers.ModelSerializer):
             'id',
             'site',
             'site_name',
+            'field',
+            'field_name',
+            'node',
+            'node_name',
             'name',
+            'description',
             'is_active',
             'device',
             'device_name',
             'actuator_kind',
             'actuator_config',
+            'hardware_mapping',
+            'crop_type',
+            'root_depth_cm',
             'soil_moisture_metric',
             'target_moisture_min',
             'target_moisture_max',
@@ -309,7 +323,7 @@ class IrrigationZoneSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         ]
-        read_only_fields = ['site_name', 'device_name', 'created_by', 'created_at', 'updated_at']
+        read_only_fields = ['site_name', 'device_name', 'field_name', 'node_name', 'created_by', 'created_at', 'updated_at']
 
     def validate_actuator_config(self, value):
         if value is None:
@@ -346,6 +360,93 @@ class IrrigationEventSerializer(serializers.ModelSerializer):
             'liters_used',
             'metadata',
         ]
+
+
+class AgriFieldSerializer(serializers.ModelSerializer):
+    site_name = serializers.CharField(source='site.name', read_only=True)
+
+    class Meta:
+        model = AgriField
+        fields = ['id', 'site', 'site_name', 'name', 'area_hectares', 'metadata', 'created_by', 'created_at', 'updated_at']
+        read_only_fields = ['site_name', 'created_by', 'created_at', 'updated_at']
+
+
+class AgriNodeSerializer(serializers.ModelSerializer):
+    field_name = serializers.CharField(source='field.name', read_only=True)
+    site_id = serializers.IntegerField(source='field.site_id', read_only=True)
+    site_name = serializers.CharField(source='field.site.name', read_only=True)
+    device_name = serializers.CharField(source='device.name', read_only=True)
+
+    class Meta:
+        model = AgriNode
+        fields = [
+            'id',
+            'field',
+            'field_name',
+            'site_id',
+            'site_name',
+            'device',
+            'device_name',
+            'hardware_id',
+            'name',
+            'connectivity',
+            'capabilities',
+            'metadata',
+            'created_by',
+            'created_at',
+            'updated_at',
+        ]
+        read_only_fields = ['field_name', 'site_id', 'site_name', 'device_name', 'created_by', 'created_at', 'updated_at']
+
+
+class AgriSensorSerializer(serializers.ModelSerializer):
+    node_name = serializers.CharField(source='node.name', read_only=True)
+    zone_name = serializers.CharField(source='zone.name', read_only=True)
+
+    class Meta:
+        model = AgriSensor
+        fields = ['id', 'node', 'node_name', 'zone', 'zone_name', 'kind', 'name', 'config', 'metadata', 'created_by', 'created_at']
+        read_only_fields = ['node_name', 'zone_name', 'created_by', 'created_at']
+
+
+class IrrigationRuleSerializer(serializers.ModelSerializer):
+    zone_name = serializers.CharField(source='zone.name', read_only=True)
+    site_id = serializers.IntegerField(source='zone.site_id', read_only=True)
+
+    class Meta:
+        model = IrrigationRule
+        fields = [
+            'id',
+            'zone',
+            'zone_name',
+            'site_id',
+            'name',
+            'enabled',
+            'conditions',
+            'actions',
+            'last_evaluated_at',
+            'last_decision',
+            'last_decision_reason',
+            'metadata',
+            'created_by',
+            'created_at',
+            'updated_at',
+        ]
+        read_only_fields = ['zone_name', 'site_id', 'last_evaluated_at', 'last_decision', 'last_decision_reason', 'created_by', 'created_at', 'updated_at']
+
+    def validate_conditions(self, value):
+        if value is None:
+            return {}
+        if not isinstance(value, dict):
+            raise serializers.ValidationError('conditions must be an object')
+        return value
+
+    def validate_actions(self, value):
+        if value is None:
+            return {}
+        if not isinstance(value, dict):
+            raise serializers.ValidationError('actions must be an object')
+        return value
         read_only_fields = [
             'zone_name',
             'site_id',

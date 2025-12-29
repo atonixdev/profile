@@ -13,6 +13,7 @@ from rest_framework import status as drf_status
 from rest_framework.exceptions import ValidationError
 
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny
 
 from .models import (
     Device,
@@ -30,6 +31,10 @@ from .models import (
     WeatherForecast,
     IrrigationZone,
     IrrigationEvent,
+    AgriField,
+    AgriNode,
+    AgriSensor,
+    IrrigationRule,
 )
 from .permissions import ReadOnlyOrAuthenticatedWrite, AuthenticatedReadOnlyOrAdminWrite
 from .serializers import (
@@ -49,10 +54,16 @@ from .serializers import (
     WeatherForecastSerializer,
     IrrigationZoneSerializer,
     IrrigationEventSerializer,
+    AgriFieldSerializer,
+    AgriNodeSerializer,
+    AgriSensorSerializer,
+    IrrigationRuleSerializer,
 )
 
 from .realtime import publish_command_status, publish_telemetry_record, publish_network_update
 from .automation_engine import run_job, run_jobs_for_event, AutomationContext
+from .agent_auth import authenticate_agent
+from .agri_utils import enqueue_irrigation_for_zone
 
 
 def _parse_int(value, default: int) -> int:
@@ -699,36 +710,18 @@ class IrrigationZoneViewSet(viewsets.ModelViewSet):
         if not zone.device_id:
             return Response({'detail': 'Zone has no device assigned'}, status=drf_status.HTTP_400_BAD_REQUEST)
 
-        payload = dict(zone.actuator_config or {})
+        try:
+            result = enqueue_irrigation_for_zone(
+                zone=zone,
+                duration_seconds=duration,
+                requested_by=request.user,
+                source='manual',
+            )
+        except ValueError as e:
+            return Response({'detail': str(e)}, status=drf_status.HTTP_400_BAD_REQUEST)
 
-        if zone.actuator_kind == IrrigationZone.ActuatorKind.GPIO_WRITE:
-            if 'pin' not in payload:
-                return Response({'detail': 'actuator_config.pin is required for gpio_write'}, status=drf_status.HTTP_400_BAD_REQUEST)
-            payload.setdefault('value', 1)
-            payload['duration_seconds'] = duration
-            kind = DeviceCommand.Kind.GPIO_WRITE
-        else:
-            # For Arduino, we just pass a message. Firmware decides duration.
-            if 'message' not in payload:
-                payload['message'] = f"IRRIGATE {zone.id} {duration}"
-            kind = DeviceCommand.Kind.ARDUINO_SERIAL
-
-        cmd = DeviceCommand.objects.create(
-            device_id=zone.device_id,
-            kind=kind,
-            payload=payload,
-            requested_by=request.user,
-        )
-
-        event = IrrigationEvent.objects.create(
-            zone=zone,
-            device_id=zone.device_id,
-            command=cmd,
-            status=IrrigationEvent.Status.QUEUED,
-            requested_by=request.user,
-            planned_duration_seconds=duration,
-            metadata={'source': 'manual'},
-        )
+        cmd = result.command
+        event = result.event
 
         publish_command_status(
             cmd.id,
@@ -746,6 +739,156 @@ class IrrigationZoneViewSet(viewsets.ModelViewSet):
         )
 
         return Response({'detail': 'queued', 'event': IrrigationEventSerializer(event).data, 'command_id': cmd.id}, status=drf_status.HTTP_201_CREATED)
+
+
+class AgriFieldViewSet(viewsets.ModelViewSet):
+    serializer_class = AgriFieldSerializer
+    permission_classes = [AuthenticatedReadOnlyOrAdminWrite]
+
+    def get_queryset(self):
+        qs = AgriField.objects.select_related('site', 'created_by')
+        site_id = self.request.query_params.get('site')
+        if site_id:
+            qs = qs.filter(site_id=site_id)
+
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-updated_at', '-id')
+        return qs.filter(site__created_by=self.request.user).order_by('-updated_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
+
+
+class AgriNodeViewSet(viewsets.ModelViewSet):
+    serializer_class = AgriNodeSerializer
+    permission_classes = [AuthenticatedReadOnlyOrAdminWrite]
+
+    def get_queryset(self):
+        qs = AgriNode.objects.select_related('field', 'field__site', 'device', 'created_by')
+        field_id = self.request.query_params.get('field')
+        if field_id:
+            qs = qs.filter(field_id=field_id)
+        site_id = self.request.query_params.get('site')
+        if site_id:
+            qs = qs.filter(field__site_id=site_id)
+
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-updated_at', '-id')
+        return qs.filter(field__site__created_by=self.request.user).order_by('-updated_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
+
+    @action(detail=True, methods=['post'], permission_classes=[AllowAny], url_path='telemetry')
+    def telemetry(self, request, pk=None):
+        """Ingest node telemetry using device-token auth.
+
+        This is an agriculture-friendly alias for the generic agent telemetry endpoint.
+        The device token must belong to the node's mapped Device.
+
+        Payload:
+          - timestamp: optional ISO string
+          - metrics: dict
+          - raw_text: optional string
+        """
+        node = self.get_object()
+        auth = authenticate_agent(request)
+        if auth.device.id != node.device_id:
+            return Response({'detail': 'Token does not match node device'}, status=403)
+
+        # Reuse TelemetryRecord creation logic from the viewset.
+        ts_raw = request.data.get('timestamp')
+        metrics = request.data.get('metrics') or {}
+        raw_text = request.data.get('raw_text') or ''
+
+        timestamp = timezone.now()
+        if ts_raw:
+            try:
+                timestamp = timezone.datetime.fromisoformat(str(ts_raw).replace('Z', '+00:00'))
+                if timezone.is_naive(timestamp):
+                    timestamp = timezone.make_aware(timestamp, timezone=timezone.utc)
+            except Exception:
+                timestamp = timezone.now()
+
+        rec = TelemetryRecord.objects.create(
+            device_id=node.device_id,
+            timestamp=timestamp,
+            metrics=metrics if isinstance(metrics, dict) else {},
+            raw_text=str(raw_text)[:20000],
+            created_by=None,
+        )
+
+        Device.objects.filter(id=node.device_id).update(last_seen_at=timestamp, status=Device.Status.ONLINE)
+
+        try:
+            run_jobs_for_event(event_type='telemetry', telemetry=rec, actor=None)
+        except Exception:
+            pass
+
+        try:
+            publish_telemetry_record(
+                rec.device_id,
+                {
+                    'id': rec.id,
+                    'device': rec.device_id,
+                    'device_name': getattr(node.device, 'name', None) if hasattr(node, 'device') else None,
+                    'timestamp': rec.timestamp.isoformat() if rec.timestamp else None,
+                    'metrics': rec.metrics,
+                    'raw_text': rec.raw_text,
+                    'created_at': rec.created_at.isoformat() if rec.created_at else None,
+                    'agri_node_id': node.id,
+                },
+            )
+        except Exception:
+            pass
+
+        publish_network_update({'reason': 'agri_node_telemetry', 'device_id': rec.device_id, 'telemetry_id': rec.id, 'agri_node_id': node.id})
+        return Response({'detail': 'ok', 'agri_node_id': node.id, 'device_id': node.device_id, 'telemetry_id': rec.id})
+
+
+class AgriSensorViewSet(viewsets.ModelViewSet):
+    serializer_class = AgriSensorSerializer
+    permission_classes = [AuthenticatedReadOnlyOrAdminWrite]
+
+    def get_queryset(self):
+        qs = AgriSensor.objects.select_related('node', 'node__field', 'node__field__site', 'zone', 'created_by')
+        node_id = self.request.query_params.get('node')
+        if node_id:
+            qs = qs.filter(node_id=node_id)
+        zone_id = self.request.query_params.get('zone')
+        if zone_id:
+            qs = qs.filter(zone_id=zone_id)
+        site_id = self.request.query_params.get('site')
+        if site_id:
+            qs = qs.filter(node__field__site_id=site_id)
+
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-created_at', '-id')
+        return qs.filter(node__field__site__created_by=self.request.user).order_by('-created_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
+
+
+class IrrigationRuleViewSet(viewsets.ModelViewSet):
+    serializer_class = IrrigationRuleSerializer
+    permission_classes = [AuthenticatedReadOnlyOrAdminWrite]
+
+    def get_queryset(self):
+        qs = IrrigationRule.objects.select_related('zone', 'zone__site', 'created_by')
+        zone_id = self.request.query_params.get('zone')
+        if zone_id:
+            qs = qs.filter(zone_id=zone_id)
+        site_id = self.request.query_params.get('site')
+        if site_id:
+            qs = qs.filter(zone__site_id=site_id)
+
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-updated_at', '-id')
+        return qs.filter(zone__site__created_by=self.request.user).order_by('-updated_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
 
 
 class IrrigationEventViewSet(viewsets.ReadOnlyModelViewSet):

@@ -67,7 +67,10 @@ const domainConfigs = {
     subtitle: 'Devices & Sensor Networks',
     items: [
       { to: '/lab/iot', label: 'Dashboard Overview', icon: FiActivity, end: true },
-      { to: '/lab/iot/agriculture', label: 'Agriculture', icon: FiActivity },
+      { to: '/lab/iot/agriculture', label: 'Agriculture Overview', icon: FiActivity },
+      { to: '/lab/iot/agriculture/fields', label: 'Agriculture Fields', icon: FiLayers },
+      { to: '/lab/iot/agriculture/rules', label: 'Agriculture Rules', icon: FiGitBranch },
+      { to: '/lab/iot/agriculture/events', label: 'Agriculture Events', icon: FiClock },
       { to: '/lab/iot/devices', label: 'Device Manager', icon: FiHardDrive },
       { to: '/lab/iot/telemetry', label: 'Sensor Telemetry', icon: FiRadio },
       { to: '/lab/iot/automation', label: 'Automation Experiments', icon: FiZap },

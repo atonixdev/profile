@@ -26,6 +26,10 @@ from .views import (
 	WeatherForecastViewSet,
 	IrrigationZoneViewSet,
 	IrrigationEventViewSet,
+	AgriFieldViewSet,
+	AgriNodeViewSet,
+	AgriSensorViewSet,
+	IrrigationRuleViewSet,
 )
 
 router = DefaultRouter()
@@ -44,6 +48,10 @@ router.register(r'farm-sites', FarmSiteViewSet, basename='iot-lab-farm-sites')
 router.register(r'weather-forecasts', WeatherForecastViewSet, basename='iot-lab-weather-forecasts')
 router.register(r'irrigation-zones', IrrigationZoneViewSet, basename='iot-lab-irrigation-zones')
 router.register(r'irrigation-events', IrrigationEventViewSet, basename='iot-lab-irrigation-events')
+router.register(r'agri-fields', AgriFieldViewSet, basename='iot-lab-agri-fields')
+router.register(r'agri-nodes', AgriNodeViewSet, basename='iot-lab-agri-nodes')
+router.register(r'agri-sensors', AgriSensorViewSet, basename='iot-lab-agri-sensors')
+router.register(r'irrigation-rules', IrrigationRuleViewSet, basename='iot-lab-irrigation-rules')
 
 urlpatterns = [
 	*router.urls,
