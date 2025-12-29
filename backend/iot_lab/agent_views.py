@@ -9,13 +9,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .agent_auth import authenticate_agent
-from .models import Device, DeviceCommand, DeviceCommandLog, TelemetryRecord
+from .models import Device, DeviceCommand, DeviceCommandLog, TelemetryRecord, IrrigationEvent
 from .realtime import publish_command_log, publish_command_status, publish_device_update, publish_network_update
 from .automation_engine import run_jobs_for_event
 
 
 class AgentHeartbeatView(APIView):
     permission_classes = [AllowAny]
+    throttle_scope = 'iot_agent'
 
     def post(self, request):
         auth = authenticate_agent(request)
@@ -62,6 +63,7 @@ class AgentHeartbeatView(APIView):
 
 class AgentNextCommandView(APIView):
     permission_classes = [AllowAny]
+    throttle_scope = 'iot_agent'
 
     def get(self, request):
         auth = authenticate_agent(request)
@@ -138,6 +140,7 @@ class AgentNextCommandView(APIView):
 
 class AgentCommandStartView(APIView):
     permission_classes = [AllowAny]
+    throttle_scope = 'iot_agent'
 
     def post(self, request, command_id: int):
         auth = authenticate_agent(request)
@@ -150,9 +153,17 @@ class AgentCommandStartView(APIView):
         if cmd.status in {DeviceCommand.Status.SUCCEEDED, DeviceCommand.Status.FAILED, DeviceCommand.Status.CANCELED}:
             return Response({'detail': 'Command already finished', 'status': cmd.status}, status=409)
 
-        cmd.status = DeviceCommand.Status.RUNNING
-        cmd.started_at = timezone.now()
-        cmd.save(update_fields=['status', 'started_at'])
+        started_at = timezone.now()
+
+        with transaction.atomic():
+            cmd.status = DeviceCommand.Status.RUNNING
+            cmd.started_at = started_at
+            cmd.save(update_fields=['status', 'started_at'])
+
+            IrrigationEvent.objects.filter(command=cmd, started_at__isnull=True).update(
+                status=IrrigationEvent.Status.RUNNING,
+                started_at=started_at,
+            )
 
         publish_command_status(
             cmd.id,
@@ -169,6 +180,7 @@ class AgentCommandStartView(APIView):
 
 class AgentCommandLogView(APIView):
     permission_classes = [AllowAny]
+    throttle_scope = 'iot_agent'
 
     def post(self, request, command_id: int):
         auth = authenticate_agent(request)
@@ -205,6 +217,7 @@ class AgentCommandLogView(APIView):
 
 class AgentCommandFinishView(APIView):
     permission_classes = [AllowAny]
+    throttle_scope = 'iot_agent'
 
     def post(self, request, command_id: int):
         auth = authenticate_agent(request)
@@ -222,14 +235,21 @@ class AgentCommandFinishView(APIView):
 
         final_status = DeviceCommand.Status.SUCCEEDED if status == 'succeeded' else DeviceCommand.Status.FAILED
 
+        finished_at = timezone.now()
+
         with transaction.atomic():
             cmd.status = final_status
-            cmd.finished_at = timezone.now()
+            cmd.finished_at = finished_at
             cmd.exit_code = exit_code if isinstance(exit_code, int) else cmd.exit_code
             cmd.stdout = str(stdout)[:200000]
             cmd.stderr = str(stderr)[:200000]
             cmd.error = str(error)[:200000]
             cmd.save(update_fields=['status', 'finished_at', 'exit_code', 'stdout', 'stderr', 'error'])
+
+            IrrigationEvent.objects.filter(command=cmd, ended_at__isnull=True).update(
+                status=IrrigationEvent.Status.SUCCEEDED if final_status == DeviceCommand.Status.SUCCEEDED else IrrigationEvent.Status.FAILED,
+                ended_at=finished_at,
+            )
 
         publish_command_status(
             cmd.id,
@@ -260,6 +280,7 @@ class AgentTelemetryIngestView(APIView):
     """
 
     permission_classes = [AllowAny]
+    throttle_scope = 'iot_agent'
 
     def post(self, request):
         auth = authenticate_agent(request)

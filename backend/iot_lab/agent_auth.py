@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import check_password
 from django.utils import timezone
 from rest_framework.exceptions import AuthenticationFailed
 
-from .models import Device, DeviceToken
+from .models import Device, DeviceToken, SecurityEvent
 
 
 @dataclass
@@ -55,6 +55,16 @@ def authenticate_agent(request) -> AgentAuthResult:
             break
 
     if not matched:
+        try:
+            SecurityEvent.objects.create(
+                device=device,
+                event_type='agent_auth_failed',
+                message='Invalid device token presented',
+                metadata={},
+                created_by=None,
+            )
+        except Exception:
+            pass
         raise AuthenticationFailed('Invalid device token')
 
     matched.last_used_at = timezone.now()

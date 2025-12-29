@@ -45,6 +45,7 @@ import IoTLabDevices from './pages/Lab/IoTLabDevices';
 import IoTLabTelemetry from './pages/Lab/IoTLabTelemetry';
 import IoTLabAutomation from './pages/Lab/IoTLabAutomation';
 import IoTLabNetwork from './pages/Lab/IoTLabNetwork';
+import IoTLabAgriculture from './pages/Lab/IoTLabAgriculture';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -160,6 +161,7 @@ function App() {
                 <Route path="iot/telemetry" element={<IoTLabTelemetry />} />
                 <Route path="iot/automation" element={<IoTLabAutomation />} />
                 <Route path="iot/network" element={<IoTLabNetwork />} />
+                <Route path="iot/agriculture" element={<IoTLabAgriculture />} />
                 <Route path="iot/settings" element={<LabSettings />} />
               </Route>
             </Route>

@@ -4,6 +4,7 @@ import secrets
 
 from django.db.models import Count
 from django.contrib.auth.hashers import make_password
+from django.db import transaction
 from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -11,10 +12,26 @@ from rest_framework.response import Response
 from rest_framework import status as drf_status
 from rest_framework.exceptions import ValidationError
 
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
-from .models import Device, TelemetryRecord, AutomationJob, DeviceToken, DeviceCommand, DeviceCommandLog, Alert, SecurityEvent
-from .permissions import ReadOnlyOrAuthenticatedWrite
+from .models import (
+    Device,
+    TelemetryRecord,
+    AutomationJob,
+    DeviceToken,
+    DeviceCommand,
+    DeviceCommandLog,
+    Alert,
+    SecurityEvent,
+    DeviceLease,
+    WorkflowTemplate,
+    AiInsight,
+    FarmSite,
+    WeatherForecast,
+    IrrigationZone,
+    IrrigationEvent,
+)
+from .permissions import ReadOnlyOrAuthenticatedWrite, AuthenticatedReadOnlyOrAdminWrite
 from .serializers import (
     DeviceSerializer,
     TelemetryRecordSerializer,
@@ -25,10 +42,24 @@ from .serializers import (
     DeviceCommandLogSerializer,
     AlertSerializer,
     SecurityEventSerializer,
+    DeviceLeaseSerializer,
+    WorkflowTemplateSerializer,
+    AiInsightSerializer,
+    FarmSiteSerializer,
+    WeatherForecastSerializer,
+    IrrigationZoneSerializer,
+    IrrigationEventSerializer,
 )
 
 from .realtime import publish_command_status, publish_telemetry_record, publish_network_update
 from .automation_engine import run_job, run_jobs_for_event, AutomationContext
+
+
+def _parse_int(value, default: int) -> int:
+    try:
+        return int(value)
+    except Exception:
+        return default
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
@@ -243,6 +274,18 @@ class DeviceCommandViewSet(viewsets.ModelViewSet):
         kind = serializer.validated_data.get('kind')
         device = serializer.validated_data.get('device')
 
+        # Default safety policy: risky commands require staff.
+        if kind in {DeviceCommand.Kind.RUN_PYTHON, DeviceCommand.Kind.REBOOT}:
+            if not (req_user and req_user.is_staff):
+                SecurityEvent.objects.create(
+                    device=device,
+                    event_type='command_blocked',
+                    message='Risky command requires admin privileges',
+                    metadata={'kind': kind},
+                    created_by=req_user,
+                )
+                raise ValidationError({'detail': 'This command requires admin privileges'})
+
         policy = (device.metadata or {}).get('policy') if device else None
         allowed_kinds = None
         if isinstance(policy, dict):
@@ -293,3 +336,431 @@ class DeviceCommandViewSet(viewsets.ModelViewSet):
             qs = qs[:500]
 
         return Response(DeviceCommandLogSerializer(qs, many=True).data)
+
+
+class DeviceLeaseViewSet(viewsets.ModelViewSet):
+    serializer_class = DeviceLeaseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        qs = DeviceLease.objects.select_related('device', 'user')
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-started_at', '-id')
+        return qs.filter(user=self.request.user).order_by('-started_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    @action(detail=False, methods=['post'])
+    def acquire(self, request):
+        """Acquire a lease for a device.
+
+        Payload:
+          - device (optional): exact device id
+          - device_type (optional)
+          - minutes (optional): TTL minutes (default 60)
+        """
+        device_id = request.data.get('device')
+        device_type = (request.data.get('device_type') or '').strip()
+
+        minutes = request.data.get('minutes', 60)
+        try:
+            minutes = int(minutes)
+        except (TypeError, ValueError):
+            minutes = 60
+        minutes = max(5, min(minutes, 24 * 60))
+
+        now = timezone.now()
+        expires_at = now + timedelta(minutes=minutes)
+
+        with transaction.atomic():
+            devices_qs = Device.objects.select_for_update().filter(is_active=True)
+            if device_id:
+                devices_qs = devices_qs.filter(id=device_id)
+            if device_type:
+                devices_qs = devices_qs.filter(device_type=device_type)
+
+            # Exclude devices with an active (unended + unexpired) lease.
+            active_lease_device_ids = (
+                DeviceLease.objects.select_for_update()
+                .filter(ended_at__isnull=True, expires_at__gt=now)
+                .values_list('device_id', flat=True)
+            )
+            devices_qs = devices_qs.exclude(id__in=list(active_lease_device_ids))
+
+            device = devices_qs.order_by('id').first()
+            if not device:
+                return Response({'detail': 'No available device'}, status=drf_status.HTTP_409_CONFLICT)
+
+            lease = DeviceLease.objects.create(
+                device=device,
+                user=request.user,
+                expires_at=expires_at,
+                metadata={'requested_device_type': device_type} if device_type else {},
+            )
+
+        return Response(DeviceLeaseSerializer(lease).data, status=drf_status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=['post'])
+    def release(self, request, pk=None):
+        lease = self.get_object()
+        if not (request.user.is_staff or lease.user_id == request.user.id):
+            return Response({'detail': 'Forbidden'}, status=drf_status.HTTP_403_FORBIDDEN)
+        if lease.ended_at:
+            return Response({'detail': 'already ended', 'id': lease.id})
+        lease.ended_at = timezone.now()
+        lease.save(update_fields=['ended_at'])
+        return Response({'detail': 'ended', 'id': lease.id, 'ended_at': lease.ended_at})
+
+
+class WorkflowTemplateViewSet(viewsets.ModelViewSet):
+    serializer_class = WorkflowTemplateSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        qs = WorkflowTemplate.objects.select_related('device', 'created_by')
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-updated_at', '-id')
+        return qs.filter(created_by=self.request.user).order_by('-updated_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
+    @action(detail=True, methods=['post'])
+    def run(self, request, pk=None):
+        tmpl = self.get_object()
+        device_id = request.data.get('device')
+        device = None
+
+        if device_id:
+            device = Device.objects.filter(id=device_id).first()
+        elif tmpl.device_id:
+            device = tmpl.device
+
+        if not device:
+            return Response({'detail': 'device is required (either template.device or payload device)'}, status=drf_status.HTTP_400_BAD_REQUEST)
+        if not device.is_active and not request.user.is_staff:
+            return Response({'detail': 'Device not available'}, status=drf_status.HTTP_409_CONFLICT)
+
+        steps = tmpl.steps or []
+        if not isinstance(steps, list):
+            return Response({'detail': 'invalid steps'}, status=drf_status.HTTP_400_BAD_REQUEST)
+
+        risky = {DeviceCommand.Kind.RUN_PYTHON, DeviceCommand.Kind.REBOOT}
+        allowed_kinds = {k for k, _ in DeviceCommand.Kind.choices}
+
+        created_ids = []
+        for step in steps:
+            if not isinstance(step, dict):
+                return Response({'detail': 'invalid workflow step'}, status=drf_status.HTTP_400_BAD_REQUEST)
+            kind = step.get('kind')
+            payload = step.get('payload') or {}
+
+            if kind not in allowed_kinds:
+                return Response({'detail': f'Unsupported kind: {kind}'}, status=drf_status.HTTP_400_BAD_REQUEST)
+            if kind in risky and not request.user.is_staff:
+                return Response({'detail': f'Command kind requires admin privileges: {kind}'}, status=drf_status.HTTP_403_FORBIDDEN)
+            if not isinstance(payload, dict):
+                return Response({'detail': 'step payload must be an object'}, status=drf_status.HTTP_400_BAD_REQUEST)
+
+            cmd = DeviceCommand.objects.create(
+                device=device,
+                kind=kind,
+                payload=payload,
+                requested_by=request.user,
+            )
+            created_ids.append(cmd.id)
+
+            publish_command_status(
+                cmd.id,
+                {
+                    'id': cmd.id,
+                    'device': cmd.device_id,
+                    'kind': cmd.kind,
+                    'payload': cmd.payload,
+                    'status': cmd.status,
+                    'queued_at': cmd.queued_at.isoformat() if cmd.queued_at else None,
+                    'source': 'workflow_template',
+                    'workflow_template_id': tmpl.id,
+                },
+            )
+
+        return Response({'detail': 'queued', 'workflow_template_id': tmpl.id, 'device': device.id, 'command_ids': created_ids})
+
+
+class AiInsightViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = AiInsightSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        qs = AiInsight.objects.select_related('device')
+        if not (self.request.user and self.request.user.is_staff):
+            qs = qs.filter(device__is_active=True)
+
+        device_id = self.request.query_params.get('device')
+        if device_id:
+            qs = qs.filter(device_id=device_id)
+        return qs.order_by('-created_at', '-id')
+
+
+class FarmSiteViewSet(viewsets.ModelViewSet):
+    serializer_class = FarmSiteSerializer
+    permission_classes = [AuthenticatedReadOnlyOrAdminWrite]
+
+    def get_queryset(self):
+        qs = FarmSite.objects.select_related('default_device', 'created_by')
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-updated_at', '-id')
+        # Keep farm locations private by default.
+        return qs.filter(created_by=self.request.user).order_by('-updated_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
+
+    @action(detail=True, methods=['get'])
+    def recommendations(self, request, pk=None):
+        """Very simple irrigation recommendation (v1 rules).
+
+        Returns per-zone status based on latest telemetry + next-hours rain probability.
+        """
+        site = self.get_object()
+
+        hours = _parse_int(request.query_params.get('hours'), 6)
+        hours = max(1, min(hours, 48))
+
+        now = timezone.now()
+        horizon = now + timedelta(hours=hours)
+
+        forecast_qs = WeatherForecast.objects.filter(site=site, forecast_time__gte=now, forecast_time__lte=horizon)
+        rain_probs = []
+        temps = []
+        for row in forecast_qs[:500]:
+            m = row.metrics or {}
+            rp = m.get('precipitation_probability')
+            t = m.get('temperature_c')
+            try:
+                if rp is not None:
+                    rain_probs.append(float(rp))
+            except Exception:
+                pass
+            try:
+                if t is not None:
+                    temps.append(float(t))
+            except Exception:
+                pass
+
+        max_rain_prob = max(rain_probs) if rain_probs else None
+        max_temp_c = max(temps) if temps else None
+
+        zones = IrrigationZone.objects.select_related('device').filter(site=site, is_active=True).order_by('id')
+        out = []
+
+        for zone in zones:
+            device_id = zone.device_id
+            moisture = None
+            last_ts = None
+            if device_id:
+                rec = (
+                    TelemetryRecord.objects.filter(device_id=device_id)
+                    .only('timestamp', 'metrics')
+                    .order_by('-timestamp', '-id')
+                    .first()
+                )
+                if rec:
+                    last_ts = rec.timestamp
+                    try:
+                        moisture = (rec.metrics or {}).get(zone.soil_moisture_metric)
+                    except Exception:
+                        moisture = None
+
+            # v1: recommend irrigation if below min and rain prob not high.
+            recommend = False
+            reason = 'insufficient data'
+
+            try:
+                moisture_f = float(moisture) if moisture is not None else None
+            except Exception:
+                moisture_f = None
+
+            if moisture_f is not None and zone.target_moisture_min is not None:
+                recommend = moisture_f < float(zone.target_moisture_min)
+                reason = 'soil below target minimum' if recommend else 'soil above target minimum'
+
+            if recommend and max_rain_prob is not None:
+                if float(max_rain_prob) >= 60.0:
+                    recommend = False
+                    reason = 'rain likely soon'
+
+            out.append(
+                {
+                    'zone_id': zone.id,
+                    'zone_name': zone.name,
+                    'device_id': zone.device_id,
+                    'soil_moisture': moisture,
+                    'soil_moisture_metric': zone.soil_moisture_metric,
+                    'last_telemetry_at': last_ts.isoformat() if last_ts else None,
+                    'target_moisture_min': zone.target_moisture_min,
+                    'target_moisture_max': zone.target_moisture_max,
+                    'recommend_irrigation': bool(recommend),
+                    'reason': reason,
+                }
+            )
+
+        return Response(
+            {
+                'site_id': site.id,
+                'hours': hours,
+                'max_rain_probability': max_rain_prob,
+                'max_temp_c': max_temp_c,
+                'zones': out,
+            }
+        )
+
+
+class WeatherForecastViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = WeatherForecastSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        qs = WeatherForecast.objects.select_related('site')
+        site_id = self.request.query_params.get('site')
+        if site_id:
+            qs = qs.filter(site_id=site_id)
+
+        provider = (self.request.query_params.get('provider') or '').strip()
+        if provider:
+            qs = qs.filter(provider=provider)
+
+        return qs.order_by('-forecast_time', '-id')
+
+
+class IrrigationZoneViewSet(viewsets.ModelViewSet):
+    serializer_class = IrrigationZoneSerializer
+    permission_classes = [AuthenticatedReadOnlyOrAdminWrite]
+
+    def get_queryset(self):
+        qs = IrrigationZone.objects.select_related('site', 'device')
+        site_id = self.request.query_params.get('site')
+        if site_id:
+            qs = qs.filter(site_id=site_id)
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-updated_at', '-id')
+        return qs.filter(site__created_by=self.request.user).order_by('-updated_at', '-id')
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
+
+    @action(detail=True, methods=['get'], permission_classes=[IsAuthenticated])
+    def status(self, request, pk=None):
+        zone = self.get_object()
+        rec = None
+        if zone.device_id:
+            rec = (
+                TelemetryRecord.objects.filter(device_id=zone.device_id)
+                .only('timestamp', 'metrics')
+                .order_by('-timestamp', '-id')
+                .first()
+            )
+
+        moisture = None
+        if rec:
+            try:
+                moisture = (rec.metrics or {}).get(zone.soil_moisture_metric)
+            except Exception:
+                moisture = None
+
+        last_event = IrrigationEvent.objects.filter(zone=zone).order_by('-requested_at', '-id').first()
+
+        return Response(
+            {
+                'zone_id': zone.id,
+                'device_id': zone.device_id,
+                'soil_moisture_metric': zone.soil_moisture_metric,
+                'soil_moisture': moisture,
+                'last_telemetry_at': rec.timestamp.isoformat() if rec and rec.timestamp else None,
+                'last_event': IrrigationEventSerializer(last_event).data if last_event else None,
+            }
+        )
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def irrigate(self, request, pk=None):
+        """Manual irrigation trigger for a zone.
+
+        Payload:
+          - duration_seconds (optional): default 600
+        """
+        zone = self.get_object()
+        if not (request.user.is_staff or zone.site.created_by_id == request.user.id):
+            return Response({'detail': 'Forbidden'}, status=drf_status.HTTP_403_FORBIDDEN)
+
+        duration = _parse_int(request.data.get('duration_seconds'), 600)
+        duration = max(5, min(duration, 6 * 60 * 60))
+
+        if not zone.device_id:
+            return Response({'detail': 'Zone has no device assigned'}, status=drf_status.HTTP_400_BAD_REQUEST)
+
+        payload = dict(zone.actuator_config or {})
+
+        if zone.actuator_kind == IrrigationZone.ActuatorKind.GPIO_WRITE:
+            if 'pin' not in payload:
+                return Response({'detail': 'actuator_config.pin is required for gpio_write'}, status=drf_status.HTTP_400_BAD_REQUEST)
+            payload.setdefault('value', 1)
+            payload['duration_seconds'] = duration
+            kind = DeviceCommand.Kind.GPIO_WRITE
+        else:
+            # For Arduino, we just pass a message. Firmware decides duration.
+            if 'message' not in payload:
+                payload['message'] = f"IRRIGATE {zone.id} {duration}"
+            kind = DeviceCommand.Kind.ARDUINO_SERIAL
+
+        cmd = DeviceCommand.objects.create(
+            device_id=zone.device_id,
+            kind=kind,
+            payload=payload,
+            requested_by=request.user,
+        )
+
+        event = IrrigationEvent.objects.create(
+            zone=zone,
+            device_id=zone.device_id,
+            command=cmd,
+            status=IrrigationEvent.Status.QUEUED,
+            requested_by=request.user,
+            planned_duration_seconds=duration,
+            metadata={'source': 'manual'},
+        )
+
+        publish_command_status(
+            cmd.id,
+            {
+                'id': cmd.id,
+                'device': cmd.device_id,
+                'kind': cmd.kind,
+                'payload': cmd.payload,
+                'status': cmd.status,
+                'queued_at': cmd.queued_at.isoformat() if cmd.queued_at else None,
+                'source': 'irrigation_zone',
+                'irrigation_zone_id': zone.id,
+                'irrigation_event_id': event.id,
+            },
+        )
+
+        return Response({'detail': 'queued', 'event': IrrigationEventSerializer(event).data, 'command_id': cmd.id}, status=drf_status.HTTP_201_CREATED)
+
+
+class IrrigationEventViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = IrrigationEventSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        qs = IrrigationEvent.objects.select_related('zone', 'zone__site', 'device', 'command')
+        site_id = self.request.query_params.get('site')
+        if site_id:
+            qs = qs.filter(zone__site_id=site_id)
+        zone_id = self.request.query_params.get('zone')
+        if zone_id:
+            qs = qs.filter(zone_id=zone_id)
+
+        if self.request.user and self.request.user.is_staff:
+            return qs.order_by('-requested_at', '-id')
+        return qs.filter(requested_by=self.request.user).order_by('-requested_at', '-id')

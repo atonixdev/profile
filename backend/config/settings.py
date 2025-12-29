@@ -230,6 +230,9 @@ REST_FRAMEWORK = {
         'anon': config('DRF_THROTTLE_ANON', default='200/hour'),
         'user': config('DRF_THROTTLE_USER', default='1000/hour'),
 
+        # IoT agent polling + telemetry (device-authenticated)
+        'iot_agent': config('DRF_THROTTLE_IOT_AGENT', default='240/min'),
+
         # Auth endpoints
         'login': config('DRF_THROTTLE_LOGIN', default='10/min'),
         'register': config('DRF_THROTTLE_REGISTER', default='5/min'),

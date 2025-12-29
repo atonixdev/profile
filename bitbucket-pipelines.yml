@@ -20,6 +20,8 @@ pipelines:
           script:
             - cd backend
             - pip install -r requirements.txt
+            - python manage.py check --settings=config.settings
+            - python -m py_compile ../iot_agent/agent.py
             - python manage.py test --settings=config.settings
             - python manage.py migrate --settings=config.settings
       - step:
@@ -81,6 +83,8 @@ pipelines:
           script:
             - cd backend
             - pip install -r requirements.txt
+            - python manage.py check --settings=config.settings
+            - python -m py_compile ../iot_agent/agent.py
             - python manage.py test --settings=config.settings
       - step:
           name: Frontend Tests

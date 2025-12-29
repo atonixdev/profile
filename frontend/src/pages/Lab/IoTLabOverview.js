@@ -104,6 +104,13 @@ const IoTLabOverview = () => {
             description="Monitor network status and connectivity"
             isDark={isDark}
           />
+          <QuickAction
+            icon={FiActivity}
+            label="Agriculture"
+            to="/lab/iot/agriculture"
+            description="Weather-aware irrigation and water management"
+            isDark={isDark}
+          />
         </div>
       </div>
 

@@ -1,0 +1,20 @@
+[Unit]
+Description=AtonixDev IoT Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/opt/atonix/iot_agent
+EnvironmentFile=-/etc/atonix/iot_agent.env
+ExecStart=/opt/atonix/iot_agent/venv/bin/python /opt/atonix/iot_agent/agent.py
+Restart=always
+RestartSec=2
+
+# Hardening (keep minimal; adjust if you need GPIO/serial perms)
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

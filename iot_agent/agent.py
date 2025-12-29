@@ -187,9 +187,12 @@ def run_python(command_id: int, code: str):
 def gpio_write(command_id: int, payload: dict):
     pin = payload.get('pin')
     value = payload.get('value')
+    duration_seconds = payload.get('duration_seconds')
+    off_value = payload.get('off_value', 0)
     try:
         pin_int = int(pin)
         value_int = 1 if str(value).lower() in ('1', 'true', 'high', 'on') else 0
+        off_value_int = 1 if str(off_value).lower() in ('1', 'true', 'high', 'on') else 0
     except Exception:
         post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
             'status': 'failed',
@@ -199,6 +202,15 @@ def gpio_write(command_id: int, payload: dict):
             'error': 'Invalid pin/value',
         })
         return
+
+    duration = None
+    if duration_seconds is not None:
+        try:
+            duration = float(duration_seconds)
+        except Exception:
+            duration = None
+        if duration is not None:
+            duration = max(0.0, min(duration, 6 * 60 * 60))
 
     try:
         import RPi.GPIO as GPIO  # type: ignore
@@ -217,10 +229,19 @@ def gpio_write(command_id: int, payload: dict):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin_int, GPIO.OUT)
         GPIO.output(pin_int, GPIO.HIGH if value_int else GPIO.LOW)
+
+        if duration is not None and duration > 0:
+            try:
+                log_line(command_id, 'log', f"GPIO {pin_int} set to {value_int} for {duration:.0f}s")
+            except Exception:
+                pass
+            time.sleep(duration)
+            GPIO.output(pin_int, GPIO.HIGH if off_value_int else GPIO.LOW)
+
         post_json(f"/iot-lab/agent/commands/{command_id}/finish/", {
             'status': 'succeeded',
             'exit_code': 0,
-            'stdout': f"GPIO {pin_int} set to {value_int}",
+            'stdout': f"GPIO {pin_int} set to {value_int}" + (f" for {duration:.0f}s then {off_value_int}" if duration else ''),
             'stderr': '',
             'error': '',
         })
@@ -232,6 +253,11 @@ def gpio_write(command_id: int, payload: dict):
             'stderr': '',
             'error': str(e),
         })
+    finally:
+        try:
+            GPIO.cleanup(pin_int)
+        except Exception:
+            pass
 
 
 def arduino_serial(command_id: int, payload: dict):
