@@ -187,8 +187,7 @@ const About = () => {
                   <div className="w-1 h-8 bg-primary-600"></div>
                   <h3 className="text-2xl font-bold text-gray-900">Specializations</h3>
                 </div>
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {[
                       {
                         title: 'Cloud Infrastructure & Architecture',
@@ -245,20 +244,23 @@ const About = () => {
                         )
                       }
                     ].map((spec, index) => (
-                      <div key={index} className={`p-6 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} border-b ${index < 2 ? 'md:border-r border-gray-200' : 'border-gray-200'}`}>
-                        <div className="mb-3">{spec.icon}</div>
-                        <h4 className="text-lg font-bold text-gray-900 mb-3">{spec.title}</h4>
-                        <ul className="space-y-2">
-                          {spec.items.map((item, idx) => (
-                            <li key={idx} className="flex items-center gap-2 text-gray-700">
-                              <span className="w-2 h-2 bg-primary-600 rounded-full"></span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                      <div key={index} className="bg-white rounded-xl shadow-md border border-gray-100 p-6 flex flex-col">
+                        <div className="flex items-start gap-3">
+                          <div className="flex-shrink-0">{spec.icon}</div>
+                          <h4 className="text-lg font-bold text-gray-900 leading-snug">{spec.title}</h4>
+                        </div>
+                        <div className="mt-4 max-h-64 overflow-auto pr-2">
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700">
+                            {spec.items.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-2 min-w-0">
+                                <span className="mt-2 w-2 h-2 bg-primary-600 rounded-full flex-shrink-0"></span>
+                                <span className="min-w-0 break-words leading-snug">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     ))}
-                  </div>
                 </div>
               </div>
 
