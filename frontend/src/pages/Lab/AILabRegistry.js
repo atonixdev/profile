@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { aiLabService } from '../../services';
 
 const AILabRegistry = () => {
+  const { theme } = useOutletContext();
+  const isDark = theme === 'dark';
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -89,7 +92,7 @@ const AILabRegistry = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Model Registry</h1>
-        <p className="text-gray-600 mt-1">Store and browse trained model artifacts.</p>
+        <p className={isDark ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>Store and browse trained model artifacts.</p>
       </div>
 
       {error && (
@@ -98,26 +101,26 @@ const AILabRegistry = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Register Model</h2>
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
+        <h2 className={isDark ? 'text-xl font-bold text-white mb-4' : 'text-xl font-bold text-gray-900 mb-4'}>Register Model</h2>
         <form onSubmit={handleUpload} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Name</label>
+              <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Name</label>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+                className={isDark ? 'w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
                 placeholder="e.g. churn-model"
                 disabled={uploading}
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Version</label>
+              <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Version</label>
               <input
                 value={version}
                 onChange={(e) => setVersion(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+                className={isDark ? 'w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
                 placeholder="e.g. v1.0.0"
                 disabled={uploading}
               />
@@ -125,36 +128,36 @@ const AILabRegistry = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+            <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Description</label>
             <input
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+              className={isDark ? 'w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
               placeholder="Optional"
               disabled={uploading}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Metrics (JSON)</label>
+            <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Metrics (JSON)</label>
             <textarea
               value={metricsText}
               onChange={(e) => setMetricsText(e.target.value)}
               rows={6}
-              className="w-full font-mono text-xs px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none"
+              className={isDark ? 'w-full font-mono text-xs px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-white outline-none' : 'w-full font-mono text-xs px-4 py-3 rounded-lg border border-gray-300 text-gray-900 outline-none'}
               disabled={uploading}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">File</label>
+            <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>File</label>
             <input
               type="file"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
               className="w-full"
               disabled={uploading}
             />
-            <div className="text-xs text-gray-500 mt-1">Upload a model artifact (e.g. .pkl, .onnx, .pt).</div>
+            <div className={isDark ? 'text-xs text-gray-300 mt-1' : 'text-xs text-gray-500 mt-1'}>Upload a model artifact (e.g. .pkl, .onnx, .pt).</div>
           </div>
 
           <button
@@ -167,13 +170,13 @@ const AILabRegistry = () => {
         </form>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="flex items-center justify-between gap-4 mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Registered Models</h2>
+          <h2 className={isDark ? 'text-xl font-bold text-white' : 'text-xl font-bold text-gray-900'}>Registered Models</h2>
           <button
             type="button"
             onClick={load}
-            className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50"
+            className={isDark ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white' : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50'}
             disabled={loading}
           >
             Refresh
@@ -181,14 +184,14 @@ const AILabRegistry = () => {
         </div>
 
         {loading ? (
-          <div className="text-gray-600">Loading…</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>Loading…</div>
         ) : items.length === 0 ? (
-          <div className="text-gray-600">No models registered yet.</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>No models registered yet.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-600 border-b">
+                <tr className={isDark ? 'text-left text-gray-300 border-b border-white/10' : 'text-left text-gray-600 border-b'}>
                   <th className="py-2">Name</th>
                   <th className="py-2">Version</th>
                   <th className="py-2">Created</th>
@@ -197,15 +200,15 @@ const AILabRegistry = () => {
               </thead>
               <tbody>
                 {items.map((m) => (
-                  <tr key={m.id} className="border-b last:border-b-0">
-                    <td className="py-2 text-gray-900 font-semibold">{m.name}</td>
-                    <td className="py-2 text-gray-600">{m.version || '—'}</td>
-                    <td className="py-2 text-gray-600">{m.created_at ? new Date(m.created_at).toLocaleString() : '-'}</td>
+                  <tr key={m.id} className={isDark ? 'border-b border-white/10 last:border-b-0' : 'border-b last:border-b-0'}>
+                    <td className={isDark ? 'py-2 text-white font-semibold' : 'py-2 text-gray-900 font-semibold'}>{m.name}</td>
+                    <td className={isDark ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{m.version || '—'}</td>
+                    <td className={isDark ? 'py-2 text-gray-200' : 'py-2 text-gray-600'}>{m.created_at ? new Date(m.created_at).toLocaleString() : '-'}</td>
                     <td className="py-2">
                       {m.file_url ? (
                         <a className="text-primary-700 hover:underline" href={m.file_url} target="_blank" rel="noreferrer">Download</a>
                       ) : (
-                        <span className="text-gray-500">—</span>
+                        <span className={isDark ? 'text-gray-300' : 'text-gray-500'}>—</span>
                       )}
                     </td>
                   </tr>

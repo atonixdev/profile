@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import api from '../services/api';
+import api, { setCsrfToken } from '../services/api';
+import SearchableCountryDropdown from '../components/SearchableCountryDropdown';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Register = () => {
     email: '',
     first_name: '',
     last_name: '',
+    country: '',
     password: '',
     password_confirm: '',
   });
@@ -45,12 +47,14 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await api.get('/auth/csrf/');
+      const csrfResp = await api.get('/auth/csrf/');
+      if (csrfResp?.data?.csrfToken) setCsrfToken(csrfResp.data.csrfToken);
       await api.post('/accounts/register/', {
         username: formData.username,
         email: formData.email,
         first_name: formData.first_name,
         last_name: formData.last_name,
+        country: formData.country,
         password: formData.password,
       });
 
@@ -59,13 +63,32 @@ const Register = () => {
         navigate('/login', { state: { email: formData.email, from: location.state?.from } });
       }, 2000);
     } catch (err) {
-      if (err.response?.data) {
-        const errorMessages = Object.entries(err.response.data)
-          .map(([key, value]) => `${key}: ${Array.isArray(value) ? value[0] : value}`)
-          .join(', ');
-        setError(errorMessages);
+      if (!err?.response) {
+        setError('Cannot reach the API server. Please try again later.');
+      } else if (err.response?.status === 429) {
+        setError('Too many attempts. Please wait and try again.');
       } else {
-        setError('Failed to create account. Please try again.');
+        const data = err.response?.data;
+
+        // If the backend returns an HTML error page (common when DEBUG=True),
+        // avoid exploding it into thousands of characters.
+        if (typeof data === 'string') {
+          const trimmed = data.trim().toLowerCase();
+          if (trimmed.startsWith('<!doctype html') || trimmed.startsWith('<html')) {
+            setError('Server error while creating account. Please try again later.');
+          } else if (data.length > 300) {
+            setError('Server error while creating account. Please try again later.');
+          } else {
+            setError(data);
+          }
+        } else if (data && typeof data === 'object') {
+          const errorMessages = Object.entries(data)
+            .map(([key, value]) => `${key}: ${Array.isArray(value) ? value[0] : value}`)
+            .join(', ');
+          setError(errorMessages || 'Failed to create account. Please try again.');
+        } else {
+          setError('Failed to create account. Please try again.');
+        }
       }
     } finally {
       setLoading(false);
@@ -155,6 +178,16 @@ const Register = () => {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="john@example.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Country
+            </label>
+            <SearchableCountryDropdown
+              value={formData.country}
+              onChange={handleChange}
             />
           </div>
 

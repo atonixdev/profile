@@ -2,12 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 import { labService } from '../../services';
 
-const LineChart = ({ points }) => {
+const LineChart = ({ points, theme }) => {
+  const isDark = theme === 'dark';
   const w = 600;
   const h = 160;
   const pad = 20;
   if (points.length < 2) {
-    return <div className="text-gray-600">Not enough data to chart.</div>;
+    return <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>Not enough data to chart.</div>;
   }
 
   const xs = points.map((p) => p.x);
@@ -37,15 +38,19 @@ const LineChart = ({ points }) => {
   );
 };
 
-const StatCard = ({ label, value }) => (
-  <div className="bg-white rounded-lg shadow-md p-6">
-    <div className="text-sm text-gray-600 font-semibold">{label}</div>
-    <div className="text-3xl font-bold text-primary-600 mt-2">{value}</div>
-  </div>
-);
+const StatCard = ({ label, value, theme }) => {
+  const isDark = theme === 'dark';
+  return (
+    <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
+      <div className={isDark ? 'text-sm text-gray-300 font-semibold' : 'text-sm text-gray-600 font-semibold'}>{label}</div>
+      <div className="text-3xl font-bold text-primary-600 mt-2">{value}</div>
+    </div>
+  );
+};
 
 const Overview = () => {
-  const { search } = useOutletContext();
+  const { search, theme } = useOutletContext();
+  const isDark = theme === 'dark';
   const [experiments, setExperiments] = useState([]);
   const [runs, setRuns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -153,7 +158,7 @@ const Overview = () => {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">Dashboard Overview</h1>
-          <p className="text-gray-600 mt-1">
+          <p className={isDark ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>
             Run experiments, track performance, and compare runs.
           </p>
         </div>
@@ -167,7 +172,7 @@ const Overview = () => {
           </Link>
           <Link
             to="/lab/compare"
-            className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50"
+            className={isDark ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white' : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50'}
           >
             Compare
           </Link>
@@ -175,27 +180,27 @@ const Overview = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <StatCard label="Total Experiments" value={stats.totalExperiments} />
-        <StatCard label="Total Runs" value={stats.totalRuns} />
-        <StatCard label="Success Rate" value={stats.successRate} />
-        <StatCard label="Average Runtime" value={stats.avgRuntime} />
+        <StatCard label="Total Experiments" value={stats.totalExperiments} theme={theme} />
+        <StatCard label="Total Runs" value={stats.totalRuns} theme={theme} />
+        <StatCard label="Success Rate" value={stats.successRate} theme={theme} />
+        <StatCard label="Average Runtime" value={stats.avgRuntime} theme={theme} />
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Recent Runs</h2>
+          <h2 className={isDark ? 'text-xl font-bold text-white' : 'text-xl font-bold text-gray-900'}>Recent Runs</h2>
           <Link to="/lab/history" className="text-primary-600 font-semibold hover:underline">
             View All →
           </Link>
         </div>
 
         {recentRuns.length === 0 ? (
-          <div className="text-gray-600">No runs yet. Start by running an experiment.</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>No runs yet. Start by running an experiment.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-600 border-b">
+                <tr className={isDark ? 'text-left text-gray-300 border-b border-white/10' : 'text-left text-gray-600 border-b'}>
                   <th className="py-2">Experiment</th>
                   <th className="py-2">Status</th>
                   <th className="py-2">Runtime</th>
@@ -204,8 +209,8 @@ const Overview = () => {
               </thead>
               <tbody>
                 {recentRuns.map((r) => (
-                  <tr key={r.id} className="border-b last:border-b-0">
-                    <td className="py-2 font-semibold text-gray-900">
+                  <tr key={r.id} className={isDark ? 'border-b border-white/10 last:border-b-0' : 'border-b last:border-b-0'}>
+                    <td className={isDark ? 'py-2 font-semibold text-white' : 'py-2 font-semibold text-gray-900'}>
                       {r.experiment?.name || r.experiment?.slug || `Run #${r.id}`}
                     </td>
                     <td className="py-2">{r.status}</td>
@@ -219,20 +224,20 @@ const Overview = () => {
         )}
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="flex flex-col md:flex-row md:items-end gap-4 mb-4">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">Performance Over Time</h2>
-            <div className="text-sm text-gray-600">Tracks a selected metric across recent runs.</div>
+            <h2 className={isDark ? 'text-xl font-bold text-white' : 'text-xl font-bold text-gray-900'}>Performance Over Time</h2>
+            <div className={isDark ? 'text-sm text-gray-300' : 'text-sm text-gray-600'}>Tracks a selected metric across recent runs.</div>
           </div>
 
           <div className="md:ml-auto flex flex-col sm:flex-row gap-3">
             <div>
-              <label className="block text-xs font-semibold text-gray-600 mb-1">Experiment</label>
+              <label className={isDark ? 'block text-xs font-semibold text-gray-300 mb-1' : 'block text-xs font-semibold text-gray-600 mb-1'}>Experiment</label>
               <select
                 value={selectedExperiment}
                 onChange={(e) => setSelectedExperiment(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg"
+                className={isDark ? 'px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'px-3 py-2 border border-gray-300 rounded-lg'}
               >
                 {experiments.map((e) => (
                   <option key={e.slug} value={e.slug}>{e.name}</option>
@@ -241,11 +246,11 @@ const Overview = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-600 mb-1">Metric</label>
+              <label className={isDark ? 'block text-xs font-semibold text-gray-300 mb-1' : 'block text-xs font-semibold text-gray-600 mb-1'}>Metric</label>
               <select
                 value={selectedMetric}
                 onChange={(e) => setSelectedMetric(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg"
+                className={isDark ? 'px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'px-3 py-2 border border-gray-300 rounded-lg'}
               >
                 {metricOptions.map((m) => (
                   <option key={m} value={m}>{m}</option>
@@ -255,8 +260,8 @@ const Overview = () => {
           </div>
         </div>
 
-        <LineChart points={chartPoints} />
-        <div className="text-xs text-gray-500 mt-2">Showing up to last 20 runs.</div>
+        <LineChart points={chartPoints} theme={theme} />
+        <div className={isDark ? 'text-xs text-gray-300 mt-2' : 'text-xs text-gray-500 mt-2'}>Showing up to last 20 runs.</div>
       </div>
     </div>
   );

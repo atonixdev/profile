@@ -4,7 +4,8 @@ import { labService } from '../../services';
 import JsonPanel from '../../components/Lab/JsonPanel';
 
 const RunExperiment = ({ experimentType, titleOverride } = {}) => {
-  const { search } = useOutletContext();
+  const outlet = useOutletContext();
+  const { search, theme = 'light' } = outlet || {};
   const [experiments, setExperiments] = useState([]);
   const [selectedExperimentId, setSelectedExperimentId] = useState('');
   const [paramsText, setParamsText] = useState('{}');
@@ -13,6 +14,19 @@ const RunExperiment = ({ experimentType, titleOverride } = {}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [runResult, setRunResult] = useState(null);
+
+  const headerMutedClass = theme === 'dark' ? 'text-gray-300' : 'text-gray-600';
+  const panelClass = theme === 'dark' ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6';
+  const panelClassSpaced = `${panelClass} space-y-4`;
+  const labelClass = theme === 'dark' ? 'text-gray-200' : 'text-gray-700';
+  const subtleTextClass = theme === 'dark' ? 'text-gray-300' : 'text-gray-600';
+  const metaTextClass = theme === 'dark' ? 'text-gray-400' : 'text-gray-500';
+  const selectClass = theme === 'dark'
+    ? 'w-full md:max-w-xl px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500'
+    : 'w-full md:max-w-xl px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500';
+  const textareaClass = theme === 'dark'
+    ? 'w-full font-mono text-xs px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500'
+    : 'w-full font-mono text-xs px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500';
 
   useEffect(() => {
     const load = async () => {
@@ -84,7 +98,7 @@ const RunExperiment = ({ experimentType, titleOverride } = {}) => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">{titleOverride || 'Run Experiment'}</h1>
-        <p className="text-gray-600 mt-1">
+        <p className={`${headerMutedClass} mt-1`}>
           Select an experiment, set parameters, optionally upload a dataset, then run.
         </p>
       </div>
@@ -95,14 +109,14 @@ const RunExperiment = ({ experimentType, titleOverride } = {}) => {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
+      <div className={panelClassSpaced}>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Experiment</label>
+          <label className={`block text-sm font-semibold ${labelClass} mb-2`}>Experiment</label>
           <select
             value={selectedExperimentId}
             onChange={(e) => setSelectedExperimentId(e.target.value)}
             disabled={loading || experiments.length === 0}
-            className="w-full md:max-w-xl px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className={selectClass}
           >
             {filteredExperiments.map((exp) => (
               <option key={exp.id} value={exp.id}>
@@ -111,33 +125,33 @@ const RunExperiment = ({ experimentType, titleOverride } = {}) => {
             ))}
           </select>
           {!loading && experiments.length === 0 && (
-            <div className="text-sm text-gray-600 mt-2">No experiments available.</div>
+            <div className={`text-sm ${subtleTextClass} mt-2`}>No experiments available.</div>
           )}
           {selectedExperiment?.description && (
-            <div className="text-sm text-gray-600 mt-2">{selectedExperiment.description}</div>
+            <div className={`text-sm ${subtleTextClass} mt-2`}>{selectedExperiment.description}</div>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Parameters (JSON)</label>
+          <label className={`block text-sm font-semibold ${labelClass} mb-2`}>Parameters (JSON)</label>
           <textarea
             value={paramsText}
             onChange={(e) => setParamsText(e.target.value)}
             rows={8}
-            className="w-full font-mono text-xs px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className={textareaClass}
             placeholder='{"seed": 1, "n_paths": 1000}'
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Upload Dataset (optional)</label>
+          <label className={`block text-sm font-semibold ${labelClass} mb-2`}>Upload Dataset (optional)</label>
           <input
             type="file"
             accept=".csv,text/csv,text/plain"
             onChange={(e) => setDatasetFile(e.target.files?.[0] || null)}
-            className="w-full"
+            className={theme === 'dark' ? 'w-full text-gray-100' : 'w-full'}
           />
-          <div className="text-xs text-gray-500 mt-1">
+          <div className={`text-xs ${metaTextClass} mt-1`}>
             If provided, the file content is sent as params.csv (useful for Data Processing).
           </div>
         </div>
@@ -151,7 +165,7 @@ const RunExperiment = ({ experimentType, titleOverride } = {}) => {
           >
             {running ? 'Running…' : 'Run'}
           </button>
-          <div className="text-sm text-gray-600">
+          <div className={`text-sm ${subtleTextClass}`}>
             {loading ? 'Live status: loading…' : running ? 'Live status: running…' : 'Live status: idle'}
           </div>
         </div>
@@ -159,8 +173,8 @@ const RunExperiment = ({ experimentType, titleOverride } = {}) => {
 
       {runResult && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <JsonPanel title="Metrics" value={runResult.metrics} />
-          <JsonPanel title="Output" value={runResult.output} />
+          <JsonPanel title="Metrics" value={runResult.metrics} theme={theme} />
+          <JsonPanel title="Output" value={runResult.output} theme={theme} />
         </div>
       )}
     </div>

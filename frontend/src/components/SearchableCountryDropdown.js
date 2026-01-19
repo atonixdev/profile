@@ -96,7 +96,7 @@ const SearchableCountryDropdown = ({ value, onChange }) => {
                   <div className="flex justify-between items-center">
                     <span>{country.name}</span>
                     <span className="text-xs text-gray-500 ml-2">
-                      {country.code} • {country.dialCode}
+                      {country.code}
                     </span>
                   </div>
                 </button>

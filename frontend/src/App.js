@@ -21,13 +21,7 @@ import Events from './pages/Events';
 import Resources from './pages/Resources';
 import LabLayout from './components/Lab/LabLayout';
 import LabOverview from './pages/Lab/Overview';
-import LabRunExperiment from './pages/Lab/RunExperiment';
-import LabHistory from './pages/Lab/History';
-import LabCompare from './pages/Lab/Compare';
-import LabModelsArtifacts from './pages/Lab/ModelsArtifacts';
 import LabSettings from './pages/Lab/Settings';
-import LabNotebooks from './pages/Lab/Notebooks';
-import LabNotebookEditor from './pages/Lab/NotebookEditor';
 import SpaceLabOverview from './pages/Lab/SpaceLabOverview';
 import SpaceModulePage from './pages/Lab/SpaceModulePage';
 import SelfLabOverview from './pages/Lab/SelfLabOverview';
@@ -45,6 +39,11 @@ import IoTLabDevices from './pages/Lab/IoTLabDevices';
 import IoTLabTelemetry from './pages/Lab/IoTLabTelemetry';
 import IoTLabAutomation from './pages/Lab/IoTLabAutomation';
 import IoTLabNetwork from './pages/Lab/IoTLabNetwork';
+import IoTLabAgriculture from './pages/Lab/IoTLabAgriculture';
+import IoTLabAgriFields from './pages/Lab/IoTLabAgriFields';
+import IoTLabAgriRules from './pages/Lab/IoTLabAgriRules';
+import IoTLabAgriEvents from './pages/Lab/IoTLabAgriEvents';
+import IoTLabWeatherMap from './pages/Lab/IoTLabWeatherMap';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -95,15 +94,17 @@ function App() {
             {/* Protected Lab Route (requires registration) */}
             <Route element={<ProtectedRoute redirectTo="/register" />}>
               <Route path="lab" element={<LabLayout />}>
-                {/* Experimentation Lab */}
+                {/* Dashboard */}
                 <Route index element={<LabOverview />} />
-                <Route path="run" element={<LabRunExperiment />} />
-                <Route path="history" element={<LabHistory />} />
-                <Route path="compare" element={<LabCompare />} />
-                <Route path="models" element={<LabModelsArtifacts />} />
-                <Route path="notebooks" element={<LabNotebooks />} />
-                <Route path="notebooks/:notebookId" element={<LabNotebookEditor />} />
                 <Route path="settings" element={<LabSettings />} />
+
+                {/* Legacy Research Lab routes (redirect to Dashboard) */}
+                <Route path="run" element={<Navigate to="/lab" replace />} />
+                <Route path="history" element={<Navigate to="/lab" replace />} />
+                <Route path="compare" element={<Navigate to="/lab" replace />} />
+                <Route path="models" element={<Navigate to="/lab" replace />} />
+                <Route path="notebooks" element={<Navigate to="/lab" replace />} />
+                <Route path="notebooks/:notebookId" element={<Navigate to="/lab" replace />} />
 
                 {/* Space Lab */}
                 <Route path="space" element={<SpaceLabOverview />} />
@@ -160,6 +161,11 @@ function App() {
                 <Route path="iot/telemetry" element={<IoTLabTelemetry />} />
                 <Route path="iot/automation" element={<IoTLabAutomation />} />
                 <Route path="iot/network" element={<IoTLabNetwork />} />
+                <Route path="iot/agriculture" element={<IoTLabAgriculture />} />
+                <Route path="iot/agriculture/fields" element={<IoTLabAgriFields />} />
+                <Route path="iot/agriculture/rules" element={<IoTLabAgriRules />} />
+                <Route path="iot/agriculture/events" element={<IoTLabAgriEvents />} />
+                <Route path="iot/weather-map" element={<IoTLabWeatherMap />} />
                 <Route path="iot/settings" element={<LabSettings />} />
               </Route>
             </Route>

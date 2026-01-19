@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'csp',
+
+    # WebSockets / realtime
+    'channels',
     
     # Local apps
     'accounts',
@@ -94,6 +97,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# ASGI (Channels)
+ASGI_APPLICATION = 'config.asgi.application'
+
+# Channels layer
+# Prefer Redis in production when REDIS_URL is set.
+REDIS_URL = config('REDIS_URL', default='').strip()
+if REDIS_URL:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {'hosts': [REDIS_URL]},
+        }
+    }
+else:
+    # Dev fallback (single-process). For multi-instance deployments, use Redis.
+    CHANNEL_LAYERS = {'default': {'BACKEND': 'channels.layers.InMemoryChannelLayer'}}
+
 # Database
 # Prefer DATABASE_URL when provided (works for local dev + production), else fall back to DB_HOST-based Postgres,
 # else fall back to SQLite.
@@ -106,6 +126,17 @@ if DATABASE_URL and dj_database_url:
             conn_max_age=60,
         )
     }
+    # If DATABASE_URL is sqlite:///db.sqlite3, dj_database_url yields NAME='db.sqlite3'
+    # which is relative to the process working directory. Make it absolute so the API
+    # keeps working even if the server is started from a different directory.
+    try:
+        default_db = DATABASES.get('default', {})
+        if default_db.get('ENGINE') == 'django.db.backends.sqlite3':
+            name = default_db.get('NAME')
+            if isinstance(name, str) and name and not os.path.isabs(name):
+                default_db['NAME'] = str((BASE_DIR / name).resolve())
+    except Exception:
+        pass
 elif config('DB_HOST', default=None):
     DATABASES = {
         'default': {
@@ -185,6 +216,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 
+    # Always return JSON error responses for API endpoints.
+    'EXCEPTION_HANDLER': 'config.exception_handler.api_exception_handler',
+
     # Rate limiting / brute-force protection
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
@@ -196,11 +230,18 @@ REST_FRAMEWORK = {
         'anon': config('DRF_THROTTLE_ANON', default='200/hour'),
         'user': config('DRF_THROTTLE_USER', default='1000/hour'),
 
+        # IoT agent polling + telemetry (device-authenticated)
+        'iot_agent': config('DRF_THROTTLE_IOT_AGENT', default='240/min'),
+
         # Auth endpoints
         'login': config('DRF_THROTTLE_LOGIN', default='10/min'),
         'register': config('DRF_THROTTLE_REGISTER', default='5/min'),
     },
 }
+
+# Third-party integrations
+# OpenWeather API key (keep in environment; do not hardcode)
+OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY', default='').strip()
 
 # JWT Settings
 SIMPLE_JWT = {
@@ -252,7 +293,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://api.atonixdev.org',
 ]
 
-if DEBUG:
+ALLOW_LOCALHOST_ORIGINS = config('ALLOW_LOCALHOST_ORIGINS', default=DEBUG, cast=bool)
+
+if ALLOW_LOCALHOST_ORIGINS:
     CSRF_TRUSTED_ORIGINS += [
         'http://localhost:3000',
         'http://127.0.0.1:3000',
@@ -261,12 +304,25 @@ if DEBUG:
     ]
 
 # Security Settings
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+#
+# IMPORTANT: If you run with DEBUG=False on localhost over plain HTTP (common in Docker),
+# forcing Secure cookies will prevent the browser from storing csrftoken/session/JWT cookies
+# and login will fail with "CSRF cookie not set".
+#
+# You can override these via env:
+#   SECURE_SSL_REDIRECT=False
+#   SESSION_COOKIE_SECURE=False
+#   CSRF_COOKIE_SECURE=False
+#   ALLOW_LOCALHOST_ORIGINS=True
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=(not DEBUG), cast=bool)
+USE_X_FORWARDED_HOST = config('USE_X_FORWARDED_HOST', default=(not DEBUG), cast=bool)
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=(not DEBUG), cast=bool)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=(not DEBUG), cast=bool)
+
+if SECURE_SSL_REDIRECT:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    USE_X_FORWARDED_HOST = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+
+if not DEBUG and SECURE_SSL_REDIRECT:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_HSTS_SECONDS = 31536000  # 1 year
@@ -325,12 +381,6 @@ CACHES = {
 # Cache Control Headers
 CACHE_MIDDLEWARE_SECONDS = 600
 CACHE_MIDDLEWARE_KEY_PREFIX = 'atonixdev'
-
-# HTTP Cache Middleware
-MIDDLEWARE += [
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-]
 
 # Set default caching headers for responses
 DEFAULT_CACHE_HEADERS = {

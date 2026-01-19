@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 const Settings = () => {
-  const { settings, setSettings } = useOutletContext();
+  const { settings, setSettings, theme } = useOutletContext();
+  const isDark = theme === 'dark';
 
   const compareCap = useMemo(() => Number(settings?.compareCap || 5), [settings]);
   const logsLimit = useMemo(() => Number(settings?.logsLimit || 200), [settings]);
@@ -40,14 +41,14 @@ const Settings = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Settings</h1>
-        <p className="text-gray-600 mt-1">Basic lab preferences.</p>
+        <p className={isDark ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>Basic lab preferences.</p>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <div className="text-sm font-semibold text-gray-700">Compare run limit</div>
-            <div className="text-xs text-gray-500 mt-1">Controls the max runs selectable in Compare.</div>
+            <div className={isDark ? 'text-sm font-semibold text-gray-200' : 'text-sm font-semibold text-gray-700'}>Compare run limit</div>
+            <div className={isDark ? 'text-xs text-gray-300 mt-1' : 'text-xs text-gray-500 mt-1'}>Controls the max runs selectable in Compare.</div>
             <input
               type="number"
               min={2}
@@ -57,13 +58,13 @@ const Settings = () => {
                 const n = clamp(Number(e.target.value || 0), 2, 10);
                 setSettings?.({ compareCap: n });
               }}
-              className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className={isDark ? 'mt-3 w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg'}
             />
           </div>
 
           <div>
-            <div className="text-sm font-semibold text-gray-700">Log lines limit</div>
-            <div className="text-xs text-gray-500 mt-1">Controls how many log lines the UI requests per run.</div>
+            <div className={isDark ? 'text-sm font-semibold text-gray-200' : 'text-sm font-semibold text-gray-700'}>Log lines limit</div>
+            <div className={isDark ? 'text-xs text-gray-300 mt-1' : 'text-xs text-gray-500 mt-1'}>Controls how many log lines the UI requests per run.</div>
             <input
               type="number"
               min={20}
@@ -73,20 +74,20 @@ const Settings = () => {
                 const n = clamp(Number(e.target.value || 0), 20, 1000);
                 setSettings?.({ logsLimit: n });
               }}
-              className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className={isDark ? 'mt-3 w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg'}
             />
           </div>
         </div>
 
-        <div className="text-xs text-gray-500 mt-4">
+        <div className={isDark ? 'text-xs text-gray-300 mt-4' : 'text-xs text-gray-500 mt-4'}>
           Saved locally in your browser (per device).
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="mb-4">
-          <div className="text-lg font-bold text-gray-900">Lab Dashboard Settings</div>
-          <div className="text-sm text-gray-600 mt-1">
+          <div className={isDark ? 'text-lg font-bold text-white' : 'text-lg font-bold text-gray-900'}>Lab Dashboard Settings</div>
+          <div className={isDark ? 'text-sm text-gray-300 mt-1' : 'text-sm text-gray-600 mt-1'}>
             Configure the name and tagline shown in the lab navigation and sidebars.
           </div>
         </div>
@@ -99,14 +100,16 @@ const Settings = () => {
             const description = current.description || d.fallbackDescription;
 
             return (
-              <div key={d.id} className="border border-gray-200 rounded-lg p-5">
+              <div key={d.id} className={isDark ? 'border border-white/10 rounded-lg p-5 bg-white/5' : 'border border-gray-200 rounded-lg p-5'}>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <div className="text-sm font-semibold text-gray-800">{d.fallbackLabel}</div>
-                    <div className="text-xs text-gray-500 mt-1">Domain key: <span className="font-mono">{d.id}</span></div>
+                    <div className={isDark ? 'text-sm font-semibold text-white' : 'text-sm font-semibold text-gray-800'}>{d.fallbackLabel}</div>
+                    <div className={isDark ? 'text-xs text-gray-300 mt-1' : 'text-xs text-gray-500 mt-1'}>
+                      Domain key: <span className="font-mono">{d.id}</span>
+                    </div>
                   </div>
 
-                  <label className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 select-none">
+                  <label className={isDark ? 'inline-flex items-center gap-2 text-sm font-semibold text-gray-200 select-none' : 'inline-flex items-center gap-2 text-sm font-semibold text-gray-700 select-none'}>
                     <input
                       type="checkbox"
                       checked={enabled}
@@ -119,22 +122,22 @@ const Settings = () => {
 
                 <div className="mt-4 space-y-4">
                   <div>
-                    <div className="text-xs font-semibold text-gray-700">Label</div>
+                    <div className={isDark ? 'text-xs font-semibold text-gray-200' : 'text-xs font-semibold text-gray-700'}>Label</div>
                     <input
                       type="text"
                       value={label}
                       onChange={(e) => updateDomain(d.id, { label: e.target.value })}
-                      className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      className={isDark ? 'mt-2 w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg'}
                     />
                   </div>
 
                   <div>
-                    <div className="text-xs font-semibold text-gray-700">Tagline</div>
+                    <div className={isDark ? 'text-xs font-semibold text-gray-200' : 'text-xs font-semibold text-gray-700'}>Tagline</div>
                     <input
                       type="text"
                       value={description}
                       onChange={(e) => updateDomain(d.id, { description: e.target.value })}
-                      className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      className={isDark ? 'mt-2 w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg'}
                     />
                   </div>
                 </div>
@@ -143,7 +146,7 @@ const Settings = () => {
           })}
         </div>
 
-        <div className="text-xs text-gray-500 mt-4">
+        <div className={isDark ? 'text-xs text-gray-300 mt-4' : 'text-xs text-gray-500 mt-4'}>
           These settings are saved locally in your browser.
         </div>
       </div>

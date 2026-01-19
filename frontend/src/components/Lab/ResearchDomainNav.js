@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { FiZap, FiActivity, FiCpu, FiRadio, FiBarChart, FiMenu, FiX } from 'react-icons/fi';
 
-const ResearchDomainNav = ({ domainsMeta = {} }) => {
+const ResearchDomainNav = ({ domainsMeta = {}, theme = 'light' }) => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -46,38 +46,68 @@ const ResearchDomainNav = ({ domainsMeta = {} }) => {
   }, [location.pathname, isExperimentationActive, domains]);
 
   return (
-    <div className="bg-gradient-to-r from-[#0A0F1F] via-[#0D1425] to-[#0A0F1F] border-b border-[#1A4FFF]/20 shadow-xl">
+    <div
+      className={
+        theme === 'dark'
+          ? 'bg-gradient-to-r from-[#0A0F1F] via-[#0D1425] to-[#0A0F1F] border-b border-[#1A4FFF]/20 shadow-xl'
+          : 'bg-white border-b border-gray-200 shadow-sm'
+      }
+    >
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
           <div>
-            <h1 className="text-2xl font-bold text-white font-['Poppins']">
-              Atonix Research Lab
+            <h1
+              className={
+                theme === 'dark'
+                  ? "text-2xl font-bold text-white font-['Poppins']"
+                  : "text-2xl font-bold text-gray-900 font-['Poppins']"
+              }
+            >
+              Dashboard
             </h1>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className={theme === 'dark' ? 'text-xs text-gray-400 mt-1' : 'text-xs text-gray-600 mt-1'}>
               Unified Command Center for Multi-Domain Research
             </p>
           </div>
 
           {/* Desktop version */}
-          <div className="hidden sm:block text-xs text-[#00E0FF] font-semibold tracking-wider sm:text-right">
+          <div
+            className={
+              theme === 'dark'
+                ? 'hidden sm:block text-xs text-[#00E0FF] font-semibold tracking-wider sm:text-right'
+                : 'hidden sm:block text-xs text-primary-700 font-semibold tracking-wider sm:text-right'
+            }
+          >
             v2.0.0
           </div>
 
           {/* Mobile menu toggle */}
           <div className="sm:hidden flex items-center justify-between gap-3">
-            <div className="text-xs text-gray-300">
-              <span className="font-semibold text-white">{activeDomain?.label}</span>
-              <span className="text-gray-500"> — </span>
-              <span className="text-gray-400">{activeDomain?.description}</span>
+            <div className={theme === 'dark' ? 'text-xs text-gray-300' : 'text-xs text-gray-700'}>
+              <span className={theme === 'dark' ? 'font-semibold text-white' : 'font-semibold text-gray-900'}>
+                {activeDomain?.label}
+              </span>
+              <span className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}> — </span>
+              <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>
+                {activeDomain?.description}
+              </span>
             </div>
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
-              className="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10"
+              className={
+                theme === 'dark'
+                  ? 'inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10'
+                  : 'inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 bg-white hover:bg-gray-50'
+              }
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <FiX className="text-white" /> : <FiMenu className="text-white" />}
+              {mobileOpen ? (
+                <FiX className={theme === 'dark' ? 'text-white' : 'text-gray-700'} />
+              ) : (
+                <FiMenu className={theme === 'dark' ? 'text-white' : 'text-gray-700'} />
+              )}
             </button>
           </div>
         </div>
@@ -99,9 +129,13 @@ const ResearchDomainNav = ({ domainsMeta = {} }) => {
                     return [
                       'group flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300',
                       'border backdrop-blur-md w-full min-w-0',
-                      isActive
-                        ? 'bg-[#1A4FFF]/20 border-[#1A4FFF]'
-                        : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-[#00E0FF]/50',
+                      theme === 'dark'
+                        ? isActive
+                          ? 'bg-[#1A4FFF]/20 border-[#1A4FFF]'
+                          : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-[#00E0FF]/50'
+                        : isActive
+                          ? 'bg-primary-50 border-primary-200'
+                          : 'bg-white border-gray-200 hover:bg-gray-50',
                     ].join(' ');
                   }}
                 >
@@ -110,19 +144,37 @@ const ResearchDomainNav = ({ domainsMeta = {} }) => {
                     return (
                       <>
                         <Icon
-                          className={`text-lg transition-colors ${
-                            isActive ? 'text-[#00E0FF]' : 'text-gray-400 group-hover:text-[#00E0FF]'
-                          }`}
+                          className={
+                            theme === 'dark'
+                              ? `text-lg transition-colors ${
+                                  isActive ? 'text-[#00E0FF]' : 'text-gray-400 group-hover:text-[#00E0FF]'
+                                }`
+                              : `text-lg transition-colors ${
+                                  isActive ? 'text-primary-700' : 'text-gray-500 group-hover:text-primary-700'
+                                }`
+                          }
                         />
                         <div className="flex flex-col min-w-0">
                           <span
-                            className={`text-sm font-semibold transition-colors ${
-                              isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
-                            }`}
+                            className={
+                              theme === 'dark'
+                                ? `text-sm font-semibold transition-colors ${
+                                    isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                                  }`
+                                : `text-sm font-semibold transition-colors ${
+                                    isActive ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
+                                  }`
+                            }
                           >
                             {domain.label}
                           </span>
-                          <span className="text-xs text-gray-500 leading-snug truncate">
+                          <span
+                            className={
+                              theme === 'dark'
+                                ? 'text-xs text-gray-500 leading-snug truncate'
+                                : 'text-xs text-gray-500 leading-snug truncate'
+                            }
+                          >
                             {domain.description}
                           </span>
                         </div>
@@ -150,9 +202,13 @@ const ResearchDomainNav = ({ domainsMeta = {} }) => {
                   return [
                     'group flex items-center gap-3 px-5 py-3 rounded-lg transition-all duration-300',
                     'border backdrop-blur-md w-full min-w-0',
-                    isActive
-                      ? 'bg-[#1A4FFF]/20 border-[#1A4FFF] shadow-lg shadow-[#1A4FFF]/25'
-                      : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-[#00E0FF]/50',
+                    theme === 'dark'
+                      ? isActive
+                        ? 'bg-[#1A4FFF]/20 border-[#1A4FFF] shadow-lg shadow-[#1A4FFF]/25'
+                        : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-[#00E0FF]/50'
+                      : isActive
+                        ? 'bg-primary-50 border-primary-200'
+                        : 'bg-white border-gray-200 hover:bg-gray-50',
                   ].join(' ');
                 }}
               >
@@ -161,15 +217,27 @@ const ResearchDomainNav = ({ domainsMeta = {} }) => {
                   return (
                     <>
                       <Icon
-                        className={`text-xl transition-colors ${
-                          isActive ? 'text-[#00E0FF]' : 'text-gray-400 group-hover:text-[#00E0FF]'
-                        }`}
+                        className={
+                          theme === 'dark'
+                            ? `text-xl transition-colors ${
+                                isActive ? 'text-[#00E0FF]' : 'text-gray-400 group-hover:text-[#00E0FF]'
+                              }`
+                            : `text-xl transition-colors ${
+                                isActive ? 'text-primary-700' : 'text-gray-500 group-hover:text-primary-700'
+                              }`
+                        }
                       />
                       <div className="flex flex-col">
                         <span
-                          className={`text-sm font-semibold transition-colors ${
-                            isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
-                          }`}
+                          className={
+                            theme === 'dark'
+                              ? `text-sm font-semibold transition-colors ${
+                                  isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                                }`
+                              : `text-sm font-semibold transition-colors ${
+                                  isActive ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
+                                }`
+                          }
                         >
                           {domain.label}
                         </span>

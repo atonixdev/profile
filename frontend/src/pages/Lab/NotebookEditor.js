@@ -11,6 +11,7 @@ const NotebookEditor = () => {
   const { notebookId } = useParams();
   const navigate = useNavigate();
   const { theme } = useOutletContext();
+  const isDark = theme === 'dark';
 
   const [notebook, setNotebook] = useState(null);
   const [cells, setCells] = useState([]);
@@ -167,7 +168,7 @@ const NotebookEditor = () => {
         <button
           type="button"
           onClick={() => navigate('/lab/notebooks')}
-          className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50"
+          className={isDark ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white' : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50'}
         >
           Back to Notebooks
         </button>
@@ -185,10 +186,10 @@ const NotebookEditor = () => {
               value={notebook.name || ''}
               onChange={(e) => setNotebook((prev) => ({ ...prev, name: e.target.value }))}
               onBlur={(e) => updateNotebookName(e.target.value)}
-              className="w-full sm:max-w-xl px-3 py-2 border border-gray-300 rounded-lg"
+              className={isDark ? 'w-full sm:max-w-xl px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'w-full sm:max-w-xl px-3 py-2 border border-gray-300 rounded-lg'}
               placeholder="Notebook name"
             />
-            <div className="text-sm text-gray-600">
+            <div className={isDark ? 'text-sm text-gray-300' : 'text-sm text-gray-600'}>
               Kernel: <span className="font-semibold">{kernelStatus?.status || 'unknown'}</span>
             </div>
           </div>
@@ -198,14 +199,14 @@ const NotebookEditor = () => {
           <button
             type="button"
             onClick={() => navigate('/lab/notebooks')}
-            className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50"
+            className={isDark ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white' : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50'}
           >
             Back
           </button>
           <button
             type="button"
             onClick={handleDeleteNotebook}
-            className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50"
+            className={isDark ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white' : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50'}
           >
             Delete
           </button>
@@ -216,9 +217,9 @@ const NotebookEditor = () => {
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">{error}</div>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6 space-y-4' : 'bg-white rounded-lg shadow-md p-6 space-y-4'}>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div className="font-bold text-gray-900">Notebook Actions</div>
+          <div className={isDark ? 'font-bold text-white' : 'font-bold text-gray-900'}>Notebook Actions</div>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
@@ -235,20 +236,20 @@ const NotebookEditor = () => {
             value={installPkg}
             onChange={(e) => setInstallPkg(e.target.value)}
             placeholder="Install package (e.g., numpy)"
-            className="w-full md:max-w-md px-3 py-2 border border-gray-300 rounded-lg"
+            className={isDark ? 'w-full md:max-w-md px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'w-full md:max-w-md px-3 py-2 border border-gray-300 rounded-lg'}
           />
           <button
             type="button"
             onClick={handleInstall}
             disabled={installing || !installPkg.trim()}
-            className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50 disabled:opacity-60"
+            className={isDark ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white disabled:opacity-60' : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50 disabled:opacity-60'}
           >
             {installing ? 'Installing…' : 'Install'}
           </button>
         </div>
 
         {installOutput && (
-          <div className="bg-gray-50 border border-gray-200 rounded p-3 text-sm whitespace-pre-wrap">
+          <div className={isDark ? 'bg-black/30 border border-white/10 rounded p-3 text-sm whitespace-pre-wrap text-gray-100' : 'bg-gray-50 border border-gray-200 rounded p-3 text-sm whitespace-pre-wrap'}>
             {installOutput.stderr ? installOutput.stderr : installOutput.stdout}
           </div>
         )}
@@ -256,15 +257,15 @@ const NotebookEditor = () => {
 
       <div className="space-y-6">
         {cells.length === 0 ? (
-          <div className="text-gray-600">No cells yet. Click “Add Cell”.</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>No cells yet. Click “Add Cell”.</div>
         ) : (
           cells
             .slice()
             .sort((a, b) => (a.position || 0) - (b.position || 0))
             .map((cell, idx) => (
-              <div key={cell.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
-                  <div className="font-semibold text-gray-900">Cell {idx + 1}</div>
+              <div key={cell.id} className={isDark ? 'bg-white/5 border border-white/10 rounded-lg overflow-hidden' : 'bg-white rounded-lg shadow-md overflow-hidden'}>
+                <div className={isDark ? 'px-4 py-3 border-b border-white/10 flex items-center justify-between' : 'px-4 py-3 border-b border-gray-200 flex items-center justify-between'}>
+                  <div className={isDark ? 'font-semibold text-white' : 'font-semibold text-gray-900'}>Cell {idx + 1}</div>
                   <button
                     type="button"
                     onClick={() => handleRunCell(cell)}
@@ -276,7 +277,7 @@ const NotebookEditor = () => {
                 </div>
 
                 <div className="p-4">
-                  <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <div className={isDark ? 'border border-white/10 rounded-lg overflow-hidden' : 'border border-gray-200 rounded-lg overflow-hidden'}>
                     <Editor
                       height="220px"
                       language="python"
@@ -294,14 +295,14 @@ const NotebookEditor = () => {
 
                   {(cell.last_stdout || cell.last_stderr) && (
                     <div className="mt-4">
-                      <div className="text-xs text-gray-600 mb-2">
+                      <div className={isDark ? 'text-xs text-gray-300 mb-2' : 'text-xs text-gray-600 mb-2'}>
                         Last run: {cell.last_executed_at ? new Date(cell.last_executed_at).toLocaleString() : '-'}
                         {cell.last_duration_ms ? ` • ${cell.last_duration_ms} ms` : ''}
                         {cell.last_exit_code !== null && cell.last_exit_code !== undefined ? ` • exit ${cell.last_exit_code}` : ''}
                       </div>
 
                       {cell.last_stdout && (
-                        <pre className="text-sm bg-gray-50 border border-gray-200 rounded p-3 whitespace-pre-wrap overflow-x-auto">{cell.last_stdout}</pre>
+                        <pre className={isDark ? 'text-sm bg-black/30 border border-white/10 text-gray-100 rounded p-3 whitespace-pre-wrap overflow-x-auto' : 'text-sm bg-gray-50 border border-gray-200 rounded p-3 whitespace-pre-wrap overflow-x-auto'}>{cell.last_stdout}</pre>
                       )}
                       {cell.last_stderr && (
                         <pre className="text-sm bg-red-50 border border-red-200 text-red-700 rounded p-3 whitespace-pre-wrap overflow-x-auto mt-2">{cell.last_stderr}</pre>

@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import logging
+
 from django.conf import settings
 from django.middleware.csrf import get_token
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
+from django.db import DatabaseError
 from rest_framework import permissions, status
+from rest_framework.authentication import BaseAuthentication
 from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
@@ -13,13 +17,16 @@ from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from .jwt import EmailOrUsernameTokenObtainPairSerializer
 
 
+logger = logging.getLogger(__name__)
+
+
 ACCESS_COOKIE = "access_token"
 REFRESH_COOKIE = "refresh_token"
 
 
 def _cookie_params() -> dict:
     # In production behind HTTPS, cookies must be Secure.
-    secure = not settings.DEBUG
+    secure = bool(getattr(settings, 'SESSION_COOKIE_SECURE', (not settings.DEBUG)))
     params = {
         "httponly": True,
         "secure": secure,
@@ -34,7 +41,14 @@ def _cookie_params() -> dict:
 
 class CsrfView(APIView):
     permission_classes = [permissions.AllowAny]
+    # IMPORTANT:
+    # DRF runs authentication before permission checks. Our default auth backend
+    # (`CookieJWTAuthentication`) loads the user from the database, which means
+    # even this public endpoint will fail hard if the DB is unreachable.
+    # CSRF token issuance should not depend on the DB.
+    authentication_classes: list[type[BaseAuthentication]] = []
 
+    @method_decorator(ensure_csrf_cookie)
     def get(self, request):
         # Ensure a CSRF cookie exists.
         token = get_token(request)
@@ -54,7 +68,14 @@ class CookieLoginView(APIView):
         serializer = EmailOrUsernameTokenObtainPairSerializer(
             data=request.data, context={"request": request}
         )
-        serializer.is_valid(raise_exception=True)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except DatabaseError:
+            logger.exception("Database error during cookie login")
+            return Response(
+                {"detail": "Login temporarily unavailable. Please try again."},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
         tokens = serializer.validated_data
 
         access = tokens.get("access")

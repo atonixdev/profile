@@ -31,8 +31,19 @@ class CookieJWTAuthentication(JWTAuthentication):
         if not raw_token:
             return None
 
-        validated_token = self.get_validated_token(raw_token)
-        user = self.get_user(validated_token)
+        # IMPORTANT:
+        # When using cookies in browsers, it's possible to have a stale/invalid access cookie
+        # (e.g. user was deleted, rotated keys, etc.). SimpleJWT raises AuthenticationFailed
+        # with code "user_not_found" which would block even public endpoints because DRF
+        # runs authentication before permissions.
+        #
+        # Treat cookie-auth failures as anonymous requests. Protected endpoints will still
+        # be denied by permission checks.
+        try:
+            validated_token = self.get_validated_token(raw_token)
+            user = self.get_user(validated_token)
+        except Exception:
+            return None
 
         if request.method not in ("GET", "HEAD", "OPTIONS", "TRACE"):
             _enforce_csrf(request)

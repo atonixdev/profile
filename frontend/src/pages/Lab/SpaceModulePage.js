@@ -1,17 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 import { FiActivity, FiGlobe, FiTarget, FiTrendingUp } from 'react-icons/fi';
 
 import { spaceService } from '../../services';
 
-const StatCard = ({ icon: Icon, label, value, sub }) => {
+const StatCard = ({ icon: Icon, label, value, sub, isDark }) => {
   return (
-    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-xl">
+    <div className={`${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'} backdrop-blur-md border rounded-xl p-6 shadow-xl`}>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-sm text-gray-400 font-medium mb-2">{label}</div>
-          <div className="text-2xl font-bold text-white font-['Poppins'] break-words">{value}</div>
-          {sub ? <div className="text-xs text-gray-400 mt-2">{sub}</div> : null}
+          <div className={`text-sm font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{label}</div>
+          <div className={`text-2xl font-bold font-['Poppins'] break-words ${isDark ? 'text-white' : 'text-gray-900'}`}>{value}</div>
+          {sub ? <div className={`text-xs mt-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{sub}</div> : null}
         </div>
         <Icon className="text-3xl text-[#00E0FF] opacity-60 flex-shrink-0" />
       </div>
@@ -20,6 +21,9 @@ const StatCard = ({ icon: Icon, label, value, sub }) => {
 };
 
 const SpaceModulePage = ({ title, description, kind }) => {
+  const { theme } = useOutletContext();
+  const isDark = theme === 'dark';
+
   const [state, setState] = useState({
     loading: true,
     error: null,
@@ -87,8 +91,8 @@ const SpaceModulePage = ({ title, description, kind }) => {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold text-white font-['Poppins']">{title}</h1>
-        <p className="text-gray-400 mt-2">{description}</p>
+        <h1 className={`text-4xl font-bold font-['Poppins'] ${isDark ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
+        <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{description}</p>
       </div>
 
       {state.error && (
@@ -104,6 +108,7 @@ const SpaceModulePage = ({ title, description, kind }) => {
             label="APOD"
             value={state.loading ? 'Loading…' : (state.apod?.date || '—')}
             sub={state.apod?.title || ''}
+            isDark={isDark}
           />
         )}
         {fetchPlan.neo && (
@@ -112,6 +117,7 @@ const SpaceModulePage = ({ title, description, kind }) => {
             label="Near‑Earth Objects"
             value={state.loading ? 'Loading…' : (state.neo?.total_near_earth_objects ?? '—')}
             sub={state.neo ? `Hazardous: ${state.neo.potentially_hazardous_count}` : ''}
+            isDark={isDark}
           />
         )}
         {fetchPlan.iss && (
@@ -120,6 +126,7 @@ const SpaceModulePage = ({ title, description, kind }) => {
             label="ISS Position"
             value={state.loading ? 'Loading…' : issLabel}
             sub={state.iss?.altitude_km != null ? `Alt: ${Number(state.iss.altitude_km).toFixed(0)} km` : ''}
+            isDark={isDark}
           />
         )}
         {fetchPlan.donki && (
@@ -128,19 +135,20 @@ const SpaceModulePage = ({ title, description, kind }) => {
             label="Space Weather"
             value={state.loading ? 'Loading…' : (state.donki?.count ?? '—')}
             sub={state.donki ? 'DONKI notifications (range)' : ''}
+            isDark={isDark}
           />
         )}
       </div>
 
       {fetchPlan.apod && state.apod?.media_type === 'image' && state.apod?.url && (
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-xl">
-          <h2 className="text-xl font-bold text-white mb-4 font-['Poppins']">Astronomy Picture of the Day</h2>
+        <div className={`${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'} backdrop-blur-md border rounded-xl p-6 shadow-xl`}>
+          <h2 className={`text-xl font-bold mb-4 font-['Poppins'] ${isDark ? 'text-white' : 'text-gray-900'}`}>Astronomy Picture of the Day</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             <a
               href={state.apod.hdurl || state.apod.url}
               target="_blank"
               rel="noreferrer"
-              className="block rounded-lg overflow-hidden border border-white/10"
+              className={`block rounded-lg overflow-hidden border ${isDark ? 'border-white/10' : 'border-gray-200'}`}
             >
               <img
                 src={state.apod.url}
@@ -150,9 +158,9 @@ const SpaceModulePage = ({ title, description, kind }) => {
               />
             </a>
             <div className="space-y-2">
-              <div className="text-white font-semibold">{state.apod.title}</div>
-              <div className="text-xs text-gray-400">{state.apod.date}</div>
-              <div className="text-sm text-gray-300 leading-relaxed">
+              <div className={`${isDark ? 'text-white' : 'text-gray-900'} font-semibold`}>{state.apod.title}</div>
+              <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{state.apod.date}</div>
+              <div className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 {String(state.apod.explanation || '').slice(0, 260)}
                 {state.apod.explanation && String(state.apod.explanation).length > 260 ? '…' : ''}
               </div>

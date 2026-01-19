@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { FiArrowLeft, FiRefreshCw } from 'react-icons/fi';
 
 import { spaceService } from '../../services';
@@ -18,6 +18,8 @@ const truncateJson = (value, limit = 4000) => {
 
 const SpaceApiPage = () => {
   const { apiId } = useParams();
+  const { theme } = useOutletContext();
+  const isDark = theme === 'dark';
 
   const config = useMemo(() => {
     const defs = {
@@ -129,8 +131,8 @@ const SpaceApiPage = () => {
     return (
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold text-white font-['Poppins']">Unknown API</h1>
-          <p className="text-gray-400 mt-2">This Space Lab integration key is not configured.</p>
+          <h1 className={`text-3xl font-bold font-['Poppins'] ${isDark ? 'text-white' : 'text-gray-900'}`}>Unknown API</h1>
+          <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>This Space Lab integration key is not configured.</p>
         </div>
         <Link to="/lab/space" className="inline-flex items-center gap-2 text-[#00E0FF] font-semibold">
           <FiArrowLeft />
@@ -144,11 +146,18 @@ const SpaceApiPage = () => {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white font-['Poppins']">{config.title}</h1>
-          <p className="text-gray-400 mt-2">{config.description}</p>
+          <h1 className={`text-3xl font-bold font-['Poppins'] ${isDark ? 'text-white' : 'text-gray-900'}`}>{config.title}</h1>
+          <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{config.description}</p>
         </div>
         <div className="flex items-center gap-3">
-          <Link to="/lab/space" className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white font-semibold hover:bg-white/10">
+          <Link
+            to="/lab/space"
+            className={`px-4 py-2 rounded-lg font-semibold ${
+              isDark
+                ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                : 'bg-white border border-gray-200 text-gray-900 hover:bg-gray-50'
+            }`}
+          >
             <FiArrowLeft className="inline mr-2" />
             Space Lab
           </Link>
@@ -169,17 +178,22 @@ const SpaceApiPage = () => {
         </div>
       )}
 
-      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-xl">
-        <div className="text-sm text-gray-400 font-semibold mb-3">Response preview</div>
-        <pre className="text-xs text-gray-200 overflow-auto whitespace-pre-wrap">
+      <div className={`${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'} backdrop-blur-md border rounded-xl p-6 shadow-xl`}>
+        <div className={`text-sm font-semibold mb-3 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>Response preview</div>
+        <pre className={`text-xs overflow-auto whitespace-pre-wrap ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
           {state.loading ? 'Loading…' : truncateJson(state.data)}
         </pre>
       </div>
 
       {apiId === 'apod' && state.data?.media_type === 'image' && state.data?.url && (
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-xl">
-          <div className="text-lg font-bold text-white mb-3 font-['Poppins']">APOD Image</div>
-          <a href={state.data.hdurl || state.data.url} target="_blank" rel="noreferrer" className="block rounded-lg overflow-hidden border border-white/10">
+        <div className={`${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'} backdrop-blur-md border rounded-xl p-6 shadow-xl`}>
+          <div className={`text-lg font-bold mb-3 font-['Poppins'] ${isDark ? 'text-white' : 'text-gray-900'}`}>APOD Image</div>
+          <a
+            href={state.data.hdurl || state.data.url}
+            target="_blank"
+            rel="noreferrer"
+            className={`block rounded-lg overflow-hidden border ${isDark ? 'border-white/10' : 'border-gray-200'}`}
+          >
             <img src={state.data.url} alt={state.data.title || 'APOD'} className="w-full h-72 object-cover" loading="lazy" />
           </a>
         </div>

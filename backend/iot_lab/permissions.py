@@ -6,3 +6,12 @@ class ReadOnlyOrAuthenticatedWrite(BasePermission):
         if request.method in SAFE_METHODS:
             return True
         return bool(request.user and request.user.is_authenticated)
+
+
+class AuthenticatedReadOnlyOrAdminWrite(BasePermission):
+    """Requires auth for safe methods; requires staff for writes."""
+
+    def has_permission(self, request, view):
+        if request.method in SAFE_METHODS:
+            return bool(request.user and request.user.is_authenticated)
+        return bool(request.user and request.user.is_staff)

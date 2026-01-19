@@ -3,18 +3,26 @@ import { useOutletContext } from 'react-router-dom';
 import { labService } from '../../services';
 import JsonPanel from '../../components/Lab/JsonPanel';
 
-const StatusBadge = ({ status }) => {
+const StatusBadge = ({ status, theme }) => {
+  const isDark = theme === 'dark';
   const cls =
     status === 'succeeded'
-      ? 'bg-green-100 text-green-700'
+      ? isDark
+        ? 'bg-green-500/20 text-green-200'
+        : 'bg-green-100 text-green-700'
       : status === 'failed'
-      ? 'bg-red-100 text-red-700'
+      ? isDark
+        ? 'bg-red-500/20 text-red-200'
+        : 'bg-red-100 text-red-700'
+      : isDark
+      ? 'bg-white/10 text-gray-200'
       : 'bg-gray-100 text-gray-700';
   return <span className={`px-2 py-1 rounded text-xs font-semibold ${cls}`}>{status}</span>;
 };
 
 const History = () => {
-  const { search } = useOutletContext();
+  const { search, theme } = useOutletContext();
+  const isDark = theme === 'dark';
   const [runs, setRuns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -98,7 +106,9 @@ const History = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Experiment History</h1>
-        <p className="text-gray-600 mt-1">Version history of experiment runs, with parameters and outputs stored server-side.</p>
+        <p className={isDark ? 'text-gray-300 mt-1' : 'text-gray-600 mt-1'}>
+          Version history of experiment runs, with parameters and outputs stored server-side.
+        </p>
       </div>
 
       {error && (
@@ -107,14 +117,14 @@ const History = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
         <div className="flex flex-col md:flex-row md:items-end gap-4 mb-4">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Status</label>
+            <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Status</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg"
+              className={isDark ? 'px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'px-3 py-2 border border-gray-300 rounded-lg'}
             >
               <option value="">All</option>
               <option value="succeeded">succeeded</option>
@@ -125,11 +135,11 @@ const History = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Type</label>
+            <label className={isDark ? 'block text-sm font-semibold text-gray-200 mb-2' : 'block text-sm font-semibold text-gray-700 mb-2'}>Type</label>
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg"
+              className={isDark ? 'px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg' : 'px-3 py-2 border border-gray-300 rounded-lg'}
             >
               <option value="">All</option>
               {experimentTypes.map((t) => (
@@ -138,13 +148,13 @@ const History = () => {
             </select>
           </div>
 
-          <div className="text-sm text-gray-500 md:ml-auto">
+          <div className={isDark ? 'text-sm text-gray-300 md:ml-auto' : 'text-sm text-gray-500 md:ml-auto'}>
             Showing {filtered.length} / {runs.length}
           </div>
         </div>
 
         {filtered.length === 0 ? (
-          <div className="text-gray-600">No runs match your filters.</div>
+          <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>No runs match your filters.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -161,15 +171,23 @@ const History = () => {
                 {filtered.map((r) => (
                   <tr
                     key={r.id}
-                    className={`border-b last:border-b-0 cursor-pointer ${String(selectedRunId) === String(r.id) ? 'bg-primary-50' : ''}`}
+                    className={`border-b last:border-b-0 cursor-pointer ${
+                      String(selectedRunId) === String(r.id)
+                        ? isDark
+                          ? 'bg-white/10'
+                          : 'bg-primary-50'
+                        : ''
+                    }`}
                     onClick={() => setSelectedRunId(String(r.id))}
                   >
                     <td className="py-2 font-semibold">#{r.id}</td>
                     <td className="py-2">
-                      <div className="font-semibold text-gray-900">{r.experiment?.name || r.experiment?.slug}</div>
-                      <div className="text-xs text-gray-500">{r.experiment?.experiment_type}</div>
+                      <div className={isDark ? 'font-semibold text-white' : 'font-semibold text-gray-900'}>
+                        {r.experiment?.name || r.experiment?.slug}
+                      </div>
+                      <div className={isDark ? 'text-xs text-gray-300' : 'text-xs text-gray-500'}>{r.experiment?.experiment_type}</div>
                     </td>
-                    <td className="py-2"><StatusBadge status={r.status} /></td>
+                    <td className="py-2"><StatusBadge status={r.status} theme={theme} /></td>
                     <td className="py-2">{r.duration_ms ? `${r.duration_ms} ms` : '-'}</td>
                     <td className="py-2">{r.created_at ? new Date(r.created_at).toLocaleString() : '-'}</td>
                   </tr>
@@ -185,32 +203,34 @@ const History = () => {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold">Inspect Run #{selectedRun.id}</h2>
-              <div className="text-sm text-gray-600">
+              <div className={isDark ? 'text-sm text-gray-300' : 'text-sm text-gray-600'}>
                 {selectedRun.experiment?.name || selectedRun.experiment?.slug} • {selectedRun.status}
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <JsonPanel title="Parameters" value={selectedRun.params} />
-            <JsonPanel title="Metrics" value={selectedRun.metrics} />
-            <JsonPanel title="Output" value={selectedRun.output} />
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Logs</h3>
-              <div className="bg-gray-50 border border-gray-200 rounded p-4 text-xs space-y-2">
+            <JsonPanel title="Parameters" value={selectedRun.params} theme={theme} />
+            <JsonPanel title="Metrics" value={selectedRun.metrics} theme={theme} />
+            <JsonPanel title="Output" value={selectedRun.output} theme={theme} />
+            <div className={isDark ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6'}>
+              <h3 className={isDark ? 'text-lg font-bold text-white mb-3' : 'text-lg font-bold text-gray-900 mb-3'}>Logs</h3>
+              <div className={isDark ? 'bg-black/30 border border-white/10 rounded p-4 text-xs space-y-2' : 'bg-gray-50 border border-gray-200 rounded p-4 text-xs space-y-2'}>
                 {runLogs.length === 0 ? (
-                  <div className="text-gray-600">No logs found.</div>
+                  <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>No logs found.</div>
                 ) : (
                   runLogs.slice(0, 200).map((l, idx) => (
                     <div key={idx} className="flex gap-2">
                       <span className="font-bold">{l.level}:</span>
-                      <span className="text-gray-700">{l.message}</span>
+                      <span className={isDark ? 'text-gray-200' : 'text-gray-700'}>{l.message}</span>
                     </div>
                   ))
                 )}
               </div>
               {runLogs.length > 200 && (
-                <div className="text-xs text-gray-500 mt-2">Showing first 200 log lines.</div>
+                <div className={isDark ? 'text-xs text-gray-300 mt-2' : 'text-xs text-gray-500 mt-2'}>
+                  Showing first 200 log lines.
+                </div>
               )}
             </div>
           </div>

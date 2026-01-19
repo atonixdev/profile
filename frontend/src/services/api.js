@@ -22,6 +22,22 @@ export function setCsrfToken(token) {
   csrfTokenMemory = token || null;
 }
 
+async function ensureCsrfToken() {
+  const existing = getCookie('csrftoken') || csrfTokenMemory;
+  if (existing) return existing;
+
+  try {
+    const resp = await api.get('/auth/csrf/');
+    if (resp?.data?.csrfToken) {
+      setCsrfToken(resp.data.csrfToken);
+      return resp.data.csrfToken;
+    }
+  } catch {
+    // ignore; caller will handle missing CSRF
+  }
+  return getCookie('csrftoken') || csrfTokenMemory;
+}
+
 function getCookie(name) {
   if (typeof document === 'undefined') return null;
   const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
@@ -32,10 +48,10 @@ const unsafeMethods = new Set(['post', 'put', 'patch', 'delete']);
 
 // Request interceptor to add CSRF token for unsafe methods
 api.interceptors.request.use(
-  (config) => {
+  async (config) => {
     const method = (config.method || 'get').toLowerCase();
     if (unsafeMethods.has(method)) {
-      const csrf = getCookie('csrftoken') || csrfTokenMemory;
+      const csrf = (getCookie('csrftoken') || csrfTokenMemory) || (await ensureCsrfToken());
       if (csrf) {
         config.headers = config.headers || {};
         config.headers['X-CSRFToken'] = csrf;
@@ -54,6 +70,19 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    // If CSRF cookie is missing/expired, bootstrap it and retry once.
+    // This helps when the browser clears cookies, the user opens the app in a new tab,
+    // or a request fires before AuthContext has fetched /auth/csrf/.
+    if (error.response?.status === 403 && !originalRequest?._csrfRetry) {
+      const data = error.response?.data;
+      const text = typeof data === 'string' ? data : (data?.detail || '');
+      if (String(text).toLowerCase().includes('csrf')) {
+        originalRequest._csrfRetry = true;
+        await ensureCsrfToken();
+        return api(originalRequest);
+      }
+    }
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -66,7 +95,22 @@ api.interceptors.response.use(
         });
         return api(originalRequest);
       } catch (refreshError) {
-        window.location.href = '/login';
+        // Don't force-redirect from public pages (e.g. Home). Let route guards handle
+        // protected areas, and only bounce to login when the user is already on a
+        // protected section of the app.
+        try {
+          const path = typeof window !== 'undefined' ? (window.location.pathname || '') : '';
+          const isProtectedPath =
+            path.startsWith('/community') ||
+            path.startsWith('/admin') ||
+            path.startsWith('/lab');
+          const isAuthPage = path.startsWith('/login') || path.startsWith('/register');
+          if (isProtectedPath && !isAuthPage) {
+            window.location.href = '/login';
+          }
+        } catch {
+          // ignore
+        }
         return Promise.reject(refreshError);
       }
     }

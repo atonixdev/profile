@@ -1,3 +1,4 @@
+import logging
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,6 +13,9 @@ from .serializers import ProfileSerializer, CurrentUserProfileSerializer, Regist
 from community.models import CommunityMember
 
 import pyotp
+
+
+logger = logging.getLogger(__name__)
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -32,11 +36,22 @@ class RegisterView(APIView):
 
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except DatabaseError:
+            logger.exception("Database error during registration validation")
+            # Validation may query the DB (e.g., uniqueness checks). If the DB is down,
+            # avoid returning Django's HTML error page.
+            return Response(
+                {'detail': 'Registration temporarily unavailable. Please try again.'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
 
         try:
             with transaction.atomic():
                 user = serializer.save()
+
+                country = (serializer.validated_data.get('country') or '').strip()
 
                 first_name = getattr(user, 'first_name', '') or ''
                 last_name = getattr(user, 'last_name', '') or ''
@@ -50,6 +65,7 @@ class RegisterView(APIView):
                         'bio': 'New community member.',
                         'about': 'New community member.',
                         'email': user.email,
+                        'location': country,
                         'skills': [],
                         'is_active': True,
                     },
@@ -60,6 +76,7 @@ class RegisterView(APIView):
                     defaults={
                         'role': 'member',
                         'bio': '',
+                        'location': country,
                         'is_active': True,
                     },
                 )
@@ -70,6 +87,7 @@ class RegisterView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         except (TransactionManagementError, DatabaseError):
+            logger.exception("Database/transaction error during registration")
             # Avoid leaking HTML debug pages to the client.
             return Response(
                 {'detail': 'Registration temporarily unavailable. Please try again.'},

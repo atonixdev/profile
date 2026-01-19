@@ -38,8 +38,8 @@ const LabLayout = () => {
         },
         experimentation: {
           enabled: true,
-          label: 'Experimentation Lab',
-          description: 'A/B Testing & Research Engine',
+          label: 'Dashboard',
+          description: '',
         },
       },
     };
@@ -100,7 +100,7 @@ const LabLayout = () => {
 
   return (
     <div className={`min-h-screen ${themeClasses}`}>
-      <ResearchDomainNav domainsMeta={domainsMeta} />
+      <ResearchDomainNav domainsMeta={domainsMeta} theme={theme} />
       
       <div className="flex flex-col md:flex-row">
         {/* Desktop sidebar */}
@@ -108,6 +108,7 @@ const LabLayout = () => {
           <DomainSidebar
             domain={currentDomain}
             domainsMeta={domainsMeta}
+            theme={theme}
             collapsed={sidebarCollapsed}
             onToggleCollapse={toggleSidebarCollapsed}
           />
@@ -126,6 +127,7 @@ const LabLayout = () => {
               <DomainSidebar
                 domain={currentDomain}
                 domainsMeta={domainsMeta}
+                theme={theme}
                 variant="drawer"
                 onNavigate={() => setMobileMenuOpen(false)}
               />

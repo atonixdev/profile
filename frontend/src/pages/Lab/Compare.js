@@ -15,7 +15,8 @@ const pickNumericMetricKeys = (runs) => {
 };
 
 const Compare = ({ experimentType, titleOverride } = {}) => {
-  const { search, settings, setSettings } = useOutletContext();
+  const outlet = useOutletContext();
+  const { search, settings, setSettings, theme = 'light' } = outlet || {};
   const [runs, setRuns] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [metricKey, setMetricKey] = useState(() => settings?.compareMetric || 'duration_ms');
@@ -23,6 +24,19 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
 
   const compareCap = Number(settings?.compareCap || 5);
   const logsLimit = Number(settings?.logsLimit || 200);
+
+  const headerMutedClass = theme === 'dark' ? 'text-gray-300' : 'text-gray-600';
+  const panelClass = theme === 'dark' ? 'bg-white/5 border border-white/10 rounded-lg p-6' : 'bg-white rounded-lg shadow-md p-6';
+  const titleClass = theme === 'dark' ? 'text-white' : 'text-gray-900';
+  const labelClass = theme === 'dark' ? 'text-gray-200' : 'text-gray-700';
+  const metaTextClass = theme === 'dark' ? 'text-gray-400' : 'text-gray-500';
+  const subtleTextClass = theme === 'dark' ? 'text-gray-300' : 'text-gray-600';
+  const buttonClass = theme === 'dark'
+    ? 'px-4 py-2 border border-white/10 rounded-lg font-semibold hover:bg-white/10 text-white disabled:opacity-50'
+    : 'px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50 disabled:opacity-50';
+  const selectClass = theme === 'dark'
+    ? 'px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg'
+    : 'px-3 py-2 border border-gray-300 rounded-lg';
 
   useEffect(() => {
     if (!setSettings) return;
@@ -130,7 +144,7 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">{titleOverride || 'Compare Experiments'}</h1>
-          <p className="text-gray-600 mt-1">Select 2–5 runs to compare metrics, parameters, and outputs.</p>
+          <p className={`${headerMutedClass} mt-1`}>Select 2–5 runs to compare metrics, parameters, and outputs.</p>
         </div>
 
         <div className="flex gap-2">
@@ -138,22 +152,22 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
             type="button"
             onClick={downloadComparison}
             disabled={selectedRuns.length < 2}
-            className="px-4 py-2 border border-gray-200 rounded-lg font-semibold hover:bg-gray-50 disabled:opacity-50"
+            className={buttonClass}
           >
             Export Comparison
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className={panelClass}>
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
-          <div className="text-sm text-gray-600 font-semibold">Select Runs (max {compareCap})</div>
+          <div className={`text-sm font-semibold ${subtleTextClass}`}>Select Runs (max {compareCap})</div>
           <div className="md:ml-auto flex items-center gap-2">
-            <label className="text-sm font-semibold text-gray-700">Metric</label>
+            <label className={`text-sm font-semibold ${labelClass}`}>Metric</label>
             <select
               value={metricKey}
               onChange={(e) => setMetricKey(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg"
+              className={selectClass}
             >
               {metricOptions.map((k) => (
                 <option key={k} value={k}>{k}</option>
@@ -163,9 +177,9 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className={theme === 'dark' ? 'w-full text-sm text-gray-100' : 'w-full text-sm'}>
             <thead>
-              <tr className="text-left text-gray-600 border-b">
+              <tr className={theme === 'dark' ? 'text-left text-gray-300 border-b border-white/10' : 'text-left text-gray-600 border-b'}>
                 <th className="py-2">Pick</th>
                 <th className="py-2">Run</th>
                 <th className="py-2">Experiment</th>
@@ -178,7 +192,7 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
                 const checked = selectedIds.map(String).includes(String(r.id));
                 const disabled = !checked && selectedIds.length >= compareCap;
                 return (
-                  <tr key={r.id} className="border-b last:border-b-0">
+                  <tr key={r.id} className={theme === 'dark' ? 'border-b border-white/10 last:border-b-0' : 'border-b last:border-b-0'}>
                     <td className="py-2">
                       <input
                         type="checkbox"
@@ -187,10 +201,10 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
                         onChange={() => toggleSelected(r.id)}
                       />
                     </td>
-                    <td className="py-2 font-semibold">#{r.id}</td>
+                    <td className={theme === 'dark' ? 'py-2 font-semibold text-white' : 'py-2 font-semibold'}>#{r.id}</td>
                     <td className="py-2">
-                      <div className="font-semibold text-gray-900">{r.experiment?.name || r.experiment?.slug}</div>
-                      <div className="text-xs text-gray-500">{r.experiment?.experiment_type}</div>
+                      <div className={`font-semibold ${titleClass}`}>{r.experiment?.name || r.experiment?.slug}</div>
+                      <div className={`text-xs ${metaTextClass}`}>{r.experiment?.experiment_type}</div>
                     </td>
                     <td className="py-2">{r.status}</td>
                     <td className="py-2">{r.created_at ? new Date(r.created_at).toLocaleString() : '-'}</td>
@@ -201,22 +215,22 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
           </table>
         </div>
 
-        <div className="text-xs text-gray-500 mt-3">Selected: {selectedRuns.length} (need at least 2 to compare)</div>
+        <div className={`text-xs ${metaTextClass} mt-3`}>Selected: {selectedRuns.length} (need at least 2 to compare)</div>
       </div>
 
       {selectedRuns.length >= 2 && (
         <>
-          <MetricsBarChart title={`Metrics Comparison (${metricKey})`} items={chartItems} />
+          <MetricsBarChart title={`Metrics Comparison (${metricKey})`} items={chartItems} theme={theme} />
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Parameter Differences</h3>
+          <div className={panelClass}>
+            <h3 className={`text-lg font-bold ${titleClass} mb-4`}>Parameter Differences</h3>
             {paramDiff.length === 0 ? (
-              <div className="text-gray-600">No parameters recorded for these runs.</div>
+              <div className={subtleTextClass}>No parameters recorded for these runs.</div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className={theme === 'dark' ? 'w-full text-sm text-gray-100' : 'w-full text-sm'}>
                   <thead>
-                    <tr className="text-left text-gray-600 border-b">
+                    <tr className={theme === 'dark' ? 'text-left text-gray-300 border-b border-white/10' : 'text-left text-gray-600 border-b'}>
                       <th className="py-2">Parameter</th>
                       {selectedRuns.map((r) => (
                         <th key={r.id} className="py-2">Run #{r.id}</th>
@@ -225,10 +239,17 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
                   </thead>
                   <tbody>
                     {paramDiff.map((row) => (
-                      <tr key={row.key} className={`border-b last:border-b-0 ${row.isDifferent ? 'bg-yellow-50' : ''}`}>
-                        <td className="py-2 font-semibold text-gray-900">{row.key}</td>
+                      <tr
+                        key={row.key}
+                        className={
+                          theme === 'dark'
+                            ? `border-b border-white/10 last:border-b-0 ${row.isDifferent ? 'bg-yellow-500/10' : ''}`
+                            : `border-b last:border-b-0 ${row.isDifferent ? 'bg-yellow-50' : ''}`
+                        }
+                      >
+                        <td className={`py-2 font-semibold ${titleClass}`}>{row.key}</td>
                         {row.values.map((v, idx) => (
-                          <td key={idx} className="py-2 font-mono text-xs text-gray-700">{JSON.stringify(v)}</td>
+                          <td key={idx} className={theme === 'dark' ? 'py-2 font-mono text-xs text-gray-100' : 'py-2 font-mono text-xs text-gray-700'}>{JSON.stringify(v)}</td>
                         ))}
                       </tr>
                     ))}
@@ -236,34 +257,34 @@ const Compare = ({ experimentType, titleOverride } = {}) => {
                 </table>
               </div>
             )}
-            <div className="text-xs text-gray-500 mt-3">Rows highlighted when values differ.</div>
+            <div className={`text-xs ${metaTextClass} mt-3`}>Rows highlighted when values differ.</div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {selectedRuns.map((r) => (
               <React.Fragment key={r.id}>
-                <JsonPanel title={`Run #${r.id} Metrics`} value={r.metrics} />
-                <JsonPanel title={`Run #${r.id} Output`} value={r.output} />
+                <JsonPanel title={`Run #${r.id} Metrics`} value={r.metrics} theme={theme} />
+                <JsonPanel title={`Run #${r.id} Output`} value={r.output} theme={theme} />
               </React.Fragment>
             ))}
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Artifacts / Logs</h3>
+          <div className={panelClass}>
+            <h3 className={`text-lg font-bold ${titleClass} mb-4`}>Artifacts / Logs</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {selectedRuns.map((r) => (
-                <div key={r.id} className="border border-gray-200 rounded-lg p-4">
-                  <div className="font-bold text-gray-900 mb-2">Run #{r.id}</div>
-                  <div className="text-xs text-gray-500 mb-3">Local SQLite path: {r.local_sqlite_path || '—'}</div>
+                <div key={r.id} className={theme === 'dark' ? 'border border-white/10 bg-white/5 rounded-lg p-4' : 'border border-gray-200 rounded-lg p-4'}>
+                  <div className={`font-bold ${titleClass} mb-2`}>Run #{r.id}</div>
+                  <div className={`text-xs ${metaTextClass} mb-3`}>Local SQLite path: {r.local_sqlite_path || '—'}</div>
                   <div className="text-xs space-y-2">
                     {(logs[r.id] || []).slice(0, 20).map((l, idx) => (
                       <div key={idx} className="flex gap-2">
-                        <span className="font-bold">{l.level}:</span>
-                        <span className="text-gray-700">{l.message}</span>
+                        <span className={theme === 'dark' ? 'font-bold text-gray-100' : 'font-bold'}>{l.level}:</span>
+                        <span className={theme === 'dark' ? 'text-gray-100' : 'text-gray-700'}>{l.message}</span>
                       </div>
                     ))}
                     {(logs[r.id] || []).length === 0 && (
-                      <div className="text-gray-600">No logs found.</div>
+                      <div className={subtleTextClass}>No logs found.</div>
                     )}
                   </div>
                 </div>
