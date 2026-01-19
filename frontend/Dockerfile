@@ -3,6 +3,12 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
+# CRA builds can exceed Node's default heap inside Docker/cgroups.
+# Allow overriding via build args and reduce memory pressure by disabling sourcemaps.
+ARG NODE_OPTIONS=--max_old_space_size=4096
+ENV NODE_OPTIONS=$NODE_OPTIONS
+ENV GENERATE_SOURCEMAP=false
+
 # CRA reads REACT_APP_* at build time. These can be provided as Docker build args.
 ARG REACT_APP_API_URL
 ARG REACT_APP_MAPBOX_TOKEN
