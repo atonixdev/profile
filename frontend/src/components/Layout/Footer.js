@@ -19,9 +19,6 @@ const Footer = () => {
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Principal Architect & Technical Innovator at AtonixCorp. Building sovereign infrastructure and intelligent systems for Africa and the global market. Specializing in custom software development, full-stack engineering, AI-driven automation, and complex technical architecture.
             </p>
-            <Link to="/cv" className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-              Download CV
-            </Link>
           </div>
 
           {/* Quick Links */}
@@ -53,11 +50,6 @@ const Footer = () => {
               <li>
                 <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact
-                </Link>
-              </li>
-              <li>
-                <Link to="/cv" className="text-gray-400 hover:text-white transition-colors">
-                  CV / Resume
                 </Link>
               </li>
               <li>

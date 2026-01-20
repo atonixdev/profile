@@ -51,7 +51,6 @@ import AdminServices from './pages/Admin/Services';
 import AdminTestimonials from './pages/Admin/Testimonials';
 import AdminInquiries from './pages/Admin/Inquiries';
 import AdminProfile from './pages/Admin/Profile';
-import CV from './components/CV';
 import ChatbotAdmin from './pages/Admin/ChatbotAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
@@ -78,7 +77,6 @@ function App() {
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="cv" element={<CV />} />
             <Route path="help" element={<FAQ />} />
             <Route path="faq" element={<FAQ />} />
 
