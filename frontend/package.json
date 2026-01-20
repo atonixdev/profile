@@ -24,9 +24,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "dotenv -e ../.env -- react-scripts start",
-    "build": "dotenv -e ../.env -- react-scripts build",
-    "test": "dotenv -e ../.env -- react-scripts test",
+    "start": "bash -lc 'set -a && source ../.env 2>/dev/null || true; set +a; react-scripts start'",
+    "build": "bash -lc 'set -a && source ../.env 2>/dev/null || true; set +a; react-scripts build'",
+    "test": "bash -lc 'set -a && source ../.env 2>/dev/null || true; set +a; react-scripts test'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,7 +49,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
-    "dotenv-cli": "^7.4.4",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.6",
     "typescript": "4.9.5",
