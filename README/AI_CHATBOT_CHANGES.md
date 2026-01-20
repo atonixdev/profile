@@ -160,7 +160,7 @@ Implemented a complete AI-powered chatbot using Hugging Face's Mistral 7B model 
 - Lines Before: 216 | Lines After: 225
 - Status: ✅ MODIFIED (Major Rewrite)
 
-### 4. `backend/.env.example`
+### 4. Root `.env`
 **Changes Made:**
 - Added HUGGINGFACE_API_KEY variable with instructions
 - Added comment: "Get your free key at: https://huggingface.co/settings/tokens"

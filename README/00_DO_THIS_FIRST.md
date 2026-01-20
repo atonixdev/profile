@@ -32,7 +32,7 @@ But it needs **ONE thing** to work: Your Hugging Face API Key
 
 **File to edit:**
 ```
-/home/atonixdev/profile/backend/.env
+/home/atonixdev/profile/.env
 ```
 
 **Find:**
@@ -47,7 +47,7 @@ HUGGINGFACE_API_KEY=hf_abc123defg456hij789klm
 
 **Command to edit:**
 ```bash
-nano /home/atonixdev/profile/backend/.env
+nano /home/atonixdev/profile/.env
 ```
 
 **To save:** `Ctrl+X` then `Y` then `Enter`

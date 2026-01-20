@@ -36,7 +36,7 @@ Your chatbot can't connect because **2 things are missing:**
 
 ```bash
 # Edit the .env file
-nano /home/atonixdev/profile/backend/.env
+nano /home/atonixdev/profile/.env
 ```
 
 **Find this line:**
@@ -118,7 +118,7 @@ Chat displays AI response
 
 ```bash
 # 1. Check API key is in .env
-grep HUGGINGFACE_API_KEY /home/atonixdev/profile/backend/.env
+grep HUGGINGFACE_API_KEY /home/atonixdev/profile/.env
 
 # 2. Check backend is running
 curl http://localhost:8000/api/status/
@@ -135,7 +135,7 @@ curl -X POST http://localhost:8000/api/chatbot/ask/ \
 
 When you clicked "Ask" the first time, a new file was created:
 
-📄 **`/home/atonixdev/profile/backend/.env`**
+📄 **`/home/atonixdev/profile/.env`**
 
 This file stores your Hugging Face API key and other settings. **This file is already created for you**, you just need to add your API key.
 
@@ -215,7 +215,7 @@ bash /home/atonixdev/profile/start_chatbot.sh
 ## All Files Created/Modified
 
 ### New Files Created:
-✅ `backend/.env` - Configuration with API key  
+✅ `.env` - Configuration with API key  
 ✅ `start_chatbot.sh` - Automated startup script  
 ✅ `AI_CHATBOT_QUICKSTART.md` - 5-minute setup  
 ✅ `AI_CHATBOT_SETUP.md` - Complete setup guide  
@@ -229,14 +229,14 @@ bash /home/atonixdev/profile/start_chatbot.sh
 ✅ `backend/config/settings.py` - Added chatbot app  
 ✅ `backend/config/urls.py` - Added chatbot routes  
 ✅ `frontend/src/components/LiveChat.js` - Updated to use AI API  
-✅ `backend/.env.example` - Added API key instructions  
+✅ `.env` - Contains API key instructions  
 
 ---
 
 ## Next Steps
 
 1. **Get API Key** (2 min) - https://huggingface.co/settings/tokens
-2. **Update .env** (1 min) - Add key to `/home/atonixdev/profile/backend/.env`
+2. **Update .env** (1 min) - Add key to `/home/atonixdev/profile/.env`
 3. **Start Backend** (1 min) - `python manage.py runserver 0.0.0.0:8000`
 4. **Start Frontend** (1 min) - `npm start`
 5. **Test Chat** (30 sec) - Open http://localhost:3000 and click chat

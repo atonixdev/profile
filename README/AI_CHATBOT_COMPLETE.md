@@ -77,7 +77,7 @@ The AI knows about:
 **Updated Files:**
 - `backend/config/settings.py` - Added chatbot app, Hugging Face API key config
 - `backend/config/urls.py` - Added chatbot URL routing
-- `backend/.env.example` - Added HUGGINGFACE_API_KEY example
+- `.env` - Contains HUGGINGFACE_API_KEY example
 
 ## How to Use It
 
@@ -263,7 +263,7 @@ backend/config/urls.py - Added chatbot URL routes
 ### Documentation (2 files)
 ```
 AI_CHATBOT_SETUP.md - Complete setup and customization guide
-backend/.env.example - Updated with HUGGINGFACE_API_KEY example
+.env - Updated with HUGGINGFACE_API_KEY example
 ```
 
 ## Customization Options

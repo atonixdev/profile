@@ -29,7 +29,7 @@ Steps:
 
 **File location:**
 ```
-/home/atonixdev/profile/backend/.env
+/home/atonixdev/profile/.env
 ```
 
 **Currently says:**
@@ -44,7 +44,7 @@ HUGGINGFACE_API_KEY=hf_abc123def456ghi789
 
 **How to edit:**
 ```bash
-nano /home/atonixdev/profile/backend/.env
+nano /home/atonixdev/profile/.env
 ```
 
 Save: `Ctrl+X` → `Y` → `Enter`
@@ -94,7 +94,7 @@ npm start
 
 ```bash
 # 1. Edit .env and add your API key
-nano /home/atonixdev/profile/backend/.env
+nano /home/atonixdev/profile/.env
 
 # 2. Start backend
 cd /home/atonixdev/profile/backend
@@ -138,7 +138,7 @@ Run this to verify setup:
 
 ```bash
 # Check API key is set
-grep HUGGINGFACE_API_KEY /home/atonixdev/profile/backend/.env
+grep HUGGINGFACE_API_KEY /home/atonixdev/profile/.env
 
 # Check backend running
 curl http://localhost:8000/api/status/

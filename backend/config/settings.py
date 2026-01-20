@@ -5,7 +5,21 @@ Django settings for Personal Brand Hub project.
 import os
 from pathlib import Path
 from datetime import timedelta
-from decouple import config, Csv
+
+from decouple import Csv
+
+# Force a single root-level .env for the whole repo.
+# This avoids needing separate backend/.env and keeps Docker Compose + local dev consistent.
+try:
+    from decouple import Config, RepositoryEnv
+
+    _ROOT_ENV = (Path(__file__).resolve().parent.parent.parent / '.env').resolve()
+    if _ROOT_ENV.exists():
+        config = Config(RepositoryEnv(str(_ROOT_ENV)))
+    else:  # fallback to default decouple behavior (env vars only)
+        from decouple import config  # type: ignore
+except Exception:  # pragma: no cover
+    from decouple import config  # type: ignore
 
 try:
     import dj_database_url

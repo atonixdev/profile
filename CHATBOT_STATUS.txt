@@ -30,7 +30,7 @@
     └─ Generate "read" token
     └─ Copy token (hf_abc123...)
 
- 2. Edit: /home/atonixdev/profile/backend/.env
+ 2. Edit: /home/atonixdev/profile/.env
     └─ Replace: HUGGINGFACE_API_KEY=hf_YOUR_KEY_HERE
     └─ With your token from step 1
 
@@ -75,7 +75,7 @@
    └─ start_chatbot.sh (auto-start script)
 
  Configuration:
-   ├─ backend/.env (API KEY GOES HERE)
+   ├─ .env (API KEY GOES HERE)
    ├─ backend/config/settings.py (updated)
    └─ backend/config/urls.py (updated)
 
@@ -96,7 +96,7 @@
  
  → Read: 00_DO_THIS_FIRST.md
  → Get API key: https://huggingface.co/settings/tokens
- → Add to .env: /home/atonixdev/profile/backend/.env
+ → Add to .env: /home/atonixdev/profile/.env
  → Start backend & frontend
  → Test chat at: http://localhost:3000
  

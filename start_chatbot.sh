@@ -10,21 +10,21 @@ echo "AI Chatbot - Quick Setup & Start"
 echo "================================"
 echo ""
 
-# Check if backend .env exists
-if [ ! -f /home/atonixdev/profile/backend/.env ]; then
+# Check if root .env exists
+if [ ! -f /home/atonixdev/profile/.env ]; then
     echo "Creating .env file..."
-    cat > /home/atonixdev/profile/backend/.env << 'EOF'
+    cat > /home/atonixdev/profile/.env << 'EOF'
 DEBUG=True
 SECRET_KEY=django-insecure-change-this-in-production
 HUGGINGFACE_API_KEY=hf_YOUR_KEY_HERE
-CORS_ALLOW_ALL_ORIGINS=True
 DATABASE_URL=sqlite:///db.sqlite3
+REACT_APP_MAPBOX_TOKEN=
 EOF
-    echo "✅ .env created at /home/atonixdev/profile/backend/.env"
+    echo "✅ .env created at /home/atonixdev/profile/.env"
 fi
 
 # Check if API key is set
-API_KEY=$(grep "HUGGINGFACE_API_KEY" /home/atonixdev/profile/backend/.env | cut -d'=' -f2)
+API_KEY=$(grep "HUGGINGFACE_API_KEY" /home/atonixdev/profile/.env | cut -d'=' -f2)
 
 if [ "$API_KEY" == "hf_YOUR_KEY_HERE" ] || [ -z "$API_KEY" ]; then
     echo ""
@@ -33,7 +33,7 @@ if [ "$API_KEY" == "hf_YOUR_KEY_HERE" ] || [ -z "$API_KEY" ]; then
     echo "1. Go to: https://huggingface.co/settings/tokens"
     echo "2. Create a new 'read' token"
     echo "3. Copy the token (starts with hf_)"
-    echo "4. Edit: /home/atonixdev/profile/backend/.env"
+    echo "4. Edit: /home/atonixdev/profile/.env"
     echo "5. Replace: hf_YOUR_KEY_HERE with your actual key"
     echo ""
     echo "Example:"
@@ -82,11 +82,11 @@ echo "================================"
 cd /home/atonixdev/profile/frontend
 
 # Optional: Mapbox token for Space Lab Earth map
-if ! grep -q "^REACT_APP_MAPBOX_TOKEN=" /home/atonixdev/profile/frontend/.env 2>/dev/null; then
+if ! grep -q "^REACT_APP_MAPBOX_TOKEN=" /home/atonixdev/profile/.env 2>/dev/null; then
     echo ""
     echo "⚠️  Optional: Mapbox token not configured"
     echo "   The Space Lab 'Earth Imagery Map' requires REACT_APP_MAPBOX_TOKEN."
-    echo "   Add it to /home/atonixdev/profile/frontend/.env then restart frontend."
+    echo "   Add it to /home/atonixdev/profile/.env then restart frontend."
 fi
 
 npm install --silent > /dev/null 2>&1 || true

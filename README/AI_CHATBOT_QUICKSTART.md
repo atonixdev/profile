@@ -19,7 +19,7 @@ echo "HUGGINGFACE_API_KEY=hf_YOUR_TOKEN_HERE" >> .env
 
 Replace `hf_YOUR_TOKEN_HERE` with your actual key.
 
-**Or create `backend/.env` file with:**
+**Or create a root `.env` file with:**
 ```
 HUGGINGFACE_API_KEY=hf_YOUR_TOKEN_HERE
 ```

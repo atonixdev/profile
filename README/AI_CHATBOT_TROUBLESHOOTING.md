@@ -34,7 +34,7 @@ python manage.py runserver 0.0.0.0:8000
 
 **Check if .env file exists:**
 ```bash
-ls -la /home/atonixdev/profile/backend/.env
+ls -la /home/atonixdev/profile/.env
 ```
 
 **Check if key is set:**
@@ -52,7 +52,7 @@ API Key: hf_YOUR_ACTUAL_KEY_HERE
 **If Missing:**
 1. Create `.env` file:
 ```bash
-cat > /home/atonixdev/profile/backend/.env << 'EOF'
+cat > /home/atonixdev/profile/.env << 'EOF'
 HUGGINGFACE_API_KEY=hf_YOUR_API_KEY_HERE
 EOF
 ```
@@ -151,7 +151,7 @@ curl http://localhost:8000/
 **Solution:**
 ```bash
 # 1. Create .env file
-echo "HUGGINGFACE_API_KEY=hf_YOUR_KEY" > /home/atonixdev/profile/backend/.env
+echo "HUGGINGFACE_API_KEY=hf_YOUR_KEY" > /home/atonixdev/profile/.env
 
 # 2. Get key from https://huggingface.co/settings/tokens
 # 3. Restart backend

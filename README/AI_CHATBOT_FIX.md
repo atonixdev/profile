@@ -29,7 +29,7 @@ Example: `hf_abc123defg456hij789klm`
 **Option A: Edit .env file directly**
 
 ```bash
-nano /home/atonixdev/profile/backend/.env
+nano /home/atonixdev/profile/.env
 ```
 
 Find this line:
@@ -50,10 +50,10 @@ Save and exit (Ctrl+X, then Y, then Enter)
 
 ```bash
 # Replace YOUR_API_KEY with your actual key from Hugging Face
-sed -i 's/hf_YOUR_KEY_HERE/hf_YOUR_ACTUAL_KEY/g' /home/atonixdev/profile/backend/.env
+sed -i 's/hf_YOUR_KEY_HERE/hf_YOUR_ACTUAL_KEY/g' /home/atonixdev/profile/.env
 
 # Verify it worked
-cat /home/atonixdev/profile/backend/.env | grep HUGGINGFACE
+cat /home/atonixdev/profile/.env | grep HUGGINGFACE
 ```
 
 ---
@@ -111,7 +111,7 @@ Should show: `{"status":"ok"}`
 
 **Check 2: Is API key set correctly?**
 ```bash
-cat /home/atonixdev/profile/backend/.env | grep HUGGINGFACE_API_KEY
+cat /home/atonixdev/profile/.env | grep HUGGINGFACE_API_KEY
 ```
 Should show: `HUGGINGFACE_API_KEY=hf_...`
 
@@ -140,7 +140,7 @@ See `AI_CHATBOT_TROUBLESHOOTING.md` for complete diagnostic guide
 **Check everything is set up:**
 ```bash
 # 1. Verify .env has API key
-grep HUGGINGFACE_API_KEY /home/atonixdev/profile/backend/.env
+grep HUGGINGFACE_API_KEY /home/atonixdev/profile/.env
 
 # 2. Verify backend is running
 curl http://localhost:8000/api/status/
