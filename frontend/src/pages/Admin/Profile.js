@@ -26,7 +26,7 @@ const AdminProfile = () => {
           <ul className="list-disc list-inside mt-4 space-y-2 text-gray-700">
             <li>Full name and title</li>
             <li>Bio and detailed about section</li>
-            <li>Profile avatar and resume upload</li>
+            <li>Profile avatar upload</li>
             <li>Contact information</li>
             <li>Social media links</li>
             <li>Skills management</li>
