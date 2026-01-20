@@ -24,9 +24,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "bash -lc 'set -a && source ../.env 2>/dev/null || true; set +a; react-scripts start'",
-    "build": "bash -lc 'set -a && source ../.env 2>/dev/null || true; set +a; react-scripts build'",
-    "test": "bash -lc 'set -a && source ../.env 2>/dev/null || true; set +a; react-scripts test'",
+    "start": "sh -lc 'set -a; [ -f ../.env ] && . ../.env; set +a; react-scripts start'",
+    "build": "sh -lc 'set -a; [ -f ../.env ] && . ../.env; set +a; react-scripts build'",
+    "test": "sh -lc 'set -a; [ -f ../.env ] && . ../.env; set +a; react-scripts test'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
