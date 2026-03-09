@@ -1,0 +1,22 @@
+<svg
+  width="16"
+  height="16"
+  viewBox="0 0 64 64"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="AtonixDev favicon"
+>
+  <!--
+    Favicon 16×16 — simplified geometry for legibility at tiny sizes.
+    Pillars are bolder and crossbar is taller so detail survives 1x screens.
+  -->
+  <rect x="0" y="0" width="64" height="64" rx="12" fill="#111827" />
+  <g transform="translate(10, 8)">
+    <!-- Left pillar — wider for 16px legibility -->
+    <path d="M2 44 L12 10 L22 44 Z" fill="#1456F0" />
+    <!-- Right pillar — wider for 16px legibility -->
+    <path d="M22 44 L32 10 L42 44 Z" fill="#1456F0" />
+    <!-- Crossbar — taller at small sizes -->
+    <rect x="10" y="22" width="24" height="6" rx="0" fill="#22D3EE" />
+  </g>
+</svg>

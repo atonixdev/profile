@@ -43,7 +43,7 @@ class ErrorBoundary extends React.Component {
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
         <div style={{ maxWidth: 720, width: '100%', border: '1px solid #eee', borderRadius: 12, padding: 20 }}>
           <h1 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8 }}>App error</h1>
-          <p style={{ margin: 0, color: '#444' }}>The page crashed while loading.</p>
+          <p style={{ margin: 0, color: '#6B7280' }}>The page crashed while loading.</p>
           <div style={{ marginTop: 12, padding: 12, background: '#fafafa', borderRadius: 8, fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
             {message}
           </div>
@@ -51,13 +51,13 @@ class ErrorBoundary extends React.Component {
             <button
               type="button"
               onClick={() => window.location.reload()}
-              style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid #ddd', background: '#fff', fontWeight: 700 }}
+              style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid #ddd', background: '#FFFFFF', fontWeight: 700 }}
             >
               Reload
             </button>
             <a
               href="/"
-              style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid #ddd', background: '#fff', fontWeight: 700, textDecoration: 'none', color: 'inherit' }}
+              style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid #ddd', background: '#FFFFFF', fontWeight: 700, textDecoration: 'none', color: 'inherit' }}
             >
               Go home
             </a>

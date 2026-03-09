@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import AtonixDevLogo from '../AtonixDevLogo';
 
+// GS-WSF §3 — Global Header — identical on every page
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -10,13 +12,11 @@ const Header = () => {
   const { user, logout } = useAuth();
 
   const navigation = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Testimonials', path: '/testimonials' },
-    { name: 'Lab', path: '/lab' },
+    { name: 'Home',         path: '/' },
+    { name: 'About',        path: '/about' },
+    { name: 'Services',     path: '/services' },
+    { name: 'Portfolio',    path: '/portfolio' },
+    { name: 'Blog',         path: '/blog' },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -25,192 +25,234 @@ const Header = () => {
     logout();
     navigate('/');
     setIsUserMenuOpen(false);
+    setIsMenuOpen(false);
   };
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg w-10 h-10 rounded-lg flex items-center justify-center shadow-lg">
-              AD
-            </div>
-            <span className="text-xl font-bold text-gray-800 hidden sm:block">
-              atonixdev
-            </span>
-          </Link>
+    <header
+      style={{
+        height: '80px',
+        background: '#FFFFFF',
+        borderBottom: '1px solid #E5E7EB',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+      }}
+    >
+      <nav
+        style={{
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: '0 24px',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '100%',
+        }}
+      >
+        {/* ── Logo ─────────────────────────────────────────── */}
+        <Link
+          to="/"
+          style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', flexShrink: 0 }}
+        >
+          <AtonixDevLogo size={32} variant="dark" textColor="#111827" />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`${
-                  isActive(item.path)
-                    ? 'text-primary-600 font-semibold'
-                    : 'text-gray-700 hover:text-primary-600'
-                } transition-colors`}
-              >
-                {item.name}
-              </Link>
-            ))}
-            
-            {/* Community Link - Only if logged in */}
-            {user && (
-              <Link
-                to="/community"
-                className={`${
-                  isActive('/community')
-                    ? 'text-primary-600 font-semibold'
-                    : 'text-gray-700 hover:text-primary-600'
-                } transition-colors`}
-              >
-                Community
-              </Link>
-            )}
-          </div>
-
-          {/* Auth / User Menu */}
-          <div className="hidden md:flex items-center space-x-4">
-            {user ? (
-              <div className="relative">
-                <button
-                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-primary-100 text-primary-700 font-semibold hover:bg-primary-200 transition-colors"
-                >
-                  <div className="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-sm">
-                    {user.user?.first_name?.charAt(0) || user.username?.charAt(0) || 'U'}
-                  </div>
-                  <span className="hidden lg:inline">{user.user?.first_name || user.username}</span>
-                </button>
-                
-                {/* User Dropdown Menu */}
-                {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                    <div className="px-4 py-2 border-b text-sm text-gray-600">
-                      {user.user?.email || user.email || 'user@example.com'}
-                    </div>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-700 font-semibold transition-colors"
-                    >
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="px-4 py-2 text-gray-700 font-semibold hover:text-primary-600 transition-colors"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  to="/register"
-                  className="px-6 py-2 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors"
-                >
-                  Join Community
-                </Link>
-              </>
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-700"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        {/* ── Desktop Nav ───────────────────────────────────── */}
+        <div className="hidden md:flex items-center" style={{ gap: 28 }}>
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className={`nav-link${isActive(item.path) ? ' nav-active' : ''}`}
             >
-              {isMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+              {item.name}
+            </Link>
+          ))}
+          {user && (
+            <Link
+              to="/community"
+              className={`nav-link${isActive('/community') ? ' nav-active' : ''}`}
+            >
+              Community
+            </Link>
+          )}
         </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 space-y-2 pb-4 border-t pt-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`block py-2 ${
-                  isActive(item.path)
-                    ? 'text-primary-600 font-semibold'
-                    : 'text-gray-700'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
+        {/* ── Desktop Auth ──────────────────────────────────── */}
+        <div className="hidden md:flex items-center" style={{ gap: 16 }}>
+          {user ? (
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                style={{
+                  background: '#F1F3F5',
+                  border: '1px solid #D1D5DB',
+                  color: '#111827',
+                  padding: '8px 20px',
+                  fontFamily: 'inherit', fontWeight: 700,
+                  fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
+                  cursor: 'pointer',
+                }}
               >
-                {item.name}
-              </Link>
-            ))}
-            
-            {/* Community Link - Only if logged in */}
-            {user && (
-              <Link
-                to="/community"
-                className={`block py-2 ${
-                  isActive('/community')
-                    ? 'text-primary-600 font-semibold'
-                    : 'text-gray-700'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Community
-              </Link>
-            )}
-
-            {/* Mobile Auth Links */}
-            <div className="pt-4 border-t space-y-2">
-              {user ? (
-                <>
-                  <div className="px-0 py-2 text-sm text-gray-600">
-                    {user.user?.email || user.email || 'user@example.com'}
+                {user.user?.first_name || user.username || 'Account'}
+              </button>
+              {isUserMenuOpen && (
+                <div
+                  style={{
+                    position: 'absolute', right: 0, top: 'calc(100% + 4px)',
+                    background: '#F1F3F5', border: '1px solid #E5E7EB',
+                    minWidth: 220, zIndex: 200,
+                  }}
+                >
+                  <div
+                    style={{
+                      padding: '12px 16px', borderBottom: '1px solid #E5E7EB',
+                      fontSize: 12, color: '#6B7280',
+                    }}
+                  >
+                    {user.user?.email || user.email || ''}
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left py-2 text-gray-700 font-semibold"
+                    style={{
+                      display: 'block', width: '100%', textAlign: 'left',
+                      padding: '12px 16px', background: 'none', border: 'none',
+                      color: '#111827', fontFamily: 'inherit', fontWeight: 600,
+                      fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = '#F3F4F6'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
                   >
                     Sign Out
                   </button>
-                </>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="nav-link">Sign In</Link>
+              <Link
+                to="/register"
+                className="gsw-btn gsw-btn-accent"
+                style={{ padding: '10px 20px', fontSize: 12 }}
+              >
+                Console
+              </Link>
+            </>
+          )}
+        </div>
+
+        {/* ── Mobile Hamburger ──────────────────────────────── */}
+        <button
+          className="flex md:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            padding: 8, flexDirection: 'column', gap: 5,
+          }}
+          aria-label="Toggle navigation"
+        >
+          <span style={{ display: 'block', width: 22, height: 2, background: '#111827', transition: 'opacity 0.15s' }} />
+          <span style={{ display: 'block', width: 22, height: 2, background: '#111827', opacity: isMenuOpen ? 0 : 1, transition: 'opacity 0.15s' }} />
+          <span style={{ display: 'block', width: 22, height: 2, background: '#111827', transition: 'opacity 0.15s' }} />
+        </button>
+      </nav>
+
+      {/* ── Mobile Drawer ─────────────────────────────────── */}
+      {isMenuOpen && (
+        <div
+          style={{
+            position: 'absolute', top: '80px', left: 0, right: 0,
+            background: '#FFFFFF', borderBottom: '1px solid #E5E7EB', zIndex: 99,
+          }}
+        >
+          <div style={{ maxWidth: 1440, margin: '0 auto', padding: '8px 24px 24px' }}>
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                onClick={() => setIsMenuOpen(false)}
+                style={{
+                  display: 'block', padding: '14px 0',
+                  borderBottom: '1px solid #F1F3F5',
+                  color: isActive(item.path) ? '#DC2626' : '#FFFFFF',
+                  fontSize: 12, fontWeight: 700,
+                  letterSpacing: '0.1em', textTransform: 'uppercase',
+                  textDecoration: 'none',
+                }}
+              >
+                {item.name}
+              </Link>
+            ))}
+            {user && (
+              <Link
+                to="/community"
+                onClick={() => setIsMenuOpen(false)}
+                style={{
+                  display: 'block', padding: '14px 0',
+                  borderBottom: '1px solid #F1F3F5',
+                  color: isActive('/community') ? '#DC2626' : '#FFFFFF',
+                  fontSize: 12, fontWeight: 700,
+                  letterSpacing: '0.1em', textTransform: 'uppercase',
+                  textDecoration: 'none',
+                }}
+              >
+                Community
+              </Link>
+            )}
+            <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    padding: '10px 24px', background: '#F1F3F5',
+                    border: '1px solid #D1D5DB', color: '#111827',
+                    fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
+                    textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
+                  }}
+                >
+                  Sign Out
+                </button>
               ) : (
                 <>
                   <Link
                     to="/login"
-                    className="block py-2 text-gray-700 font-semibold"
                     onClick={() => setIsMenuOpen(false)}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center',
+                      padding: '10px 24px', border: '1px solid #D1D5DB',
+                      color: '#111827', fontSize: 12, fontWeight: 700,
+                      letterSpacing: '0.1em', textTransform: 'uppercase',
+                      textDecoration: 'none',
+                    }}
                   >
                     Sign In
                   </Link>
                   <Link
                     to="/register"
-                    className="block py-2 bg-primary-600 text-white rounded font-semibold text-center"
                     onClick={() => setIsMenuOpen(false)}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center',
+                      padding: '10px 24px', background: '#DC2626',
+                      color: '#111827', fontSize: 12, fontWeight: 700,
+                      letterSpacing: '0.1em', textTransform: 'uppercase',
+                      textDecoration: 'none',
+                    }}
                   >
-                    Join Community
+                    Console
                   </Link>
                 </>
               )}
             </div>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
     </header>
   );
 };

@@ -6,85 +6,78 @@ const BlogDetail = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [commentForm, setCommentForm] = useState({
-    name: '',
-    email: '',
-    content: '',
-  });
+  const [commentForm, setCommentForm] = useState({ name: '', email: '', content: '' });
   const [comments, setComments] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        setLoading(true);
         const response = await blogService.getOne(slug);
         setPost(response.data);
         setComments(response.data.comments || []);
-        
-        // Increment view count
         await blogService.incrementViews(slug);
       } catch (error) {
-        console.error('Error fetching blog post:', error);
+        console.error('Error fetching post:', error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchPost();
   }, [slug]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
     try {
-      const response = await blogService.addComment(slug, commentForm);
-      setComments([response.data, ...comments]);
+      await blogService.addComment(slug, commentForm);
+      setSubmitMessage('Comment submitted for review.');
       setCommentForm({ name: '', email: '', content: '' });
-      alert('Comment submitted! It will appear after approval.');
     } catch (error) {
-      console.error('Error submitting comment:', error);
-      alert('Failed to submit comment. Please try again.');
+      setSubmitMessage('Failed to submit comment. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  const getCategoryColor = (category) => {
-    const colors = {
-      cloud: 'bg-blue-100 text-blue-800',
-      ai: 'bg-purple-100 text-purple-800',
-      devops: 'bg-green-100 text-green-800',
-      infrastructure: 'bg-orange-100 text-orange-800',
-      security: 'bg-red-100 text-red-800',
-      tutorial: 'bg-yellow-100 text-yellow-800',
-    };
-    return colors[category] || 'bg-gray-100 text-gray-800';
+  const inputStyle = {
+    background: '#F1F3F5',
+    border: '1px solid #D1D5DB',
+    color: '#111827',
+    padding: '12px 14px',
+    fontSize: '14px',
+    fontFamily: 'inherit',
+    outline: 'none',
+    width: '100%',
+    display: 'block',
   };
 
-  const getCategoryLabel = (category) => {
-    const categoryLabels = {
-      cloud: 'Cloud Architecture',
-      ai: 'AI & ML',
-      devops: 'DevOps',
-      infrastructure: 'Infrastructure',
-      security: 'Security',
-      tutorial: 'Tutorial',
-    };
-    return categoryLabels[category] || category;
+  const labelStyle = {
+    display: 'block',
+    fontSize: '12px',
+    fontWeight: 600,
+    color: '#6B7280',
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    marginBottom: '6px',
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl text-gray-600">Loading blog post...</div>
+      <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p style={{ color: '#6B7280', fontFamily: 'Inter, sans-serif' }}>Loading...</p>
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
-          <Link to="/blog" className="text-primary-600 hover:underline">
-            Back to Blog
+      <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ color: '#6B7280', fontFamily: 'Inter, sans-serif', marginBottom: '24px' }}>Post not found.</p>
+          <Link to="/blog" style={{ color: '#DC2626', textDecoration: 'none', fontSize: '14px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            &larr; Back to Blog
           </Link>
         </div>
       </div>
@@ -92,151 +85,182 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4 max-w-3xl">
-        {/* Back Link */}
-        <Link to="/blog" className="text-primary-600 hover:text-primary-700 mb-6 inline-flex items-center">
-          ← Back to Blog
-        </Link>
-
-        {/* Header */}
-        <article className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <div className="mb-6">
-            <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4 ${getCategoryColor(post.category)}`}>
-              {getCategoryLabel(post.category)}
-            </span>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
-            
-            {/* Meta Information */}
-            <div className="flex flex-wrap gap-6 text-gray-600 py-4 border-y border-gray-200">
-              <div>
-                <span className="font-semibold">By</span> {post.author}
-              </div>
-              <div>
-                <span className="font-semibold">Published</span> {new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </div>
-              <div>
-                <span className="font-semibold">Read Time</span> {post.read_time} minutes
-              </div>
-              <div>
-                <span className="font-semibold">Views</span> {post.view_count}
-              </div>
-            </div>
-          </div>
-
-          {/* Featured Image */}
-          {post.featured_image && (
-            <div className="mb-8">
-              <img
-                src={post.featured_image}
-                alt={post.title}
-                className="w-full h-96 object-cover rounded-lg"
-              />
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
+      {/* Hero */}
+      <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
+          <Link
+            to="/blog"
+            style={{ color: '#DC2626', textDecoration: 'none', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px' }}
+          >
+            &larr; Back to Blog
+          </Link>
+          {post.category && (
+            <div style={{ marginBottom: '16px' }}>
+              <span style={{ background: '#DC2626', color: '#fff', padding: '4px 12px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                {post.category}
+              </span>
             </div>
           )}
-
-          {/* Content */}
-          <div className="prose prose-lg max-w-none mb-8">
-            <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-              {post.content}
-            </div>
+          <h1 style={{ fontSize: '40px', fontWeight: 800, lineHeight: 1.2, color: '#111827', margin: '0 0 24px' }}>
+            {post.title}
+          </h1>
+          <div style={{ display: 'flex', gap: '24px', color: '#6B7280', fontSize: '13px' }}>
+            {post.author && <span>{post.author}</span>}
+            {post.published_at && (
+              <span>{new Date(post.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            )}
+            {post.views && <span>{post.views} views</span>}
           </div>
+        </div>
+      </div>
 
-          {/* Tags */}
-          {post.tags_list && post.tags_list.length > 0 && (
-            <div className="mb-8 pt-8 border-t border-gray-200">
-              <div className="flex flex-wrap gap-3">
-                {post.tags_list.map((tag, index) => (
-                  <span key={index} className="bg-primary-100 text-primary-700 px-4 py-2 rounded-full">
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
+        {/* Featured Image */}
+        {post.featured_image && (
+          <div style={{ margin: '48px 0' }}>
+            <img
+              src={post.featured_image}
+              alt={post.title}
+              style={{ width: '100%', height: '400px', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+        )}
+
+        {/* Article Content */}
+        <article style={{ padding: '48px 0', borderBottom: '1px solid #E5E7EB' }}>
+          {post.excerpt && (
+            <p style={{ fontSize: '18px', color: '#374151', lineHeight: 1.7, marginBottom: '32px', borderLeft: '3px solid #DC2626', paddingLeft: '20px' }}>
+              {post.excerpt}
+            </p>
+          )}
+          {post.content && (
+            <div
+              className="blog-content"
+              style={{ fontSize: '16px', color: '#4B5563', lineHeight: 1.8 }}
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
           )}
         </article>
 
-        {/* Comments Section */}
-        <section className="bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-bold mb-8">Comments ({comments.length})</h2>
-
-          {/* Comment Form */}
-          <div className="mb-8 pb-8 border-b border-gray-200">
-            <h3 className="text-xl font-bold mb-6">Leave a Comment</h3>
-            <form onSubmit={handleCommentSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={commentForm.name}
-                  onChange={(e) => setCommentForm({...commentForm, name: e.target.value})}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={commentForm.email}
-                  onChange={(e) => setCommentForm({...commentForm, email: e.target.value})}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-              </div>
-              <textarea
-                placeholder="Your Comment"
-                value={commentForm.content}
-                onChange={(e) => setCommentForm({...commentForm, content: e.target.value})}
-                required
-                rows="5"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              />
-              <button
-                type="submit"
-                className="bg-primary-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
-              >
-                Submit Comment
-              </button>
-            </form>
+        {/* Tags */}
+        {post.tags && post.tags.length > 0 && (
+          <div style={{ padding: '32px 0', borderBottom: '1px solid #E5E7EB' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {(Array.isArray(post.tags) ? post.tags : post.tags.split(',')).map((tag, idx) => (
+                <span
+                  key={idx}
+                  style={{ border: '1px solid #D1D5DB', color: '#6B7280', padding: '4px 12px', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}
+                >
+                  {String(tag).trim()}
+                </span>
+              ))}
+            </div>
           </div>
+        )}
 
-          {/* Comments List */}
-          {comments.length > 0 ? (
-            <div className="space-y-6">
-              {comments.map((comment) => (
-                <div key={comment.id} className="pb-6 border-b border-gray-200 last:border-b-0">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <h4 className="font-bold text-gray-900">{comment.name}</h4>
-                      <p className="text-sm text-gray-500">
-                        {new Date(comment.created_at).toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'short', 
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
-                      </p>
-                    </div>
+        {/* Comments Section */}
+        <section style={{ padding: '64px 0' }}>
+          <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#111827', margin: '0 0 40px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            Comments ({comments.length})
+          </h2>
+
+          {comments.length > 0 && (
+            <div style={{ marginBottom: '48px' }}>
+              {comments.map((comment, idx) => (
+                <div
+                  key={idx}
+                  style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '24px', marginBottom: '16px' }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+                    <span style={{ color: '#111827', fontWeight: 700, fontSize: '14px' }}>{comment.name}</span>
+                    <span style={{ color: '#6B7280', fontSize: '12px' }}>
+                      {comment.created_at && new Date(comment.created_at).toLocaleDateString()}
+                    </span>
                   </div>
-                  <p className="text-gray-700">{comment.content}</p>
+                  <p style={{ color: '#4B5563', fontSize: '14px', lineHeight: 1.7, margin: 0 }}>{comment.content}</p>
                 </div>
               ))}
             </div>
-          ) : (
-            <p className="text-gray-600">No comments yet. Be the first to comment!</p>
           )}
-        </section>
 
-        {/* Related Posts CTA */}
-        <div className="mt-12 bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg p-8 text-center">
-          <h3 className="text-2xl font-bold mb-4">Want to read more?</h3>
-          <Link
-            to="/blog"
-            className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-primary-700 transition-colors"
-          >
-            Back to All Articles
-          </Link>
-        </div>
+          {/* Comment Form */}
+          <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '40px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#111827', margin: '0 0 32px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              Leave a Comment
+            </h3>
+            {submitMessage && (
+              <div style={{ background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#DC2626', padding: '12px 16px', marginBottom: '24px', fontSize: '14px' }}>
+                {submitMessage}
+              </div>
+            )}
+            <form onSubmit={handleCommentSubmit}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                <div>
+                  <label style={labelStyle}>Name *</label>
+                  <input
+                    type="text"
+                    value={commentForm.name}
+                    onChange={(e) => setCommentForm({ ...commentForm, name: e.target.value })}
+                    required
+                    style={inputStyle}
+                  />
+                </div>
+                <div>
+                  <label style={labelStyle}>Email *</label>
+                  <input
+                    type="email"
+                    value={commentForm.email}
+                    onChange={(e) => setCommentForm({ ...commentForm, email: e.target.value })}
+                    required
+                    style={inputStyle}
+                  />
+                </div>
+              </div>
+              <div style={{ marginBottom: '28px' }}>
+                <label style={labelStyle}>Comment *</label>
+                <textarea
+                  value={commentForm.content}
+                  onChange={(e) => setCommentForm({ ...commentForm, content: e.target.value })}
+                  required
+                  rows={5}
+                  style={{ ...inputStyle, resize: 'vertical' }}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={submitting}
+                style={{
+                  background: '#DC2626',
+                  color: '#111827',
+                  border: 'none',
+                  padding: '14px 32px',
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  cursor: submitting ? 'not-allowed' : 'pointer',
+                  opacity: submitting ? 0.6 : 1,
+                  fontFamily: 'inherit',
+                }}
+              >
+                {submitting ? 'Submitting...' : 'Post Comment'}
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      {/* CTA */}
+      <div style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB', padding: '64px 24px', textAlign: 'center' }}>
+        <p style={{ color: '#6B7280', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>Atonix Blog</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, color: '#111827', margin: '0 0 32px' }}>Explore More Articles</h2>
+        <Link
+          to="/blog"
+          style={{ display: 'inline-block', background: '#DC2626', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}
+        >
+          View All Posts
+        </Link>
       </div>
     </div>
   );

@@ -1,21 +1,18 @@
 <svg
-  width="64"
-  height="64"
+  width="32"
+  height="32"
   viewBox="0 0 64 64"
   xmlns="http://www.w3.org/2000/svg"
   role="img"
-  aria-label="AtonixDev logo icon"
+  aria-label="AtonixDev favicon"
 >
-  <!-- Background -->
+  <!--
+    Favicon 32×32 — standard detail level; matches the canonical icon.
+  -->
   <rect x="0" y="0" width="64" height="64" rx="16" fill="#111827" />
-
-  <!-- Geometric A emblem -->
   <g transform="translate(12, 10)">
-    <!-- Left pillar -->
     <path d="M4 40 L12 12 L20 40 Z" fill="#1456F0" />
-    <!-- Right pillar -->
     <path d="M20 40 L28 12 L36 40 Z" fill="#1456F0" />
-    <!-- Crossbar (Electric Cyan) -->
     <rect x="12" y="20" width="16" height="4" rx="2" fill="#22D3EE" />
   </g>
 </svg>

@@ -71,113 +71,155 @@ const Testimonials = () => {
     ? testimonials
     : testimonials.filter(t => t.rating >= filterRating);
 
-  const averageRating = testimonials.length > 0
-    ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1)
-    : 0;
-
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span key={i} className={`text-lg ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}>
-        ★
-      </span>
-    ));
-  };
+  const averageRating = (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1);
 
   return (
-    <div className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Client Testimonials</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Trusted by leading African institutions and tech companies.
+    <div style={{ background: '#FFFFFF' }} className="min-h-screen">
+
+      {/* Page Hero */}
+      <section className="hero-grid-bg" style={{ padding: '96px 0 80px', borderBottom: '1px solid #E5E7EB' }}>
+        <div className="gsw-container">
+          <p className="gsw-eyebrow">Client Success</p>
+          <h1 style={{ fontSize: '48px', fontWeight: 700, color: '#111827', lineHeight: 1.1, marginBottom: '24px', maxWidth: '720px' }}>
+            Testimonials
+          </h1>
+          <p style={{ fontSize: '18px', color: '#aaa', maxWidth: '600px', lineHeight: 1.7 }}>
+            Trusted by leading African institutions, research universities, and technology companies.
+            Every engagement is measured by outcomes, not effort.
           </p>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="text-3xl font-bold text-primary-600 mb-2">{averageRating}</div>
-              <div className="text-gray-600">Average Rating</div>
-              <div className="flex justify-center mt-2">
-                {renderStars(Math.round(averageRating))}
+      {/* Stats Row */}
+      <section style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB' }}>
+        <div className="gsw-container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+            {[
+              { value: averageRating, label: 'Average Rating' },
+              { value: '84+', label: 'Satisfied Clients' },
+              { value: '100%', label: 'Satisfaction Rate' },
+              { value: '5★', label: 'Consistent Score' },
+            ].map((stat, i) => (
+              <div key={i} className="gsw-stat" style={{ borderRight: i < 3 ? '1px solid #E5E7EB' : 'none' }}>
+                <div style={{ fontSize: '36px', fontWeight: 700, color: '#DC2626', marginBottom: '4px' }}>{stat.value}</div>
+                <div style={{ fontSize: '13px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{stat.label}</div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="text-3xl font-bold text-primary-600 mb-2">84</div>
-              <div className="text-gray-600">Happy Clients</div>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="text-3xl font-bold text-primary-600 mb-2">100%</div>
-              <div className="text-gray-600">Satisfaction</div>
-            </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        <div className="flex justify-center mb-8">
-          <div className="bg-white rounded-lg p-4 shadow-md">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Filter:</label>
-            <select
-              value={filterRating}
-              onChange={(e) => setFilterRating(Number(e.target.value))}
-              className="border border-gray-300 rounded-md px-3 py-2"
-            >
-              <option value={0}>All Ratings</option>
-              <option value={5}>5 Stars</option>
-              <option value={4}>4+ Stars</option>
-              <option value={3}>3+ Stars</option>
-            </select>
+      {/* Filter */}
+      <section style={{ padding: '48px 0 0', borderBottom: '1px solid #E5E7EB' }}>
+        <div className="gsw-container">
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', paddingBottom: '32px' }}>
+            <span style={{ fontSize: '12px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginRight: '8px' }}>Filter:</span>
+            {[0, 5, 4, 3].map((val) => (
+              <button
+                key={val}
+                onClick={() => setFilterRating(val)}
+                style={{
+                  padding: '6px 16px',
+                  background: filterRating === val ? '#DC2626' : 'transparent',
+                  color: filterRating === val ? '#111827' : '#aaa',
+                  border: `1px solid ${filterRating === val ? '#DC2626' : '#D1D5DB'}`,
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  fontFamily: 'inherit',
+                  transition: 'all 0.15s',
+                }}
+              >
+                {val === 0 ? 'All' : val === 5 ? '5 Stars' : val === 4 ? '4+ Stars' : '3+ Stars'}
+              </button>
+            ))}
           </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredTestimonials.map((testimonial) => (
-            <div key={testimonial.id} className={`bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow ${testimonial.is_featured ? 'ring-2 ring-primary-500' : ''}`}>
-              {testimonial.is_featured && (
-                <div className="bg-primary-500 text-white text-xs font-bold px-2 py-1 rounded-full inline-block mb-4">
-                  FEATURED
-                </div>
-              )}
-
-              <div className="flex items-center mb-4">
-                <div className="flex mr-2">
-                  {renderStars(testimonial.rating)}
-                </div>
-                <span className="text-sm text-gray-600">({testimonial.rating}/5)</span>
-              </div>
-
-              <p className="text-gray-700 mb-6 italic">"{testimonial.content}"</p>
-
-              <div className="border-t pt-4">
-                <div className="font-bold text-gray-900">{testimonial.client_name}</div>
-                <div className="text-primary-600 font-medium">{testimonial.client_title}</div>
-                <div className="text-gray-600 text-sm">{testimonial.client_company}</div>
-                {testimonial.project && (
-                  <div className="text-xs text-gray-500 mt-2">
-                    {testimonial.project}
+      {/* Testimonials Grid */}
+      <section className="gsw-section">
+        <div className="gsw-container">
+          {filteredTestimonials.length === 0 ? (
+            <p style={{ color: '#6B7280', textAlign: 'center', padding: '64px 0' }}>No testimonials match your filter.</p>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1px', background: '#E5E7EB' }}>
+              {filteredTestimonials.map((t) => (
+                <div
+                  key={t.id}
+                  className="gsw-testimonial"
+                  style={{ background: '#F8F9FA', padding: '40px', position: 'relative' }}
+                >
+                  {t.is_featured && (
+                    <div style={{
+                      position: 'absolute', top: 0, left: 0, right: 0,
+                      height: '2px', background: '#DC2626'
+                    }} />
+                  )}
+                  <div style={{ marginBottom: '24px' }}>
+                    {t.is_featured && (
+                      <span style={{
+                        display: 'inline-block',
+                        background: '#DC2626',
+                        color: '#111827',
+                        fontSize: '10px',
+                        fontWeight: 700,
+                        letterSpacing: '0.1em',
+                        padding: '3px 8px',
+                        textTransform: 'uppercase',
+                        marginBottom: '16px'
+                      }}>
+                        FEATURED
+                      </span>
+                    )}
+                    <div style={{ display: 'flex', gap: '2px', marginBottom: '20px' }}>
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <span key={i} style={{ color: i < t.rating ? '#DC2626' : '#D1D5DB', fontSize: '16px' }}>★</span>
+                      ))}
+                    </div>
+                    <p style={{ color: '#374151', lineHeight: 1.75, fontSize: '15px', fontStyle: 'italic' }}>
+                      "{t.content}"
+                    </p>
                   </div>
-                )}
-              </div>
+                  <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: '24px' }}>
+                    <div style={{ fontWeight: 700, color: '#111827', fontSize: '15px' }}>{t.client_name}</div>
+                    <div style={{ color: '#DC2626', fontSize: '13px', marginTop: '2px' }}>{t.client_title}</div>
+                    <div style={{ color: '#6B7280', fontSize: '13px', marginTop: '2px' }}>{t.client_company}</div>
+                    {t.project && (
+                      <div style={{ marginTop: '12px' }}>
+                        <span style={{
+                          display: 'inline-block',
+                          background: '#F1F3F5',
+                          border: '1px solid #E5E7EB',
+                          color: '#6B7280',
+                          fontSize: '11px',
+                          padding: '2px 8px',
+                          letterSpacing: '0.05em',
+                        }}>
+                          {t.project}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
+      </section>
 
-        {filteredTestimonials.length === 0 && (
-          <div className="text-center text-gray-600">
-            <p>No testimonials match your filter.</p>
+      {/* CTA Bar */}
+      <section className="gsw-cta-bar">
+        <div className="gsw-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+          <div>
+            <div style={{ fontSize: '24px', fontWeight: 700, color: '#111827', marginBottom: '8px' }}>Ready to become the next success story?</div>
+            <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '15px' }}>Let's discuss your infrastructure challenges.</div>
           </div>
-        )}
-
-        <div className="mt-16 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Join Our Success Stories?</h2>
-          <p className="text-xl mb-6 text-primary-100">
-            Let's discuss how we can transform your infrastructure forward.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-all"
-          >
+          <Link to="/contact" className="gsw-btn-dark" style={{ background: '#FFFFFF', color: '#111827', border: '1px solid rgba(255,255,255,0.3)' }}>
             Start Your Project
           </Link>
         </div>
-      </div>
+      </section>
+
     </div>
   );
 };

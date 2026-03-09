@@ -17,9 +17,7 @@ const AdminBlog = () => {
     published: false,
   });
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  useEffect(() => { fetchPosts(); }, []);
 
   const fetchPosts = async () => {
     try {
@@ -76,96 +74,62 @@ const AdminBlog = () => {
   };
 
   const resetForm = () => {
-    setFormData({
-      title: '',
-      excerpt: '',
-      content: '',
-      category: 'ai',
-      tags: '',
-      featured_image: '',
-      published: false,
-    });
+    setFormData({ title: '', excerpt: '', content: '', category: 'ai', tags: '', featured_image: '', published: false });
     setEditingPost(null);
     setShowForm(false);
   };
 
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString();
-  };
+  const formatDate = (dateString) => new Date(dateString).toLocaleDateString();
+
+  const labelStyle = { display: 'block', fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' };
+  const inputStyle = { width: '100%', background: '#F8F9FA', border: '1px solid #D1D5DB', color: '#111827', padding: '10px 14px', fontSize: '14px', fontFamily: 'Inter, sans-serif', boxSizing: 'border-box', outline: 'none' };
+  const thStyle = { padding: '12px 16px', textAlign: 'left', fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', background: '#F1F3F5', borderBottom: '1px solid #D1D5DB' };
+  const tdStyle = { padding: '14px 16px', fontSize: '14px', color: '#374151', borderBottom: '1px solid #F3F4F6' };
 
   if (loading) {
-    return <div className="p-8">Loading...</div>;
+    return <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6B7280', fontFamily: 'Inter, sans-serif' }}>Loading...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow mb-8">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Manage Blog Posts</h1>
-            <div className="flex gap-4">
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-700"
-              >
-                {showForm ? 'Cancel' : 'Add New Post'}
-              </button>
-              <Link
-                to="/admin"
-                className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
-              >
-                Back to Dashboard
-              </Link>
-            </div>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
+      <header style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
+          <h1 style={{ fontSize: '16px', fontWeight: 700, color: '#111827', margin: 0 }}>Manage Blog Posts</h1>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <button
+              onClick={() => setShowForm(!showForm)}
+              style={{ background: '#DC2626', border: 'none', color: '#fff', padding: '8px 16px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}
+            >
+              {showForm ? 'Cancel' : 'Add New Post'}
+            </button>
+            <Link to="/admin" style={{ border: '1px solid #D1D5DB', color: '#6B7280', padding: '8px 16px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>Back to Dashboard</Link>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px 80px' }}>
         {showForm && (
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <h2 className="text-xl font-bold mb-4">
+          <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '32px', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#111827', margin: '0 0 24px' }}>
               {editingPost ? 'Edit Post' : 'Create New Post'}
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div>
-                <label className="block text-sm font-medium mb-1">Title</label>
-                <input
-                  type="text"
-                  value={formData.title}
-                  onChange={(e) => setFormData({...formData, title: e.target.value})}
-                  className="w-full p-2 border rounded"
-                  required
-                />
+                <label style={labelStyle}>Title</label>
+                <input type="text" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} style={inputStyle} required />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Excerpt</label>
-                <textarea
-                  value={formData.excerpt}
-                  onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
-                  className="w-full p-2 border rounded"
-                  rows="3"
-                  required
-                />
+                <label style={labelStyle}>Excerpt</label>
+                <textarea value={formData.excerpt} onChange={(e) => setFormData({...formData, excerpt: e.target.value})} style={{ ...inputStyle, resize: 'vertical', minHeight: '80px' }} rows="3" required />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Content (HTML)</label>
-                <textarea
-                  value={formData.content}
-                  onChange={(e) => setFormData({...formData, content: e.target.value})}
-                  className="w-full p-2 border rounded"
-                  rows="10"
-                  required
-                />
+                <label style={labelStyle}>Content (HTML)</label>
+                <textarea value={formData.content} onChange={(e) => setFormData({...formData, content: e.target.value})} style={{ ...inputStyle, resize: 'vertical', minHeight: '200px' }} rows="10" required />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Category</label>
-                  <select
-                    value={formData.category}
-                    onChange={(e) => setFormData({...formData, category: e.target.value})}
-                    className="w-full p-2 border rounded"
-                  >
+                  <label style={labelStyle}>Category</label>
+                  <select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})} style={inputStyle}>
                     <option value="ai">Artificial Intelligence</option>
                     <option value="bigdata">Big Data</option>
                     <option value="robotics">Robotics</option>
@@ -178,46 +142,23 @@ const AdminBlog = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Tags (comma-separated)</label>
-                  <input
-                    type="text"
-                    value={formData.tags}
-                    onChange={(e) => setFormData({...formData, tags: e.target.value})}
-                    className="w-full p-2 border rounded"
-                    placeholder="AI, Machine Learning, Technology"
-                  />
+                  <label style={labelStyle}>Tags (comma-separated)</label>
+                  <input type="text" value={formData.tags} onChange={(e) => setFormData({...formData, tags: e.target.value})} style={inputStyle} placeholder="AI, Machine Learning, Technology" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Featured Image URL</label>
-                <input
-                  type="url"
-                  value={formData.featured_image}
-                  onChange={(e) => setFormData({...formData, featured_image: e.target.value})}
-                  className="w-full p-2 border rounded"
-                />
+                <label style={labelStyle}>Featured Image URL</label>
+                <input type="url" value={formData.featured_image} onChange={(e) => setFormData({...formData, featured_image: e.target.value})} style={inputStyle} />
               </div>
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={formData.published}
-                  onChange={(e) => setFormData({...formData, published: e.target.checked})}
-                  className="mr-2"
-                />
-                <label className="text-sm font-medium">Publish immediately</label>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <input type="checkbox" id="published" checked={formData.published} onChange={(e) => setFormData({...formData, published: e.target.checked})} style={{ width: '16px', height: '16px', accentColor: '#DC2626' }} />
+                <label htmlFor="published" style={{ fontSize: '13px', color: '#374151', cursor: 'pointer' }}>Publish immediately</label>
               </div>
-              <div className="flex gap-4">
-                <button
-                  type="submit"
-                  className="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700"
-                >
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <button type="submit" style={{ background: '#DC2626', border: 'none', color: '#fff', padding: '12px 28px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
                   {editingPost ? 'Update Post' : 'Create Post'}
                 </button>
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700"
-                >
+                <button type="button" onClick={resetForm} style={{ background: 'transparent', border: '1px solid #D1D5DB', color: '#6B7280', padding: '12px 28px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
                   Cancel
                 </button>
               </div>
@@ -225,69 +166,41 @@ const AdminBlog = () => {
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-50">
+        <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Title
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Category
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
+                <th style={thStyle}>Title</th>
+                <th style={thStyle}>Category</th>
+                <th style={thStyle}>Status</th>
+                <th style={thStyle}>Date</th>
+                <th style={{ ...thStyle, textAlign: 'right' }}>Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody>
               {posts.map((post) => (
-                <tr key={post.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">{post.title}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="text-sm text-gray-500 capitalize">
-                      {post.category.replace('_', ' ')}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                    }`}>
+                <tr key={post.id} style={{ background: 'transparent' }}>
+                  <td style={tdStyle}><span style={{ color: '#111827', fontWeight: 500 }}>{post.title}</span></td>
+                  <td style={tdStyle}><span style={{ color: '#6B7280', textTransform: 'capitalize' }}>{post.category.replace('_', ' ')}</span></td>
+                  <td style={tdStyle}>
+                    <span style={post.published
+                      ? { background: '#003311', border: '1px solid #00AA44', color: '#00AA44', padding: '3px 10px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }
+                      : { background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#6B7280', padding: '3px 10px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                       {post.published ? 'Published' : 'Draft'}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(post.created_at)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <button
-                      onClick={() => handleEdit(post)}
-                      className="text-indigo-600 hover:text-indigo-900 mr-4"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(post.id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      Delete
-                    </button>
+                  <td style={tdStyle}>{formatDate(post.created_at)}</td>
+                  <td style={{ ...tdStyle, textAlign: 'right' }}>
+                    <button onClick={() => handleEdit(post)} style={{ background: 'transparent', border: 'none', color: '#DC2626', cursor: 'pointer', fontSize: '13px', fontWeight: 600, marginRight: '16px', padding: 0, fontFamily: 'Inter, sans-serif' }}>Edit</button>
+                    <button onClick={() => handleDelete(post.id)} style={{ background: 'transparent', border: 'none', color: '#CC0033', cursor: 'pointer', fontSize: '13px', fontWeight: 600, padding: 0, fontFamily: 'Inter, sans-serif' }}>Delete</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
           {posts.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
-              No blog posts yet. Create your first post!
+            <div style={{ textAlign: 'center', padding: '48px', color: '#6B7280', fontSize: '14px' }}>
+              No blog posts yet. Create your first post above.
             </div>
           )}
         </div>

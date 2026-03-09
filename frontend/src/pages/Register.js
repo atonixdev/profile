@@ -22,10 +22,7 @@ const Register = () => {
   const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -33,7 +30,6 @@ const Register = () => {
     setError('');
     setSuccess('');
 
-    // Validation
     if (formData.password !== formData.password_confirm) {
       setError('Passwords do not match');
       return;
@@ -69,14 +65,9 @@ const Register = () => {
         setError('Too many attempts. Please wait and try again.');
       } else {
         const data = err.response?.data;
-
-        // If the backend returns an HTML error page (common when DEBUG=True),
-        // avoid exploding it into thousands of characters.
         if (typeof data === 'string') {
           const trimmed = data.trim().toLowerCase();
-          if (trimmed.startsWith('<!doctype html') || trimmed.startsWith('<html')) {
-            setError('Server error while creating account. Please try again later.');
-          } else if (data.length > 300) {
+          if (trimmed.startsWith('<!doctype html') || trimmed.startsWith('<html') || data.length > 300) {
             setError('Server error while creating account. Please try again later.');
           } else {
             setError(data);
@@ -95,185 +86,174 @@ const Register = () => {
     }
   };
 
+  const inputStyle = {
+    width: '100%', boxSizing: 'border-box',
+    background: '#F1F3F5', border: '1px solid #D1D5DB',
+    color: '#111827', padding: '12px 14px',
+    fontSize: '14px', fontFamily: 'inherit',
+    outline: 'none', transition: 'border-color 0.15s',
+  };
+
+  const labelStyle = {
+    display: 'block', fontSize: '12px', fontWeight: 600,
+    color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em',
+    marginBottom: '6px',
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center py-12 px-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Our Community</h1>
-          <p className="text-gray-600">Create an account to access exclusive community features</p>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 16px' }}>
+      <div style={{ width: '100%', maxWidth: '480px' }}>
+
+        {/* Logo / Brand */}
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+            <div style={{ width: '32px', height: '32px', background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#111827', fontWeight: 900, fontSize: '14px' }}>AC</span>
+            </div>
+            <span style={{ color: '#111827', fontWeight: 700, fontSize: '16px', letterSpacing: '-0.01em' }}>AtonixDev</span>
+          </div>
+          <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', marginBottom: '8px', letterSpacing: '-0.02em' }}>
+            Join Our Community
+          </h1>
+          <p style={{ color: '#6B7280', fontSize: '14px' }}>Create an account to access exclusive platform features</p>
         </div>
 
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
-            {error}
-          </div>
-        )}
+        {/* Card */}
+        <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '40px' }}>
 
-        {success && (
-          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6">
-            {success}
-          </div>
-        )}
+          {error && (
+            <div style={{ background: '#1a0000', border: '1px solid #660000', color: '#ff6666', padding: '12px 16px', marginBottom: '24px', fontSize: '13px' }}>
+              {error}
+            </div>
+          )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          {success && (
+            <div style={{ background: '#001a33', border: '1px solid #DC2626', color: '#66aaff', padding: '12px 16px', marginBottom: '24px', fontSize: '13px' }}>
+              {success}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div>
+                <label style={labelStyle}>First Name</label>
+                <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required placeholder="John" style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Last Name</label>
+                <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} required placeholder="Doe" style={inputStyle} />
+              </div>
+            </div>
+
             <div>
-              <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 mb-1">
-                First Name
-              </label>
-              <input
-                type="text"
-                id="first_name"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                placeholder="John"
-              />
+              <label style={labelStyle}>Username</label>
+              <input type="text" name="username" value={formData.username} onChange={handleChange} required placeholder="johndoe" style={inputStyle} />
             </div>
+
             <div>
-              <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 mb-1">
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="last_name"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                placeholder="Doe"
-              />
+              <label style={labelStyle}>Email Address</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="john@example.com" style={inputStyle} />
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              placeholder="johndoe"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              placeholder="john@example.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Country
-            </label>
-            <SearchableCountryDropdown
-              value={formData.country}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="w-full pr-20 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-primary-600 hover:text-primary-700"
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
-              >
-                {showPassword ? 'Hide' : 'Show'}
-              </button>
+            <div>
+              <label style={labelStyle}>Country</label>
+              <div style={{ border: '1px solid #D1D5DB', background: '#F1F3F5' }}>
+                <SearchableCountryDropdown value={formData.country} onChange={handleChange} />
+              </div>
             </div>
-            <p className="text-xs text-gray-500 mt-1">At least 8 characters</p>
-          </div>
 
-          <div>
-            <label htmlFor="password_confirm" className="block text-sm font-medium text-gray-700 mb-1">
-              Confirm Password
-            </label>
-            <div className="relative">
-              <input
-                type={showPasswordConfirm ? 'text' : 'password'}
-                id="password_confirm"
-                name="password_confirm"
-                value={formData.password_confirm}
-                onChange={handleChange}
-                required
-                className="w-full pr-20 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPasswordConfirm((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-primary-600 hover:text-primary-700"
-                aria-label={showPasswordConfirm ? 'Hide password confirmation' : 'Show password confirmation'}
-              >
-                {showPasswordConfirm ? 'Hide' : 'Show'}
-              </button>
+            <div>
+              <label style={labelStyle}>Password</label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={showPassword ? 'text' : 'password'} name="password"
+                  value={formData.password} onChange={handleChange} required
+                  placeholder="••••••••"
+                  style={{ ...inputStyle, paddingRight: '64px' }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(v => !v)}
+                  style={{
+                    position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+                    background: 'none', border: 'none', color: '#DC2626', fontSize: '12px',
+                    fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.05em',
+                  }}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? 'HIDE' : 'SHOW'}
+                </button>
+              </div>
+              <p style={{ fontSize: '11px', color: '#6B7280', marginTop: '4px' }}>Minimum 8 characters</p>
             </div>
+
+            <div>
+              <label style={labelStyle}>Confirm Password</label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={showPasswordConfirm ? 'text' : 'password'} name="password_confirm"
+                  value={formData.password_confirm} onChange={handleChange} required
+                  placeholder="••••••••"
+                  style={{ ...inputStyle, paddingRight: '64px' }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPasswordConfirm(v => !v)}
+                  style={{
+                    position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+                    background: 'none', border: 'none', color: '#DC2626', fontSize: '12px',
+                    fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.05em',
+                  }}
+                  aria-label={showPasswordConfirm ? 'Hide password confirmation' : 'Show password confirmation'}
+                >
+                  {showPasswordConfirm ? 'HIDE' : 'SHOW'}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                padding: '14px 24px', background: loading ? '#E5E7EB' : '#DC2626',
+                color: '#111827', border: 'none', fontSize: '13px',
+                fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+                cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
+                transition: 'background 0.15s', marginTop: '4px',
+              }}
+            >
+              {loading ? 'Creating Account...' : 'Create Account'}
+            </button>
+          </form>
+
+          <div style={{ borderTop: '1px solid #E5E7EB', marginTop: '28px', paddingTop: '24px', textAlign: 'center' }}>
+            <p style={{ color: '#6B7280', fontSize: '13px' }}>
+              Already have an account?{' '}
+              <Link to="/login" style={{ color: '#DC2626', fontWeight: 700, textDecoration: 'none' }}>
+                Sign In
+              </Link>
+            </p>
           </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-primary-600 text-white py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-6"
-          >
-            {loading ? 'Creating Account...' : 'Create Account'}
-          </button>
-        </form>
-
-        <div className="mt-6 pt-6 border-t text-center">
-          <p className="text-gray-600">
-            Already have an account?{' '}
-            <Link to="/login" className="text-primary-600 font-semibold hover:underline">
-              Sign in
-            </Link>
-          </p>
         </div>
 
-        <div className="mt-4 pt-4 border-t">
-          <p className="text-xs text-gray-500 text-center mb-3">
-            We welcome developers and tech professionals of all backgrounds and experience levels
+        {/* Tech tags */}
+        <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', borderTop: 'none', padding: '20px 40px' }}>
+          <p style={{ fontSize: '11px', color: '#6B7280', textAlign: 'center', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            Open to all tech professionals
           </p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Full Stack</span>
-            <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">DevOps</span>
-            <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">AI/ML</span>
-            <span className="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs">Cloud</span>
-            <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs">Security</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
+            {['Full Stack', 'DevOps', 'AI/ML', 'Cloud', 'Security', 'Systems'].map((tag) => (
+              <span key={tag} style={{
+                background: '#F1F3F5', border: '1px solid #E5E7EB',
+                color: '#6B7280', fontSize: '11px', padding: '3px 10px',
+                letterSpacing: '0.05em',
+              }}>
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
+
       </div>
     </div>
   );

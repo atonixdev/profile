@@ -45,7 +45,7 @@ const IoTLabWeatherMap = () => {
         el.style.borderRadius = '10px';
         el.style.border = isDark ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(0,0,0,0.12)';
         el.style.background = isDark ? 'rgba(10,15,31,0.92)' : 'rgba(255,255,255,0.95)';
-        el.style.color = isDark ? '#fff' : '#111';
+        el.style.color = isDark ? '#111827' : '#F1F3F5';
         el.style.boxShadow = isDark ? '0 16px 40px rgba(0,0,0,0.45)' : '0 12px 30px rgba(0,0,0,0.18)';
         return el;
       };

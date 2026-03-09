@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { blogService } from '../services';
 
+// GS-WSF §5 — Blog page
 const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,33 +10,23 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetch = async () => {
       try {
         setLoading(true);
         const params = {};
-
-        if (selectedCategory !== 'all') {
-          params.category = selectedCategory;
-        }
-        if (searchTerm) {
-          params.search = searchTerm;
-        }
-
-        const response = await blogService.getAll(params);
-        setPosts(response.data.results || response.data);
-      } catch (error) {
-        console.error('Error fetching blog posts:', error);
-      } finally {
-        setLoading(false);
-      }
+        if (selectedCategory !== 'all') params.category = selectedCategory;
+        if (searchTerm) params.search = searchTerm;
+        const res = await blogService.getAll(params);
+        setPosts(res.data.results || res.data);
+      } catch { setPosts([]); }
+      finally { setLoading(false); }
     };
-
-    fetchPosts();
+    fetch();
   }, [selectedCategory, searchTerm]);
 
   const categories = [
     { value: 'all', label: 'All Posts' },
-    { value: 'cloud', label: 'Cloud Architecture' },
+    { value: 'cloud', label: 'Cloud' },
     { value: 'ai', label: 'AI & ML' },
     { value: 'devops', label: 'DevOps' },
     { value: 'infrastructure', label: 'Infrastructure' },
@@ -43,152 +34,148 @@ const Blog = () => {
     { value: 'tutorial', label: 'Tutorial' },
   ];
 
-  const getCategoryColor = (category) => {
-    const colors = {
-      cloud: 'bg-blue-100 text-blue-800',
-      ai: 'bg-purple-100 text-purple-800',
-      devops: 'bg-green-100 text-green-800',
-      infrastructure: 'bg-orange-100 text-orange-800',
-      security: 'bg-red-100 text-red-800',
-      tutorial: 'bg-yellow-100 text-yellow-800',
-    };
-    return colors[category] || 'bg-gray-100 text-gray-800';
-  };
-
-  const getCategoryLabel = (category) => {
-    const cat = categories.find(c => c.value === category);
-    return cat ? cat.label : category;
-  };
-
   return (
-    <div className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg p-8 mb-12 text-center">
-          <h1 className="text-5xl font-bold mb-4 text-gray-900">Blog</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Insights on cloud infrastructure, AI/ML, DevOps, and technology trends for African digital sovereignty
+    <div style={{ background: '#FFFFFF' }}>
+
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+          <span className="gsw-eyebrow">Insights & Research</span>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, marginBottom: 24 }}>
+            Blog
+          </h1>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600 }}>
+            Insights on cloud infrastructure, AI/ML, DevOps, and technology trends for African digital sovereignty.
           </p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            {/* Search */}
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-              <h3 className="text-lg font-bold mb-4">Search</h3>
-              <input
-                type="text"
-                placeholder="Search posts..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              />
+      <hr className="gsw-divider" />
+
+      {/* ── Filters ────────────────────────────────────────── */}
+      <section style={{ background: '#F8F9FA', padding: '32px 0', borderBottom: '1px solid #F3F4F6' }}>
+        <div className="gsw-container">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {categories.map((cat) => (
+                <button
+                  key={cat.value}
+                  onClick={() => setSelectedCategory(cat.value)}
+                  style={{
+                    padding: '8px 20px',
+                    background: selectedCategory === cat.value ? '#DC2626' : 'transparent',
+                    border: `1px solid ${selectedCategory === cat.value ? '#DC2626' : '#D1D5DB'}`,
+                    color: selectedCategory === cat.value ? '#111827' : '#6B7280',
+                    fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
+                    textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  {cat.label}
+                </button>
+              ))}
             </div>
-
-            {/* Categories */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-bold mb-4">Categories</h3>
-              <div className="space-y-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.value}
-                    onClick={() => setSelectedCategory(category.value)}
-                    className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                      selectedCategory === category.value
-                        ? 'bg-primary-600 text-white font-semibold'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {category.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            {loading ? (
-              <div className="text-center py-16">
-                <div className="inline-block text-xl text-gray-600">Loading blog posts...</div>
-              </div>
-            ) : posts.length === 0 ? (
-              <div className="text-center py-16">
-                <p className="text-xl text-gray-600">No blog posts found.</p>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {posts.map((post) => (
-                  <article key={post.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-                    <div className="p-6">
-                      {/* Header */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-3 ${getCategoryColor(post.category)}`}>
-                            {getCategoryLabel(post.category)}
-                          </span>
-                          <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                            <Link to={`/blog/${post.slug}`} className="hover:text-primary-600 transition-colors">
-                              {post.title}
-                            </Link>
-                          </h2>
-                        </div>
-                      </div>
-
-                      {/* Excerpt */}
-                      <p className="text-gray-600 mb-4 leading-relaxed">{post.excerpt}</p>
-
-                      {/* Meta */}
-                      <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 pb-4 border-b border-gray-200">
-                        <span>By {post.author}</span>
-                        <span>{new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                        <span>{post.read_time} min read</span>
-                        <span>{post.view_count} views</span>
-                      </div>
-
-                      {/* Tags */}
-                      {post.tags_list && post.tags_list.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {post.tags_list.map((tag, index) => (
-                            <span key={index} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* CTA */}
-                      <Link
-                        to={`/blog/${post.slug}`}
-                        className="inline-block mt-4 bg-primary-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
-                      >
-                        Read More
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
+            <input
+              type="text"
+              placeholder="Search posts..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="gsw-input"
+              style={{ maxWidth: 280 }}
+            />
           </div>
         </div>
+      </section>
 
-        {/* CTA Section */}
-        <div className="mt-16 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Have an Idea for a Blog Post?</h2>
-          <p className="text-xl text-primary-100 mb-6">
+      {/* ── Posts ──────────────────────────────────────────── */}
+      <section className="gsw-section" style={{ background: '#FFFFFF' }}>
+        <div className="gsw-container">
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '64px 0', color: '#6B7280', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              Loading posts&hellip;
+            </div>
+          ) : posts.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '64px 0', color: '#6B7280' }}>
+              No posts found.
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              {posts.map((post) => (
+                <article
+                  key={post.id}
+                  className="gsw-card"
+                  style={{ padding: 0, display: 'grid', gridTemplateColumns: '1fr', transition: 'border-color 0.2s ease' }}
+                >
+                  <div style={{ padding: '32px' }}>
+                    <div style={{ marginBottom: 12 }}>
+                      <span className="gsw-tag-accent" style={{ fontSize: 10 }}>
+                        {post.category?.toUpperCase() || 'ARTICLE'}
+                      </span>
+                    </div>
+                    <h2 style={{ marginTop: 12, marginBottom: 12 }}>
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        style={{ fontSize: 22, fontWeight: 700, color: '#111827', lineHeight: 1.3, textDecoration: 'none', transition: 'color 0.15s ease' }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = '#DC2626'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = '#111827'; }}
+                      >
+                        {post.title}
+                      </Link>
+                    </h2>
+                    <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8, marginBottom: 20 }}>
+                      {post.excerpt}
+                    </p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 12, color: '#6B7280', marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid #F3F4F6' }}>
+                      {post.author && <span>By {post.author}</span>}
+                      {post.created_at && <span>{new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
+                      {post.read_time && <span>{post.read_time} min read</span>}
+                    </div>
+                    {post.tags_list?.length > 0 && (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20 }}>
+                        {post.tags_list.map((tag) => (
+                          <span key={tag} className="gsw-tag" style={{ fontSize: 10 }}>#{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                    <Link to={`/blog/${post.slug}`} className="gsw-btn gsw-btn-ghost" style={{ padding: '8px 24px' }}>
+                      Read Article
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── CTA Bar ────────────────────────────────────────── */}
+      <section className="gsw-cta-bar">
+        <div className="gsw-container" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#111827', marginBottom: 12, marginTop: 0 }}>
+            Have an Idea for a Blog Post?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, maxWidth: 480, margin: '0 auto 32px', lineHeight: 1.6 }}>
             Share your thoughts on cloud infrastructure, AI/ML, DevOps, and technology innovation.
           </p>
           <Link
             to="/contact"
-            className="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+            style={{
+              display: 'inline-flex', alignItems: 'center',
+              padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+              fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
+              textTransform: 'uppercase', textDecoration: 'none',
+            }}
           >
             Get in Touch
           </Link>
         </div>
-      </div>
+      </section>
+
     </div>
   );
 };
 
 export default Blog;
+

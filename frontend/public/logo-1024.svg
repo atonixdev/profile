@@ -1,0 +1,20 @@
+<svg
+  width="1024"
+  height="1024"
+  viewBox="0 0 64 64"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="AtonixDev app icon"
+>
+  <!--
+    App Icon 1024×1024 — source file for rasterisation.
+    Rasterise with Inkscape / resvg / puppeteer:
+      inkscape logo-1024.svg --export-png=logo-1024.png --export-width=1024
+  -->
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#111827" />
+  <g transform="translate(12, 10)">
+    <path d="M4 40 L12 12 L20 40 Z" fill="#1456F0" />
+    <path d="M20 40 L28 12 L36 40 Z" fill="#1456F0" />
+    <rect x="12" y="20" width="16" height="4" rx="2" fill="#22D3EE" />
+  </g>
+</svg>

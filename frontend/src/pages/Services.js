@@ -1,154 +1,183 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// GS-WSF §5 — Services page
 const Services = () => {
   const services = [
     {
       id: 1,
       title: 'Software Engineering & Product Development',
-      description: 'AtonixDev builds custom applications, platforms, and digital tools tailored to the unique needs of each client. From backend systems and APIs to full user-facing applications, the company delivers clean, maintainable, and scalable codebases that support long-term growth.',
+      description: 'AtonixDev builds custom applications, platforms, and digital tools tailored to the unique needs of each client. Clean, maintainable, and scalable codebases that support long-term growth.',
       features: [
         'Custom application development',
         'Full-stack engineering',
         'Backend systems and APIs',
         'User-facing application design',
         'Clean, maintainable codebases',
-        'Scalable architecture solutions'
+        'Scalable architecture solutions',
       ],
-      pricing: 'Custom Quote'
     },
     {
       id: 2,
       title: 'AI-Driven Automation & Intelligence',
-      description: 'The company integrates artificial intelligence into business workflows, enabling smarter decision-making, automated processes, and intelligent data analysis. AtonixDev focuses on practical, high-impact AI implementations that enhance efficiency and reduce human error.',
+      description: 'We integrate artificial intelligence into business workflows, enabling smarter decision-making, automated processes, and intelligent data analysis with high-impact implementations.',
       features: [
         'AI-powered workflow automation',
         'Intelligent data analysis',
         'Smart decision-making systems',
         'Automated business processes',
         'Machine learning integration',
-        'Efficiency optimization'
+        'Efficiency optimization',
       ],
-      pricing: 'Custom Quote'
     },
     {
       id: 3,
       title: 'Technical Architecture & Systems Design',
-      description: 'AtonixDev provides expert architectural planning for complex systems, ensuring that every component — from databases to user interfaces — is harmonized, secure, and optimized for performance. This includes multi-country logic, financial engines, and enterprise-grade infrastructure.',
+      description: 'Expert architectural planning for complex systems — from databases to user interfaces — harmonized, secure, and optimized for performance across enterprise-grade infrastructure.',
       features: [
         'Complex systems architecture',
         'Database design and optimization',
-        'User interface harmonization',
         'Multi-country logic implementation',
         'Financial engine design',
-        'Enterprise-grade infrastructure'
+        'Enterprise-grade infrastructure',
+        'Security hardening',
       ],
-      pricing: 'Custom Quote'
     },
     {
       id: 4,
-      title: 'FinTech Engineering & Financial Logic Harmonization',
-      description: 'With deep expertise in financial systems, AtonixDev builds platforms that handle tax calculations, multi-currency logic, compliance workflows, and financial reporting with precision. The company\'s approach ensures accuracy, transparency, and regulatory alignment.',
+      title: 'FinTech Engineering & Financial Logic',
+      description: 'Deep expertise in financial systems: tax calculations, multi-currency logic, compliance workflows, and financial reporting with precision, transparency, and regulatory alignment.',
       features: [
         'Tax calculation systems',
         'Multi-currency logic',
         'Compliance workflow automation',
         'Financial reporting platforms',
         'Regulatory alignment',
-        'Transparent financial insights'
+        'Transparent financial insights',
       ],
-      pricing: 'Custom Quote'
     },
     {
       id: 5,
-      title: 'Strategic Consulting & Developer-Ready Specifications',
-      description: 'AtonixDev helps businesses clarify their product vision, define technical requirements, and create detailed documentation that developers can execute without confusion. This reduces development time, prevents costly errors, and ensures alignment across teams.',
+      title: 'Strategic Consulting & Dev-Ready Specifications',
+      description: 'We help businesses clarify product vision, define technical requirements, and create detailed documentation that developers can execute — reducing time, cost, and error.',
       features: [
         'Product vision clarification',
         'Technical requirement definition',
         'Detailed documentation creation',
         'Developer-ready specifications',
         'Cross-team alignment',
-        'Error prevention strategies'
+        'Error prevention strategies',
       ],
-      pricing: 'Custom Quote'
-    }
+    },
   ];
 
   return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">AtonixDev Services</h1>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-6">
-            AtonixDev specializes in custom software development, full-stack engineering, AI-driven automation, and technical architecture for complex platforms. The company is known for its ability to translate high-level business goals into clean, modular, and developer-ready specifications that eliminate ambiguity and reduce operational risk.
+    <div style={{ background: '#FFFFFF' }}>
+
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+          <span className="gsw-eyebrow">What We Offer</span>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, marginBottom: 24 }}>
+            AtonixDev Services
+          </h1>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, marginBottom: 40 }}>
+            Specializing in custom software development, full-stack engineering, AI-driven automation,
+            and technical architecture for complex platforms.
           </p>
-          <div className="bg-primary-50 rounded-lg p-6 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-primary-800 mb-2">Our Mission</h2>
-            <p className="text-gray-700">
-              Building intelligent, scalable, and future-proof digital systems. At its core, AtonixDev is built on the belief that technology should not merely solve problems — it should create new possibilities.
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            {['Custom Software', 'AI Automation', 'Future-Proof Architecture'].map((t) => (
+              <span key={t} className="gsw-tag">{t}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <hr className="gsw-divider" />
+
+      {/* ── Mission bar ────────────────────────────────────── */}
+      <section style={{ background: '#F8F9FA', padding: '48px 0', borderBottom: '1px solid #F3F4F6' }}>
+        <div className="gsw-container">
+          <div style={{ maxWidth: 700 }}>
+            <span className="gsw-eyebrow">Our Mission</span>
+            <p style={{ fontSize: 18, color: '#374151', lineHeight: 1.7 }}>
+              Building intelligent, scalable, and future-proof digital systems. At our core, AtonixDev
+              believes technology should not merely solve problems — it should create new possibilities.
             </p>
           </div>
         </div>
+      </section>
 
-        {/* Quote CTA Section */}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-8 mb-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Build Intelligent Digital Systems?</h2>
-          <p className="text-xl mb-6 text-primary-100">
-            Get a detailed consultation for your software development, AI automation, or technical architecture needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="text-primary-100">Custom software solutions</div>
-            <div className="text-primary-100">AI-driven automation</div>
-            <div className="text-primary-100">Future-proof architecture</div>
+      {/* ── Services Grid ──────────────────────────────────── */}
+      <section className="gsw-section" style={{ background: '#FFFFFF' }}>
+        <div className="gsw-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {services.map((service) => (
+              <div key={service.id} className="gsw-card" style={{ padding: 0 }}>
+                <div style={{ padding: '32px 32px 24px' }}>
+                  <div style={{ width: 40, height: 2, background: '#DC2626', marginBottom: 24 }} />
+                  <h3 style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 12, lineHeight: 1.4 }}>
+                    {service.title}
+                  </h3>
+                  <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8, marginBottom: 24 }}>
+                    {service.description}
+                  </p>
+                  <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {service.features.map((f) => (
+                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151' }}>
+                        <span style={{ color: '#DC2626', flexShrink: 0, marginTop: 2, fontWeight: 700 }}>—</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div style={{ padding: '20px 32px', borderTop: '1px solid #F3F4F6' }}>
+                  <Link
+                    to="/contact"
+                    onClick={() => {
+                      sessionStorage.setItem('selectedInquiryType', 'quote');
+                      sessionStorage.setItem('selectedService', service.title);
+                    }}
+                    className="gsw-btn gsw-btn-accent"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                  >
+                    Request Quote
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <div key={service.id} className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow relative">
-              {/* Title */}
-              <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-
-              {/* Description */}
-              <p className="text-gray-600 mb-6">{service.description}</p>
-
-              {/* Features */}
-              {service.features && service.features.length > 0 && (
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-700 flex items-start">
-                      <span className="text-primary-500 mr-2 mt-1">•</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {/* Pricing */}
-              {service.pricing && (
-                <div className="border-t pt-4">
-                  <p className="text-primary-600 font-bold text-lg">{service.pricing}</p>
-                </div>
-              )}
-
-              {/* Request Quote Button */}
-              <div className="mt-6">
-                <Link
-                  to="/contact"
-                  onClick={() => {
-                    sessionStorage.setItem('selectedInquiryType', 'quote');
-                    sessionStorage.setItem('selectedService', service.title);
-                  }}
-                  className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors text-center block"
-                >
-                  Request Quote
-                </Link>
-              </div>
-            </div>
-          ))}
+      {/* ── CTA Bar ────────────────────────────────────────── */}
+      <section className="gsw-cta-bar">
+        <div className="gsw-container" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#111827', marginBottom: 12, marginTop: 0 }}>
+            Ready to Build Intelligent Digital Systems?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, maxWidth: 520, margin: '0 auto 32px', lineHeight: 1.6 }}>
+            Get a detailed consultation for your software development, AI automation, or technical architecture needs.
+          </p>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link
+              to="/contact"
+              onClick={() => sessionStorage.setItem('selectedInquiryType', 'consultation')}
+              style={{
+                display: 'inline-flex', alignItems: 'center',
+                padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+                fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
+                textTransform: 'uppercase', textDecoration: 'none',
+              }}
+            >
+              Get Free Consultation
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
+
     </div>
   );
 };

@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+const eventTypes = [
+  { value: 'all', label: 'All Types' },
+  { value: 'webinar', label: 'Webinar' },
+  { value: 'workshop', label: 'Workshop' },
+  { value: 'meetup', label: 'Meetup' },
+  { value: 'conference', label: 'Conference' },
+  { value: 'hackathon', label: 'Hackathon' },
+];
 
 const Events = () => {
   const [events, setEvents] = useState([]);
@@ -8,42 +16,14 @@ const Events = () => {
   const [selectedType, setSelectedType] = useState('all');
   const [onlineFilter, setOnlineFilter] = useState('all');
 
-  const eventTypes = [
-    { value: 'all', label: 'All Events' },
-    { value: 'webinar', label: 'Webinars' },
-    { value: 'workshop', label: 'Workshops' },
-    { value: 'meetup', label: 'Meetups' },
-    { value: 'conference', label: 'Conferences' },
-    { value: 'hackathon', label: 'Hackathons' },
-  ];
-
-  const getEventTypeColor = (type) => {
-    const colors = {
-      webinar: 'bg-blue-100 text-blue-700',
-      workshop: 'bg-green-100 text-green-700',
-      meetup: 'bg-purple-100 text-purple-700',
-      conference: 'bg-orange-100 text-orange-700',
-      hackathon: 'bg-red-100 text-red-700',
-      other: 'bg-gray-100 text-gray-700',
-    };
-    return colors[type] || 'bg-gray-100 text-gray-700';
-  };
-
   useEffect(() => {
     const fetchEvents = async () => {
       setLoading(true);
       try {
         let url = 'http://localhost:8000/api/community/events/?ordering=event_date';
-        
-        if (selectedType !== 'all') {
-          url += `&event_type=${selectedType}`;
-        }
-        
-        if (onlineFilter !== 'all') {
-          const isOnline = onlineFilter === 'online';
-          url += `&is_online=${isOnline}`;
-        }
-
+        if (selectedType !== 'all') url += `&event_type=${selectedType}`;
+        if (onlineFilter === 'online') url += '&is_online=true';
+        if (onlineFilter === 'inperson') url += '&is_online=false';
         const response = await axios.get(url);
         setEvents(response.data.results || response.data);
       } catch (error) {
@@ -52,140 +32,89 @@ const Events = () => {
         setLoading(false);
       }
     };
-
     fetchEvents();
   }, [selectedType, onlineFilter]);
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    const d = new Date(dateString);
+    const mo = d.toLocaleString('en-US', { month: 'short' });
+    const day = d.getDate();
+    const yr = d.getFullYear();
+    let h = d.getHours(), m = d.getMinutes();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    const ms = m < 10 ? '0' + m : m;
+    return `${mo} ${day}, ${yr} ${h}:${ms} ${ampm}`;
   };
 
+  const selectStyle = { background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#111827', padding: '10px 14px', fontSize: '14px', fontFamily: 'Inter, sans-serif', outline: 'none', width: '100%' };
+
   return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4">Community Events</h1>
-          <p className="text-lg text-gray-600">
-            Join webinars, workshops, and meetups to learn and connect with the community
-          </p>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
+      <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
+          <h1 style={{ fontSize: '48px', fontWeight: 800, color: '#111827', margin: '0 0 16px' }}>Events</h1>
+          <p style={{ fontSize: '18px', color: '#6B7280' }}>Webinars, workshops, hackathons, and more from the AtonixCorp community.</p>
         </div>
+      </div>
 
-        {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {/* Event Type Filter */}
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px 24px 80px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '40px' }}>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Event Type</label>
-            <select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            >
-              {eventTypes.map((type) => (
-                <option key={type.value} value={type.value}>
-                  {type.label}
-                </option>
-              ))}
+            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>Event Type</label>
+            <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} style={selectStyle}>
+              {eventTypes.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
             </select>
           </div>
-
-          {/* Online/In-Person Filter */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Format</label>
-            <select
-              value={onlineFilter}
-              onChange={(e) => setOnlineFilter(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            >
-              <option value="all">All Events</option>
-              <option value="online">Online Events</option>
-              <option value="in-person">In-Person Events</option>
+            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>Format</label>
+            <select value={onlineFilter} onChange={(e) => setOnlineFilter(e.target.value)} style={selectStyle}>
+              <option value="all">All Formats</option>
+              <option value="online">Online</option>
+              <option value="inperson">In-Person</option>
             </select>
           </div>
         </div>
 
-        {/* Events Grid */}
         {loading ? (
-          <div className="text-center py-12">
-            <div className="text-lg text-gray-600">Loading events...</div>
-          </div>
+          <p style={{ color: '#6B7280' }}>Loading events...</p>
         ) : events.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {events.map((event) => (
-              <Link
-                key={event.id}
-                to={`/community/event/${event.slug}`}
-                className="bg-white rounded-lg shadow hover:shadow-lg transition-all overflow-hidden"
-              >
-                {event.featured_image && (
-                  <img
-                    src={event.featured_image}
-                    alt={event.title}
-                    className="w-full h-48 object-cover"
-                  />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+            {events.map((ev) => (
+              <div key={ev.id} style={{ background: '#F8F9FA', border: '1px solid #E5E7EB' }}>
+                {ev.featured_image && (
+                  <img src={ev.featured_image} alt={ev.title} style={{ width: '100%', height: '180px', objectFit: 'cover', display: 'block' }} />
                 )}
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <span className={`px-3 py-1 rounded text-sm font-semibold ${getEventTypeColor(event.event_type)}`}>
-                      {event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1)}
+                <div style={{ padding: '24px' }}>
+                  <div style={{ display: 'flex', gap: '8px', marginBottom: '14px', flexWrap: 'wrap' }}>
+                    <span style={{ background: '#DC2626', color: '#fff', padding: '3px 10px', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                      {ev.event_type}
                     </span>
-                    {event.is_online && (
-                      <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-semibold">
+                    {ev.is_online && (
+                      <span style={{ border: '1px solid #D1D5DB', color: '#aaa', padding: '3px 10px', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                         Online
                       </span>
                     )}
                   </div>
-
-                  <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2 hover:text-primary-600">
-                    {event.title}
-                  </h3>
-
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                    {event.description}
-                  </p>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <span className="font-semibold">Date:</span>
-                      <span className="ml-2">{formatDate(event.event_date)}</span>
-                    </div>
-                    
-                    {event.location && !event.is_online && (
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="font-semibold">Location:</span>
-                        <span className="ml-2">{event.location}</span>
-                      </div>
-                    )}
-
-                    <div className="flex items-center text-sm text-gray-600">
-                      <span className="font-semibold">Attending:</span>
-                      <span className="ml-2">{event.attendee_count} people</span>
-                    </div>
+                  <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#111827', marginBottom: '10px', lineHeight: 1.3 }}>{ev.title}</h3>
+                  {ev.description && <p style={{ fontSize: '13px', color: '#6B7280', lineHeight: 1.6, marginBottom: '16px' }}>{ev.description}</p>}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px', color: '#6B7280', paddingTop: '16px', borderTop: '1px solid #E5E7EB' }}>
+                    {ev.event_date && <span>Date: {formatDate(ev.event_date)}</span>}
+                    {ev.location && <span>Location: {ev.location}</span>}
+                    {ev.max_attendees && <span>Capacity: {ev.max_attendees}</span>}
                   </div>
-
-                  {event.organizer_info && (
-                    <div className="pt-4 border-t">
-                      <div className="text-xs text-gray-600">
-                        Organized by <span className="font-semibold">{event.organizer_info.full_name || event.organizer_info.username}</span>
-                      </div>
-                    </div>
-                  )}
-
-                  <button className="w-full mt-4 bg-primary-600 text-white py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+                  <a href={`/community/events/${ev.id}`}
+                    style={{ display: 'inline-block', marginTop: '20px', background: '#DC2626', color: '#fff', padding: '10px 24px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>
                     View Details
-                  </button>
+                  </a>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-lg">
-            <div className="text-lg text-gray-600">No events found. Check back soon!</div>
+          <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '48px', textAlign: 'center' }}>
+            <p style={{ color: '#6B7280' }}>No events found.</p>
           </div>
         )}
       </div>

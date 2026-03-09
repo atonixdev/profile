@@ -1,5 +1,5 @@
 {
-  "name": "personal-brand-hub-frontend",
+  "name": "atonixdev",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,9 +24,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "sh -c 'set -a; [ -f ../.env ] && . ../.env; set +a; react-scripts start'",
-    "build": "sh -c 'set -a; [ -f ../.env ] && . ../.env; set +a; react-scripts build'",
-    "test": "sh -c 'set -a; [ -f ../.env ] && . ../.env; set +a; react-scripts test'",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

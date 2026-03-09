@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+const roles = [
+  { value: 'all', label: 'All Roles' },
+  { value: 'member', label: 'Member' },
+  { value: 'contributor', label: 'Contributor' },
+  { value: 'moderator', label: 'Moderator' },
+  { value: 'admin', label: 'Admin' },
+];
 
 const Members = () => {
   const [members, setMembers] = useState([]);
@@ -8,38 +15,13 @@ const Members = () => {
   const [selectedRole, setSelectedRole] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const roles = [
-    { value: 'all', label: 'All Members' },
-    { value: 'member', label: 'Members' },
-    { value: 'contributor', label: 'Contributors' },
-    { value: 'moderator', label: 'Moderators' },
-    { value: 'admin', label: 'Admins' },
-  ];
-
-  const getRoleColor = (role) => {
-    const colors = {
-      member: 'bg-blue-100 text-blue-700',
-      contributor: 'bg-green-100 text-green-700',
-      moderator: 'bg-purple-100 text-purple-700',
-      admin: 'bg-red-100 text-red-700',
-    };
-    return colors[role] || 'bg-gray-100 text-gray-700';
-  };
-
   useEffect(() => {
     const fetchMembers = async () => {
       setLoading(true);
       try {
         let url = 'http://localhost:8000/api/community/members/?ordering=-contribution_points';
-        
-        if (selectedRole !== 'all') {
-          url += `&role=${selectedRole}`;
-        }
-        
-        if (searchTerm) {
-          url += `&search=${encodeURIComponent(searchTerm)}`;
-        }
-
+        if (selectedRole !== 'all') url += `&role=${selectedRole}`;
+        if (searchTerm) url += `&search=${encodeURIComponent(searchTerm)}`;
         const response = await axios.get(url);
         setMembers(response.data.results || response.data);
       } catch (error) {
@@ -48,105 +30,68 @@ const Members = () => {
         setLoading(false);
       }
     };
-
     fetchMembers();
   }, [selectedRole, searchTerm]);
 
-  return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4">Community Members</h1>
-          <p className="text-lg text-gray-600">
-            Meet the talented professionals in our global community
-          </p>
-        </div>
+  const selectStyle = { background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#111827', padding: '10px 14px', fontSize: '14px', fontFamily: 'Inter, sans-serif', outline: 'none', width: '100%' };
+  const inputStyle = { ...selectStyle };
 
-        {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {/* Role Filter */}
+  return (
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
+      <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
+          <h1 style={{ fontSize: '48px', fontWeight: 800, color: '#111827', margin: '0 0 16px' }}>Members</h1>
+          <p style={{ fontSize: '18px', color: '#6B7280' }}>Connect with contributors and engineers in our community.</p>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px 24px 80px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '40px' }}>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Filter by Role</label>
-            <select
-              value={selectedRole}
-              onChange={(e) => setSelectedRole(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            >
-              {roles.map((role) => (
-                <option key={role.value} value={role.value}>
-                  {role.label}
-                </option>
-              ))}
+            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>Filter by Role</label>
+            <select value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)} style={selectStyle}>
+              {roles.map(r => <option key={r.value} value={r.value}>{r.label}</option>)}
             </select>
           </div>
-
-          {/* Search */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Search Members</label>
-            <input
-              type="text"
-              placeholder="Search by name or expertise..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
+            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>Search</label>
+            <input type="text" placeholder="Search members..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} style={inputStyle} />
           </div>
         </div>
 
-        {/* Members Grid */}
         {loading ? (
-          <div className="text-center py-12">
-            <div className="text-lg text-gray-600">Loading members...</div>
-          </div>
+          <p style={{ color: '#6B7280' }}>Loading members...</p>
         ) : members.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {members.map((member) => (
-              <Link
-                key={member.id}
-                to={`/community/member/${member.username}`}
-                className="bg-white rounded-lg shadow hover:shadow-lg transition-all overflow-hidden"
-              >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
-                      {member.full_name?.charAt(0)?.toUpperCase() || 'U'}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+            {members.map((m) => (
+              <div key={m.id} style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '24px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+                  <div style={{ width: '48px', height: '48px', background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: 800, color: '#fff', flexShrink: 0 }}>
+                    {(m.user && m.user.username ? m.user.username : m.full_name || 'U')[0].toUpperCase()}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '15px', fontWeight: 700, color: '#111827' }}>
+                      {m.user && m.user.full_name ? m.user.full_name : m.user && m.user.username ? m.user.username : m.full_name || 'Member'}
                     </div>
-                    <span className={`px-3 py-1 rounded text-xs font-semibold ${getRoleColor(member.role)}`}>
-                      {member.role.charAt(0).toUpperCase() + member.role.slice(1)}
-                    </span>
-                  </div>
-
-                  <h3 className="font-bold text-lg text-gray-900 mb-1 line-clamp-2">
-                    {member.full_name || member.username}
-                  </h3>
-                  
-                  {member.location && (
-                    <p className="text-sm text-gray-600 mb-2">{member.location}</p>
-                  )}
-
-                  {member.bio && (
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                      {member.bio}
-                    </p>
-                  )}
-
-                  <div className="pt-4 border-t">
-                    <div className="text-2xl font-bold text-primary-600">{member.contribution_points}</div>
-                    <div className="text-xs text-gray-600">Contribution Points</div>
-                  </div>
-
-                  <div className="mt-3 pt-3 border-t">
-                    <div className="text-xs text-gray-500">
-                      Joined {new Date(member.joined_date).toLocaleDateString()}
+                    <div style={{ fontSize: '11px', marginTop: '4px' }}>
+                      <span style={{ background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#aaa', padding: '2px 8px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                        {m.role || 'member'}
+                      </span>
                     </div>
                   </div>
                 </div>
-              </Link>
+                {m.bio && <p style={{ fontSize: '13px', color: '#6B7280', lineHeight: 1.6, marginBottom: '16px' }}>{m.bio}</p>}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '1px solid #E5E7EB' }}>
+                  <span style={{ fontSize: '11px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Contribution Points</span>
+                  <span style={{ fontSize: '18px', fontWeight: 800, color: '#DC2626' }}>{m.contribution_points || 0}</span>
+                </div>
+              </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-lg">
-            <div className="text-lg text-gray-600">No members found matching your criteria.</div>
+          <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '48px', textAlign: 'center' }}>
+            <p style={{ color: '#6B7280' }}>No members found.</p>
           </div>
         )}
       </div>

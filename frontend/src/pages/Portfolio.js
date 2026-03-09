@@ -1,202 +1,167 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// GS-WSF §5 — Portfolio page
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   const projects = [
-    {
-      id: 1,
-      title: 'OpenStack Private Cloud ',
-      description: 'Designed and deployed a comprehensive OpenStack cloud infrastructure supporting AI research workloads.',
-      category: 'cloud',
-      technologies: ['OpenStack', 'OVN', 'Kubernetes', 'Ceph'],
-      client: 'atonixdev',
-      completion_date: '2024-06-15',
-      is_featured: true,
-      image: '/portfolio/cloud-infrastructure.svg'
-    },
-    {
-      id: 2,
-      title: 'Neuron Data Center - AI Research Hub',
-      description: 'Built a high-performance computing environment optimized for AI/ML workloads with GPU acceleration.',
-      category: 'ai',
-      technologies: ['AWS Neuron', 'GPU', 'Docker', 'TensorFlow'],
-      client: 'atonixdev',
-      completion_date: '2024-08-20',
-      is_featured: true,
-      image: '/portfolio/ai-ml-hub.svg'
-    },
-    {
-      id: 3,
-      title: 'DevOps Pipeline Automation - FinTech SA',
-      description: 'Implemented comprehensive CI/CD pipelines with automated testing and zero-downtime deployments.',
-      category: 'devops',
-      technologies: ['Jenkins', 'GitLab CI', 'Docker', 'Kubernetes'],
-      client: 'atonixdev',
-      completion_date: '2024-05-10',
-      is_featured: false,
-      image: '/portfolio/devops-pipeline.svg'
-    },
-    {
-      id: 4,
-      title: 'Enterprise Email Infrastructure',
-      description: 'Developed secure, scalable communication systems with custom SMTP servers and encryption.',
-      category: 'infrastructure',
-      technologies: ['Postfix', 'DKIM', 'SPF', 'Redis'],
-      client: 'atonixdev',
-      completion_date: '2024-07-25',
-      is_featured: false,
-      image: '/portfolio/email-infrastructure.svg'
-    },
-    {
-      id: 5,
-      title: 'AI Marketing Automation Platform',
-      description: 'Created automated marketing workflows with segmentation engines and behavioral triggers.',
-      category: 'ai',
-      technologies: ['Python', 'TensorFlow', 'React', 'PostgreSQL'],
-      client: 'atonixdev',
-      completion_date: '2024-09-05',
-      is_featured: true,
-      image: '/portfolio/ai-ml-hub.svg'
-    },
-    {
-      id: 6,
-      title: 'Scientific Computing Platform',
-      description: 'Architected high-performance computing systems for scientific research with optimizations.',
-      category: 'systems',
-      technologies: ['C++', 'Python', 'CUDA', 'Hadoop'],
-      client: 'atonixdev',
-      completion_date: '2024-04-30',
-      is_featured: false,
-      image: '/portfolio/scientific-computing.svg'
-    }
+    { id: 1, title: 'OpenStack Private Cloud', description: 'Designed and deployed a comprehensive OpenStack cloud infrastructure supporting AI research workloads.', category: 'cloud', technologies: ['OpenStack', 'OVN', 'Kubernetes', 'Ceph'], is_featured: true },
+    { id: 2, title: 'Neuron Data Center — AI Research Hub', description: 'Built a high-performance computing environment optimized for AI/ML workloads with GPU acceleration.', category: 'ai', technologies: ['AWS Neuron', 'GPU', 'Docker', 'TensorFlow'], is_featured: true },
+    { id: 3, title: 'DevOps Pipeline Automation — FinTech SA', description: 'Implemented comprehensive CI/CD pipelines with automated testing and zero-downtime deployments.', category: 'devops', technologies: ['Jenkins', 'GitLab CI', 'Docker', 'Kubernetes'], is_featured: false },
+    { id: 4, title: 'Enterprise Email Infrastructure', description: 'Developed secure, scalable communication systems with custom SMTP servers and encryption.', category: 'infrastructure', technologies: ['Postfix', 'DKIM', 'SPF', 'Redis'], is_featured: false },
+    { id: 5, title: 'AI Marketing Automation Platform', description: 'Created automated marketing workflows with segmentation engines and behavioral triggers.', category: 'ai', technologies: ['Python', 'TensorFlow', 'React', 'PostgreSQL'], is_featured: true },
+    { id: 6, title: 'Scientific Computing Platform', description: 'Architected high-performance computing systems for scientific research with optimizations.', category: 'systems', technologies: ['C++', 'Python', 'CUDA', 'Hadoop'], is_featured: false },
   ];
 
   const categories = ['all', 'cloud', 'ai', 'devops', 'infrastructure', 'systems'];
+  const catLabels = { all: 'All', cloud: 'Cloud', ai: 'AI & ML', devops: 'DevOps', infrastructure: 'Infrastructure', systems: 'Systems' };
 
-  const filteredProjects = projects.filter(project => {
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    const matchesSearch = searchTerm === '' ||
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
+  const filtered = projects.filter((p) => {
+    const matchCat = selectedCategory === 'all' || p.category === selectedCategory;
+    const matchSearch = !searchTerm || p.title.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchCat && matchSearch;
   });
 
-  const getCategoryDisplayName = (category) => {
-    const names = {
-      'cloud': 'Cloud',
-      'ai': 'AI & ML',
-      'devops': 'DevOps',
-      'infrastructure': 'Infrastructure',
-      'systems': 'Systems'
-    };
-    return names[category] || category;
-  };
-
   return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Portfolio</h1>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-            Showcase of sovereign infrastructure projects powering African innovation.
+    <div style={{ background: '#FFFFFF' }}>
+
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+          <span className="gsw-eyebrow">Our Work</span>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, marginBottom: 24 }}>
+            Portfolio
+          </h1>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600 }}>
+            Sovereign infrastructure projects powering African innovation and global digital independence.
           </p>
         </div>
+      </section>
 
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full font-medium transition-colors ${
-                selectedCategory === category
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {category === 'all' ? 'All' : getCategoryDisplayName(category)}
-            </button>
-          ))}
+      <hr className="gsw-divider" />
+
+      {/* ── Filters ────────────────────────────────────────── */}
+      <section style={{ background: '#F8F9FA', padding: '32px 0', borderBottom: '1px solid #F3F4F6' }}>
+        <div className="gsw-container">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  style={{
+                    padding: '8px 20px',
+                    background: selectedCategory === cat ? '#DC2626' : 'transparent',
+                    border: `1px solid ${selectedCategory === cat ? '#DC2626' : '#D1D5DB'}`,
+                    color: selectedCategory === cat ? '#111827' : '#6B7280',
+                    fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
+                    textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  {catLabels[cat]}
+                </button>
+              ))}
+            </div>
+            <input
+              type="text"
+              placeholder="Search projects..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="gsw-input"
+              style={{ maxWidth: 280 }}
+            />
+          </div>
         </div>
+      </section>
 
-        <div className="max-w-md mx-auto mb-8">
-          <input
-            type="text"
-            placeholder="Search projects..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow ${project.is_featured ? 'ring-2 ring-primary-500' : ''}`}>
-              {project.is_featured && (
-                <div className="bg-primary-500 text-white text-xs font-bold px-3 py-1 text-center">
-                  FEATURED
-                </div>
-              )}
-
-              <div className="h-48 bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 3).map((tech, idx) => (
-                      <span key={idx} className="bg-primary-100 text-primary-700 px-2 py-1 rounded text-xs font-medium">
-                        {tech}
-                      </span>
-                    ))}
+      {/* ── Projects Grid ──────────────────────────────────── */}
+      <section className="gsw-section" style={{ background: '#FFFFFF' }}>
+        <div className="gsw-container">
+          {filtered.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '64px 0', color: '#6B7280' }}>
+              No projects match your filters.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map((project) => (
+                <div
+                  key={project.id}
+                  className="gsw-card"
+                  style={{
+                    padding: 0,
+                    borderTop: project.is_featured ? '2px solid #DC2626' : '1px solid #E5E7EB',
+                    display: 'flex', flexDirection: 'column',
+                  }}
+                >
+                  {project.is_featured && (
+                    <div style={{
+                      padding: '6px 28px',
+                      fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
+                      color: '#DC2626', borderBottom: '1px solid #F3F4F6',
+                    }}>
+                      Featured
+                    </div>
+                  )}
+                  <div style={{ padding: '28px 28px 20px', flexGrow: 1 }}>
+                    <div style={{ marginBottom: 8 }}>
+                      <span className="gsw-tag-accent" style={{ fontSize: 10 }}>{catLabels[project.category] || project.category}</span>
+                    </div>
+                    <h3 style={{ fontSize: 17, fontWeight: 700, color: '#111827', marginBottom: 10, marginTop: 12, lineHeight: 1.4 }}>
+                      {project.title}
+                    </h3>
+                    <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7, marginBottom: 20 }}>
+                      {project.description}
+                    </p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                      {project.technologies.map((tech) => (
+                        <span key={tech} className="gsw-tag">{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{ padding: '16px 28px', borderTop: '1px solid #F3F4F6' }}>
+                    <Link
+                      to={`/portfolio/${project.id}`}
+                      className="gsw-btn gsw-btn-ghost"
+                      style={{ width: '100%', justifyContent: 'center' }}
+                    >
+                      View Details
+                    </Link>
                   </div>
                 </div>
-
-                <div className="text-sm text-gray-500 mb-4">
-                  <div>{project.client}</div>
-                  <div>{new Date(project.completion_date).toLocaleDateString()}</div>
-                </div>
-
-                <Link
-                  to={`/portfolio/${project.id}`}
-                  className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors text-center block"
-                >
-                  View Details
-                </Link>
-              </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
+      </section>
 
-        {filteredProjects.length === 0 && (
-          <div className="text-center text-gray-600">
-            <p>No projects match your filters.</p>
-          </div>
-        )}
-
-        <div className="mt-16 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready for Your Infrastructure Project?</h2>
-          <p className="text-xl mb-6 text-primary-100">
+      {/* ── CTA Bar ────────────────────────────────────────── */}
+      <section className="gsw-cta-bar">
+        <div className="gsw-container" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#111827', marginBottom: 12, marginTop: 0 }}>
+            Ready for Your Infrastructure Project?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, maxWidth: 480, margin: '0 auto 32px', lineHeight: 1.6 }}>
             Let's build sovereign, scalable solutions together.
           </p>
           <Link
             to="/contact"
-            className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-all"
+            style={{
+              display: 'inline-flex', alignItems: 'center',
+              padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+              fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
+              textTransform: 'uppercase', textDecoration: 'none',
+            }}
           >
             Discuss Your Project
           </Link>
         </div>
-      </div>
+      </section>
+
     </div>
   );
 };

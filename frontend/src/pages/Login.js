@@ -17,7 +17,6 @@ const Login = () => {
   const location = useLocation();
   const { login: authLogin } = useContext(AuthContext);
 
-  // Pre-fill email/username from registration redirect if available
   const prefill = location.state?.email || '';
 
   useEffect(() => {
@@ -29,10 +28,7 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+    setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
   };
 
   const handleSubmit = async (e) => {
@@ -53,8 +49,6 @@ const Login = () => {
         setError(result.error || 'Login failed. Please try again.');
         return;
       }
-
-      // Redirect to the originally requested page, or default to Lab
       const redirectPath = location.state?.from || '/lab';
       navigate(redirectPath);
     } catch (err) {
@@ -64,182 +58,181 @@ const Login = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
-        {/* Card */}
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Welcome Back
-            </h1>
-            <p className="text-gray-600">
-              Sign in to access the community
-            </p>
-          </div>
+  const inputStyle = {
+    width: '100%', boxSizing: 'border-box',
+    background: '#F1F3F5', border: '1px solid #D1D5DB',
+    color: '#111827', padding: '12px 14px',
+    fontSize: '14px', fontFamily: 'inherit',
+    outline: 'none', transition: 'border-color 0.15s',
+  };
 
-          {/* Error Message */}
+  const labelStyle = {
+    display: 'block', fontSize: '12px', fontWeight: 600,
+    color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em',
+    marginBottom: '6px',
+  };
+
+  return (
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 16px' }}>
+      <div style={{ width: '100%', maxWidth: '440px' }}>
+
+        {/* Logo / Brand */}
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+            <div style={{ width: '32px', height: '32px', background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#111827', fontWeight: 900, fontSize: '14px' }}>AC</span>
+            </div>
+            <span style={{ color: '#111827', fontWeight: 700, fontSize: '16px', letterSpacing: '-0.01em' }}>AtonixDev</span>
+          </div>
+          <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', marginBottom: '8px', letterSpacing: '-0.02em' }}>
+            Welcome Back
+          </h1>
+          <p style={{ color: '#6B7280', fontSize: '14px' }}>Sign in to access the community</p>
+        </div>
+
+        {/* Card */}
+        <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '40px' }}>
+
           {error && (
-            <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+            <div style={{ background: '#1a0000', border: '1px solid #660000', color: '#ff6666', padding: '12px 16px', marginBottom: '24px', fontSize: '13px' }}>
               {error}
             </div>
           )}
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Username/Email */}
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Username or Email
-              </label>
+              <label style={labelStyle}>Username or Email</label>
               <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
+                type="text" name="username" value={formData.username}
+                onChange={handleChange} disabled={loading} required
                 placeholder="Enter your username or email"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-                disabled={loading}
+                style={inputStyle}
               />
             </div>
 
-            {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
+              <label style={labelStyle}>Password</label>
+              <div style={{ position: 'relative' }}>
                 <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
+                  type={showPassword ? 'text' : 'password'} name="password"
+                  value={formData.password} onChange={handleChange}
+                  disabled={loading} required
                   placeholder="Enter your password"
-                  className="w-full pr-20 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-                  disabled={loading}
+                  style={{ ...inputStyle, paddingRight: '64px' }}
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-primary-600 hover:text-primary-700"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  onClick={() => setShowPassword(v => !v)}
                   disabled={loading}
+                  style={{
+                    position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+                    background: 'none', border: 'none', color: '#DC2626', fontSize: '12px',
+                    fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.05em',
+                  }}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  {showPassword ? 'HIDE' : 'SHOW'}
                 </button>
               </div>
             </div>
 
-            {/* OTP (MFA) */}
             {showOtp && (
               <div>
-                <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-2">
-                  One-time code (OTP)
-                </label>
+                <label style={labelStyle}>One-Time Code (OTP)</label>
                 <input
-                  type="text"
-                  id="otp"
-                  name="otp"
-                  value={formData.otp}
-                  onChange={handleChange}
-                  placeholder="123456"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-                  disabled={loading}
-                  inputMode="numeric"
-                  autoComplete="one-time-code"
+                  type="text" name="otp" value={formData.otp} onChange={handleChange}
+                  disabled={loading} placeholder="123456"
+                  inputMode="numeric" autoComplete="one-time-code"
+                  style={inputStyle}
                 />
               </div>
             )}
 
-            {/* Remember Me */}
-            <div className="flex items-center">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <input
-                type="checkbox"
-                id="rememberMe"
-                name="rememberMe"
-                checked={formData.rememberMe}
-                onChange={handleChange}
-                className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                type="checkbox" id="rememberMe" name="rememberMe"
+                checked={formData.rememberMe} onChange={handleChange}
                 disabled={loading}
+                style={{ width: '14px', height: '14px', accentColor: '#DC2626' }}
               />
-              <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-700">
+              <label htmlFor="rememberMe" style={{ fontSize: '13px', color: '#6B7280', cursor: 'pointer' }}>
                 Remember me
               </label>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition ${
-                loading
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-primary-600 hover:bg-primary-700'
-              }`}
+              style={{
+                padding: '14px 24px', background: loading ? '#E5E7EB' : '#DC2626',
+                color: '#111827', border: 'none', fontSize: '13px',
+                fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+                cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
+                transition: 'background 0.15s', marginTop: '4px',
+              }}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 
           {/* Divider */}
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">
-                Don't have an account?
-              </span>
-            </div>
+          <div style={{ borderTop: '1px solid #E5E7EB', margin: '28px 0', position: 'relative' }}>
+            <span style={{
+              position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+              background: '#F8F9FA', padding: '0 12px', color: '#6B7280', fontSize: '12px',
+            }}>
+              Don't have an account?
+            </span>
           </div>
 
-          {/* Sign Up Link */}
           <Link
             to="/register"
-            className="w-full py-3 px-4 rounded-lg font-semibold text-center text-primary-600 border-2 border-primary-600 hover:bg-primary-50 transition"
+            style={{
+              display: 'block', textAlign: 'center', padding: '12px 24px',
+              background: 'transparent', color: '#111827',
+              border: '1px solid #D1D5DB', fontSize: '13px',
+              fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+              textDecoration: 'none', transition: 'border-color 0.15s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = '#DC2626'}
+            onMouseLeave={e => e.currentTarget.style.borderColor = '#D1D5DB'}
           >
             Create Account
           </Link>
 
-          {/* Footer Text */}
-          <p className="text-center text-sm text-gray-600 mt-6">
+          <p style={{ textAlign: 'center', fontSize: '12px', color: '#6B7280', marginTop: '20px' }}>
             By signing in, you agree to our{' '}
-            <button className="text-primary-600 hover:underline bg-transparent border-0 cursor-pointer p-0">
+            <button style={{ background: 'none', border: 'none', color: '#6B7280', fontSize: '12px', cursor: 'pointer', textDecoration: 'underline', fontFamily: 'inherit', padding: 0 }}>
               Terms of Service
-            </button>{' '}
-            and{' '}
-            <button className="text-primary-600 hover:underline bg-transparent border-0 cursor-pointer p-0">
+            </button>{' '}and{' '}
+            <button style={{ background: 'none', border: 'none', color: '#6B7280', fontSize: '12px', cursor: 'pointer', textDecoration: 'underline', fontFamily: 'inherit', padding: 0 }}>
               Privacy Policy
             </button>
           </p>
         </div>
 
-        {/* Additional Info */}
-        <div className="mt-8 bg-white rounded-lg shadow-md p-6">
-          <h3 className="font-semibold text-gray-900 mb-3">
-            Need help?
-          </h3>
-          <ul className="space-y-2 text-sm text-gray-600">
-            <li>
-              <button className="hover:text-primary-600 transition bg-transparent border-0 cursor-pointer text-left p-0">
-                Reset your password
-              </button>
-            </li>
-            <li>
-              <button className="hover:text-primary-600 transition bg-transparent border-0 cursor-pointer text-left p-0">
-                Contact support
-              </button>
-            </li>
-            <li>
-              <a href="/about" className="hover:text-primary-600 transition">
-                Learn about the platform
-              </a>
-            </li>
-          </ul>
+        {/* Help block */}
+        <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', borderTop: 'none', padding: '24px 40px' }}>
+          <div style={{ fontSize: '12px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>Need help?</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {[
+              { label: 'Reset your password' },
+              { label: 'Contact support' },
+              { label: 'Learn about the platform', href: '/about' },
+            ].map((item, i) => (
+              item.href
+                ? <a key={i} href={item.href} style={{ color: '#6B7280', fontSize: '13px', textDecoration: 'none', transition: 'color 0.15s' }}
+                    onMouseEnter={e => e.currentTarget.style.color = '#DC2626'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#6B7280'}
+                  >{item.label}</a>
+                : <button key={i} style={{ background: 'none', border: 'none', color: '#6B7280', fontSize: '13px', cursor: 'pointer', textAlign: 'left', padding: 0, fontFamily: 'inherit', transition: 'color 0.15s' }}
+                    onMouseEnter={e => e.currentTarget.style.color = '#DC2626'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#6B7280'}
+                  >{item.label}</button>
+            ))}
+          </div>
         </div>
+
       </div>
     </div>
   );

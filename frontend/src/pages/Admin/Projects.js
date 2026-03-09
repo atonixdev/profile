@@ -45,80 +45,50 @@ const AdminProjects = () => {
     }
   };
 
+  const thStyle = { padding: '12px 16px', textAlign: 'left', fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', background: '#F1F3F5', borderBottom: '1px solid #D1D5DB' };
+  const tdStyle = { padding: '14px 16px', fontSize: '14px', color: '#374151', borderBottom: '1px solid #F3F4F6' };
+
   if (loading) {
-    return <div className="p-8">Loading...</div>;
+    return <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Inter, sans-serif', color: '#6B7280' }}>Loading...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow mb-8">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Manage Projects</h1>
-            <Link
-              to="/admin"
-              className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
-            >
-              Back to Dashboard
-            </Link>
-          </div>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
+      <header style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '0 24px', marginBottom: '0' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
+          <h1 style={{ fontSize: '16px', fontWeight: 700, color: '#111827', margin: 0 }}>Manage Projects</h1>
+          <Link to="/admin" style={{ border: '1px solid #D1D5DB', color: '#6B7280', padding: '8px 16px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>
+            Back to Dashboard
+          </Link>
         </div>
       </header>
-
-      <div className="container mx-auto px-4">
-        <div className="mb-4">
-          <p className="text-gray-600">
-            Note: Full CRUD interface would include create/edit modals or separate pages.
-            This is a simplified view showing list and delete functionality.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="min-w-full">
-            <thead className="bg-gray-50">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px 80px' }}>
+        <div style={{ overflowX: 'auto', background: '#F8F9FA', border: '1px solid #E5E7EB' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Title
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Category
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Featured
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  Actions
-                </th>
+                <th style={thStyle}>Title</th>
+                <th style={thStyle}>Category</th>
+                <th style={thStyle}>Status</th>
+                <th style={thStyle}>Featured</th>
+                <th style={thStyle}>Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody>
               {projects.map((project) => (
                 <tr key={project.id}>
-                  <td className="px-6 py-4">{project.title}</td>
-                  <td className="px-6 py-4 capitalize">{project.category}</td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => togglePublished(project)}
-                      className={`px-3 py-1 rounded ${
-                        project.is_published
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}
-                    >
+                  <td style={tdStyle}>{project.title}</td>
+                  <td style={{ ...tdStyle, textTransform: 'capitalize' }}>{project.category}</td>
+                  <td style={tdStyle}>
+                    <button onClick={() => togglePublished(project)}
+                      style={{ background: project.is_published ? '#003311' : '#F1F3F5', border: `1px solid ${project.is_published ? '#00AA44' : '#D1D5DB'}`, color: project.is_published ? '#00AA44' : '#6B7280', padding: '4px 12px', fontSize: '11px', fontWeight: 700, cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
                       {project.is_published ? 'Published' : 'Draft'}
                     </button>
                   </td>
-                  <td className="px-6 py-4">
-                    {project.is_featured ? 'Featured' : '-'}
-                  </td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => handleDelete(project.id)}
-                      className="text-red-600 hover:text-red-800"
-                    >
+                  <td style={tdStyle}>{project.is_featured ? <span style={{ color: '#DC2626', fontWeight: 700 }}>Featured</span> : <span style={{ color: '#6B7280' }}>—</span>}</td>
+                  <td style={tdStyle}>
+                    <button onClick={() => handleDelete(project.id)}
+                      style={{ background: 'transparent', border: 'none', color: '#CC0033', fontSize: '13px', fontWeight: 700, cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
                       Delete
                     </button>
                   </td>
@@ -127,6 +97,7 @@ const AdminProjects = () => {
             </tbody>
           </table>
         </div>
+        {projects.length === 0 && <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '48px', textAlign: 'center', color: '#6B7280' }}>No projects found.</div>}
       </div>
     </div>
   );

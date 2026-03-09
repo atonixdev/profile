@@ -1,211 +1,140 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+
+const faqs = [
+  { category: 'General', question: 'What is AtonixCorp?', answer: 'AtonixCorp is a technology company specializing in AI, cloud computing, IoT, and enterprise software solutions. We help businesses leverage cutting-edge technology to drive innovation and growth.' },
+  { category: 'General', question: 'Where are you located?', answer: 'We operate globally with a distributed team. We work with clients worldwide and offer remote collaboration for all projects.' },
+  { category: 'General', question: 'How can I contact AtonixCorp?', answer: 'You can reach us through our contact form, email, or by scheduling a consultation through our website. We typically respond within 24 hours.' },
+  { category: 'Services', question: 'What services does AtonixCorp offer?', answer: 'We offer AI/ML development, cloud architecture, IoT solutions, cybersecurity, DevOps & CI/CD, blockchain development, and custom enterprise software. Each service is tailored to your specific needs.' },
+  { category: 'Services', question: 'Do you offer ongoing support after project completion?', answer: 'Yes, we offer flexible maintenance and support packages for all completed projects. This includes bug fixes, performance optimization, and feature enhancements.' },
+  { category: 'Services', question: 'Can you integrate with our existing systems?', answer: 'Absolutely. We specialize in system integration and have experience connecting with a wide range of legacy and modern platforms including ERP systems, CRMs, and custom databases.' },
+  { category: 'Project Process', question: 'What is your typical project timeline?', answer: 'Timelines vary based on project complexity. A simple web application may take 4-8 weeks, while complex enterprise solutions can take 3-6 months. We provide detailed timelines during the proposal phase.' },
+  { category: 'Project Process', question: 'How do you handle project management?', answer: 'We use agile methodologies with regular sprint reviews, transparent progress tracking, and weekly check-in calls. You will have a dedicated project manager as your point of contact.' },
+  { category: 'Project Process', question: 'What information do you need to start a project?', answer: 'We begin with discovery sessions to understand your goals, technical requirements, existing infrastructure, budget, and timeline. The more context you provide, the better we can scope the work.' },
+  { category: 'Pricing', question: 'How is pricing determined?', answer: 'Pricing is based on project scope, complexity, and timeline. We offer fixed-price contracts for well-defined projects and time & materials billing for evolving projects. Request a quote to get a detailed estimate.' },
+  { category: 'Pricing', question: 'Do you offer flexible payment options?', answer: 'Yes, we offer milestone-based payments for larger projects. A portion is due at project kickoff, with subsequent payments tied to project milestones.' },
+  { category: 'Pricing', question: 'Do you offer retainer arrangements?', answer: 'Yes, we offer monthly retainer packages for ongoing development, maintenance, and consulting services at discounted rates compared to project-based billing.' },
+  { category: 'Technical', question: 'What technologies do you work with?', answer: 'We work with Python, Node.js, React, Django, FastAPI, AWS, GCP, Azure, TensorFlow, PyTorch, Docker, Kubernetes, and many more. We select the best tools for each project.' },
+  { category: 'Technical', question: 'How do you ensure security?', answer: 'Security is built into every phase of development. We follow OWASP standards, conduct security audits, implement encryption, and stay current with security best practices.' },
+  { category: 'Technical', question: 'Do you provide source code and documentation?', answer: 'Yes, you own all code and assets produced during your project. We provide complete source code, technical documentation, and deployment guides.' },
+];
+
+const categories = ['All', 'General', 'Services', 'Project Process', 'Pricing', 'Technical'];
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
-
-  const faqs = [
-    {
-      id: 1,
-      category: 'General',
-      question: 'What services does AtonixDev offer?',
-      answer: 'AtonixDev specializes in software engineering, cloud infrastructure, AI/ML solutions, DevOps, and technology architecture. We help businesses build scalable, intelligent, and future-proof digital systems. Visit our Services page for detailed information about each offering.'
-    },
-    {
-      id: 2,
-      category: 'General',
-      question: 'How can I get in touch with AtonixDev?',
-      answer: 'You can reach us through our Contact page, email, or using the live chat feature at the bottom right of this page. Our team responds to inquiries within 24 hours during business days.'
-    },
-    {
-      id: 3,
-      category: 'General',
-      question: 'What is your company experience?',
-      answer: 'AtonixDev has delivered 6+ major projects including cloud infrastructure, AI research hubs, DevOps pipelines, and enterprise systems. Check our Portfolio page to see detailed case studies of our work.'
-    },
-    {
-      id: 4,
-      category: 'Services',
-      question: 'Do you offer custom software development?',
-      answer: 'Yes! We provide custom software development tailored to your specific business needs. We work with modern technologies including React, Django, Kubernetes, and AWS. Contact us to discuss your project requirements.'
-    },
-    {
-      id: 5,
-      category: 'Services',
-      question: 'What is your approach to cloud infrastructure?',
-      answer: 'We design sovereign, scalable cloud solutions using OpenStack, AWS, and Kubernetes. Our approach focuses on high availability, security, and cost optimization. We can help you migrate to or architect cloud-native applications.'
-    },
-    {
-      id: 6,
-      category: 'Services',
-      question: 'Do you offer DevOps consulting?',
-      answer: 'Absolutely! We implement CI/CD pipelines, infrastructure automation, and deployment strategies using Jenkins, GitLab CI, Docker, and Kubernetes. We help teams achieve zero-downtime deployments and automated testing.'
-    },
-    {
-      id: 7,
-      category: 'Services',
-      question: 'Can you help with AI/ML implementation?',
-      answer: 'Yes, we specialize in AI and machine learning solutions. We can help with architecture design, model development using TensorFlow/PyTorch, and production deployment. Perfect for data science teams and research organizations.'
-    },
-    {
-      id: 8,
-      category: 'Project Process',
-      question: 'How do you approach project engagement?',
-      answer: 'We start with a detailed discovery phase to understand your goals and requirements. Then we design a solution, implement it in phases, test thoroughly, and provide ongoing support. We maintain transparent communication throughout.'
-    },
-    {
-      id: 9,
-      category: 'Project Process',
-      question: 'What is your typical project timeline?',
-      answer: 'Project timelines vary based on scope and complexity. Simple projects take 2-4 weeks, medium projects 1-3 months, and complex infrastructure work 3-6 months. We provide detailed timeline estimates during the initial consultation.'
-    },
-    {
-      id: 10,
-      category: 'Project Process',
-      question: 'Do you provide ongoing support after project completion?',
-      answer: 'Yes! We offer maintenance, monitoring, and support packages. Many of our clients benefit from ongoing optimization and security updates. We\'re committed to the long-term success of your systems.'
-    },
-    {
-      id: 11,
-      category: 'Pricing',
-      question: 'How is pricing determined?',
-      answer: 'We provide custom quotes based on project scope, complexity, and timeline. We offer flexible engagement models: fixed-price projects, time-and-materials, or dedicated team arrangements. Contact us for a personalized quote.'
-    },
-    {
-      id: 12,
-      category: 'Pricing',
-      question: 'Do you offer startup or non-profit discounts?',
-      answer: 'Yes! We support innovation and social impact. We offer discounted rates for startups and non-profits. Please mention your organization type when contacting us, and we\'ll discuss available options.'
-    },
-    {
-      id: 13,
-      category: 'Technical',
-      question: 'What technologies does AtonixDev use?',
-      answer: 'We work with modern tech stacks: Frontend (React, Vue), Backend (Django, FastAPI, Node.js), Cloud (AWS, OpenStack, Kubernetes), Databases (PostgreSQL, MongoDB), and CI/CD (Jenkins, GitLab CI, GitHub Actions).'
-    },
-    {
-      id: 14,
-      category: 'Technical',
-      question: 'Do you follow best practices and standards?',
-      answer: 'Absolutely! We follow industry best practices including WCAG accessibility standards, OWASP security guidelines, Clean Code principles, and agile methodologies. Code quality and security are paramount.'
-    },
-    {
-      id: 15,
-      category: 'Technical',
-      question: 'Can you help with legacy system modernization?',
-      answer: 'Yes! We specialize in modernizing legacy systems. We can help with code refactoring, migration to modern frameworks, cloud migration, or complete system redesigns. Let\'s discuss your specific needs.'
-    }
-  ];
-
-  const categories = ['All', ...new Set(faqs.map(faq => faq.category))];
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredFaqs = selectedCategory === 'All' 
-    ? faqs 
-    : faqs.filter(faq => faq.category === selectedCategory);
+  const filtered = selectedCategory === 'All' ? faqs : faqs.filter(f => f.category === selectedCategory);
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const btnBase = {
+    padding: '8px 20px',
+    fontSize: '12px',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    cursor: 'pointer',
+    border: '1px solid #D1D5DB',
+    fontFamily: 'Inter, sans-serif',
+    transition: 'background 0.15s',
   };
 
   return (
-    <div className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Find answers to common questions about our services, process, and pricing. Can't find what you're looking for? Contact us directly.
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
+      {/* Hero */}
+      <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Support</p>
+          <h1 style={{ fontSize: '48px', fontWeight: 800, lineHeight: 1.1, color: '#111827', margin: '0 0 20px' }}>
+            Frequently Asked Questions
+          </h1>
+          <p style={{ fontSize: '18px', color: '#6B7280', maxWidth: '560px', margin: '0 auto' }}>
+            Find answers to common questions about our services, process, and technology.
           </p>
         </div>
+      </div>
 
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '64px 24px 80px' }}>
         {/* Category Filter */}
-        <div className="flex flex-wrap gap-2 justify-center mb-12">
-          {categories.map(category => (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '48px', justifyContent: 'center' }}>
+          {categories.map(cat => (
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full font-medium transition-colors ${
-                selectedCategory === category
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              style={{
+                ...btnBase,
+                background: selectedCategory === cat ? '#DC2626' : 'transparent',
+                color: selectedCategory === cat ? '#111827' : '#6B7280',
+                borderColor: selectedCategory === cat ? '#DC2626' : '#D1D5DB',
+              }}
             >
-              {category}
+              {cat}
             </button>
           ))}
         </div>
 
-        {/* FAQ Items */}
-        <div className="max-w-3xl mx-auto space-y-4">
-          {filteredFaqs.map((faq, index) => (
-            <div
-              key={faq.id}
-              className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
+        {/* Accordion */}
+        <div>
+          {filtered.map((faq, idx) => {
+            const globalIdx = faqs.indexOf(faq);
+            const isOpen = openIndex === globalIdx;
+            return (
+              <div
+                key={globalIdx}
+                style={{ borderBottom: '1px solid #E5E7EB' }}
               >
-                <div className="flex items-start gap-4 flex-1">
-                  <span className="text-primary-600 font-bold text-lg mt-1">{faq.id}</span>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {faq.question}
-                    </h3>
-                    <span className="text-sm text-primary-600 font-medium">
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : globalIdx)}
+                  style={{
+                    width: '100%',
+                    background: isOpen ? '#F8F9FA' : 'transparent',
+                    border: 'none',
+                    color: '#111827',
+                    padding: '24px 0',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    gap: '16px',
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <span style={{ fontSize: '11px', color: '#DC2626', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '6px' }}>
                       {faq.category}
                     </span>
+                    <span style={{ fontSize: '16px', fontWeight: 700, color: isOpen ? '#111827' : '#ddd' }}>
+                      {faq.question}
+                    </span>
                   </div>
-                </div>
-                <svg
-                  className={`w-6 h-6 text-primary-600 flex-shrink-0 transition-transform ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
-                </svg>
-              </button>
-
-              {openIndex === index && (
-                <div className="px-6 py-4 bg-white border-t border-gray-200">
-                  <p className="text-gray-700 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
+                  <span style={{ fontSize: '24px', color: '#DC2626', fontWeight: 300, lineHeight: 1, flexShrink: 0, width: '28px', textAlign: 'center' }}>
+                    {isOpen ? '−' : '+'}
+                  </span>
+                </button>
+                {isOpen && (
+                  <div style={{ padding: '0 0 28px', background: '#F8F9FA' }}>
+                    <p style={{ color: '#4B5563', fontSize: '15px', lineHeight: 1.8, margin: 0 }}>
+                      {faq.answer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Still need help? */}
-        <div className="mt-16 bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Still Have Questions?</h2>
-          <p className="text-gray-700 mb-6">
-            Our support team is here to help. Use the live chat feature or contact us directly for personalized assistance.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              to="/contact"
-              className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-all"
-            >
-              Contact Us
-            </Link>
-            <Link
-              to="/portfolio"
-              className="inline-block border-2 border-primary-600 text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-all"
-            >
-              View Our Projects
-            </Link>
-          </div>
+        {/* CTA */}
+        <div style={{ marginTop: '80px', background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '48px', textAlign: 'center' }}>
+          <p style={{ color: '#6B7280', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>Still have questions?</p>
+          <h2 style={{ fontSize: '26px', fontWeight: 800, color: '#111827', margin: '0 0 24px' }}>
+            Get in Touch with Our Team
+          </h2>
+          <a
+            href="/contact"
+            style={{ display: 'inline-block', background: '#DC2626', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}
+          >
+            Contact Us
+          </a>
         </div>
       </div>
     </div>
