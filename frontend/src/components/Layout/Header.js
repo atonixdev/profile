@@ -13,8 +13,10 @@ const Header = () => {
 
   const navigation = [
     { name: 'Software',       path: '/software' },
-    { name: 'Services',       path: '/services' },
     { name: 'Infrastructure', path: '/infrastructure' },
+    { name: 'Solutions',      path: '/solutions' },
+    { name: 'Industries',     path: '/industries' },
+    { name: 'Contact',        path: '/contact' },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -179,14 +181,6 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            {user && (
-              <Link
-                to="/community"
-                className={`nav-link${isActive('/community') ? ' nav-active' : ''}`}
-              >
-                Community
-              </Link>
-            )}
           </div>
         </nav>
       </div>
@@ -218,22 +212,6 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            {user && (
-              <Link
-                to="/community"
-                onClick={() => setIsMenuOpen(false)}
-                style={{
-                  display: 'block', padding: '14px 0',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)',
-                  color: isActive('/community') ? '#A81D37' : '#FFFFFF',
-                  fontSize: 12, fontWeight: 700,
-                  letterSpacing: '0.1em', textTransform: 'uppercase',
-                  textDecoration: 'none',
-                }}
-              >
-                Community
-              </Link>
-            )}
             <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               {user ? (
                 <button

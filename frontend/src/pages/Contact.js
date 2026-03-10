@@ -158,15 +158,17 @@ const Contact = () => {
     <div style={{ background: '#FFFFFF' }} className="min-h-screen">
 
       {/* Page Hero */}
-      <section className="hero-grid-bg" style={{ padding: '96px 0 80px', borderBottom: '1px solid #E5E7EB' }}>
-        <div className="gsw-container">
-          <p className="gsw-eyebrow">Get In Touch</p>
-          <h1 style={{ fontSize: '48px', fontWeight: 700, color: '#111827', lineHeight: 1.1, marginBottom: '24px', maxWidth: '720px' }}>
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px', borderBottom: '1px solid #E5E7EB' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+          <span className="gsw-eyebrow">Get In Touch</span>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 24, maxWidth: 720 }}>
             Let's Build Together
           </h1>
-          <p style={{ fontSize: '18px', color: '#aaa', maxWidth: '560px', lineHeight: 1.7 }}>
-            Infrastructure solutions and digital innovation on an enterprise scale.
-            Response within 24 hours, guaranteed.
+          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7 }}>
+            Enterprise-grade technology solutions and digital transformation at scale.
+            Our team responds within 24 hours.
           </p>
         </div>
       </section>
@@ -183,13 +185,13 @@ const Contact = () => {
               </h2>
 
               {success && (
-                <div style={{ background: '#001a33', border: '1px solid #A81D37', color: '#66aaff', padding: '14px 18px', marginBottom: '24px', fontSize: '14px' }}>
-                  <strong>Message sent.</strong> I'll respond within 24 hours.
+                <div style={{ background: '#F0FDF4', border: '1px solid #86EFAC', color: '#166534', padding: '14px 18px', marginBottom: '24px', fontSize: '14px' }}>
+                  <strong>Message sent.</strong> Our team will respond within 24 hours.
                 </div>
               )}
 
               {error && (
-                <div style={{ background: '#1a0000', border: '1px solid #660000', color: '#ff6666', padding: '14px 18px', marginBottom: '24px', fontSize: '14px', whiteSpace: 'pre-wrap' }}>
+                <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', color: '#991B1B', padding: '14px 18px', marginBottom: '24px', fontSize: '14px', whiteSpace: 'pre-wrap' }}>
                   <strong>Error:</strong> {error}
                 </div>
               )}
@@ -294,7 +296,7 @@ const Contact = () => {
                   style={{
                     width: '100%', padding: '14px 24px',
                     background: loading ? '#D1D5DB' : '#A81D37',
-                    color: '#111827', border: 'none',
+                    color: '#FFFFFF', border: 'none',
                     fontSize: '14px', fontWeight: 700,
                     letterSpacing: '0.05em', textTransform: 'uppercase',
                     cursor: loading ? 'not-allowed' : 'pointer',

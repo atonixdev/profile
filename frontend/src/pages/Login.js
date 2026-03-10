@@ -85,7 +85,7 @@ const Login = () => {
           <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', marginBottom: '8px', letterSpacing: '-0.02em' }}>
             Welcome Back
           </h1>
-          <p style={{ color: '#6B7280', fontSize: '14px' }}>Sign in to access the community</p>
+          <p style={{ color: '#6B7280', fontSize: '14px' }}>Sign in to your account</p>
         </div>
 
         {/* Card */}

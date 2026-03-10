@@ -37,7 +37,8 @@ const Infrastructure = () => {
             Infrastructure
           </h1>
           <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600 }}>
-            Sovereign infrastructure projects powering African innovation and global digital independence.
+            Enterprise-grade infrastructure projects delivering digital transformation
+            for governments and corporations worldwide.
           </p>
         </div>
       </section>
@@ -57,7 +58,7 @@ const Infrastructure = () => {
                     padding: '8px 20px',
                     background: selectedCategory === cat ? '#A81D37' : 'transparent',
                     border: `1px solid ${selectedCategory === cat ? '#A81D37' : '#D1D5DB'}`,
-                    color: selectedCategory === cat ? '#111827' : '#6B7280',
+                    color: selectedCategory === cat ? '#FFFFFF' : '#6B7280',
                     fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
                     textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
                     transition: 'all 0.15s ease',

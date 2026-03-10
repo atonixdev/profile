@@ -111,7 +111,7 @@ const Register = () => {
             <AtonixDevLogo size={32} variant="dark" textColor="#111827" />
           </div>
           <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', marginBottom: '8px', letterSpacing: '-0.02em' }}>
-            Join Our Community
+            Create Account
           </h1>
           <p style={{ color: '#6B7280', fontSize: '14px' }}>Create an account to access exclusive platform features</p>
         </div>

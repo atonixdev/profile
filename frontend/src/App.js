@@ -4,6 +4,8 @@ import Layout from './components/Layout/Layout';
 import FloatingChatbot from './components/FloatingChatbot';
 import Home from './pages/Home';
 import Software from './pages/Software';
+import Solutions from './pages/Solutions';
+import Industries from './pages/Industries';
 import About from './pages/About';
 import Services from './pages/Services';
 import Infrastructure from './pages/Infrastructure';
@@ -14,11 +16,6 @@ import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import CommunityDashboard from './pages/CommunityDashboard';
-import Discussions from './pages/Discussions';
-import Members from './pages/Members';
-import Events from './pages/Events';
-import Resources from './pages/Resources';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -42,6 +39,8 @@ function App() {
             {/* Public Routes */}
             <Route index element={<Home />} />
             <Route path="software" element={<Software />} />
+            <Route path="solutions" element={<Solutions />} />
+            <Route path="industries" element={<Industries />} />
             <Route path="about" element={<About />} />
             <Route path="services" element={<Services />} />
             <Route path="infrastructure" element={<Infrastructure />} />
@@ -54,16 +53,7 @@ function App() {
             <Route path="help" element={<FAQ />} />
             <Route path="faq" element={<FAQ />} />
 
-            {/* Protected Community Routes */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="community" element={<CommunityDashboard />} />
-              <Route path="community/discussions" element={<Discussions />} />
-              <Route path="community/members" element={<Members />} />
-              <Route path="community/events" element={<Events />} />
-              <Route path="community/resources" element={<Resources />} />
-            </Route>
-
-            {/* Lab removed — redirect to home */}
+            {/* Lab removed — redirect to home */}}
             <Route path="lab/*" element={<Navigate to="/" replace />} />
           </Route>
 

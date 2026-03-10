@@ -10,38 +10,41 @@ const Footer = () => {
     {
       title: 'Company',
       links: [
-        { label: 'About Us',       to: '/about' },
-        { label: 'Services',       to: '/services' },
-        { label: 'Infrastructure', to: '/infrastructure' },
-        { label: 'Contact',        to: '/contact' },
+        { label: 'About Us',               to: '/about' },
+        { label: 'Careers',                to: '/careers' },
+        { label: 'Government Contracting', to: '/government' },
+        { label: 'Capabilities Statement', to: '/capabilities' },
+        { label: 'Contact',                to: '/contact' },
       ],
     },
     {
       title: 'Platform',
       links: [
-        { label: 'Software',   to: '/software' },
-        { label: 'Blog',       to: '/blog' },
-        { label: 'Community',  to: '/community' },
-        { label: 'Resources',  to: '/community/resources' },
+        { label: 'Software',       to: '/software' },
+        { label: 'Infrastructure', to: '/infrastructure' },
+        { label: 'Solutions',      to: '/solutions' },
+        { label: 'Industries',     to: '/industries' },
+        { label: 'Blog',           to: '/blog' },
       ],
     },
     {
-      title: 'Solutions',
+      title: 'Trust & Compliance',
       links: [
-        { label: 'Software Engineering',  to: '/services' },
-        { label: 'AI Automation',         to: '/services' },
-        { label: 'FinTech Engineering',   to: '/services' },
-        { label: 'Technical Architecture',to: '/services' },
+        { label: 'Security & Compliance', to: '/security' },
+        { label: 'Data Protection',       to: '/privacy' },
+        { label: 'Legal',                 to: '/legal' },
+        { label: 'Privacy Policy',        to: '/privacy' },
+        { label: 'Terms of Service',      to: '/terms' },
       ],
     },
     {
-      title: 'Legal',
+      title: 'Corporate Solutions',
       links: [
-        { label: 'Legal',          to: '/legal' },
-        { label: 'Compliance',     to: '/compliance' },
-        { label: 'Security',       to: '/security' },
-        { label: 'Privacy Policy', to: '/privacy' },
-        { label: 'Terms of Service',to: '/terms' },
+        { label: 'Enterprise Software',   to: '/solutions' },
+        { label: 'AI & Automation',       to: '/software' },
+        { label: 'Cloud Engineering',     to: '/infrastructure' },
+        { label: 'DevOps & Security',     to: '/software' },
+        { label: 'Case Studies',          to: '/infrastructure' },
       ],
     },
   ];
@@ -97,7 +100,9 @@ const Footer = () => {
               <AtonixDevLogo size={28} variant="dark" textColor="#FFFFFF" />
             </div>
             <p style={{ color: '#9CA3AF', fontSize: 13, lineHeight: 1.7, marginBottom: 24, maxWidth: 300 }}>
-              Principal Architect &amp; Technical Innovator at AtonixCorp. Building sovereign infrastructure and intelligent systems for Africa and the global market.
+              A global enterprise technology company delivering secure, scalable, and intelligent
+              software, cloud, and infrastructure solutions for governments, corporations, and
+              high-growth organizations worldwide.
             </p>
             {/* Social icons — monochrome, small */}
             <div style={{ display: 'flex', gap: 8 }}>
@@ -177,13 +182,20 @@ const Footer = () => {
           &copy; {currentYear} AtonixDev — AtonixCorp. All rights reserved.
         </p>
         <div style={{ display: 'flex', gap: 24 }}>
-          {['Privacy Policy', 'Terms of Service', 'Compliance'].map((t) => (
-            <span
-              key={t}
-              style={{ color: '#9CA3AF', fontSize: 12, cursor: 'default' }}
+          {[
+            { label: 'Privacy Policy',  to: '/privacy'  },
+            { label: 'Terms of Service', to: '/terms'   },
+            { label: 'Compliance',       to: '/security' },
+          ].map(({ label, to }) => (
+            <Link
+              key={label}
+              to={to}
+              style={{ color: '#9CA3AF', fontSize: 12, textDecoration: 'none', transition: 'color 0.15s' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
             >
-              {t}
-            </span>
+              {label}
+            </Link>
           ))}
         </div>
       </div>
