@@ -440,3 +440,23 @@ HUGGINGFACE_API_KEY = os.getenv(
     'hf_YOUR_API_KEY_HERE'  # Replace with actual key
 )
 
+# ── OAuth 2.0 Provider Credentials ───────────────────────────────────────────
+# Obtain these from each provider's developer console.
+# Redirect URI for all providers: {FRONTEND_URL}/oauth/callback
+
+GITHUB_CLIENT_ID     = config('GITHUB_CLIENT_ID',     default='')
+GITHUB_CLIENT_SECRET = config('GITHUB_CLIENT_SECRET', default='')
+GITHUB_REDIRECT_URI  = config('GITHUB_REDIRECT_URI',  default=f'{FRONTEND_URL}/oauth/callback')
+
+GITLAB_CLIENT_ID     = config('GITLAB_CLIENT_ID',     default='')
+GITLAB_CLIENT_SECRET = config('GITLAB_CLIENT_SECRET', default='')
+GITLAB_REDIRECT_URI  = config('GITLAB_REDIRECT_URI',  default=f'{FRONTEND_URL}/oauth/callback')
+
+LINKEDIN_CLIENT_ID     = config('LINKEDIN_CLIENT_ID',     default='')
+LINKEDIN_CLIENT_SECRET = config('LINKEDIN_CLIENT_SECRET', default='')
+LINKEDIN_REDIRECT_URI  = config('LINKEDIN_REDIRECT_URI',  default=f'{FRONTEND_URL}/oauth/callback')
+
+GOOGLE_CLIENT_ID     = config('GOOGLE_CLIENT_ID',     default='')
+GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET', default='')
+GOOGLE_REDIRECT_URI  = config('GOOGLE_REDIRECT_URI',  default=f'{FRONTEND_URL}/oauth/callback')
+

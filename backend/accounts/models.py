@@ -36,6 +36,13 @@ class Profile(models.Model):
     # Settings
     is_active = models.BooleanField(default=True)
 
+    # OAuth
+    oauth_provider    = models.CharField(max_length=20,  blank=True, default='', db_index=True)
+    oauth_provider_id = models.CharField(max_length=255, blank=True, default='', db_index=True)
+    oauth_email       = models.EmailField(blank=True, default='')
+    oauth_avatar      = models.URLField(blank=True, default='')
+    oauth_verified    = models.BooleanField(default=False)
+
     # MFA (TOTP)
     mfa_enabled = models.BooleanField(default=False)
     # Stores an encrypted token with a prefix (enc:v1:...), or empty string.

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import AtonixDevLogo from '../components/AtonixDevLogo';
+import OAuthButtons from '../components/OAuthButtons';
 import api, { setCsrfToken } from '../services/api';
 import { inquiryService } from '../services';
 import SearchableCountryDropdown from '../components/SearchableCountryDropdown';
@@ -447,6 +448,7 @@ const Portal = () => {
             )}
 
             {/* Form */}
+            <OAuthButtons mode="signin" />
             <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
                 <label style={labelStyle}>Username or Email</label>
@@ -674,6 +676,7 @@ const Portal = () => {
             )}
 
             {/* Form */}
+            <OAuthButtons mode="signup" />
             <form onSubmit={handleSignUpSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>

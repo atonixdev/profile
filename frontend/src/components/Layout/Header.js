@@ -84,13 +84,29 @@ const Header = () => {
                   style={{
                     background: 'rgba(255,255,255,0.1)',
                     border: '1px solid rgba(255,255,255,0.25)',
-                    color: '#FFFFFF', padding: '6px 18px',
+                    color: '#FFFFFF', padding: '4px',
                     fontFamily: 'inherit', fontWeight: 700,
-                    fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase',
+                    fontSize: 11, letterSpacing: '0.08em',
                     cursor: 'pointer',
+                    borderRadius: '50%',
+                    width: 36, height: 36,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    overflow: 'hidden', flexShrink: 0,
                   }}
+                  title={user.user?.first_name || user.username || 'Account'}
+                  aria-label="User menu"
                 >
-                  {user.user?.first_name || user.username || 'Account'}
+                  {user.oauth_avatar ? (
+                    <img
+                      src={user.oauth_avatar}
+                      alt=""
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                    />
+                  ) : (
+                    <span style={{ fontSize: 14, fontWeight: 700, lineHeight: 1, userSelect: 'none' }}>
+                      {(user.user?.first_name || user.username || 'A')[0].toUpperCase()}
+                    </span>
+                  )}
                 </button>
                 {isUserMenuOpen && (
                   <div

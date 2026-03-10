@@ -15,6 +15,7 @@ import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Register from './pages/Register';
 import Portal from './pages/Login';
+import OAuthCallback from './pages/OAuthCallback';
 import ProtectedRoute from './components/ProtectedRoute';
 import StaffRoute from './components/StaffRoute';
 import { AuthProvider } from './context/AuthContext';
@@ -119,7 +120,7 @@ function App() {
             <Route path="help" element={<FAQ />} />
             <Route path="faq" element={<FAQ />} />
 
-            {/* Lab removed — redirect to home */}}
+            {/* Lab removed — redirect to home */}
             <Route path="lab/*" element={<Navigate to="/" replace />} />
 
             {/* Platform capability pages */}
@@ -162,6 +163,7 @@ function App() {
           {/* Auth Routes */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Portal />} />
+          <Route path="/oauth/callback" element={<OAuthCallback />} />
 
           {/* Developer Dashboard — Protected */}
           <Route element={<ProtectedRoute />}>

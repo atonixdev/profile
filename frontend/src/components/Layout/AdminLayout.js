@@ -171,24 +171,42 @@ const AdminLayout = () => {
 
         {/* User section */}
         <div style={{ padding: '14px 20px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
-          <div
-            style={{
-              fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em',
-              color: 'rgba(255,255,255,0.6)', marginBottom: 4, textTransform: 'uppercase',
-            }}
-          >
-            Administrator
-          </div>
-          <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 2, marginTop: 2 }}>
-            {displayName}
-          </div>
-          <div
-            style={{
-              fontSize: 11, color: 'rgba(255,255,255,0.55)', marginBottom: 12,
-              overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-            }}
-          >
-            {user?.user_email || user?.user?.email || ''}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            {/* Avatar */}
+            <div
+              style={{
+                width: 34, height: 34, borderRadius: '50%', flexShrink: 0,
+                background: '#A81D37', border: '1px solid rgba(255,255,255,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                overflow: 'hidden',
+              }}
+            >
+              {user?.oauth_avatar ? (
+                <img src={user.oauth_avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF', userSelect: 'none' }}>
+                  {(user?.first_name || user?.username || 'A')[0].toUpperCase()}
+                </span>
+              )}
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <div
+                style={{
+                  fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em',
+                  color: 'rgba(255,255,255,0.6)', marginBottom: 2, textTransform: 'uppercase',
+                }}
+              >
+                Administrator
+              </div>
+              <div
+                style={{
+                  fontSize: 11, color: 'rgba(255,255,255,0.55)',
+                  overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                }}
+              >
+                {user?.user_email || user?.user?.email || ''}
+              </div>
+            </div>
           </div>
           <button
             onClick={handleLogout}

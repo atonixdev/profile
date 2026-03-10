@@ -201,16 +201,37 @@ const DashboardLayout = () => {
             borderTop: '1px solid rgba(255,255,255,0.08)',
           }}
         >
-          <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 2 }}>
-            {displayName}
-          </div>
-          <div
-            style={{
-              fontSize: 11, color: '#6B7280', marginBottom: 14,
-              overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-            }}
-          >
-            {user?.user?.email || ''}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+            {/* Avatar */}
+            <div
+              style={{
+                width: 34, height: 34, borderRadius: '50%', flexShrink: 0,
+                background: '#A81D37', border: '1px solid rgba(255,255,255,0.15)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                overflow: 'hidden',
+              }}
+            >
+              {user?.oauth_avatar ? (
+                <img src={user.oauth_avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF', userSelect: 'none' }}>
+                  {(user?.first_name || user?.username || 'D')[0].toUpperCase()}
+                </span>
+              )}
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 1 }}>
+                {displayName}
+              </div>
+              <div
+                style={{
+                  fontSize: 11, color: '#6B7280',
+                  overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                }}
+              >
+                {user?.user?.email || ''}
+              </div>
+            </div>
           </div>
           <button
             onClick={handleLogout}

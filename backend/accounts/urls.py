@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import ProfileViewSet, RegisterView, EmailVerifyView, MFASetupView, MFAEnableView, MFADisableView
+from .oauth_views import OAuthInitView, OAuthCallbackView
 
 router = DefaultRouter()
 router.register(r'profiles', ProfileViewSet, basename='profile')
@@ -12,4 +13,7 @@ urlpatterns = [
     path('mfa/setup/', MFASetupView.as_view(), name='mfa_setup'),
     path('mfa/enable/', MFAEnableView.as_view(), name='mfa_enable'),
     path('mfa/disable/', MFADisableView.as_view(), name='mfa_disable'),
+    # OAuth
+    path('oauth/<str:provider>/init/', OAuthInitView.as_view(), name='oauth_init'),
+    path('oauth/callback/', OAuthCallbackView.as_view(), name='oauth_callback'),
 ]
