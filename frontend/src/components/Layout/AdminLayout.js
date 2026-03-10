@@ -15,7 +15,8 @@ const NAV_ITEMS = [
   { path: '/admin-console/email',     exact: false, label: 'Email & Domain',        code: 'EML' },
   { path: '/admin-console/settings',  exact: false, label: 'System Settings',       code: 'SYS' },
   { path: '/admin-console/activity',  exact: false, label: 'Admin Activity',        code: 'ACT' },
-  { path: '/admin-console/features',  exact: false, label: 'Feature Flags',         code: 'FLG' },
+  { path: '/admin-console/features',   exact: false, label: 'Feature Flags',         code: 'FLG' },
+  { path: '/admin-console/campaigns',  exact: false, label: 'Campaigns',              code: 'CMP' },
 ];
 
 const ACCENT = '#D4AF37';

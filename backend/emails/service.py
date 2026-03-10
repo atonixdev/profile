@@ -234,6 +234,155 @@ class EmailService:
         except Exception as exc:
             logger.error('EmailService: audit write failed: %s', exc)
 
+    # ── DB Template rendering ──────────────────────────────────────────────
+
+    @classmethod
+    def send_from_db_template(
+        cls,
+        template_id: str,
+        recipient: str,
+        variables: dict[str, Any] | None = None,
+        subject_override: str | None = None,
+        sender_identity=None,
+        actor=None,
+        ip_address: str = '',
+    ) -> bool:
+        """
+        Render and send a user-created EmailTemplate (stored in DB).
+        Variables are injected using Python str.format_map with {{key}} syntax.
+        """
+        from emails.models import EmailTemplate, EmailLog
+        from django.template import Template, Context
+
+        variables = variables or {}
+
+        try:
+            tmpl = EmailTemplate.objects.get(template_id=template_id, is_active=True)
+        except EmailTemplate.DoesNotExist:
+            logger.error('EmailService: DB template not found: %s', template_id)
+            return False
+
+        subject = subject_override or tmpl.subject
+        # Replace {{var}} placeholders
+        try:
+            rendered_subject = subject.replace('{{', '{').replace('}}', '}').format_map(variables)
+            rendered_html    = tmpl.html_body.replace('{{', '{').replace('}}', '}').format_map(variables)
+            rendered_text    = tmpl.text_body.replace('{{', '{').replace('}}', '}').format_map(variables) if tmpl.text_body else cls._strip_html(rendered_html)
+        except KeyError as exc:
+            logger.error('EmailService: missing variable %s in template %s', exc, template_id)
+            return False
+
+        from_email  = sender_identity.email if sender_identity else getattr(settings, 'DEFAULT_FROM_EMAIL', 'no-reply@atonixdev.com')
+        from_name   = sender_identity.display_name if sender_identity else 'AtonixDev'
+        reply_to    = [sender_identity.reply_to] if sender_identity and sender_identity.reply_to else [getattr(settings, 'EMAIL_REPLY_TO', 'support@atonixdev.com')]
+        from_header = f'{from_name} <{from_email}>'
+
+        log = EmailLog(
+            recipient=recipient,
+            subject=rendered_subject,
+            email_type='marketing_campaign' if (sender_identity and sender_identity.usage == 'marketing') else 'custom',
+            template_name=f'db:{template_id}',
+            ip_address=ip_address,
+            metadata={'template_id': template_id, 'variables': variables},
+        )
+        try:
+            msg = EmailMultiAlternatives(
+                subject=rendered_subject,
+                body=rendered_text,
+                from_email=from_header,
+                to=[recipient],
+                reply_to=reply_to,
+            )
+            msg.attach_alternative(rendered_html, 'text/html')
+            msg.send(fail_silently=False)
+            log.status = 'sent'
+            log.save()
+            logger.info('EmailService: db-template %s sent → %s', template_id, recipient)
+            return True
+        except Exception as exc:
+            log.status = 'failed'
+            log.error_message = str(exc)
+            log.save()
+            logger.error('EmailService: db-template %s failed → %s: %s', template_id, recipient, exc)
+            return False
+
+    @classmethod
+    def send_campaign(cls, campaign_id: int, actor=None) -> dict:
+        """
+        Dispatch a Campaign to all recipients.
+        Returns a summary dict: {sent, failed, total}.
+        Only campaigns in 'draft' or 'scheduled' status can be sent.
+        """
+        from emails.models import Campaign, CampaignLog
+        from django.utils import timezone as tz
+
+        try:
+            campaign = Campaign.objects.select_related('template', 'sender_identity').get(pk=campaign_id)
+        except Campaign.DoesNotExist:
+            logger.error('EmailService: campaign %s not found', campaign_id)
+            return {'sent': 0, 'failed': 0, 'total': 0, 'error': 'Not found'}
+
+        if campaign.status not in ('draft', 'scheduled'):
+            return {'sent': 0, 'failed': 0, 'total': 0, 'error': f'Cannot send campaign in status: {campaign.status}'}
+
+        campaign.status = 'sending'
+        campaign.save(update_fields=['status'])
+
+        recipients = campaign.recipients or []
+        sent = failed = 0
+
+        for entry in recipients:
+            if isinstance(entry, str):
+                email, name = entry, ''
+            elif isinstance(entry, dict):
+                email = entry.get('email', '')
+                name  = entry.get('name', '')
+            else:
+                continue
+
+            if not email:
+                continue
+
+            variables = {'name': name or email, 'unsubscribe_url': f"{getattr(settings, 'FRONTEND_URL', 'https://atonixdev.com')}/unsubscribe?email={email}"}
+
+            ok = cls.send_from_db_template(
+                template_id=campaign.template.template_id if campaign.template else '',
+                recipient=email,
+                variables=variables,
+                subject_override=campaign.subject or None,
+                sender_identity=campaign.sender_identity,
+                actor=actor,
+            )
+
+            status_val = 'sent' if ok else 'failed'
+            CampaignLog.objects.create(
+                campaign=campaign,
+                recipient=email,
+                status=status_val,
+                sent_at=tz.now() if ok else None,
+            )
+
+            if ok:
+                sent += 1
+            else:
+                failed += 1
+
+        campaign.status = 'sent'
+        campaign.sent_at = tz.now()
+        campaign.recipient_count = sent + failed
+        campaign.delivered_count = sent
+        campaign.save(update_fields=['status', 'sent_at', 'recipient_count', 'delivered_count'])
+
+        # Audit
+        cls._write_audit(
+            action='admin_action',
+            actor=actor,
+            description=f'Campaign "{campaign.name}" sent: {sent} delivered, {failed} failed',
+        )
+
+        logger.info('EmailService: campaign %s sent=%s failed=%s', campaign.name, sent, failed)
+        return {'sent': sent, 'failed': failed, 'total': sent + failed}
+
 
 # ── Security email → audit action mapping ─────────────────────────────────────
 _SECURITY_EMAIL_TYPES: dict[str, str] = {
@@ -250,3 +399,4 @@ _SECURITY_EMAIL_TYPES: dict[str, str] = {
     'account_suspended': 'account_suspended',
     'admin_action':    'admin_action',
 }
+

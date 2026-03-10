@@ -72,6 +72,7 @@ import AdminEmail from './pages/admin-console/Email';
 import AdminSettings from './pages/admin-console/Settings';
 import AdminActivity from './pages/admin-console/Activity';
 import AdminFeatures from './pages/admin-console/Features';
+import AdminCampaigns from './pages/admin-console/Campaigns';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
 import SettingsGPGKeys from './pages/settings/GPGKeys';
@@ -235,7 +236,8 @@ function App() {
               <Route path="email"    element={<AdminEmail />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="activity" element={<AdminActivity />} />
-              <Route path="features" element={<AdminFeatures />} />
+              <Route path="features"   element={<AdminFeatures />} />
+              <Route path="campaigns"  element={<AdminCampaigns />} />
             </Route>
           </Route>
 
