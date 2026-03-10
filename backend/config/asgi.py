@@ -18,6 +18,7 @@ from django.core.asgi import get_asgi_application
 django_asgi_app = get_asgi_application()
 
 import iot_lab.routing  # noqa: E402
+import employment.routing  # noqa: E402
 from accounts.ws_auth import JwtCookieAuthMiddleware  # noqa: E402
 
 application = ProtocolTypeRouter(
@@ -26,7 +27,8 @@ application = ProtocolTypeRouter(
 		'websocket': AllowedHostsOriginValidator(
 			JwtCookieAuthMiddleware(
 				URLRouter(
-					iot_lab.routing.websocket_urlpatterns,
+					iot_lab.routing.websocket_urlpatterns +
+					employment.routing.websocket_urlpatterns,
 				)
 			)
 		),

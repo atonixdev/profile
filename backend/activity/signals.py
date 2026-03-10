@@ -2,6 +2,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
+from django.db import transaction
 from .models import ActivityEvent
 
 
@@ -32,14 +33,25 @@ def on_post_save(sender, instance, created, **kwargs):
         return
     try:
         ct = ContentType.objects.get_for_model(instance.__class__)
-        ActivityEvent.objects.create(
-            actor=None,  # actor unknown at signal time
-            action='create' if created else 'update',
-            object_type=ct,
-            object_id=str(getattr(instance, 'pk')),
-            path=f"signal:{ct.app_label}.{ct.model}",
-            method='SIGNAL',
-        )
+        action = 'create' if created else 'update'
+        ct_pk = ct.pk
+        obj_pk = str(getattr(instance, 'pk'))
+        label = f"signal:{ct.app_label}.{ct.model}"
+
+        def _create():
+            try:
+                ActivityEvent.objects.create(
+                    actor=None,
+                    action=action,
+                    object_type_id=ct_pk,
+                    object_id=obj_pk,
+                    path=label,
+                    method='SIGNAL',
+                )
+            except Exception:
+                pass
+
+        transaction.on_commit(_create)
     except Exception:
         pass
 
@@ -52,13 +64,23 @@ def on_post_delete(sender, instance, **kwargs):
         return
     try:
         ct = ContentType.objects.get_for_model(instance.__class__)
-        ActivityEvent.objects.create(
-            actor=None,
-            action='delete',
-            object_type=ct,
-            object_id=str(getattr(instance, 'pk')),
-            path=f"signal:{ct.app_label}.{ct.model}",
-            method='SIGNAL',
-        )
+        ct_pk = ct.pk
+        obj_pk = str(getattr(instance, 'pk'))
+        label = f"signal:{ct.app_label}.{ct.model}"
+
+        def _create():
+            try:
+                ActivityEvent.objects.create(
+                    actor=None,
+                    action='delete',
+                    object_type_id=ct_pk,
+                    object_id=obj_pk,
+                    path=label,
+                    method='SIGNAL',
+                )
+            except Exception:
+                pass
+
+        transaction.on_commit(_create)
     except Exception:
         pass

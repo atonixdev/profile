@@ -91,6 +91,21 @@ import BillingCredits from './pages/billing-console/Credits';
 import BillingLedger from './pages/billing-console/Ledger';
 import BillingCompliance from './pages/billing-console/Compliance';
 import BillingUserAnalytics from './pages/billing-console/UserAnalytics';
+import ApplicationConsoleLayout from './components/Layout/ApplicationConsoleLayout';
+import ApplicationConsoleDashboard from './pages/application-console/Dashboard';
+import JobPostings from './pages/application-console/JobPostings';
+import ApplicantTrackingSystem from './pages/application-console/ATS';
+import HiringPipeline from './pages/application-console/Pipeline';
+import Interviews from './pages/application-console/Interviews';
+import Evaluations from './pages/application-console/Evaluations';
+import EmployeeDirectory from './pages/application-console/Employees';
+import ApplicationCompliance from './pages/application-console/Compliance';
+import InterviewRoom from './pages/application-console/InterviewRoom';
+import ApplicationDetail from './pages/application-console/ApplicationDetail';
+import JobDetail from './pages/application-console/JobDetail';
+import CandidatePortal from './pages/application-console/CandidatePortal';
+import Jobs from './pages/Jobs';
+import TrackApplication from './pages/TrackApplication';
 import EmailConsoleLayout from './components/Layout/EmailConsoleLayout';
 import EmailOverview from './pages/email-console/Overview';
 import EmailDomains from './pages/email-console/Domains';
@@ -312,6 +327,30 @@ function App() {
               <Route path="users"          element={<BillingUserAnalytics />} />
             </Route>
           </Route>
+
+          {/* Employment Console — Staff Only */}
+          <Route element={<StaffRoute />}>
+            <Route path="/application-console" element={<ApplicationConsoleLayout />}>
+              <Route index element={<ApplicationConsoleDashboard />} />
+              <Route path="jobs"          element={<JobPostings />} />
+              <Route path="jobs/:jobId"   element={<JobDetail />} />
+              <Route path="ats"           element={<ApplicantTrackingSystem />} />
+              <Route path="applications/:applicationId" element={<ApplicationDetail />} />
+              <Route path="interviews"    element={<Interviews />} />
+              <Route path="interviews/:interviewId/room" element={<InterviewRoom />} />
+              <Route path="pipeline"      element={<HiringPipeline />} />
+              <Route path="evaluations"   element={<Evaluations />} />
+              <Route path="employees"     element={<EmployeeDirectory />} />
+              <Route path="compliance"    element={<ApplicationCompliance />} />
+            </Route>
+          </Route>
+
+          {/* Public Candidate Portal — No Auth */}
+          <Route path="/apply/:jobId" element={<CandidatePortal />} />
+
+          {/* Public Job Board & Application Tracker — No Auth */}
+          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/track" element={<TrackApplication />} />
 
           {/* Catch all - redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />
