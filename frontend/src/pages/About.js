@@ -65,7 +65,7 @@ const About = () => {
           <span className="gsw-eyebrow">About AtonixDev</span>
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, marginBottom: 24 }}>
             Engineering Intelligence<br />
-            <span style={{ color: '#DC2626' }}>for the Next Decade</span>
+            <span style={{ color: '#A81D37' }}>for the Next Decade</span>
           </h1>
           <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, marginBottom: 0 }}>
             A modern, high-precision software engineering and technology architecture company
@@ -93,7 +93,7 @@ const About = () => {
                 <div
                   style={{
                     width: '100%', aspectRatio: '1',
-                    background: '#DC2626',
+                    background: '#A81D37',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: 72, fontWeight: 800, color: '#111827',
                   }}
@@ -111,7 +111,7 @@ const About = () => {
                 {profile?.email && (
                   <div>
                     <span className="gsw-label" style={{ marginBottom: 4 }}>Email</span>
-                    <a href={`mailto:${profile.email}`} style={{ color: '#DC2626', fontSize: 14 }}>{profile.email}</a>
+                    <a href={`mailto:${profile.email}`} style={{ color: '#A81D37', fontSize: 14 }}>{profile.email}</a>
                   </div>
                 )}
                 {profile?.phone && (
@@ -131,7 +131,7 @@ const About = () => {
               <h2 style={{ fontSize: 32, fontWeight: 800, color: '#111827', marginBottom: 8 }}>
                 {profile?.full_name || 'Samuel Realm'}
               </h2>
-              <p style={{ fontSize: 16, color: '#DC2626', fontWeight: 600, marginBottom: 24 }}>
+              <p style={{ fontSize: 16, color: '#A81D37', fontWeight: 600, marginBottom: 24 }}>
                 {profile?.title || 'Technical Innovator & Systems Architect'}
               </p>
               <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.8, marginBottom: 40 }}>
@@ -150,7 +150,7 @@ const About = () => {
 
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link to="/services" className="gsw-btn gsw-btn-accent">View Services</Link>
-                <Link to="/portfolio" className="gsw-btn gsw-btn-outline">Explore Work</Link>
+                <Link to="/infrastructure" className="gsw-btn gsw-btn-outline">Explore Work</Link>
               </div>
             </div>
           </div>
@@ -172,7 +172,7 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {philosophy.map((p, i) => (
               <div key={i} className="gsw-card" style={{ padding: 32 }}>
-                <div style={{ width: 40, height: 2, background: '#DC2626', marginBottom: 24 }} />
+                <div style={{ width: 40, height: 2, background: '#A81D37', marginBottom: 24 }} />
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 12 }}>{p.title}</h3>
                 <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7 }}>{p.desc}</p>
               </div>
@@ -199,7 +199,7 @@ const About = () => {
                 <h3
                   style={{
                     fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
-                    color: '#DC2626', marginBottom: 20,
+                    color: '#A81D37', marginBottom: 20,
                     borderBottom: '1px solid #E5E7EB', paddingBottom: 16,
                   }}
                 >
@@ -230,7 +230,7 @@ const About = () => {
               to="/contact"
               style={{
                 display: 'inline-flex', alignItems: 'center',
-                padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+                padding: '14px 36px', background: '#FFFFFF', color: '#A81D37',
                 fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
                 textTransform: 'uppercase', textDecoration: 'none',
               }}

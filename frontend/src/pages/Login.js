@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import AtonixDevLogo from '../components/AtonixDevLogo';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -79,10 +80,7 @@ const Login = () => {
         {/* Logo / Brand */}
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '32px', height: '32px', background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: '#111827', fontWeight: 900, fontSize: '14px' }}>AC</span>
-            </div>
-            <span style={{ color: '#111827', fontWeight: 700, fontSize: '16px', letterSpacing: '-0.01em' }}>AtonixDev</span>
+            <AtonixDevLogo size={32} variant="dark" textColor="#111827" />
           </div>
           <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', marginBottom: '8px', letterSpacing: '-0.02em' }}>
             Welcome Back
@@ -126,7 +124,7 @@ const Login = () => {
                   disabled={loading}
                   style={{
                     position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
-                    background: 'none', border: 'none', color: '#DC2626', fontSize: '12px',
+                    background: 'none', border: 'none', color: '#A81D37', fontSize: '12px',
                     fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.05em',
                   }}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
@@ -153,7 +151,7 @@ const Login = () => {
                 type="checkbox" id="rememberMe" name="rememberMe"
                 checked={formData.rememberMe} onChange={handleChange}
                 disabled={loading}
-                style={{ width: '14px', height: '14px', accentColor: '#DC2626' }}
+                style={{ width: '14px', height: '14px', accentColor: '#A81D37' }}
               />
               <label htmlFor="rememberMe" style={{ fontSize: '13px', color: '#6B7280', cursor: 'pointer' }}>
                 Remember me
@@ -164,7 +162,7 @@ const Login = () => {
               type="submit"
               disabled={loading}
               style={{
-                padding: '14px 24px', background: loading ? '#E5E7EB' : '#DC2626',
+                padding: '14px 24px', background: loading ? '#E5E7EB' : '#A81D37',
                 color: '#111827', border: 'none', fontSize: '13px',
                 fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
                 cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
@@ -194,7 +192,7 @@ const Login = () => {
               fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
               textDecoration: 'none', transition: 'border-color 0.15s',
             }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = '#DC2626'}
+            onMouseEnter={e => e.currentTarget.style.borderColor = '#A81D37'}
             onMouseLeave={e => e.currentTarget.style.borderColor = '#D1D5DB'}
           >
             Create Account
@@ -222,11 +220,11 @@ const Login = () => {
             ].map((item, i) => (
               item.href
                 ? <a key={i} href={item.href} style={{ color: '#6B7280', fontSize: '13px', textDecoration: 'none', transition: 'color 0.15s' }}
-                    onMouseEnter={e => e.currentTarget.style.color = '#DC2626'}
+                    onMouseEnter={e => e.currentTarget.style.color = '#A81D37'}
                     onMouseLeave={e => e.currentTarget.style.color = '#6B7280'}
                   >{item.label}</a>
                 : <button key={i} style={{ background: 'none', border: 'none', color: '#6B7280', fontSize: '13px', cursor: 'pointer', textAlign: 'left', padding: 0, fontFamily: 'inherit', transition: 'color 0.15s' }}
-                    onMouseEnter={e => e.currentTarget.style.color = '#DC2626'}
+                    onMouseEnter={e => e.currentTarget.style.color = '#A81D37'}
                     onMouseLeave={e => e.currentTarget.style.color = '#6B7280'}
                   >{item.label}</button>
             ))}

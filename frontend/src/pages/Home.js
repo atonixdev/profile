@@ -79,97 +79,190 @@ const Home = () => {
           position: 'relative',
           background: '#FFFFFF',
           overflow: 'hidden',
-          minHeight: '90vh',
+          minHeight: '72vh',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
+        {/* Engineering grid */}
+        <div
+          style={{
+            position: 'absolute', inset: 0, zIndex: 0,
+            backgroundImage: `
+              linear-gradient(rgba(168,29,55,0.04) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(168,29,55,0.04) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        />
+        {/* Top accent bar */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: '#A81D37', zIndex: 2 }} />
+        {/* Radial glow */}
+        <div
+          style={{
+            position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)',
+            width: 900, height: 600,
+            background: 'radial-gradient(ellipse at center, rgba(168,29,55,0.06) 0%, transparent 68%)',
+            zIndex: 0, pointerEvents: 'none',
+          }}
+        />
 
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, padding: '120px 24px' }}>
-          <div className="max-w-4xl">
-            <span className="gsw-eyebrow anim-fade-up">
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, padding: '72px 24px 48px', textAlign: 'center' }}>
+
+          {/* Eyebrow badge */}
+          <div
+            className="anim-fade-up"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 28,
+              padding: '9px 20px',
+              border: '1px solid rgba(168,29,55,0.35)',
+              background: 'rgba(168,29,55,0.07)',
+            }}
+          >
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#A81D37', flexShrink: 0 }} />
+            <span style={{
+              fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase',
+              color: 'rgba(0,0,0,0.45)',
+              fontFamily: 'var(--font-mono)',
+            }}>
               Enterprise Software Engineering · AtonixCorp
             </span>
-
-            <h1
-              className="anim-fade-up anim-delay-1"
-              style={{
-                fontSize: 'clamp(40px, 6vw, 64px)',
-                fontWeight: 800,
-                lineHeight: 1.1,
-                color: '#111827',
-                marginBottom: 24,
-                letterSpacing: '-0.02em',
-              }}
-            >
-              Building Intelligent<br />
-              <span style={{ color: '#DC2626' }}>Digital Systems</span>
-            </h1>
-
-            <p
-              className="anim-fade-up anim-delay-2"
-              style={{
-                fontSize: 'clamp(17px, 2vw, 22px)',
-                color: '#6B7280',
-                lineHeight: 1.6,
-                maxWidth: 600,
-                marginBottom: 40,
-              }}
-            >
-              A modern, high-precision software engineering and technology architecture company
-              specializing in scalable, sovereign, and future-proof digital systems.
-            </p>
-
-            <div className="anim-fade-up anim-delay-3" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Link to="/contact" className="gsw-btn gsw-btn-accent">
-                Start a Project
-              </Link>
-              <Link to="/portfolio" className="gsw-btn gsw-btn-outline">
-                View Portfolio
-              </Link>
-            </div>
-
-            {/* Expertise tags */}
-            <div
-              style={{
-                display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 48,
-                borderTop: '1px solid #F3F4F6', paddingTop: 32,
-              }}
-            >
-              {expertise.map((e) => (
-                <span key={e.label} className="gsw-tag">
-                  {e.label}
-                </span>
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* ── Stats Bar ──────────────────────────────────────── */}
-      <section style={{ background: '#F8F9FA', borderTop: '1px solid #F3F4F6', borderBottom: '1px solid #F3F4F6' }}>
-        <div className="gsw-container">
-          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: 0 }}>
-            {stats.map((s, i) => (
+          {/* Headline */}
+          <h1
+            className="anim-fade-up anim-delay-1"
+            style={{
+              fontSize: 'clamp(36px, 5.5vw, 68px)',
+              fontWeight: 900,
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
+              marginBottom: 24,
+              textAlign: 'center',
+            }}
+          >
+            <span style={{ display: 'block', color: '#111827' }}>Building Intelligent</span>
+            <span style={{ display: 'block', color: '#A81D37' }}>Digital Systems</span>
+          </h1>
+
+          {/* Subtext */}
+          <p
+            className="anim-fade-up anim-delay-2"
+            style={{
+              fontSize: 'clamp(14px, 1.4vw, 17px)',
+              color: '#6B7280',
+              lineHeight: 1.65,
+              maxWidth: 560,
+              margin: '0 auto 36px',
+            }}
+          >
+            A high-precision software engineering and technology architecture company
+            specializing in scalable, sovereign, and future-proof digital systems.
+          </p>
+
+          {/* CTAs */}
+          <div
+            className="anim-fade-up anim-delay-3"
+            style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}
+          >
+            <Link
+              to="/contact"
+              style={{
+                display: 'inline-flex', alignItems: 'center',
+                padding: '13px 36px',
+                background: '#A81D37',
+                color: '#FFFFFF',
+                fontWeight: 700, fontSize: 12, letterSpacing: '0.10em', textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = '#7A1528'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = '#A81D37'; }}
+            >
+              Start a Project
+            </Link>
+            <Link
+              to="/infrastructure"
+              style={{
+                display: 'inline-flex', alignItems: 'center',
+                padding: '13px 36px',
+                background: 'transparent',
+                color: '#111827',
+                fontWeight: 700, fontSize: 12, letterSpacing: '0.10em', textTransform: 'uppercase',
+                textDecoration: 'none',
+                border: '1px solid #D1D5DB',
+                transition: 'border-color 0.2s, color 0.2s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A81D37'; e.currentTarget.style.color = '#A81D37'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#D1D5DB'; e.currentTarget.style.color = '#111827'; }}
+            >
+              View Infrastructure
+            </Link>
+          </div>
+
+          {/* Stats — integrated inside hero */}
+          <div
+            className="anim-fade-up anim-delay-4"
+            style={{
+              display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+              borderTop: '1px solid #E5E7EB',
+              borderLeft: '1px solid #E5E7EB',
+              maxWidth: 720, margin: '0 auto 40px',
+            }}
+          >
+            {stats.map((s) => (
               <div
                 key={s.label}
                 style={{
-                  padding: '40px 24px',
-                  borderRight: i < stats.length - 1 ? '1px solid #F3F4F6' : 'none',
+                  padding: '22px 16px',
+                  borderRight: '1px solid #E5E7EB',
+                  borderBottom: '1px solid #E5E7EB',
                   textAlign: 'center',
                 }}
               >
-                <div style={{ fontSize: 40, fontWeight: 800, color: '#111827', marginBottom: 6 }}>
+                <div style={{
+                  fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 900,
+                  color: '#111827', letterSpacing: '-0.02em', marginBottom: 4,
+                }}>
                   {s.value}
                 </div>
-                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280' }}>
+                <div style={{
+                  fontSize: 10, fontWeight: 600, letterSpacing: '0.14em',
+                  textTransform: 'uppercase', color: '#9CA3AF',
+                  fontFamily: 'var(--font-mono)',
+                }}>
                   {s.label}
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Expertise pills */}
+          <div
+            className="anim-fade-up anim-delay-5"
+            style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}
+          >
+            {expertise.map((e) => (
+              <span
+                key={e.label}
+                style={{
+                  display: 'inline-block',
+                  padding: '6px 14px',
+                  fontSize: 10, fontWeight: 600, letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: '#6B7280',
+                  border: '1px solid #E5E7EB',
+                  background: 'transparent',
+                  fontFamily: 'var(--font-mono)',
+                }}
+              >
+                {e.label}
+              </span>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -193,7 +286,7 @@ const Home = () => {
               <div key={service.id} className="gsw-card" style={{ padding: '32px 28px', display: 'flex', flexDirection: 'column' }}>
                 <div
                   style={{
-                    width: 36, height: 3, background: '#DC2626', marginBottom: 24, flexShrink: 0,
+                    width: 36, height: 3, background: '#A81D37', marginBottom: 24, flexShrink: 0,
                   }}
                 />
                 <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 12, lineHeight: 1.4 }}>
@@ -204,9 +297,9 @@ const Home = () => {
                 </p>
                 <Link
                   to="/services"
-                  style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#DC2626', textDecoration: 'none' }}
+                  style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#A81D37', textDecoration: 'none' }}
                   onMouseEnter={(e) => { e.currentTarget.style.color = '#111827'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = '#DC2626'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = '#A81D37'; }}
                 >
                   Learn More →
                 </Link>
@@ -227,12 +320,12 @@ const Home = () => {
         <div className="gsw-container">
           <div style={{ marginBottom: 64, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
             <div>
-              <span className="gsw-eyebrow">Portfolio</span>
+              <span className="gsw-eyebrow">Infrastructure</span>
               <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>
                 Featured Projects
               </h2>
             </div>
-            <Link to="/portfolio" className="gsw-btn gsw-btn-dark" style={{ flexShrink: 0 }}>
+            <Link to="/infrastructure" className="gsw-btn gsw-btn-dark" style={{ flexShrink: 0 }}>
               View All Work
             </Link>
           </div>
@@ -254,7 +347,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {featuredTestimonials.map((t) => (
                 <div key={t.id} className="gsw-testimonial">
-                  <div style={{ fontSize: 32, color: '#DC2626', marginBottom: 16, lineHeight: 1 }}>&ldquo;</div>
+                  <div style={{ fontSize: 32, color: '#A81D37', marginBottom: 16, lineHeight: 1 }}>&ldquo;</div>
                   <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>
                     {t.content}
                   </p>
@@ -264,7 +357,7 @@ const Home = () => {
                       <div style={{ fontSize: 12, color: '#6B7280' }}>{t.client_title}</div>
                     )}
                     {t.client_company && (
-                      <div style={{ fontSize: 12, color: '#DC2626', marginTop: 2 }}>{t.client_company}</div>
+                      <div style={{ fontSize: 12, color: '#A81D37', marginTop: 2 }}>{t.client_company}</div>
                     )}
                   </div>
                 </div>
@@ -313,7 +406,7 @@ const Home = () => {
               onClick={() => sessionStorage.setItem('selectedInquiryType', 'consultation')}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+                padding: '14px 36px', background: '#FFFFFF', color: '#A81D37',
                 fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
                 textTransform: 'uppercase', textDecoration: 'none',
               }}
@@ -321,7 +414,7 @@ const Home = () => {
               Get Free Consultation
             </Link>
             <Link
-              to="/portfolio"
+              to="/infrastructure"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '14px 36px', background: 'transparent', color: '#111827',
@@ -330,7 +423,7 @@ const Home = () => {
                 border: '1px solid rgba(255,255,255,0.4)',
               }}
             >
-              View Portfolio
+              View Infrastructure
             </Link>
           </div>
         </div>

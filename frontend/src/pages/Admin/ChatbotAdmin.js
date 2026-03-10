@@ -67,11 +67,11 @@ const ChatbotAdmin = () => {
     if (status === 'waiting_support') return { ...base, background: '#2a1a00', border: '1px solid #FFAA00', color: '#FFAA00' };
     if (status === 'in_support') return { ...base, background: '#003311', border: '1px solid #00AA44', color: '#00AA44' };
     if (status === 'closed') return { ...base, background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#6B7280' };
-    return { ...base, background: '#1F0606', border: '1px solid #DC2626', color: '#DC2626' };
+    return { ...base, background: '#1F0606', border: '1px solid #A81D37', color: '#A81D37' };
   };
 
   const getMsgSenderStyle = (type) => {
-    if (type === 'visitor') return { fontSize: '12px', fontWeight: 700, color: '#DC2626', marginBottom: '4px' };
+    if (type === 'visitor') return { fontSize: '12px', fontWeight: 700, color: '#A81D37', marginBottom: '4px' };
     if (type === 'admin') return { fontSize: '12px', fontWeight: 700, color: '#00AA44', marginBottom: '4px' };
     if (type === 'bot') return { fontSize: '12px', fontWeight: 700, color: '#AA44FF', marginBottom: '4px' };
     return { fontSize: '12px', fontWeight: 700, color: '#6B7280', marginBottom: '4px' };
@@ -79,7 +79,7 @@ const ChatbotAdmin = () => {
 
   const getMsgBubbleStyle = (type) => {
     const base = { padding: '12px 16px', fontSize: '14px', lineHeight: '1.5', whiteSpace: 'pre-wrap', wordBreak: 'break-word', borderLeft: '3px solid' };
-    if (type === 'visitor') return { ...base, background: '#F8F9FA', borderLeftColor: '#DC2626' };
+    if (type === 'visitor') return { ...base, background: '#F8F9FA', borderLeftColor: '#A81D37' };
     if (type === 'admin') return { ...base, background: '#F8F9FA', borderLeftColor: '#00AA44' };
     if (type === 'bot') return { ...base, background: '#F8F9FA', borderLeftColor: '#AA44FF' };
     return { ...base, background: '#F8F9FA', borderLeftColor: '#D1D5DB' };
@@ -120,7 +120,7 @@ const ChatbotAdmin = () => {
                   borderBottom: '1px solid #F3F4F6',
                   cursor: 'pointer',
                   background: selectedConversation?.id === conv.id ? '#F1F3F5' : 'transparent',
-                  borderLeft: selectedConversation?.id === conv.id ? '3px solid #DC2626' : '3px solid transparent',
+                  borderLeft: selectedConversation?.id === conv.id ? '3px solid #A81D37' : '3px solid transparent',
                 }}
               >
                 <div style={{ fontWeight: 600, fontSize: '13px', color: '#111827', marginBottom: '3px' }}>
@@ -129,7 +129,7 @@ const ChatbotAdmin = () => {
                 <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '3px' }}>{conv.visitor_email}</div>
                 <div style={{ fontSize: '11px', color: '#6B7280' }}>{new Date(conv.created_at).toLocaleString()}</div>
                 {conv.service_interest && (
-                  <div style={{ fontSize: '11px', color: '#DC2626', marginTop: '4px' }}>{conv.service_interest}</div>
+                  <div style={{ fontSize: '11px', color: '#A81D37', marginTop: '4px' }}>{conv.service_interest}</div>
                 )}
               </div>
             ))
@@ -150,7 +150,7 @@ const ChatbotAdmin = () => {
                   {selectedConversation.visitor_email}{selectedConversation.visitor_phone ? ` • ${selectedConversation.visitor_phone}` : ''}
                 </p>
                 {selectedConversation.service_interest && (
-                  <p style={{ margin: '3px 0 0 0', color: '#DC2626', fontSize: '12px' }}>
+                  <p style={{ margin: '3px 0 0 0', color: '#A81D37', fontSize: '12px' }}>
                     Interest: {selectedConversation.service_interest}
                   </p>
                 )}
@@ -188,7 +188,7 @@ const ChatbotAdmin = () => {
                   <button
                     type="submit"
                     disabled={sending || !replyMessage.trim()}
-                    style={{ padding: '10px 20px', background: sending || !replyMessage.trim() ? '#D1D5DB' : '#DC2626', color: sending || !replyMessage.trim() ? '#6B7280' : '#fff', border: 'none', cursor: sending || !replyMessage.trim() ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'Inter, sans-serif' }}
+                    style={{ padding: '10px 20px', background: sending || !replyMessage.trim() ? '#D1D5DB' : '#A81D37', color: sending || !replyMessage.trim() ? '#6B7280' : '#fff', border: 'none', cursor: sending || !replyMessage.trim() ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'Inter, sans-serif' }}
                   >
                     {sending ? 'Sending...' : 'Send'}
                   </button>

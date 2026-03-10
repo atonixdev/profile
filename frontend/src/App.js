@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Layout from './components/Layout/Layout';
 import FloatingChatbot from './components/FloatingChatbot';
 import Home from './pages/Home';
+import Software from './pages/Software';
 import About from './pages/About';
 import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
+import Infrastructure from './pages/Infrastructure';
 import ProjectDetail from './pages/ProjectDetail';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
@@ -40,10 +41,13 @@ function App() {
           <Route path="/" element={<Layout />}>
             {/* Public Routes */}
             <Route index element={<Home />} />
+            <Route path="software" element={<Software />} />
             <Route path="about" element={<About />} />
             <Route path="services" element={<Services />} />
-            <Route path="portfolio" element={<Portfolio />} />
-            <Route path="portfolio/:id" element={<ProjectDetail />} />
+            <Route path="infrastructure" element={<Infrastructure />} />
+            <Route path="portfolio" element={<Navigate to="/infrastructure" replace />} />
+            <Route path="infrastructure/:id" element={<ProjectDetail />} />
+            <Route path="portfolio/:id" element={<Navigate to="/infrastructure" replace />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="contact" element={<Contact />} />

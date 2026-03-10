@@ -33,17 +33,17 @@ export const tokens = {
 
   // ── Accent — Crimson ─────────────────────────────────────────────────────
   accent: {
-    primary: '#DC2626',               // Crimson — buttons, links, active states
-    deep:    '#991B1B',               // Hover / destructive
-    bg:      'rgba(220,38,38,0.08)',  // Subtle accent fill
-    border:  '#DC2626',
+    primary: '#A81D37',               // Crimson — buttons, links, active states
+    deep:    '#7A1528',               // Hover / destructive
+    bg:      'rgba(168,29,55,0.08)',  // Subtle accent fill
+    border:  '#A81D37',
   },
 
   // ── Status Semantics ─────────────────────────────────────────────────────
   status: {
     success: { bg: '#F0FDF4', border: '#16A34A', text: '#15803D' },
     warning: { bg: '#FFFBEB', border: '#D97706', text: '#B45309' },
-    error:   { bg: '#FEF2F2', border: '#DC2626', text: '#DC2626' },
+    error:   { bg: '#FEF2F2', border: '#A81D37', text: '#A81D37' },
     info:    { bg: '#EFF6FF', border: '#2563EB', text: '#1D4ED8' },
   },
 
@@ -123,7 +123,7 @@ export const tokens = {
 };
 
 // ── Convenience aliases ────────────────────────────────────────────────────
-export const CRIMSON  = tokens.accent.primary;   // '#DC2626'
+export const CRIMSON  = tokens.accent.primary;   // '#A81D37'
 export const GRAPHITE = tokens.brand.bg;          // '#111827'
 export const WHITE    = tokens.bg.page;           // '#FFFFFF'
 

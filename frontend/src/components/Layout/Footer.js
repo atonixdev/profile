@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AtonixDevLogo from '../AtonixDevLogo';
 
 // GS-WSF §6 — Institutional Footer — AWS/Oracle/IBM standard
 const Footer = () => {
@@ -9,35 +10,38 @@ const Footer = () => {
     {
       title: 'Company',
       links: [
-        { label: 'About', to: '/about' },
-        { label: 'Services', to: '/services' },
-        { label: 'Portfolio', to: '/portfolio' },
+        { label: 'About Us',       to: '/about' },
+        { label: 'Services',       to: '/services' },
+        { label: 'Infrastructure', to: '/infrastructure' },
+        { label: 'Contact',        to: '/contact' },
       ],
     },
     {
       title: 'Platform',
       links: [
-        { label: 'Blog', to: '/blog' },
-        { label: 'Community', to: '/community' },
-        { label: 'Resources', to: '/community/resources' },
+        { label: 'Software',   to: '/software' },
+        { label: 'Blog',       to: '/blog' },
+        { label: 'Community',  to: '/community' },
+        { label: 'Resources',  to: '/community/resources' },
       ],
     },
     {
       title: 'Solutions',
       links: [
-        { label: 'Software Engineering', to: '/services' },
-        { label: 'AI Automation', to: '/services' },
-        { label: 'FinTech Engineering', to: '/services' },
-        { label: 'Technical Architecture', to: '/services' },
+        { label: 'Software Engineering',  to: '/services' },
+        { label: 'AI Automation',         to: '/services' },
+        { label: 'FinTech Engineering',   to: '/services' },
+        { label: 'Technical Architecture',to: '/services' },
       ],
     },
     {
-      title: 'Support',
+      title: 'Legal',
       links: [
-        { label: 'Contact', to: '/contact' },
-        { label: 'FAQ', to: '/help' },
-        { label: 'Sign In', to: '/login' },
-        { label: 'Create Account', to: '/register' },
+        { label: 'Legal',          to: '/legal' },
+        { label: 'Compliance',     to: '/compliance' },
+        { label: 'Security',       to: '/security' },
+        { label: 'Privacy Policy', to: '/privacy' },
+        { label: 'Terms of Service',to: '/terms' },
       ],
     },
   ];
@@ -82,7 +86,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer style={{ background: '#FFFFFF', borderTop: '1px solid #E5E7EB' }}>
+    <footer style={{ background: '#353535', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
       {/* Main grid */}
       <div style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 24px 48px' }}>
         <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
@@ -90,26 +94,9 @@ const Footer = () => {
           {/* Brand column — spans 2 */}
           <div className="md:col-span-2">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-              <div
-                style={{
-                  width: 32, height: 32, background: '#DC2626',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontWeight: 800, fontSize: 12, color: '#111827', letterSpacing: '0.04em',
-                  flexShrink: 0,
-                }}
-              >
-                AC
-              </div>
-              <span
-                style={{
-                  color: '#111827', fontWeight: 700,
-                  fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase',
-                }}
-              >
-                AtonixDev
-              </span>
+              <AtonixDevLogo size={28} variant="dark" textColor="#FFFFFF" />
             </div>
-            <p style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.7, marginBottom: 24, maxWidth: 300 }}>
+            <p style={{ color: '#9CA3AF', fontSize: 13, lineHeight: 1.7, marginBottom: 24, maxWidth: 300 }}>
               Principal Architect &amp; Technical Innovator at AtonixCorp. Building sovereign infrastructure and intelligent systems for Africa and the global market.
             </p>
             {/* Social icons — monochrome, small */}
@@ -123,18 +110,18 @@ const Footer = () => {
                   aria-label={s.label}
                   style={{
                     width: 32, height: 32,
-                    background: '#F1F3F5', border: '1px solid #E5E7EB',
+                    background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#6B7280',
+                    color: '#9CA3AF',
                     transition: 'color 0.15s ease, border-color 0.15s ease',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#111827';
-                    e.currentTarget.style.borderColor = '#6B7280';
+                    e.currentTarget.style.color = '#FFFFFF';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#6B7280';
-                    e.currentTarget.style.borderColor = '#E5E7EB';
+                    e.currentTarget.style.color = '#9CA3AF';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
                   }}
                 >
                   {s.icon}
@@ -149,7 +136,7 @@ const Footer = () => {
               <div
                 style={{
                   fontSize: 11, fontWeight: 700, letterSpacing: '0.15em',
-                  textTransform: 'uppercase', color: '#111827',
+                  textTransform: 'uppercase', color: '#FFFFFF',
                   marginBottom: 20,
                 }}
               >
@@ -161,11 +148,11 @@ const Footer = () => {
                     <Link
                       to={link.to}
                       style={{
-                        color: '#6B7280', fontSize: 13,
+                      color: '#9CA3AF', fontSize: 13,
                         transition: 'color 0.15s ease', textDecoration: 'none',
                       }}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = '#111827'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
                     >
                       {link.label}
                     </Link>
@@ -180,20 +167,20 @@ const Footer = () => {
       {/* Legal bar */}
       <div
         style={{
-          borderTop: '1px solid #E5E7EB',
+        borderTop: '1px solid rgba(255,255,255,0.1)',
           maxWidth: 1440, margin: '0 auto', padding: '20px 24px',
           display: 'flex', flexWrap: 'wrap', gap: 16,
           justifyContent: 'space-between', alignItems: 'center',
         }}
       >
-        <p style={{ color: '#6B7280', fontSize: 12, margin: 0 }}>
+        <p style={{ color: '#9CA3AF', fontSize: 12, margin: 0 }}>
           &copy; {currentYear} AtonixDev — AtonixCorp. All rights reserved.
         </p>
         <div style={{ display: 'flex', gap: 24 }}>
-          {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((t) => (
+          {['Privacy Policy', 'Terms of Service', 'Compliance'].map((t) => (
             <span
               key={t}
-              style={{ color: '#6B7280', fontSize: 12, cursor: 'default' }}
+              style={{ color: '#9CA3AF', fontSize: 12, cursor: 'default' }}
             >
               {t}
             </span>

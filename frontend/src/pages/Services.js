@@ -117,7 +117,7 @@ const Services = () => {
             {services.map((service) => (
               <div key={service.id} className="gsw-card" style={{ padding: 0 }}>
                 <div style={{ padding: '32px 32px 24px' }}>
-                  <div style={{ width: 40, height: 2, background: '#DC2626', marginBottom: 24 }} />
+                  <div style={{ width: 40, height: 2, background: '#A81D37', marginBottom: 24 }} />
                   <h3 style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 12, lineHeight: 1.4 }}>
                     {service.title}
                   </h3>
@@ -127,7 +127,7 @@ const Services = () => {
                   <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {service.features.map((f) => (
                       <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151' }}>
-                        <span style={{ color: '#DC2626', flexShrink: 0, marginTop: 2, fontWeight: 700 }}>—</span>
+                        <span style={{ color: '#A81D37', flexShrink: 0, marginTop: 2, fontWeight: 700 }}>—</span>
                         {f}
                       </li>
                     ))}
@@ -167,7 +167,7 @@ const Services = () => {
               onClick={() => sessionStorage.setItem('selectedInquiryType', 'consultation')}
               style={{
                 display: 'inline-flex', alignItems: 'center',
-                padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+                padding: '14px 36px', background: '#FFFFFF', color: '#A81D37',
                 fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
                 textTransform: 'uppercase', textDecoration: 'none',
               }}

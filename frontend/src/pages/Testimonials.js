@@ -101,7 +101,7 @@ const Testimonials = () => {
               { value: '5★', label: 'Consistent Score' },
             ].map((stat, i) => (
               <div key={i} className="gsw-stat" style={{ borderRight: i < 3 ? '1px solid #E5E7EB' : 'none' }}>
-                <div style={{ fontSize: '36px', fontWeight: 700, color: '#DC2626', marginBottom: '4px' }}>{stat.value}</div>
+                <div style={{ fontSize: '36px', fontWeight: 700, color: '#A81D37', marginBottom: '4px' }}>{stat.value}</div>
                 <div style={{ fontSize: '13px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{stat.label}</div>
               </div>
             ))}
@@ -120,9 +120,9 @@ const Testimonials = () => {
                 onClick={() => setFilterRating(val)}
                 style={{
                   padding: '6px 16px',
-                  background: filterRating === val ? '#DC2626' : 'transparent',
+                  background: filterRating === val ? '#A81D37' : 'transparent',
                   color: filterRating === val ? '#111827' : '#aaa',
-                  border: `1px solid ${filterRating === val ? '#DC2626' : '#D1D5DB'}`,
+                  border: `1px solid ${filterRating === val ? '#A81D37' : '#D1D5DB'}`,
                   fontSize: '13px',
                   cursor: 'pointer',
                   fontFamily: 'inherit',
@@ -152,14 +152,14 @@ const Testimonials = () => {
                   {t.is_featured && (
                     <div style={{
                       position: 'absolute', top: 0, left: 0, right: 0,
-                      height: '2px', background: '#DC2626'
+                      height: '2px', background: '#A81D37'
                     }} />
                   )}
                   <div style={{ marginBottom: '24px' }}>
                     {t.is_featured && (
                       <span style={{
                         display: 'inline-block',
-                        background: '#DC2626',
+                        background: '#A81D37',
                         color: '#111827',
                         fontSize: '10px',
                         fontWeight: 700,
@@ -173,7 +173,7 @@ const Testimonials = () => {
                     )}
                     <div style={{ display: 'flex', gap: '2px', marginBottom: '20px' }}>
                       {Array.from({ length: 5 }, (_, i) => (
-                        <span key={i} style={{ color: i < t.rating ? '#DC2626' : '#D1D5DB', fontSize: '16px' }}>★</span>
+                        <span key={i} style={{ color: i < t.rating ? '#A81D37' : '#D1D5DB', fontSize: '16px' }}>★</span>
                       ))}
                     </div>
                     <p style={{ color: '#374151', lineHeight: 1.75, fontSize: '15px', fontStyle: 'italic' }}>
@@ -182,7 +182,7 @@ const Testimonials = () => {
                   </div>
                   <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: '24px' }}>
                     <div style={{ fontWeight: 700, color: '#111827', fontSize: '15px' }}>{t.client_name}</div>
-                    <div style={{ color: '#DC2626', fontSize: '13px', marginTop: '2px' }}>{t.client_title}</div>
+                    <div style={{ color: '#A81D37', fontSize: '13px', marginTop: '2px' }}>{t.client_title}</div>
                     <div style={{ color: '#6B7280', fontSize: '13px', marginTop: '2px' }}>{t.client_company}</div>
                     {t.project && (
                       <div style={{ marginTop: '12px' }}>

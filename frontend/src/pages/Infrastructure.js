@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// GS-WSF §5 — Portfolio page
-const Portfolio = () => {
+// GS-WSF §5 — Infrastructure page
+const Infrastructure = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -34,7 +34,7 @@ const Portfolio = () => {
         <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="gsw-eyebrow">Our Work</span>
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, marginBottom: 24 }}>
-            Portfolio
+            Infrastructure
           </h1>
           <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600 }}>
             Sovereign infrastructure projects powering African innovation and global digital independence.
@@ -55,8 +55,8 @@ const Portfolio = () => {
                   onClick={() => setSelectedCategory(cat)}
                   style={{
                     padding: '8px 20px',
-                    background: selectedCategory === cat ? '#DC2626' : 'transparent',
-                    border: `1px solid ${selectedCategory === cat ? '#DC2626' : '#D1D5DB'}`,
+                    background: selectedCategory === cat ? '#A81D37' : 'transparent',
+                    border: `1px solid ${selectedCategory === cat ? '#A81D37' : '#D1D5DB'}`,
                     color: selectedCategory === cat ? '#111827' : '#6B7280',
                     fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
                     textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
@@ -94,7 +94,7 @@ const Portfolio = () => {
                   className="gsw-card"
                   style={{
                     padding: 0,
-                    borderTop: project.is_featured ? '2px solid #DC2626' : '1px solid #E5E7EB',
+                    borderTop: project.is_featured ? '2px solid #A81D37' : '1px solid #E5E7EB',
                     display: 'flex', flexDirection: 'column',
                   }}
                 >
@@ -102,7 +102,7 @@ const Portfolio = () => {
                     <div style={{
                       padding: '6px 28px',
                       fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
-                      color: '#DC2626', borderBottom: '1px solid #F3F4F6',
+                      color: '#A81D37', borderBottom: '1px solid #F3F4F6',
                     }}>
                       Featured
                     </div>
@@ -125,7 +125,7 @@ const Portfolio = () => {
                   </div>
                   <div style={{ padding: '16px 28px', borderTop: '1px solid #F3F4F6' }}>
                     <Link
-                      to={`/portfolio/${project.id}`}
+                      to={`/infrastructure/${project.id}`}
                       className="gsw-btn gsw-btn-ghost"
                       style={{ width: '100%', justifyContent: 'center' }}
                     >
@@ -152,7 +152,7 @@ const Portfolio = () => {
             to="/contact"
             style={{
               display: 'inline-flex', alignItems: 'center',
-              padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+              padding: '14px 36px', background: '#FFFFFF', color: '#A81D37',
               fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
               textTransform: 'uppercase', textDecoration: 'none',
             }}
@@ -166,4 +166,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default Infrastructure;

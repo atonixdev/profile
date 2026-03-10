@@ -98,7 +98,7 @@ const AdminBlog = () => {
           <div style={{ display: 'flex', gap: '12px' }}>
             <button
               onClick={() => setShowForm(!showForm)}
-              style={{ background: '#DC2626', border: 'none', color: '#fff', padding: '8px 16px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}
+              style={{ background: '#A81D37', border: 'none', color: '#fff', padding: '8px 16px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}
             >
               {showForm ? 'Cancel' : 'Add New Post'}
             </button>
@@ -151,11 +151,11 @@ const AdminBlog = () => {
                 <input type="url" value={formData.featured_image} onChange={(e) => setFormData({...formData, featured_image: e.target.value})} style={inputStyle} />
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <input type="checkbox" id="published" checked={formData.published} onChange={(e) => setFormData({...formData, published: e.target.checked})} style={{ width: '16px', height: '16px', accentColor: '#DC2626' }} />
+                <input type="checkbox" id="published" checked={formData.published} onChange={(e) => setFormData({...formData, published: e.target.checked})} style={{ width: '16px', height: '16px', accentColor: '#A81D37' }} />
                 <label htmlFor="published" style={{ fontSize: '13px', color: '#374151', cursor: 'pointer' }}>Publish immediately</label>
               </div>
               <div style={{ display: 'flex', gap: '12px' }}>
-                <button type="submit" style={{ background: '#DC2626', border: 'none', color: '#fff', padding: '12px 28px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
+                <button type="submit" style={{ background: '#A81D37', border: 'none', color: '#fff', padding: '12px 28px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
                   {editingPost ? 'Update Post' : 'Create Post'}
                 </button>
                 <button type="button" onClick={resetForm} style={{ background: 'transparent', border: '1px solid #D1D5DB', color: '#6B7280', padding: '12px 28px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
@@ -191,7 +191,7 @@ const AdminBlog = () => {
                   </td>
                   <td style={tdStyle}>{formatDate(post.created_at)}</td>
                   <td style={{ ...tdStyle, textAlign: 'right' }}>
-                    <button onClick={() => handleEdit(post)} style={{ background: 'transparent', border: 'none', color: '#DC2626', cursor: 'pointer', fontSize: '13px', fontWeight: 600, marginRight: '16px', padding: 0, fontFamily: 'Inter, sans-serif' }}>Edit</button>
+                    <button onClick={() => handleEdit(post)} style={{ background: 'transparent', border: 'none', color: '#A81D37', cursor: 'pointer', fontSize: '13px', fontWeight: 600, marginRight: '16px', padding: 0, fontFamily: 'Inter, sans-serif' }}>Edit</button>
                     <button onClick={() => handleDelete(post.id)} style={{ background: 'transparent', border: 'none', color: '#CC0033', cursor: 'pointer', fontSize: '13px', fontWeight: 600, padding: 0, fontFamily: 'Inter, sans-serif' }}>Delete</button>
                   </td>
                 </tr>

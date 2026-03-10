@@ -43,7 +43,7 @@ const FAQ = () => {
       {/* Hero */}
       <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
-          <p style={{ fontSize: '12px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Support</p>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: '#A81D37', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Support</p>
           <h1 style={{ fontSize: '48px', fontWeight: 800, lineHeight: 1.1, color: '#111827', margin: '0 0 20px' }}>
             Frequently Asked Questions
           </h1>
@@ -62,9 +62,9 @@ const FAQ = () => {
               onClick={() => setSelectedCategory(cat)}
               style={{
                 ...btnBase,
-                background: selectedCategory === cat ? '#DC2626' : 'transparent',
+                background: selectedCategory === cat ? '#A81D37' : 'transparent',
                 color: selectedCategory === cat ? '#111827' : '#6B7280',
-                borderColor: selectedCategory === cat ? '#DC2626' : '#D1D5DB',
+                borderColor: selectedCategory === cat ? '#A81D37' : '#D1D5DB',
               }}
             >
               {cat}
@@ -100,14 +100,14 @@ const FAQ = () => {
                   }}
                 >
                   <div style={{ flex: 1 }}>
-                    <span style={{ fontSize: '11px', color: '#DC2626', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '11px', color: '#A81D37', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '6px' }}>
                       {faq.category}
                     </span>
                     <span style={{ fontSize: '16px', fontWeight: 700, color: isOpen ? '#111827' : '#ddd' }}>
                       {faq.question}
                     </span>
                   </div>
-                  <span style={{ fontSize: '24px', color: '#DC2626', fontWeight: 300, lineHeight: 1, flexShrink: 0, width: '28px', textAlign: 'center' }}>
+                  <span style={{ fontSize: '24px', color: '#A81D37', fontWeight: 300, lineHeight: 1, flexShrink: 0, width: '28px', textAlign: 'center' }}>
                     {isOpen ? '−' : '+'}
                   </span>
                 </button>
@@ -131,7 +131,7 @@ const FAQ = () => {
           </h2>
           <a
             href="/contact"
-            style={{ display: 'inline-block', background: '#DC2626', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}
+            style={{ display: 'inline-block', background: '#A81D37', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}
           >
             Contact Us
           </a>

@@ -77,7 +77,7 @@ const Dashboard = () => {
             <div key={item.label} style={{ background: '#F8F9FA', padding: '28px' }}>
               <p style={{ fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 12px' }}>{item.label}</p>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
-                <span style={{ fontSize: '36px', fontWeight: 800, color: '#DC2626' }}>{item.value}</span>
+                <span style={{ fontSize: '36px', fontWeight: 800, color: '#A81D37' }}>{item.value}</span>
                 {item.badge > 0 && (
                   <span style={{ background: '#CC0033', color: '#FFFFFF', padding: '2px 8px', fontSize: '11px', fontWeight: 700 }}>
                     {item.badge} new
@@ -94,7 +94,7 @@ const Dashboard = () => {
             <Link
               key={card.to}
               to={card.to}
-              style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', borderLeft: '3px solid #DC2626', padding: '24px', textDecoration: 'none', display: 'block' }}
+              style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', borderLeft: '3px solid #A81D37', padding: '24px', textDecoration: 'none', display: 'block' }}
             >
               <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#111827', margin: '0 0 8px' }}>{card.title}</h3>
               <p style={{ fontSize: '13px', color: '#6B7280', margin: 0 }}>{card.desc}</p>
@@ -102,7 +102,7 @@ const Dashboard = () => {
           ))}
           <Link
             to="/"
-            style={{ background: '#DC2626', border: '1px solid #DC2626', padding: '24px', textDecoration: 'none', display: 'block' }}
+            style={{ background: '#A81D37', border: '1px solid #A81D37', padding: '24px', textDecoration: 'none', display: 'block' }}
           >
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#111827', margin: '0 0 8px' }}>View Public Site</h3>
             <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', margin: 0 }}>See your live website</p>

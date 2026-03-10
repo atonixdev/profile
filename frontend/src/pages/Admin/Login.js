@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AtonixDevLogo from '../../components/AtonixDevLogo';
 import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
@@ -57,7 +58,9 @@ const Login = () => {
     <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Inter, sans-serif', padding: '24px' }}>
       <div style={{ width: '100%', maxWidth: '440px' }}>
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>AtonixCorp</p>
+          <div style={{ display: 'inline-flex', justifyContent: 'center', marginBottom: '16px' }}>
+            <AtonixDevLogo size={36} variant="dark" textColor="#111827" />
+          </div>
           <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#111827', margin: 0 }}>Admin Login</h1>
           <p style={{ color: '#6B7280', marginTop: '12px', fontSize: '14px' }}>Sign in to manage your content</p>
         </div>
@@ -116,7 +119,7 @@ const Login = () => {
               disabled={loading}
               style={{
                 width: '100%',
-                background: '#DC2626',
+                background: '#A81D37',
                 color: '#111827',
                 border: 'none',
                 padding: '15px',

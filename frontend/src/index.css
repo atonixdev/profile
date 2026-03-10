@@ -20,14 +20,14 @@
   --color-text:           #111827;   /* primary body text */
   --color-text-secondary: #6B7280;   /* subtext, labels */
   --color-text-muted:     #374151;   /* de-emphasised text */
-  --color-accent:         #DC2626;   /* Crimson — interactive accent */
-  --color-accent-deep:    #991B1B;   /* hover / destructive */
-  --color-accent-bg:      rgba(220,38,38,0.08); /* subtle accent fill */
+  --color-accent:         #A81D37;   /* Crimson — interactive accent */
+  --color-accent-deep:    #7A1528;   /* hover / destructive */
+  --color-accent-bg:      rgba(168,29,55,0.08); /* subtle accent fill */
 
   /* ── Brand (logo only — never use in UI) ────────────── */
   --brand-black:  #111827;
   --brand-dark:   #F8F9FA;
-  --brand-accent: #DC2626;
+  --brand-accent: #A81D37;
   --brand-card:   #F1F3F5;
   --brand-border: #E5E7EB;
   --brand-muted:  #D1D5DB;
@@ -120,6 +120,16 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   color: #111827;
   margin: 0;
+  text-align: center;
+}
+
+/* Section intro block — centers eyebrow + heading + subtext */
+.gsw-section-header {
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 64px;
 }
 
 p { line-height: 1.5; margin: 0; }
@@ -135,7 +145,7 @@ img, video, canvas, iframe {
 ::-webkit-scrollbar           { width: 5px; }
 ::-webkit-scrollbar-track     { background: #F8F9FA; }
 ::-webkit-scrollbar-thumb     { background: #D1D5DB; }
-::-webkit-scrollbar-thumb:hover { background: #DC2626; }
+::-webkit-scrollbar-thumb:hover { background: #A81D37; }
 
 /* ── GS-WSF Nav Link ──────────────────────────────────────── */
 .nav-link {
@@ -152,8 +162,8 @@ img, video, canvas, iframe {
 }
 .nav-link:hover,
 .nav-link.nav-active {
-  color: #DC2626;
-  border-bottom-color: #DC2626;
+  color: #A81D37;
+  border-bottom-color: #A81D37;
 }
 
 /* ── GS-WSF Buttons ───────────────────────────────────────── */
@@ -176,11 +186,11 @@ img, video, canvas, iframe {
   outline: none;
 }
 .gsw-btn-accent {
-  background-color: #DC2626;
+  background-color: #A81D37;
   color: #111827;
-  border: 1px solid #DC2626;
+  border: 1px solid #A81D37;
 }
-.gsw-btn-accent:hover { background-color: #991B1B; border-color: #991B1B; }
+.gsw-btn-accent:hover { background-color: #7A1528; border-color: #7A1528; }
 
 .gsw-btn-outline {
   background-color: transparent;
@@ -191,17 +201,17 @@ img, video, canvas, iframe {
 
 .gsw-btn-ghost {
   background-color: transparent;
-  color: #DC2626;
-  border: 1px solid #DC2626;
+  color: #A81D37;
+  border: 1px solid #A81D37;
 }
-.gsw-btn-ghost:hover { background-color: #DC2626; color: #FFFFFF; }
+.gsw-btn-ghost:hover { background-color: #A81D37; color: #FFFFFF; }
 
 .gsw-btn-dark {
   background-color: #F1F3F5;
   color: #111827;
   border: 1px solid #D1D5DB;
 }
-.gsw-btn-dark:hover { border-color: #DC2626; color: #DC2626; }
+.gsw-btn-dark:hover { border-color: #A81D37; color: #A81D37; }
 
 /* ── GS-WSF Section ───────────────────────────────────────── */
 .gsw-section     { padding: 120px 0; }
@@ -221,7 +231,7 @@ img, video, canvas, iframe {
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #DC2626;
+  color: #A81D37;
   margin-bottom: 16px;
 }
 
@@ -231,7 +241,7 @@ img, video, canvas, iframe {
   border: 1px solid #E5E7EB;
   transition: border-color 0.2s ease;
 }
-.gsw-card:hover { border-color: #DC2626; }
+.gsw-card:hover { border-color: #A81D37; }
 
 .gsw-card-body { padding: 32px; }
 
@@ -252,7 +262,7 @@ img, video, canvas, iframe {
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 3px;
-  background: #DC2626;
+  background: #A81D37;
 }
 
 /* ── Forms ────────────────────────────────────────────────── */
@@ -268,7 +278,7 @@ img, video, canvas, iframe {
   transition: border-color 0.15s ease;
   outline: none;
 }
-.gsw-input:focus { border-color: #DC2626; }
+.gsw-input:focus { border-color: #A81D37; }
 .gsw-input::placeholder { color: #6B7280; }
 
 .gsw-select {
@@ -284,7 +294,7 @@ img, video, canvas, iframe {
   cursor: pointer;
   transition: border-color 0.15s ease;
 }
-.gsw-select:focus { border-color: #DC2626; }
+.gsw-select:focus { border-color: #A81D37; }
 .gsw-select option { background: #F1F3F5; color: #111827; }
 
 .gsw-label {
@@ -301,19 +311,19 @@ img, video, canvas, iframe {
 code, pre, kbd, samp {
   font-family: var(--font-mono);
   background: #F1F3F5;
-  color: #DC2626;
+  color: #A81D37;
   padding: 2px 8px;
   font-size: 0.875em;
 }
 
 /* ── Stat Block ───────────────────────────────────────────── */
-.gsw-stat { border-left: 2px solid #DC2626; padding-left: 16px; }
+.gsw-stat { border-left: 2px solid #A81D37; padding-left: 16px; }
 
 /* ── Testimonial Block ────────────────────────────────────── */
 .gsw-testimonial {
   background: #F8F9FA;
   border: 1px solid #E5E7EB;
-  border-top: 2px solid #DC2626;
+  border-top: 2px solid #A81D37;
   padding: 32px;
 }
 
@@ -330,13 +340,13 @@ code, pre, kbd, samp {
   text-transform: uppercase;
 }
 .gsw-tag-accent {
-  background: rgba(220,38,38,0.1);
-  border-color: rgba(220,38,38,0.35);
-  color: #DC2626;
+  background: rgba(168,29,55,0.1);
+  border-color: rgba(168,29,55,0.35);
+  color: #A81D37;
 }
 
 /* ── CTA Bar ──────────────────────────────────────────────── */
-.gsw-cta-bar { background: #DC2626; padding: 64px 0; }
+.gsw-cta-bar { background: #A81D37; padding: 64px 0; }
 
 /* ── Table ────────────────────────────────────────────────── */
 .gsw-table { width: 100%; border-collapse: collapse; }
@@ -387,7 +397,7 @@ code, pre, kbd, samp {
 
 /* ── Utility ──────────────────────────────────────────────── */
 .text-muted  { color: #6B7280; }
-.text-accent { color: #DC2626; }
+.text-accent { color: #A81D37; }
 
 /* ── Mobile ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -399,7 +409,7 @@ code, pre, kbd, samp {
 /* ── Legacy / backward-compat for classes still used ─────── */
 .animate-fade-in-up  { animation: fadeInUp 0.6s ease forwards; }
 .animate-slide-in-up { animation: fadeInUp 0.6s ease forwards; }
-.gradient-text       { color: #DC2626; }
+.gradient-text       { color: #A81D37; }
 .card-hover          { transition: border-color 0.2s ease; }
 .section-padding     { padding-left: 1.5rem; padding-right: 1.5rem; }
 .break-anywhere      { overflow-wrap: anywhere; word-break: break-word; }

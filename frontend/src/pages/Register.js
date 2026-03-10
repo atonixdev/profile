@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AtonixDevLogo from '../components/AtonixDevLogo';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import api, { setCsrfToken } from '../services/api';
 import SearchableCountryDropdown from '../components/SearchableCountryDropdown';
@@ -107,10 +108,7 @@ const Register = () => {
         {/* Logo / Brand */}
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '32px', height: '32px', background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: '#111827', fontWeight: 900, fontSize: '14px' }}>AC</span>
-            </div>
-            <span style={{ color: '#111827', fontWeight: 700, fontSize: '16px', letterSpacing: '-0.01em' }}>AtonixDev</span>
+            <AtonixDevLogo size={32} variant="dark" textColor="#111827" />
           </div>
           <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', marginBottom: '8px', letterSpacing: '-0.02em' }}>
             Join Our Community
@@ -128,7 +126,7 @@ const Register = () => {
           )}
 
           {success && (
-            <div style={{ background: '#001a33', border: '1px solid #DC2626', color: '#66aaff', padding: '12px 16px', marginBottom: '24px', fontSize: '13px' }}>
+            <div style={{ background: '#001a33', border: '1px solid #A81D37', color: '#66aaff', padding: '12px 16px', marginBottom: '24px', fontSize: '13px' }}>
               {success}
             </div>
           )}
@@ -176,7 +174,7 @@ const Register = () => {
                   onClick={() => setShowPassword(v => !v)}
                   style={{
                     position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
-                    background: 'none', border: 'none', color: '#DC2626', fontSize: '12px',
+                    background: 'none', border: 'none', color: '#A81D37', fontSize: '12px',
                     fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.05em',
                   }}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
@@ -201,7 +199,7 @@ const Register = () => {
                   onClick={() => setShowPasswordConfirm(v => !v)}
                   style={{
                     position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
-                    background: 'none', border: 'none', color: '#DC2626', fontSize: '12px',
+                    background: 'none', border: 'none', color: '#A81D37', fontSize: '12px',
                     fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.05em',
                   }}
                   aria-label={showPasswordConfirm ? 'Hide password confirmation' : 'Show password confirmation'}
@@ -215,7 +213,7 @@ const Register = () => {
               type="submit"
               disabled={loading}
               style={{
-                padding: '14px 24px', background: loading ? '#E5E7EB' : '#DC2626',
+                padding: '14px 24px', background: loading ? '#E5E7EB' : '#A81D37',
                 color: '#111827', border: 'none', fontSize: '13px',
                 fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
                 cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
@@ -229,7 +227,7 @@ const Register = () => {
           <div style={{ borderTop: '1px solid #E5E7EB', marginTop: '28px', paddingTop: '24px', textAlign: 'center' }}>
             <p style={{ color: '#6B7280', fontSize: '13px' }}>
               Already have an account?{' '}
-              <Link to="/login" style={{ color: '#DC2626', fontWeight: 700, textDecoration: 'none' }}>
+              <Link to="/login" style={{ color: '#A81D37', fontWeight: 700, textDecoration: 'none' }}>
                 Sign In
               </Link>
             </p>

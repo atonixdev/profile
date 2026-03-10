@@ -2,15 +2,19 @@ import React from 'react';
 import AtonixDevLogoIcon from './AtonixDevLogoIcon';
 
 /**
- * AtonixDev full brand logo — icon emblem + wordmark.
+ * AtonixDev full brand logo — icon tile + wordmark.
  *
- * @param {{ size?: number, variant?: 'light' | 'dark' }} props
- *   size    — icon height in px; wordmark scales proportionally (default 32)
- *   variant — 'dark'  → dark tile icon, white wordmark (for dark surfaces)
- *             'light' → white tile icon, dark wordmark (for light surfaces)
+ * Wordmark spec: Inter Bold, letter-spacing 0, mixed-case "AtonixDev"
+ *
+ * @param {{ size?: number, variant?: 'dark' | 'light', textColor?: string }} props
+ *   size      — icon height in px; wordmark scales proportionally (default 32)
+ *   variant   — 'dark' → dark tile + white wordmark | 'light' → light tile + dark wordmark
+ *   textColor — explicit override for wordmark color
  */
 function AtonixDevLogo({ size = 32, variant = 'dark', textColor: textColorProp }) {
-  const textColor = textColorProp !== undefined ? textColorProp : (variant === 'light' ? '#111827' : '#FFFFFF');
+  const textColor = textColorProp !== undefined
+    ? textColorProp
+    : (variant === 'light' ? '#111827' : '#FFFFFF');
 
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
@@ -19,9 +23,9 @@ function AtonixDevLogo({ size = 32, variant = 'dark', textColor: textColorProp }
         style={{
           fontFamily: 'Inter, system-ui, sans-serif',
           fontWeight: 700,
-          fontSize: Math.round(size * 0.6),
+          fontSize: Math.round(size * 0.56),
           color: textColor,
-          letterSpacing: '0.04em',
+          letterSpacing: 0,
           lineHeight: 1,
           userSelect: 'none',
         }}

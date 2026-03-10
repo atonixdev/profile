@@ -183,7 +183,7 @@ const Contact = () => {
               </h2>
 
               {success && (
-                <div style={{ background: '#001a33', border: '1px solid #DC2626', color: '#66aaff', padding: '14px 18px', marginBottom: '24px', fontSize: '14px' }}>
+                <div style={{ background: '#001a33', border: '1px solid #A81D37', color: '#66aaff', padding: '14px 18px', marginBottom: '24px', fontSize: '14px' }}>
                   <strong>Message sent.</strong> I'll respond within 24 hours.
                 </div>
               )}
@@ -293,7 +293,7 @@ const Contact = () => {
                   disabled={loading}
                   style={{
                     width: '100%', padding: '14px 24px',
-                    background: loading ? '#D1D5DB' : '#DC2626',
+                    background: loading ? '#D1D5DB' : '#A81D37',
                     color: '#111827', border: 'none',
                     fontSize: '14px', fontWeight: 700,
                     letterSpacing: '0.05em', textTransform: 'uppercase',
@@ -322,7 +322,7 @@ const Contact = () => {
                     <div key={i}>
                       <div style={{ fontSize: '11px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>{item.label}</div>
                       {item.href
-                        ? <a href={item.href} style={{ color: '#DC2626', fontSize: '14px', textDecoration: 'none' }}>{item.value}</a>
+                        ? <a href={item.href} style={{ color: '#A81D37', fontSize: '14px', textDecoration: 'none' }}>{item.value}</a>
                         : <div style={{ color: '#374151', fontSize: '14px' }}>{item.value}</div>
                       }
                     </div>
@@ -353,7 +353,7 @@ const Contact = () => {
                         padding: '10px 14px', border: '1px solid #E5E7EB',
                         transition: 'all 0.15s',
                       }}
-                      onMouseEnter={e => { e.currentTarget.style.borderColor = '#DC2626'; e.currentTarget.style.color = '#111827'; }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = '#A81D37'; e.currentTarget.style.color = '#111827'; }}
                       onMouseLeave={e => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.color = '#aaa'; }}
                     >
                       <span>{link.label}</span>

@@ -34,8 +34,8 @@ const ProjectDetail = () => {
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', fontFamily: 'Inter, sans-serif' }}>
           <p style={{ color: '#6B7280', marginBottom: '24px' }}>Project not found.</p>
-          <Link to="/portfolio" style={{ color: '#DC2626', textDecoration: 'none', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            &larr; Back to Portfolio
+          <Link to="/infrastructure" style={{ color: '#A81D37', textDecoration: 'none', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            &larr; Back to Infrastructure
           </Link>
         </div>
       </div>
@@ -48,14 +48,14 @@ const ProjectDetail = () => {
       <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
           <Link
-            to="/portfolio"
-            style={{ color: '#DC2626', textDecoration: 'none', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px' }}
+            to="/infrastructure"
+            style={{ color: '#A81D37', textDecoration: 'none', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px' }}
           >
-            &larr; Back to Portfolio
+            &larr; Back to Infrastructure
           </Link>
           {project.category && (
             <div style={{ marginBottom: '16px' }}>
-              <span style={{ background: '#DC2626', color: '#fff', padding: '4px 12px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              <span style={{ background: '#A81D37', color: '#fff', padding: '4px 12px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 {project.category}
               </span>
             </div>
@@ -84,7 +84,7 @@ const ProjectDetail = () => {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '48px', padding: '48px 0 80px', alignItems: 'start' }}>
           <div>
-            <h2 style={{ fontSize: '14px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>
+            <h2 style={{ fontSize: '14px', fontWeight: 700, color: '#A81D37', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>
               Project Overview
             </h2>
             <div
@@ -119,7 +119,7 @@ const ProjectDetail = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {project.live_url && (
                     <a href={project.live_url} target="_blank" rel="noopener noreferrer"
-                      style={{ display: 'block', background: '#DC2626', color: '#fff', padding: '12px 20px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none', textAlign: 'center' }}>
+                      style={{ display: 'block', background: '#A81D37', color: '#fff', padding: '12px 20px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none', textAlign: 'center' }}>
                       Live Demo
                     </a>
                   )}
@@ -137,10 +137,10 @@ const ProjectDetail = () => {
       </div>
 
       <div style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB', padding: '64px 24px', textAlign: 'center' }}>
-        <p style={{ color: '#6B7280', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>Portfolio</p>
+        <p style={{ color: '#6B7280', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>Infrastructure</p>
         <h2 style={{ fontSize: '28px', fontWeight: 800, color: '#111827', margin: '0 0 32px' }}>Explore More Projects</h2>
-        <Link to="/portfolio"
-          style={{ display: 'inline-block', background: '#DC2626', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>
+        <Link to="/infrastructure"
+          style={{ display: 'inline-block', background: '#A81D37', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>
           View All Projects
         </Link>
       </div>

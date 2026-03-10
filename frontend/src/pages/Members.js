@@ -40,7 +40,7 @@ const Members = () => {
     <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
       <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
-          <p style={{ fontSize: '12px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: '#A81D37', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
           <h1 style={{ fontSize: '48px', fontWeight: 800, color: '#111827', margin: '0 0 16px' }}>Members</h1>
           <p style={{ fontSize: '18px', color: '#6B7280' }}>Connect with contributors and engineers in our community.</p>
         </div>
@@ -67,7 +67,7 @@ const Members = () => {
             {members.map((m) => (
               <div key={m.id} style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '24px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-                  <div style={{ width: '48px', height: '48px', background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: 800, color: '#fff', flexShrink: 0 }}>
+                  <div style={{ width: '48px', height: '48px', background: '#A81D37', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: 800, color: '#fff', flexShrink: 0 }}>
                     {(m.user && m.user.username ? m.user.username : m.full_name || 'U')[0].toUpperCase()}
                   </div>
                   <div>
@@ -84,7 +84,7 @@ const Members = () => {
                 {m.bio && <p style={{ fontSize: '13px', color: '#6B7280', lineHeight: 1.6, marginBottom: '16px' }}>{m.bio}</p>}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '1px solid #E5E7EB' }}>
                   <span style={{ fontSize: '11px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Contribution Points</span>
-                  <span style={{ fontSize: '18px', fontWeight: 800, color: '#DC2626' }}>{m.contribution_points || 0}</span>
+                  <span style={{ fontSize: '18px', fontWeight: 800, color: '#A81D37' }}>{m.contribution_points || 0}</span>
                 </div>
               </div>
             ))}

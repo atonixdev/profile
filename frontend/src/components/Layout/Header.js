@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AtonixDevLogo from '../AtonixDevLogo';
 
-// GS-WSF §3 — Global Header — identical on every page
+// GS-WSF §3 — Global Header — two-tier: brand/auth bar + nav bar
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -12,11 +12,9 @@ const Header = () => {
   const { user, logout } = useAuth();
 
   const navigation = [
-    { name: 'Home',         path: '/' },
-    { name: 'About',        path: '/about' },
-    { name: 'Services',     path: '/services' },
-    { name: 'Portfolio',    path: '/portfolio' },
-    { name: 'Blog',         path: '/blog' },
+    { name: 'Software',       path: '/software' },
+    { name: 'Services',       path: '/services' },
+    { name: 'Infrastructure', path: '/infrastructure' },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -29,147 +27,177 @@ const Header = () => {
   };
 
   return (
-    <header
-      style={{
-        height: '80px',
-        background: '#FFFFFF',
-        borderBottom: '1px solid #E5E7EB',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
-      }}
-    >
-      <nav
+    <header style={{ position: 'sticky', top: 0, zIndex: 100, width: '100%' }}>
+
+      {/* ══ TOP BAR — Logo + Auth ══════════════════════════════ */}
+      <div
         style={{
-          maxWidth: '1440px',
-          margin: '0 auto',
-          padding: '0 24px',
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '100%',
+          height: 52,
+          background: '#000000',
+          borderBottom: '1px solid rgba(255,255,255,0.12)',
         }}
       >
-        {/* ── Logo ─────────────────────────────────────────── */}
-        <Link
-          to="/"
-          style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', flexShrink: 0 }}
+        <div
+          style={{
+            maxWidth: 1440, margin: '0 auto', padding: '0 24px',
+            height: '100%', display: 'flex', alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
         >
-          <AtonixDevLogo size={32} variant="dark" textColor="#111827" />
-        </Link>
+          {/* Logo + wordmark */}
+          <Link
+            to="/"
+            style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', flexShrink: 0 }}
+          >
+            <AtonixDevLogo size={30} variant="dark" textColor="#FFFFFF" />
+          </Link>
 
-        {/* ── Desktop Nav ───────────────────────────────────── */}
-        <div className="hidden md:flex items-center" style={{ gap: 28 }}>
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className={`nav-link${isActive(item.path) ? ' nav-active' : ''}`}
-            >
-              {item.name}
-            </Link>
-          ))}
-          {user && (
-            <Link
-              to="/community"
-              className={`nav-link${isActive('/community') ? ' nav-active' : ''}`}
-            >
-              Community
-            </Link>
-          )}
-        </div>
-
-        {/* ── Desktop Auth ──────────────────────────────────── */}
-        <div className="hidden md:flex items-center" style={{ gap: 16 }}>
-          {user ? (
-            <div style={{ position: 'relative' }}>
-              <button
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                style={{
-                  background: '#F1F3F5',
-                  border: '1px solid #D1D5DB',
-                  color: '#111827',
-                  padding: '8px 20px',
-                  fontFamily: 'inherit', fontWeight: 700,
-                  fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
-                  cursor: 'pointer',
-                }}
-              >
-                {user.user?.first_name || user.username || 'Account'}
-              </button>
-              {isUserMenuOpen && (
-                <div
+          {/* Desktop auth */}
+          <div className="hidden md:flex items-center" style={{ gap: 12 }}>
+            {user ? (
+              <div style={{ position: 'relative' }}>
+                <button
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   style={{
-                    position: 'absolute', right: 0, top: 'calc(100% + 4px)',
-                    background: '#F1F3F5', border: '1px solid #E5E7EB',
-                    minWidth: 220, zIndex: 200,
+                    background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.25)',
+                    color: '#FFFFFF', padding: '6px 18px',
+                    fontFamily: 'inherit', fontWeight: 700,
+                    fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase',
+                    cursor: 'pointer',
                   }}
                 >
+                  {user.user?.first_name || user.username || 'Account'}
+                </button>
+                {isUserMenuOpen && (
                   <div
                     style={{
-                      padding: '12px 16px', borderBottom: '1px solid #E5E7EB',
-                      fontSize: 12, color: '#6B7280',
+                      position: 'absolute', right: 0, top: 'calc(100% + 4px)',
+                      background: '#2C2C2C', border: '1px solid rgba(255,255,255,0.1)',
+                      minWidth: 220, zIndex: 300,
                     }}
                   >
-                    {user.user?.email || user.email || ''}
+                    <div
+                      style={{
+                        padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)',
+                        fontSize: 12, color: '#9CA3AF',
+                      }}
+                    >
+                      {user.user?.email || user.email || ''}
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      style={{
+                        display: 'block', width: '100%', textAlign: 'left',
+                        padding: '12px 16px', background: 'none', border: 'none',
+                        color: '#FFFFFF', fontFamily: 'inherit', fontWeight: 600,
+                        fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
+                        cursor: 'pointer',
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
+                    >
+                      Sign Out
+                    </button>
                   </div>
-                  <button
-                    onClick={handleLogout}
-                    style={{
-                      display: 'block', width: '100%', textAlign: 'left',
-                      padding: '12px 16px', background: 'none', border: 'none',
-                      color: '#111827', fontFamily: 'inherit', fontWeight: 600,
-                      fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
-                      cursor: 'pointer',
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = '#F3F4F6'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <>
-              <Link to="/login" className="nav-link">Sign In</Link>
-              <Link
-                to="/register"
-                className="gsw-btn gsw-btn-accent"
-                style={{ padding: '10px 20px', fontSize: 12 }}
-              >
-                Console
-              </Link>
-            </>
-          )}
+                )}
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  style={{
+                    color: '#FFFFFF', fontSize: 11, fontWeight: 700,
+                    letterSpacing: '0.08em', textTransform: 'uppercase',
+                    textDecoration: 'none', padding: '6px 0',
+                    borderBottom: '1px solid transparent',
+                    transition: 'border-color 0.15s',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderBottomColor = '#A81D37'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; }}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/register"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center',
+                    padding: '6px 18px', background: '#A81D37',
+                    color: '#FFFFFF', fontSize: 11, fontWeight: 700,
+                    letterSpacing: '0.08em', textTransform: 'uppercase',
+                    textDecoration: 'none', transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#7A1528'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = '#A81D37'; }}
+                >
+                  Console
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="flex md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              padding: 8, flexDirection: 'column', gap: 5,
+            }}
+            aria-label="Toggle navigation"
+          >
+            <span style={{ display: 'block', width: 22, height: 2, background: '#FFFFFF', transition: 'opacity 0.15s' }} />
+            <span style={{ display: 'block', width: 22, height: 2, background: '#FFFFFF', opacity: isMenuOpen ? 0 : 1, transition: 'opacity 0.15s' }} />
+            <span style={{ display: 'block', width: 22, height: 2, background: '#FFFFFF', transition: 'opacity 0.15s' }} />
+          </button>
         </div>
+      </div>
 
-        {/* ── Mobile Hamburger ──────────────────────────────── */}
-        <button
-          className="flex md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+      {/* ══ NAV BAR — Page links ═══════════════════════════════ */}
+      <div
+        style={{
+          height: 48,
+          background: 'transparent',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+        }}
+      >
+        <nav
           style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            padding: 8, flexDirection: 'column', gap: 5,
+            maxWidth: 1440, margin: '0 auto', padding: '0 24px',
+            height: '100%', display: 'flex', alignItems: 'center',
+            justifyContent: 'center',
           }}
-          aria-label="Toggle navigation"
         >
-          <span style={{ display: 'block', width: 22, height: 2, background: '#111827', transition: 'opacity 0.15s' }} />
-          <span style={{ display: 'block', width: 22, height: 2, background: '#111827', opacity: isMenuOpen ? 0 : 1, transition: 'opacity 0.15s' }} />
-          <span style={{ display: 'block', width: 22, height: 2, background: '#111827', transition: 'opacity 0.15s' }} />
-        </button>
-      </nav>
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center" style={{ gap: 28 }}>
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`nav-link${isActive(item.path) ? ' nav-active' : ''}`}
+              >
+                {item.name}
+              </Link>
+            ))}
+            {user && (
+              <Link
+                to="/community"
+                className={`nav-link${isActive('/community') ? ' nav-active' : ''}`}
+              >
+                Community
+              </Link>
+            )}
+          </div>
+        </nav>
+      </div>
 
-      {/* ── Mobile Drawer ─────────────────────────────────── */}
+      {/* ══ Mobile Drawer ══════════════════════════════════════ */}
       {isMenuOpen && (
         <div
           style={{
-            position: 'absolute', top: '80px', left: 0, right: 0,
-            background: '#FFFFFF', borderBottom: '1px solid #E5E7EB', zIndex: 99,
+            position: 'absolute', top: '100px', left: 0, right: 0,
+            background: '#2C2C2C', borderBottom: '1px solid rgba(255,255,255,0.1)',
+            zIndex: 99,
           }}
         >
           <div style={{ maxWidth: 1440, margin: '0 auto', padding: '8px 24px 24px' }}>
@@ -180,8 +208,8 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
                 style={{
                   display: 'block', padding: '14px 0',
-                  borderBottom: '1px solid #F1F3F5',
-                  color: isActive(item.path) ? '#DC2626' : '#FFFFFF',
+                  borderBottom: '1px solid rgba(255,255,255,0.08)',
+                  color: isActive(item.path) ? '#A81D37' : '#FFFFFF',
                   fontSize: 12, fontWeight: 700,
                   letterSpacing: '0.1em', textTransform: 'uppercase',
                   textDecoration: 'none',
@@ -196,8 +224,8 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
                 style={{
                   display: 'block', padding: '14px 0',
-                  borderBottom: '1px solid #F1F3F5',
-                  color: isActive('/community') ? '#DC2626' : '#FFFFFF',
+                  borderBottom: '1px solid rgba(255,255,255,0.08)',
+                  color: isActive('/community') ? '#A81D37' : '#FFFFFF',
                   fontSize: 12, fontWeight: 700,
                   letterSpacing: '0.1em', textTransform: 'uppercase',
                   textDecoration: 'none',
@@ -211,8 +239,8 @@ const Header = () => {
                 <button
                   onClick={handleLogout}
                   style={{
-                    padding: '10px 24px', background: '#F1F3F5',
-                    border: '1px solid #D1D5DB', color: '#111827',
+                    padding: '10px 24px', background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF',
                     fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
                     textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
                   }}
@@ -226,8 +254,8 @@ const Header = () => {
                     onClick={() => setIsMenuOpen(false)}
                     style={{
                       display: 'inline-flex', alignItems: 'center',
-                      padding: '10px 24px', border: '1px solid #D1D5DB',
-                      color: '#111827', fontSize: 12, fontWeight: 700,
+                      padding: '10px 24px', border: '1px solid rgba(255,255,255,0.3)',
+                      color: '#FFFFFF', fontSize: 12, fontWeight: 700,
                       letterSpacing: '0.1em', textTransform: 'uppercase',
                       textDecoration: 'none',
                     }}
@@ -239,8 +267,8 @@ const Header = () => {
                     onClick={() => setIsMenuOpen(false)}
                     style={{
                       display: 'inline-flex', alignItems: 'center',
-                      padding: '10px 24px', background: '#DC2626',
-                      color: '#111827', fontSize: 12, fontWeight: 700,
+                      padding: '10px 24px', background: '#A81D37',
+                      color: '#FFFFFF', fontSize: 12, fontWeight: 700,
                       letterSpacing: '0.1em', textTransform: 'uppercase',
                       textDecoration: 'none',
                     }}

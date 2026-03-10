@@ -32,7 +32,7 @@ const AdminInquiries = () => {
 
   const getStatusStyle = (status) => {
     const styles = {
-      new: { background: '#1F0606', border: '1px solid #DC2626', color: '#DC2626' },
+      new: { background: '#1F0606', border: '1px solid #A81D37', color: '#A81D37' },
       in_progress: { background: '#332200', border: '1px solid #FFAA00', color: '#FFAA00' },
       completed: { background: '#003311', border: '1px solid #00AA44', color: '#00AA44' },
       archived: { background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#6B7280' },

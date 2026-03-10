@@ -65,8 +65,8 @@ const Blog = () => {
                   onClick={() => setSelectedCategory(cat.value)}
                   style={{
                     padding: '8px 20px',
-                    background: selectedCategory === cat.value ? '#DC2626' : 'transparent',
-                    border: `1px solid ${selectedCategory === cat.value ? '#DC2626' : '#D1D5DB'}`,
+                    background: selectedCategory === cat.value ? '#A81D37' : 'transparent',
+                    border: `1px solid ${selectedCategory === cat.value ? '#A81D37' : '#D1D5DB'}`,
                     color: selectedCategory === cat.value ? '#111827' : '#6B7280',
                     fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
                     textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
@@ -118,7 +118,7 @@ const Blog = () => {
                       <Link
                         to={`/blog/${post.slug}`}
                         style={{ fontSize: 22, fontWeight: 700, color: '#111827', lineHeight: 1.3, textDecoration: 'none', transition: 'color 0.15s ease' }}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = '#DC2626'; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.color = '#111827'; }}
                       >
                         {post.title}
@@ -163,7 +163,7 @@ const Blog = () => {
             to="/contact"
             style={{
               display: 'inline-flex', alignItems: 'center',
-              padding: '14px 36px', background: '#FFFFFF', color: '#DC2626',
+              padding: '14px 36px', background: '#FFFFFF', color: '#A81D37',
               fontWeight: 800, fontSize: 12, letterSpacing: '0.1em',
               textTransform: 'uppercase', textDecoration: 'none',
             }}

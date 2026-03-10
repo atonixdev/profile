@@ -20,7 +20,7 @@ const difficultyLevels = [
 ];
 
 const typeColor = (type) => {
-  const m = { tutorial: '#DC2626', guide: '#00AA44', template: '#8833FF', tool: '#FF6600', library: '#CC0033', documentation: '#00AACC' };
+  const m = { tutorial: '#A81D37', guide: '#00AA44', template: '#8833FF', tool: '#FF6600', library: '#CC0033', documentation: '#00AACC' };
   return m[type] || '#6B7280';
 };
 
@@ -63,7 +63,7 @@ const Resources = () => {
     <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
       <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
-          <p style={{ fontSize: '12px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: '#A81D37', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
           <h1 style={{ fontSize: '48px', fontWeight: 800, color: '#111827', margin: '0 0 16px' }}>Community Resources</h1>
           <p style={{ fontSize: '18px', color: '#6B7280' }}>Discover tutorials, guides, and templates shared by the community.</p>
         </div>
@@ -125,7 +125,7 @@ const Resources = () => {
                       <div style={{ fontSize: '11px', color: '#6B7280' }}>{new Date(r.created_at).toLocaleDateString()}</div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#DC2626' }}>{r.view_count}</div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#A81D37' }}>{r.view_count}</div>
                       <div style={{ fontSize: '10px', color: '#6B7280', textTransform: 'uppercase' }}>Views</div>
                     </div>
                   </div>

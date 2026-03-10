@@ -53,7 +53,7 @@ const Events = () => {
     <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
       <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
-          <p style={{ fontSize: '12px', fontWeight: 700, color: '#DC2626', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: '#A81D37', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Community</p>
           <h1 style={{ fontSize: '48px', fontWeight: 800, color: '#111827', margin: '0 0 16px' }}>Events</h1>
           <p style={{ fontSize: '18px', color: '#6B7280' }}>Webinars, workshops, hackathons, and more from the AtonixCorp community.</p>
         </div>
@@ -88,7 +88,7 @@ const Events = () => {
                 )}
                 <div style={{ padding: '24px' }}>
                   <div style={{ display: 'flex', gap: '8px', marginBottom: '14px', flexWrap: 'wrap' }}>
-                    <span style={{ background: '#DC2626', color: '#fff', padding: '3px 10px', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                    <span style={{ background: '#A81D37', color: '#fff', padding: '3px 10px', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                       {ev.event_type}
                     </span>
                     {ev.is_online && (
@@ -105,7 +105,7 @@ const Events = () => {
                     {ev.max_attendees && <span>Capacity: {ev.max_attendees}</span>}
                   </div>
                   <a href={`/community/events/${ev.id}`}
-                    style={{ display: 'inline-block', marginTop: '20px', background: '#DC2626', color: '#fff', padding: '10px 24px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>
+                    style={{ display: 'inline-block', marginTop: '20px', background: '#A81D37', color: '#fff', padding: '10px 24px', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>
                     View Details
                   </a>
                 </div>

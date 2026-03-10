@@ -76,7 +76,7 @@ const BlogDetail = () => {
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
           <p style={{ color: '#6B7280', fontFamily: 'Inter, sans-serif', marginBottom: '24px' }}>Post not found.</p>
-          <Link to="/blog" style={{ color: '#DC2626', textDecoration: 'none', fontSize: '14px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <Link to="/blog" style={{ color: '#A81D37', textDecoration: 'none', fontSize: '14px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             &larr; Back to Blog
           </Link>
         </div>
@@ -91,13 +91,13 @@ const BlogDetail = () => {
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
           <Link
             to="/blog"
-            style={{ color: '#DC2626', textDecoration: 'none', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px' }}
+            style={{ color: '#A81D37', textDecoration: 'none', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px' }}
           >
             &larr; Back to Blog
           </Link>
           {post.category && (
             <div style={{ marginBottom: '16px' }}>
-              <span style={{ background: '#DC2626', color: '#fff', padding: '4px 12px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              <span style={{ background: '#A81D37', color: '#fff', padding: '4px 12px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 {post.category}
               </span>
             </div>
@@ -130,7 +130,7 @@ const BlogDetail = () => {
         {/* Article Content */}
         <article style={{ padding: '48px 0', borderBottom: '1px solid #E5E7EB' }}>
           {post.excerpt && (
-            <p style={{ fontSize: '18px', color: '#374151', lineHeight: 1.7, marginBottom: '32px', borderLeft: '3px solid #DC2626', paddingLeft: '20px' }}>
+            <p style={{ fontSize: '18px', color: '#374151', lineHeight: 1.7, marginBottom: '32px', borderLeft: '3px solid #A81D37', paddingLeft: '20px' }}>
               {post.excerpt}
             </p>
           )}
@@ -190,7 +190,7 @@ const BlogDetail = () => {
               Leave a Comment
             </h3>
             {submitMessage && (
-              <div style={{ background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#DC2626', padding: '12px 16px', marginBottom: '24px', fontSize: '14px' }}>
+              <div style={{ background: '#F1F3F5', border: '1px solid #D1D5DB', color: '#A81D37', padding: '12px 16px', marginBottom: '24px', fontSize: '14px' }}>
                 {submitMessage}
               </div>
             )}
@@ -231,7 +231,7 @@ const BlogDetail = () => {
                 type="submit"
                 disabled={submitting}
                 style={{
-                  background: '#DC2626',
+                  background: '#A81D37',
                   color: '#111827',
                   border: 'none',
                   padding: '14px 32px',
@@ -257,7 +257,7 @@ const BlogDetail = () => {
         <h2 style={{ fontSize: '28px', fontWeight: 800, color: '#111827', margin: '0 0 32px' }}>Explore More Articles</h2>
         <Link
           to="/blog"
-          style={{ display: 'inline-block', background: '#DC2626', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}
+          style={{ display: 'inline-block', background: '#A81D37', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}
         >
           View All Posts
         </Link>

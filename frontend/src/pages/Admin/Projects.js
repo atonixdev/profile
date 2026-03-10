@@ -85,7 +85,7 @@ const AdminProjects = () => {
                       {project.is_published ? 'Published' : 'Draft'}
                     </button>
                   </td>
-                  <td style={tdStyle}>{project.is_featured ? <span style={{ color: '#DC2626', fontWeight: 700 }}>Featured</span> : <span style={{ color: '#6B7280' }}>—</span>}</td>
+                  <td style={tdStyle}>{project.is_featured ? <span style={{ color: '#A81D37', fontWeight: 700 }}>Featured</span> : <span style={{ color: '#6B7280' }}>—</span>}</td>
                   <td style={tdStyle}>
                     <button onClick={() => handleDelete(project.id)}
                       style={{ background: 'transparent', border: 'none', color: '#CC0033', fontSize: '13px', fontWeight: 700, cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}>
