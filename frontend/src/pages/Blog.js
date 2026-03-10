@@ -67,7 +67,7 @@ const Blog = () => {
                     padding: '8px 20px',
                     background: selectedCategory === cat.value ? '#A81D37' : 'transparent',
                     border: `1px solid ${selectedCategory === cat.value ? '#A81D37' : '#D1D5DB'}`,
-                    color: selectedCategory === cat.value ? '#111827' : '#6B7280',
+                    color: selectedCategory === cat.value ? '#FFFFFF' : '#6B7280',
                     fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
                     textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
                     transition: 'all 0.15s ease',
@@ -153,7 +153,7 @@ const Blog = () => {
       {/* ── CTA Bar ────────────────────────────────────────── */}
       <section className="gsw-cta-bar">
         <div className="gsw-container" style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#111827', marginBottom: 12, marginTop: 0 }}>
+          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 12, marginTop: 0 }}>
             Have an Idea for a Blog Post?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, maxWidth: 480, margin: '0 auto 32px', lineHeight: 1.6 }}>

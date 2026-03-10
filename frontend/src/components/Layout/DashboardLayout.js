@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AtonixDevLogo from '../AtonixDevLogo';
@@ -19,6 +19,7 @@ const DashboardLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const isActive = (item) =>
     item.exact
@@ -39,15 +40,23 @@ const DashboardLayout = () => {
     <div
       style={{
         display: 'flex', height: '100vh', overflow: 'hidden',
-        background: '#F8FAFC', fontFamily: 'inherit',
+        background: '#F8FAFC', fontFamily: 'inherit', position: 'relative',
       }}
     >
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="app-sidebar-overlay"
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 49 }}
+        />
+      )}
 
       {/* ══ SIDEBAR ═════════════════════════════════════════ */}
       <aside
+        className={`app-sidebar${sidebarOpen ? ' sidebar-open' : ''}`}
         style={{
           width: 224,
-          flexShrink: 0,
           background: '#393E41',
           display: 'flex',
           flexDirection: 'column',
@@ -153,7 +162,7 @@ const DashboardLayout = () => {
       </aside>
 
       {/* ══ MAIN ════════════════════════════════════════════ */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minWidth: 0 }}>
 
         {/* Top bar */}
         <div
@@ -162,21 +171,37 @@ const DashboardLayout = () => {
             background: '#393E41', borderBottom: '1px solid rgba(255,255,255,0.08)',
             display: 'flex', alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '0 32px',
+            padding: '0 16px',
           }}
         >
-          <div
-            style={{
-              display: 'flex', alignItems: 'center', gap: 8,
-              fontSize: 12,
-              fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
-            }}
-          >
-            <span style={{ color: '#4B5563' }}>Console</span>
-            <span style={{ color: '#374151' }}>/</span>
-            <span style={{ color: '#FFFFFF', fontWeight: 700 }}>
-              {currentItem?.label || 'Dashboard'}
-            </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setSidebarOpen((v) => !v)}
+              className="flex md:hidden"
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                padding: 6, flexDirection: 'column', gap: 4,
+              }}
+              aria-label="Toggle sidebar"
+            >
+              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
+            </button>
+            <div
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                fontSize: 12,
+                fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
+              }}
+            >
+              <span style={{ color: '#4B5563' }}>Console</span>
+              <span style={{ color: '#374151' }}>/</span>
+              <span style={{ color: '#FFFFFF', fontWeight: 700 }}>
+                {currentItem?.label || 'Dashboard'}
+              </span>
+            </div>
           </div>
           <Link
             to="/"

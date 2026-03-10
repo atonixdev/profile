@@ -124,11 +124,13 @@ const Home = () => {
           </div>
 
           {/* Stats */}
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-            borderTop: '1px solid #E5E7EB', borderLeft: '1px solid #E5E7EB',
-            maxWidth: 720, margin: '0 auto',
-          }}>
+          <div
+            className="grid grid-cols-2 md:grid-cols-4"
+            style={{
+              borderTop: '1px solid #E5E7EB', borderLeft: '1px solid #E5E7EB',
+              maxWidth: 720, margin: '0 auto',
+            }}
+          >
             {stats.map((s) => (
               <div key={s.label} style={{ padding: '22px 16px', borderRight: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB', textAlign: 'center' }}>
                 <div style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 900, color: '#111827', letterSpacing: '-0.02em', marginBottom: 4 }}>{s.value}</div>

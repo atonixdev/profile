@@ -280,8 +280,8 @@ const Header = () => {
       <div
         style={{
           height: 48,
-          background: 'transparent',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          background: '#FFFFFF',
+          borderBottom: '1px solid #E5E7EB',
         }}
       >
         <nav

@@ -120,7 +120,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   color: #111827;
   margin: 0;
-  text-align: center;
 }
 
 /* Section intro block — centers eyebrow + heading + subtext */
@@ -187,7 +186,7 @@ img, video, canvas, iframe {
 }
 .gsw-btn-accent {
   background-color: #A81D37;
-  color: #111827;
+  color: #FFFFFF;
   border: 1px solid #A81D37;
 }
 .gsw-btn-accent:hover { background-color: #7A1528; border-color: #7A1528; }
@@ -347,6 +346,9 @@ code, pre, kbd, samp {
 
 /* ── CTA Bar ──────────────────────────────────────────────── */
 .gsw-cta-bar { background: #A81D37; padding: 64px 0; }
+.gsw-cta-bar h1,
+.gsw-cta-bar h2,
+.gsw-cta-bar h3 { color: #FFFFFF; }
 
 /* ── Table ────────────────────────────────────────────────── */
 .gsw-table { width: 100%; border-collapse: collapse; }
@@ -401,9 +403,14 @@ code, pre, kbd, samp {
 
 /* ── Mobile ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .gsw-section    { padding: 64px 0; }
-  .gsw-section-sm { padding: 48px 0; }
+  .gsw-section    { padding: 56px 0; }
+  .gsw-section-sm { padding: 40px 0; }
+  .gsw-section-xs { padding: 32px 0; }
   .gsw-container  { padding: 0 16px; }
+  .gsw-cta-bar    { padding: 48px 0; }
+  .gsw-card-body  { padding: 20px; }
+  /* Ensure grid bottoms don't cause horizontal scroll */
+  .grid { width: 100%; }
 }
 
 /* ── Legacy / backward-compat for classes still used ─────── */
@@ -413,3 +420,23 @@ code, pre, kbd, samp {
 .card-hover          { transition: border-color 0.2s ease; }
 .section-padding     { padding-left: 1.5rem; padding-right: 1.5rem; }
 .break-anywhere      { overflow-wrap: anywhere; word-break: break-word; }
+/* ── Dashboard / Settings Sidebar ────────────────────────── */
+.app-sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 50;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.app-sidebar.sidebar-open {
+  transform: translateX(0);
+}
+@media (min-width: 768px) {
+  .app-sidebar {
+    position: relative;
+    transform: none !important;
+    z-index: auto;
+  }
+  .app-sidebar-overlay { display: none !important; }
+}
