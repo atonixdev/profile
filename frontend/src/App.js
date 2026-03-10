@@ -23,6 +23,7 @@ import AdminTestimonials from './pages/Admin/Testimonials';
 import AdminInquiries from './pages/Admin/Inquiries';
 import AdminProfile from './pages/Admin/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
+import StaffRoute from './components/StaffRoute';
 import { AuthProvider } from './context/AuthContext';
 import CommunityHome from './pages/community/CommunityHome';
 import Discussions from './pages/community/Discussions';
@@ -211,8 +212,8 @@ function App() {
             </Route>
           </Route>
 
-          {/* Operational Control — Protected */}
-          <Route element={<ProtectedRoute />}>
+          {/* Operational Control — Staff Only */}
+          <Route element={<StaffRoute />}>
             <Route path="/ops" element={<OpsLayout />}>
               <Route index element={<OpsOverview />} />
               <Route path="services"    element={<OpsServices />} />

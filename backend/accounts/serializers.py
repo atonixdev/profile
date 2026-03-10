@@ -22,9 +22,10 @@ class CurrentUserProfileSerializer(ProfileSerializer):
     first_name = serializers.CharField(source='user.first_name', read_only=True)
     last_name = serializers.CharField(source='user.last_name', read_only=True)
     user_email = serializers.EmailField(source='user.email', read_only=True)
+    is_staff = serializers.BooleanField(source='user.is_staff', read_only=True)
 
     class Meta(ProfileSerializer.Meta):
-        fields = ['username', 'first_name', 'last_name', 'user_email'] + list(ProfileSerializer.Meta.fields)
+        fields = ['username', 'first_name', 'last_name', 'user_email', 'is_staff'] + list(ProfileSerializer.Meta.fields)
 
 
 class UserSerializer(serializers.ModelSerializer):
