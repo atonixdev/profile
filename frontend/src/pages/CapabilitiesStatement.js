@@ -94,7 +94,7 @@ const CapabilitiesStatement = () => {
     <div style={{ background: '#FFFFFF' }}>
 
       {/* ── Cover Header ── */}
-      <section style={{ position: 'relative', background: '#111827', overflow: 'hidden', padding: '96px 0 80px' }}>
+      <section style={{ position: 'relative', background: '#A81D37', overflow: 'hidden', padding: '96px 0 80px' }}>
         <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32 }}>
             <div>
@@ -263,11 +263,11 @@ const CapabilitiesStatement = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="gsw-section-sm" style={{ background: '#111827' }}>
+      <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
         <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px 48px' }}>
           <div>
             <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 10 }}>Ready to engage AtonixDev?</h2>
-            <p style={{ fontSize: 14, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>Contact our government solutions team to discuss requirements, contract vehicles, and procurement options.</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.7 }}>Contact our government solutions team to discuss requirements, contract vehicles, and procurement options.</p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>

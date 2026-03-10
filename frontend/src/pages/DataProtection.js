@@ -93,7 +93,7 @@ const DataProtection = () => {
             <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 2fr 1.5fr 1.8fr', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', minWidth: 720 }}>
               {/* Header */}
               {['Category', 'Examples', 'Lawful Basis', 'Retention'].map((h) => (
-                <div key={h} style={{ background: '#111827', padding: '12px 16px' }}>
+                <div key={h} style={{ background: '#A81D37', padding: '12px 16px' }}>
                   <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>{h}</span>
                 </div>
               ))}
@@ -142,11 +142,11 @@ const DataProtection = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="gsw-section-sm" style={{ background: '#111827' }}>
+      <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
         <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px 48px' }}>
           <div>
             <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 10 }}>Have a data protection enquiry?</h2>
-            <p style={{ fontSize: 14, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>Reach our Data Protection Officer or review our full Privacy Policy and Terms of Service.</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.7 }}>Reach our Data Protection Officer or review our full Privacy Policy and Terms of Service.</p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>

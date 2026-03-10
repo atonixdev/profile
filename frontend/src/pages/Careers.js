@@ -93,7 +93,7 @@ const Careers = () => {
       <hr className="gsw-divider" />
 
       {/* ── Benefits Bar ── */}
-      <section className="gsw-section-sm" style={{ background: '#111827' }}>
+      <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
         <div className="gsw-container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '32px 48px' }}>
             {[
@@ -169,7 +169,7 @@ const Careers = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 800 }}>
             {process.map((p) => (
               <div key={p.step} style={{ background: '#FFFFFF', padding: '28px 32px', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, background: '#111827', fontSize: 11, fontWeight: 800, color: '#FFFFFF', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{p.step}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, background: '#A81D37', fontSize: 11, fontWeight: 800, color: '#FFFFFF', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{p.step}</span>
                 <div>
                   <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.3 }}>{p.title}</h3>
                   <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0 }}>{p.desc}</p>
@@ -181,11 +181,11 @@ const Careers = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="gsw-section-sm" style={{ background: '#111827' }}>
+      <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
         <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px 48px' }}>
           <div>
             <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 10 }}>Don't see the right role?</h2>
-            <p style={{ fontSize: 14, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>Send us an open application. We always want to hear from talented engineers and problem-solvers.</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.7 }}>Send us an open application. We always want to hear from talented engineers and problem-solvers.</p>
           </div>
           <Link to="/contact" style={{ flexShrink: 0, display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
             Open Application

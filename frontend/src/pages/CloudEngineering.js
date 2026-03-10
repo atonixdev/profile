@@ -172,15 +172,15 @@ const CloudEngineering = () => (
     </section>
 
     {/* ── CTA ── */}
-    <section className="gsw-section-sm" style={{ background: '#111827' }}>
+    <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
       <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px 48px' }}>
         <div>
           <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 10 }}>Ready to take control of your infrastructure?</h2>
-          <p style={{ fontSize: 14, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>We'll assess your current estate and produce a cloud architecture roadmap tailored to your workloads, compliance requirements, and budget.</p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.7 }}>We'll assess your current estate and produce a cloud architecture roadmap tailored to your workloads, compliance requirements, and budget.</p>
         </div>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Get in Touch</Link>
-          <Link to="/devops-security" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', border: '1px solid #374151', color: '#D1D5DB', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>DevOps & Security →</Link>
+          <Link to="/devops-security" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', border: '1px solid rgba(255,255,255,0.4)', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>DevOps & Security →</Link>
         </div>
       </div>
     </section>

@@ -156,11 +156,11 @@ const GovernmentContracting = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="gsw-section-sm" style={{ background: '#111827' }}>
+      <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
         <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px 48px' }}>
           <div>
             <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 10 }}>Ready to discuss your requirements?</h2>
-            <p style={{ fontSize: 14, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>Download our Capabilities Statement or contact our government solutions team directly.</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.7 }}>Download our Capabilities Statement or contact our government solutions team directly.</p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link to="/capabilities" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>

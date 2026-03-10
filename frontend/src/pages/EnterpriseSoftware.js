@@ -163,15 +163,15 @@ const EnterpriseSoftware = () => (
     </section>
 
     {/* ── CTA ── */}
-    <section className="gsw-section-sm" style={{ background: '#111827' }}>
+    <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
       <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px 48px' }}>
         <div>
           <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 10 }}>Ready to build something exceptional?</h2>
-          <p style={{ fontSize: 14, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>Let's discuss your project requirements and put together an architecture proposal at no obligation.</p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.7 }}>Let's discuss your project requirements and put together an architecture proposal at no obligation.</p>
         </div>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Get in Touch</Link>
-          <Link to="/case-studies" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', border: '1px solid #374151', color: '#D1D5DB', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Case Studies</Link>
+          <Link to="/case-studies" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', border: '1px solid rgba(255,255,255,0.4)', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Case Studies</Link>
         </div>
       </div>
     </section>

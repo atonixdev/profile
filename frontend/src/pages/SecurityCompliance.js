@@ -151,7 +151,7 @@ const SecurityCompliance = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 840 }}>
             {incident.map((step, idx) => (
               <div key={step.title} style={{ background: '#FFFFFF', padding: '24px 32px', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: '#111827', fontSize: 10, fontWeight: 800, color: '#FFFFFF', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{String(idx + 1).padStart(2, '0')}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: '#A81D37', fontSize: 10, fontWeight: 800, color: '#FFFFFF', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{String(idx + 1).padStart(2, '0')}</span>
                 <div>
                   <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 6 }}>{step.title}</h3>
                   <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0 }}>{step.desc}</p>
@@ -163,11 +163,11 @@ const SecurityCompliance = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="gsw-section-sm" style={{ background: '#111827' }}>
+      <section className="gsw-section-sm" style={{ background: '#A81D37' }}>
         <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px 48px' }}>
           <div>
             <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#FFFFFF', marginBottom: 10 }}>Security questions or audit requests?</h2>
-            <p style={{ fontSize: 14, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>Our security team is available for enterprise procurement security reviews, penetration test coordination, and DPA negotiations.</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.7 }}>Our security team is available for enterprise procurement security reviews, penetration test coordination, and DPA negotiations.</p>
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
