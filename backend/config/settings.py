@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'self_lab',
     'developer_settings',
     'model_flow',
+    'emails',
 ]
 
 MIDDLEWARE = [
@@ -397,6 +398,30 @@ CACHES = {
 # Cache Control Headers
 CACHE_MIDDLEWARE_SECONDS = 600
 CACHE_MIDDLEWARE_KEY_PREFIX = 'atonixdev'
+
+# ---------------------------------------------------------------------------
+# Email Configuration
+# ---------------------------------------------------------------------------
+# Set EMAIL_BACKEND to 'django.core.mail.backends.smtp.EmailBackend' in production.
+# Use 'django.core.mail.backends.console.EmailBackend' for local dev / CI.
+EMAIL_BACKEND = config(
+    'EMAIL_BACKEND',
+    default='django.core.mail.backends.console.EmailBackend',
+)
+EMAIL_HOST = config('EMAIL_HOST', default='smtp-relay.brevo.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=False, cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_TIMEOUT = 10  # seconds
+
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='no-reply@atonixdev.com')
+EMAIL_REPLY_TO = config('EMAIL_REPLY_TO', default='support@atonixdev.com')
+SERVER_EMAIL = config('SERVER_EMAIL', default='errors@atonixdev.com')
+
+# Public URL used in email CTAs (no trailing slash)
+FRONTEND_URL = config('FRONTEND_URL', default='https://atonixdev.com').rstrip('/')
 
 # Set default caching headers for responses
 DEFAULT_CACHE_HEADERS = {
