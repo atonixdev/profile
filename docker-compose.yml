@@ -51,7 +51,6 @@ services:
     environment:
       - DEBUG=${DEBUG:-True}
       - SECRET_KEY=${SECRET_KEY:-dev-secret-key-change-in-production}
-      - NASA_API_KEY=${NASA_API_KEY}
       # IMPORTANT: root .env is the single source of configuration; Docker overrides DATABASE_URL for Postgres.
       # Override it inside Docker so the container uses Postgres.
       - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-personal_brand_hub}
@@ -63,7 +62,6 @@ services:
       - DB_WAIT_SECONDS=${DB_WAIT_SECONDS:-180}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
       - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:3001}
-      - NOTEBOOK_KERNEL_URL=${NOTEBOOK_KERNEL_URL:-http://notebook-kernel:8000}
       - REDIS_URL=${REDIS_URL:-redis://redis:6379/0}
     depends_on:
       db:
@@ -79,7 +77,6 @@ services:
       dockerfile: Dockerfile
       args:
         - REACT_APP_API_URL=${REACT_APP_API_URL:-}
-        - REACT_APP_MAPBOX_TOKEN=${REACT_APP_MAPBOX_TOKEN:-}
     container_name: profile_frontend
     volumes:
       # - ./frontend:/app  # Commented out to prevent overwriting build output
@@ -92,7 +89,6 @@ services:
       # Leave unset to let the frontend derive the API base URL from window.location.hostname,
       # or explicitly set REACT_APP_API_URL=http://<YOUR_LAN_IP>:8000/api for LAN testing.
       - REACT_APP_API_URL=${REACT_APP_API_URL:-}
-      - REACT_APP_MAPBOX_TOKEN=${REACT_APP_MAPBOX_TOKEN:-}
       - NODE_ENV=${NODE_ENV:-development}
       - WATCHPACK_POLLING=true
     depends_on:

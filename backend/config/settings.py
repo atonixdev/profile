@@ -70,13 +70,7 @@ INSTALLED_APPS = [
     'blog',
     'community',
     'activity',
-    # 'chatbot_service',  # directory removed — re-add when restored
-    # 'research_lab',  # directory removed — re-add when restored
-    # 'ai_lab',  # directory removed — re-add when restored
-    # 'iot_lab',  # directory removed — re-add when restored
-    # 'self_lab',  # directory removed — re-add when restored
     'developer_settings',
-    'model_flow',
     'emails',
     'support',
 ]
