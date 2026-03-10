@@ -58,6 +58,16 @@ import SettingsLayout from './components/Layout/SettingsLayout';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
 import SettingsGPGKeys from './pages/settings/GPGKeys';
+import PipelineDashboardLayout from './components/Layout/PipelineDashboardLayout';
+import PipelineOverview from './pages/pipelines/PipelineOverview';
+import PipelineGraph from './pages/pipelines/PipelineGraph';
+import PipelineSteps from './pages/pipelines/PipelineSteps';
+import PipelineContainers from './pages/pipelines/PipelineContainers';
+import PipelineLogs from './pages/pipelines/PipelineLogs';
+import PipelineArtifacts from './pages/pipelines/PipelineArtifacts';
+import PipelineReports from './pages/pipelines/PipelineReports';
+import PipelineMetrics from './pages/pipelines/PipelineMetrics';
+import PipelineSettings from './pages/pipelines/PipelineSettings';
 import {
   Account as SettingsAccount,
   Security as SettingsSecurity,
@@ -157,6 +167,21 @@ function App() {
               <Route path="registries" element={<DashboardRegistries />} />
               <Route path="monitoring" element={<DashboardMonitoring />} />
               <Route path="support" element={<DashboardSupport />} />
+            </Route>
+          </Route>
+
+          {/* Pipeline Console (Dashboard 2) — Protected */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/pipelines/:pipelineId" element={<PipelineDashboardLayout />}>
+              <Route index element={<PipelineOverview />} />
+              <Route path="graph" element={<PipelineGraph />} />
+              <Route path="steps" element={<PipelineSteps />} />
+              <Route path="containers" element={<PipelineContainers />} />
+              <Route path="logs" element={<PipelineLogs />} />
+              <Route path="artifacts" element={<PipelineArtifacts />} />
+              <Route path="reports" element={<PipelineReports />} />
+              <Route path="metrics" element={<PipelineMetrics />} />
+              <Route path="settings" element={<PipelineSettings />} />
             </Route>
           </Route>
 

@@ -42,6 +42,7 @@ urlpatterns = [
     path('api/iot-lab/', include('iot_lab.urls')),
     path('api/self-lab/', include('self_lab.urls')),
     path('api/v1/settings/', include('developer_settings.urls')),
+    path('api/v1/flow/', include('model_flow.urls')),
 ]
 
 # Serve media files in development

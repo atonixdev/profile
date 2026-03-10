@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'iot_lab',
     'self_lab',
     'developer_settings',
+    'model_flow',
 ]
 
 MIDDLEWARE = [
