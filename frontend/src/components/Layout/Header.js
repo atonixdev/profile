@@ -223,18 +223,35 @@ const MegaDropdown = ({ columns, isOpen, onClose, onMouseEnter, onMouseLeave }) 
 };
 
 // ─────────────────────────────────────────────────────
-// SearchBar — expands on focus
+// SearchBar — icon only, expands on click
 // ─────────────────────────────────────────────────────
 const SearchBar = () => {
-  const [focused, setFocused] = useState(false);
+  const [open, setOpen] = useState(false);
   const inputRef = useRef(null);
+  const wrapperRef = useRef(null);
+
+  // Focus input when opened
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
+  }, [open]);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   // Global "/" shortcut
   useEffect(() => {
     const handler = (e) => {
       if (e.key === '/' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
         e.preventDefault();
-        inputRef.current?.focus();
+        setOpen(true);
       }
     };
     document.addEventListener('keydown', handler);
@@ -243,71 +260,69 @@ const SearchBar = () => {
 
   return (
     <div
+      ref={wrapperRef}
       style={{
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        transition: 'width 0.2s ease',
-        width: focused ? 280 : 200,
+        justifyContent: 'flex-end',
+        transition: 'width 0.25s ease',
+        width: open ? 260 : 28,
+        overflow: 'hidden',
       }}
     >
-      <span
+      {/* Icon button — always visible */}
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Search"
         style={{
           position: 'absolute',
-          left: 10,
-          color: '#9CA3AF',
-          fontSize: 13,
-          pointerEvents: 'none',
-          lineHeight: 1,
+          right: 0,
+          width: 28,
+          height: 28,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: open ? 'rgba(255,255,255,0.15)' : 'transparent',
+          border: 'none',
+          borderRadius: 4,
+          cursor: 'pointer',
+          color: '#FFFFFF',
+          flexShrink: 0,
+          zIndex: 1,
+          transition: 'background 0.15s',
         }}
-        aria-hidden="true"
       >
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
           <circle cx="6.5" cy="6.5" r="5" />
           <path d="M10.5 10.5L14 14" strokeLinecap="round" />
         </svg>
-      </span>
+      </button>
+
+      {/* Expanding input */}
       <input
         ref={inputRef}
         type="search"
         aria-label="Search"
         placeholder="Search…"
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onBlur={() => setOpen(false)}
         style={{
-          width: '100%',
+          width: open ? 'calc(100% - 32px)' : 0,
           height: 28,
-          paddingLeft: 30,
-          paddingRight: focused ? 10 : 32,
-          background: '#F3F4F6',
-          border: `1px solid ${focused ? '#A81D37' : '#E5E7EB'}`,
+          paddingLeft: 10,
+          paddingRight: 8,
+          background: 'rgba(255,255,255,0.15)',
+          border: '1px solid rgba(255,255,255,0.4)',
           borderRadius: 4,
           fontSize: 12,
-          color: '#111827',
+          color: '#FFFFFF',
           outline: 'none',
           fontFamily: 'inherit',
-          transition: 'border-color 0.15s, background 0.15s',
+          opacity: open ? 1 : 0,
+          transition: 'opacity 0.2s ease',
+          marginRight: 4,
         }}
       />
-      {!focused && (
-        <span
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            right: 8,
-            fontSize: 10,
-            fontWeight: 600,
-            color: '#9CA3AF',
-            background: '#E5E7EB',
-            padding: '1px 5px',
-            borderRadius: 3,
-            letterSpacing: '0.04em',
-            pointerEvents: 'none',
-          }}
-        >
-          /
-        </span>
-      )}
     </div>
   );
 };
@@ -418,8 +433,8 @@ const Header = () => {
       <div
         style={{
           height: 40,
-          background: '#FFFFFF',
-          borderBottom: '1px solid #E5E7EB',
+          background: '#02010a',
+          borderBottom: '1px solid rgba(255,255,255,0.15)',
         }}
       >
         <div
@@ -437,7 +452,7 @@ const Header = () => {
                 background: 'transparent',
                 border: 'none',
                 fontSize: 12,
-                color: '#374151',
+                color: '#FFFFFF',
                 cursor: 'pointer',
                 fontFamily: 'inherit',
               }}
@@ -447,14 +462,14 @@ const Header = () => {
               <option>EU West</option>
               <option>Asia Pacific</option>
             </select>
-            <span style={{ color: '#D1D5DB', fontSize: 12 }}>•</span>
+            <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12 }}>•</span>
             <select
               aria-label="Language"
               style={{
                 background: 'transparent',
                 border: 'none',
                 fontSize: 12,
-                color: '#374151',
+                color: '#FFFFFF',
                 cursor: 'pointer',
                 fontFamily: 'inherit',
               }}
@@ -467,7 +482,7 @@ const Header = () => {
           </div>
 
           {/* Center: Global Search */}
-          <div style={{ flex: 1, maxWidth: 320, margin: '0 40px' }}>
+          <div style={{ margin: '0 16px' }}>
             <SearchBar />
           </div>
 
@@ -477,12 +492,12 @@ const Header = () => {
               to="/pricing"
               style={{
                 fontSize: 12,
-                color: '#374151',
+                color: 'rgba(255,255,255,0.85)',
                 textDecoration: 'none',
                 fontWeight: 500,
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
             >
               Pricing
             </Link>
@@ -490,12 +505,12 @@ const Header = () => {
               to="/docs"
               style={{
                 fontSize: 12,
-                color: '#374151',
+                color: 'rgba(255,255,255,0.85)',
                 textDecoration: 'none',
                 fontWeight: 500,
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
             >
               Documentation
             </Link>
@@ -503,12 +518,12 @@ const Header = () => {
               to="/support"
               style={{
                 fontSize: 12,
-                color: '#374151',
+                color: 'rgba(255,255,255,0.85)',
                 textDecoration: 'none',
                 fontWeight: 500,
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
             >
               Support
             </Link>
@@ -517,7 +532,7 @@ const Header = () => {
                 to="/dashboard"
                 style={{
                   fontSize: 12,
-                  color: '#A81D37',
+                  color: '#FFFFFF',
                   textDecoration: 'none',
                   fontWeight: 600,
                 }}
@@ -529,10 +544,18 @@ const Header = () => {
                 <button
                   onClick={() => { setIsPortalOpen((v) => !v); setPortalError(''); }}
                   style={{
-                    fontSize: 12, color: '#A81D37', fontWeight: 600,
-                    background: 'none', border: 'none', cursor: 'pointer',
-                    fontFamily: 'inherit', padding: 0,
+                    fontSize: 12, color: '#FFFFFF', fontWeight: 600,
+                    background: 'rgba(255,255,255,0.18)',
+                    border: '1px solid rgba(255,255,255,0.45)',
+                    borderRadius: 20,
+                    cursor: 'pointer',
+                    fontFamily: 'inherit',
+                    padding: '4px 14px',
+                    letterSpacing: '0.03em',
+                    transition: 'background 0.15s, border-color 0.15s',
                   }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.28)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.7)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.18)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'; }}
                 >
                   Portal
                 </button>
