@@ -30,8 +30,8 @@ const GitLabIcon = () => (
 
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/atonixcorp', Icon: LinkedInIcon, color: '#0A66C2' },
-  { label: 'GitHub',   href: 'https://github.com/atonixcorp',      Icon: GitHubIcon,   color: '#FFFFFF' },
-  { label: 'X',        href: 'https://twitter.com/atonixcorp',     Icon: XIcon,        color: '#FFFFFF' },
+  { label: 'GitHub',   href: 'https://github.com/atonixcorp',      Icon: GitHubIcon,   color: '#111827' },
+  { label: 'X',        href: 'https://twitter.com/atonixcorp',     Icon: XIcon,        color: '#111827' },
   { label: 'GitLab',   href: 'https://gitlab.com/atonixcorp',      Icon: GitLabIcon,   color: '#FC6D26' },
 ];
 
