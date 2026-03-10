@@ -58,22 +58,22 @@ const OpsLayout = () => {
         className={`app-sidebar${sidebarOpen ? ' sidebar-open' : ''}`}
         style={{
           width: 232,
-          background: '#0F172A',
+          background: '#23395b',
           display: 'flex',
           flexDirection: 'column',
-          borderRight: '1px solid rgba(255,255,255,0.06)',
+          borderRight: '1px solid rgba(255,255,255,0.08)',
           overflow: 'hidden',
         }}
       >
         {/* Brand */}
-        <div style={{ padding: '20px 20px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ padding: '20px 20px 18px', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
           <Link to="/" style={{ textDecoration: 'none', display: 'block' }}>
             <AtonixDevLogo size={26} variant="dark" textColor="#FFFFFF" />
           </Link>
           <div
             style={{
               fontSize: 10, fontWeight: 700, letterSpacing: '0.14em',
-              textTransform: 'uppercase', color: '#A81D37',
+              textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)',
               marginTop: 10, fontFamily: 'var(--font-mono)',
             }}
           >
@@ -95,15 +95,15 @@ const OpsLayout = () => {
                   padding: '10px 20px',
                   fontSize: 13,
                   fontWeight: active ? 700 : 400,
-                  color: active ? '#FFFFFF' : '#6B7280',
+                  color: active ? '#FFFFFF' : 'rgba(255,255,255,0.65)',
                   textDecoration: 'none',
-                  borderLeft: active ? '2px solid #A81D37' : '2px solid transparent',
-                  background: active ? 'rgba(255,255,255,0.06)' : 'transparent',
+                  borderLeft: active ? '2px solid rgba(255,255,255,0.9)' : '2px solid transparent',
+                  background: active ? 'rgba(255,255,255,0.12)' : 'transparent',
                   letterSpacing: '0.01em',
                   transition: 'color 0.15s, background 0.15s',
                 }}
-                onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = '#D1D5DB'; }}
-                onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = '#6B7280'; }}
+                onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = '#FFFFFF'; }}
+                onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = 'rgba(255,255,255,0.65)'; }}
               >
                 {item.label}
               </Link>
@@ -112,13 +112,13 @@ const OpsLayout = () => {
         </nav>
 
         {/* User section */}
-        <div style={{ padding: '16px 20px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ padding: '16px 20px', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
           <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 2 }}>
             {displayName}
           </div>
           <div
             style={{
-              fontSize: 11, color: '#6B7280', marginBottom: 14,
+              fontSize: 11, color: 'rgba(255,255,255,0.5)', marginBottom: 14,
               overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
             }}
           >
@@ -128,9 +128,9 @@ const OpsLayout = () => {
             onClick={handleLogout}
             style={{
               width: '100%', padding: '8px 0',
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              color: '#9CA3AF', fontSize: 11, fontWeight: 700,
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.18)',
+              color: 'rgba(255,255,255,0.8)', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.1em', textTransform: 'uppercase',
               cursor: 'pointer', fontFamily: 'inherit',
               transition: 'color 0.15s, border-color 0.15s',
@@ -156,7 +156,7 @@ const OpsLayout = () => {
         <div
           style={{
             height: 52, flexShrink: 0,
-            background: '#0F172A', borderBottom: '1px solid rgba(255,255,255,0.08)',
+            background: '#23395b', borderBottom: '1px solid rgba(255,255,255,0.12)',
             display: 'flex', alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0 16px',
@@ -173,9 +173,9 @@ const OpsLayout = () => {
               }}
               aria-label="Toggle sidebar"
             >
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
             </button>
             <div
               style={{
@@ -183,9 +183,9 @@ const OpsLayout = () => {
                 fontSize: 12, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
               }}
             >
-              <span style={{ color: '#4B5563' }}>OPS</span>
-              <span style={{ color: '#374151' }}>/</span>
-              <span style={{ color: '#9CA3AF' }}>{currentItem?.label || 'Overview'}</span>
+              <span style={{ color: '#FFFFFF', fontWeight: 700 }}>OPS</span>
+              <span style={{ color: 'rgba(255,255,255,0.45)' }}>/</span>
+              <span style={{ color: 'rgba(255,255,255,0.85)' }}>{currentItem?.label || 'Overview'}</span>
             </div>
           </div>
 
@@ -203,12 +203,12 @@ const OpsLayout = () => {
                   borderRadius: '50%', background: '#22C55E',
                 }}
               />
-              <span style={{ color: '#6B7280', letterSpacing: '0.08em' }}>ALL SYSTEMS NOMINAL</span>
+              <span style={{ color: 'rgba(255,255,255,0.65)', letterSpacing: '0.08em' }}>ALL SYSTEMS NOMINAL</span>
             </div>
             <Link
               to="/admin-console"
               style={{
-                fontSize: 10, fontWeight: 700, color: '#D4AF37', textDecoration: 'none',
+                fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.85)', textDecoration: 'none',
                 fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase',
               }}
             >
@@ -217,7 +217,7 @@ const OpsLayout = () => {
             <Link
               to="/dashboard"
               style={{
-                fontSize: 11, color: '#6B7280', textDecoration: 'none',
+                fontSize: 11, color: 'rgba(255,255,255,0.65)', textDecoration: 'none',
                 fontFamily: 'var(--font-mono)', letterSpacing: '0.08em',
               }}
             >
