@@ -5,39 +5,7 @@ import AtonixDevLogo from '../components/AtonixDevLogo';
 import api, { setCsrfToken } from '../services/api';
 import { inquiryService } from '../services';
 import SearchableCountryDropdown from '../components/SearchableCountryDropdown';
-
-// ── Social Icons ───────────────────────────────────────────────────────────
-const LinkedInIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
-    <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-  </svg>
-);
-const XIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
-const InstagramIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-  </svg>
-);
-const YouTubeIcon = () => (
-  <svg width="18" height="13" viewBox="0 0 24 17" fill="currentColor" aria-hidden="true">
-    <path d="M23.5 2.9A3.1 3.1 0 0 0 21.3.7C19.5.2 12 .2 12 .2S4.5.2 2.7.7A3.1 3.1 0 0 0 .5 2.9 32.5 32.5 0 0 0 0 8.5a32.5 32.5 0 0 0 .5 5.6A3.1 3.1 0 0 0 2.7 16.3C4.5 16.8 12 16.8 12 16.8s7.5 0 9.3-.5a3.1 3.1 0 0 0 2.2-2.2 32.5 32.5 0 0 0 .5-5.6 32.5 32.5 0 0 0-.5-5.6z"/>
-    <polygon points="9.75,12.02 15.5,8.5 9.75,4.98" fill="white"/>
-  </svg>
-);
-
-const SOCIAL = [
-  { Icon: LinkedInIcon,  href: '#',  label: 'LinkedIn',  color: '#0A66C2' },
-  { Icon: XIcon,         href: '#',  label: 'X',         color: '#111827' },
-  { Icon: InstagramIcon, href: '#',  label: 'Instagram', color: '#E1306C' },
-  { Icon: YouTubeIcon,   href: '#',  label: 'YouTube',   color: '#FF0000' },
-];
+import SOCIALS from '../constants/socials';
 
 const Portal = () => {
   const navigate = useNavigate();
@@ -365,7 +333,7 @@ const Portal = () => {
                 alignItems: 'center',
               }}
             >
-              {SOCIAL.map((social) => (
+              {SOCIALS.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
