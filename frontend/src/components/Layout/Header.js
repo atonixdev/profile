@@ -155,10 +155,10 @@ const MegaDropdown = ({ columns, isOpen, onClose, onMouseEnter, onMouseLeave }) 
         top: 104,
         left: 0,
         right: 0,
-        background: '#FFFFFF',
+        background: '#0f0f0f',
         borderTop: '2px solid #A81D37',
-        borderBottom: '1px solid #E5E7EB',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.55)',
         zIndex: 200,
       }}
     >
@@ -178,12 +178,12 @@ const MegaDropdown = ({ columns, isOpen, onClose, onMouseEnter, onMouseLeave }) 
               style={{
                 fontSize: 13,
                 fontWeight: 700,
-                color: '#111827',
+                color: '#FFFFFF',
                 letterSpacing: '0.07em',
                 textTransform: 'uppercase',
                 marginBottom: 12,
                 paddingBottom: 8,
-                borderBottom: '1px solid #F3F4F6',
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
               }}
             >
               {col.title}
@@ -199,16 +199,16 @@ const MegaDropdown = ({ columns, isOpen, onClose, onMouseEnter, onMouseLeave }) 
                       display: 'block',
                       padding: '6px 0',
                       fontSize: 14,
-                      color: '#374151',
+                      color: 'rgba(255,255,255,0.75)',
                       textDecoration: 'none',
                       fontWeight: 400,
                       lineHeight: 1.4,
                       transition: 'color 0.12s',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
-                    onFocus={(e) => { e.currentTarget.style.color = '#A81D37'; }}
-                    onBlur={(e) => { e.currentTarget.style.color = '#374151'; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = '#E8637A'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.75)'; }}
+                    onFocus={(e) => { e.currentTarget.style.color = '#E8637A'; }}
+                    onBlur={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.75)'; }}
                   >
                     {item}
                   </Link>
@@ -449,12 +449,14 @@ const Header = () => {
             <select
               aria-label="Region"
               style={{
-                background: 'transparent',
-                border: 'none',
+                background: '#1a1a1a',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: 4,
                 fontSize: 12,
                 color: '#FFFFFF',
                 cursor: 'pointer',
                 fontFamily: 'inherit',
+                padding: '2px 6px',
               }}
             >
               <option>Global</option>
@@ -466,12 +468,14 @@ const Header = () => {
             <select
               aria-label="Language"
               style={{
-                background: 'transparent',
-                border: 'none',
+                background: '#1a1a1a',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: 4,
                 fontSize: 12,
                 color: '#FFFFFF',
                 cursor: 'pointer',
                 fontFamily: 'inherit',
+                padding: '2px 6px',
               }}
             >
               <option>English</option>
