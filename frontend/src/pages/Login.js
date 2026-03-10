@@ -59,6 +59,17 @@ const Portal = () => {
   const prefill = location.state?.email || '';
 
   useEffect(() => {
+    const mode = location.state?.mode;
+    if (mode && ['signin', 'signup', 'contact'].includes(mode)) {
+      setCardMode(mode);
+    }
+    if (location.state?.email) {
+      setSignInData((prev) => ({ ...prev, username: location.state.email }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (prefill && !signInData.username) {
       setSignInData((prev) => ({ ...prev, username: prefill }));
     }

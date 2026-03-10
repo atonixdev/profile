@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AtonixDevLogo from '../AtonixDevLogo';
 import AtonixDevLogoIcon from '../AtonixDevLogoIcon';
+import SOCIALS from '../../constants/socials';
 
 // GS-WSF §3 — Global Header — two-tier: brand/auth bar + nav bar
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isPortalOpen, setIsPortalOpen] = useState(false);
+  const portalRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+
+  useEffect(() => {
+    if (!isPortalOpen) return;
+    const handleMouseDown = (e) => {
+      if (portalRef.current && !portalRef.current.contains(e.target)) {
+        setIsPortalOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleMouseDown);
+    return () => document.removeEventListener('mousedown', handleMouseDown);
+  }, [isPortalOpen]);
 
   const navigation = [
     { name: 'Software',       path: '/software' },
@@ -141,23 +155,108 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <>
-                <Link
-                  to="/login"
-        style={{
+              <div ref={portalRef} style={{ position: 'relative' }}>
+                <button
+                  onClick={() => setIsPortalOpen((v) => !v)}
+                  style={{
                     display: 'inline-flex', alignItems: 'center',
                     padding: '6px 18px', background: '#A81D37',
                     color: '#FFFFFF', fontSize: 11, fontWeight: 700,
                     letterSpacing: '0.08em', textTransform: 'uppercase',
-                    textDecoration: 'none', transition: 'background 0.15s',
+                    border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                    transition: 'background 0.15s',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderBottomColor = '#A81D37'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#7C1626'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = '#A81D37'; }}
                 >
                   Portal
-                </Link>
-                
-              </>
+                </button>
+
+                {isPortalOpen && (
+                  <div
+                    style={{
+                      position: 'absolute', right: 0, top: 'calc(100% + 8px)',
+                      background: '#FFFFFF', border: '1px solid #E5E7EB',
+                      borderRadius: 14, padding: '24px 20px',
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.16)', zIndex: 300,
+                      width: 264,
+                    }}
+                  >
+                    {/* Logo */}
+                    <div style={{ textAlign: 'center', marginBottom: 20 }}>
+                      <AtonixDevLogo size={24} variant="dark" textColor="#111827" />
+                    </div>
+
+                    {/* Action buttons */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+                      <button
+                        onClick={() => { setIsPortalOpen(false); navigate('/login', { state: { mode: 'signin' } }); }}
+                        style={{
+                          width: '100%', padding: '11px 0',
+                          background: '#A81D37', color: '#FFFFFF',
+                          border: 'none', fontSize: 11, fontWeight: 700,
+                          cursor: 'pointer', fontFamily: 'inherit',
+                          letterSpacing: '0.08em', textTransform: 'uppercase',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = '#7C1626'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = '#A81D37'; }}
+                      >
+                        Console
+                      </button>
+                      <button
+                        onClick={() => { setIsPortalOpen(false); navigate('/login', { state: { mode: 'signup' } }); }}
+                        style={{
+                          width: '100%', padding: '11px 0',
+                          background: 'transparent', color: '#111827',
+                          border: '1px solid #D1D5DB', fontSize: 11, fontWeight: 700,
+                          cursor: 'pointer', fontFamily: 'inherit',
+                          letterSpacing: '0.08em', textTransform: 'uppercase',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A81D37'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#D1D5DB'; }}
+                      >
+                        Sign Up
+                      </button>
+                      <button
+                        onClick={() => { setIsPortalOpen(false); navigate('/login', { state: { mode: 'contact' } }); }}
+                        style={{
+                          width: '100%', padding: '11px 0',
+                          background: 'transparent', color: '#6B7280',
+                          border: 'none', fontSize: 11, fontWeight: 600,
+                          cursor: 'pointer', fontFamily: 'inherit',
+                          letterSpacing: '0.06em',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = '#374151'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+                      >
+                        Contact
+                      </button>
+                    </div>
+
+                    {/* Social icons */}
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: 14, alignItems: 'center' }}>
+                      {SOCIALS.map((s) => (
+                        <a
+                          key={s.label}
+                          href={s.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={s.label}
+                          style={{
+                            color: s.color,
+                            display: 'inline-flex', alignItems: 'center',
+                            opacity: 0.65, transition: 'opacity 0.15s', textDecoration: 'none',
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.65'; }}
+                        >
+                          <s.Icon />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
           </div>
 
