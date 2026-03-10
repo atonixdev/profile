@@ -92,6 +92,8 @@ export default function Email() {
       const params = new URLSearchParams();
       if (filter) params.set('category', filter);
       const res = await fetch(`/api/admin/templates/?${params}`, { credentials: 'include' });
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('application/json')) throw new Error(`Backend not reachable (got ${res.status} ${res.statusText || 'non-JSON'})`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setTemplates(data.results || data);

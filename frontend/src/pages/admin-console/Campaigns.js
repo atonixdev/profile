@@ -66,6 +66,8 @@ export default function Campaigns() {
       const params = new URLSearchParams();
       if (filter) params.set('status', filter);
       const res = await fetch(`/api/admin/campaigns/?${params}`, { credentials: 'include' });
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('application/json')) throw new Error(`Backend not reachable (got ${res.status} ${res.statusText || 'non-JSON'})`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setCampaigns(data.results || data);
