@@ -28,7 +28,7 @@ const Infrastructure = () => {
     <div style={{ background: '#FFFFFF' }}>
 
       {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
         <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>

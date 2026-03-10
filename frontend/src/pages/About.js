@@ -81,7 +81,7 @@ const About = () => {
 
       {/* ── S1: Hero ──────────────────────────────────────────── */}
       <section
-        style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}
+        style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}
         aria-label="About AtonixDev"
       >
         <div className="hero-grid-bg" />

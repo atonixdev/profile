@@ -109,7 +109,7 @@ const Privacy = () => (
   <div style={{ background: '#FFFFFF' }}>
 
     {/* ── Header ── */}
-    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 80px' }}>
+    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
       <div className="hero-grid-bg" />
       <div className="hero-accent-bar" />
       <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>

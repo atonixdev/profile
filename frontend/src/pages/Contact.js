@@ -158,7 +158,7 @@ const Contact = () => {
     <div style={{ background: '#FFFFFF' }} className="min-h-screen">
 
       {/* Page Hero */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px', borderBottom: '1px solid #E5E7EB' }}>
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px', borderBottom: '1px solid #E5E7EB' }}>
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
         <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>

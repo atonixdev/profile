@@ -26,7 +26,7 @@ const CommunityHome = () => {
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section
-        style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}
+        style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}
         aria-label="AtonixDev Community"
       >
         <div className="hero-grid-bg" />

@@ -60,7 +60,7 @@ const EnterpriseSoftware = () => (
   <div style={{ background: '#FFFFFF' }}>
 
     {/* ── Hero ── */}
-    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 80px' }}>
+    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
       <div className="hero-grid-bg" />
       <div className="hero-accent-bar" />
       <div className="gsw-container" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '48px 80px', alignItems: 'center' }}>
