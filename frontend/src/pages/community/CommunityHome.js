@@ -31,23 +31,23 @@ const CommunityHome = () => {
       >
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <span className="gsw-eyebrow">AtonixDev Community</span>
           <h1
             style={{
               fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800,
-              color: '#111827', lineHeight: 1.08, maxWidth: 700, marginBottom: 24,
+              color: '#111827', lineHeight: 1.08, maxWidth: 700, margin: '0 auto 24px',
             }}
           >
             The Platform for<br />
             <span style={{ color: '#A81D37' }}>Enterprise Engineers</span>
           </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 560, marginBottom: 40 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 40px' }}>
             Ask questions, share knowledge, and collaborate with engineers and architects
             building enterprise software, cloud infrastructure, and AI systems globally.
           </p>
           {/* Search */}
-          <form onSubmit={handleSearch} style={{ display: 'flex', maxWidth: 520 }}>
+          <form onSubmit={handleSearch} style={{ display: 'flex', maxWidth: 520, margin: '0 auto' }}>
             <input
               type="text"
               placeholder="Search discussions, tutorials, announcements…"
@@ -80,7 +80,7 @@ const CommunityHome = () => {
       {/* ── Stats bar ────────────────────────────────────────── */}
       <div style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB', padding: '20px 0' }}>
         <div className="gsw-container">
-          <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'center' }}>
             {[
               { label: 'Categories',   value: '9'  },
               { label: 'Discussions',  value: '0'  },

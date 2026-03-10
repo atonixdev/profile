@@ -45,17 +45,17 @@ const Careers = () => {
       <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <span className="gsw-eyebrow">Careers at AtonixDev</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, marginBottom: 24 }}>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, margin: '0 auto 24px' }}>
             Build the Future of<br />
             <span style={{ color: '#A81D37' }}>Enterprise Technology</span>
           </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 620, marginBottom: 40 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 620, margin: '0 auto 40px' }}>
             Join a globally distributed team of engineers, architects, and product thinkers
             solving the hardest infrastructure and software challenges for governments and enterprises.
           </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
             <a href="#open-roles" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
               View Open Roles
             </a>

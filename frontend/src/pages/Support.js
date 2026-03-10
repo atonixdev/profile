@@ -133,24 +133,26 @@ export default function Support() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#F9FAFB' }}>
-      {/* Page Hero */}
-      <div style={{ background: '#06080D', padding: '72px 24px 56px' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono, monospace)', marginBottom: 14 }}>
-            ENTERPRISE SUPPORT
-          </div>
-          <h1 style={{ fontSize: 36, fontWeight: 700, color: '#FFFFFF', margin: '0 0 16px', lineHeight: 1.2 }}>
+    <div style={{ minHeight: '100vh', background: '#FFFFFF' }}>
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <span className="gsw-eyebrow">Enterprise Support</span>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
             Support Center
           </h1>
-          <p style={{ fontSize: 15, color: '#6B7280', margin: 0, maxWidth: 540, lineHeight: 1.7 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7, margin: '0 auto' }}>
             Submit a request to the AtonixDev support team. All ticket communications are tracked and responded to directly by our engineers.
           </p>
         </div>
-      </div>
+      </section>
+      <hr className="gsw-divider" />
 
       {/* Form */}
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 24px' }}>
+      <section className="gsw-section">
+        <div className="gsw-container" style={{ maxWidth: 720 }}>
         <form onSubmit={handleSubmit}>
           {/* Row: name + email */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
@@ -238,7 +240,8 @@ export default function Support() {
             <strong>support@atonixdev.org</strong>.
           </p>
         </form>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -90,6 +90,7 @@ import EmailLogs from './pages/email-console/Logs';
 import EmailMarketing from './pages/email-console/Marketing';
 import EmailCampaigns from './pages/email-console/Campaigns';
 import EmailSenders from './pages/email-console/Senders';
+import EmailInbox from './pages/email-console/Inbox';
 import Support from './pages/Support';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
@@ -247,6 +248,7 @@ function App() {
           <Route element={<StaffRoute />}>
             <Route path="/email-console" element={<EmailConsoleLayout />}>
               <Route index element={<EmailOverview />} />
+              <Route path="inbox"     element={<EmailInbox />} />
               <Route path="marketing" element={<EmailMarketing />} />
               <Route path="campaigns" element={<EmailCampaigns />} />
               <Route path="templates" element={<EmailTemplates />} />

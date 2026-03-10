@@ -70,19 +70,17 @@ const DevOpsSecurity = () => (
     <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 80px' }}>
       <div className="hero-grid-bg" />
       <div className="hero-accent-bar" />
-      <div className="gsw-container" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '48px 80px', alignItems: 'center' }}>
-        <div>
-          <span className="gsw-eyebrow">Corporate Solutions</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 20 }}>DevOps & Security</h1>
-          <p style={{ fontSize: 17, color: '#6B7280', lineHeight: 1.75, marginBottom: 32 }}>
-            CI/CD pipeline engineering, shift-left application security, infrastructure hardening, and compliance automation — baked into your software delivery lifecycle from day one, not bolted on after the fact.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Assess My Pipeline</Link>
-            <Link to="/security" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', border: '1px solid #111827', color: '#111827', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Security Compliance →</Link>
-          </div>
+      <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+        <span className="gsw-eyebrow">Corporate Solutions</span>
+        <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 20px' }}>DevOps & Security</h1>
+        <p style={{ fontSize: 17, color: '#6B7280', lineHeight: 1.75, maxWidth: 600, margin: '0 auto 32px' }}>
+          CI/CD pipeline engineering, shift-left application security, infrastructure hardening, and compliance automation — baked into your software delivery lifecycle from day one, not bolted on after the fact.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', marginBottom: 48 }}>
+          <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Assess My Pipeline</Link>
+          <Link to="/security" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', border: '1px solid #111827', color: '#111827', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Security Compliance →</Link>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 800, margin: '0 auto' }}>
           {[['4min', 'Avg deploy lead time (post)', ['14day', 'Before engagement']], ['0', 'Critical vuln MTTR (SLA)', null], ['100%', 'Pipeline SAST coverage', null], ['3×', 'Deployment frequency increase', null]].map(([val, label], i) => (
             <div key={i} style={{ background: '#FFFFFF', padding: '28px 24px' }}>
               <div style={{ fontSize: 32, fontWeight: 800, color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{val}</div>

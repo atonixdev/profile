@@ -352,3 +352,60 @@ class CampaignLog(models.Model):
     def __str__(self):
         return f"[{self.campaign.name}] → {self.recipient} ({self.status})"
 
+
+# ── Inbound Email Inbox ───────────────────────────────────────────────────────
+
+class InboundEmail(models.Model):
+    """
+    Received email stored via the inbound webhook.
+    Compatible with Brevo Inbound Parsing and similar services
+    (Mailgun inbound, SendGrid Inbound Parse, etc.).
+    """
+
+    STATUS_CHOICES = [
+        ('unread',   'Unread'),
+        ('read',     'Read'),
+        ('archived', 'Archived'),
+        ('spam',     'Spam'),
+    ]
+
+    # Envelope
+    message_id      = models.CharField(max_length=512, blank=True, default='', db_index=True)
+    from_email      = models.EmailField()
+    from_name       = models.CharField(max_length=255, blank=True, default='')
+    to_email        = models.CharField(max_length=512)   # may be comma-separated
+    cc              = models.TextField(blank=True, default='')
+    reply_to        = models.EmailField(blank=True, default='')
+    in_reply_to     = models.CharField(max_length=512, blank=True, default='')
+
+    # Content
+    subject         = models.CharField(max_length=998, blank=True, default='(no subject)')
+    html_body       = models.TextField(blank=True, default='')
+    text_body       = models.TextField(blank=True, default='')
+    preview_text    = models.CharField(max_length=255, blank=True, default='')
+
+    # Meta
+    status          = models.CharField(max_length=16, choices=STATUS_CHOICES, default='unread')
+    has_attachments = models.BooleanField(default=False)
+    attachments     = models.JSONField(default=list, blank=True)
+    headers         = models.JSONField(default=dict, blank=True)
+    raw_payload     = models.JSONField(default=dict, blank=True,
+                                       help_text='Full raw webhook payload for debugging')
+    spam_score      = models.FloatField(null=True, blank=True)
+    received_at     = models.DateTimeField(null=True, blank=True,
+                                           help_text='Date header from the email itself')
+    created_at      = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['status', 'created_at']),
+            models.Index(fields=['from_email', 'created_at']),
+            models.Index(fields=['message_id']),
+        ]
+        verbose_name = 'Inbound Email'
+        verbose_name_plural = 'Inbound Emails'
+
+    def __str__(self):
+        return f"[{self.status}] From {self.from_email}: {self.subject}"
+

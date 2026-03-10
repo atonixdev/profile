@@ -109,10 +109,12 @@ const Privacy = () => (
   <div style={{ background: '#FFFFFF' }}>
 
     {/* ── Header ── */}
-    <section style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 24px 56px' }}>
-      <div className="gsw-container">
+    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 80px' }}>
+      <div className="hero-grid-bg" />
+      <div className="hero-accent-bar" />
+      <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
         <span className="gsw-eyebrow">Legal</span>
-        <h1 style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 16 }}>
+        <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 16 }}>
           Privacy Policy
         </h1>
         <p style={{ fontSize: 14, color: '#6B7280', margin: 0 }}>
@@ -120,6 +122,7 @@ const Privacy = () => (
         </p>
       </div>
     </section>
+    <hr className="gsw-divider" />
 
     {/* ── Body ── */}
     <section className="gsw-section" style={{ background: '#FFFFFF' }}>

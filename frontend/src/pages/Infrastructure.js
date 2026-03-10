@@ -31,12 +31,12 @@ const Infrastructure = () => {
       <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <span className="gsw-eyebrow">Our Work</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, marginBottom: 24 }}>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
             Infrastructure
           </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
             Enterprise-grade infrastructure projects delivering digital transformation
             for governments and corporations worldwide.
           </p>

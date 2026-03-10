@@ -58,21 +58,22 @@ const Solutions = () => {
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
 
-      {/* Page Header */}
-      <section style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '64px 24px 56px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-          <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 20 }}>
-            Enterprise Solutions
-          </span>
-          <h1 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 900, color: '#111827', letterSpacing: '-0.025em', lineHeight: 1.1, marginBottom: 20 }}>
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <span className="gsw-eyebrow">Enterprise Solutions</span>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
             Solutions
           </h1>
-          <p style={{ fontSize: 'clamp(15px, 1.5vw, 18px)', color: '#6B7280', lineHeight: 1.65, maxWidth: 580, margin: '0 auto' }}>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
             Comprehensive technology solutions designed for enterprise and government organisations
             seeking scalable, secure, and future-proof digital capabilities.
           </p>
         </div>
       </section>
+      <hr className="gsw-divider" />
 
       {/* Solutions */}
       <section style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 24px 80px' }}>

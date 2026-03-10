@@ -1,6 +1,16 @@
+import hashlib
+import hmac
+import json
+from email.utils import parsedate_to_datetime
+
+from django.conf import settings
+from django.db import models
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 
@@ -510,4 +520,228 @@ class CampaignLogListView(APIView):
             for obj in page
         ]
         return paginator.get_paginated_response(data)
+
+
+# ── Inbound Email Webhook ─────────────────────────────────────────────────────
+
+@method_decorator(csrf_exempt, name='dispatch')
+class InboundEmailWebhookView(APIView):
+    """
+    Receives inbound parsed emails via webhook.
+
+    Supports:
+    - Brevo (Sendinblue) Inbound Parsing  → POST JSON array
+    - Mailgun Inbound Parsing             → POST form-encoded
+    - Generic JSON webhook                → POST {from, to, subject, html, text, ...}
+
+    Security: validates X-Webhook-Token header against INBOUND_WEBHOOK_SECRET.
+    Set INBOUND_WEBHOOK_SECRET in your .env (used as a shared secret).
+    Leave blank during local dev to skip validation.
+    """
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def _verify_token(self, request):
+        secret = getattr(settings, 'INBOUND_WEBHOOK_SECRET', '').strip()
+        if not secret:
+            return True  # No secret configured → allow all (dev mode)
+        token = (
+            request.headers.get('X-Webhook-Token', '') or
+            request.headers.get('X-Inbound-Token', '') or
+            request.query_params.get('token', '')
+        )
+        return hmac.compare_digest(token, secret)
+
+    def _parse_brevo(self, payload):
+        """Parse Brevo inbound email format (array of message objects)."""
+        items = payload if isinstance(payload, list) else [payload]
+        results = []
+        for item in items:
+            from_obj = item.get('From') or item.get('from') or {}
+            if isinstance(from_obj, str):
+                from_email = from_obj
+                from_name = ''
+            else:
+                from_email = from_obj.get('Address', from_obj.get('email', ''))
+                from_name = from_obj.get('Name', from_obj.get('name', ''))
+
+            to_list = item.get('To', item.get('to', []))
+            if isinstance(to_list, str):
+                to_email = to_list
+            elif isinstance(to_list, list):
+                to_email = ', '.join(
+                    (t.get('Address', t.get('email', t)) if isinstance(t, dict) else t)
+                    for t in to_list
+                )
+            else:
+                to_email = ''
+
+            received_at = None
+            date_str = item.get('Date', item.get('date', ''))
+            if date_str:
+                try:
+                    try:
+                        received_at = parsedate_to_datetime(date_str)
+                    except Exception:
+                        from django.utils.dateparse import parse_datetime
+                        received_at = parse_datetime(date_str)
+                except Exception:
+                    pass
+
+            results.append({
+                'message_id':      item.get('MessageId', item.get('message_id', '')),
+                'from_email':      from_email,
+                'from_name':       from_name,
+                'to_email':        to_email,
+                'reply_to':        (item.get('ReplyTo') or {}).get('Address', '') if isinstance(item.get('ReplyTo'), dict) else item.get('reply_to', ''),
+                'in_reply_to':     item.get('InReplyTo', item.get('in_reply_to', '')),
+                'subject':         item.get('Subject', item.get('subject', '')) or '(no subject)',
+                'html_body':       item.get('RawHtmlBody', item.get('html', item.get('body_html', ''))),
+                'text_body':       item.get('RawTextBody', item.get('text', item.get('body_plain', item.get('ExtractedMarkdownMessage', '')))),
+                'has_attachments': bool(item.get('Attachments') or item.get('attachments', [])),
+                'attachments':     item.get('Attachments', item.get('attachments', [])),
+                'headers':         item.get('Headers', item.get('headers', {})),
+                'received_at':     received_at,
+                'raw_payload':     item,
+            })
+        return results
+
+    def post(self, request):
+        if not self._verify_token(request):
+            return Response({'error': 'Unauthorized'}, status=401)
+
+        content_type = request.content_type or ''
+        if 'application/json' in content_type:
+            payload = request.data
+        else:
+            # Form-encoded fallback (Mailgun, generic)
+            payload = {
+                'from':    request.POST.get('from', request.POST.get('sender', '')),
+                'to':      request.POST.get('to', request.POST.get('recipient', '')),
+                'subject': request.POST.get('subject', ''),
+                'html':    request.POST.get('body-html', request.POST.get('html', '')),
+                'text':    request.POST.get('body-plain', request.POST.get('text', '')),
+                'message_id': request.POST.get('Message-Id', ''),
+            }
+
+        try:
+            records = self._parse_brevo(payload)
+        except Exception as exc:
+            return Response({'error': f'Parse error: {exc}'}, status=400)
+
+        if not records:
+            return Response({'received': 0})
+
+        from emails.models import InboundEmail
+        created = []
+        for r in records:
+            # Deduplicate by message_id
+            if r['message_id'] and InboundEmail.objects.filter(message_id=r['message_id']).exists():
+                continue
+            obj = InboundEmail.objects.create(**r)
+            created.append(obj.pk)
+
+        return Response({'received': len(created), 'ids': created}, status=201)
+
+
+# ── Inbound Inbox API ─────────────────────────────────────────────────────────
+
+class InboundEmailListView(APIView):
+    """List received emails. Staff only."""
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        from emails.models import InboundEmail
+        qs = InboundEmail.objects.order_by('-created_at')
+
+        status_filter = request.query_params.get('status', '').strip()
+        if status_filter:
+            qs = qs.filter(status=status_filter)
+
+        q = request.query_params.get('q', '').strip()
+        if q:
+            qs = qs.filter(
+                models.Q(from_email__icontains=q) |
+                models.Q(subject__icontains=q) |
+                models.Q(from_name__icontains=q)
+            )
+
+        paginator = EmailLogPagination()
+        page = paginator.paginate_queryset(qs, request)
+        data = [
+            {
+                'id':               obj.pk,
+                'from_email':       obj.from_email,
+                'from_name':        obj.from_name,
+                'to_email':         obj.to_email,
+                'subject':          obj.subject,
+                'preview_text':     obj.text_body[:120] if obj.text_body else '',
+                'status':           obj.status,
+                'has_attachments':  obj.has_attachments,
+                'received_at':      obj.received_at.isoformat() if obj.received_at else None,
+                'created_at':       obj.created_at.isoformat(),
+            }
+            for obj in page
+        ]
+        return paginator.get_paginated_response(data)
+
+
+class InboundEmailDetailView(APIView):
+    """Retrieve or update status of a single inbound email. Staff only."""
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request, pk):
+        from emails.models import InboundEmail
+        try:
+            obj = InboundEmail.objects.get(pk=pk)
+        except InboundEmail.DoesNotExist:
+            return Response({'error': 'Not found.'}, status=404)
+
+        # Mark as read automatically on open
+        if obj.status == 'unread':
+            obj.status = 'read'
+            obj.save(update_fields=['status'])
+
+        return Response({
+            'id':               obj.pk,
+            'message_id':       obj.message_id,
+            'from_email':       obj.from_email,
+            'from_name':        obj.from_name,
+            'to_email':         obj.to_email,
+            'cc':               obj.cc,
+            'reply_to':         obj.reply_to,
+            'in_reply_to':      obj.in_reply_to,
+            'subject':          obj.subject,
+            'html_body':        obj.html_body,
+            'text_body':        obj.text_body,
+            'status':           obj.status,
+            'has_attachments':  obj.has_attachments,
+            'attachments':      obj.attachments,
+            'spam_score':       obj.spam_score,
+            'received_at':      obj.received_at.isoformat() if obj.received_at else None,
+            'created_at':       obj.created_at.isoformat(),
+        })
+
+    def patch(self, request, pk):
+        from emails.models import InboundEmail
+        try:
+            obj = InboundEmail.objects.get(pk=pk)
+        except InboundEmail.DoesNotExist:
+            return Response({'error': 'Not found.'}, status=404)
+
+        allowed = {'status', 'spam_score'}
+        for field in allowed:
+            if field in request.data:
+                setattr(obj, field, request.data[field])
+        obj.save()
+        return Response({'id': obj.pk, 'status': obj.status})
+
+    def delete(self, request, pk):
+        from emails.models import InboundEmail
+        try:
+            obj = InboundEmail.objects.get(pk=pk)
+        except InboundEmail.DoesNotExist:
+            return Response({'error': 'Not found.'}, status=404)
+        obj.delete()
+        return Response({'deleted': True})
 

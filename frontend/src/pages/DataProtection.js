@@ -36,16 +36,16 @@ const DataProtection = () => {
       <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <span className="gsw-eyebrow">Trust & Compliance</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, marginBottom: 24 }}>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, margin: '0 auto 24px' }}>
             Data Protection
           </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, marginBottom: 32 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 32px' }}>
             AtonixDev processes personal data responsibly and in full alignment with GDPR principles,
             international privacy standards, and the expectations of enterprise and government clients.
           </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
             <Link to="/privacy" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
               Privacy Policy
             </Link>

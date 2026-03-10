@@ -105,7 +105,10 @@ api.interceptors.response.use(
             path.startsWith('/admin') ||
             path.startsWith('/dashboard') ||
             path.startsWith('/settings') ||
-            path.startsWith('/lab');
+            path.startsWith('/lab') ||
+            path.startsWith('/email-console') ||
+            path.startsWith('/ops') ||
+            path.startsWith('/support-console');
           const isAuthPage = path.startsWith('/login') || path.startsWith('/register');
           if (isProtectedPath && !isAuthPage) {
             window.location.href = '/login';

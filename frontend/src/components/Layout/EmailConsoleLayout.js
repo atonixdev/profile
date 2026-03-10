@@ -6,6 +6,7 @@ import AtonixDevLogo from '../AtonixDevLogo';
 // GS-WSF — Email & Communications Console Shell
 const NAV_ITEMS = [
   { path: '/email-console',            exact: true,  label: 'Overview',           code: 'OVW' },
+  { path: '/email-console/inbox',      exact: false, label: 'Inbox',              code: 'INB' },
   { path: '/email-console/marketing',  exact: false, label: 'Marketing',          code: 'MKT' },
   { path: '/email-console/campaigns',  exact: false, label: 'Campaigns',          code: 'CMP' },
   { path: '/email-console/templates',  exact: false, label: 'Templates',          code: 'TPL' },

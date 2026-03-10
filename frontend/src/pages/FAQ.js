@@ -28,32 +28,36 @@ const FAQ = () => {
 
   const btnBase = {
     padding: '8px 20px',
-    fontSize: '12px',
+    fontSize: '11px',
     fontWeight: 700,
     textTransform: 'uppercase',
     letterSpacing: '0.08em',
     cursor: 'pointer',
     border: '1px solid #D1D5DB',
-    fontFamily: 'Inter, sans-serif',
-    transition: 'background 0.15s',
+    fontFamily: 'inherit',
+    transition: 'all 0.15s ease',
   };
 
   return (
-    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
-      {/* Hero */}
-      <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
-          <p style={{ fontSize: '12px', fontWeight: 700, color: '#A81D37', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>Support</p>
-          <h1 style={{ fontSize: '48px', fontWeight: 800, lineHeight: 1.1, color: '#111827', margin: '0 0 20px' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <span className="gsw-eyebrow">Support</span>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', fontWeight: 800, lineHeight: 1.1, color: '#111827', maxWidth: 700, margin: '0 auto 24px' }}>
             Frequently Asked Questions
           </h1>
-          <p style={{ fontSize: '18px', color: '#6B7280', maxWidth: '560px', margin: '0 auto' }}>
+          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7, margin: '0 auto' }}>
             Find answers to common questions about our services, process, and technology.
           </p>
         </div>
-      </div>
+      </section>
+      <hr className="gsw-divider" />
 
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '64px 24px 80px' }}>
+      <section className="gsw-section">
+        <div className="gsw-container" style={{ maxWidth: 900 }}>
         {/* Category Filter */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '48px', justifyContent: 'center' }}>
           {categories.map(cat => (
@@ -63,7 +67,7 @@ const FAQ = () => {
               style={{
                 ...btnBase,
                 background: selectedCategory === cat ? '#A81D37' : 'transparent',
-                color: selectedCategory === cat ? '#111827' : '#6B7280',
+                color: selectedCategory === cat ? '#FFFFFF' : '#6B7280',
                 borderColor: selectedCategory === cat ? '#A81D37' : '#D1D5DB',
               }}
             >
@@ -96,14 +100,14 @@ const FAQ = () => {
                     cursor: 'pointer',
                     textAlign: 'left',
                     gap: '16px',
-                    fontFamily: 'Inter, sans-serif',
+                    fontFamily: 'inherit',
                   }}
                 >
                   <div style={{ flex: 1 }}>
                     <span style={{ fontSize: '11px', color: '#A81D37', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '6px' }}>
                       {faq.category}
                     </span>
-                    <span style={{ fontSize: '16px', fontWeight: 700, color: isOpen ? '#111827' : '#ddd' }}>
+                    <span style={{ fontSize: '16px', fontWeight: 700, color: isOpen ? '#111827' : '#374151' }}>
                       {faq.question}
                     </span>
                   </div>
@@ -136,7 +140,8 @@ const FAQ = () => {
             Contact Us
           </a>
         </div>
-      </div>
+        </div>
+      </section>
     </div>
   );
 };

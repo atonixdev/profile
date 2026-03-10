@@ -8,7 +8,7 @@ const PlatformHero = ({ eyebrow, title, subtitle, bullets }) => (
   >
     <div className="hero-grid-bg" />
     <div className="hero-accent-bar" />
-    <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+    <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
       <span className="gsw-eyebrow">{eyebrow}</span>
       <h1
         style={{
@@ -17,7 +17,7 @@ const PlatformHero = ({ eyebrow, title, subtitle, bullets }) => (
           color: '#111827',
           lineHeight: 1.08,
           maxWidth: 760,
-          marginBottom: 24,
+          margin: '0 auto 24px',
         }}
       >
         {title}
@@ -28,12 +28,12 @@ const PlatformHero = ({ eyebrow, title, subtitle, bullets }) => (
           color: '#6B7280',
           lineHeight: 1.75,
           maxWidth: 620,
-          marginBottom: 40,
+          margin: '0 auto 40px',
         }}
       >
         {subtitle}
       </p>
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexWrap: 'wrap', gap: '12px 40px' }}>
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexWrap: 'wrap', gap: '12px 40px', justifyContent: 'center' }}>
         {bullets.map((b) => (
           <li
             key={b}

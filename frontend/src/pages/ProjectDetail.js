@@ -24,7 +24,7 @@ const ProjectDetail = () => {
   if (loading) {
     return (
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: '#6B7280', fontFamily: 'Inter, sans-serif' }}>Loading...</p>
+        <p style={{ color: '#6B7280' }}>Loading...</p>
       </div>
     );
   }
@@ -32,7 +32,7 @@ const ProjectDetail = () => {
   if (!project) {
     return (
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ textAlign: 'center', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ textAlign: 'center' }}>
           <p style={{ color: '#6B7280', marginBottom: '24px' }}>Project not found.</p>
           <Link to="/infrastructure" style={{ color: '#A81D37', textDecoration: 'none', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             &larr; Back to Infrastructure
@@ -43,33 +43,34 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
-      {/* Hero */}
-      <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '100px 0 72px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <Link
             to="/infrastructure"
-            style={{ color: '#A81D37', textDecoration: 'none', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px' }}
+            style={{ color: '#A81D37', textDecoration: 'none', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px', fontFamily: 'var(--font-mono)' }}
           >
             &larr; Back to Infrastructure
           </Link>
           {project.category && (
             <div style={{ marginBottom: '16px' }}>
-              <span style={{ background: '#A81D37', color: '#fff', padding: '4px 12px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                {project.category}
-              </span>
+              <span className="gsw-eyebrow" style={{ marginBottom: 0 }}>{project.category}</span>
             </div>
           )}
-          <h1 style={{ fontSize: '40px', fontWeight: 800, lineHeight: 1.2, color: '#111827', margin: '0 0 20px' }}>
+          <h1 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, lineHeight: 1.2, color: '#111827', margin: '16px auto 20px', maxWidth: 720 }}>
             {project.title}
           </h1>
           {project.short_description && (
-            <p style={{ fontSize: '18px', color: '#6B7280', lineHeight: 1.6, maxWidth: '600px' }}>
+            <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.6, maxWidth: 600, margin: '0 auto' }}>
               {project.short_description}
             </p>
           )}
         </div>
-      </div>
+      </section>
+      <hr className="gsw-divider" />
 
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
         {project.thumbnail && (

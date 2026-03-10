@@ -77,6 +77,9 @@ python manage.py migrate --noinput
 python manage.py add_sample_discussions || true
 python manage.py add_sample_blogs || true
 
+# Ensure sessions directory exists at runtime
+mkdir -p /app/sessions
+
 # Start ASGI server (supports WebSockets via Channels)
 echo "Starting Daphne (ASGI)..."
 exec daphne -b 0.0.0.0 -p 8000 config.asgi:application

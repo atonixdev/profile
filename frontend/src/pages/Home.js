@@ -68,21 +68,7 @@ const Home = () => {
           `,
           backgroundSize: '60px 60px',
         }} />
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: '#A81D37', zIndex: 2 }} />
-
         <div className="gsw-container" style={{ position: 'relative', zIndex: 1, padding: '72px 24px 48px', textAlign: 'center' }}>
-
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 28,
-            padding: '9px 20px',
-            border: '1px solid rgba(168,29,55,0.35)',
-            background: 'rgba(168,29,55,0.07)',
-          }}>
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#A81D37', flexShrink: 0 }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.45)', fontFamily: 'var(--font-mono)' }}>
-              Enterprise Software · Cloud · AI Engineering
-            </span>
-          </div>
 
           <h1 style={{ fontSize: 'clamp(24px, 3.5vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 24, textAlign: 'center' }}>
             <span style={{ display: 'block', color: '#111827' }}>Engineering the Future of Cloud,</span>

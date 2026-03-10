@@ -4,6 +4,7 @@ from .views import (
     EmailTemplateListView, EmailTemplateDetailView, EmailTemplatePreviewView,
     SenderIdentityListView, SenderIdentityDetailView,
     CampaignListView, CampaignDetailView, CampaignSendView, CampaignLogListView,
+    InboundEmailWebhookView, InboundEmailListView, InboundEmailDetailView,
 )
 
 urlpatterns = [
@@ -22,4 +23,8 @@ urlpatterns = [
     path('campaigns/<int:pk>/',   CampaignDetailView.as_view(),       name='admin-campaign-detail'),
     path('campaigns/<int:pk>/send/', CampaignSendView.as_view(),      name='admin-campaign-send'),
     path('campaigns/<int:pk>/logs/', CampaignLogListView.as_view(),   name='admin-campaign-logs'),
+    # Inbound email inbox
+    path('inbound/webhook/',      InboundEmailWebhookView.as_view(),  name='inbound-email-webhook'),
+    path('inbound/',              InboundEmailListView.as_view(),     name='inbound-email-list'),
+    path('inbound/<int:pk>/',     InboundEmailDetailView.as_view(),   name='inbound-email-detail'),
 ]

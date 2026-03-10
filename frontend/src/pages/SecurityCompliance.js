@@ -53,18 +53,18 @@ const SecurityCompliance = () => {
       <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px' }}>
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <span className="gsw-eyebrow">Trust & Compliance</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, marginBottom: 24 }}>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, margin: '0 auto 24px' }}>
             Security &<br />
             <span style={{ color: '#A81D37' }}>Compliance</span>
           </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, marginBottom: 40 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 40px' }}>
             AtonixDev is built with security at the foundation — not layered on top.
             Every control, certification, and operational practice is designed for enterprise
             and government-grade assurance.
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 40px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 40px', justifyContent: 'center' }}>
             {['Identity & Access Control', 'Encryption at Rest & in Transit', 'Zero-Trust Architecture', 'Continuous Compliance Monitoring'].map((b) => (
               <div key={b} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, fontWeight: 600, color: '#374151' }}>
                 <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#A81D37' }} />{b}

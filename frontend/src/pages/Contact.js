@@ -161,12 +161,12 @@ const Contact = () => {
       <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '120px 0 96px', borderBottom: '1px solid #E5E7EB' }}>
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <span className="gsw-eyebrow">Get In Touch</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 24, maxWidth: 720 }}>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 720, margin: '0 auto 24px' }}>
             Let's Build Together
           </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7, margin: '0 auto' }}>
             Enterprise-grade technology solutions and digital transformation at scale.
             Our team responds within 24 hours.
           </p>

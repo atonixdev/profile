@@ -86,18 +86,18 @@ const About = () => {
       >
         <div className="hero-grid-bg" />
         <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <span className="gsw-eyebrow">About AtonixDev</span>
           <h1
             style={{
               fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800,
-              color: '#111827', lineHeight: 1.08, maxWidth: 780, marginBottom: 28,
+              color: '#111827', lineHeight: 1.08, maxWidth: 780, margin: '0 auto 28px',
             }}
           >
             Enterprise Software,<br />
             <span style={{ color: '#A81D37' }}>Cloud &amp; AI Engineering Company</span>
           </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 620 }}>
+          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 620, margin: '0 auto' }}>
             AtonixDev is a global enterprise technology company delivering secure, scalable,
             and intelligent software, cloud, and infrastructure solutions for governments,
             corporations, and high-growth organizations worldwide.

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const PlatformCTA = ({ eyebrow, title, description, links }) => (
   <section
     className="gsw-section-sm"
-    style={{ background: '#111827', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+    style={{ background: '#A81D37', borderTop: '1px solid rgba(255,255,255,0.15)' }}
   >
     <div className="gsw-container">
       <div
@@ -23,7 +23,7 @@ const PlatformCTA = ({ eyebrow, title, description, links }) => (
             style={{
               display: 'inline-block',
               fontSize: 10, fontWeight: 700, letterSpacing: '0.15em',
-              textTransform: 'uppercase', color: '#A81D37',
+              textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)',
               fontFamily: 'var(--font-mono)', marginBottom: 14,
             }}
           >
@@ -52,16 +52,16 @@ const PlatformCTA = ({ eyebrow, title, description, links }) => (
                 style={{
                   display: 'inline-flex', alignItems: 'center',
                   padding: '12px 28px',
-                  background: '#A81D37',
-                  color: '#FFFFFF',
+                  background: '#FFFFFF',
+                  color: '#A81D37',
                   fontSize: 11, fontWeight: 700,
                   letterSpacing: '0.1em', textTransform: 'uppercase',
                   textDecoration: 'none',
                   fontFamily: 'inherit',
-                  transition: 'background 0.15s',
+                  transition: 'opacity 0.15s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = '#8f1830'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = '#A81D37'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.88'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
               >
                 {lnk.label}
               </Link>

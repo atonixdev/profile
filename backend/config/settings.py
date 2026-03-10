@@ -71,10 +71,10 @@ INSTALLED_APPS = [
     'community',
     'activity',
     # 'chatbot_service',  # directory removed — re-add when restored
-    'research_lab',
+    # 'research_lab',  # directory removed — re-add when restored
     # 'ai_lab',  # directory removed — re-add when restored
-    'iot_lab',
-    'self_lab',
+    # 'iot_lab',  # directory removed — re-add when restored
+    # 'self_lab',  # directory removed — re-add when restored
     'developer_settings',
     'model_flow',
     'emails',
@@ -429,6 +429,9 @@ EMAIL_TIMEOUT = 10  # seconds
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@atonixdev.org')
 EMAIL_REPLY_TO = config('EMAIL_REPLY_TO', default='support@atonixdev.com')
 SERVER_EMAIL = config('SERVER_EMAIL', default='errors@atonixdev.com')
+
+# Inbound email webhook shared secret (validated against X-Webhook-Token header)
+INBOUND_WEBHOOK_SECRET = config('INBOUND_WEBHOOK_SECRET', default='')
 
 # Public URL used in email CTAs (no trailing slash)
 FRONTEND_URL = config('FRONTEND_URL', default='https://atonixdev.com').rstrip('/')

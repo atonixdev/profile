@@ -66,7 +66,7 @@ const BlogDetail = () => {
   if (loading) {
     return (
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: '#6B7280', fontFamily: 'Inter, sans-serif' }}>Loading...</p>
+        <p style={{ color: '#6B7280' }}>Loading...</p>
       </div>
     );
   }
@@ -75,7 +75,7 @@ const BlogDetail = () => {
     return (
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#6B7280', fontFamily: 'Inter, sans-serif', marginBottom: '24px' }}>Post not found.</p>
+          <p style={{ color: '#6B7280', marginBottom: '24px' }}>Post not found.</p>
           <Link to="/blog" style={{ color: '#A81D37', textDecoration: 'none', fontSize: '14px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             &larr; Back to Blog
           </Link>
@@ -85,27 +85,27 @@ const BlogDetail = () => {
   }
 
   return (
-    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: 'Inter, sans-serif', color: '#111827' }}>
-      {/* Hero */}
-      <div style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '80px 0 60px' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      {/* ── Page Hero ──────────────────────────────────────── */}
+      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '100px 0 72px' }}>
+        <div className="hero-grid-bg" />
+        <div className="hero-accent-bar" />
+        <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <Link
             to="/blog"
-            style={{ color: '#A81D37', textDecoration: 'none', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px' }}
+            style={{ color: '#A81D37', textDecoration: 'none', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px', fontFamily: 'var(--font-mono)' }}
           >
             &larr; Back to Blog
           </Link>
           {post.category && (
             <div style={{ marginBottom: '16px' }}>
-              <span style={{ background: '#A81D37', color: '#fff', padding: '4px 12px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                {post.category}
-              </span>
+              <span className="gsw-eyebrow" style={{ marginBottom: 0 }}>{post.category}</span>
             </div>
           )}
-          <h1 style={{ fontSize: '40px', fontWeight: 800, lineHeight: 1.2, color: '#111827', margin: '0 0 24px' }}>
+          <h1 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, lineHeight: 1.2, color: '#111827', margin: '16px auto 24px', maxWidth: 720 }}>
             {post.title}
           </h1>
-          <div style={{ display: 'flex', gap: '24px', color: '#6B7280', fontSize: '13px' }}>
+          <div style={{ display: 'flex', gap: '24px', color: '#6B7280', fontSize: '13px', justifyContent: 'center' }}>
             {post.author && <span>{post.author}</span>}
             {post.published_at && (
               <span>{new Date(post.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -113,7 +113,8 @@ const BlogDetail = () => {
             {post.views && <span>{post.views} views</span>}
           </div>
         </div>
-      </div>
+      </section>
+      <hr className="gsw-divider" />
 
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
         {/* Featured Image */}

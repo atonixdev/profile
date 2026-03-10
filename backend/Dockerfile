@@ -24,7 +24,7 @@ RUN pip install -r requirements.txt
 COPY . /app/
 
 # Create necessary directories
-RUN mkdir -p /app/staticfiles /app/media
+RUN mkdir -p /app/staticfiles /app/media /app/sessions
 
 # Collect static files
 RUN python manage.py collectstatic --noinput || true
