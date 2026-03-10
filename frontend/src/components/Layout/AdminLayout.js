@@ -222,8 +222,8 @@ const AdminLayout = () => {
         <div
           style={{
             height: 52, flexShrink: 0,
-            background: '#FFFFFF',
-            borderBottom: '1px solid #E5E7EB',
+            background: '#406e8e',
+            borderBottom: '1px solid rgba(255,255,255,0.12)',
             display: 'flex', alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0 20px',
@@ -239,9 +239,9 @@ const AdminLayout = () => {
               }}
               aria-label="Toggle sidebar"
             >
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
             </button>
             <div
               style={{
@@ -249,9 +249,9 @@ const AdminLayout = () => {
                 fontSize: 12, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
               }}
             >
-              <span style={{ color: '#406e8e', fontWeight: 700 }}>ADMIN</span>
-              <span style={{ color: '#9CA3AF' }}>/</span>
-              <span style={{ color: '#111827', fontWeight: 700 }}>
+              <span style={{ color: '#FFFFFF', fontWeight: 700 }}>ADMIN</span>
+              <span style={{ color: 'rgba(255,255,255,0.45)' }}>/</span>
+              <span style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 700 }}>
                 {currentItem?.label || 'Console'}
               </span>
             </div>
@@ -259,17 +259,17 @@ const AdminLayout = () => {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 10, fontFamily: 'var(--font-mono)' }}>
-              <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: '#406e8e' }} />
-              <span style={{ color: '#6B7280', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: 'rgba(255,255,255,0.7)' }} />
+              <span style={{ color: 'rgba(255,255,255,0.65)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                 Governance Active
               </span>
             </div>
             <Link
               to="/ops"
               style={{
-                fontSize: 10, color: '#A81D37', textDecoration: 'none',
+                fontSize: 10, color: '#FFB3BF', textDecoration: 'none',
                 fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', fontWeight: 700,
-                textTransform: 'uppercase', opacity: 0.8,
+                textTransform: 'uppercase', opacity: 0.9,
               }}
             >
               OPS →
@@ -277,7 +277,7 @@ const AdminLayout = () => {
             <Link
               to="/dashboard"
               style={{
-                fontSize: 10, color: '#406e8e', textDecoration: 'none',
+                fontSize: 10, color: 'rgba(255,255,255,0.75)', textDecoration: 'none',
                 fontFamily: 'var(--font-mono)', letterSpacing: '0.1em',
                 textTransform: 'uppercase',
               }}
