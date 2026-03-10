@@ -65,23 +65,6 @@ const Industries = () => {
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
 
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Sector Expertise</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
-            Industries
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
-            Domain-specific technology delivery across eight critical sectors,
-            with deep understanding of each industry's regulatory, operational, and technical requirements.
-          </p>
-        </div>
-      </section>
-      <hr className="gsw-divider" />
-
       {/* Industries List */}
       <section style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 24px 80px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
@@ -96,24 +79,24 @@ const Industries = () => {
                 {/* Right — Details */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px 40px' }}>
                   <div>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Challenges</div>
-                    <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.72, margin: 0 }}>{ind.challenges}</p>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Challenges</div>
+                    <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.72, margin: 0 }}>{ind.challenges}</p>
                   </div>
                   <div>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Solutions Delivered</div>
-                    <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.72, margin: 0 }}>{ind.solutions}</p>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Solutions Delivered</div>
+                    <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.72, margin: 0 }}>{ind.solutions}</p>
                   </div>
                   <div>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Technologies</div>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Technologies</div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                       {ind.technologies.map((t) => (
-                        <span key={t} style={{ padding: '3px 10px', fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', color: '#6B7280', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{t}</span>
+                        <span key={t} style={{ padding: '3px 10px', fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', color: '#4B5563', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{t}</span>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Impact</div>
-                    <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.72, margin: 0 }}>{ind.impact}</p>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Impact</div>
+                    <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.72, margin: 0 }}>{ind.impact}</p>
                   </div>
                 </div>
               </div>
@@ -122,7 +105,7 @@ const Industries = () => {
         </div>
 
         <div style={{ marginTop: 56, textAlign: 'center' }}>
-          <p style={{ fontSize: 15, color: '#6B7280', marginBottom: 28, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 15, color: '#4B5563', marginBottom: 28, lineHeight: 1.6 }}>
             Does your sector require a tailored approach?
           </p>
           <Link

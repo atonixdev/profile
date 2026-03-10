@@ -62,7 +62,7 @@ const Footer = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               <AtonixDevLogo size={28} variant="dark" textColor="#FFFFFF" />
             </div>
-            <p style={{ color: '#9CA3AF', fontSize: 13, lineHeight: 1.7, marginBottom: 24, maxWidth: 300 }}>
+            <p style={{ color: '#4B5563', fontSize: 13, lineHeight: 1.7, marginBottom: 24, maxWidth: 300 }}>
               A global enterprise technology company delivering secure, scalable, and intelligent
               software, cloud, and infrastructure solutions for governments, corporations, and
               high-growth organizations worldwide.
@@ -80,7 +80,7 @@ const Footer = () => {
                     width: 32, height: 32,
                     background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#9CA3AF',
+                    color: '#4B5563',
                     transition: 'color 0.15s ease, border-color 0.15s ease',
                   }}
                   onMouseEnter={(e) => {
@@ -88,7 +88,7 @@ const Footer = () => {
                     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#9CA3AF';
+                    e.currentTarget.style.color = '#4B5563';
                     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
                   }}
                 >
@@ -116,11 +116,11 @@ const Footer = () => {
                     <Link
                       to={link.to}
                       style={{
-                      color: '#9CA3AF', fontSize: 13,
+                      color: '#4B5563', fontSize: 13,
                         transition: 'color 0.15s ease', textDecoration: 'none',
                       }}
                       onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
                     >
                       {link.label}
                     </Link>
@@ -141,7 +141,7 @@ const Footer = () => {
           justifyContent: 'space-between', alignItems: 'center',
         }}
       >
-        <p style={{ color: '#9CA3AF', fontSize: 12, margin: 0 }}>
+        <p style={{ color: '#4B5563', fontSize: 12, margin: 0 }}>
           &copy; {currentYear} AtonixDev — AtonixCorp. All rights reserved.
         </p>
         <div style={{ display: 'flex', gap: 24 }}>
@@ -153,9 +153,9 @@ const Footer = () => {
             <Link
               key={label}
               to={to}
-              style={{ color: '#9CA3AF', fontSize: 12, textDecoration: 'none', transition: 'color 0.15s' }}
+              style={{ color: '#4B5563', fontSize: 12, textDecoration: 'none', transition: 'color 0.15s' }}
               onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
             >
               {label}
             </Link>

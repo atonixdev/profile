@@ -10,7 +10,7 @@ const STATUS_COLOR = {
   awaiting_user: '#60A5FA',
   escalated:     '#EF4444',
   resolved:      '#A78BFA',
-  closed:        '#9CA3AF',
+  closed:        '#4B5563',
 };
 
 export default function Overview() {
@@ -47,13 +47,13 @@ export default function Overview() {
           ANL — Support Analytics
         </div>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Overview</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+        <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
           Real-time ticket volume, resolution rates, and status distribution.
         </p>
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: 60, color: '#9CA3AF' }}>Loading analytics…</div>
+        <div style={{ textAlign: 'center', padding: 60, color: '#4B5563' }}>Loading analytics…</div>
       ) : (
         <>
           {/* Top stats */}
@@ -65,7 +65,7 @@ export default function Overview() {
               { label: 'Resolution Rate',    value: `${resolutionRate}%`,  color: '#A78BFA' },
             ].map((s) => (
               <div key={s.label} style={CARD}>
-                <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+                <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
                 <div style={{ fontSize: 32, fontWeight: 700, color: s.color }}>{s.value}</div>
               </div>
             ))}
@@ -73,7 +73,7 @@ export default function Overview() {
 
           {/* Status breakdown */}
           <div style={{ marginBottom: 32 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 16 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 16 }}>
               Status Breakdown
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
@@ -85,7 +85,7 @@ export default function Overview() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
                       <div>
                         <div style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>{s.label}</div>
-                        <div style={{ fontSize: 11, color: '#9CA3AF', marginTop: 2 }}>{s.desc}</div>
+                        <div style={{ fontSize: 11, color: '#4B5563', marginTop: 2 }}>{s.desc}</div>
                       </div>
                       <div style={{ fontSize: 22, fontWeight: 700, color: STATUS_COLOR[s.key] }}>{count}</div>
                     </div>
@@ -93,7 +93,7 @@ export default function Overview() {
                     <div style={{ height: 4, background: '#E5E7EB', borderRadius: 2, overflow: 'hidden' }}>
                       <div style={{ height: '100%', width: `${pct}%`, background: STATUS_COLOR[s.key], borderRadius: 2, transition: 'width 0.6s ease' }} />
                     </div>
-                    <div style={{ fontSize: 10, color: '#9CA3AF', marginTop: 4, fontFamily: 'var(--font-mono)' }}>{pct}% of total</div>
+                    <div style={{ fontSize: 10, color: '#4B5563', marginTop: 4, fontFamily: 'var(--font-mono)' }}>{pct}% of total</div>
                   </div>
                 );
               })}
@@ -102,11 +102,11 @@ export default function Overview() {
 
           {/* Quick actions */}
           <div style={{ background: '#F9FAFB', border: BD, padding: '20px 24px' }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>Quick Actions</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>Quick Actions</div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <a href="/support-console" style={{ padding: '9px 20px', background: '#1B3A4B', color: '#FFFFFF', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em' }}>View All Tickets</a>
               <a href="/support-console/escalated" style={{ padding: '9px 20px', background: '#EF4444', color: '#FFFFFF', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em' }}>Escalated ({stats.escalated ?? 0})</a>
-              <a href="/support" style={{ padding: '9px 20px', background: 'transparent', border: BD, color: '#374151', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em' }}>Public Support Form →</a>
+              <a href="/support" style={{ padding: '9px 20px', background: 'transparent', border: BD, color: '#1F2937', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em' }}>Public Support Form →</a>
             </div>
           </div>
         </>

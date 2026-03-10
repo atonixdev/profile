@@ -66,40 +66,13 @@ const maturity = [
 const DevOpsSecurity = () => (
   <div style={{ background: '#FFFFFF' }}>
 
-    {/* ── Hero ── */}
-    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
-      <div className="hero-grid-bg" />
-      <div className="hero-accent-bar" />
-      <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-        <span className="gsw-eyebrow">Corporate Solutions</span>
-        <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 20px' }}>DevOps & Security</h1>
-        <p style={{ fontSize: 17, color: '#6B7280', lineHeight: 1.75, maxWidth: 600, margin: '0 auto 32px' }}>
-          CI/CD pipeline engineering, shift-left application security, infrastructure hardening, and compliance automation — baked into your software delivery lifecycle from day one, not bolted on after the fact.
-        </p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', marginBottom: 48 }}>
-          <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Assess My Pipeline</Link>
-          <Link to="/security" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', border: '1px solid #111827', color: '#111827', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Security Compliance →</Link>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 800, margin: '0 auto' }}>
-          {[['4min', 'Avg deploy lead time (post)', ['14day', 'Before engagement']], ['0', 'Critical vuln MTTR (SLA)', null], ['100%', 'Pipeline SAST coverage', null], ['3×', 'Deployment frequency increase', null]].map(([val, label], i) => (
-            <div key={i} style={{ background: '#FFFFFF', padding: '28px 24px' }}>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{val}</div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <hr className="gsw-divider" />
-
     {/* ── Services ── */}
     <section className="gsw-section" style={{ background: '#FFFFFF' }}>
       <div className="gsw-container">
-        <div style={{ marginBottom: 56 }}>
+        <div className="gsw-section-header">
           <span className="gsw-eyebrow">Services</span>
           <h2 className="gsw-section-title">DevSecOps service areas</h2>
-          <p style={{ fontSize: 16, color: '#6B7280', maxWidth: 520, lineHeight: 1.75 }}>Six practice areas covering delivery automation, infrastructure code, application security scanning, container hardening, observability, and compliance-as-code.</p>
+          <p style={{ fontSize: 16, color: '#4B5563', maxWidth: 520, lineHeight: 1.75 }}>Six practice areas covering delivery automation, infrastructure code, application security scanning, container hardening, observability, and compliance-as-code.</p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
           {services.map((svc, i) => (
@@ -107,11 +80,11 @@ const DevOpsSecurity = () => (
               <div>
                 <div style={{ fontSize: 22, color: '#A81D37', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>{svc.icon}</div>
                 <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', marginBottom: 10 }}>{svc.title}</h3>
-                <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8 }}>{svc.body}</p>
+                <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8 }}>{svc.body}</p>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {svc.points.map((pt) => (
-                  <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.7, paddingBottom: 8 }}>
+                  <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.7, paddingBottom: 8 }}>
                     <span style={{ color: '#A81D37', fontWeight: 900, flexShrink: 0, marginTop: 2 }}>—</span>{pt}
                   </li>
                 ))}
@@ -127,21 +100,21 @@ const DevOpsSecurity = () => (
     {/* ── Maturity Path ── */}
     <section className="gsw-section" style={{ background: '#F8F9FA' }}>
       <div className="gsw-container">
-        <div style={{ marginBottom: 48 }}>
+        <div className="gsw-section-header">
           <span className="gsw-eyebrow">Maturity</span>
           <h2 className="gsw-section-title">DevSecOps maturity roadmap</h2>
-          <p style={{ fontSize: 16, color: '#6B7280', maxWidth: 520, lineHeight: 1.75 }}>We use a maturity model to quickly assess where your team is today and define the highest-ROI improvements to prioritise.</p>
+          <p style={{ fontSize: 16, color: '#4B5563', maxWidth: 520, lineHeight: 1.75 }}>We use a maturity model to quickly assess where your team is today and define the highest-ROI improvements to prioritise.</p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
           {maturity.map((m, i) => (
             <div key={i} style={{ background: '#FFFFFF', padding: '28px 32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px 48px', alignItems: 'start' }}>
               <div>
                 <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{m.level}</div>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7, margin: 0 }}><strong style={{ color: '#111827' }}>Current state: </strong>{m.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7, margin: 0 }}><strong style={{ color: '#111827' }}>Current state: </strong>{m.desc}</p>
               </div>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#6B7280', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>Deliverable</div>
-                <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.7, margin: 0 }}>{m.deliverable}</p>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>Deliverable</div>
+                <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.7, margin: 0 }}>{m.deliverable}</p>
               </div>
             </div>
           ))}
@@ -154,7 +127,7 @@ const DevOpsSecurity = () => (
     {/* ── DORA Metrics ── */}
     <section className="gsw-section" style={{ background: '#FFFFFF' }}>
       <div className="gsw-container">
-        <div style={{ marginBottom: 48 }}>
+        <div className="gsw-section-header">
           <span className="gsw-eyebrow">Outcomes</span>
           <h2 className="gsw-section-title">We measure delivery performance against DORA metrics</h2>
         </div>
@@ -166,7 +139,7 @@ const DevOpsSecurity = () => (
             { metric: 'Failed Deployment Recovery', elite: '<1 hour', target: 'From days to <1 hour' },
           ].map((d) => (
             <div key={d.metric} style={{ background: '#FFFFFF', padding: '28px 24px' }}>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>{d.metric}</div>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>{d.metric}</div>
               <div style={{ fontSize: 18, fontWeight: 800, color: '#111827', marginBottom: 6 }}>{d.elite}</div>
               <div style={{ fontSize: 12, color: '#A81D37', fontWeight: 600 }}>{d.target}</div>
             </div>

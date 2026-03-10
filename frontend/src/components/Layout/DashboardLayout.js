@@ -98,7 +98,7 @@ const DashboardLayout = () => {
                   padding: '10px 20px',
                   fontSize: 13,
                   fontWeight: active ? 700 : 400,
-                  color: active ? '#FFFFFF' : '#6B7280',
+                  color: active ? '#FFFFFF' : '#4B5563',
                   textDecoration: 'none',
                   borderLeft: active ? '2px solid #A81D37' : '2px solid transparent',
                   background: active ? 'rgba(255,255,255,0.06)' : 'transparent',
@@ -109,7 +109,7 @@ const DashboardLayout = () => {
                   if (!active) e.currentTarget.style.color = '#D1D5DB';
                 }}
                 onMouseLeave={(e) => {
-                  if (!active) e.currentTarget.style.color = '#6B7280';
+                  if (!active) e.currentTarget.style.color = '#4B5563';
                 }}
               >
                 {item.label}
@@ -225,7 +225,7 @@ const DashboardLayout = () => {
               </div>
               <div
                 style={{
-                  fontSize: 11, color: '#6B7280',
+                  fontSize: 11, color: '#4B5563',
                   overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                 }}
               >
@@ -239,7 +239,7 @@ const DashboardLayout = () => {
               width: '100%', padding: '8px 0',
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(255,255,255,0.1)',
-              color: '#9CA3AF', fontSize: 11, fontWeight: 700,
+              color: '#4B5563', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.1em', textTransform: 'uppercase',
               cursor: 'pointer', fontFamily: 'inherit',
               transition: 'color 0.15s, border-color 0.15s',
@@ -249,7 +249,7 @@ const DashboardLayout = () => {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#9CA3AF';
+              e.currentTarget.style.color = '#4B5563';
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
             }}
           >
@@ -282,9 +282,9 @@ const DashboardLayout = () => {
               }}
               aria-label="Toggle sidebar"
             >
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#4B5563' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#4B5563' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#4B5563' }} />
             </button>
             <div
               style={{
@@ -294,7 +294,7 @@ const DashboardLayout = () => {
               }}
             >
               <span style={{ color: '#4B5563' }}>Console</span>
-              <span style={{ color: '#374151' }}>/</span>
+              <span style={{ color: '#1F2937' }}>/</span>
               <span style={{ color: '#FFFFFF', fontWeight: 700 }}>
                 {currentItem?.label || 'Dashboard'}
               </span>
@@ -352,12 +352,12 @@ const DashboardLayout = () => {
             <Link
               to="/"
               style={{
-                fontSize: 11, color: '#6B7280', textDecoration: 'none',
+                fontSize: 11, color: '#4B5563', textDecoration: 'none',
                 fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
                 transition: 'color 0.15s',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
             >
               ← Back to Site
             </Link>

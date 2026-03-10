@@ -5,7 +5,7 @@ const BD = '1px solid #E5E7EB';
 const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const STATUS_CONFIG = {
-  draft:      { color: '#6B7280', label: 'Draft'     },
+  draft:      { color: '#4B5563', label: 'Draft'     },
   scheduled:  { color: '#3B82F6', label: 'Scheduled' },
   sending:    { color: A,         label: 'Sending'   },
   sent:       { color: '#22C55E', label: 'Sent'      },
@@ -15,9 +15,9 @@ const STATUS_CONFIG = {
 };
 
 const LOG_STATUS_COLOR = {
-  queued: '#6B7280', sent: '#3B82F6', delivered: '#22C55E',
+  queued: '#4B5563', sent: '#3B82F6', delivered: '#22C55E',
   opened: A, clicked: '#8B5CF6', bounced: '#F59E0B',
-  failed: '#EF4444', unsubscribed: '#9CA3AF',
+  failed: '#EF4444', unsubscribed: '#4B5563',
 };
 
 const BLANK_CAMPAIGN = {
@@ -216,36 +216,36 @@ export default function Campaigns() {
                 <span style={{ fontSize: 12, fontWeight: 700, color: A, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>
                   CAMPAIGN LOGS — {logsCampaign.name}
                 </span>
-                <span style={{ marginLeft: 12, fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>
+                <span style={{ marginLeft: 12, fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>
                   {logsCampaign.recipient_count} recipients
                 </span>
               </div>
-              <button onClick={() => setLogsOpen(false)} style={{ background: 'transparent', border: 'none', color: '#6B7280', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+              <button onClick={() => setLogsOpen(false)} style={{ background: 'transparent', border: 'none', color: '#4B5563', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
             </div>
             <div style={{ flex: 1, overflow: 'auto' }}>
               {logsLoading ? (
                 <div style={{ padding: 32, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading logs…</div>
               ) : logs.length === 0 ? (
-                <div style={{ padding: 32, textAlign: 'center', color: '#374151', fontSize: 13 }}>No logs yet.</div>
+                <div style={{ padding: 32, textAlign: 'center', color: '#1F2937', fontSize: 13 }}>No logs yet.</div>
               ) : (
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
                     <tr>
                       {['Recipient', 'Status', 'Sent At', 'Error'].map((h) => (
-                        <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
+                        <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {logs.map((l, i) => (
                       <tr key={l.id || i} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                        <td style={{ padding: '9px 16px', fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>{l.recipient}</td>
+                        <td style={{ padding: '9px 16px', fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{l.recipient}</td>
                         <td style={{ padding: '9px 16px' }}>
-                          <span style={{ fontSize: 10, fontWeight: 700, color: LOG_STATUS_COLOR[l.status] || '#6B7280', fontFamily: 'var(--font-mono)' }}>
+                          <span style={{ fontSize: 10, fontWeight: 700, color: LOG_STATUS_COLOR[l.status] || '#4B5563', fontFamily: 'var(--font-mono)' }}>
                             {(l.status || '').toUpperCase()}
                           </span>
                         </td>
-                        <td style={{ padding: '9px 16px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
+                        <td style={{ padding: '9px 16px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
                           {l.sent_at ? new Date(l.sent_at).toLocaleString() : '—'}
                         </td>
                         <td style={{ padding: '9px 16px', fontSize: 11, color: '#EF4444', maxWidth: 260, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -268,7 +268,7 @@ export default function Campaigns() {
             CMP — Marketing Campaign Management
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Campaigns</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Create, schedule, and dispatch email marketing campaigns.
           </p>
         </div>
@@ -294,7 +294,7 @@ export default function Campaigns() {
           { label: 'Drafts',          value: stats.draft },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -312,7 +312,7 @@ export default function Campaigns() {
           <div style={{ fontSize: 11, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 18, fontFamily: 'var(--font-mono)' }}>New Campaign</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
             <div>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Campaign Name</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Campaign Name</label>
               <input
                 value={newCampaign.name}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, name: e.target.value }))}
@@ -321,7 +321,7 @@ export default function Campaigns() {
               />
             </div>
             <div>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject Line</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject Line</label>
               <input
                 value={newCampaign.subject}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, subject: e.target.value }))}
@@ -330,7 +330,7 @@ export default function Campaigns() {
               />
             </div>
             <div>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Template</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Template</label>
               <select
                 value={newCampaign.template}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, template: e.target.value }))}
@@ -343,7 +343,7 @@ export default function Campaigns() {
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Sender Identity</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Sender Identity</label>
               <select
                 value={newCampaign.sender_identity}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, sender_identity: e.target.value }))}
@@ -356,7 +356,7 @@ export default function Campaigns() {
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Scheduled At (optional)</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Scheduled At (optional)</label>
               <input
                 type="datetime-local"
                 value={newCampaign.scheduled_at}
@@ -365,7 +365,7 @@ export default function Campaigns() {
               />
             </div>
             <div style={{ gridColumn: '1 / -1' }}>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 Recipients (comma-separated email addresses)
               </label>
               <textarea
@@ -375,7 +375,7 @@ export default function Campaigns() {
                 placeholder="user@example.com, another@example.com, ..."
                 style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
               />
-              <div style={{ fontSize: 10, color: '#374151', marginTop: 4, fontFamily: 'var(--font-mono)' }}>
+              <div style={{ fontSize: 10, color: '#1F2937', marginTop: 4, fontFamily: 'var(--font-mono)' }}>
                 {newCampaign.recipients
                   ? newCampaign.recipients.split(',').map((r) => r.trim()).filter(Boolean).length
                   : 0} recipient(s)
@@ -412,7 +412,7 @@ export default function Campaigns() {
         >
           Refresh
         </button>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>
+        <span style={{ marginLeft: 'auto', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>
           {campaigns.length} campaign{campaigns.length !== 1 ? 's' : ''}
         </span>
       </div>
@@ -428,7 +428,7 @@ export default function Campaigns() {
       {loading ? (
         <div style={{ padding: 40, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading campaigns…</div>
       ) : campaigns.length === 0 ? (
-        <div style={{ padding: '40px 20px', textAlign: 'center', color: '#374151', fontSize: 13, border: BD }}>
+        <div style={{ padding: '40px 20px', textAlign: 'center', color: '#1F2937', fontSize: 13, border: BD }}>
           No campaigns found. Create one with the button above.
         </div>
       ) : (
@@ -437,13 +437,13 @@ export default function Campaigns() {
             <thead>
               <tr>
                 {['Campaign', 'Template', 'Status', 'Recipients', 'Delivery', 'Open', 'Click', 'Bounce', 'Actions'].map((h) => (
-                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>{h}</th>
+                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {campaigns.map((c) => {
-                const sc = STATUS_CONFIG[c.status] || { color: '#6B7280', label: c.status };
+                const sc = STATUS_CONFIG[c.status] || { color: '#4B5563', label: c.status };
                 const sr = sendResult[c.id];
                 return (
                   <tr key={c.id}
@@ -453,7 +453,7 @@ export default function Campaigns() {
                   >
                     <td style={{ padding: '12px 14px', maxWidth: 200 }}>
                       <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</div>
-                      <div style={{ fontSize: 10, color: '#374151', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
+                      <div style={{ fontSize: 10, color: '#1F2937', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
                         {c.sent_at ? `Sent ${new Date(c.sent_at).toLocaleDateString()}` : c.scheduled_at ? `Sched. ${new Date(c.scheduled_at).toLocaleDateString()}` : 'Not scheduled'}
                       </div>
                       {sr && (
@@ -462,7 +462,7 @@ export default function Campaigns() {
                         </div>
                       )}
                     </td>
-                    <td style={{ padding: '12px 14px', fontSize: 11, color: '#9CA3AF', fontFamily: 'var(--font-mono)', maxWidth: 140, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <td style={{ padding: '12px 14px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', maxWidth: 140, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {c.template || '—'}
                     </td>
                     <td style={{ padding: '12px 14px' }}>
@@ -470,7 +470,7 @@ export default function Campaigns() {
                         {sc.label.toUpperCase()}
                       </span>
                     </td>
-                    <td style={{ padding: '12px 14px', fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
+                    <td style={{ padding: '12px 14px', fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
                       {c.recipient_count ?? '—'}
                     </td>
                     <td style={{ padding: '12px 14px', fontSize: 12, color: '#22C55E', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
@@ -498,7 +498,7 @@ export default function Campaigns() {
                         )}
                         <button
                           onClick={() => openLogs(c)}
-                          style={{ fontSize: 9, padding: '4px 10px', cursor: 'pointer', background: 'transparent', border: BD, color: '#9CA3AF', fontFamily: 'var(--font-mono)', fontWeight: 700, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
+                          style={{ fontSize: 9, padding: '4px 10px', cursor: 'pointer', background: 'transparent', border: BD, color: '#4B5563', fontFamily: 'var(--font-mono)', fontWeight: 700, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
                         >
                           Logs
                         </button>

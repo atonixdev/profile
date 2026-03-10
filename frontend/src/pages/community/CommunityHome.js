@@ -24,59 +24,6 @@ const CommunityHome = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section
-        style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}
-        aria-label="AtonixDev Community"
-      >
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">AtonixDev Community</span>
-          <h1
-            style={{
-              fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800,
-              color: '#111827', lineHeight: 1.08, maxWidth: 700, margin: '0 auto 24px',
-            }}
-          >
-            The Platform for<br />
-            <span style={{ color: '#A81D37' }}>Enterprise Engineers</span>
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 40px' }}>
-            Ask questions, share knowledge, and collaborate with engineers and architects
-            building enterprise software, cloud infrastructure, and AI systems globally.
-          </p>
-          {/* Search */}
-          <form onSubmit={handleSearch} style={{ display: 'flex', maxWidth: 520, margin: '0 auto' }}>
-            <input
-              type="text"
-              placeholder="Search discussions, tutorials, announcements…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              aria-label="Search community"
-              style={{
-                flex: 1, padding: '14px 20px',
-                border: '1px solid #D1D5DB', borderRight: 'none',
-                fontSize: 14, color: '#111827', background: '#FFFFFF',
-                outline: 'none', fontFamily: 'inherit',
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                padding: '14px 28px',
-                background: '#A81D37', color: '#FFFFFF',
-                border: 'none', fontSize: 12, fontWeight: 700,
-                letterSpacing: '0.1em', textTransform: 'uppercase',
-                cursor: 'pointer', fontFamily: 'inherit',
-              }}
-            >
-              Search
-            </button>
-          </form>
-        </div>
-      </section>
-
       {/* ── Stats bar ────────────────────────────────────────── */}
       <div style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB', padding: '20px 0' }}>
         <div className="gsw-container">
@@ -89,7 +36,7 @@ const CommunityHome = () => {
             ].map((s) => (
               <div key={s.label} style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
                 <span style={{ fontSize: 22, fontWeight: 900, color: '#111827' }}>{s.value}</span>
-                <span style={{ fontSize: 11, color: '#9CA3AF', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.label}</span>
+                <span style={{ fontSize: 11, color: '#4B5563', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.label}</span>
               </div>
             ))}
           </div>
@@ -101,7 +48,7 @@ const CommunityHome = () => {
       {/* ── Discussion Categories ────────────────────────────── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }} aria-labelledby="discussion-boards">
         <div className="gsw-container">
-          <div style={{ marginBottom: 48 }}>
+          <div className="gsw-section-header">
             <span className="gsw-eyebrow">Discussion Boards</span>
             <h2
               id="discussion-boards"
@@ -137,8 +84,8 @@ const CommunityHome = () => {
               >
                 <div style={{ width: 20, height: 2, background: '#A81D37', marginBottom: 14 }} />
                 <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 6 }}>{cat.name}</div>
-                <div style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.65, marginBottom: 12 }}>{cat.desc}</div>
-                <div style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)', fontWeight: 600, letterSpacing: '0.08em' }}>
+                <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.65, marginBottom: 12 }}>{cat.desc}</div>
+                <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)', fontWeight: 600, letterSpacing: '0.08em' }}>
                   0 THREADS
                 </div>
               </Link>
@@ -176,7 +123,7 @@ const CommunityHome = () => {
               <div key={tile.title} className="gsw-card" style={{ padding: '36px 32px' }}>
                 <div style={{ width: 32, height: 2, background: '#A81D37', marginBottom: 20 }} />
                 <h3 style={{ fontSize: 17, fontWeight: 800, color: '#111827', marginBottom: 10 }}>{tile.title}</h3>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, marginBottom: 28 }}>{tile.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, marginBottom: 28 }}>{tile.desc}</p>
                 <Link
                   to={tile.to}
                   style={{

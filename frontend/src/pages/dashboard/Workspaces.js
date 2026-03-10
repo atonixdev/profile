@@ -9,7 +9,7 @@ const Workspaces = () => (
           Developer Console
         </div>
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>Workspaces</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Launch cloud-based development environments, manage terminal sessions, and view resource usage.
         </p>
       </div>
@@ -34,8 +34,8 @@ const Workspaces = () => (
       }}
     >
       <div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: '#374151', marginBottom: 4 }}>Cloud Workspaces</div>
-        <p style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.65, margin: 0 }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: '#1F2937', marginBottom: 4 }}>Cloud Workspaces</div>
+        <p style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.65, margin: 0 }}>
           Each workspace is an isolated development environment with access to your project files,
           terminal, package manager, and pre-configured toolchains.
         </p>
@@ -51,15 +51,15 @@ const Workspaces = () => (
         }}
       >
         {['Workspace Name', 'Project', 'Status', 'Resources', 'Actions'].map((col) => (
-          <div key={col} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+          <div key={col} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
             {col}
           </div>
         ))}
       </div>
       <div style={{ padding: '64px 24px', textAlign: 'center' }}>
         <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-        <p style={{ fontSize: 14, fontWeight: 700, color: '#374151', marginBottom: 8 }}>No workspaces running</p>
-        <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65, maxWidth: 400, margin: '0 auto 24px' }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>No workspaces running</p>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 400, margin: '0 auto 24px' }}>
           Launch a workspace to access a cloud-based IDE with your project codebase, dependencies, and terminal.
         </p>
         <button

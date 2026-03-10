@@ -66,10 +66,10 @@ export default function EmailOverview() {
             OVW — Email Console Overview
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Email Overview</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>Live health summary, delivery stats, and recent activity.</p>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>Live health summary, delivery stats, and recent activity.</p>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          {refreshed && <span style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>Updated {refreshed.toLocaleTimeString()}</span>}
+          {refreshed && <span style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>Updated {refreshed.toLocaleTimeString()}</span>}
           <button onClick={fetchData} disabled={loading} style={{ padding: '9px 20px', background: A, border: 'none', color: '#06080D', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: loading ? 'wait' : 'pointer', fontFamily: 'inherit', opacity: loading ? 0.7 : 1 }}>
             {loading ? 'Loading…' : '↻ Refresh'}
           </button>
@@ -87,7 +87,7 @@ export default function EmailOverview() {
           <div key={s.label} style={{ ...CARD, position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, width: 3, height: '100%', background: s.accent }} />
             <div style={{ paddingLeft: 12 }}>
-              <div style={{ fontSize: 10, color: '#9CA3AF', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+              <div style={{ fontSize: 10, color: '#4B5563', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: '#111827', lineHeight: 1 }}>{s.value}</div>
             </div>
           </div>
@@ -109,8 +109,8 @@ export default function EmailOverview() {
           ].map((r) => (
             <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: BD }}>
               <div>
-                <div style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{r.label}</div>
-                <div style={{ fontSize: 12, color: '#374151', marginTop: 2, fontFamily: 'var(--font-mono)' }}>{r.value}</div>
+                <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{r.label}</div>
+                <div style={{ fontSize: 12, color: '#1F2937', marginTop: 2, fontFamily: 'var(--font-mono)' }}>{r.value}</div>
               </div>
               <span style={{ fontSize: 10, fontWeight: 700, color: '#22C55E', fontFamily: 'var(--font-mono)', background: 'rgba(34,197,94,0.08)', padding: '3px 8px' }}>{r.status}</span>
             </div>
@@ -123,7 +123,7 @@ export default function EmailOverview() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>{['Domain', 'SPF', 'DKIM', 'Status'].map((h) => (
-                <th key={h} style={{ padding: '6px 8px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9CA3AF', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
+                <th key={h} style={{ padding: '6px 8px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
               ))}</tr>
             </thead>
             <tbody>
@@ -140,7 +140,7 @@ export default function EmailOverview() {
             </tbody>
           </table>
           <div style={{ marginTop: 16, padding: '12px 14px', background: '#F9FAFB', border: BD }}>
-            <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Deliverability Score</div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Deliverability Score</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ flex: 1, height: 6, background: '#E5E7EB', borderRadius: 3, overflow: 'hidden' }}>
                 <div style={{ width: '98.7%', height: '100%', background: '#22C55E', borderRadius: 3 }} />
@@ -155,17 +155,17 @@ export default function EmailOverview() {
       <div style={{ ...CARD, marginBottom: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <div style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Recent Email Activity</div>
-          <Link to="/email-console/logs" style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)', textDecoration: 'none', letterSpacing: '0.06em' }}>View All Logs →</Link>
+          <Link to="/email-console/logs" style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)', textDecoration: 'none', letterSpacing: '0.06em' }}>View All Logs →</Link>
         </div>
         {loading ? (
           <div style={{ padding: 32, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading…</div>
         ) : logs.length === 0 ? (
-          <div style={{ padding: 32, textAlign: 'center', color: '#9CA3AF', fontSize: 13, border: BD }}>No recent activity.</div>
+          <div style={{ padding: 32, textAlign: 'center', color: '#4B5563', fontSize: 13, border: BD }}>No recent activity.</div>
         ) : (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>{['Time', 'Type', 'Recipient', 'Subject', 'Status'].map((h) => (
-                <th key={h} style={{ padding: '8px 14px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9CA3AF', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
+                <th key={h} style={{ padding: '8px 14px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
               ))}</tr>
             </thead>
             <tbody>
@@ -173,12 +173,12 @@ export default function EmailOverview() {
                 <tr key={log.id || i} style={{ borderBottom: BD }}
                   onMouseEnter={(e) => (e.currentTarget.style.background = '#F9FAFB')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
-                  <td style={{ padding: '10px 14px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>{log.created_at ? new Date(log.created_at).toLocaleString() : '—'}</td>
+                  <td style={{ padding: '10px 14px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>{log.created_at ? new Date(log.created_at).toLocaleString() : '—'}</td>
                   <td style={{ padding: '10px 14px' }}><span style={{ fontSize: 10, fontWeight: 700, color: A, fontFamily: 'var(--font-mono)' }}>{TYPE_LABELS[log.email_type] || log.email_type || '—'}</span></td>
-                  <td style={{ padding: '10px 14px', fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{log.recipient || '—'}</td>
+                  <td style={{ padding: '10px 14px', fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{log.recipient || '—'}</td>
                   <td style={{ padding: '10px 14px', fontSize: 12, color: '#4B5563', maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{log.subject || '—'}</td>
                   <td style={{ padding: '10px 14px' }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[log.status] || '#6B7280', fontFamily: 'var(--font-mono)', background: `${STATUS_COLOR[log.status] || '#6B7280'}1A`, padding: '3px 8px' }}>{(log.status || 'unknown').toUpperCase()}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[log.status] || '#4B5563', fontFamily: 'var(--font-mono)', background: `${STATUS_COLOR[log.status] || '#4B5563'}1A`, padding: '3px 8px' }}>{(log.status || 'unknown').toUpperCase()}</span>
                   </td>
                 </tr>
               ))}
@@ -200,7 +200,7 @@ export default function EmailOverview() {
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E5E7EB')}>
             <span style={{ fontSize: 8, fontFamily: 'var(--font-mono)', fontWeight: 700, color: A, letterSpacing: '0.1em', background: 'rgba(212,175,55,0.1)', padding: '3px 7px', display: 'inline-block', marginBottom: 8 }}>{item.code}</span>
             <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{item.label}</div>
-            <div style={{ fontSize: 12, color: '#6B7280' }}>{item.desc}</div>
+            <div style={{ fontSize: 12, color: '#4B5563' }}>{item.desc}</div>
           </Link>
         ))}
       </div>

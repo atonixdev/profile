@@ -79,7 +79,7 @@ export default function OAuthButtons({ mode = 'signin', layout = 'icon' }) {
         }}
       >
         <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
-        <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 600, letterSpacing: '0.06em' }}>
+        <span style={{ fontSize: '11px', color: '#4B5563', fontWeight: 600, letterSpacing: '0.06em' }}>
           OR
         </span>
         <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
@@ -117,15 +117,15 @@ export default function OAuthButtons({ mode = 'signin', layout = 'icon' }) {
                 cursor: loading ? 'not-allowed' : 'pointer',
                 opacity: loading && loading !== p.key ? 0.4 : 1,
                 fontFamily: 'inherit', fontSize: '13px', fontWeight: 600,
-                color: '#374151', letterSpacing: '0.01em',
+                color: '#1F2937', letterSpacing: '0.01em',
                 transition: 'background 0.15s, border-color 0.15s',
               }}
-              onMouseEnter={(e) => { if (!loading) { e.currentTarget.style.background = p.hoverBg; e.currentTarget.style.borderColor = '#9CA3AF'; } }}
+              onMouseEnter={(e) => { if (!loading) { e.currentTarget.style.background = p.hoverBg; e.currentTarget.style.borderColor = '#4B5563'; } }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = '#D1D5DB'; }}
               aria-label={`${verb} ${p.label}`}
             >
               {loading === p.key ? (
-                <span style={{ width: 20, height: 20, border: '2px solid #D1D5DB', borderTopColor: '#6B7280', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
+                <span style={{ width: 20, height: 20, border: '2px solid #D1D5DB', borderTopColor: '#4B5563', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
               ) : ICONS[p.key]}
               <span>{verb} {p.label}</span>
             </button>
@@ -148,12 +148,12 @@ export default function OAuthButtons({ mode = 'signin', layout = 'icon' }) {
                 opacity: loading && loading !== p.key ? 0.4 : 1,
                 transition: 'background 0.15s, border-color 0.15s',
               }}
-              onMouseEnter={(e) => { if (!loading) { e.currentTarget.style.background = p.hoverBg; e.currentTarget.style.borderColor = '#9CA3AF'; } }}
+              onMouseEnter={(e) => { if (!loading) { e.currentTarget.style.background = p.hoverBg; e.currentTarget.style.borderColor = '#4B5563'; } }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = p.border; }}
               aria-label={`${verb} ${p.label}`}
             >
               {loading === p.key ? (
-                <span style={{ width: 20, height: 20, border: '2px solid #D1D5DB', borderTopColor: '#6B7280', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
+                <span style={{ width: 20, height: 20, border: '2px solid #D1D5DB', borderTopColor: '#4B5563', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
               ) : ICONS[p.key]}
             </button>
           ))}

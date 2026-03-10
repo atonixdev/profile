@@ -38,7 +38,7 @@ export default function Features() {
             FLG — Feature Flags & Internal Tools
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Feature Flags</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Control feature availability per environment. Toggle flags, adjust rollout percentage, and stage releases.
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function Features() {
           { label: 'Partial Rollout', value: flags.filter((f) => f.rollout > 0 && f.rollout < 100).length },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -79,7 +79,7 @@ export default function Features() {
               fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase',
               background: filter === f ? A : 'transparent',
               border: filter === f ? `1px solid ${A}` : BD,
-              color: filter === f ? '#06080D' : '#6B7280',
+              color: filter === f ? '#06080D' : '#4B5563',
             }}
           >
             {f}
@@ -102,7 +102,7 @@ export default function Features() {
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
                 <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{flag.name}</span>
-                <span style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: ENV_COLOR[flag.env] || '#6B7280', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: ENV_COLOR[flag.env] || '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                   {flag.env}
                 </span>
                 {flag.rollout > 0 && flag.rollout < 100 && (
@@ -112,7 +112,7 @@ export default function Features() {
                 )}
               </div>
               <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 2 }}>{flag.desc}</div>
-              <div style={{ fontSize: 10, color: '#374151', fontFamily: 'var(--font-mono)' }}>{flag.key}</div>
+              <div style={{ fontSize: 10, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{flag.key}</div>
             </div>
             <button
               onClick={() => toggle(flag.id)}

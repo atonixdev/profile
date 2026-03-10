@@ -84,7 +84,7 @@ const PipelineDashboardLayout = () => {
           <div
             style={{
               fontSize: 9, fontWeight: 700, letterSpacing: '0.14em',
-              textTransform: 'uppercase', color: '#6B7280',
+              textTransform: 'uppercase', color: '#4B5563',
               fontFamily: 'var(--font-mono)', marginBottom: 6,
             }}
           >
@@ -106,7 +106,7 @@ const PipelineDashboardLayout = () => {
                 background: '#10B981', display: 'inline-block', flexShrink: 0,
               }}
             />
-            <span style={{ fontSize: 10, color: '#9CA3AF' }}>completed</span>
+            <span style={{ fontSize: 10, color: '#4B5563' }}>completed</span>
           </div>
           <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
             model: fraud_detection
@@ -125,7 +125,7 @@ const PipelineDashboardLayout = () => {
                   display: 'flex', alignItems: 'center',
                   padding: '10px 20px', fontSize: 13,
                   fontWeight: active ? 700 : 400,
-                  color: active ? '#FFFFFF' : '#6B7280',
+                  color: active ? '#FFFFFF' : '#4B5563',
                   textDecoration: 'none',
                   borderLeft: active ? '2px solid #A81D37' : '2px solid transparent',
                   background: active ? 'rgba(255,255,255,0.06)' : 'transparent',
@@ -133,7 +133,7 @@ const PipelineDashboardLayout = () => {
                   transition: 'color 0.15s, background 0.15s',
                 }}
                 onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = '#D1D5DB'; }}
-                onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = '#6B7280'; }}
+                onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = '#4B5563'; }}
               >
                 {item.label}
               </Link>
@@ -161,12 +161,12 @@ const PipelineDashboardLayout = () => {
             to="/dashboard/pipelines"
             style={{
               display: 'block', textAlign: 'center',
-              marginTop: 10, fontSize: 11, color: '#6B7280',
+              marginTop: 10, fontSize: 11, color: '#4B5563',
               textDecoration: 'none', letterSpacing: '0.04em',
               transition: 'color 0.15s',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = '#4B5563'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
           >
             ← Developer Console
           </Link>
@@ -179,7 +179,7 @@ const PipelineDashboardLayout = () => {
           </div>
           <div
             style={{
-              fontSize: 11, color: '#6B7280', marginBottom: 14,
+              fontSize: 11, color: '#4B5563', marginBottom: 14,
               overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
             }}
           >
@@ -191,7 +191,7 @@ const PipelineDashboardLayout = () => {
               width: '100%', padding: '8px 0',
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(255,255,255,0.1)',
-              color: '#9CA3AF', fontSize: 11, fontWeight: 700,
+              color: '#4B5563', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.1em', textTransform: 'uppercase',
               cursor: 'pointer', fontFamily: 'inherit',
               transition: 'color 0.15s, border-color 0.15s',
@@ -201,7 +201,7 @@ const PipelineDashboardLayout = () => {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#9CA3AF';
+              e.currentTarget.style.color = '#4B5563';
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
             }}
           >
@@ -234,21 +234,21 @@ const PipelineDashboardLayout = () => {
             <Link
               to="/dashboard"
               style={{ color: '#4B5563', textDecoration: 'none', transition: 'color 0.15s' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#4B5563'; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
             >
               Dashboard
             </Link>
-            <span style={{ color: '#374151' }}>/</span>
+            <span style={{ color: '#1F2937' }}>/</span>
             <Link
               to="/dashboard/pipelines"
               style={{ color: '#4B5563', textDecoration: 'none', transition: 'color 0.15s' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#9CA3AF'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#4B5563'; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
             >
               Pipelines
             </Link>
-            <span style={{ color: '#374151' }}>/</span>
+            <span style={{ color: '#1F2937' }}>/</span>
             <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{pipelineLabel}</span>
             <span
               style={{
@@ -263,11 +263,11 @@ const PipelineDashboardLayout = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-            <div style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>
-              <span style={{ color: '#9CA3AF' }}>run #47</span>
-              <span style={{ margin: '0 8px', color: '#374151' }}>|</span>
+            <div style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ color: '#4B5563' }}>run #47</span>
+              <span style={{ margin: '0 8px', color: '#1F2937' }}>|</span>
               <span>3m 42s</span>
-              <span style={{ margin: '0 8px', color: '#374151' }}>|</span>
+              <span style={{ margin: '0 8px', color: '#1F2937' }}>|</span>
               <span>Mar 9, 14:22 UTC</span>
             </div>
             <span

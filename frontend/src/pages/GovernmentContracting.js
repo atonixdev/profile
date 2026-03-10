@@ -37,44 +37,18 @@ const GovernmentContracting = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Government Contracting</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, margin: '0 auto 24px' }}>
-            Technology Delivery for<br />
-            <span style={{ color: '#A81D37' }}>Government & Public Sector</span>
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 40px' }}>
-            AtonixDev delivers enterprise-grade software, cloud infrastructure, and AI capabilities
-            to government agencies and public sector organisations worldwide with the security and
-            compliance posture that public service demands.
-          </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
-              Start a Conversation
-            </Link>
-            <Link to="/capabilities" style={{ display: 'inline-flex', alignItems: 'center', padding: '11px 28px', border: '1px solid #D1D5DB', color: '#374151', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
-              Capabilities Statement
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Capabilities ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Technical Capabilities</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, marginBottom: 16 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, margin: '0 auto 16px' }}>
             Core Technical Areas
           </h2>
-          <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 660, marginBottom: 56 }}>
+          <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 660, margin: '0 auto 56px' }}>
             AtonixDev is qualified to deliver across the full government technology stack — from infrastructure to intelligent applications.
           </p>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {capabilities.map((cap) => (
               <div key={cap.title} style={{ background: '#FFFFFF', padding: '32px 28px' }}>
@@ -84,7 +58,7 @@ const GovernmentContracting = () => {
                 </div>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {cap.items.map((item) => (
-                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.65 }}>
+                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.65 }}>
                       <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#A81D37', flexShrink: 0, marginTop: 6 }} />
                       {item}
                     </li>
@@ -101,16 +75,18 @@ const GovernmentContracting = () => {
       {/* ── Why AtonixDev ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Why AtonixDev</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, marginBottom: 56 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, margin: '0 auto 16px' }}>
             Purpose-Built for Government
           </h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {differentiators.map((d, idx) => (
               <div key={d.title} style={{ background: idx % 2 === 0 ? '#FFFFFF' : '#FAFAFA', padding: '36px 32px' }}>
                 <div style={{ width: 32, height: 2, background: '#A81D37', marginBottom: 20 }} />
                 <h3 style={{ fontSize: 16, fontWeight: 800, color: '#111827', marginBottom: 12 }}>{d.title}</h3>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.8, margin: 0 }}>{d.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.8, margin: 0 }}>{d.desc}</p>
               </div>
             ))}
           </div>
@@ -132,7 +108,7 @@ const GovernmentContracting = () => {
                 {naics.map((n) => (
                   <div key={n.code} style={{ background: '#FFFFFF', padding: '16px 20px', display: 'flex', gap: 16, alignItems: 'center' }}>
                     <span style={{ fontSize: 11, fontWeight: 700, color: '#A81D37', fontFamily: 'var(--font-mono)', flexShrink: 0, minWidth: 60 }}>{n.code}</span>
-                    <span style={{ fontSize: 13, color: '#374151' }}>{n.title}</span>
+                    <span style={{ fontSize: 13, color: '#1F2937' }}>{n.title}</span>
                   </div>
                 ))}
               </div>
@@ -146,7 +122,7 @@ const GovernmentContracting = () => {
                 {vehicles.map((v) => (
                   <div key={v.name} style={{ padding: '20px 24px', background: '#FFFFFF', border: '1px solid #E5E7EB', borderLeft: '3px solid #A81D37' }}>
                     <div style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 6 }}>{v.name}</div>
-                    <div style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7 }}>{v.desc}</div>
+                    <div style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7 }}>{v.desc}</div>
                   </div>
                 ))}
               </div>

@@ -25,7 +25,7 @@ const PlatformHero = ({ eyebrow, title, subtitle, bullets }) => (
       <p
         style={{
           fontSize: 18,
-          color: '#6B7280',
+          color: '#4B5563',
           lineHeight: 1.75,
           maxWidth: 620,
           margin: '0 auto 40px',
@@ -37,7 +37,7 @@ const PlatformHero = ({ eyebrow, title, subtitle, bullets }) => (
         {bullets.map((b) => (
           <li
             key={b}
-            style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, fontWeight: 600, color: '#374151' }}
+            style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, fontWeight: 600, color: '#1F2937' }}
           >
             <span
               style={{ width: 6, height: 6, borderRadius: '50%', background: '#A81D37', flexShrink: 0 }}

@@ -12,16 +12,6 @@ import content from '../../data/security.json';
 const Security = () => (
   <div style={{ background: '#FFFFFF' }}>
 
-    {/* S1 — Hero */}
-    <PlatformHero
-      eyebrow={content.hero.eyebrow}
-      title={content.hero.title}
-      subtitle={content.hero.subtitle}
-      bullets={content.hero.bullets}
-    />
-
-    <hr className="gsw-divider" />
-
     {/* S2 — Architecture */}
     <ArchitectureSection
       eyebrow={content.architecture.eyebrow}

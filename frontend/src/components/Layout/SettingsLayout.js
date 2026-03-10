@@ -96,7 +96,7 @@ const SettingsLayout = () => {
           <Link
             to="/dashboard"
             style={{
-              fontSize: 10, fontWeight: 700, color: '#6B7280',
+              fontSize: 10, fontWeight: 700, color: '#4B5563',
               textDecoration: 'none', letterSpacing: '0.1em', textTransform: 'uppercase',
             }}
             title="Go to Dashboard"
@@ -142,14 +142,14 @@ const SettingsLayout = () => {
                       padding: '9px 20px',
                       fontSize: 13,
                       fontWeight: active ? 700 : 400,
-                      color: active ? '#FFFFFF' : '#6B7280',
+                      color: active ? '#FFFFFF' : '#4B5563',
                       textDecoration: 'none',
                       borderLeft: active ? '2px solid #A81D37' : '2px solid transparent',
                       background: active ? 'rgba(255,255,255,0.08)' : 'transparent',
                       letterSpacing: '0.01em',
                     }}
                     onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = '#D1D5DB'; }}
-                    onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = '#6B7280'; }}  
+                    onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = '#4B5563'; }}  
                   >
                     {item.label}
                   </Link>
@@ -185,7 +185,7 @@ const SettingsLayout = () => {
               </div>
               <div
                 style={{
-                  fontSize: 11, color: '#9CA3AF',
+                  fontSize: 11, color: '#4B5563',
                   overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                 }}
               >
@@ -198,7 +198,7 @@ const SettingsLayout = () => {
             style={{
               width: '100%', padding: '7px 0',
               background: 'none', border: '1px solid rgba(255,255,255,0.1)',
-              color: '#9CA3AF', fontSize: 11, fontWeight: 700,
+              color: '#4B5563', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.1em', textTransform: 'uppercase',
               cursor: 'pointer', fontFamily: 'inherit',
             }}
@@ -208,7 +208,7 @@ const SettingsLayout = () => {
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-              e.currentTarget.style.color = '#9CA3AF';
+              e.currentTarget.style.color = '#4B5563';
             }}
           >
             Sign Out
@@ -237,9 +237,9 @@ const SettingsLayout = () => {
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 6, flexDirection: 'column', gap: 4 }}
               aria-label="Toggle sidebar"
             >
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
-              <span style={{ display: 'block', width: 18, height: 2, background: '#9CA3AF' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#4B5563' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#4B5563' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#4B5563' }} />
             </button>
             <div
               style={{
@@ -247,7 +247,7 @@ const SettingsLayout = () => {
                 fontSize: 12, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
               }}
             >
-              <span style={{ color: '#6B7280' }}>Settings</span>
+              <span style={{ color: '#4B5563' }}>Settings</span>
               <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
               <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{currentLabel}</span>
             </div>
@@ -255,11 +255,11 @@ const SettingsLayout = () => {
           <Link
             to="/"
             style={{
-              fontSize: 11, color: '#6B7280', textDecoration: 'none',
+              fontSize: 11, color: '#4B5563', textDecoration: 'none',
               fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
             }}
             onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
           >
             ← Back to Site
           </Link>

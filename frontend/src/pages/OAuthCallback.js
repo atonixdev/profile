@@ -131,7 +131,7 @@ export default function OAuthCallback() {
             <p style={{ fontSize: '14px', fontWeight: 600, color: '#111827', margin: '0 0 6px' }}>
               Completing sign in
             </p>
-            <p style={{ fontSize: '12px', color: '#6B7280', margin: 0 }}>
+            <p style={{ fontSize: '12px', color: '#4B5563', margin: 0 }}>
               Verifying your {providerLabel} account…
             </p>
           </>
@@ -158,7 +158,7 @@ export default function OAuthCallback() {
             <p style={{ fontSize: '14px', fontWeight: 600, color: '#065F46', margin: '0 0 6px' }}>
               Signed in successfully
             </p>
-            <p style={{ fontSize: '12px', color: '#6B7280', margin: 0 }}>
+            <p style={{ fontSize: '12px', color: '#4B5563', margin: 0 }}>
               Redirecting to your dashboard…
             </p>
           </>
@@ -185,7 +185,7 @@ export default function OAuthCallback() {
             <p style={{ fontSize: '14px', fontWeight: 600, color: '#991B1B', margin: '0 0 8px' }}>
               Sign in failed
             </p>
-            <p style={{ fontSize: '12px', color: '#6B7280', margin: '0 0 20px', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '12px', color: '#4B5563', margin: '0 0 20px', lineHeight: 1.6 }}>
               {message}
             </p>
             <button

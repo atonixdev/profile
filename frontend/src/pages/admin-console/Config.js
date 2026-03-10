@@ -68,7 +68,7 @@ export default function Config() {
             CFG — Platform Configuration
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Global Platform Settings</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Manage branding, authentication, integrations, and resource constraints.
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function Config() {
           { label: 'Last Modified',    value: 'Today' },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -132,7 +132,7 @@ export default function Config() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             {section.fields.map((f) => (
               <div key={f.key}>
-                <label style={{ fontSize: 11, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6, fontFamily: 'var(--font-mono)' }}>
+                <label style={{ fontSize: 11, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6, fontFamily: 'var(--font-mono)' }}>
                   {f.label}
                 </label>
                 <input
@@ -147,7 +147,7 @@ export default function Config() {
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 24, fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
+          <div style={{ marginTop: 24, fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
             Config version: v2.4.1 · Last updated: 2026-03-07 09:41 UTC
           </div>
         </div>

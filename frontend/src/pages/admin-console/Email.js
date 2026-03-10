@@ -236,7 +236,7 @@ export default function Email() {
               <span style={{ fontSize: 12, fontWeight: 700, color: A, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>
                 PREVIEW — {previewTitle}
               </span>
-              <button onClick={() => setPreviewOpen(false)} style={{ background: 'transparent', border: 'none', color: '#6B7280', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+              <button onClick={() => setPreviewOpen(false)} style={{ background: 'transparent', border: 'none', color: '#4B5563', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
             </div>
             <div style={{ flex: 1, overflow: 'auto' }}>
               {previewLoading ? (
@@ -261,7 +261,7 @@ export default function Email() {
             EML — Email & Domain Configuration
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Email & Domain</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Configure sending domains, DKIM/SPF/DMARC records, and transactional email templates.
           </p>
         </div>
@@ -287,7 +287,7 @@ export default function Email() {
           { label: 'Bounce Rate',        value: '0.4%' },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -319,7 +319,7 @@ export default function Email() {
             <thead>
               <tr>
                 {['Domain', 'MX', 'SPF', 'DKIM', 'DMARC', 'Status'].map((h) => (
-                  <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
+                  <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
                     {h}
                   </th>
                 ))}
@@ -360,7 +360,7 @@ export default function Email() {
               { label: 'Encryption',   value: 'TLS' },
             ].map((f) => (
               <div key={f.label}>
-                <label style={{ fontSize: 11, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6, fontFamily: 'var(--font-mono)' }}>
+                <label style={{ fontSize: 11, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6, fontFamily: 'var(--font-mono)' }}>
                   {f.label}
                 </label>
                 <input
@@ -409,7 +409,7 @@ export default function Email() {
             >
               {showNewTmpl ? '✕ Cancel' : '+ New Template'}
             </button>
-            <span style={{ marginLeft: 'auto', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ marginLeft: 'auto', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>
               {templates.length} template{templates.length !== 1 ? 's' : ''}
             </span>
           </div>
@@ -430,7 +430,7 @@ export default function Email() {
                   { key: 'name',        label: 'Display Name',       placeholder: 'e.g. Promo Email' },
                 ].map(({ key, label, placeholder }) => (
                   <div key={key}>
-                    <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>{label}</label>
+                    <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>{label}</label>
                     <input
                       value={newTmpl[key]}
                       onChange={(e) => setNewTmpl((p) => ({ ...p, [key]: e.target.value }))}
@@ -440,21 +440,21 @@ export default function Email() {
                   </div>
                 ))}
                 <div>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Category</label>
+                  <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Category</label>
                   <select value={newTmpl.category} onChange={(e) => setNewTmpl((p) => ({ ...p, category: e.target.value }))}
                     style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>
                     {['system','security','notification','marketing','custom'].map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Permission</label>
+                  <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Permission</label>
                   <select value={newTmpl.permission} onChange={(e) => setNewTmpl((p) => ({ ...p, permission: e.target.value }))}
                     style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>
                     {['global','personal','marketing'].map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Subject Line</label>
+                  <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Subject Line</label>
                   <input
                     value={newTmpl.subject}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, subject: e.target.value }))}
@@ -463,7 +463,7 @@ export default function Email() {
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Variables (comma-separated)</label>
+                  <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Variables (comma-separated)</label>
                   <input
                     value={newTmpl.variables}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, variables: e.target.value }))}
@@ -472,7 +472,7 @@ export default function Email() {
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Preview Text</label>
+                  <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Preview Text</label>
                   <input
                     value={newTmpl.preview_text}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, preview_text: e.target.value }))}
@@ -481,7 +481,7 @@ export default function Email() {
                   />
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>HTML Body</label>
+                  <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>HTML Body</label>
                   <textarea
                     value={newTmpl.html_body}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, html_body: e.target.value }))}
@@ -491,7 +491,7 @@ export default function Email() {
                   />
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Plain Text Body (optional)</label>
+                  <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Plain Text Body (optional)</label>
                   <textarea
                     value={newTmpl.text_body}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, text_body: e.target.value }))}
@@ -523,7 +523,7 @@ export default function Email() {
           {tmplLoading ? (
             <div style={{ padding: 40, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading templates…</div>
           ) : templates.length === 0 ? (
-            <div style={{ padding: '40px 20px', textAlign: 'center', color: '#374151', fontSize: 13, border: BD }}>
+            <div style={{ padding: '40px 20px', textAlign: 'center', color: '#1F2937', fontSize: 13, border: BD }}>
               No templates found. Create one with the button above.
             </div>
           ) : (
@@ -535,29 +535,29 @@ export default function Email() {
                     <div>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
                         <div>
-                          <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Name</label>
+                          <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Name</label>
                           <input value={editForm.name || ''} onChange={(e) => setEditForm((p) => ({ ...p, name: e.target.value }))}
                             style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
                         </div>
                         <div>
-                          <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
+                          <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
                           <input value={editForm.subject || ''} onChange={(e) => setEditForm((p) => ({ ...p, subject: e.target.value }))}
                             style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
                         </div>
                         <div>
-                          <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Variables (comma-separated)</label>
+                          <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Variables (comma-separated)</label>
                           <input
                             value={typeof editForm.variables === 'string' ? editForm.variables : (editForm.variables || []).join(', ')}
                             onChange={(e) => setEditForm((p) => ({ ...p, variables: e.target.value }))}
                             style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', boxSizing: 'border-box' }} />
                         </div>
                         <div>
-                          <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Preview Text</label>
+                          <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Preview Text</label>
                           <input value={editForm.preview_text || ''} onChange={(e) => setEditForm((p) => ({ ...p, preview_text: e.target.value }))}
                             style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
                         </div>
                         <div style={{ gridColumn: '1/-1' }}>
-                          <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>HTML Body</label>
+                          <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>HTML Body</label>
                           <textarea value={editForm.html_body || ''} onChange={(e) => setEditForm((p) => ({ ...p, html_body: e.target.value }))} rows={10}
                             style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 11, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box' }} />
                         </div>
@@ -568,7 +568,7 @@ export default function Email() {
                           {savingTmpl ? 'Saving…' : 'Save'}
                         </button>
                         <button onClick={() => setEditingTmpl(null)}
-                          style={{ padding: '7px 14px', background: 'transparent', border: BD, color: '#9CA3AF', fontSize: 11, cursor: 'pointer', fontFamily: 'inherit' }}>
+                          style={{ padding: '7px 14px', background: 'transparent', border: BD, color: '#4B5563', fontSize: 11, cursor: 'pointer', fontFamily: 'inherit' }}>
                           Cancel
                         </button>
                       </div>
@@ -579,17 +579,17 @@ export default function Email() {
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
                           <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{t.name}</span>
-                          <span style={{ fontSize: 9, fontWeight: 700, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', padding: '2px 7px', background: `${CAT_COLOR[t.category] || '#6B7280'}22`, color: CAT_COLOR[t.category] || '#6B7280', textTransform: 'uppercase' }}>
+                          <span style={{ fontSize: 9, fontWeight: 700, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', padding: '2px 7px', background: `${CAT_COLOR[t.category] || '#4B5563'}22`, color: CAT_COLOR[t.category] || '#4B5563', textTransform: 'uppercase' }}>
                             {t.category}
                           </span>
-                          <span style={{ fontSize: 9, color: '#374151', fontFamily: 'var(--font-mono)' }}>v{t.version || 1}</span>
+                          <span style={{ fontSize: 9, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>v{t.version || 1}</span>
                         </div>
                         <div style={{ fontSize: 10, color: A, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', marginBottom: 4 }}>{t.template_id}</div>
-                        <div style={{ fontSize: 12, color: '#6B7280', marginBottom: 6, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 540 }}>{t.subject}</div>
+                        <div style={{ fontSize: 12, color: '#4B5563', marginBottom: 6, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 540 }}>{t.subject}</div>
                         {t.variables && t.variables.length > 0 && (
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                             {t.variables.map((v) => (
-                              <span key={v} style={{ fontSize: 9, padding: '2px 6px', background: '#F1F5F9', color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{'{{'+v+'}}'}</span>
+                              <span key={v} style={{ fontSize: 9, padding: '2px 6px', background: '#F1F5F9', color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{'{{'+v+'}}'}</span>
                             ))}
                           </div>
                         )}
@@ -603,7 +603,7 @@ export default function Email() {
                         </button>
                         <button
                           onClick={() => { setEditingTmpl(t.template_id); setEditForm({ ...t, variables: (t.variables || []).join(', ') }); setSaveTmplMsg(null); }}
-                          style={{ fontSize: 10, padding: '5px 12px', cursor: 'pointer', background: 'transparent', border: BD, color: '#9CA3AF', fontFamily: 'var(--font-mono)', fontWeight: 700, letterSpacing: '0.06em' }}
+                          style={{ fontSize: 10, padding: '5px 12px', cursor: 'pointer', background: 'transparent', border: BD, color: '#4B5563', fontFamily: 'var(--font-mono)', fontWeight: 700, letterSpacing: '0.06em' }}
                         >
                           Edit
                         </button>
@@ -644,7 +644,7 @@ export default function Email() {
             >
               Refresh
             </button>
-            <span style={{ marginLeft: 'auto', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ marginLeft: 'auto', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>
               {logsTotal} total
             </span>
           </div>
@@ -660,7 +660,7 @@ export default function Email() {
               <thead>
                 <tr>
                   {['Time', 'Type', 'Recipient', 'Subject', 'Status', 'IP'].map((h) => (
-                    <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
+                    <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
                       {h}
                     </th>
                   ))}
@@ -673,7 +673,7 @@ export default function Email() {
                   </tr>
                 ) : logs.length === 0 ? (
                   <tr>
-                    <td colSpan={6} style={{ padding: '32px', textAlign: 'center', color: '#374151', fontSize: 13 }}>No email logs found.</td>
+                    <td colSpan={6} style={{ padding: '32px', textAlign: 'center', color: '#1F2937', fontSize: 13 }}>No email logs found.</td>
                   </tr>
                 ) : (
                   logs.map((log, i) => (
@@ -683,7 +683,7 @@ export default function Email() {
                       onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                       onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                     >
-                      <td style={{ padding: '10px 16px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
+                      <td style={{ padding: '10px 16px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
                         {log.created_at ? new Date(log.created_at).toLocaleString() : '—'}
                       </td>
                       <td style={{ padding: '10px 16px' }}>
@@ -691,14 +691,14 @@ export default function Email() {
                           {TYPE_LABELS[log.email_type] || log.email_type || '—'}
                         </span>
                       </td>
-                      <td style={{ padding: '10px 16px', fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>
+                      <td style={{ padding: '10px 16px', fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>
                         {log.recipient || '—'}
                       </td>
                       <td style={{ padding: '10px 16px', fontSize: 12, color: '#4B5563', maxWidth: 260, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {log.subject || '—'}
                       </td>
                       <td style={{ padding: '10px 16px' }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[log.status] || '#6B7280', fontFamily: 'var(--font-mono)' }}>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[log.status] || '#4B5563', fontFamily: 'var(--font-mono)' }}>
                           {(log.status || 'unknown').toUpperCase()}
                         </span>
                         {log.error_message && (
@@ -723,17 +723,17 @@ export default function Email() {
               <button
                 onClick={() => setLogsPage((p) => Math.max(1, p - 1))}
                 disabled={logsPage === 1}
-                style={{ padding: '6px 14px', background: 'transparent', border: BD, color: logsPage === 1 ? '#374151' : A, fontSize: 11, fontWeight: 700, cursor: logsPage === 1 ? 'default' : 'pointer', fontFamily: 'var(--font-mono)' }}
+                style={{ padding: '6px 14px', background: 'transparent', border: BD, color: logsPage === 1 ? '#1F2937' : A, fontSize: 11, fontWeight: 700, cursor: logsPage === 1 ? 'default' : 'pointer', fontFamily: 'var(--font-mono)' }}
               >
                 ← Prev
               </button>
-              <span style={{ padding: '6px 12px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ padding: '6px 12px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
                 Page {logsPage} / {Math.ceil(logsTotal / 20)}
               </span>
               <button
                 onClick={() => setLogsPage((p) => p + 1)}
                 disabled={logsPage >= Math.ceil(logsTotal / 20)}
-                style={{ padding: '6px 14px', background: 'transparent', border: BD, color: logsPage >= Math.ceil(logsTotal / 20) ? '#374151' : A, fontSize: 11, fontWeight: 700, cursor: logsPage >= Math.ceil(logsTotal / 20) ? 'default' : 'pointer', fontFamily: 'var(--font-mono)' }}
+                style={{ padding: '6px 14px', background: 'transparent', border: BD, color: logsPage >= Math.ceil(logsTotal / 20) ? '#1F2937' : A, fontSize: 11, fontWeight: 700, cursor: logsPage >= Math.ceil(logsTotal / 20) ? 'default' : 'pointer', fontFamily: 'var(--font-mono)' }}
               >
                 Next →
               </button>

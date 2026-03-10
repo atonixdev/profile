@@ -37,7 +37,7 @@ export default function Audit() {
             AUD — Audit Logs & Compliance
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Audit Trail</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Immutable record of all administrative and platform actions. Every entry is append-only.
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function Audit() {
           { label: 'Compliance Score',  value: '98%'     },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -96,7 +96,7 @@ export default function Audit() {
           <thead>
             <tr>
               {['Log ID', 'Timestamp', 'Actor', 'Action', 'Target', 'Result'].map((h) => (
-                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
+                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
                   {h}
                 </th>
               ))}
@@ -110,13 +110,13 @@ export default function Audit() {
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
-                <td style={{ padding: '11px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{l.id}</td>
+                <td style={{ padding: '11px 20px', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{l.id}</td>
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>{l.ts}</td>
-                <td style={{ padding: '11px 20px', fontSize: 12, color: '#9CA3AF' }}>{l.actor}</td>
+                <td style={{ padding: '11px 20px', fontSize: 12, color: '#4B5563' }}>{l.actor}</td>
                 <td style={{ padding: '11px 20px' }}>
                   <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: A, letterSpacing: '0.04em' }}>{l.action}</span>
                 </td>
-                <td style={{ padding: '11px 20px', fontSize: 12, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{l.target}</td>
+                <td style={{ padding: '11px 20px', fontSize: 12, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{l.target}</td>
                 <td style={{ padding: '11px 20px' }}>
                   <span style={{ fontSize: 10, fontWeight: 700, color: l.result === 'Success' ? '#22C55E' : '#EF4444', fontFamily: 'var(--font-mono)' }}>
                     {l.result}
@@ -127,7 +127,7 @@ export default function Audit() {
           </tbody>
         </table>
         <div style={{ padding: '12px 20px', borderTop: BD }}>
-          <span style={{ fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>
+          <span style={{ fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>
             {filtered.length} entries · Immutable · Append-only storage
           </span>
         </div>

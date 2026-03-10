@@ -52,7 +52,7 @@ const METRIC_SERIES = [
     metric_name: 'epoch_time_s',
     unit: 's',
     direction: 'neutral',
-    color: '#6B7280',
+    color: '#4B5563',
     history: [3.2,3.1,3.0,3.1,3.0,2.9,3.0,3.1,3.0,2.9,3.1,3.0,2.9,3.0,3.1],
     current: 3.1,
     prev: 3.0,
@@ -91,11 +91,11 @@ const MiniBarChart = ({ values, color, height = 40 }) => {
 };
 
 const trendIcon = (curr, prev, dir) => {
-  if (dir === 'neutral') return { icon: '→', color: '#6B7280' };
+  if (dir === 'neutral') return { icon: '→', color: '#4B5563' };
   const up = curr >= prev;
   if (dir === 'up')   return up ? { icon: '↑', color: '#10B981' } : { icon: '↓', color: '#EF4444' };
   if (dir === 'down') return up ? { icon: '↑', color: '#EF4444' } : { icon: '↓', color: '#10B981' };
-  return { icon: '→', color: '#6B7280' };
+  return { icon: '→', color: '#4B5563' };
 };
 
 const PipelineMetrics = () => {
@@ -110,7 +110,7 @@ const PipelineMetrics = () => {
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
           Training Metrics
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Epoch-by-epoch metrics captured during <strong style={{ color: '#111827' }}>run #47</strong>
           &nbsp;(50 epochs, best at epoch 48). Click a card to inspect.
         </p>
@@ -137,7 +137,7 @@ const PipelineMetrics = () => {
               {/* Top row */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                 <div>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>
                     {m.metric_name}
                   </div>
                   <div style={{ fontSize: 24, fontWeight: 800, color: m.color, lineHeight: 1 }}>
@@ -155,7 +155,7 @@ const PipelineMetrics = () => {
               {/* Mini bar chart */}
               <MiniBarChart values={m.history} color={m.color} height={36} />
 
-              <div style={{ fontSize: 9, color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
+              <div style={{ fontSize: 9, color: '#4B5563', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
                 {m.history.length} epochs
               </div>
             </div>
@@ -175,7 +175,7 @@ const PipelineMetrics = () => {
             </div>
             <button
               onClick={() => setSelected(null)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9CA3AF', fontSize: 16 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4B5563', fontSize: 16 }}
             >
               ✕
             </button>
@@ -209,7 +209,7 @@ const PipelineMetrics = () => {
               { l: 'Direction', v: detail.direction },
             ].map(({ l, v }) => (
               <div key={l}>
-                <div style={{ fontSize: 9, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{l}</div>
+                <div style={{ fontSize: 9, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{l}</div>
                 <div style={{ fontSize: 12, color: '#111827', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{v}</div>
               </div>
             ))}
@@ -225,7 +225,7 @@ const PipelineMetrics = () => {
           <thead>
             <tr>
               {['Metric', 'Value', 'Prev Run', 'Change', 'Direction'].map((h) => (
-                <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB', fontFamily: 'var(--font-mono)' }}>{h}</th>
+                <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB', fontFamily: 'var(--font-mono)' }}>{h}</th>
               ))}
             </tr>
           </thead>
@@ -241,7 +241,7 @@ const PipelineMetrics = () => {
                   <td style={{ padding: '11px 16px', fontFamily: 'var(--font-mono)', color: m.color, fontWeight: 700, fontSize: 12, borderBottom: '1px solid #F3F4F6' }}>
                     {m.current.toFixed(4)}{m.unit}
                   </td>
-                  <td style={{ padding: '11px 16px', fontFamily: 'var(--font-mono)', color: '#6B7280', fontSize: 12, borderBottom: '1px solid #F3F4F6' }}>
+                  <td style={{ padding: '11px 16px', fontFamily: 'var(--font-mono)', color: '#4B5563', fontSize: 12, borderBottom: '1px solid #F3F4F6' }}>
                     {m.prev.toFixed(4)}{m.unit}
                   </td>
                   <td style={{ padding: '11px 16px', fontFamily: 'var(--font-mono)', color: trend.color, fontWeight: 700, fontSize: 12, borderBottom: '1px solid #F3F4F6' }}>

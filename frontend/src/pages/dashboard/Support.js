@@ -54,7 +54,7 @@ const Support = () => {
           Developer Console
         </div>
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>Support</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Open a support ticket, browse documentation, or connect with the AtonixDev engineering team.
         </p>
       </div>
@@ -67,7 +67,7 @@ const Support = () => {
             <div style={{ padding: '48px 24px', textAlign: 'center' }}>
               <div style={{ width: 32, height: 2, background: '#A81D37', margin: '0 auto 20px' }} />
               <p style={{ fontSize: 16, fontWeight: 800, color: '#111827', marginBottom: 8 }}>Ticket Submitted</p>
-              <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65, maxWidth: 360, margin: '0 auto 24px' }}>
+              <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 360, margin: '0 auto 24px' }}>
                 Your support request has been received. The AtonixDev engineering team will respond
                 to your registered email within one business day.
               </p>
@@ -88,7 +88,7 @@ const Support = () => {
               <form onSubmit={handleSubmit}>
                 {/* Subject */}
                 <div style={{ marginBottom: 20 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', marginBottom: 6 }}>
                     Subject
                   </label>
                   <input
@@ -108,7 +108,7 @@ const Support = () => {
 
                 {/* Priority */}
                 <div style={{ marginBottom: 20 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', marginBottom: 6 }}>
                     Priority
                   </label>
                   <select
@@ -129,7 +129,7 @@ const Support = () => {
 
                 {/* Description */}
                 <div style={{ marginBottom: 24 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', marginBottom: 6 }}>
                     Description
                   </label>
                   <textarea
@@ -151,7 +151,7 @@ const Support = () => {
                   type="submit"
                   disabled={loading}
                   style={{
-                    padding: '12px 32px', background: loading ? '#9CA3AF' : '#A81D37',
+                    padding: '12px 32px', background: loading ? '#4B5563' : '#A81D37',
                     color: '#FFFFFF', border: 'none', fontSize: 11, fontWeight: 700,
                     letterSpacing: '0.1em', textTransform: 'uppercase', cursor: loading ? 'default' : 'pointer',
                     fontFamily: 'inherit',
@@ -167,7 +167,7 @@ const Support = () => {
         {/* Resources & links */}
         <div>
           <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '24px', marginBottom: 16 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#374151', marginBottom: 16 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1F2937', marginBottom: 16 }}>
               Resources
             </div>
             {DOCS_LINKS.map((link) => (
@@ -178,10 +178,10 @@ const Support = () => {
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '11px 0', borderBottom: '1px solid #F3F4F6',
                   textDecoration: 'none', fontSize: 13,
-                  color: '#374151', fontWeight: 500,
+                  color: '#1F2937', fontWeight: 500,
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#1F2937'; }}
               >
                 {link.label}
                 <span style={{ color: '#D1D5DB', fontSize: 10 }}>→</span>
@@ -196,7 +196,7 @@ const Support = () => {
             }}
           >
             <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 6 }}>Enterprise Support</div>
-            <p style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.6, marginBottom: 16 }}>
+            <p style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.6, marginBottom: 16 }}>
               Priority response SLAs and dedicated engineering support are available on enterprise plans.
             </p>
             <Link

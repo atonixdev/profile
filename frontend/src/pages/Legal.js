@@ -36,29 +36,12 @@ const Legal = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Header ── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Legal & Compliance</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 680, margin: '0 auto 20px' }}>
-            Legal
-          </h1>
-          <p style={{ fontSize: 17, color: '#6B7280', lineHeight: 1.75, maxWidth: 580, margin: '0 auto' }}>
-            All legal documents, policies, compliance information, and procurement resources for AtonixDev are available below.
-          </p>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Document Index ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
           {docs.map((group) => (
             <div key={group.category} style={{ marginBottom: 64 }}>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid #E5E7EB' }}>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid #E5E7EB' }}>
                 {group.category}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
@@ -72,10 +55,10 @@ const Legal = () => {
                   >
                     <div>
                       <h3 style={{ fontSize: 16, fontWeight: 800, color: '#111827', marginBottom: 6 }}>{doc.title}</h3>
-                      <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7, margin: 0 }}>{doc.desc}</p>
+                      <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7, margin: 0 }}>{doc.desc}</p>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
-                      <span style={{ padding: '3px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6B7280', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{doc.tag}</span>
+                      <span style={{ padding: '3px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4B5563', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{doc.tag}</span>
                       <span style={{ fontSize: 12, color: '#A81D37', fontWeight: 700 }}>View →</span>
                     </div>
                   </Link>

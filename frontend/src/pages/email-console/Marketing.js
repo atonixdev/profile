@@ -6,7 +6,7 @@ const BD = '1px solid #E5E7EB';
 const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const STATUS_CONFIG = {
-  draft:      { color: '#6B7280', label: 'Draft'     },
+  draft:      { color: '#4B5563', label: 'Draft'     },
   scheduled:  { color: '#3B82F6', label: 'Scheduled' },
   sending:    { color: A,         label: 'Sending'   },
   sent:       { color: '#22C55E', label: 'Sent'      },
@@ -64,7 +64,7 @@ export default function EmailMarketing() {
         <div>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>MKT — Marketing Overview</div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Marketing</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>High-level performance metrics for all marketing campaigns.</p>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>High-level performance metrics for all marketing campaigns.</p>
         </div>
         <Link to="/email-console/campaigns" style={{ padding: '9px 20px', background: A, border: `1px solid ${A}`, color: '#06080D', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', display: 'inline-block', fontFamily: 'inherit' }}>
           Manage Campaigns →
@@ -77,32 +77,32 @@ export default function EmailMarketing() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 32 }}>
         {METRICS.map((m) => (
           <div key={m.label} style={CARD}>
-            <div style={{ fontSize: 10, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{m.label}</div>
+            <div style={{ fontSize: 10, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{m.label}</div>
             <div style={{ fontSize: 28, fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>{loading ? '—' : m.value}</div>
-            <div style={{ fontSize: 11, color: '#9CA3AF', marginTop: 5 }}>{m.sub}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginTop: 5 }}>{m.sub}</div>
           </div>
         ))}
       </div>
 
       {/* Recent Campaigns Performance Table */}
       <div style={{ marginBottom: 32 }}>
-        <div style={{ fontSize: 10, fontWeight: 700, color: '#374151', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 14, fontFamily: 'var(--font-mono)' }}>Recent Campaign Performance</div>
+        <div style={{ fontSize: 10, fontWeight: 700, color: '#1F2937', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 14, fontFamily: 'var(--font-mono)' }}>Recent Campaign Performance</div>
         <div style={{ ...CARD, padding: 0, overflow: 'hidden' }}>
-          {loading ? <div style={{ padding: '32px 20px', textAlign: 'center', color: '#6B7280', fontSize: 13 }}>Loading…</div>
+          {loading ? <div style={{ padding: '32px 20px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading…</div>
            : campaigns.length === 0 ? (
-             <div style={{ padding: '36px 20px', textAlign: 'center', color: '#6B7280', fontSize: 13 }}>No campaigns yet. <Link to="/email-console/campaigns" style={{ color: A, textDecoration: 'none', fontWeight: 600 }}>Create your first campaign →</Link></div>
+             <div style={{ padding: '36px 20px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>No campaigns yet. <Link to="/email-console/campaigns" style={{ color: A, textDecoration: 'none', fontWeight: 600 }}>Create your first campaign →</Link></div>
            ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
               <thead>
                 <tr style={{ background: '#F1F5F9' }}>
                   {['Campaign', 'Status', 'Recipients', 'Delivered', 'Opened', 'Clicked', 'Date'].map((h) => (
-                    <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', fontFamily: 'var(--font-mono)', borderBottom: BD, whiteSpace: 'nowrap' }}>{h}</th>
+                    <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', borderBottom: BD, whiteSpace: 'nowrap' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {campaigns.slice(0, 15).map((c, i) => {
-                  const sc = STATUS_CONFIG[c.status] || { color: '#6B7280', label: c.status };
+                  const sc = STATUS_CONFIG[c.status] || { color: '#4B5563', label: c.status };
                   const rc = c.recipient_count || 0;
                   const dc = c.delivered_count || 0;
                   const oc = c.opened_count || 0;
@@ -113,11 +113,11 @@ export default function EmailMarketing() {
                       <td style={{ padding: '10px 14px' }}>
                         <span style={{ fontSize: 9, padding: '2px 7px', color: sc.color, background: `${sc.color}18`, fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase' }}>{sc.label}</span>
                       </td>
-                      <td style={{ padding: '10px 14px', color: '#374151', fontFamily: 'var(--font-mono)' }}>{rc.toLocaleString()}</td>
-                      <td style={{ padding: '10px 14px', color: '#374151', fontFamily: 'var(--font-mono)' }}>{rc > 0 ? `${dc.toLocaleString()} (${fmtPct(dc / rc * 100)})` : '—'}</td>
-                      <td style={{ padding: '10px 14px', color: '#374151', fontFamily: 'var(--font-mono)' }}>{dc > 0 ? `${oc.toLocaleString()} (${fmtPct(oc / dc * 100)})` : '—'}</td>
-                      <td style={{ padding: '10px 14px', color: '#374151', fontFamily: 'var(--font-mono)' }}>{oc > 0 ? `${cc.toLocaleString()} (${fmtPct(cc / oc * 100)})` : '—'}</td>
-                      <td style={{ padding: '10px 14px', color: '#9CA3AF', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', fontSize: 11 }}>{c.sent_at ? new Date(c.sent_at).toLocaleDateString() : c.scheduled_at ? new Date(c.scheduled_at).toLocaleDateString() : '—'}</td>
+                      <td style={{ padding: '10px 14px', color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{rc.toLocaleString()}</td>
+                      <td style={{ padding: '10px 14px', color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{rc > 0 ? `${dc.toLocaleString()} (${fmtPct(dc / rc * 100)})` : '—'}</td>
+                      <td style={{ padding: '10px 14px', color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{dc > 0 ? `${oc.toLocaleString()} (${fmtPct(oc / dc * 100)})` : '—'}</td>
+                      <td style={{ padding: '10px 14px', color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{oc > 0 ? `${cc.toLocaleString()} (${fmtPct(cc / oc * 100)})` : '—'}</td>
+                      <td style={{ padding: '10px 14px', color: '#4B5563', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', fontSize: 11 }}>{c.sent_at ? new Date(c.sent_at).toLocaleDateString() : c.scheduled_at ? new Date(c.scheduled_at).toLocaleDateString() : '—'}</td>
                     </tr>
                   );
                 })}
@@ -137,7 +137,7 @@ export default function EmailMarketing() {
           <Link key={item.title} to={item.href} style={{ ...CARD, display: 'block', textDecoration: 'none', transition: 'opacity .15s' }}>
             <div style={{ fontSize: 22, marginBottom: 10 }}>{item.icon}</div>
             <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', marginBottom: 5 }}>{item.title}</div>
-            <div style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.5 }}>{item.desc}</div>
+            <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.5 }}>{item.desc}</div>
             <div style={{ marginTop: 12, fontSize: 11, color: A, fontWeight: 700, fontFamily: 'var(--font-mono)' }}>Go →</div>
           </Link>
         ))}

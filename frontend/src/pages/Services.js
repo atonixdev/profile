@@ -74,35 +74,12 @@ const Services = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">What We Offer</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
-            AtonixDev Services
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, margin: '0 auto 40px' }}>
-            Specializing in custom software development, full-stack engineering, AI-driven automation,
-            and technical architecture for complex platforms.
-          </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
-            {['Custom Software', 'AI Automation', 'Future-Proof Architecture'].map((t) => (
-              <span key={t} className="gsw-tag">{t}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Mission bar ────────────────────────────────────── */}
       <section style={{ background: '#F8F9FA', padding: '48px 0', borderBottom: '1px solid #F3F4F6' }}>
         <div className="gsw-container">
           <div style={{ maxWidth: 700 }}>
             <span className="gsw-eyebrow">Our Mission</span>
-            <p style={{ fontSize: 18, color: '#374151', lineHeight: 1.7 }}>
+            <p style={{ fontSize: 18, color: '#1F2937', lineHeight: 1.7 }}>
               Building intelligent, scalable, and future-proof digital systems. At our core, AtonixDev
               believes technology should not merely solve problems — it should create new possibilities.
             </p>
@@ -121,12 +98,12 @@ const Services = () => {
                   <h3 style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 12, lineHeight: 1.4 }}>
                     {service.title}
                   </h3>
-                  <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8, marginBottom: 24 }}>
+                  <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8, marginBottom: 24 }}>
                     {service.description}
                   </p>
                   <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {service.features.map((f) => (
-                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151' }}>
+                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937' }}>
                         <span style={{ color: '#A81D37', flexShrink: 0, marginTop: 2, fontWeight: 700 }}>—</span>
                         {f}
                       </li>

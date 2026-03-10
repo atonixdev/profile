@@ -68,7 +68,7 @@ export default function EmailSenders() {
         <div>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>SND — Sender Identities</div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Sender Identities</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>Manage from-address identities used for sending emails and campaigns.</p>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>Manage from-address identities used for sending emails and campaigns.</p>
         </div>
         <button onClick={() => { setShowNew((v) => !v); setSaveMsg(null); }} style={{ padding: '9px 20px', background: showNew ? 'transparent' : A, border: `1px solid ${A}`, color: showNew ? A : '#06080D', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
           {showNew ? '✕ Cancel' : '+ New Sender'}
@@ -83,13 +83,13 @@ export default function EmailSenders() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
             {[{ k: 'from_name', l: 'From Name', ph: 'AtonixDev Notifications' }, { k: 'from_email', l: 'From Email', ph: 'noreply@atonixdev.com' }, { k: 'reply_to', l: 'Reply-To (optional)', ph: 'support@atonixdev.com' }, { k: 'description', l: 'Description (optional)', ph: 'Transactional emails' }].map(({ k, l, ph }) => (
               <div key={k}>
-                <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{l}</label>
+                <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{l}</label>
                 <input value={form[k]} onChange={(e) => setForm((p) => ({ ...p, [k]: e.target.value }))} placeholder={ph} style={inp} />
               </div>
             ))}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <input type="checkbox" id="is_default" checked={form.is_default} onChange={(e) => setForm((p) => ({ ...p, is_default: e.target.checked }))} style={{ width: 15, height: 15, accentColor: A, cursor: 'pointer' }} />
-              <label htmlFor="is_default" style={{ fontSize: 12, color: '#374151', cursor: 'pointer', fontFamily: 'var(--font-mono)' }}>Set as default sender</label>
+              <label htmlFor="is_default" style={{ fontSize: 12, color: '#1F2937', cursor: 'pointer', fontFamily: 'var(--font-mono)' }}>Set as default sender</label>
             </div>
           </div>
           <div style={{ marginTop: 16 }}>
@@ -106,8 +106,8 @@ export default function EmailSenders() {
        : senders.length === 0 ? (
          <div style={{ ...CARD, textAlign: 'center', padding: '48px 20px' }}>
            <div style={{ fontSize: 28, marginBottom: 12 }}>📬</div>
-           <div style={{ fontSize: 14, fontWeight: 600, color: '#374151', marginBottom: 6 }}>No sender identities yet</div>
-           <div style={{ fontSize: 12, color: '#6B7280' }}>Add a sender identity to use as the from-address for campaigns and automated emails.</div>
+           <div style={{ fontSize: 14, fontWeight: 600, color: '#1F2937', marginBottom: 6 }}>No sender identities yet</div>
+           <div style={{ fontSize: 12, color: '#4B5563' }}>Add a sender identity to use as the from-address for campaigns and automated emails.</div>
          </div>
        ) : (
          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -118,9 +118,9 @@ export default function EmailSenders() {
                    <span style={{ fontSize: 14, fontWeight: 700, color: '#111827' }}>{s.from_name || s.display_name}</span>
                    {(s.is_default) && <span style={{ fontSize: 9, padding: '2px 7px', background: `${A}20`, color: A, fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Default</span>}
                  </div>
-                 <div style={{ fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>{s.from_email || s.email}</div>
-                 {s.reply_to && <div style={{ fontSize: 11, color: '#6B7280', marginTop: 3, fontFamily: 'var(--font-mono)' }}>reply-to: {s.reply_to}</div>}
-                 {s.description && <div style={{ fontSize: 11, color: '#9CA3AF', marginTop: 3 }}>{s.description}</div>}
+                 <div style={{ fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{s.from_email || s.email}</div>
+                 {s.reply_to && <div style={{ fontSize: 11, color: '#4B5563', marginTop: 3, fontFamily: 'var(--font-mono)' }}>reply-to: {s.reply_to}</div>}
+                 {s.description && <div style={{ fontSize: 11, color: '#4B5563', marginTop: 3 }}>{s.description}</div>}
                </div>
                <div style={{ display: 'flex', gap: 6 }}>
                  {!s.is_default && (
@@ -136,7 +136,7 @@ export default function EmailSenders() {
       {/* DNS Note */}
       <div style={{ marginTop: 28, ...CARD, border: '1px solid rgba(212,175,55,0.2)', background: 'rgba(212,175,55,0.04)' }}>
         <div style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>SPF / DKIM Verification</div>
-        <div style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.7 }}>
+        <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.7 }}>
           To prevent emails landing in spam, ensure your sending domain has valid SPF, DKIM, and DMARC records.
           Go to <a href="/email-console/domains" style={{ color: A, textDecoration: 'none', fontWeight: 600 }}>Domains</a> to view required DNS records and verification status for each domain.
         </div>

@@ -40,7 +40,7 @@ const ROLES = [
   {
     id: 'role-viewer',
     name: 'Viewer',
-    color: '#6B7280',
+    color: '#4B5563',
     users: 517,
     description: 'Read-only access to public portfolio and documentation.',
     permissions: ['portfolio.read', 'docs.read'],
@@ -60,7 +60,7 @@ export default function Roles() {
             RPM — Roles & Permissions
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Access Control</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Define roles, assign permissions, and enforce least-privilege access across the platform.
           </p>
         </div>
@@ -84,7 +84,7 @@ export default function Roles() {
           { label: 'Total Permissions',  value: '38' },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -137,10 +137,10 @@ export default function Roles() {
             </div>
           </div>
 
-          <p style={{ fontSize: 13, color: '#9CA3AF', marginBottom: 24, lineHeight: 1.7 }}>{selected.description}</p>
+          <p style={{ fontSize: 13, color: '#4B5563', marginBottom: 24, lineHeight: 1.7 }}>{selected.description}</p>
 
           <div>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
               Permission Set
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -160,7 +160,7 @@ export default function Roles() {
           </div>
 
           <div style={{ marginTop: 28, paddingTop: 20, borderTop: BD }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
               Assigned Users ({selected.users})
             </div>
             <div style={{ fontSize: 12, color: '#4B5563' }}>

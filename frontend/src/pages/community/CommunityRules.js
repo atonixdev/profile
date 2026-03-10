@@ -55,15 +55,15 @@ const CommunityRules = () => (
     {/* Page Header */}
     <section style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '56px 24px 40px' }}>
       <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-        <nav style={{ fontSize: 12, color: '#9CA3AF', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>
-          <Link to="/community" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Community</Link>
+        <nav style={{ fontSize: 12, color: '#4B5563', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>
+          <Link to="/community" style={{ color: '#4B5563', textDecoration: 'none' }}>Community</Link>
           {' / '}
           <span style={{ color: '#111827' }}>Guidelines</span>
         </nav>
         <h1 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 16 }}>
           Community Guidelines
         </h1>
-        <p style={{ fontSize: 15, color: '#6B7280', maxWidth: 600, lineHeight: 1.75 }}>
+        <p style={{ fontSize: 15, color: '#4B5563', maxWidth: 600, lineHeight: 1.75 }}>
           AtonixDev Community is a professional space for engineers, architects, and technologists.
           These guidelines ensure it remains structured, respectful, and valuable for all participants.
         </p>
@@ -99,7 +99,7 @@ const CommunityRules = () => (
                       flexShrink: 0, marginTop: 7,
                     }}
                   />
-                  <span style={{ fontSize: 14, color: '#374151', lineHeight: 1.75 }}>{item}</span>
+                  <span style={{ fontSize: 14, color: '#1F2937', lineHeight: 1.75 }}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -113,7 +113,7 @@ const CommunityRules = () => (
             background: '#111827', borderLeft: '3px solid #A81D37',
           }}
         >
-          <p style={{ fontSize: 14, color: '#9CA3AF', lineHeight: 1.8, marginBottom: 20 }}>
+          <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8, marginBottom: 20 }}>
             By participating in the AtonixDev Community, you agree to abide by these guidelines
             in full. Questions regarding moderation, account policy, or community standards may
             be directed to our support team.

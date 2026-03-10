@@ -14,7 +14,7 @@ const PLANS = [
 ];
 
 const PLAN_COLOR = { Pro: '#A78BFA', Enterprise: A, Starter: '#38BDF8' };
-const STATUS_COLOR = { Active: '#22C55E', 'Past Due': '#EF4444', Cancelled: '#6B7280' };
+const STATUS_COLOR = { Active: '#22C55E', 'Past Due': '#EF4444', Cancelled: '#4B5563' };
 
 export default function Billing() {
   return (
@@ -27,7 +27,7 @@ export default function Billing() {
             BIL — Billing & Subscription Management
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Financial Operations</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Manage subscription plans, invoices, payment methods, and revenue metrics.
           </p>
         </div>
@@ -51,7 +51,7 @@ export default function Billing() {
           { label: 'Past Due',            value: '2',      delta: '$98 overdue',  color: '#EF4444' },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: s.color }}>{s.value}</div>
             <div style={{ fontSize: 11, color: '#4B5563', marginTop: 4 }}>{s.delta}</div>
           </div>
@@ -68,7 +68,7 @@ export default function Billing() {
           <div key={p.plan} style={{ ...CARD, borderColor: `${p.color}33` }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{p.plan}</div>
             <div style={{ fontSize: 22, fontWeight: 700, color: p.color, marginBottom: 6 }}>{p.price}</div>
-            <div style={{ fontSize: 11, color: '#6B7280' }}>{p.seats} active seats</div>
+            <div style={{ fontSize: 11, color: '#4B5563' }}>{p.seats} active seats</div>
           </div>
         ))}
       </div>
@@ -82,7 +82,7 @@ export default function Billing() {
           <thead>
             <tr>
               {['Sub ID', 'User', 'Plan', 'Status', 'MRR', 'Next Billing', 'Actions'].map((h) => (
-                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
+                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
                   {h}
                 </th>
               ))}
@@ -96,13 +96,13 @@ export default function Billing() {
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
-                <td style={{ padding: '11px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{s.id}</td>
-                <td style={{ padding: '11px 20px', fontSize: 12, color: '#9CA3AF' }}>{s.user}</td>
+                <td style={{ padding: '11px 20px', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{s.id}</td>
+                <td style={{ padding: '11px 20px', fontSize: 12, color: '#4B5563' }}>{s.user}</td>
                 <td style={{ padding: '11px 20px' }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: PLAN_COLOR[s.plan] || '#6B7280' }}>{s.plan}</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: PLAN_COLOR[s.plan] || '#4B5563' }}>{s.plan}</span>
                 </td>
                 <td style={{ padding: '11px 20px' }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[s.status] || '#6B7280', fontFamily: 'var(--font-mono)' }}>{s.status}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[s.status] || '#4B5563', fontFamily: 'var(--font-mono)' }}>{s.status}</span>
                 </td>
                 <td style={{ padding: '11px 20px', fontSize: 12, color: '#111827', fontWeight: 700 }}>{s.mrr}</td>
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563' }}>{s.next}</td>

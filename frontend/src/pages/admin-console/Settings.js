@@ -61,7 +61,7 @@ export default function Settings() {
             SYS — System Settings
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>System Configuration</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Low-level platform controls: caching, storage, jobs, maintenance, and debug flags.
           </p>
         </div>
@@ -89,7 +89,7 @@ export default function Settings() {
           { label: 'Storage Used',    value: '2.1GB' },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -115,7 +115,7 @@ export default function Settings() {
                     borderRight: idx % 2 === 0 ? '1px solid rgba(255,255,255,0.04)' : 'none',
                   }}
                 >
-                  <label style={{ fontSize: 12, color: '#9CA3AF', fontFamily: 'inherit' }}>{item.label}</label>
+                  <label style={{ fontSize: 12, color: '#4B5563', fontFamily: 'inherit' }}>{item.label}</label>
                   {item.type === 'toggle' ? (
                     <button
                       onClick={() => flip(item.key)}

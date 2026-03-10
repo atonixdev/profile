@@ -27,16 +27,16 @@ const STEPS = [
 ];
 // ──────────────────────────────────────────────────────────────────────────
 
-const statusColor  = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', cancelled: '#9CA3AF', pending: '#F59E0B' }[s] || '#9CA3AF');
+const statusColor  = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', cancelled: '#4B5563', pending: '#F59E0B' }[s] || '#4B5563');
 const statusBg     = (s) => ({ completed: '#F0FDF4', failed: '#FEF2F2', running: '#EFF6FF', cancelled: '#F9FAFB', pending: '#FFFBEB' }[s] || '#F9FAFB');
 const statusBorder = (s) => ({ completed: '#BBF7D0', failed: '#FECACA', running: '#BFDBFE', cancelled: '#E5E7EB', pending: '#FDE68A' }[s] || '#E5E7EB');
-const triggerColor = (t) => ({ push: '#7C3AED', manual: '#0284C7', schedule: '#D97706', api: '#059669' }[t] || '#6B7280');
+const triggerColor = (t) => ({ push: '#7C3AED', manual: '#0284C7', schedule: '#D97706', api: '#059669' }[t] || '#4B5563');
 const triggerBg    = (t) => ({ push: '#F5F3FF', manual: '#E0F2FE', schedule: '#FFFBEB', api: '#ECFDF5' }[t] || '#F9FAFB');
 
 const card = { background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '20px 24px', marginBottom: 24 };
 const eyebrow = { fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 };
-const th = { padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB' };
-const td = { padding: '11px 16px', fontSize: 12, color: '#374151', borderBottom: '1px solid #F3F4F6', verticalAlign: 'middle' };
+const th = { padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB' };
+const td = { padding: '11px 16px', fontSize: 12, color: '#1F2937', borderBottom: '1px solid #F3F4F6', verticalAlign: 'middle' };
 
 const PipelineOverview = () => {
   const { pipelineId } = useParams();
@@ -51,7 +51,7 @@ const PipelineOverview = () => {
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
           {pipelineLabel}
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Model Flow: <strong style={{ color: '#111827' }}>fraud_detection</strong>
           &nbsp;·&nbsp;Versioning: auto
           &nbsp;·&nbsp;Branch: <code style={{ fontFamily: 'var(--font-mono)', background: '#F3F4F6', padding: '1px 5px' }}>main</code>
@@ -70,13 +70,13 @@ const PipelineOverview = () => {
             key={s.label}
             style={{ background: s.bg, border: `1px solid ${s.border}`, padding: '18px 20px' }}
           >
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
               {s.label}
             </div>
             <div style={{ fontSize: 22, fontWeight: 800, color: s.color, lineHeight: 1 }}>
               {s.value}
             </div>
-            <div style={{ fontSize: 11, color: '#9CA3AF', marginTop: 5 }}>{s.sub}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginTop: 5 }}>{s.sub}</div>
           </div>
         ))}
       </div>
@@ -137,9 +137,9 @@ const PipelineOverview = () => {
                   </span>
                 </td>
                 <td style={{ ...td, fontFamily: 'var(--font-mono)', fontSize: 11 }}>{r.branch}</td>
-                <td style={{ ...td, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#6B7280' }}>{r.sha}</td>
+                <td style={{ ...td, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#4B5563' }}>{r.sha}</td>
                 <td style={{ ...td, fontFamily: 'var(--font-mono)', fontSize: 11 }}>{r.duration}</td>
-                <td style={{ ...td, fontSize: 11, color: '#9CA3AF' }}>{r.time}</td>
+                <td style={{ ...td, fontSize: 11, color: '#4B5563' }}>{r.time}</td>
               </tr>
             ))}
           </tbody>
@@ -170,7 +170,7 @@ const PipelineOverview = () => {
                 >
                   {step.name}
                 </div>
-                <div style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+                <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
                   {step.duration}
                 </div>
               </div>

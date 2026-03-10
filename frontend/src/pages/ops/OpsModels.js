@@ -42,7 +42,7 @@ const OpsModels = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Model Flow Activity
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
           Accountable tracking of every model training run, inference call, evaluation, and registry event.
         </p>
       </div>
@@ -66,7 +66,7 @@ const OpsModels = () => {
             <div
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)', marginBottom: 6,
               }}
             >
@@ -87,7 +87,7 @@ const OpsModels = () => {
               padding: '6px 14px', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.06em', textTransform: 'uppercase',
               background: filter === f ? '#A81D37' : '#F9FAFB',
-              color: filter === f ? '#FFFFFF' : '#6B7280',
+              color: filter === f ? '#FFFFFF' : '#4B5563',
               border: filter === f ? '1px solid #A81D37' : '1px solid #E5E7EB',
               cursor: 'pointer', fontFamily: 'inherit',
             }}
@@ -111,7 +111,7 @@ const OpsModels = () => {
               key={h}
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)',
               }}
             >
@@ -121,7 +121,7 @@ const OpsModels = () => {
         </div>
 
         {visible.map((m, i) => {
-          const sc = STATUS_STYLES[m.status] || { bg: '#F9FAFB', color: '#6B7280', dot: '#9CA3AF' };
+          const sc = STATUS_STYLES[m.status] || { bg: '#F9FAFB', color: '#4B5563', dot: '#4B5563' };
           return (
             <div
               key={m.id}
@@ -132,19 +132,19 @@ const OpsModels = () => {
                 alignItems: 'center',
               }}
             >
-              <span style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>{m.id}</span>
+              <span style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{m.id}</span>
               <span style={{ fontSize: 13, fontWeight: 600, color: '#111827' }}>{m.model}</span>
-              <span style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{m.version}</span>
-              <span style={{ fontSize: 10, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{m.type}</span>
-              <span style={{ fontSize: 12, color: '#374151' }}>{m.accuracy}</span>
-              <span style={{ fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>{m.duration}</span>
+              <span style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{m.version}</span>
+              <span style={{ fontSize: 10, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{m.type}</span>
+              <span style={{ fontSize: 12, color: '#1F2937' }}>{m.accuracy}</span>
+              <span style={{ fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{m.duration}</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                 <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: sc.dot, flexShrink: 0 }} />
                 <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: sc.color, textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
                   {m.status}
                 </span>
               </div>
-              <span style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
                 {m.ts.replace('T', ' ').replace('Z', '')}
               </span>
             </div>

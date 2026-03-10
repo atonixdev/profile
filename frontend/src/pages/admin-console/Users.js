@@ -20,7 +20,7 @@ const ROLE_COLOR = {
   Admin:      '#A78BFA',
   Staff:      '#38BDF8',
   Developer:  '#34D399',
-  Viewer:     '#6B7280',
+  Viewer:     '#4B5563',
 };
 
 const STATUS_COLOR = { Active: '#22C55E', Suspended: '#EF4444', Pending: '#F59E0B' };
@@ -45,7 +45,7 @@ export default function Users() {
             USM — User Management
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Platform Users</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Full lifecycle management of all registered platform accounts.
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function Users() {
           { label: 'New This Month',  value: '22',   delta: '↑ 18% vs last' },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>
               {s.label}
             </div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
@@ -88,7 +88,7 @@ export default function Users() {
             placeholder="Search users…"
             style={{
               background: '#FFFFFF', border: BD,
-              color: '#374151', fontSize: 12, padding: '6px 12px',
+              color: '#1F2937', fontSize: 12, padding: '6px 12px',
               outline: 'none', fontFamily: 'inherit', width: 220,
             }}
           />
@@ -102,7 +102,7 @@ export default function Users() {
                   style={{
                     padding: '10px 20px', textAlign: 'left', fontSize: 10,
                     fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
-                    color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)',
+                    color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)',
                   }}
                 >
                   {h}
@@ -118,18 +118,18 @@ export default function Users() {
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
-                <td style={{ padding: '12px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{u.id}</td>
+                <td style={{ padding: '12px 20px', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{u.id}</td>
                 <td style={{ padding: '12px 20px', fontSize: 13, fontWeight: 600, color: '#111827' }}>{u.name}</td>
-                <td style={{ padding: '12px 20px', fontSize: 12, color: '#6B7280' }}>{u.email}</td>
+                <td style={{ padding: '12px 20px', fontSize: 12, color: '#4B5563' }}>{u.email}</td>
                 <td style={{ padding: '12px 20px' }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: ROLE_COLOR[u.role] || '#6B7280', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: ROLE_COLOR[u.role] || '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                     {u.role}
                   </span>
                 </td>
                 <td style={{ padding: '12px 20px' }}>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: STATUS_COLOR[u.status] || '#6B7280', display: 'inline-block' }} />
-                    <span style={{ color: STATUS_COLOR[u.status] || '#6B7280' }}>{u.status}</span>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: STATUS_COLOR[u.status] || '#4B5563', display: 'inline-block' }} />
+                    <span style={{ color: STATUS_COLOR[u.status] || '#4B5563' }}>{u.status}</span>
                   </span>
                 </td>
                 <td style={{ padding: '12px 20px', fontSize: 11, color: '#4B5563' }}>{u.joined}</td>

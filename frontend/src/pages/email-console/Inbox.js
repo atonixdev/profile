@@ -14,8 +14,8 @@ const STATUS_TABS = [
 
 const STATUS_BADGE = {
   unread:   { bg: '#EFF6FF', color: '#1D4ED8', label: 'Unread'    },
-  read:     { bg: '#F3F4F6', color: '#6B7280', label: 'Read'      },
-  archived: { bg: '#F3F4F6', color: '#9CA3AF', label: 'Archived'  },
+  read:     { bg: '#F3F4F6', color: '#4B5563', label: 'Read'      },
+  archived: { bg: '#F3F4F6', color: '#4B5563', label: 'Archived'  },
   spam:     { bg: '#FEF2F2', color: '#DC2626', label: 'Spam'      },
 };
 
@@ -159,7 +159,7 @@ export default function EmailInbox() {
               style={{
                 padding: '9px 20px', border: 'none', background: 'transparent', cursor: 'pointer',
                 fontWeight: statusFilter === t.value ? 700 : 400, fontSize: 13,
-                color: statusFilter === t.value ? A : '#6B7280',
+                color: statusFilter === t.value ? A : '#4B5563',
                 borderBottom: statusFilter === t.value ? `2px solid ${A}` : '2px solid transparent',
               }}>
               {t.label}
@@ -181,11 +181,11 @@ export default function EmailInbox() {
           )}
 
           {loading && emails.length === 0 && (
-            <div style={{ padding: 32, textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>Loading…</div>
+            <div style={{ padding: 32, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading…</div>
           )}
 
           {!loading && emails.length === 0 && !error && (
-            <div style={{ padding: 32, textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>No emails found.</div>
+            <div style={{ padding: 32, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>No emails found.</div>
           )}
 
           <div style={{ flex: 1, overflowY: 'auto' }}>
@@ -204,17 +204,17 @@ export default function EmailInbox() {
                     <span style={{ fontWeight: email.status === 'unread' ? 700 : 500, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 170 }}>
                       {email.from_name || email.from_email}
                     </span>
-                    <span style={{ fontSize: 11, color: '#9CA3AF', whiteSpace: 'nowrap', flexShrink: 0 }}>{relTime(email.received_at || email.created_at)}</span>
+                    <span style={{ fontSize: 11, color: '#4B5563', whiteSpace: 'nowrap', flexShrink: 0 }}>{relTime(email.received_at || email.created_at)}</span>
                   </div>
-                  <div style={{ fontSize: 13, fontWeight: email.status === 'unread' ? 600 : 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#374151', marginTop: 2 }}>
+                  <div style={{ fontSize: 13, fontWeight: email.status === 'unread' ? 600 : 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1F2937', marginTop: 2 }}>
                     {email.subject || '(no subject)'}
                   </div>
-                  <div style={{ fontSize: 12, color: '#9CA3AF', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginTop: 2 }}>
+                  <div style={{ fontSize: 12, color: '#4B5563', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginTop: 2 }}>
                     {email.preview_text || email.text_body?.slice(0, 80) || ''}
                   </div>
                   <div style={{ display: 'flex', gap: 6, marginTop: 5, alignItems: 'center' }}>
                     {email.has_attachments && (
-                      <span style={{ fontSize: 10, color: '#6B7280' }}>📎</span>
+                      <span style={{ fontSize: 10, color: '#4B5563' }}>📎</span>
                     )}
                     {STATUS_BADGE[email.status] && (
                       <span style={{ fontSize: 10, fontWeight: 600, padding: '1px 6px', borderRadius: 10, background: STATUS_BADGE[email.status].bg, color: STATUS_BADGE[email.status].color }}>
@@ -229,7 +229,7 @@ export default function EmailInbox() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div style={{ padding: '10px 16px', borderTop: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12, color: '#6B7280' }}>
+            <div style={{ padding: '10px 16px', borderTop: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12, color: '#4B5563' }}>
               <span>{total} total</span>
               <div style={{ display: 'flex', gap: 6 }}>
                 <button onClick={() => handlePage(-1)} disabled={page <= 1}
@@ -247,7 +247,7 @@ export default function EmailInbox() {
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#fff' }}>
 
             {detailLoading && (
-              <div style={{ padding: 32, textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>Loading…</div>
+              <div style={{ padding: 32, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading…</div>
             )}
 
             {!detailLoading && (
@@ -265,14 +265,14 @@ export default function EmailInbox() {
                           style={btnStyle('#3B82F6', '#fff')}>Mark Read</button>
                       ) : (
                         <button onClick={() => patchStatus(selected.id, 'unread')}
-                          style={btnStyle('#E5E7EB', '#374151')}>Mark Unread</button>
+                          style={btnStyle('#E5E7EB', '#1F2937')}>Mark Unread</button>
                       )}
                       {selected.status !== 'archived' ? (
                         <button onClick={() => patchStatus(selected.id, 'archived')}
-                          style={btnStyle('#E5E7EB', '#374151')}>Archive</button>
+                          style={btnStyle('#E5E7EB', '#1F2937')}>Archive</button>
                       ) : (
                         <button onClick={() => patchStatus(selected.id, 'read')}
-                          style={btnStyle('#E5E7EB', '#374151')}>Unarchive</button>
+                          style={btnStyle('#E5E7EB', '#1F2937')}>Unarchive</button>
                       )}
                       {selected.status !== 'spam' ? (
                         <button onClick={() => patchStatus(selected.id, 'spam')}
@@ -285,24 +285,24 @@ export default function EmailInbox() {
 
                   {/* Metadata row */}
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 20px', marginTop: 12, fontSize: 13 }}>
-                    <span><span style={{ color: '#9CA3AF' }}>From: </span>
+                    <span><span style={{ color: '#4B5563' }}>From: </span>
                       <strong>{selected.from_name ? `${selected.from_name} ` : ''}</strong>
-                      <span style={{ color: '#6B7280' }}>&lt;{selected.from_email}&gt;</span>
+                      <span style={{ color: '#4B5563' }}>&lt;{selected.from_email}&gt;</span>
                     </span>
                     {selected.to_email && (
-                      <span><span style={{ color: '#9CA3AF' }}>To: </span><span style={{ color: '#6B7280' }}>{selected.to_email}</span></span>
+                      <span><span style={{ color: '#4B5563' }}>To: </span><span style={{ color: '#4B5563' }}>{selected.to_email}</span></span>
                     )}
                     {selected.cc && (
-                      <span><span style={{ color: '#9CA3AF' }}>CC: </span><span style={{ color: '#6B7280' }}>{selected.cc}</span></span>
+                      <span><span style={{ color: '#4B5563' }}>CC: </span><span style={{ color: '#4B5563' }}>{selected.cc}</span></span>
                     )}
-                    <span><span style={{ color: '#9CA3AF' }}>Received: </span><span style={{ color: '#6B7280' }}>{fmtFull(selected.received_at || selected.created_at)}</span></span>
+                    <span><span style={{ color: '#4B5563' }}>Received: </span><span style={{ color: '#4B5563' }}>{fmtFull(selected.received_at || selected.created_at)}</span></span>
                     {selected.spam_score != null && (
-                      <span><span style={{ color: '#9CA3AF' }}>Spam score: </span>
+                      <span><span style={{ color: '#4B5563' }}>Spam score: </span>
                         <span style={{ color: selected.spam_score > 5 ? '#DC2626' : '#22C55E', fontWeight: 600 }}>{selected.spam_score.toFixed(1)}</span>
                       </span>
                     )}
                     {selected.has_attachments && (
-                      <span style={{ color: '#6B7280' }}>📎 Has attachments</span>
+                      <span style={{ color: '#4B5563' }}>📎 Has attachments</span>
                     )}
                   </div>
                 </div>
@@ -318,7 +318,7 @@ export default function EmailInbox() {
                       style={{ flex: 1, border: 'none', width: '100%' }}
                     />
                   ) : (
-                    <pre style={{ flex: 1, margin: 0, padding: '24px 28px', overflowY: 'auto', fontFamily: 'var(--font-mono,monospace)', fontSize: 13, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: '#374151' }}>
+                    <pre style={{ flex: 1, margin: 0, padding: '24px 28px', overflowY: 'auto', fontFamily: 'var(--font-mono,monospace)', fontSize: 13, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: '#1F2937' }}>
                       {selected.text_body || '(empty body)'}
                     </pre>
                   )}
@@ -328,7 +328,7 @@ export default function EmailInbox() {
           </div>
         ) : (
           /* Empty state */
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9CA3AF', fontSize: 14 }}>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4B5563', fontSize: 14 }}>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: 40, marginBottom: 12 }}>✉️</div>
               <div style={{ fontWeight: 600, marginBottom: 4 }}>Select an email to read</div>

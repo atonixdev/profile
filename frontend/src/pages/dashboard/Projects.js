@@ -12,7 +12,7 @@ const Projects = () => (
           Developer Console
         </div>
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>Projects</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Create and manage engineering projects, repositories, pipelines, and deployment configurations.
         </p>
       </div>
@@ -37,7 +37,7 @@ const Projects = () => (
             padding: '7px 18px',
             background: i === 0 ? '#111827' : 'transparent',
             border: `1px solid ${i === 0 ? '#111827' : '#D1D5DB'}`,
-            color: i === 0 ? '#FFFFFF' : '#6B7280',
+            color: i === 0 ? '#FFFFFF' : '#4B5563',
             fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
           }}
         >
@@ -62,7 +62,7 @@ const Projects = () => (
             key={col}
             style={{
               fontSize: 10, fontWeight: 700, letterSpacing: '0.12em',
-              textTransform: 'uppercase', color: '#9CA3AF',
+              textTransform: 'uppercase', color: '#4B5563',
               fontFamily: 'var(--font-mono)',
             }}
           >
@@ -73,8 +73,8 @@ const Projects = () => (
       {/* Empty state */}
       <div style={{ padding: '64px 24px', textAlign: 'center' }}>
         <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-        <p style={{ fontSize: 14, fontWeight: 700, color: '#374151', marginBottom: 8 }}>No projects yet</p>
-        <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65, maxWidth: 400, margin: '0 auto 24px' }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>No projects yet</p>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 400, margin: '0 auto 24px' }}>
           Create your first project to start managing your codebase, pipelines, and deployments from one place.
         </p>
         <button

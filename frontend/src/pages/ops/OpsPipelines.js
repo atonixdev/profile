@@ -18,7 +18,7 @@ const STATUS_STYLES = {
   Running:   { bg: '#EFF6FF', color: '#2563EB', dot: '#3B82F6' },
   Failed:    { bg: '#FEF2F2', color: '#DC2626', dot: '#EF4444' },
   Queued:    { bg: '#F5F3FF', color: '#7C3AED', dot: '#8B5CF6' },
-  Cancelled: { bg: '#F9FAFB', color: '#6B7280', dot: '#9CA3AF' },
+  Cancelled: { bg: '#F9FAFB', color: '#4B5563', dot: '#4B5563' },
 };
 
 const OpsPipelines = () => {
@@ -49,7 +49,7 @@ const OpsPipelines = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Pipeline Activity
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
           Traceable records of every pipeline execution — trigger source, status, branch, and duration.
         </p>
       </div>
@@ -73,7 +73,7 @@ const OpsPipelines = () => {
             <div
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)', marginBottom: 6,
               }}
             >
@@ -94,7 +94,7 @@ const OpsPipelines = () => {
               padding: '6px 14px', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.06em', textTransform: 'uppercase',
               background: filter === f ? '#A81D37' : '#F9FAFB',
-              color: filter === f ? '#FFFFFF' : '#6B7280',
+              color: filter === f ? '#FFFFFF' : '#4B5563',
               border: filter === f ? '1px solid #A81D37' : '1px solid #E5E7EB',
               cursor: 'pointer', fontFamily: 'inherit',
             }}
@@ -118,7 +118,7 @@ const OpsPipelines = () => {
               key={h}
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)',
               }}
             >
@@ -128,7 +128,7 @@ const OpsPipelines = () => {
         </div>
 
         {visible.map((p, i) => {
-          const sc = STATUS_STYLES[p.status] || { bg: '#F9FAFB', color: '#6B7280', dot: '#9CA3AF' };
+          const sc = STATUS_STYLES[p.status] || { bg: '#F9FAFB', color: '#4B5563', dot: '#4B5563' };
           return (
             <div
               key={p.id}
@@ -139,11 +139,11 @@ const OpsPipelines = () => {
                 alignItems: 'center',
               }}
             >
-              <span style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>{p.id}</span>
+              <span style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{p.id}</span>
               <span style={{ fontSize: 13, fontWeight: 600, color: '#111827' }}>{p.name}</span>
-              <span style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{p.branch}</span>
-              <span style={{ fontSize: 10, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{p.trigger}</span>
-              <span style={{ fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>{p.duration}</span>
+              <span style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{p.branch}</span>
+              <span style={{ fontSize: 10, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{p.trigger}</span>
+              <span style={{ fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{p.duration}</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                 <span
                   style={{
@@ -155,7 +155,7 @@ const OpsPipelines = () => {
                   {p.status}
                 </span>
               </div>
-              <span style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
                 {p.ts.replace('T', ' ').replace('Z', '')}
               </span>
             </div>

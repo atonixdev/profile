@@ -49,43 +49,18 @@ const SecurityCompliance = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Trust & Compliance</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, margin: '0 auto 24px' }}>
-            Security &<br />
-            <span style={{ color: '#A81D37' }}>Compliance</span>
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 40px' }}>
-            AtonixDev is built with security at the foundation — not layered on top.
-            Every control, certification, and operational practice is designed for enterprise
-            and government-grade assurance.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 40px', justifyContent: 'center' }}>
-            {['Identity & Access Control', 'Encryption at Rest & in Transit', 'Zero-Trust Architecture', 'Continuous Compliance Monitoring'].map((b) => (
-              <div key={b} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, fontWeight: 600, color: '#374151' }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#A81D37' }} />{b}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Security Framework ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Security Controls</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, marginBottom: 16 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, margin: '0 auto 16px' }}>
             Security Control Framework
           </h2>
-          <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 660, marginBottom: 56 }}>
+          <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 660, margin: '0 auto 56px' }}>
             Security controls are implemented and maintained across every layer of the AtonixDev platform stack.
           </p>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {framework.map((f) => (
               <div key={f.name} style={{ background: '#FFFFFF', padding: '32px 28px' }}>
@@ -95,7 +70,7 @@ const SecurityCompliance = () => {
                 </div>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {f.controls.map((c) => (
-                    <li key={c} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.65 }}>
+                    <li key={c} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.65 }}>
                       <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#A81D37', flexShrink: 0, marginTop: 6 }} />{c}
                     </li>
                   ))}
@@ -111,10 +86,12 @@ const SecurityCompliance = () => {
       {/* ── Certifications ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Certifications & Standards</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, marginBottom: 56 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, margin: '0 auto 16px' }}>
             Compliance Certifications
           </h2>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {certifications.map((cert) => (
               <div key={cert.name} style={{ background: '#FFFFFF', padding: '24px 32px', display: 'flex', alignItems: 'center', gap: 32, flexWrap: 'wrap' }}>
@@ -132,7 +109,7 @@ const SecurityCompliance = () => {
                     {cert.status}
                   </span>
                 </div>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0, flex: 1 }}>{cert.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, margin: 0, flex: 1 }}>{cert.desc}</p>
               </div>
             ))}
           </div>
@@ -144,17 +121,19 @@ const SecurityCompliance = () => {
       {/* ── Incident Response ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Incident Response</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, marginBottom: 56 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, margin: '0 auto 56px' }}>
             Incident Response Process
           </h2>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 840 }}>
             {incident.map((step, idx) => (
               <div key={step.title} style={{ background: '#FFFFFF', padding: '24px 32px', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
                 <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: '#A81D37', fontSize: 10, fontWeight: 800, color: '#FFFFFF', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{String(idx + 1).padStart(2, '0')}</span>
                 <div>
                   <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 6 }}>{step.title}</h3>
-                  <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0 }}>{step.desc}</p>
+                  <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, margin: 0 }}>{step.desc}</p>
                 </div>
               </div>
             ))}

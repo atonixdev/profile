@@ -161,7 +161,7 @@ const OpsLayout = () => {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#9CA3AF';
+              e.currentTarget.style.color = '#4B5563';
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
             }}
           >

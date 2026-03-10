@@ -49,23 +49,6 @@ const Software = () => {
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
 
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Platform</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
-            Software
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
-            Enterprise software engineering across every critical technology domain —
-            from artificial intelligence to cloud infrastructure.
-          </p>
-        </div>
-      </section>
-      <hr className="gsw-divider" />
-
       {/* Categories Grid */}
       <section style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 24px 80px' }}>
         <div
@@ -111,7 +94,7 @@ const Software = () => {
               <p
                 style={{
                   fontSize: 14,
-                  color: '#6B7280',
+                  color: '#4B5563',
                   lineHeight: 1.75,
                   flexGrow: 1,
                   marginBottom: 28,
@@ -146,7 +129,7 @@ const Software = () => {
         <div style={{ marginTop: 64, textAlign: 'center' }}>
           <p
             style={{
-              fontSize: 15, color: '#6B7280', marginBottom: 28,
+              fontSize: 15, color: '#4B5563', marginBottom: 28,
               lineHeight: 1.6,
             }}
           >

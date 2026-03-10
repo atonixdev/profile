@@ -22,7 +22,7 @@ export default function EmailDomains() {
         <div>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>DOM — Sending Domains</div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Sending Domains</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>Configure and verify DKIM, SPF, and DMARC records for all sending domains.</p>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>Configure and verify DKIM, SPF, and DMARC records for all sending domains.</p>
         </div>
         <button onClick={() => setShowAdd((v) => !v)} style={{ padding: '9px 20px', background: showAdd ? 'transparent' : A, border: `1px solid ${A}`, color: showAdd ? A : '#06080D', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>
           {showAdd ? '✕ Cancel' : '+ Add Domain'}
@@ -34,7 +34,7 @@ export default function EmailDomains() {
           <div style={{ fontSize: 11, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 14, fontFamily: 'var(--font-mono)' }}>Add New Domain</div>
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
             <div style={{ flex: 1 }}>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Domain Name</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Domain Name</label>
               <input
                 value={newDomain}
                 onChange={(e) => setNewDomain(e.target.value)}
@@ -46,7 +46,7 @@ export default function EmailDomains() {
               Add &amp; Verify
             </button>
           </div>
-          <p style={{ fontSize: 11, color: '#9CA3AF', margin: '12px 0 0', fontFamily: 'var(--font-mono)' }}>
+          <p style={{ fontSize: 11, color: '#4B5563', margin: '12px 0 0', fontFamily: 'var(--font-mono)' }}>
             DNS records (MX, SPF TXT, DKIM TXT, DMARC TXT) will be generated after submission.
           </p>
         </div>
@@ -60,7 +60,7 @@ export default function EmailDomains() {
           { label: 'Pending Verification', value: DOMAINS.filter((d) => d.status === 'Pending').length },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 10, color: '#9CA3AF', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 10, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -72,7 +72,7 @@ export default function EmailDomains() {
           <thead>
             <tr>
               {['Domain', 'MX', 'SPF', 'DKIM', 'DMARC', 'Status', 'Actions'].map((h) => (
-                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
+                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
               ))}
             </tr>
           </thead>
@@ -94,7 +94,7 @@ export default function EmailDomains() {
                 <td style={{ padding: '14px 20px' }}>
                   <div style={{ display: 'flex', gap: 8 }}>
                     <button style={{ fontSize: 10, padding: '4px 10px', cursor: 'pointer', background: 'transparent', border: BD, color: A, fontFamily: 'var(--font-mono)', fontWeight: 700 }}>DNS Records</button>
-                    <button style={{ fontSize: 10, padding: '4px 10px', cursor: 'pointer', background: 'transparent', border: BD, color: '#6B7280', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>Re-verify</button>
+                    <button style={{ fontSize: 10, padding: '4px 10px', cursor: 'pointer', background: 'transparent', border: BD, color: '#4B5563', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>Re-verify</button>
                   </div>
                 </td>
               </tr>
@@ -114,8 +114,8 @@ export default function EmailDomains() {
           ].map((r) => (
             <div key={r.type} style={{ padding: '14px 16px', border: BD, background: '#FFFFFF' }}>
               <div style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{r.type} — {r.record}</div>
-              <div style={{ fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 8, wordBreak: 'break-all' }}>{r.value}</div>
-              <div style={{ fontSize: 11, color: '#6B7280' }}>{r.desc}</div>
+              <div style={{ fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 8, wordBreak: 'break-all' }}>{r.value}</div>
+              <div style={{ fontSize: 11, color: '#4B5563' }}>{r.desc}</div>
             </div>
           ))}
         </div>

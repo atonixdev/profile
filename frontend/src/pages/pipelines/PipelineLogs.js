@@ -34,7 +34,7 @@ const STEPS_LIST = ['all', ...Array.from(new Set(ALL_LOGS.map((l) => l.step)))];
 const LEVELS      = ['all', 'INFO', 'WARN', 'ERROR'];
 // ──────────────────────────────────────────────────────────────────────────
 
-const levelColor = (l) => ({ INFO: '#3B82F6', WARN: '#F59E0B', ERROR: '#EF4444' }[l] || '#9CA3AF');
+const levelColor = (l) => ({ INFO: '#3B82F6', WARN: '#F59E0B', ERROR: '#EF4444' }[l] || '#4B5563');
 const levelBg    = (l) => ({ INFO: '#EFF6FF', WARN: '#FFFBEB', ERROR: '#FEF2F2' }[l] || '#F9FAFB');
 
 const eyebrow = { fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 };
@@ -56,7 +56,7 @@ const PipelineLogs = () => {
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
           Live Logs
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Captured log output from all steps in <strong style={{ color: '#111827' }}>run #47</strong>.
           Filter by step or log level.
         </p>
@@ -71,7 +71,7 @@ const PipelineLogs = () => {
         }}
       >
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>Step:</span>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>Step:</span>
           {STEPS_LIST.map((s) => (
             <button
               key={s}
@@ -79,7 +79,7 @@ const PipelineLogs = () => {
               style={{
                 padding: '4px 10px', border: `1px solid ${stepFilter === s ? '#A81D37' : '#E5E7EB'}`,
                 background: stepFilter === s ? '#A81D37' : '#FFFFFF',
-                color: stepFilter === s ? '#FFFFFF' : '#6B7280',
+                color: stepFilter === s ? '#FFFFFF' : '#4B5563',
                 fontSize: 10, cursor: 'pointer', fontFamily: 'var(--font-mono)', fontWeight: 700,
               }}
             >
@@ -88,7 +88,7 @@ const PipelineLogs = () => {
           ))}
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>Level:</span>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>Level:</span>
           {LEVELS.map((l) => (
             <button
               key={l}
@@ -97,7 +97,7 @@ const PipelineLogs = () => {
                 padding: '4px 10px',
                 border: `1px solid ${levelFilter === l ? levelColor(l === 'all' ? 'INFO' : l) : '#E5E7EB'}`,
                 background: levelFilter === l ? levelBg(l === 'all' ? 'INFO' : l) : '#FFFFFF',
-                color: levelFilter === l ? levelColor(l === 'all' ? 'INFO' : l) : '#6B7280',
+                color: levelFilter === l ? levelColor(l === 'all' ? 'INFO' : l) : '#4B5563',
                 fontSize: 10, cursor: 'pointer', fontFamily: 'var(--font-mono)', fontWeight: 700,
               }}
             >
@@ -105,7 +105,7 @@ const PipelineLogs = () => {
             </button>
           ))}
         </div>
-        <div style={{ marginLeft: 'auto', fontSize: 11, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+        <div style={{ marginLeft: 'auto', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
           {logs.length} lines
         </div>
       </div>
@@ -127,7 +127,7 @@ const PipelineLogs = () => {
           <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#EF4444', display: 'inline-block' }} />
           <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#F59E0B', display: 'inline-block' }} />
           <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
-          <span style={{ marginLeft: 12, fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>
+          <span style={{ marginLeft: 12, fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
             pipeline run #47 — stdout
           </span>
         </div>
@@ -151,7 +151,7 @@ const PipelineLogs = () => {
                 {/* Line num */}
                 <span
                   style={{
-                    fontSize: 10, color: '#374151', fontFamily: 'var(--font-mono)',
+                    fontSize: 10, color: '#1F2937', fontFamily: 'var(--font-mono)',
                     minWidth: 28, userSelect: 'none', flexShrink: 0,
                   }}
                 >
@@ -179,7 +179,7 @@ const PipelineLogs = () => {
                 {/* Step */}
                 <span
                   style={{
-                    fontSize: 9, color: '#6B7280', fontFamily: 'var(--font-mono)',
+                    fontSize: 9, color: '#4B5563', fontFamily: 'var(--font-mono)',
                     minWidth: 120, flexShrink: 0, marginRight: 12,
                   }}
                 >

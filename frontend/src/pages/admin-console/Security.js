@@ -35,7 +35,7 @@ export default function Security() {
           SEC — Security & Access Control
         </div>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Security Events</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+        <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
           Real-time visibility into authentication, access, and threat events across the platform.
         </p>
       </div>
@@ -49,7 +49,7 @@ export default function Security() {
           { label: 'Blocked IPs',     value: '5',    color: '#A81D37' },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: s.color }}>{s.value}</div>
           </div>
         ))}
@@ -86,7 +86,7 @@ export default function Security() {
                   fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase',
                   background: filter === f ? A : 'transparent',
                   border: filter === f ? `1px solid ${A}` : BD,
-                  color: filter === f ? '#06080D' : '#6B7280',
+                  color: filter === f ? '#06080D' : '#4B5563',
                 }}
               >
                 {f}
@@ -98,7 +98,7 @@ export default function Security() {
           <thead>
             <tr>
               {['Event ID', 'Time', 'User', 'Type', 'Severity', 'Description'].map((h) => (
-                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
+                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
                   {h}
                 </th>
               ))}
@@ -112,9 +112,9 @@ export default function Security() {
                 onMouseEnter={(ev) => (ev.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
                 onMouseLeave={(ev) => (ev.currentTarget.style.background = 'transparent')}
               >
-                <td style={{ padding: '11px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{e.id}</td>
+                <td style={{ padding: '11px 20px', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{e.id}</td>
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{e.time}</td>
-                <td style={{ padding: '11px 20px', fontSize: 12, color: '#9CA3AF' }}>{e.user}</td>
+                <td style={{ padding: '11px 20px', fontSize: 12, color: '#4B5563' }}>{e.user}</td>
                 <td style={{ padding: '11px 20px' }}>
                   <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: A, letterSpacing: '0.06em' }}>{e.type}</span>
                 </td>

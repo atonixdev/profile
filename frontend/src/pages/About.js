@@ -79,34 +79,6 @@ const About = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── S1: Hero ──────────────────────────────────────────── */}
-      <section
-        style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}
-        aria-label="About AtonixDev"
-      >
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">About AtonixDev</span>
-          <h1
-            style={{
-              fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800,
-              color: '#111827', lineHeight: 1.08, maxWidth: 780, margin: '0 auto 28px',
-            }}
-          >
-            Enterprise Software,<br />
-            <span style={{ color: '#A81D37' }}>Cloud &amp; AI Engineering Company</span>
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 620, margin: '0 auto' }}>
-            AtonixDev is a global enterprise technology company delivering secure, scalable,
-            and intelligent software, cloud, and infrastructure solutions for governments,
-            corporations, and high-growth organizations worldwide.
-          </p>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── S2: Who We Are ───────────────────────────────────── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }} aria-labelledby="who-we-are">
         <div className="gsw-container">
@@ -120,11 +92,11 @@ const About = () => {
               >
                 A Global Enterprise<br />Technology Company
               </h2>
-              <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.85, marginBottom: 20 }}>
+              <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.85, marginBottom: 20 }}>
                 AtonixDev operates with a singular mission: to engineer technology that drives
                 national-scale impact, enterprise transformation, and long-term operational excellence.
               </p>
-              <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.85 }}>
+              <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.85 }}>
                 Our work spans multiple continents, multiple industries, and multiple technology domains.
                 We combine deep engineering expertise with disciplined execution, modern cloud architecture,
                 and a commitment to global-standard quality.
@@ -142,18 +114,18 @@ const About = () => {
               <p
                 style={{
                   fontSize: 13, fontWeight: 700, letterSpacing: '0.12em',
-                  textTransform: 'uppercase', color: '#9CA3AF',
+                  textTransform: 'uppercase', color: '#4B5563',
                   marginBottom: 24, fontFamily: 'var(--font-mono)',
                 }}
               >
                 Our Hybrid Model
               </p>
-              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.85, marginBottom: 28 }}>
+              <p style={{ fontSize: 15, color: '#1F2937', lineHeight: 1.85, marginBottom: 28 }}>
                 AtonixDev is built as a hybrid enterprise technology company — integrating software
                 engineering, cloud infrastructure, artificial intelligence, DevOps, security,
                 and data systems under one unified engineering standard.
               </p>
-              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.85 }}>
+              <p style={{ fontSize: 15, color: '#1F2937', lineHeight: 1.85 }}>
                 This model allows us to deliver end-to-end solutions — from architecture to deployment,
                 from automation to security, from cloud to AI — without fragmentation or handoff gaps.
               </p>
@@ -188,7 +160,7 @@ const About = () => {
               <p style={{ fontSize: 22, fontWeight: 800, color: '#111827', lineHeight: 1.4, marginBottom: 20 }}>
                 Build technology that empowers institutions and strengthens digital infrastructure.
               </p>
-              <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8 }}>
+              <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8 }}>
                 To build technology that empowers institutions, strengthens digital infrastructure,
                 and accelerates innovation across governments, enterprises, and global organizations.
               </p>
@@ -204,7 +176,7 @@ const About = () => {
               <p
                 style={{
                   fontSize: 11, fontWeight: 700, letterSpacing: '0.14em',
-                  textTransform: 'uppercase', color: '#374151', marginBottom: 20,
+                  textTransform: 'uppercase', color: '#1F2937', marginBottom: 20,
                   fontFamily: 'var(--font-mono)',
                 }}
               >
@@ -213,7 +185,7 @@ const About = () => {
               <p style={{ fontSize: 22, fontWeight: 800, color: '#111827', lineHeight: 1.4, marginBottom: 20 }}>
                 Become one of the world's most trusted engineering partners for mission-critical systems.
               </p>
-              <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8 }}>
+              <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8 }}>
                 Recognized for reliability, precision, security, and the ability to deliver
                 mission-critical systems at scale — across governments and enterprises globally.
               </p>
@@ -293,7 +265,7 @@ const About = () => {
                   0{i + 1}
                 </div>
                 <h3 style={{ fontSize: 17, fontWeight: 800, color: '#111827', marginBottom: 12 }}>{v.title}</h3>
-                <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.75 }}>{v.desc}</p>
+                <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.75 }}>{v.desc}</p>
               </div>
             ))}
           </div>
@@ -313,7 +285,7 @@ const About = () => {
             >
               Who We Serve
             </h2>
-            <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 560, marginTop: 16 }}>
+            <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 560, marginTop: 16 }}>
               Our solutions are designed for organizations that require reliability, security,
               and long-term operational stability.
             </p>
@@ -337,7 +309,7 @@ const About = () => {
                 }}
               >
                 <div style={{ width: 20, height: 1, background: '#A81D37', marginBottom: 14 }} />
-                <p style={{ fontSize: 13, fontWeight: 700, color: '#374151' }}>{ind}</p>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#1F2937' }}>{ind}</p>
               </div>
             ))}
           </div>
@@ -357,7 +329,7 @@ const About = () => {
             >
               Our Global Footprint
             </h2>
-            <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 560, marginTop: 16 }}>
+            <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 560, marginTop: 16 }}>
               AtonixDev delivers culturally aware solutions, cross-regional engineering support,
               and 24/7 operational coverage across four global territories.
             </p>
@@ -374,7 +346,7 @@ const About = () => {
                 }}
               >
                 <h3 style={{ fontSize: 16, fontWeight: 800, color: '#111827', marginBottom: 12 }}>{r.region}</h3>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7 }}>{r.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7 }}>{r.desc}</p>
               </div>
             ))}
           </div>
@@ -395,7 +367,7 @@ const About = () => {
               >
                 Our Approach
               </h2>
-              <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8 }}>
+              <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8 }}>
                 We follow a structured, enterprise-grade engineering methodology that ensures every project
                 meets the highest standards of performance, security, and reliability.
               </p>
@@ -425,7 +397,7 @@ const About = () => {
                     </div>
                     <div>
                       <div style={{ fontSize: 15, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{m.title}</div>
-                      <div style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7 }}>{m.desc}</div>
+                      <div style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7 }}>{m.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -477,7 +449,7 @@ const About = () => {
                     flexShrink: 0, marginTop: 6,
                   }}
                 />
-                <p style={{ fontSize: 14, fontWeight: 600, color: '#374151', lineHeight: 1.5 }}>{r}</p>
+                <p style={{ fontSize: 14, fontWeight: 600, color: '#1F2937', lineHeight: 1.5 }}>{r}</p>
               </div>
             ))}
           </div>

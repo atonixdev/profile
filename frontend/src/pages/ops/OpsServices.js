@@ -28,7 +28,7 @@ const STATUS_COLORS = {
   Operational:    '#22C55E',
   Degraded:       '#F59E0B',
   'Major Outage': '#EF4444',
-  Maintenance:    '#6B7280',
+  Maintenance:    '#4B5563',
 };
 
 const OpsServices = () => {
@@ -57,7 +57,7 @@ const OpsServices = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Service Health
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
           Live operational status for every registered AtonixDev platform service.
         </p>
       </div>
@@ -102,7 +102,7 @@ const OpsServices = () => {
               padding: '6px 14px', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.06em', textTransform: 'uppercase',
               background: filter === c ? '#A81D37' : '#F9FAFB',
-              color: filter === c ? '#FFFFFF' : '#6B7280',
+              color: filter === c ? '#FFFFFF' : '#4B5563',
               border: filter === c ? '1px solid #A81D37' : '1px solid #E5E7EB',
               cursor: 'pointer', fontFamily: 'inherit',
               transition: 'all 0.15s',
@@ -128,7 +128,7 @@ const OpsServices = () => {
               key={h}
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)',
               }}
             >
@@ -151,24 +151,24 @@ const OpsServices = () => {
             <span
               style={{
                 fontSize: 10, fontFamily: 'var(--font-mono)', fontWeight: 700,
-                letterSpacing: '0.08em', color: '#6B7280', textTransform: 'uppercase',
+                letterSpacing: '0.08em', color: '#4B5563', textTransform: 'uppercase',
               }}
             >
               {s.category}
             </span>
-            <span style={{ fontSize: 12, color: '#374151' }}>{s.uptime}</span>
-            <span style={{ fontSize: 12, color: '#374151' }}>{s.latency}</span>
+            <span style={{ fontSize: 12, color: '#1F2937' }}>{s.uptime}</span>
+            <span style={{ fontSize: 12, color: '#1F2937' }}>{s.latency}</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span
                 style={{
                   display: 'inline-block', width: 6, height: 6,
-                  borderRadius: '50%', background: STATUS_COLORS[s.status] || '#6B7280', flexShrink: 0,
+                  borderRadius: '50%', background: STATUS_COLORS[s.status] || '#4B5563', flexShrink: 0,
                 }}
               />
               <span
                 style={{
                   fontSize: 10, fontFamily: 'var(--font-mono)', fontWeight: 700,
-                  letterSpacing: '0.08em', color: STATUS_COLORS[s.status] || '#6B7280',
+                  letterSpacing: '0.08em', color: STATUS_COLORS[s.status] || '#4B5563',
                   textTransform: 'uppercase',
                 }}
               >
@@ -179,7 +179,7 @@ const OpsServices = () => {
         ))}
 
         {visible.length === 0 && (
-          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>
+          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>
             No services match the selected filter.
           </div>
         )}

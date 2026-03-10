@@ -59,42 +59,13 @@ const techStack = [
 const EnterpriseSoftware = () => (
   <div style={{ background: '#FFFFFF' }}>
 
-    {/* ── Hero ── */}
-    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
-      <div className="hero-grid-bg" />
-      <div className="hero-accent-bar" />
-      <div className="gsw-container" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '48px 80px', alignItems: 'center' }}>
-        <div>
-          <span className="gsw-eyebrow">Corporate Solutions</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 20 }}>Enterprise Software Engineering</h1>
-          <p style={{ fontSize: 17, color: '#6B7280', lineHeight: 1.75, marginBottom: 32 }}>
-            Custom software built to exacting standards — from API platforms and SaaS architectures through legacy modernisation and internal developer tooling, delivered by engineers who treat quality as non-negotiable.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Start a Project</Link>
-            <Link to="/case-studies" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', border: '1px solid #111827', color: '#111827', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>View Case Studies</Link>
-          </div>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
-          {[['100+', 'Applications delivered'], ['8yr+', 'Avg team experience'], ['99.9%', 'Prod uptime SLA'], ['<2wk', 'First delivery sprint']].map(([val, label]) => (
-            <div key={label} style={{ background: '#FFFFFF', padding: '28px 24px' }}>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{val}</div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <hr className="gsw-divider" />
-
     {/* ── Capabilities ── */}
     <section className="gsw-section" style={{ background: '#FFFFFF' }}>
       <div className="gsw-container">
-        <div style={{ marginBottom: 56 }}>
+        <div className="gsw-section-header">
           <span className="gsw-eyebrow">Capabilities</span>
           <h2 className="gsw-section-title">Engineering capabilities</h2>
-          <p style={{ fontSize: 16, color: '#6B7280', maxWidth: 520, lineHeight: 1.75 }}>Six core practice areas cover the full software engineering lifecycle — from greenfield platform builds to precision modernisation programmes.</p>
+          <p style={{ fontSize: 16, color: '#4B5563', maxWidth: 520, lineHeight: 1.75 }}>Six core practice areas cover the full software engineering lifecycle — from greenfield platform builds to precision modernisation programmes.</p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
           {capabilities.map((cap, i) => (
@@ -102,11 +73,11 @@ const EnterpriseSoftware = () => (
               <div>
                 <div style={{ fontSize: 22, color: '#A81D37', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>{cap.icon}</div>
                 <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', marginBottom: 10 }}>{cap.title}</h3>
-                <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8 }}>{cap.body}</p>
+                <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8 }}>{cap.body}</p>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {cap.points.map((pt) => (
-                  <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.7, paddingBottom: 8 }}>
+                  <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.7, paddingBottom: 8 }}>
                     <span style={{ color: '#A81D37', fontWeight: 900, flexShrink: 0, marginTop: 2 }}>—</span>{pt}
                   </li>
                 ))}
@@ -122,17 +93,17 @@ const EnterpriseSoftware = () => (
     {/* ── Tech Stack ── */}
     <section className="gsw-section" style={{ background: '#F8F9FA' }}>
       <div className="gsw-container">
-        <div style={{ marginBottom: 48 }}>
+        <div className="gsw-section-header">
           <span className="gsw-eyebrow">Technology</span>
           <h2 className="gsw-section-title">Core technology stack</h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
           {techStack.map((t) => (
             <div key={t.category} style={{ background: '#FFFFFF', padding: '28px 28px' }}>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 16 }}>{t.category}</div>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 16 }}>{t.category}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {t.items.map((item) => (
-                  <span key={item} style={{ padding: '4px 10px', background: '#F8F9FA', border: '1px solid #E5E7EB', fontSize: 11, fontWeight: 600, color: '#374151', fontFamily: 'var(--font-mono)' }}>{item}</span>
+                  <span key={item} style={{ padding: '4px 10px', background: '#F8F9FA', border: '1px solid #E5E7EB', fontSize: 11, fontWeight: 600, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{item}</span>
                 ))}
               </div>
             </div>
@@ -146,7 +117,7 @@ const EnterpriseSoftware = () => (
     {/* ── Delivery Process ── */}
     <section className="gsw-section" style={{ background: '#FFFFFF' }}>
       <div className="gsw-container">
-        <div style={{ marginBottom: 48 }}>
+        <div className="gsw-section-header">
           <span className="gsw-eyebrow">Delivery</span>
           <h2 className="gsw-section-title">How we deliver</h2>
         </div>
@@ -155,7 +126,7 @@ const EnterpriseSoftware = () => (
             <div key={p.step} style={{ background: '#FFFFFF', padding: '32px 28px' }}>
               <div style={{ fontSize: 32, fontWeight: 800, color: '#E5E7EB', lineHeight: 1, marginBottom: 16, fontFamily: 'var(--font-mono)' }}>{p.step}</div>
               <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 8 }}>{p.title}</h3>
-              <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0 }}>{p.body}</p>
+              <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, margin: 0 }}>{p.body}</p>
             </div>
           ))}
         </div>

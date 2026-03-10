@@ -37,7 +37,7 @@ const PlatformCTA = ({ eyebrow, title, description, links }) => (
           >
             {title}
           </h2>
-          <p style={{ fontSize: 15, color: '#9CA3AF', lineHeight: 1.7, margin: 0 }}>
+          <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.7, margin: 0 }}>
             {description}
           </p>
         </div>

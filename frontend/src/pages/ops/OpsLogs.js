@@ -54,7 +54,7 @@ const OpsLogs = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Operational Logs
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
           Structured, timestamped, and queryable application, system, security, and pipeline logs.
         </p>
       </div>
@@ -81,7 +81,7 @@ const OpsLogs = () => {
                 padding: '6px 12px', fontSize: 10, fontWeight: 700,
                 letterSpacing: '0.08em', textTransform: 'uppercase',
                 background: level === l ? '#A81D37' : '#F9FAFB',
-                color: level === l ? '#FFFFFF' : '#6B7280',
+                color: level === l ? '#FFFFFF' : '#4B5563',
                 border: level === l ? '1px solid #A81D37' : '1px solid #E5E7EB',
                 cursor: 'pointer', fontFamily: 'var(--font-mono)',
               }}
@@ -95,7 +95,7 @@ const OpsLogs = () => {
           onChange={(e) => setSource(e.target.value)}
           style={{
             padding: '8px 12px', fontSize: 12, border: '1px solid #E5E7EB',
-            fontFamily: 'inherit', background: '#FFFFFF', color: '#374151', outline: 'none',
+            fontFamily: 'inherit', background: '#FFFFFF', color: '#1F2937', outline: 'none',
           }}
         >
           {LOG_SOURCES.map((s) => <option key={s}>{s}</option>)}
@@ -105,7 +105,7 @@ const OpsLogs = () => {
       {/* Log count */}
       <div
         style={{
-          fontSize: 11, color: '#9CA3AF', fontFamily: 'var(--font-mono)',
+          fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)',
           marginBottom: 12, letterSpacing: '0.06em',
         }}
       >
@@ -119,7 +119,7 @@ const OpsLogs = () => {
             No log entries match the current filters.
           </div>
         ) : visible.map((l, i) => {
-          const lc = LEVEL_COLORS[l.level] || { bg: '#F9FAFB', color: '#6B7280' };
+          const lc = LEVEL_COLORS[l.level] || { bg: '#F9FAFB', color: '#4B5563' };
           return (
             <div
               key={i}
@@ -144,7 +144,7 @@ const OpsLogs = () => {
               </span>
               <span
                 style={{
-                  fontSize: 10, color: '#6B7280', whiteSpace: 'nowrap',
+                  fontSize: 10, color: '#4B5563', whiteSpace: 'nowrap',
                   flexShrink: 0, minWidth: 100, paddingTop: 1,
                 }}
               >
@@ -158,7 +158,7 @@ const OpsLogs = () => {
 
       <div
         style={{
-          marginTop: 12, fontSize: 11, color: '#9CA3AF',
+          marginTop: 12, fontSize: 11, color: '#4B5563',
           fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
         }}
       >

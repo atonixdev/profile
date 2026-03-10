@@ -104,7 +104,7 @@ const CapabilitiesStatement = () => {
               <h1 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.1, marginBottom: 16 }}>
                 AtonixDev
               </h1>
-              <p style={{ fontSize: 15, color: '#9CA3AF', lineHeight: 1.7, maxWidth: 480, margin: 0 }}>
+              <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.7, maxWidth: 480, margin: 0 }}>
                 Enterprise Software, Cloud & AI Engineering Company
               </p>
             </div>
@@ -117,7 +117,7 @@ const CapabilitiesStatement = () => {
                 ['SAM.gov', 'Registered'],
               ].map(([label, val]) => (
                 <div key={label} style={{ marginBottom: 8 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280', fontFamily: 'var(--font-mono)', marginRight: 12 }}>{label}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginRight: 12 }}>{label}</span>
                   <span style={{ fontSize: 12, color: '#D1D5DB', fontFamily: 'var(--font-mono)' }}>{val}</span>
                 </div>
               ))}
@@ -133,13 +133,13 @@ const CapabilitiesStatement = () => {
             <div>
               <span className="gsw-eyebrow">Company Profile</span>
               <h2 style={{ fontSize: 'clamp(22px, 2.5vw, 30px)', fontWeight: 800, color: '#111827', marginBottom: 16 }}>About AtonixDev</h2>
-              <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>
+              <p style={{ fontSize: 14, color: '#1F2937', lineHeight: 1.8, marginBottom: 16 }}>
                 AtonixDev is a global enterprise technology company specialising in software engineering,
                 cloud infrastructure, artificial intelligence, and security-driven systems delivery.
                 We serve governments, corporations, financial institutions, and high-growth organisations
                 across the United States, Africa, and Europe.
               </p>
-              <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.8, margin: 0 }}>
+              <p style={{ fontSize: 14, color: '#1F2937', lineHeight: 1.8, margin: 0 }}>
                 Our team of senior engineers and architects delivers mission-critical platforms with
                 the discipline, security posture, and long-term support obligations that enterprise
                 and government clients require.
@@ -157,7 +157,7 @@ const CapabilitiesStatement = () => {
                   ['Service Regions', 'United States, Africa, Europe'],
                 ].map(([label, val]) => (
                   <div key={label} style={{ display: 'flex', gap: 12, padding: '12px 16px', background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', minWidth: 140, flexShrink: 0 }}>{label}</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', minWidth: 140, flexShrink: 0 }}>{label}</span>
                     <span style={{ fontSize: 13, color: '#111827' }}>{val}</span>
                   </div>
                 ))}
@@ -185,7 +185,7 @@ const CapabilitiesStatement = () => {
                 </div>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {cap.items.map((item) => (
-                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.65 }}>
+                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.65 }}>
                       <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#A81D37', flexShrink: 0, marginTop: 6 }} />
                       {item}
                     </li>
@@ -211,11 +211,11 @@ const CapabilitiesStatement = () => {
               <div key={p.title} style={{ background: '#FFFFFF', padding: '28px 32px', display: 'grid', gridTemplateColumns: '1fr auto', gap: '16px 32px', alignItems: 'start' }}>
                 <div>
                   <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.3 }}>{p.title}</h3>
-                  <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0 }}>{p.desc}</p>
+                  <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, margin: 0 }}>{p.desc}</p>
                 </div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                   <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{p.sector}</div>
-                  <div style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>{p.region}</div>
+                  <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{p.region}</div>
                 </div>
               </div>
             ))}
@@ -234,7 +234,7 @@ const CapabilitiesStatement = () => {
               <h2 style={{ fontSize: 'clamp(20px, 2vw, 28px)', fontWeight: 800, color: '#111827', marginBottom: 28 }}>Certifications & Compliance</h2>
               <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {certifications.map((c) => (
-                  <li key={c} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.65 }}>
+                  <li key={c} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.65 }}>
                     <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#A81D37', flexShrink: 0, marginTop: 7 }} />
                     {c}
                   </li>
@@ -253,7 +253,7 @@ const CapabilitiesStatement = () => {
                 ].map(([label, val]) => (
                   <div key={label} style={{ padding: '14px 18px', background: '#F8F9FA', border: '1px solid #E5E7EB', borderLeft: '3px solid #A81D37' }}>
                     <div style={{ fontSize: 13, fontWeight: 800, color: '#111827', marginBottom: 4 }}>{label}</div>
-                    <div style={{ fontSize: 12, color: '#6B7280' }}>{val}</div>
+                    <div style={{ fontSize: 12, color: '#4B5563' }}>{val}</div>
                   </div>
                 ))}
               </div>

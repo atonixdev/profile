@@ -11,7 +11,7 @@ const STATUS_COLOR = {
   awaiting_user: '#60A5FA',
   escalated:     '#EF4444',
   resolved:      '#A78BFA',
-  closed:        '#9CA3AF',
+  closed:        '#4B5563',
 };
 const PRIORITY_COLOR = {
   low:      '#22C55E',
@@ -40,12 +40,12 @@ const FILTER_TABS = [
   { key: 'closed',       label: 'Closed' },
 ];
 
-const TH = { padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' };
-const TD = { padding: '11px 16px', fontSize: 12, color: '#374151', borderBottom: BD, verticalAlign: 'middle' };
+const TH = { padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' };
+const TD = { padding: '11px 16px', fontSize: 12, color: '#1F2937', borderBottom: BD, verticalAlign: 'middle' };
 
 function Badge({ value, colorMap }) {
   return (
-    <span style={{ fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase', color: colorMap[value] || '#6B7280' }}>
+    <span style={{ fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase', color: colorMap[value] || '#4B5563' }}>
       {value}
     </span>
   );
@@ -95,11 +95,11 @@ function TicketDetail({ ticket, onClose, onRefresh }) {
               {ticket.ticket_ref}
             </div>
             <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#111827' }}>{ticket.subject}</h3>
-            <div style={{ marginTop: 6, fontSize: 12, color: '#6B7280' }}>
+            <div style={{ marginTop: 6, fontSize: 12, color: '#4B5563' }}>
               {ticket.name} · {ticket.email} · {new Date(ticket.created_at).toLocaleDateString()}
             </div>
           </div>
-          <button onClick={onClose} style={{ border: 'none', background: 'transparent', fontSize: 22, cursor: 'pointer', color: '#6B7280', lineHeight: 1, padding: '0 4px' }}>×</button>
+          <button onClick={onClose} style={{ border: 'none', background: 'transparent', fontSize: 22, cursor: 'pointer', color: '#4B5563', lineHeight: 1, padding: '0 4px' }}>×</button>
         </div>
 
         <div style={{ padding: '24px', flex: 1 }}>
@@ -113,10 +113,10 @@ function TicketDetail({ ticket, onClose, onRefresh }) {
                 </select>
               )},
               { label: 'Priority', content: <span style={{ fontSize: 12, fontWeight: 700, color: PRIORITY_COLOR[ticket.priority] }}>{ticket.priority?.toUpperCase()}</span> },
-              { label: 'Category', content: <span style={{ fontSize: 12, fontWeight: 700, color: '#374151' }}>{CATEGORY_LABEL[ticket.category] || ticket.category}</span> },
+              { label: 'Category', content: <span style={{ fontSize: 12, fontWeight: 700, color: '#1F2937' }}>{CATEGORY_LABEL[ticket.category] || ticket.category}</span> },
             ].map(({ label, content }) => (
               <div key={label} style={CARD}>
-                <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280', marginBottom: 4 }}>{label}</div>
+                <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', marginBottom: 4 }}>{label}</div>
                 {content}
               </div>
             ))}
@@ -124,14 +124,14 @@ function TicketDetail({ ticket, onClose, onRefresh }) {
 
           {/* Original message */}
           <div style={{ marginBottom: 24 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Original Message</div>
-            <div style={{ background: '#F9FAFB', border: BD, padding: '16px', fontSize: 13, color: '#374151', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{ticket.message}</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Original Message</div>
+            <div style={{ background: '#F9FAFB', border: BD, padding: '16px', fontSize: 13, color: '#1F2937', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{ticket.message}</div>
           </div>
 
           {/* Thread */}
           {ticket.replies?.length > 0 && (
             <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>
                 Thread ({ticket.replies.length})
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -140,16 +140,16 @@ function TicketDetail({ ticket, onClose, onRefresh }) {
                     padding: '12px 16px',
                     background: r.is_internal ? '#FFFBEB' : (r.sender_type === 'support' ? '#F0FDF4' : '#F9FAFB'),
                     border: `1px solid ${r.is_internal ? '#FDE68A' : (r.sender_type === 'support' ? '#BBF7D0' : '#E5E7EB')}`,
-                    borderLeft: `3px solid ${r.is_internal ? '#F59E0B' : (r.sender_type === 'support' ? '#22C55E' : '#9CA3AF')}`,
+                    borderLeft: `3px solid ${r.is_internal ? '#F59E0B' : (r.sender_type === 'support' ? '#22C55E' : '#4B5563')}`,
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: '#374151' }}>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: '#1F2937' }}>
                         {r.sender_name || r.sender_username || 'User'}
                         {r.is_internal && <span style={{ marginLeft: 8, fontSize: 9, color: '#D97706', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>INTERNAL</span>}
                       </span>
-                      <span style={{ fontSize: 11, color: '#9CA3AF' }}>{new Date(r.created_at).toLocaleString()}</span>
+                      <span style={{ fontSize: 11, color: '#4B5563' }}>{new Date(r.created_at).toLocaleString()}</span>
                     </div>
-                    <div style={{ fontSize: 13, color: '#374151', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>{r.message}</div>
+                    <div style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>{r.message}</div>
                   </div>
                 ))}
               </div>
@@ -158,21 +158,21 @@ function TicketDetail({ ticket, onClose, onRefresh }) {
 
           {/* Reply */}
           <div>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Reply</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Reply</div>
             <textarea
               rows={5} value={reply} onChange={(e) => setReply(e.target.value)}
               placeholder="Type your reply here…"
               style={{ width: '100%', padding: '10px 14px', border: BD, fontSize: 13, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
             />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#6B7280', cursor: 'pointer' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#4B5563', cursor: 'pointer' }}>
                 <input type="checkbox" checked={isInternal} onChange={(e) => setIsInternal(e.target.checked)} />
                 Internal note (not sent to user)
               </label>
               <button
                 onClick={sendReply}
                 disabled={sending || !reply.trim()}
-                style={{ padding: '8px 24px', background: sending || !reply.trim() ? '#9CA3AF' : '#1B3A4B', border: 'none', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: sending || !reply.trim() ? 'not-allowed' : 'pointer', fontFamily: 'inherit' }}
+                style={{ padding: '8px 24px', background: sending || !reply.trim() ? '#4B5563' : '#1B3A4B', border: 'none', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: sending || !reply.trim() ? 'not-allowed' : 'pointer', fontFamily: 'inherit' }}
               >
                 {sending ? 'Sending…' : 'Send Reply'}
               </button>
@@ -241,7 +241,7 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
             INB — Enterprise Support System
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>{title}</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Manage tickets, send replies, update status, and track escalations.
           </p>
         </div>
@@ -251,7 +251,7 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
             placeholder="Search tickets…"
             style={{ padding: '8px 14px', border: BD, background: '#F9FAFB', fontSize: 13, width: 220, fontFamily: 'inherit', outline: 'none' }}
           />
-          <button onClick={fetchData} style={{ padding: '8px 16px', background: '#FFFFFF', border: BD, fontSize: 11, fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', color: '#374151' }}>
+          <button onClick={fetchData} style={{ padding: '8px 16px', background: '#FFFFFF', border: BD, fontSize: 11, fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', color: '#1F2937' }}>
             ↻ Refresh
           </button>
         </div>
@@ -267,7 +267,7 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
           { label: 'Total',     key: 'total',     color: '#1B3A4B' },
         ].map((s) => (
           <div key={s.key} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: s.color }}>{stats[s.key] ?? '—'}</div>
           </div>
         ))}
@@ -276,7 +276,7 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
       {/* Filter tabs */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0, marginBottom: 0, borderBottom: BD }}>
         {FILTER_TABS.map((t) => (
-          <button key={t.key} onClick={() => setFilter(t.key)} style={{ padding: '9px 16px', border: 'none', borderBottom: filter === t.key ? '2px solid #1B3A4B' : '2px solid transparent', background: 'transparent', fontSize: 12, fontWeight: filter === t.key ? 700 : 400, color: filter === t.key ? '#1B3A4B' : '#6B7280', cursor: 'pointer', fontFamily: 'inherit', marginBottom: -1 }}>
+          <button key={t.key} onClick={() => setFilter(t.key)} style={{ padding: '9px 16px', border: 'none', borderBottom: filter === t.key ? '2px solid #1B3A4B' : '2px solid transparent', background: 'transparent', fontSize: 12, fontWeight: filter === t.key ? 700 : 400, color: filter === t.key ? '#1B3A4B' : '#4B5563', cursor: 'pointer', fontFamily: 'inherit', marginBottom: -1 }}>
             {t.label}
           </button>
         ))}
@@ -285,9 +285,9 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
       {/* Tickets table */}
       <div style={{ background: '#FFFFFF', border: BD, borderTop: 'none' }}>
         {loading ? (
-          <div style={{ padding: '48px', textAlign: 'center', color: '#6B7280', fontSize: 13 }}>Loading tickets…</div>
+          <div style={{ padding: '48px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading tickets…</div>
         ) : tickets.length === 0 ? (
-          <div style={{ padding: '48px', textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>
+          <div style={{ padding: '48px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>
             {filter ? `No ${filter} tickets.` : 'No tickets found.'}
           </div>
         ) : (
@@ -302,18 +302,18 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
             <tbody>
               {tickets.map((t) => (
                 <tr key={t.id} onMouseEnter={(e) => (e.currentTarget.style.background = '#F9FAFB')} onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
-                  <td style={{ ...TD, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#374151' }}>{t.ticket_ref}</td>
-                  <td style={TD}><span style={{ fontSize: 11, color: '#6B7280' }}>{CATEGORY_LABEL[t.category] || t.category}</span></td>
+                  <td style={{ ...TD, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#1F2937' }}>{t.ticket_ref}</td>
+                  <td style={TD}><span style={{ fontSize: 11, color: '#4B5563' }}>{CATEGORY_LABEL[t.category] || t.category}</span></td>
                   <td style={{ ...TD, maxWidth: 220 }}>
                     <span style={{ fontSize: 12, color: '#111827', fontWeight: 600, display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.subject}</span>
                   </td>
                   <td style={TD}>
-                    <div style={{ fontSize: 12, color: '#374151' }}>{t.name}</div>
-                    <div style={{ fontSize: 11, color: '#9CA3AF' }}>{t.email}</div>
+                    <div style={{ fontSize: 12, color: '#1F2937' }}>{t.name}</div>
+                    <div style={{ fontSize: 11, color: '#4B5563' }}>{t.email}</div>
                   </td>
                   <td style={TD}><Badge value={t.priority} colorMap={PRIORITY_COLOR} /></td>
                   <td style={TD}><Badge value={t.status} colorMap={STATUS_COLOR} /></td>
-                  <td style={{ ...TD, fontSize: 11, color: '#9CA3AF', whiteSpace: 'nowrap' }}>{new Date(t.created_at).toLocaleDateString()}</td>
+                  <td style={{ ...TD, fontSize: 11, color: '#4B5563', whiteSpace: 'nowrap' }}>{new Date(t.created_at).toLocaleDateString()}</td>
                   <td style={TD}>
                     <button onClick={() => fetchDetail(t.id)} style={{ fontSize: 10, padding: '5px 14px', cursor: 'pointer', background: '#1B3A4B', border: 'none', color: '#FFFFFF', fontFamily: 'var(--font-mono)', fontWeight: 700, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
                       Open →

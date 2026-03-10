@@ -47,7 +47,7 @@ const OpsResources = () => (
       <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
         Resource Usage
       </h1>
-      <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
         Real-time compute, memory, disk, and network consumption across all infrastructure nodes.
       </p>
     </div>
@@ -72,7 +72,7 @@ const OpsResources = () => (
           <div
             style={{
               fontSize: 10, fontWeight: 700, letterSpacing: '0.12em',
-              textTransform: 'uppercase', color: '#9CA3AF',
+              textTransform: 'uppercase', color: '#4B5563',
               fontFamily: 'var(--font-mono)', marginBottom: 6,
             }}
           >
@@ -80,9 +80,9 @@ const OpsResources = () => (
           </div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
             <span style={{ fontSize: 36, fontWeight: 900, color: '#111827', lineHeight: 1 }}>{m.value}</span>
-            <span style={{ fontSize: 13, color: '#9CA3AF' }}>{m.unit}</span>
+            <span style={{ fontSize: 13, color: '#4B5563' }}>{m.unit}</span>
           </div>
-          <div style={{ fontSize: 11, color: '#9CA3AF', marginTop: 4 }}>{m.sub}</div>
+          <div style={{ fontSize: 11, color: '#4B5563', marginTop: 4 }}>{m.sub}</div>
           <MetricBar percent={m.bar} />
         </div>
       ))}
@@ -112,7 +112,7 @@ const OpsResources = () => (
             key={h}
             style={{
               fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-              textTransform: 'uppercase', color: '#9CA3AF',
+              textTransform: 'uppercase', color: '#4B5563',
               fontFamily: 'var(--font-mono)',
             }}
           >
@@ -132,10 +132,10 @@ const OpsResources = () => (
           }}
         >
           <span style={{ fontSize: 12, fontWeight: 600, color: '#111827', fontFamily: 'var(--font-mono)' }}>{n.name}</span>
-          <span style={{ fontSize: 12, color: '#6B7280' }}>{n.role}</span>
-          <span style={{ fontSize: 12, color: '#374151' }}>{n.cpu}</span>
-          <span style={{ fontSize: 12, color: '#374151' }}>{n.mem}</span>
-          <span style={{ fontSize: 12, color: '#374151' }}>{n.disk}</span>
+          <span style={{ fontSize: 12, color: '#4B5563' }}>{n.role}</span>
+          <span style={{ fontSize: 12, color: '#1F2937' }}>{n.cpu}</span>
+          <span style={{ fontSize: 12, color: '#1F2937' }}>{n.mem}</span>
+          <span style={{ fontSize: 12, color: '#1F2937' }}>{n.disk}</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <span
               style={{

@@ -45,7 +45,7 @@ const OpsOverview = () => (
       <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
         System Overview
       </h1>
-      <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 580 }}>
+      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 580 }}>
         Real-time visibility across every layer of the AtonixDev platform. Monitor health, incidents,
         security events, and operational metrics from a unified control plane.
       </p>
@@ -71,7 +71,7 @@ const OpsOverview = () => (
           <div
             style={{
               fontSize: 10, fontWeight: 700, letterSpacing: '0.12em',
-              textTransform: 'uppercase', color: '#9CA3AF',
+              textTransform: 'uppercase', color: '#4B5563',
               fontFamily: 'var(--font-mono)', marginBottom: 8,
             }}
           >
@@ -87,7 +87,7 @@ const OpsOverview = () => (
                 borderRadius: '50%', background: '#22C55E', flexShrink: 0,
               }}
             />
-            <span style={{ fontSize: 11, color: '#9CA3AF' }}>{s.sub}</span>
+            <span style={{ fontSize: 11, color: '#4B5563' }}>{s.sub}</span>
           </div>
         </div>
       ))}
@@ -125,7 +125,7 @@ const OpsOverview = () => (
                 borderBottom: i < SUBSYSTEM_STATUS.length - 1 ? '1px solid #F3F4F6' : 'none',
               }}
             >
-              <span style={{ fontSize: 13, color: '#374151' }}>{s.name}</span>
+              <span style={{ fontSize: 13, color: '#1F2937' }}>{s.name}</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span
                   style={{
@@ -173,7 +173,7 @@ const OpsOverview = () => (
                 <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{q.label}</span>
                 <span style={{ fontSize: 14, color: '#A81D37' }}>→</span>
               </div>
-              <p style={{ fontSize: 12, color: '#6B7280', margin: 0, lineHeight: 1.5 }}>{q.desc}</p>
+              <p style={{ fontSize: 12, color: '#4B5563', margin: 0, lineHeight: 1.5 }}>{q.desc}</p>
             </div>
           </Link>
         ))}
@@ -196,7 +196,7 @@ const OpsOverview = () => (
       >
         Operational Control Directive
       </div>
-      <p style={{ fontSize: 12, color: '#9CA3AF', margin: 0, lineHeight: 1.7 }}>
+      <p style={{ fontSize: 12, color: '#4B5563', margin: 0, lineHeight: 1.7 }}>
         Every service is monitored. Every action is logged. Every failure is detected.
         Every environment is governed. Every pipeline is traceable. Every model flow is accountable.
         This is the institutional operating system of AtonixDev.

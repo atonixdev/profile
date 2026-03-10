@@ -27,24 +27,6 @@ const Infrastructure = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Our Work</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
-            Infrastructure
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
-            Enterprise-grade infrastructure projects delivering digital transformation
-            for governments and corporations worldwide.
-          </p>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Filters ────────────────────────────────────────── */}
       <section style={{ background: '#F8F9FA', padding: '32px 0', borderBottom: '1px solid #F3F4F6' }}>
         <div className="gsw-container">
@@ -58,7 +40,7 @@ const Infrastructure = () => {
                     padding: '8px 20px',
                     background: selectedCategory === cat ? '#A81D37' : 'transparent',
                     border: `1px solid ${selectedCategory === cat ? '#A81D37' : '#D1D5DB'}`,
-                    color: selectedCategory === cat ? '#FFFFFF' : '#6B7280',
+                    color: selectedCategory === cat ? '#FFFFFF' : '#4B5563',
                     fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
                     textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
                     transition: 'all 0.15s ease',
@@ -84,7 +66,7 @@ const Infrastructure = () => {
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
           {filtered.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '64px 0', color: '#6B7280' }}>
+            <div style={{ textAlign: 'center', padding: '64px 0', color: '#4B5563' }}>
               No projects match your filters.
             </div>
           ) : (
@@ -115,7 +97,7 @@ const Infrastructure = () => {
                     <h3 style={{ fontSize: 17, fontWeight: 700, color: '#111827', marginBottom: 10, marginTop: 12, lineHeight: 1.4 }}>
                       {project.title}
                     </h3>
-                    <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7, marginBottom: 20 }}>
+                    <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7, marginBottom: 20 }}>
                       {project.description}
                     </p>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>

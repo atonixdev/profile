@@ -71,7 +71,7 @@ const CONTAINERS = [
 ];
 // ──────────────────────────────────────────────────────────────────────────
 
-const statusColor = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', terminated: '#9CA3AF', pending: '#F59E0B' }[s] || '#9CA3AF');
+const statusColor = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', terminated: '#4B5563', pending: '#F59E0B' }[s] || '#4B5563');
 const statusBg    = (s) => ({ completed: '#F0FDF4', failed: '#FEF2F2', running: '#EFF6FF', terminated: '#F9FAFB', pending: '#FFFBEB' }[s] || '#F9FAFB');
 
 const cpuColor    = (pct) => pct > 80 ? '#EF4444' : pct > 50 ? '#F59E0B' : '#10B981';
@@ -104,7 +104,7 @@ const PipelineContainers = () => (
       <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
         Container Runtime
       </h1>
-      <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+      <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
         All containers spawned in <strong style={{ color: '#111827' }}>run #47</strong>.
         CPU and memory stats reflect peak usage captured at container exit.
       </p>
@@ -127,7 +127,7 @@ const PipelineContainers = () => (
           key={s.label}
           style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '18px 20px' }}
         >
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
             {s.label}
           </div>
           <div style={{ fontSize: 22, fontWeight: 800, color: s.color || '#111827', lineHeight: 1 }}>
@@ -146,7 +146,7 @@ const PipelineContainers = () => (
             {/* Card header */}
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 14 }}>
               <div>
-                <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: '#9CA3AF', marginBottom: 3 }}>
+                <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: '#4B5563', marginBottom: 3 }}>
                   {c.id.substring(0, 12)}
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', fontFamily: 'var(--font-mono)' }}>
@@ -165,14 +165,14 @@ const PipelineContainers = () => (
             </div>
 
             {/* Image */}
-            <div style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)', marginBottom: 14, padding: '6px 10px', background: '#F9FAFB', border: '1px solid #E5E7EB' }}>
+            <div style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 14, padding: '6px 10px', background: '#F9FAFB', border: '1px solid #E5E7EB' }}>
               {c.image}
             </div>
 
             {/* CPU */}
             <div style={{ marginBottom: 12 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>CPU</span>
+                <span style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>CPU</span>
                 <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: cpuColor(c.cpu_pct), fontWeight: 700 }}>{c.cpu_pct.toFixed(1)}%</span>
               </div>
               <ProgressBar pct={c.cpu_pct} color={cpuColor(c.cpu_pct)} />
@@ -181,7 +181,7 @@ const PipelineContainers = () => (
             {/* Memory */}
             <div style={{ marginBottom: 14 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>Memory</span>
+                <span style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>Memory</span>
                 <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: memColor(c.mem_used, c.mem_limit), fontWeight: 700 }}>
                   {c.mem_used.toLocaleString()} / {c.mem_limit.toLocaleString()} MB ({memPct}%)
                 </span>
@@ -192,12 +192,12 @@ const PipelineContainers = () => (
             {/* Timestamps */}
             <div style={{ display: 'flex', gap: 16 }}>
               <div>
-                <div style={{ fontSize: 9, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Started</div>
-                <div style={{ fontSize: 10, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{c.started}</div>
+                <div style={{ fontSize: 9, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Started</div>
+                <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{c.started}</div>
               </div>
               <div>
-                <div style={{ fontSize: 9, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Finished</div>
-                <div style={{ fontSize: 10, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{c.finished}</div>
+                <div style={{ fontSize: 9, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Finished</div>
+                <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{c.finished}</div>
               </div>
             </div>
           </div>

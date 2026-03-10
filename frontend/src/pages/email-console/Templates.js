@@ -105,7 +105,7 @@ export default function EmailTemplates() {
           <div ref={previewRef} style={{ width: 820, maxWidth: '96vw', maxHeight: '90vh', background: '#FFF', border: BD, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
             <div style={{ padding: '14px 20px', borderBottom: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: 12, fontWeight: 700, color: A, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>PREVIEW — {previewTitle}</span>
-              <button onClick={() => setPreviewOpen(false)} style={{ background: 'transparent', border: 'none', color: '#6B7280', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+              <button onClick={() => setPreviewOpen(false)} style={{ background: 'transparent', border: 'none', color: '#4B5563', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
             </div>
             <div style={{ flex: 1, overflow: 'auto' }}>
               {previewLoading ? <div style={{ padding: 40, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Rendering…</div>
@@ -120,10 +120,10 @@ export default function EmailTemplates() {
         <div>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>TPL — Template Library</div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Email Templates</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>Manage transactional and marketing email templates.</p>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>Manage transactional and marketing email templates.</p>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
-          <select value={filter} onChange={(e) => setFilter(e.target.value)} style={{ padding: '9px 12px', background: '#FFF', border: BD, color: '#374151', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}>
+          <select value={filter} onChange={(e) => setFilter(e.target.value)} style={{ padding: '9px 12px', background: '#FFF', border: BD, color: '#1F2937', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}>
             <option value=''>All Categories</option>
             {['system','security','notification','marketing','custom'].map((c) => <option key={c} value={c}>{c.charAt(0).toUpperCase()+c.slice(1)}</option>)}
           </select>
@@ -142,26 +142,26 @@ export default function EmailTemplates() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
             {[{ key: 'template_id', label: 'Template ID', ph: 'e.g. MKT-PROMO-02' }, { key: 'name', label: 'Display Name', ph: 'e.g. Promo Email' }].map(({ key, label, ph }) => (
               <div key={key}>
-                <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>{label}</label>
+                <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>{label}</label>
                 <input value={newTmpl[key]} onChange={(e) => setNewTmpl((p) => ({ ...p, [key]: e.target.value }))} placeholder={ph} style={input} />
               </div>
             ))}
             <div>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Category</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Category</label>
               <select value={newTmpl.category} onChange={(e) => setNewTmpl((p) => ({ ...p, category: e.target.value }))} style={{ ...input, cursor: 'pointer' }}>
                 {['system','security','notification','marketing','custom'].map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Variables (comma-separated)</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Variables (comma-separated)</label>
               <input value={newTmpl.variables} onChange={(e) => setNewTmpl((p) => ({ ...p, variables: e.target.value }))} placeholder="name, cta_url" style={input} />
             </div>
             <div style={{ gridColumn: '1/-1' }}>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Subject Line</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Subject Line</label>
               <input value={newTmpl.subject} onChange={(e) => setNewTmpl((p) => ({ ...p, subject: e.target.value }))} placeholder="Hello {{name}}, here's your update" style={input} />
             </div>
             <div style={{ gridColumn: '1/-1' }}>
-              <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>HTML Body</label>
+              <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>HTML Body</label>
               <textarea value={newTmpl.html_body} onChange={(e) => setNewTmpl((p) => ({ ...p, html_body: e.target.value }))} rows={10} placeholder="Full HTML body. Use {{variable}} for substitutions." style={{ ...input, resize: 'vertical', lineHeight: 1.6, fontFamily: 'var(--font-mono)', fontSize: 11 }} />
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function EmailTemplates() {
 
       {/* Template List */}
       {loading ? <div style={{ padding: 40, textAlign: 'center', color: '#4B5563', fontSize: 13 }}>Loading templates…</div>
-       : templates.length === 0 ? <div style={{ padding: '40px 20px', textAlign: 'center', color: '#374151', fontSize: 13, border: BD }}>No templates found. Create one above.</div>
+       : templates.length === 0 ? <div style={{ padding: '40px 20px', textAlign: 'center', color: '#1F2937', fontSize: 13, border: BD }}>No templates found. Create one above.</div>
        : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {templates.map((t) => (
@@ -187,22 +187,22 @@ export default function EmailTemplates() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
                     {[{ k: 'name', l: 'Name' }, { k: 'subject', l: 'Subject' }, { k: 'preview_text', l: 'Preview Text' }].map(({ k, l }) => (
                       <div key={k}>
-                        <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{l}</label>
+                        <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{l}</label>
                         <input value={editForm[k] || ''} onChange={(e) => setEditForm((p) => ({ ...p, [k]: e.target.value }))} style={input} />
                       </div>
                     ))}
                     <div>
-                      <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Variables</label>
+                      <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Variables</label>
                       <input value={typeof editForm.variables === 'string' ? editForm.variables : (editForm.variables || []).join(', ')} onChange={(e) => setEditForm((p) => ({ ...p, variables: e.target.value }))} style={{ ...input, fontFamily: 'var(--font-mono)' }} />
                     </div>
                     <div style={{ gridColumn: '1/-1' }}>
-                      <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>HTML Body</label>
+                      <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>HTML Body</label>
                       <textarea value={editForm.html_body || ''} onChange={(e) => setEditForm((p) => ({ ...p, html_body: e.target.value }))} rows={10} style={{ ...input, resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: 11 }} />
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 8 }}>
                     <button onClick={() => handleSaveEdit(t.template_id)} disabled={saving} style={{ padding: '7px 18px', background: A, border: 'none', color: '#06080D', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>{saving ? 'Saving…' : 'Save'}</button>
-                    <button onClick={() => setEditing(null)} style={{ padding: '7px 14px', background: 'transparent', border: BD, color: '#9CA3AF', fontSize: 11, cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
+                    <button onClick={() => setEditing(null)} style={{ padding: '7px 14px', background: 'transparent', border: BD, color: '#4B5563', fontSize: 11, cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
                   </div>
                 </div>
               ) : (
@@ -210,19 +210,19 @@ export default function EmailTemplates() {
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
                       <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{t.name}</span>
-                      <span style={{ fontSize: 9, fontWeight: 700, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', padding: '2px 7px', background: `${CAT_COLOR[t.category] || '#6B7280'}22`, color: CAT_COLOR[t.category] || '#6B7280', textTransform: 'uppercase' }}>{t.category}</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', padding: '2px 7px', background: `${CAT_COLOR[t.category] || '#4B5563'}22`, color: CAT_COLOR[t.category] || '#4B5563', textTransform: 'uppercase' }}>{t.category}</span>
                     </div>
                     <div style={{ fontSize: 10, color: A, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', marginBottom: 4 }}>{t.template_id}</div>
-                    <div style={{ fontSize: 12, color: '#6B7280', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 540 }}>{t.subject}</div>
+                    <div style={{ fontSize: 12, color: '#4B5563', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 540 }}>{t.subject}</div>
                     {t.variables?.length > 0 && (
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 6 }}>
-                        {t.variables.map((v) => <span key={v} style={{ fontSize: 9, padding: '2px 6px', background: '#F1F5F9', color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{`{{${v}}}`}</span>)}
+                        {t.variables.map((v) => <span key={v} style={{ fontSize: 9, padding: '2px 6px', background: '#F1F5F9', color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{`{{${v}}}`}</span>)}
                       </div>
                     )}
                   </div>
                   <div style={{ display: 'flex', gap: 6, flexShrink: 0, alignItems: 'center' }}>
                     <button onClick={() => handlePreview(t)} style={{ fontSize: 10, padding: '5px 12px', cursor: 'pointer', background: 'transparent', border: BD, color: A, fontFamily: 'var(--font-mono)', fontWeight: 700 }}>Preview</button>
-                    <button onClick={() => { setEditing(t.template_id); setEditForm({ ...t, variables: (t.variables || []).join(', ') }); setSaveMsg(null); }} style={{ fontSize: 10, padding: '5px 12px', cursor: 'pointer', background: 'transparent', border: BD, color: '#9CA3AF', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>Edit</button>
+                    <button onClick={() => { setEditing(t.template_id); setEditForm({ ...t, variables: (t.variables || []).join(', ') }); setSaveMsg(null); }} style={{ fontSize: 10, padding: '5px 12px', cursor: 'pointer', background: 'transparent', border: BD, color: '#4B5563', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>Edit</button>
                     <button onClick={() => handleDelete(t.template_id)} style={{ fontSize: 10, padding: '5px 12px', cursor: 'pointer', background: 'transparent', border: '1px solid rgba(239,68,68,0.3)', color: '#EF4444', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>Delete</button>
                   </div>
                 </div>

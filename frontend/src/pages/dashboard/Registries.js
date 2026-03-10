@@ -14,7 +14,7 @@ const Registries = () => (
           Developer Console
         </div>
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>Registries</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Store, manage, and distribute container images for your projects and pipelines.
         </p>
       </div>
@@ -47,7 +47,7 @@ const Registries = () => (
             padding: '6px 0', borderBottom: i < PUSH_COMMANDS.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
           }}
         >
-          <span style={{ color: '#6B7280', marginRight: 8 }}>$</span>{cmd}
+          <span style={{ color: '#4B5563', marginRight: 8 }}>$</span>{cmd}
         </div>
       ))}
     </div>
@@ -61,15 +61,15 @@ const Registries = () => (
         }}
       >
         {['Image', 'Tag', 'Size', 'Pushed', 'Actions'].map((col) => (
-          <div key={col} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+          <div key={col} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
             {col}
           </div>
         ))}
       </div>
       <div style={{ padding: '64px 24px', textAlign: 'center' }}>
         <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-        <p style={{ fontSize: 14, fontWeight: 700, color: '#374151', marginBottom: 8 }}>No images pushed yet</p>
-        <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65, maxWidth: 420, margin: '0 auto' }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>No images pushed yet</p>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 420, margin: '0 auto' }}>
           Follow the quick start commands above to push your first container image to the
           AtonixDev registry.
         </p>

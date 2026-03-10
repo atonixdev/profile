@@ -13,14 +13,14 @@ const STEPS = [
 // ──────────────────────────────────────────────────────────────────────────
 
 const STATUS_FILTERS = ['all', 'completed', 'failed', 'running', 'pending', 'skipped'];
-const statusColor  = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', cancelled: '#9CA3AF', pending: '#F59E0B', skipped: '#6B7280' }[s] || '#9CA3AF');
+const statusColor  = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', cancelled: '#4B5563', pending: '#F59E0B', skipped: '#4B5563' }[s] || '#4B5563');
 const statusBg     = (s) => ({ completed: '#F0FDF4', failed: '#FEF2F2', running: '#EFF6FF', cancelled: '#F9FAFB', pending: '#FFFBEB', skipped: '#F9FAFB' }[s] || '#F9FAFB');
 const statusBorder = (s) => ({ completed: '#BBF7D0', failed: '#FECACA', running: '#BFDBFE', cancelled: '#E5E7EB', pending: '#FDE68A', skipped: '#E5E7EB' }[s] || '#E5E7EB');
 
 const eyebrow = { fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 };
 const card = { background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '24px 28px', marginBottom: 24 };
-const th = { padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB' };
-const td = { padding: '12px 16px', fontSize: 12, color: '#374151', borderBottom: '1px solid #F3F4F6', verticalAlign: 'middle' };
+const th = { padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB' };
+const td = { padding: '12px 16px', fontSize: 12, color: '#1F2937', borderBottom: '1px solid #F3F4F6', verticalAlign: 'middle' };
 
 const PipelineSteps = () => {
   const [filter, setFilter] = useState('all');
@@ -37,7 +37,7 @@ const PipelineSteps = () => {
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
           Pipeline Steps
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           All steps executed in <strong style={{ color: '#111827' }}>run #47</strong>. Click a row to inspect step details.
         </p>
       </div>
@@ -54,7 +54,7 @@ const PipelineSteps = () => {
               style={{
                 padding: '6px 14px', border: active ? `1px solid ${statusColor(f === 'all' ? 'completed' : f)}` : '1px solid #E5E7EB',
                 background: active ? (f === 'all' ? '#F9FAFB' : statusBg(f)) : '#FFFFFF',
-                color: active ? (f === 'all' ? '#111827' : statusColor(f)) : '#6B7280',
+                color: active ? (f === 'all' ? '#111827' : statusColor(f)) : '#4B5563',
                 fontSize: 11, fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-mono)',
                 letterSpacing: '0.06em', textTransform: 'uppercase',
               }}
@@ -75,7 +75,7 @@ const PipelineSteps = () => {
             </div>
             <button
               onClick={() => setSelected(null)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9CA3AF', fontSize: 16 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4B5563', fontSize: 16 }}
             >
               ✕
             </button>
@@ -88,7 +88,7 @@ const PipelineSteps = () => {
               { l: 'Finished', v: detail.end },
             ].map(({ l, v }) => (
               <div key={l}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4, fontFamily: 'var(--font-mono)' }}>{l}</div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4, fontFamily: 'var(--font-mono)' }}>{l}</div>
                 <div style={{ fontSize: 12, color: '#111827', fontFamily: 'var(--font-mono)', fontWeight: 600, wordBreak: 'break-all' }}>{v}</div>
               </div>
             ))}
@@ -121,7 +121,7 @@ const PipelineSteps = () => {
                 onClick={() => setSelected(step.id === selected ? null : step.id)}
                 style={{ cursor: 'pointer', background: selected === step.id ? '#F9FAFB' : 'transparent', transition: 'background 0.1s' }}
               >
-                <td style={{ ...td, fontFamily: 'var(--font-mono)', color: '#9CA3AF', width: 32 }}>{step.order}</td>
+                <td style={{ ...td, fontFamily: 'var(--font-mono)', color: '#4B5563', width: 32 }}>{step.order}</td>
                 <td style={{ ...td, fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#111827' }}>{step.name}</td>
                 <td style={td}>
                   <span
@@ -135,7 +135,7 @@ const PipelineSteps = () => {
                     {step.status}
                   </span>
                 </td>
-                <td style={{ ...td, fontSize: 11, fontFamily: 'var(--font-mono)', color: '#6B7280' }}>{step.image}</td>
+                <td style={{ ...td, fontSize: 11, fontFamily: 'var(--font-mono)', color: '#4B5563' }}>{step.image}</td>
                 <td style={{ ...td, fontFamily: 'var(--font-mono)', fontSize: 11 }}>{step.duration}</td>
                 <td style={{ ...td, fontFamily: 'var(--font-mono)', fontSize: 11 }}>
                   {step.exit_code !== null ? (
@@ -149,7 +149,7 @@ const PipelineSteps = () => {
                     onClick={(e) => { e.stopPropagation(); setSelected(step.id); }}
                     style={{
                       padding: '4px 10px', background: 'none', border: '1px solid #E5E7EB',
-                      fontSize: 10, color: '#6B7280', cursor: 'pointer', fontFamily: 'inherit',
+                      fontSize: 10, color: '#4B5563', cursor: 'pointer', fontFamily: 'inherit',
                       fontWeight: 700, letterSpacing: '0.06em',
                     }}
                   >

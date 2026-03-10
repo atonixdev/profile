@@ -13,8 +13,8 @@ const SHORT_FP = (fp) => (fp ? `${fp.slice(0, 8)}…${fp.slice(-8)}` : '—');
 const STATUS_STYLE = {
   unverified: { color: '#92400E', background: '#FFFBEB', border: '1px solid #FDE68A' },
   verified:   { color: '#065F46', background: '#ECFDF5', border: '1px solid #A7F3D0' },
-  revoked:    { color: '#6B7280', background: '#F3F4F6', border: '1px solid #E5E7EB' },
-  expired:    { color: '#6B7280', background: '#F3F4F6', border: '1px solid #E5E7EB' },
+  revoked:    { color: '#4B5563', background: '#F3F4F6', border: '1px solid #E5E7EB' },
+  expired:    { color: '#4B5563', background: '#F3F4F6', border: '1px solid #E5E7EB' },
 };
 
 const Badge = ({ status }) => (
@@ -39,14 +39,14 @@ const Field = ({ label, children, hint }) => (
       style={{
         display: 'block', fontSize: 11, fontWeight: 700,
         letterSpacing: '0.1em', textTransform: 'uppercase',
-        color: '#374151', marginBottom: 6,
+        color: '#1F2937', marginBottom: 6,
       }}
     >
       {label}
     </label>
     {children}
     {hint && (
-      <div style={{ fontSize: 11, color: '#9CA3AF', marginTop: 5, lineHeight: 1.55 }}>
+      <div style={{ fontSize: 11, color: '#4B5563', marginTop: 5, lineHeight: 1.55 }}>
         {hint}
       </div>
     )}
@@ -76,7 +76,7 @@ const ErrorBox = ({ message }) =>
 
 const ConfirmRow = ({ label, onConfirm, onCancel, danger }) => (
   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-    <span style={{ fontSize: 11, color: '#6B7280' }}>{label}</span>
+    <span style={{ fontSize: 11, color: '#4B5563' }}>{label}</span>
     <button
       onClick={onConfirm}
       style={{
@@ -90,7 +90,7 @@ const ConfirmRow = ({ label, onConfirm, onCancel, danger }) => (
     <button
       onClick={onCancel}
       style={{
-        padding: '3px 10px', background: 'none', color: '#6B7280',
+        padding: '3px 10px', background: 'none', color: '#4B5563',
         border: '1px solid #E5E7EB', fontSize: 10, fontWeight: 700,
         letterSpacing: '0.08em', cursor: 'pointer', fontFamily: 'inherit',
       }}
@@ -192,7 +192,7 @@ const GPGKeys = () => {
         <h1 style={{ fontSize: 22, fontWeight: 800, color: '#111827', marginBottom: 6 }}>
           GPG Keys
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65, maxWidth: 620 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 620 }}>
           Manage GPG public keys used to verify signed commits and tags.
           AtonixDev uses your GPG key fingerprint to mark commits as verified.
         </p>
@@ -257,7 +257,7 @@ const GPGKeys = () => {
             disabled={submitting}
             style={{
               padding: '10px 28px',
-              background: submitting ? '#9CA3AF' : '#A81D37',
+              background: submitting ? '#4B5563' : '#A81D37',
               color: '#FFFFFF', border: 'none',
               fontSize: 11, fontWeight: 700, letterSpacing: '0.1em',
               textTransform: 'uppercase', cursor: submitting ? 'default' : 'pointer',
@@ -275,7 +275,7 @@ const GPGKeys = () => {
           <h2 style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>
             Your GPG Keys
             {keys.length > 0 && (
-              <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
                 ({keys.length})
               </span>
             )}
@@ -295,7 +295,7 @@ const GPGKeys = () => {
               key={col}
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.12em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)',
               }}
             >
@@ -305,16 +305,16 @@ const GPGKeys = () => {
         </div>
 
         {loading ? (
-          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>
             Loading…
           </div>
         ) : keys.length === 0 ? (
           <div style={{ padding: '56px 24px', textAlign: 'center' }}>
             <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-            <p style={{ fontSize: 14, fontWeight: 700, color: '#374151', marginBottom: 8 }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>
               You have no GPG keys yet
             </p>
-            <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65, maxWidth: 380, margin: '0 auto' }}>
+            <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 380, margin: '0 auto' }}>
               Add a GPG key to sign commits and have them displayed as verified in AtonixDev repositories.
             </p>
           </div>
@@ -332,15 +332,15 @@ const GPGKeys = () => {
                 {SHORT_ID(key.key_id)}
               </div>
               <div
-                style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                 title={key.fingerprint}
               >
                 {SHORT_FP(key.fingerprint)}
               </div>
-              <div style={{ fontSize: 12, color: '#6B7280', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={key.primary_user_id}>
+              <div style={{ fontSize: 12, color: '#4B5563', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={key.primary_user_id}>
                 {key.primary_user_id || '—'}
               </div>
-              <div style={{ fontSize: 12, color: '#6B7280' }}>{fmt(key.created_at)}</div>
+              <div style={{ fontSize: 12, color: '#4B5563' }}>{fmt(key.created_at)}</div>
               <div><Badge status={key.status} /></div>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                 {confirming?.id === key.id ? (
@@ -376,12 +376,12 @@ const GPGKeys = () => {
                         onClick={() => setConfirming({ id: key.id, action: 'revoke' })}
                         style={{
                           padding: '4px 12px', background: 'none',
-                          border: '1px solid #E5E7EB', color: '#6B7280',
+                          border: '1px solid #E5E7EB', color: '#4B5563',
                           fontSize: 10, fontWeight: 700, letterSpacing: '0.08em',
                           cursor: 'pointer', fontFamily: 'inherit',
                         }}
                         onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A81D37'; e.currentTarget.style.color = '#A81D37'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.color = '#6B7280'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.color = '#4B5563'; }}
                       >
                         Revoke
                       </button>
@@ -390,12 +390,12 @@ const GPGKeys = () => {
                       onClick={() => setConfirming({ id: key.id, action: 'delete' })}
                       style={{
                         padding: '4px 12px', background: 'none',
-                        border: '1px solid #E5E7EB', color: '#6B7280',
+                        border: '1px solid #E5E7EB', color: '#4B5563',
                         fontSize: 10, fontWeight: 700, letterSpacing: '0.08em',
                         cursor: 'pointer', fontFamily: 'inherit',
                       }}
                       onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#DC2626'; e.currentTarget.style.color = '#DC2626'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.color = '#6B7280'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.color = '#4B5563'; }}
                     >
                       Delete
                     </button>

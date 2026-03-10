@@ -50,7 +50,7 @@ const STATUS_STYLES = {
   Open:          { bg: '#FEF2F2', color: '#DC2626' },
   Investigating: { bg: '#FFFBEB', color: '#D97706' },
   Resolved:      { bg: '#F0FDF4', color: '#16A34A' },
-  Closed:        { bg: '#F9FAFB', color: '#6B7280' },
+  Closed:        { bg: '#F9FAFB', color: '#4B5563' },
 };
 
 const OpsIncidents = () => {
@@ -78,7 +78,7 @@ const OpsIncidents = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Incident Center
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
           Detect, classify, assign, resolve, and document every operational incident on the platform.
         </p>
       </div>
@@ -102,7 +102,7 @@ const OpsIncidents = () => {
             <div
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)', marginBottom: 6,
               }}
             >
@@ -123,7 +123,7 @@ const OpsIncidents = () => {
               padding: '6px 14px', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.06em', textTransform: 'uppercase',
               background: filter === f ? '#A81D37' : '#F9FAFB',
-              color: filter === f ? '#FFFFFF' : '#6B7280',
+              color: filter === f ? '#FFFFFF' : '#4B5563',
               border: filter === f ? '1px solid #A81D37' : '1px solid #E5E7EB',
               cursor: 'pointer', fontFamily: 'inherit',
             }}
@@ -136,13 +136,13 @@ const OpsIncidents = () => {
       {/* Incident list */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {visible.length === 0 && (
-          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#9CA3AF', fontSize: 13, background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
+          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#4B5563', fontSize: 13, background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
             No incidents match the selected filter.
           </div>
         )}
         {visible.map((inc) => {
-          const sc = SEV_STYLES[inc.severity] || { bg: '#F9FAFB', color: '#6B7280' };
-          const stc = STATUS_STYLES[inc.status] || { bg: '#F9FAFB', color: '#6B7280' };
+          const sc = SEV_STYLES[inc.severity] || { bg: '#F9FAFB', color: '#4B5563' };
+          const stc = STATUS_STYLES[inc.status] || { bg: '#F9FAFB', color: '#4B5563' };
           const isOpen = expanded === inc.id;
           return (
             <div key={inc.id} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
@@ -156,7 +156,7 @@ const OpsIncidents = () => {
               >
                 {/* ID + Severity */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flexShrink: 0, minWidth: 80 }}>
-                  <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#9CA3AF' }}>{inc.id}</span>
+                  <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#4B5563' }}>{inc.id}</span>
                   <span
                     style={{
                       fontSize: 9, fontWeight: 700, letterSpacing: '0.08em',
@@ -171,7 +171,7 @@ const OpsIncidents = () => {
                 {/* Title + Meta */}
                 <div style={{ flex: 1, textAlign: 'left' }}>
                   <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 6 }}>{inc.title}</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, fontSize: 11, color: '#6B7280' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, fontSize: 11, color: '#4B5563' }}>
                     <span>{inc.service}</span>
                     <span>Assignee: {inc.assignee}</span>
                     <span>Opened: {inc.opened.replace('T', ' ').replace('Z', '')}</span>
@@ -188,17 +188,17 @@ const OpsIncidents = () => {
                 >
                   {inc.status}
                 </span>
-                <span style={{ fontSize: 14, color: '#9CA3AF', alignSelf: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: 14, color: '#4B5563', alignSelf: 'center', flexShrink: 0 }}>
                   {isOpen ? '▲' : '▼'}
                 </span>
               </button>
 
               {isOpen && (
                 <div style={{ padding: '0 20px 16px', borderTop: '1px solid #F3F4F6' }}>
-                  <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.7, margin: '16px 0 0' }}>
+                  <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.7, margin: '16px 0 0' }}>
                     {inc.detail}
                   </p>
-                  <div style={{ marginTop: 12, fontSize: 11, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+                  <div style={{ marginTop: 12, fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
                     Updated: {inc.updated.replace('T', ' ').replace('Z', '')}
                   </div>
                 </div>

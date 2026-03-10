@@ -31,7 +31,7 @@ export default function API() {
             API — Developer Tools & API Management
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>API & Developer Tools</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
             Manage API keys, webhooks, rate limits, and developer integrations.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function API() {
           { label: 'Avg Latency (ms)',   value: '142'    },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -87,7 +87,7 @@ export default function API() {
             <thead>
               <tr>
                 {['Key ID', 'Name', 'Scope', 'Created', 'Last Used', 'Status', 'Actions'].map((h) => (
-                  <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
+                  <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
                     {h}
                   </th>
                 ))}
@@ -101,7 +101,7 @@ export default function API() {
                 >
                   <td style={{ padding: '11px 20px', fontSize: 11, color: A, fontFamily: 'var(--font-mono)' }}>{k.id}</td>
                   <td style={{ padding: '11px 20px', fontSize: 13, fontWeight: 600, color: '#111827' }}>{k.name}</td>
-                  <td style={{ padding: '11px 20px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{k.scope}</td>
+                  <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{k.scope}</td>
                   <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563' }}>{k.created}</td>
                   <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563' }}>{k.last_used}</td>
                   <td style={{ padding: '11px 20px' }}>
@@ -128,9 +128,9 @@ export default function API() {
             <div key={w.id} style={{ ...CARD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#111827', marginBottom: 4, fontFamily: 'var(--font-mono)' }}>{w.url}</div>
-                <div style={{ fontSize: 11, color: '#6B7280' }}>Events: {w.events}</div>
+                <div style={{ fontSize: 11, color: '#4B5563' }}>Events: {w.events}</div>
               </div>
-              <span style={{ fontSize: 10, fontWeight: 700, color: w.status === 'Active' ? '#22C55E' : '#6B7280', fontFamily: 'var(--font-mono)' }}>{w.status}</span>
+              <span style={{ fontSize: 10, fontWeight: 700, color: w.status === 'Active' ? '#22C55E' : '#4B5563', fontFamily: 'var(--font-mono)' }}>{w.status}</span>
             </div>
           ))}
         </div>
@@ -139,7 +139,7 @@ export default function API() {
       {/* Docs */}
       {tab === 'docs' && (
         <div style={{ ...CARD, padding: '28px 32px' }}>
-          <div style={{ fontSize: 13, color: '#9CA3AF', marginBottom: 16 }}>
+          <div style={{ fontSize: 13, color: '#4B5563', marginBottom: 16 }}>
             Access the AtonixDev REST API documentation to integrate third-party systems.
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -153,7 +153,7 @@ export default function API() {
               <div key={e.path} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                 <span style={{ fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono)', width: 40, color: e.method === 'GET' ? '#22C55E' : '#38BDF8' }}>{e.method}</span>
                 <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: A, minWidth: 220 }}>{e.path}</span>
-                <span style={{ fontSize: 12, color: '#6B7280' }}>{e.desc}</span>
+                <span style={{ fontSize: 12, color: '#4B5563' }}>{e.desc}</span>
               </div>
             ))}
           </div>

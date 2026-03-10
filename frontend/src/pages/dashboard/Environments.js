@@ -15,7 +15,7 @@ const Environments = () => (
           Developer Console
         </div>
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>Environments</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Create isolated deployment environments, manage configuration variables, and control secrets per environment.
         </p>
       </div>
@@ -48,7 +48,7 @@ const Environments = () => (
           }}
         >
           <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{env.name}</div>
-          <div style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.6 }}>{env.desc}</div>
+          <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.6 }}>{env.desc}</div>
         </div>
       ))}
     </div>
@@ -62,15 +62,15 @@ const Environments = () => (
         }}
       >
         {['Environment', 'Type', 'Variables', 'Status', 'Actions'].map((col) => (
-          <div key={col} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+          <div key={col} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
             {col}
           </div>
         ))}
       </div>
       <div style={{ padding: '64px 24px', textAlign: 'center' }}>
         <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-        <p style={{ fontSize: 14, fontWeight: 700, color: '#374151', marginBottom: 8 }}>No environments configured</p>
-        <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65, maxWidth: 420, margin: '0 auto 24px' }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>No environments configured</p>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 420, margin: '0 auto 24px' }}>
           Create an environment to manage deployment targets, environment variables, and secrets
           in a structured, isolated configuration.
         </p>

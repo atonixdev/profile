@@ -75,7 +75,7 @@ const Home = () => {
             <span style={{ display: 'block', color: '#A81D37' }}>Automation, and Intelligent Infrastructure.</span>
           </h1>
 
-          <p style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', color: '#6B7280', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
+          <p style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', color: '#4B5563', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
             Delivering secure, scalable, and intelligent technology solutions for governments,
             enterprises, and global organisations across software, cloud, AI, and infrastructure.
           </p>
@@ -120,7 +120,7 @@ const Home = () => {
             {stats.map((s) => (
               <div key={s.label} style={{ padding: '22px 16px', borderRight: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB', textAlign: 'center' }}>
                 <div style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 900, color: '#111827', letterSpacing: '-0.02em', marginBottom: 4 }}>{s.value}</div>
-                <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+                <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -135,7 +135,7 @@ const Home = () => {
             <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>
               Eight Technology Domains
             </h2>
-            <p style={{ fontSize: 16, color: '#6B7280', maxWidth: 560, margin: '12px auto 0', lineHeight: 1.65 }}>
+            <p style={{ fontSize: 16, color: '#4B5563', maxWidth: 560, margin: '12px auto 0', lineHeight: 1.65 }}>
               End-to-end enterprise technology delivery across every critical domain.
             </p>
           </div>
@@ -148,7 +148,7 @@ const Home = () => {
               <div key={c.title} style={{ background: '#FFFFFF', padding: '32px 28px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ width: 28, height: 2, background: '#A81D37', marginBottom: 20, flexShrink: 0 }} />
                 <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 10, lineHeight: 1.3 }}>{c.title}</h3>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7, flexGrow: 1 }}>{c.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7, flexGrow: 1 }}>{c.desc}</p>
               </div>
             ))}
           </div>
@@ -183,7 +183,7 @@ const Home = () => {
             {industries.map((ind) => (
               <div key={ind.name} style={{ padding: '28px 24px', border: '1px solid #E5E7EB', background: '#FFFFFF' }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 8 }}>{ind.name}</div>
-                <p style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.65, margin: 0 }}>{ind.desc}</p>
+                <p style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.65, margin: 0 }}>{ind.desc}</p>
               </div>
             ))}
           </div>
@@ -224,7 +224,7 @@ const Home = () => {
               <div key={item.label} style={{ padding: '24px 20px', border: '1px solid #E5E7EB', background: '#FFFFFF', textAlign: 'center' }}>
                 <div style={{ width: 20, height: 2, background: '#A81D37', margin: '0 auto 16px' }} />
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', marginBottom: 6, lineHeight: 1.3 }}>{item.label}</div>
-                <div style={{ fontSize: 11, color: '#9CA3AF', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>{item.sub}</div>
+                <div style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>{item.sub}</div>
               </div>
             ))}
           </div>
@@ -245,10 +245,10 @@ const Home = () => {
               {featuredTestimonials.map((t) => (
                 <div key={t.id} className="gsw-testimonial">
                   <div style={{ fontSize: 32, color: '#A81D37', marginBottom: 16, lineHeight: 1 }}>&ldquo;</div>
-                  <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>{t.content}</p>
+                  <p style={{ fontSize: 14, color: '#1F2937', lineHeight: 1.8, marginBottom: 24 }}>{t.content}</p>
                   <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: 20 }}>
                     <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{t.client_name}</div>
-                    {t.client_title && <div style={{ fontSize: 12, color: '#6B7280' }}>{t.client_title}</div>}
+                    {t.client_title && <div style={{ fontSize: 12, color: '#4B5563' }}>{t.client_title}</div>}
                     {t.client_company && <div style={{ fontSize: 12, color: '#A81D37', marginTop: 2 }}>{t.client_company}</div>}
                   </div>
                 </div>

@@ -35,7 +35,7 @@ const EDGES = [
 ];
 // ──────────────────────────────────────────────────────────────────────────
 
-const statusColor = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', cancelled: '#9CA3AF', pending: '#F59E0B', skipped: '#6B7280' }[s] || '#9CA3AF');
+const statusColor = (s) => ({ completed: '#10B981', failed: '#EF4444', running: '#3B82F6', cancelled: '#4B5563', pending: '#F59E0B', skipped: '#4B5563' }[s] || '#4B5563');
 const statusBg    = (s) => ({ completed: '#F0FDF4', failed: '#FEF2F2', running: '#EFF6FF', cancelled: '#F9FAFB', pending: '#FFFBEB', skipped: '#F9FAFB' }[s] || '#F9FAFB');
 
 const eyebrow = { fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 };
@@ -74,7 +74,7 @@ const PipelineGraph = () => {
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
           Pipeline Graph
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           DAG visualization of all pipeline steps for <strong style={{ color: '#111827' }}>run #47</strong>.
           Hover a node to see step details.
         </p>
@@ -85,7 +85,7 @@ const PipelineGraph = () => {
         {['completed', 'running', 'failed', 'pending', 'skipped'].map((s) => (
           <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <span style={{ width: 8, height: 8, borderRadius: '50%', background: statusColor(s), display: 'inline-block' }} />
-            <span style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{s}</span>
+            <span style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{s}</span>
           </div>
         ))}
       </div>
@@ -161,7 +161,7 @@ const PipelineGraph = () => {
                   {/* Image */}
                   <text
                     x={x + 12} y={y + 42}
-                    fontSize={9} fill="#6B7280"
+                    fontSize={9} fill="#4B5563"
                     fontFamily="var(--font-mono)"
                     style={{ pointerEvents: 'none' }}
                   >
@@ -170,7 +170,7 @@ const PipelineGraph = () => {
                   {/* Duration */}
                   <text
                     x={x + 12} y={y + 60}
-                    fontSize={9} fill="#9CA3AF"
+                    fontSize={9} fill="#4B5563"
                     fontFamily="var(--font-mono)"
                     style={{ pointerEvents: 'none' }}
                   >
@@ -198,7 +198,7 @@ const PipelineGraph = () => {
                 { l: 'Duration', v: step.duration },
               ].map(({ l, v }) => (
                 <div key={l}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4, fontFamily: 'var(--font-mono)' }}>{l}</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4, fontFamily: 'var(--font-mono)' }}>{l}</div>
                   <div style={{ fontSize: 12, color: '#111827', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>{v}</div>
                 </div>
               ))}
@@ -225,7 +225,7 @@ const PipelineGraph = () => {
                 <div style={{ fontSize: 11, fontWeight: 700, color: '#111827', fontFamily: 'var(--font-mono)' }}>
                   {step.name}
                 </div>
-                <div style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginTop: 3 }}>
+                <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)', marginTop: 3 }}>
                   {step.duration}
                 </div>
               </div>

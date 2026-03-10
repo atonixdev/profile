@@ -97,7 +97,7 @@ const Register = () => {
 
   const labelStyle = {
     display: 'block', fontSize: '12px', fontWeight: 600,
-    color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em',
+    color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.08em',
     marginBottom: '6px',
   };
 
@@ -113,7 +113,7 @@ const Register = () => {
           <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', marginBottom: '8px', letterSpacing: '-0.02em' }}>
             Create Account
           </h1>
-          <p style={{ color: '#6B7280', fontSize: '14px' }}>Create an account to access exclusive platform features</p>
+          <p style={{ color: '#4B5563', fontSize: '14px' }}>Create an account to access exclusive platform features</p>
         </div>
 
         {/* Card */}
@@ -182,7 +182,7 @@ const Register = () => {
                   {showPassword ? 'HIDE' : 'SHOW'}
                 </button>
               </div>
-              <p style={{ fontSize: '11px', color: '#6B7280', marginTop: '4px' }}>Minimum 8 characters</p>
+              <p style={{ fontSize: '11px', color: '#4B5563', marginTop: '4px' }}>Minimum 8 characters</p>
             </div>
 
             <div>
@@ -225,7 +225,7 @@ const Register = () => {
           </form>
 
           <div style={{ borderTop: '1px solid #E5E7EB', marginTop: '28px', paddingTop: '24px', textAlign: 'center' }}>
-            <p style={{ color: '#6B7280', fontSize: '13px' }}>
+            <p style={{ color: '#4B5563', fontSize: '13px' }}>
               Already have an account?{' '}
               <Link to="/login" style={{ color: '#A81D37', fontWeight: 700, textDecoration: 'none' }}>
                 Sign In
@@ -236,14 +236,14 @@ const Register = () => {
 
         {/* Tech tags */}
         <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', borderTop: 'none', padding: '20px 40px' }}>
-          <p style={{ fontSize: '11px', color: '#6B7280', textAlign: 'center', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          <p style={{ fontSize: '11px', color: '#4B5563', textAlign: 'center', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
             Open to all tech professionals
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
             {['Full Stack', 'DevOps', 'AI/ML', 'Cloud', 'Security', 'Systems'].map((tag) => (
               <span key={tag} style={{
                 background: '#F1F3F5', border: '1px solid #E5E7EB',
-                color: '#6B7280', fontSize: '11px', padding: '3px 10px',
+                color: '#4B5563', fontSize: '11px', padding: '3px 10px',
                 letterSpacing: '0.05em',
               }}>
                 {tag}

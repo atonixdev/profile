@@ -79,7 +79,7 @@ const MODEL_FLOW = {
 
 const eyebrow = { fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 };
 const card    = { background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '24px 28px', marginBottom: 24 };
-const label   = { fontSize: 9, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 4 };
+const label   = { fontSize: 9, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 4 };
 
 const PipelineSettings = () => {
   const [yamlOpen, setYamlOpen] = useState(true);
@@ -92,7 +92,7 @@ const PipelineSettings = () => {
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
           Pipeline Settings
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           Configuration for <strong style={{ color: '#111827' }}>fraud_detection_pipeline</strong>.
           Changes take effect on the next triggered run.
         </p>
@@ -132,7 +132,7 @@ const PipelineSettings = () => {
             >
               <div style={label}>{l}</div>
               <div style={{ fontSize: 20, fontWeight: 800, color: '#111827', lineHeight: 1, marginBottom: 4 }}>{v}</div>
-              <div style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>{note}</div>
+              <div style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{note}</div>
             </div>
           ))}
         </div>
@@ -160,7 +160,7 @@ const PipelineSettings = () => {
           <thead>
             <tr>
               {['Key', 'Value', 'Type'].map((h) => (
-                <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B7280', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB', fontFamily: 'var(--font-mono)' }}>{h}</th>
+                <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: '1px solid #E5E7EB', background: '#F9FAFB', fontFamily: 'var(--font-mono)' }}>{h}</th>
               ))}
             </tr>
           </thead>
@@ -170,7 +170,7 @@ const PipelineSettings = () => {
                 <td style={{ padding: '11px 16px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#111827', fontSize: 12, borderBottom: '1px solid #F3F4F6' }}>
                   {ev.key}
                 </td>
-                <td style={{ padding: '11px 16px', fontFamily: 'var(--font-mono)', color: '#6B7280', fontSize: 11, borderBottom: '1px solid #F3F4F6', maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <td style={{ padding: '11px 16px', fontFamily: 'var(--font-mono)', color: '#4B5563', fontSize: 11, borderBottom: '1px solid #F3F4F6', maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {ev.value}
                 </td>
                 <td style={{ padding: '11px 16px', borderBottom: '1px solid #F3F4F6' }}>
@@ -200,7 +200,7 @@ const PipelineSettings = () => {
           </div>
           <button
             onClick={() => setYamlOpen((o) => !o)}
-            style={{ background: 'none', border: '1px solid #E5E7EB', padding: '6px 12px', fontSize: 11, color: '#6B7280', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 700 }}
+            style={{ background: 'none', border: '1px solid #E5E7EB', padding: '6px 12px', fontSize: 11, color: '#4B5563', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 700 }}
           >
             {yamlOpen ? 'Collapse ↑' : 'Expand ↓'}
           </button>
@@ -240,7 +240,7 @@ const PipelineSettings = () => {
               style={{ background: '#FFFFFF', border: '1px solid #FECACA', padding: '14px 18px', flex: '1 1 200px' }}
             >
               <div style={{ fontSize: 12, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{lbl}</div>
-              <div style={{ fontSize: 11, color: '#9CA3AF', marginBottom: 12 }}>{note}</div>
+              <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 12 }}>{note}</div>
               <button
                 style={{
                   padding: '7px 14px', background: 'none',

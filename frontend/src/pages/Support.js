@@ -39,7 +39,7 @@ const LABEL = {
   fontWeight: 700,
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
-  color: '#374151',
+  color: '#1F2937',
   marginBottom: 6,
   fontFamily: 'var(--font-mono, monospace)',
 };
@@ -112,11 +112,11 @@ export default function Support() {
             </svg>
           </div>
           <h2 style={{ fontSize: 22, fontWeight: 700, color: '#111827', margin: '0 0 8px' }}>Request Received</h2>
-          <p style={{ fontSize: 14, color: '#6B7280', margin: '0 0 24px', lineHeight: 1.6 }}>
+          <p style={{ fontSize: 14, color: '#4B5563', margin: '0 0 24px', lineHeight: 1.6 }}>
             Your support ticket has been submitted. We'll respond to <strong>{form.email || 'your email'}</strong> as soon as possible.
           </p>
           <div style={{ background: '#F3F4F6', border: '1px solid #E5E7EB', padding: '16px 24px', marginBottom: 28 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', fontFamily: 'var(--font-mono, monospace)', marginBottom: 6 }}>Ticket Reference</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono, monospace)', marginBottom: 6 }}>Ticket Reference</div>
             <div style={{ fontSize: 20, fontWeight: 700, color: '#A81D37', fontFamily: 'var(--font-mono, monospace)', letterSpacing: '0.08em' }}>
               {submitted.ticket_ref || 'PENDING'}
             </div>
@@ -134,21 +134,6 @@ export default function Support() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#FFFFFF' }}>
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Enterprise Support</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
-            Support Center
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7, margin: '0 auto' }}>
-            Submit a request to the AtonixDev support team. All ticket communications are tracked and responded to directly by our engineers.
-          </p>
-        </div>
-      </section>
-      <hr className="gsw-divider" />
 
       {/* Form */}
       <section className="gsw-section">
@@ -206,10 +191,10 @@ export default function Support() {
           <div style={{ marginBottom: 28 }}>
             <label style={LABEL}>Attachment (optional)</label>
             <label style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 16px', border: '1px dashed #D1D5DB', background: '#F9FAFB', cursor: 'pointer' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
               </svg>
-              <span style={{ fontSize: 13, color: fileLabel ? '#111827' : '#9CA3AF' }}>
+              <span style={{ fontSize: 13, color: fileLabel ? '#111827' : '#4B5563' }}>
                 {fileLabel || 'Choose file — PDF, PNG, JPG, ZIP, TXT (max 10 MB)'}
               </span>
               <input type="file" onChange={handleFile} style={{ display: 'none' }} accept=".pdf,.png,.jpg,.jpeg,.webp,.zip,.txt" />
@@ -226,7 +211,7 @@ export default function Support() {
             type="submit"
             disabled={loading}
             style={{
-              padding: '13px 36px', background: loading ? '#6B7280' : '#A81D37', border: 'none',
+              padding: '13px 36px', background: loading ? '#4B5563' : '#A81D37', border: 'none',
               color: '#FFFFFF', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em',
               textTransform: 'uppercase', cursor: loading ? 'not-allowed' : 'pointer',
               fontFamily: 'inherit', width: '100%',
@@ -235,7 +220,7 @@ export default function Support() {
             {loading ? 'Submitting…' : 'Submit Support Request'}
           </button>
 
-          <p style={{ marginTop: 14, fontSize: 12, color: '#6B7280', textAlign: 'center' }}>
+          <p style={{ marginTop: 14, fontSize: 12, color: '#4B5563', textAlign: 'center' }}>
             For critical outages affecting production, please also contact us directly at{' '}
             <strong>support@atonixdev.org</strong>.
           </p>

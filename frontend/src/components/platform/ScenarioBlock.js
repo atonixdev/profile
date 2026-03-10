@@ -5,17 +5,17 @@ const ScenarioBlock = ({ eyebrow, title, description, scenarios }) => (
   <section className="gsw-section" style={{ background: '#FFFFFF' }}>
     <div className="gsw-container">
       {/* Section header */}
-      <div style={{ marginBottom: 56 }}>
+      <div className="gsw-section-header">
         <span className="gsw-eyebrow">{eyebrow}</span>
         <h2
           style={{
             fontSize: 'clamp(26px, 3vw, 36px)', fontWeight: 800,
-            color: '#111827', lineHeight: 1.15, maxWidth: 600, marginBottom: 20,
+            color: '#111827', lineHeight: 1.15, maxWidth: 600, margin: '0 auto 20px',
           }}
         >
           {title}
         </h2>
-        <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 620 }}>
+        <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 620 }}>
           {description}
         </p>
       </div>
@@ -50,7 +50,7 @@ const ScenarioBlock = ({ eyebrow, title, description, scenarios }) => (
             >
               {sc.title}
             </h3>
-            <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.8, marginBottom: 20 }}>
+            <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.8, marginBottom: 20 }}>
               {sc.desc}
             </p>
             {sc.tags && sc.tags.length > 0 && (
@@ -62,7 +62,7 @@ const ScenarioBlock = ({ eyebrow, title, description, scenarios }) => (
                       padding: '3px 10px',
                       fontSize: 10, fontWeight: 700,
                       letterSpacing: '0.08em', textTransform: 'uppercase',
-                      color: '#6B7280', border: '1px solid #E5E7EB',
+                      color: '#4B5563', border: '1px solid #E5E7EB',
                       fontFamily: 'var(--font-mono)',
                     }}
                   >

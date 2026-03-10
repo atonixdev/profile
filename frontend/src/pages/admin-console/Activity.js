@@ -25,7 +25,7 @@ export default function Activity() {
           ACT — Admin Activity Logs
         </div>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Admin Activity</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
+        <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>
           All administrator actions, tagged by actor, resource, and context. Used for internal accountability.
         </p>
       </div>
@@ -39,7 +39,7 @@ export default function Activity() {
           { label: 'Pending Reviews', value: '0'   },
         ].map((s) => (
           <div key={s.label} style={CARD}>
-            <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
+            <div style={{ fontSize: 11, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
             <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
@@ -72,7 +72,7 @@ export default function Activity() {
           <thead>
             <tr>
               {['Ref', 'Timestamp', 'Admin', 'Action', 'Target', 'Context'].map((h) => (
-                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#374151', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
+                <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1F2937', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>
                   {h}
                 </th>
               ))}
@@ -86,11 +86,11 @@ export default function Activity() {
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
-                <td style={{ padding: '11px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{a.id}</td>
+                <td style={{ padding: '11px 20px', fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{a.id}</td>
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>{a.ts}</td>
-                <td style={{ padding: '11px 20px', fontSize: 12, fontWeight: 600, color: '#9CA3AF' }}>{a.admin}</td>
+                <td style={{ padding: '11px 20px', fontSize: 12, fontWeight: 600, color: '#4B5563' }}>{a.admin}</td>
                 <td style={{ padding: '11px 20px', fontSize: 12, color: '#D1D5DB' }}>{a.action}</td>
-                <td style={{ padding: '11px 20px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{a.target}</td>
+                <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{a.target}</td>
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563' }}>{a.context}</td>
               </tr>
             ))}

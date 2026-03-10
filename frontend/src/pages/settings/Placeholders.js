@@ -7,7 +7,7 @@ const ComingSoon = ({ title, description }) => (
         Developer Settings
       </div>
       <h1 style={{ fontSize: 22, fontWeight: 800, color: '#111827', marginBottom: 6 }}>{title}</h1>
-      <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>{description}</p>
+      <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>{description}</p>
     </div>
 
     <div
@@ -17,8 +17,8 @@ const ComingSoon = ({ title, description }) => (
       }}
     >
       <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-      <p style={{ fontSize: 14, fontWeight: 700, color: '#374151', marginBottom: 8 }}>Coming Soon</p>
-      <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.65, maxWidth: 400, margin: '0 auto' }}>
+      <p style={{ fontSize: 14, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>Coming Soon</p>
+      <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65, maxWidth: 400, margin: '0 auto' }}>
         This section is under development and will be available in a future release.
       </p>
     </div>

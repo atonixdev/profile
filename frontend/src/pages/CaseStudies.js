@@ -101,23 +101,6 @@ const CaseStudies = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Portfolio</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 680, margin: '0 auto 20px' }}>
-            Case Studies
-          </h1>
-          <p style={{ fontSize: 17, color: '#6B7280', lineHeight: 1.75, maxWidth: 580, margin: '0 auto' }}>
-            Six detailed projects across government, finance, healthcare, retail, logistics, and manufacturing — showcasing how we deliver measurable outcomes through engineering excellence.
-          </p>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Case Study Selector ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
@@ -136,7 +119,7 @@ const CaseStudies = () => {
                   textAlign: 'left',
                 }}
               >
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: activeStudy === i ? '#A81D37' : '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: activeStudy === i ? '#A81D37' : '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>
                   {cs.industry}
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: activeStudy === i ? '#FFFFFF' : '#111827' }}>
@@ -159,7 +142,7 @@ const CaseStudies = () => {
             <h2 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.2, marginBottom: 24 }}>
               {study.title}
             </h2>
-            <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.8, maxWidth: 680 }}>
+            <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.8, maxWidth: 680 }}>
               <strong style={{ color: '#111827' }}>Challenge: </strong>{study.challenge}
             </p>
           </div>
@@ -170,7 +153,7 @@ const CaseStudies = () => {
               <div key={i} style={{ background: '#FFFFFF', padding: '24px 20px' }}>
                 <div style={{ fontSize: 28, fontWeight: 800, color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{r.metric}</div>
                 <div style={{ fontSize: 12, fontWeight: 600, color: '#111827', lineHeight: 1.5, marginBottom: 6 }}>{r.title}</div>
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6B7280' }}>{r.tag}</div>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4B5563' }}>{r.tag}</div>
               </div>
             ))}
           </div>
@@ -179,13 +162,13 @@ const CaseStudies = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px 56px', marginBottom: 56 }}>
             <div>
               <h3 style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Approach</h3>
-              <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8, margin: 0 }}>{study.approach}</p>
+              <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8, margin: 0 }}>{study.approach}</p>
             </div>
             <div>
               <h3 style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Tech Stack</h3>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {study.technologies.map((tech) => (
-                  <span key={tech} style={{ padding: '4px 10px', background: '#FFFFFF', border: '1px solid #E5E7EB', fontSize: 11, fontWeight: 600, color: '#374151', fontFamily: 'var(--font-mono)' }}>
+                  <span key={tech} style={{ padding: '4px 10px', background: '#FFFFFF', border: '1px solid #E5E7EB', fontSize: 11, fontWeight: 600, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>
                     {tech}
                   </span>
                 ))}
@@ -196,7 +179,7 @@ const CaseStudies = () => {
           {/* ── Outcome ── */}
           <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '28px 32px' }}>
             <h3 style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Ongoing Impact</h3>
-            <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.8, margin: 0 }}>{study.outcome}</p>
+            <p style={{ fontSize: 14, color: '#1F2937', lineHeight: 1.8, margin: 0 }}>{study.outcome}</p>
           </div>
         </div>
       </section>
@@ -204,7 +187,7 @@ const CaseStudies = () => {
       {/* ── Summary Stats ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
-          <div style={{ marginBottom: 48 }}>
+          <div className="gsw-section-header">
             <span className="gsw-eyebrow">Portfolio Overview</span>
             <h2 className="gsw-section-title">Six years of measurable outcomes</h2>
           </div>
@@ -219,7 +202,7 @@ const CaseStudies = () => {
             ].map((item) => (
               <div key={item.label} style={{ background: '#FFFFFF', padding: '28px 24px' }}>
                 <div style={{ fontSize: 36, fontWeight: 800, color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{item.stat}</div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#6B7280', lineHeight: 1.6 }}>{item.label}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#4B5563', lineHeight: 1.6 }}>{item.label}</div>
               </div>
             ))}
           </div>

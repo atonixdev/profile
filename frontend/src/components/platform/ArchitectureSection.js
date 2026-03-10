@@ -22,7 +22,7 @@ const ArchDiagram = ({ label }) => (
       <div style={{ display: 'flex', gap: 8, justifyContent: 'center', width: '100%' }}>
         <div
           style={{
-            width: 100, height: 32, background: '#374151',
+            width: 100, height: 32, background: '#1F2937',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
@@ -61,7 +61,7 @@ const ArchDiagram = ({ label }) => (
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
           >
-            <span style={{ fontSize: 7, fontWeight: 700, color: '#6B7280', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ fontSize: 7, fontWeight: 700, color: '#4B5563', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>
               {svc}
             </span>
           </div>
@@ -79,7 +79,7 @@ const ArchDiagram = ({ label }) => (
           display: 'flex', alignItems: 'center', paddingLeft: 12,
         }}
       >
-        <span style={{ fontSize: 8, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>
+        <span style={{ fontSize: 8, fontWeight: 700, color: '#4B5563', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>
           Data Layer
         </span>
       </div>
@@ -90,7 +90,7 @@ const ArchDiagram = ({ label }) => (
       <span
         style={{
           fontSize: 10, fontWeight: 700, letterSpacing: '0.14em',
-          textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)',
+          textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)',
         }}
       >
         {label}
@@ -104,17 +104,17 @@ const ArchitectureSection = ({ eyebrow, title, description, subsections }) => (
   <section className="gsw-section" style={{ background: '#FFFFFF' }}>
     <div className="gsw-container">
       {/* Section header */}
-      <div style={{ marginBottom: 72 }}>
+      <div className="gsw-section-header">
         <span className="gsw-eyebrow">{eyebrow}</span>
         <h2
           style={{
             fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800,
-            color: '#111827', lineHeight: 1.12, maxWidth: 640, marginBottom: 20,
+            color: '#111827', lineHeight: 1.12, maxWidth: 640, margin: '0 auto 20px',
           }}
         >
           {title}
         </h2>
-        <p style={{ fontSize: 16, color: '#6B7280', lineHeight: 1.75, maxWidth: 680 }}>
+        <p style={{ fontSize: 16, color: '#4B5563', lineHeight: 1.75, maxWidth: 680 }}>
           {description}
         </p>
       </div>
@@ -155,14 +155,14 @@ const ArchitectureSection = ({ eyebrow, title, description, subsections }) => (
                   {sub.title}
                 </h3>
               </div>
-              <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8, marginBottom: 24 }}>
+              <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8, marginBottom: 24 }}>
                 {sub.body}
               </p>
               <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {sub.points.map((pt) => (
                   <li
                     key={pt}
-                    style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.6 }}
+                    style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.6 }}
                   >
                     <span
                       style={{

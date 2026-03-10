@@ -241,7 +241,7 @@ const Portal = () => {
 
   const labelStyle = {
     display: 'block', fontSize: '10px', fontWeight: 700,
-    color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em',
+    color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em',
     marginBottom: '5px',
   };
 
@@ -265,7 +265,7 @@ const Portal = () => {
 
   const buttonGhost = {
     width: '100%', padding: '12px 0',
-    background: 'transparent', color: '#6B7280',
+    background: 'transparent', color: '#4B5563',
     border: 'none', fontSize: '12px', fontWeight: 600,
     cursor: 'pointer', fontFamily: 'inherit',
     letterSpacing: '0.06em',
@@ -329,8 +329,8 @@ const Portal = () => {
               <button
                 onClick={() => switchCard('contact')}
                 style={buttonGhost}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#374151')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#6B7280')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#1F2937')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = '#4B5563')}
               >
                 Contact
               </button>
@@ -387,7 +387,7 @@ const Portal = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#6B7280',
+                color: '#4B5563',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -397,7 +397,7 @@ const Portal = () => {
                 padding: 0,
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#111827')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#6B7280')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#4B5563')}
             >
               ← Back
             </button>
@@ -422,7 +422,7 @@ const Portal = () => {
             <p
               style={{
                 fontSize: '12px',
-                color: '#6B7280',
+                color: '#4B5563',
                 marginBottom: '20px',
                 textAlign: 'center',
               }}
@@ -532,7 +532,7 @@ const Portal = () => {
                     cursor: 'pointer',
                   }}
                 />
-                <label htmlFor="rememberMe" style={{ fontSize: '12px', color: '#6B7280', cursor: 'pointer' }}>
+                <label htmlFor="rememberMe" style={{ fontSize: '12px', color: '#4B5563', cursor: 'pointer' }}>
                   Remember me
                 </label>
               </div>
@@ -544,7 +544,7 @@ const Portal = () => {
                   ...buttonPrimary,
                   marginTop: '8px',
                   background: signInLoading ? '#E5E7EB' : '#A81D37',
-                  color: signInLoading ? '#9CA3AF' : '#FFFFFF',
+                  color: signInLoading ? '#4B5563' : '#FFFFFF',
                 }}
                 onMouseEnter={(e) => {
                   if (!signInLoading) e.currentTarget.style.background = '#7C1626';
@@ -559,7 +559,7 @@ const Portal = () => {
             <OAuthButtons mode="signin" />
 
             {/* Footer links */}
-            <div style={{ marginTop: '16px', fontSize: '11px', color: '#9CA3AF', textAlign: 'center' }}>
+            <div style={{ marginTop: '16px', fontSize: '11px', color: '#4B5563', textAlign: 'center' }}>
               Don't have an account?{' '}
               <button
                 onClick={() => switchCard('signup')}
@@ -600,7 +600,7 @@ const Portal = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#6B7280',
+                color: '#4B5563',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -610,7 +610,7 @@ const Portal = () => {
                 padding: 0,
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#111827')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#6B7280')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#4B5563')}
             >
               ← Back
             </button>
@@ -635,7 +635,7 @@ const Portal = () => {
             <p
               style={{
                 fontSize: '12px',
-                color: '#6B7280',
+                color: '#4B5563',
                 marginBottom: '20px',
                 textAlign: 'center',
               }}
@@ -822,7 +822,7 @@ const Portal = () => {
                   ...buttonPrimary,
                   marginTop: '8px',
                   background: signUpLoading ? '#E5E7EB' : '#A81D37',
-                  color: signUpLoading ? '#9CA3AF' : '#FFFFFF',
+                  color: signUpLoading ? '#4B5563' : '#FFFFFF',
                 }}
                 onMouseEnter={(e) => {
                   if (!signUpLoading) e.currentTarget.style.background = '#7C1626';
@@ -837,7 +837,7 @@ const Portal = () => {
             <OAuthButtons mode="signup" />
 
             {/* Footer */}
-            <div style={{ marginTop: '12px', fontSize: '11px', color: '#9CA3AF', textAlign: 'center' }}>
+            <div style={{ marginTop: '12px', fontSize: '11px', color: '#4B5563', textAlign: 'center' }}>
               Already have an account?{' '}
               <button
                 onClick={() => switchCard('signin')}
@@ -876,7 +876,7 @@ const Portal = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#6B7280',
+                color: '#4B5563',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -886,7 +886,7 @@ const Portal = () => {
                 padding: 0,
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#111827')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#6B7280')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#4B5563')}
             >
               ← Back
             </button>
@@ -911,7 +911,7 @@ const Portal = () => {
             <p
               style={{
                 fontSize: '12px',
-                color: '#6B7280',
+                color: '#4B5563',
                 marginBottom: '20px',
                 textAlign: 'center',
               }}
@@ -1038,7 +1038,7 @@ const Portal = () => {
                   ...buttonPrimary,
                   marginTop: '8px',
                   background: contactLoading ? '#E5E7EB' : '#A81D37',
-                  color: contactLoading ? '#9CA3AF' : '#FFFFFF',
+                  color: contactLoading ? '#4B5563' : '#FFFFFF',
                 }}
                 onMouseEnter={(e) => {
                   if (!contactLoading) e.currentTarget.style.background = '#7C1626';

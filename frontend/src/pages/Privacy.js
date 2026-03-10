@@ -108,22 +108,6 @@ const sections = [
 const Privacy = () => (
   <div style={{ background: '#FFFFFF' }}>
 
-    {/* ── Header ── */}
-    <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
-      <div className="hero-grid-bg" />
-      <div className="hero-accent-bar" />
-      <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-        <span className="gsw-eyebrow">Legal</span>
-        <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 16 }}>
-          Privacy Policy
-        </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', margin: 0 }}>
-          Last Updated: March 2026 &nbsp;·&nbsp; Effective: March 2026
-        </p>
-      </div>
-    </section>
-    <hr className="gsw-divider" />
-
     {/* ── Body ── */}
     <section className="gsw-section" style={{ background: '#FFFFFF' }}>
       <div className="gsw-container">
@@ -131,30 +115,30 @@ const Privacy = () => (
 
           {/* TOC sidebar */}
           <div style={{ position: 'sticky', top: 96, paddingTop: 8 }} className="hidden md:block">
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 16 }}>Contents</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 16 }}>Contents</div>
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
               {sections.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`} style={{ fontSize: 12, color: '#6B7280', textDecoration: 'none', lineHeight: 1.5, display: 'block' }}
+                  <a href={`#${s.id}`} style={{ fontSize: 12, color: '#4B5563', textDecoration: 'none', lineHeight: 1.5, display: 'block' }}
                     onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}>
+                    onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}>
                     {s.title}
                   </a>
                 </li>
               ))}
             </ul>
             <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid #E5E7EB' }}>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>Related</div>
-              <Link to="/terms" style={{ display: 'block', fontSize: 12, color: '#6B7280', textDecoration: 'none', marginBottom: 8 }}>Terms of Service</Link>
-              <Link to="/data-protection" style={{ display: 'block', fontSize: 12, color: '#6B7280', textDecoration: 'none', marginBottom: 8 }}>Data Protection</Link>
-              <Link to="/security" style={{ display: 'block', fontSize: 12, color: '#6B7280', textDecoration: 'none' }}>Security</Link>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>Related</div>
+              <Link to="/terms" style={{ display: 'block', fontSize: 12, color: '#4B5563', textDecoration: 'none', marginBottom: 8 }}>Terms of Service</Link>
+              <Link to="/data-protection" style={{ display: 'block', fontSize: 12, color: '#4B5563', textDecoration: 'none', marginBottom: 8 }}>Data Protection</Link>
+              <Link to="/security" style={{ display: 'block', fontSize: 12, color: '#4B5563', textDecoration: 'none' }}>Security</Link>
             </div>
           </div>
 
           {/* Content */}
           <div>
             <div style={{ padding: '20px 24px', background: '#FFF5F5', border: '1px solid #FECACA', borderLeft: '3px solid #A81D37', marginBottom: 48 }}>
-              <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.75, margin: 0 }}>
+              <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.75, margin: 0 }}>
                 Please read this Privacy Policy carefully. It explains how AtonixDev collects,
                 uses, and protects your personal information when you use our Services.
                 By using AtonixDev Services, you acknowledge this policy.
@@ -168,7 +152,7 @@ const Privacy = () => (
                 </h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {section.content.map((para, idx) => (
-                    <p key={idx} style={{ fontSize: 14, color: '#374151', lineHeight: 1.8, margin: 0 }}>{para}</p>
+                    <p key={idx} style={{ fontSize: 14, color: '#1F2937', lineHeight: 1.8, margin: 0 }}>{para}</p>
                   ))}
                 </div>
               </div>
@@ -181,13 +165,13 @@ const Privacy = () => (
     {/* ── Footer bar ── */}
     <section className="gsw-section-xs" style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB' }}>
       <div className="gsw-container" style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', alignItems: 'center' }}>
-        <p style={{ fontSize: 13, color: '#6B7280', margin: 0 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', margin: 0 }}>
           Questions about this policy? <Link to="/contact" style={{ color: '#A81D37', textDecoration: 'none', fontWeight: 600 }}>Contact us</Link>.
         </p>
         <div style={{ display: 'flex', gap: 24 }}>
-          <Link to="/terms" style={{ fontSize: 12, color: '#6B7280', textDecoration: 'none' }}>Terms of Service</Link>
-          <Link to="/data-protection" style={{ fontSize: 12, color: '#6B7280', textDecoration: 'none' }}>Data Protection</Link>
-          <Link to="/security" style={{ fontSize: 12, color: '#6B7280', textDecoration: 'none' }}>Security</Link>
+          <Link to="/terms" style={{ fontSize: 12, color: '#4B5563', textDecoration: 'none' }}>Terms of Service</Link>
+          <Link to="/data-protection" style={{ fontSize: 12, color: '#4B5563', textDecoration: 'none' }}>Data Protection</Link>
+          <Link to="/security" style={{ fontSize: 12, color: '#4B5563', textDecoration: 'none' }}>Security</Link>
         </div>
       </div>
     </section>

@@ -5,17 +5,17 @@ const CardGrid = ({ eyebrow, title, description, cards }) => (
   <section className="gsw-section" style={{ background: '#F8F9FA' }}>
     <div className="gsw-container">
       {/* Section header */}
-      <div style={{ marginBottom: 56 }}>
+      <div className="gsw-section-header">
         <span className="gsw-eyebrow">{eyebrow}</span>
         <h2
           style={{
             fontSize: 'clamp(26px, 3vw, 36px)', fontWeight: 800,
-            color: '#111827', lineHeight: 1.15, maxWidth: 600, marginBottom: 20,
+            color: '#111827', lineHeight: 1.15, maxWidth: 600, margin: '0 auto 20px',
           }}
         >
           {title}
         </h2>
-        <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 620 }}>
+        <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 620 }}>
           {description}
         </p>
       </div>
@@ -45,7 +45,7 @@ const CardGrid = ({ eyebrow, title, description, cards }) => (
             >
               {card.title}
             </h3>
-            <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.8, margin: 0 }}>
+            <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.8, margin: 0 }}>
               {card.desc}
             </p>
           </div>

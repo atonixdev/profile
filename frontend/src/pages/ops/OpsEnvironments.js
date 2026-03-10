@@ -33,7 +33,7 @@ const OpsEnvironments = () => (
       <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
         Environment Health
       </h1>
-      <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
         Governance and health status for every deployment environment across the platform.
       </p>
     </div>
@@ -57,7 +57,7 @@ const OpsEnvironments = () => (
           <div
             style={{
               fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-              textTransform: 'uppercase', color: '#9CA3AF',
+              textTransform: 'uppercase', color: '#4B5563',
               fontFamily: 'var(--font-mono)', marginBottom: 6,
             }}
           >
@@ -71,7 +71,7 @@ const OpsEnvironments = () => (
     {/* Environment cards */}
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }} className="ops-two-col">
       {ENVIRONMENTS.map((env) => {
-        const tc = TYPE_STYLES[env.type] || { bg: '#F9FAFB', color: '#6B7280' };
+        const tc = TYPE_STYLES[env.type] || { bg: '#F9FAFB', color: '#4B5563' };
         return (
           <div key={env.name} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
             {/* Card top bar */}
@@ -132,13 +132,13 @@ const OpsEnvironments = () => (
                     <div
                       style={{
                         fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                        textTransform: 'uppercase', color: '#9CA3AF',
+                        textTransform: 'uppercase', color: '#4B5563',
                         fontFamily: 'var(--font-mono)', marginBottom: 3,
                       }}
                     >
                       {r.label}
                     </div>
-                    <div style={{ fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>{r.value}</div>
+                    <div style={{ fontSize: 12, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{r.value}</div>
                   </div>
                 ))}
               </div>

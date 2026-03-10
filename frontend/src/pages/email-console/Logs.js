@@ -12,7 +12,7 @@ const TYPE_OPTS = [
   { value: 'marketing', label: 'Marketing' },
   { value: 'custom', label: 'Custom' },
 ];
-const STATUS_COLOR = { sent: '#22C55E', failed: '#EF4444', queued: '#F59E0B', pending: '#6B7280' };
+const STATUS_COLOR = { sent: '#22C55E', failed: '#EF4444', queued: '#F59E0B', pending: '#4B5563' };
 const PAGE_SIZE = 20;
 
 export default function EmailLogs() {
@@ -61,7 +61,7 @@ export default function EmailLogs() {
           <div style={{ width: 460, background: '#FFF', borderLeft: BD, height: '100%', overflowY: 'auto', padding: '28px 24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
               <span style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Log Entry Detail</span>
-              <button onClick={() => setSelected(null)} style={{ background: 'transparent', border: 'none', color: '#6B7280', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+              <button onClick={() => setSelected(null)} style={{ background: 'transparent', border: 'none', color: '#4B5563', fontSize: 18, cursor: 'pointer', lineHeight: 1 }}>✕</button>
             </div>
             {[
               ['ID', selected.id],
@@ -74,7 +74,7 @@ export default function EmailLogs() {
               ['Template ID', selected.template_id || '—'],
             ].map(([l, v]) => (
               <div key={l} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 9, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: 3 }}>{l}</div>
+                <div style={{ fontSize: 9, fontWeight: 700, color: '#4B5563', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: 3 }}>{l}</div>
                 <div style={{ fontSize: 13, color: '#111827', wordBreak: 'break-all' }}>{v}</div>
               </div>
             ))}
@@ -93,13 +93,13 @@ export default function EmailLogs() {
         <div>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>LOG — Email Logs</div>
           <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Email Delivery Logs</h1>
-          <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>Full audit trail of all outbound emails. {total > 0 && `${total.toLocaleString()} total entries.`}</p>
+          <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>Full audit trail of all outbound emails. {total > 0 && `${total.toLocaleString()} total entries.`}</p>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
-          <select value={filter} onChange={(e) => setFilter(e.target.value)} style={{ padding: '9px 12px', background: '#FFF', border: BD, color: '#374151', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}>
+          <select value={filter} onChange={(e) => setFilter(e.target.value)} style={{ padding: '9px 12px', background: '#FFF', border: BD, color: '#1F2937', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}>
             {TYPE_OPTS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
-          <button onClick={() => fetchLogs(page, filter)} style={{ padding: '9px 18px', background: 'transparent', border: BD, color: '#374151', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>⟳ Refresh</button>
+          <button onClick={() => fetchLogs(page, filter)} style={{ padding: '9px 18px', background: 'transparent', border: BD, color: '#1F2937', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}>⟳ Refresh</button>
         </div>
       </div>
 
@@ -112,32 +112,32 @@ export default function EmailLogs() {
             <thead>
               <tr style={{ background: '#F1F5F9' }}>
                 {['Time', 'Type', 'Recipient', 'Subject', 'Status', 'IP', ''].map((h) => (
-                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', fontFamily: 'var(--font-mono)', borderBottom: BD, whiteSpace: 'nowrap' }}>{h}</th>
+                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', borderBottom: BD, whiteSpace: 'nowrap' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {loading && (
-                <tr><td colSpan={7} style={{ padding: '32px 20px', textAlign: 'center', color: '#6B7280', fontSize: 12 }}>Loading…</td></tr>
+                <tr><td colSpan={7} style={{ padding: '32px 20px', textAlign: 'center', color: '#4B5563', fontSize: 12 }}>Loading…</td></tr>
               )}
               {!loading && logs.length === 0 && (
-                <tr><td colSpan={7} style={{ padding: '32px 20px', textAlign: 'center', color: '#6B7280', fontSize: 12 }}>No log entries found.</td></tr>
+                <tr><td colSpan={7} style={{ padding: '32px 20px', textAlign: 'center', color: '#4B5563', fontSize: 12 }}>No log entries found.</td></tr>
               )}
               {!loading && logs.map((l, i) => (
                 <tr key={l.id || i} style={{ borderBottom: BD, transition: 'background .1s', cursor: 'pointer' }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = '#F9FAFB'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                   onClick={() => setSelected(l)}>
-                  <td style={{ padding: '10px 14px', color: '#374151', whiteSpace: 'nowrap', fontFamily: 'var(--font-mono)', fontSize: 11 }}>{fmt(l.sent_at)}</td>
+                  <td style={{ padding: '10px 14px', color: '#1F2937', whiteSpace: 'nowrap', fontFamily: 'var(--font-mono)', fontSize: 11 }}>{fmt(l.sent_at)}</td>
                   <td style={{ padding: '10px 14px', whiteSpace: 'nowrap' }}>
                     <span style={{ fontSize: 9, padding: '2px 7px', background: '#EEF2FF', color: '#6366F1', fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l.email_type || '—'}</span>
                   </td>
-                  <td style={{ padding: '10px 14px', color: '#374151', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.recipient_email || '—'}</td>
-                  <td style={{ padding: '10px 14px', color: '#374151', maxWidth: 240, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.subject || '—'}</td>
+                  <td style={{ padding: '10px 14px', color: '#1F2937', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.recipient_email || '—'}</td>
+                  <td style={{ padding: '10px 14px', color: '#1F2937', maxWidth: 240, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.subject || '—'}</td>
                   <td style={{ padding: '10px 14px', whiteSpace: 'nowrap' }}>
-                    <span style={{ fontSize: 9, padding: '2px 7px', color: STATUS_COLOR[l.status] || '#6B7280', background: `${STATUS_COLOR[l.status] || '#6B7280'}18`, fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l.status || '—'}</span>
+                    <span style={{ fontSize: 9, padding: '2px 7px', color: STATUS_COLOR[l.status] || '#4B5563', background: `${STATUS_COLOR[l.status] || '#4B5563'}18`, fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l.status || '—'}</span>
                   </td>
-                  <td style={{ padding: '10px 14px', color: '#9CA3AF', fontFamily: 'var(--font-mono)', fontSize: 11, whiteSpace: 'nowrap' }}>{l.ip_address || '—'}</td>
+                  <td style={{ padding: '10px 14px', color: '#4B5563', fontFamily: 'var(--font-mono)', fontSize: 11, whiteSpace: 'nowrap' }}>{l.ip_address || '—'}</td>
                   <td style={{ padding: '10px 14px' }}>
                     <button onClick={(e) => { e.stopPropagation(); setSelected(l); }} style={{ fontSize: 9, color: A, fontFamily: 'var(--font-mono)', fontWeight: 700, background: 'transparent', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.08em' }}>View →</button>
                   </td>
@@ -150,10 +150,10 @@ export default function EmailLogs() {
         {/* Pagination */}
         {total > PAGE_SIZE && (
           <div style={{ padding: '12px 16px', borderTop: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#FAFAFA' }}>
-            <span style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>Page {page} of {totalPages} — {total.toLocaleString()} total</span>
+            <span style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>Page {page} of {totalPages} — {total.toLocaleString()} total</span>
             <div style={{ display: 'flex', gap: 6 }}>
-              <button onClick={() => handlePage(-1)} disabled={page === 1} style={{ padding: '5px 14px', border: BD, color: page === 1 ? '#D1D5DB' : '#374151', background: '#FFF', fontSize: 11, cursor: page === 1 ? 'not-allowed' : 'pointer', fontFamily: 'inherit', fontWeight: 600 }}>← Prev</button>
-              <button onClick={() => handlePage(1)} disabled={page === totalPages} style={{ padding: '5px 14px', border: BD, color: page === totalPages ? '#D1D5DB' : '#374151', background: '#FFF', fontSize: 11, cursor: page === totalPages ? 'not-allowed' : 'pointer', fontFamily: 'inherit', fontWeight: 600 }}>Next →</button>
+              <button onClick={() => handlePage(-1)} disabled={page === 1} style={{ padding: '5px 14px', border: BD, color: page === 1 ? '#D1D5DB' : '#1F2937', background: '#FFF', fontSize: 11, cursor: page === 1 ? 'not-allowed' : 'pointer', fontFamily: 'inherit', fontWeight: 600 }}>← Prev</button>
+              <button onClick={() => handlePage(1)} disabled={page === totalPages} style={{ padding: '5px 14px', border: BD, color: page === totalPages ? '#D1D5DB' : '#1F2937', background: '#FFF', fontSize: 11, cursor: page === totalPages ? 'not-allowed' : 'pointer', fontFamily: 'inherit', fontWeight: 600 }}>Next →</button>
             </div>
           </div>
         )}

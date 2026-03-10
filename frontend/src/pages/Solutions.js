@@ -58,23 +58,6 @@ const Solutions = () => {
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
 
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Enterprise Solutions</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 24px' }}>
-            Solutions
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
-            Comprehensive technology solutions designed for enterprise and government organisations
-            seeking scalable, secure, and future-proof digital capabilities.
-          </p>
-        </div>
-      </section>
-      <hr className="gsw-divider" />
-
       {/* Solutions */}
       <section style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 24px 80px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
@@ -83,26 +66,26 @@ const Solutions = () => {
               <div>
                 <div style={{ width: 32, height: 2, background: '#A81D37', marginBottom: 20 }} />
                 <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111827', letterSpacing: '-0.01em', marginBottom: 14, lineHeight: 1.25 }}>{sol.title}</h2>
-                <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.75, marginBottom: 20 }}>{sol.overview}</p>
+                <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.75, marginBottom: 20 }}>{sol.overview}</p>
                 <div>
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Industries</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Industries</div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {sol.industries.map((ind) => (
-                      <span key={ind} style={{ padding: '4px 10px', fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6B7280', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{ind}</span>
+                      <span key={ind} style={{ padding: '4px 10px', fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4B5563', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{ind}</span>
                     ))}
                   </div>
                 </div>
               </div>
               <div>
                 <div style={{ marginBottom: 24 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Architecture</div>
-                  <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.7 }}>{sol.architecture}</p>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Architecture</div>
+                  <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.7 }}>{sol.architecture}</p>
                 </div>
                 <div>
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Key Benefits</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Key Benefits</div>
                   <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                     {sol.benefits.map((b) => (
-                      <li key={b} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#374151' }}>
+                      <li key={b} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#1F2937' }}>
                         <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#A81D37', flexShrink: 0 }} />
                         {b}
                       </li>
@@ -115,7 +98,7 @@ const Solutions = () => {
         </div>
 
         <div style={{ marginTop: 56, textAlign: 'center' }}>
-          <p style={{ fontSize: 15, color: '#6B7280', marginBottom: 28, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 15, color: '#4B5563', marginBottom: 28, lineHeight: 1.6 }}>
             Ready to discuss your enterprise requirements?
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>

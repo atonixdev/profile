@@ -43,7 +43,7 @@ const OpsSecurity = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Security Events
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
           Real-time monitoring of failed logins, unauthorized access attempts, policy violations,
           and security anomalies across the platform.
         </p>
@@ -73,7 +73,7 @@ const OpsSecurity = () => {
             <div
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)', marginBottom: 6,
               }}
             >
@@ -94,7 +94,7 @@ const OpsSecurity = () => {
               padding: '6px 14px', fontSize: 11, fontWeight: 700,
               letterSpacing: '0.06em', textTransform: 'uppercase',
               background: filter === t ? '#A81D37' : '#F9FAFB',
-              color: filter === t ? '#FFFFFF' : '#6B7280',
+              color: filter === t ? '#FFFFFF' : '#4B5563',
               border: filter === t ? '1px solid #A81D37' : '1px solid #E5E7EB',
               cursor: 'pointer', fontFamily: 'inherit',
             }}
@@ -119,7 +119,7 @@ const OpsSecurity = () => {
               key={h}
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)',
               }}
             >
@@ -129,7 +129,7 @@ const OpsSecurity = () => {
         </div>
 
         {visible.map((e, i) => {
-          const sc = SEV_STYLES[e.severity] || { bg: '#F9FAFB', color: '#6B7280' };
+          const sc = SEV_STYLES[e.severity] || { bg: '#F9FAFB', color: '#4B5563' };
           return (
             <div
               key={i}
@@ -140,7 +140,7 @@ const OpsSecurity = () => {
                 alignItems: 'start',
               }}
             >
-              <span style={{ fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)', paddingTop: 2 }}>
+              <span style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', paddingTop: 2 }}>
                 {e.ts.replace('T', ' ').replace('Z', '')}
               </span>
               <span style={{ fontSize: 13, fontWeight: 600, color: '#111827' }}>{e.type}</span>
@@ -155,16 +155,16 @@ const OpsSecurity = () => {
                 {e.severity}
               </span>
               <div>
-                <div style={{ fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{e.actor}</div>
-                <div style={{ fontSize: 11, color: '#9CA3AF' }}>{e.resource}</div>
+                <div style={{ fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{e.actor}</div>
+                <div style={{ fontSize: 11, color: '#4B5563' }}>{e.resource}</div>
               </div>
-              <span style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.5 }}>{e.detail}</span>
+              <span style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.5 }}>{e.detail}</span>
             </div>
           );
         })}
 
         {visible.length === 0 && (
-          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>
+          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>
             No security events match the selected filter.
           </div>
         )}

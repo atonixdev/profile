@@ -5,17 +5,17 @@ const ComplianceSection = ({ eyebrow, title, description, items }) => (
   <section className="gsw-section" style={{ background: '#F8F9FA' }}>
     <div className="gsw-container">
       {/* Section header */}
-      <div style={{ marginBottom: 56 }}>
+      <div className="gsw-section-header">
         <span className="gsw-eyebrow">{eyebrow}</span>
         <h2
           style={{
             fontSize: 'clamp(26px, 3vw, 36px)', fontWeight: 800,
-            color: '#111827', lineHeight: 1.15, maxWidth: 600, marginBottom: 20,
+            color: '#111827', lineHeight: 1.15, maxWidth: 600, margin: '0 auto 20px',
           }}
         >
           {title}
         </h2>
-        <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 680 }}>
+        <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 680 }}>
           {description}
         </p>
       </div>
@@ -50,7 +50,7 @@ const ComplianceSection = ({ eyebrow, title, description, items }) => (
               {item.points.map((pt) => (
                 <li
                   key={pt}
-                  style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.7 }}
+                  style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.7 }}
                 >
                   <span
                     style={{

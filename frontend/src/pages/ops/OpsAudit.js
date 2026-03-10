@@ -18,7 +18,7 @@ const AUDIT_ENTRIES = [
 
 const ACTION_STYLES = {
   Login:      { bg: '#EFF6FF', color: '#2563EB' },
-  Logout:     { bg: '#F9FAFB', color: '#6B7280' },
+  Logout:     { bg: '#F9FAFB', color: '#4B5563' },
   Create:     { bg: '#F0FDF4', color: '#16A34A' },
   Update:     { bg: '#FFFBEB', color: '#D97706' },
   Delete:     { bg: '#FEF2F2', color: '#DC2626' },
@@ -55,7 +55,7 @@ const OpsAudit = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Audit Center
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, maxWidth: 560 }}>
           Immutable, indexed record of every action performed on the AtonixDev platform.
           Every change, login, deployment, and permission modification is preserved.
         </p>
@@ -78,7 +78,7 @@ const OpsAudit = () => {
         >
           Immutable
         </span>
-        <span style={{ fontSize: 12, color: '#9CA3AF', lineHeight: 1.5 }}>
+        <span style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.5 }}>
           Audit logs are write-once. No entry may be modified or deleted after creation. Retention: 7 years.
         </span>
       </div>
@@ -102,7 +102,7 @@ const OpsAudit = () => {
             <div
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)', marginBottom: 6,
               }}
             >
@@ -135,7 +135,7 @@ const OpsAudit = () => {
                 padding: '6px 12px', fontSize: 10, fontWeight: 700,
                 letterSpacing: '0.08em', textTransform: 'uppercase',
                 background: filter === f ? '#A81D37' : '#F9FAFB',
-                color: filter === f ? '#FFFFFF' : '#6B7280',
+                color: filter === f ? '#FFFFFF' : '#4B5563',
                 border: filter === f ? '1px solid #A81D37' : '1px solid #E5E7EB',
                 cursor: 'pointer', fontFamily: 'inherit',
               }}
@@ -147,7 +147,7 @@ const OpsAudit = () => {
       </div>
 
       {/* Log count */}
-      <div style={{ fontSize: 11, color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 12, letterSpacing: '0.06em' }}>
+      <div style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 12, letterSpacing: '0.06em' }}>
         SHOWING {visible.length} OF {AUDIT_ENTRIES.length} ENTRIES
       </div>
 
@@ -165,7 +165,7 @@ const OpsAudit = () => {
               key={h}
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)',
               }}
             >
@@ -175,7 +175,7 @@ const OpsAudit = () => {
         </div>
 
         {visible.map((e, i) => {
-          const ac = ACTION_STYLES[e.action] || { bg: '#F9FAFB', color: '#6B7280' };
+          const ac = ACTION_STYLES[e.action] || { bg: '#F9FAFB', color: '#4B5563' };
           return (
             <div
               key={e.id}
@@ -186,7 +186,7 @@ const OpsAudit = () => {
                 alignItems: 'start',
               }}
             >
-              <span style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)', paddingTop: 2 }}>{e.id}</span>
+              <span style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)', paddingTop: 2 }}>{e.id}</span>
               <span
                 style={{
                   display: 'inline-flex', alignItems: 'center',
@@ -197,10 +197,10 @@ const OpsAudit = () => {
               >
                 {e.action}
               </span>
-              <span style={{ fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{e.actor}</span>
-              <span style={{ fontSize: 12, color: '#374151' }}>{e.resource}</span>
-              <span style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.5 }}>{e.detail}</span>
-              <span style={{ fontSize: 10, color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{e.actor}</span>
+              <span style={{ fontSize: 12, color: '#1F2937' }}>{e.resource}</span>
+              <span style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.5 }}>{e.detail}</span>
+              <span style={{ fontSize: 10, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
                 {e.ts.replace('T', ' ').replace('Z', '')}
               </span>
               <span
@@ -216,7 +216,7 @@ const OpsAudit = () => {
         })}
 
         {visible.length === 0 && (
-          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#9CA3AF', fontSize: 13 }}>
+          <div style={{ padding: '40px 20px', textAlign: 'center', color: '#4B5563', fontSize: 13 }}>
             No audit entries match the current filters.
           </div>
         )}

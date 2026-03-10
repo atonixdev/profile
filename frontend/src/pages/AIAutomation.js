@@ -53,40 +53,13 @@ const AIAutomation = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 80px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Corporate Solutions</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 700, margin: '0 auto 20px' }}>AI & Automation</h1>
-          <p style={{ fontSize: 17, color: '#6B7280', lineHeight: 1.75, maxWidth: 600, margin: '0 auto 32px' }}>
-            From machine learning pipelines through LLM-powered product features and intelligent process automation — we design, build, and operationalise AI systems that deliver measurable business outcomes.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', marginBottom: 48 }}>
-            <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Discuss Your AI Use Case</Link>
-            <Link to="/case-studies" style={{ display: 'inline-flex', alignItems: 'center', padding: '13px 28px', border: '1px solid #111827', color: '#111827', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>View Outcomes</Link>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 800, margin: '0 auto' }}>
-            {[['60+', 'ML models in production'], ['94%', 'Avg model accuracy'], ['10M+', 'Daily inferences served'], ['3.2×', 'Avg ROI on AI projects']].map(([val, label]) => (
-              <div key={label} style={{ background: '#FFFFFF', padding: '28px 24px' }}>
-                <div style={{ fontSize: 32, fontWeight: 800, color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{val}</div>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Services ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
-          <div style={{ marginBottom: 56 }}>
+          <div className="gsw-section-header">
             <span className="gsw-eyebrow">Services</span>
             <h2 className="gsw-section-title">AI & automation services</h2>
-            <p style={{ fontSize: 16, color: '#6B7280', maxWidth: 520, lineHeight: 1.75 }}>Six specialised practice areas covering the full AI lifecycle — from data engineering and model training through deployment, monitoring, and continuous improvement.</p>
+            <p style={{ fontSize: 16, color: '#4B5563', maxWidth: 520, lineHeight: 1.75 }}>Six specialised practice areas covering the full AI lifecycle — from data engineering and model training through deployment, monitoring, and continuous improvement.</p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {services.map((svc, i) => (
@@ -94,11 +67,11 @@ const AIAutomation = () => {
                 <div>
                   <div style={{ fontSize: 22, color: '#A81D37', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>{svc.icon}</div>
                   <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', marginBottom: 10 }}>{svc.title}</h3>
-                  <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.8 }}>{svc.body}</p>
+                  <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.8 }}>{svc.body}</p>
                 </div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                   {svc.points.map((pt) => (
-                    <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#374151', lineHeight: 1.7, paddingBottom: 8 }}>
+                    <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: '#1F2937', lineHeight: 1.7, paddingBottom: 8 }}>
                       <span style={{ color: '#A81D37', fontWeight: 900, flexShrink: 0, marginTop: 2 }}>—</span>{pt}
                     </li>
                   ))}
@@ -114,7 +87,7 @@ const AIAutomation = () => {
       {/* ── Use Cases ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
-          <div style={{ marginBottom: 48 }}>
+          <div className="gsw-section-header">
             <span className="gsw-eyebrow">Impact</span>
             <h2 className="gsw-section-title">Sector outcomes</h2>
           </div>
@@ -125,12 +98,12 @@ const AIAutomation = () => {
                 onClick={() => setActiveCase(i)}
                 style={{ background: activeCase === i ? '#A81D37' : '#FFFFFF', padding: '20px 24px', textAlign: 'left', border: 'none', cursor: 'pointer', transition: 'background 0.15s' }}
               >
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: activeCase === i ? '#A81D37' : '#9CA3AF', fontFamily: 'var(--font-mono)' }}>{uc.sector}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: activeCase === i ? '#A81D37' : '#4B5563', fontFamily: 'var(--font-mono)' }}>{uc.sector}</div>
               </button>
             ))}
           </div>
           <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '32px 36px' }}>
-            <p style={{ fontSize: 16, color: '#374151', lineHeight: 1.8, margin: 0 }}>{useCases[activeCase].scenario}</p>
+            <p style={{ fontSize: 16, color: '#1F2937', lineHeight: 1.8, margin: 0 }}>{useCases[activeCase].scenario}</p>
           </div>
         </div>
       </section>
@@ -140,7 +113,7 @@ const AIAutomation = () => {
       {/* ── AI Principles ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
-          <div style={{ marginBottom: 48 }}>
+          <div className="gsw-section-header">
             <span className="gsw-eyebrow">Responsible AI</span>
             <h2 className="gsw-section-title">How we build trustworthy AI</h2>
           </div>
@@ -155,7 +128,7 @@ const AIAutomation = () => {
             ].map((p) => (
               <div key={p.title} style={{ background: '#FFFFFF', padding: '28px 24px' }}>
                 <h3 style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 8 }}>{p.title}</h3>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0 }}>{p.body}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, margin: 0 }}>{p.body}</p>
               </div>
             ))}
           </div>

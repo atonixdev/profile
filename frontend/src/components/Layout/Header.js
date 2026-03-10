@@ -119,7 +119,7 @@ const Header = () => {
                     <div
                       style={{
                         padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)',
-                        fontSize: 12, color: '#9CA3AF',
+                        fontSize: 12, color: '#4B5563',
                       }}
                     >
                       {user.user?.email || user.email || ''}
@@ -236,13 +236,13 @@ const Header = () => {
                         onClick={() => { setIsPortalOpen(false); navigate('/login', { state: { mode: 'contact' } }); }}
                         style={{
                           width: '100%', padding: '11px 0',
-                          background: 'transparent', color: '#6B7280',
+                          background: 'transparent', color: '#4B5563',
                           border: 'none', fontSize: 11, fontWeight: 600,
                           cursor: 'pointer', fontFamily: 'inherit',
                           letterSpacing: '0.06em',
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = '#374151'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = '#1F2937'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
                       >
                         Contact
                       </button>

@@ -24,7 +24,7 @@ const ProjectDetail = () => {
   if (loading) {
     return (
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: '#6B7280' }}>Loading...</p>
+        <p style={{ color: '#4B5563' }}>Loading...</p>
       </div>
     );
   }
@@ -33,7 +33,7 @@ const ProjectDetail = () => {
     return (
       <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#6B7280', marginBottom: '24px' }}>Project not found.</p>
+          <p style={{ color: '#4B5563', marginBottom: '24px' }}>Project not found.</p>
           <Link to="/infrastructure" style={{ color: '#A81D37', textDecoration: 'none', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             &larr; Back to Infrastructure
           </Link>
@@ -44,33 +44,6 @@ const ProjectDetail = () => {
 
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '100px 0 72px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <Link
-            to="/infrastructure"
-            style={{ color: '#A81D37', textDecoration: 'none', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '32px', fontFamily: 'var(--font-mono)' }}
-          >
-            &larr; Back to Infrastructure
-          </Link>
-          {project.category && (
-            <div style={{ marginBottom: '16px' }}>
-              <span className="gsw-eyebrow" style={{ marginBottom: 0 }}>{project.category}</span>
-            </div>
-          )}
-          <h1 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, lineHeight: 1.2, color: '#111827', margin: '16px auto 20px', maxWidth: 720 }}>
-            {project.title}
-          </h1>
-          {project.short_description && (
-            <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.6, maxWidth: 600, margin: '0 auto' }}>
-              {project.short_description}
-            </p>
-          )}
-        </div>
-      </section>
-      <hr className="gsw-divider" />
 
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
         {project.thumbnail && (
@@ -97,14 +70,14 @@ const ProjectDetail = () => {
           <div>
             {project.technologies && project.technologies.length > 0 && (
               <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '28px', marginBottom: '24px' }}>
-                <h3 style={{ fontSize: '12px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 16px' }}>
+                <h3 style={{ fontSize: '12px', fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 16px' }}>
                   Technologies
                 </h3>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {project.technologies.map((tech, idx) => (
                     <span
                       key={idx}
-                      style={{ border: '1px solid #D1D5DB', color: '#374151', padding: '4px 10px', fontSize: '12px', fontWeight: 600 }}
+                      style={{ border: '1px solid #D1D5DB', color: '#1F2937', padding: '4px 10px', fontSize: '12px', fontWeight: 600 }}
                     >
                       {typeof tech === 'object' ? tech.name : tech}
                     </span>
@@ -114,7 +87,7 @@ const ProjectDetail = () => {
             )}
             {(project.live_url || project.github_url) && (
               <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '28px' }}>
-                <h3 style={{ fontSize: '12px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 16px' }}>
+                <h3 style={{ fontSize: '12px', fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 16px' }}>
                   Links
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -138,7 +111,7 @@ const ProjectDetail = () => {
       </div>
 
       <div style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB', padding: '64px 24px', textAlign: 'center' }}>
-        <p style={{ color: '#6B7280', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>Infrastructure</p>
+        <p style={{ color: '#4B5563', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>Infrastructure</p>
         <h2 style={{ fontSize: '28px', fontWeight: 800, color: '#111827', margin: '0 0 32px' }}>Explore More Projects</h2>
         <Link to="/infrastructure"
           style={{ display: 'inline-block', background: '#A81D37', color: '#fff', padding: '14px 32px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', textDecoration: 'none' }}>

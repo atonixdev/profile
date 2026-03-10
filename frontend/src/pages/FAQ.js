@@ -40,21 +40,6 @@ const FAQ = () => {
 
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
-      {/* ── Page Hero ──────────────────────────────────────── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Support</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', fontWeight: 800, lineHeight: 1.1, color: '#111827', maxWidth: 700, margin: '0 auto 24px' }}>
-            Frequently Asked Questions
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7, margin: '0 auto' }}>
-            Find answers to common questions about our services, process, and technology.
-          </p>
-        </div>
-      </section>
-      <hr className="gsw-divider" />
 
       <section className="gsw-section">
         <div className="gsw-container" style={{ maxWidth: 900 }}>
@@ -67,7 +52,7 @@ const FAQ = () => {
               style={{
                 ...btnBase,
                 background: selectedCategory === cat ? '#A81D37' : 'transparent',
-                color: selectedCategory === cat ? '#FFFFFF' : '#6B7280',
+                color: selectedCategory === cat ? '#FFFFFF' : '#4B5563',
                 borderColor: selectedCategory === cat ? '#A81D37' : '#D1D5DB',
               }}
             >
@@ -107,7 +92,7 @@ const FAQ = () => {
                     <span style={{ fontSize: '11px', color: '#A81D37', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '6px' }}>
                       {faq.category}
                     </span>
-                    <span style={{ fontSize: '16px', fontWeight: 700, color: isOpen ? '#111827' : '#374151' }}>
+                    <span style={{ fontSize: '16px', fontWeight: 700, color: isOpen ? '#111827' : '#1F2937' }}>
                       {faq.question}
                     </span>
                   </div>
@@ -129,7 +114,7 @@ const FAQ = () => {
 
         {/* CTA */}
         <div style={{ marginTop: '80px', background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '48px', textAlign: 'center' }}>
-          <p style={{ color: '#6B7280', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>Still have questions?</p>
+          <p style={{ color: '#4B5563', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>Still have questions?</p>
           <h2 style={{ fontSize: '26px', fontWeight: 800, color: '#111827', margin: '0 0 24px' }}>
             Get in Touch with Our Team
           </h2>

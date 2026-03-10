@@ -18,8 +18,8 @@
   --color-border:         #E5E7EB;   /* standard dividers */
   --color-border-input:   #D1D5DB;   /* form input borders */
   --color-text:           #111827;   /* primary body text */
-  --color-text-secondary: #6B7280;   /* subtext, labels */
-  --color-text-muted:     #374151;   /* de-emphasised text */
+  --color-text-secondary: #4B5563;   /* subtext, labels */
+  --color-text-muted:     #1F2937;   /* de-emphasised text */
   --color-accent:         #A81D37;   /* Crimson — interactive accent */
   --color-accent-deep:    #7A1528;   /* hover / destructive */
   --color-accent-bg:      rgba(168,29,55,0.08); /* subtle accent fill */
@@ -129,6 +129,15 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 64px;
+}
+
+/* Section h2 heading class */
+.gsw-section-title {
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.15;
+  margin: 0 auto 0;
 }
 
 p { line-height: 1.5; margin: 0; }
@@ -278,7 +287,7 @@ img, video, canvas, iframe {
   outline: none;
 }
 .gsw-input:focus { border-color: #A81D37; }
-.gsw-input::placeholder { color: #6B7280; }
+.gsw-input::placeholder { color: #4B5563; }
 
 .gsw-select {
   width: 100%;
@@ -302,7 +311,7 @@ img, video, canvas, iframe {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6B7280;
+  color: #4B5563;
   margin-bottom: 8px;
 }
 
@@ -332,7 +341,7 @@ code, pre, kbd, samp {
   padding: 4px 12px;
   background: #F1F3F5;
   border: 1px solid #E5E7EB;
-  color: #6B7280;
+  color: #4B5563;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -353,7 +362,7 @@ code, pre, kbd, samp {
 /* ── Table ────────────────────────────────────────────────── */
 .gsw-table { width: 100%; border-collapse: collapse; }
 .gsw-table th {
-  background: #F1F3F5; color: #6B7280;
+  background: #F1F3F5; color: #4B5563;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 12px 16px;
@@ -363,7 +372,7 @@ code, pre, kbd, samp {
 .gsw-table td {
   padding: 12px 16px;
   border-bottom: 1px solid #F3F4F6;
-  font-size: 14px; color: #374151;
+  font-size: 14px; color: #1F2937;
 }
 .gsw-table tr:hover td { background: #F8F9FA; }
 
@@ -398,7 +407,7 @@ code, pre, kbd, samp {
 .anim-delay-3  { animation-delay: 0.3s; opacity: 0; }
 
 /* ── Utility ──────────────────────────────────────────────── */
-.text-muted  { color: #6B7280; }
+.text-muted  { color: #4B5563; }
 .text-accent { color: #A81D37; }
 
 /* ── Mobile ───────────────────────────────────────────────── */

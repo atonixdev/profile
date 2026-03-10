@@ -13,15 +13,15 @@ const Tutorials = () => {
       {/* Page Header */}
       <section style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB', padding: '56px 24px 40px' }}>
         <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-          <nav style={{ fontSize: 12, color: '#9CA3AF', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>
-            <Link to="/community" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Community</Link>
+          <nav style={{ fontSize: 12, color: '#4B5563', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>
+            <Link to="/community" style={{ color: '#4B5563', textDecoration: 'none' }}>Community</Link>
             {' / '}
             <span style={{ color: '#111827' }}>Tutorials</span>
           </nav>
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, marginBottom: 16 }}>
             Tutorials &amp; Guides
           </h1>
-          <p style={{ fontSize: 15, color: '#6B7280', maxWidth: 580, lineHeight: 1.75 }}>
+          <p style={{ fontSize: 15, color: '#4B5563', maxWidth: 580, lineHeight: 1.75 }}>
             Structured how-to guides, architecture best practices, code samples, and engineering
             references — written by AtonixDev engineers and community contributors.
           </p>
@@ -42,7 +42,7 @@ const Tutorials = () => {
                   padding: '8px 20px',
                   background: isActive ? '#111827' : 'transparent',
                   border: `1px solid ${isActive ? '#111827' : '#D1D5DB'}`,
-                  color: isActive ? '#FFFFFF' : '#6B7280',
+                  color: isActive ? '#FFFFFF' : '#4B5563',
                   fontSize: 12, fontWeight: 600, letterSpacing: '0.06em',
                   cursor: 'pointer', fontFamily: 'inherit',
                   transition: 'all 0.15s',
@@ -62,12 +62,12 @@ const Tutorials = () => {
           }}
         >
           <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-          <p style={{ fontSize: 15, fontWeight: 700, color: '#374151', marginBottom: 8 }}>
+          <p style={{ fontSize: 15, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>
             No tutorials published yet
           </p>
           <p
             style={{
-              fontSize: 13, color: '#9CA3AF', lineHeight: 1.7,
+              fontSize: 13, color: '#4B5563', lineHeight: 1.7,
               maxWidth: 440, margin: '0 auto 28px',
             }}
           >

@@ -18,9 +18,9 @@ const TYPE_META = {
   feature_set:      { label: 'Feature Set',       color: '#0284C7', bg: '#E0F2FE' },
   report:           { label: 'Report',            color: '#059669', bg: '#ECFDF5' },
   chart:            { label: 'Chart',             color: '#D97706', bg: '#FFFBEB' },
-  log:              { label: 'Log',               color: '#6B7280', bg: '#F9FAFB' },
+  log:              { label: 'Log',               color: '#4B5563', bg: '#F9FAFB' },
   deployment_bundle:{ label: 'Deploy Bundle',     color: '#A81D37', bg: '#FFF1F2' },
-  other:            { label: 'Other',             color: '#6B7280', bg: '#F9FAFB' },
+  other:            { label: 'Other',             color: '#4B5563', bg: '#F9FAFB' },
 };
 
 const TYPE_FILTERS = ['all', ...Object.keys(TYPE_META)];
@@ -49,7 +49,7 @@ const PipelineArtifacts = () => {
         <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 6, lineHeight: 1.2 }}>
           Artifact Registry
         </h1>
-        <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.65 }}>
+        <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.65 }}>
           {ARTIFACTS.length} artifacts produced in <strong style={{ color: '#111827' }}>run #47</strong>.
           Total size: <strong style={{ color: '#111827' }}>{formatSize(totalSize)}</strong>.
         </p>
@@ -66,7 +66,7 @@ const PipelineArtifacts = () => {
           { label: 'Total Size',      value: formatSize(totalSize) },
         ].map((s) => (
           <div key={s.label} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '18px 20px' }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
               {s.label}
             </div>
             <div style={{ fontSize: 22, fontWeight: 800, color: '#111827', lineHeight: 1 }}>{s.value}</div>
@@ -77,7 +77,7 @@ const PipelineArtifacts = () => {
       {/* Type filter */}
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20 }}>
         {TYPE_FILTERS.map((t) => {
-          const meta  = TYPE_META[t] || { color: '#6B7280', bg: '#F9FAFB', label: 'All' };
+          const meta  = TYPE_META[t] || { color: '#4B5563', bg: '#F9FAFB', label: 'All' };
           const count = t === 'all' ? ARTIFACTS.length : ARTIFACTS.filter((a) => a.type === t).length;
           if (t !== 'all' && count === 0) return null;
           const active = filter === t;
@@ -89,7 +89,7 @@ const PipelineArtifacts = () => {
                 padding: '5px 12px',
                 border: `1px solid ${active ? meta.color : '#E5E7EB'}`,
                 background: active ? meta.bg : '#FFFFFF',
-                color: active ? meta.color : '#6B7280',
+                color: active ? meta.color : '#4B5563',
                 fontSize: 10, cursor: 'pointer', fontFamily: 'var(--font-mono)',
                 fontWeight: 700, letterSpacing: '0.06em',
               }}
@@ -136,12 +136,12 @@ const PipelineArtifacts = () => {
               {/* Meta */}
               <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
                 <div>
-                  <div style={{ fontSize: 9, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Size</div>
-                  <div style={{ fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{formatSize(a.size)}</div>
+                  <div style={{ fontSize: 9, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Size</div>
+                  <div style={{ fontSize: 11, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{formatSize(a.size)}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: 9, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Created</div>
-                  <div style={{ fontSize: 11, color: '#374151' }}>{a.created}</div>
+                  <div style={{ fontSize: 9, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', marginBottom: 2 }}>Created</div>
+                  <div style={{ fontSize: 11, color: '#1F2937' }}>{a.created}</div>
                 </div>
               </div>
 

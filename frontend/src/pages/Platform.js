@@ -81,39 +81,15 @@ const Platform = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">AtonixDev Platform</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, margin: '0 auto 24px' }}>
-            One Platform for<br />
-            <span style={{ color: '#A81D37' }}>Enterprise Engineering</span>
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 40px' }}>
-            AtonixDev brings together software, infrastructure, networking, security, and developer community
-            into a cohesive platform built to enterprise and government specification.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 40px', justifyContent: 'center' }}>
-            {['Software Engineering', 'Cloud Infrastructure', 'Networking', 'Security', 'AI & Automation', 'Developer Community'].map((b) => (
-              <div key={b} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, fontWeight: 600, color: '#374151' }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#A81D37' }} />{b}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Capability Grid ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Explore the Platform</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, marginBottom: 56 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, margin: '0 auto 16px' }}>
             Platform Capabilities
           </h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {capabilities.map((cap) => (
               <Link
@@ -125,10 +101,10 @@ const Platform = () => {
               >
                 <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>{cap.eyebrow}</div>
                 <h3 style={{ fontSize: 20, fontWeight: 800, color: '#111827', marginBottom: 12, lineHeight: 1.25 }}>{cap.title}</h3>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.8, marginBottom: 20, margin: '0 0 20px' }}>{cap.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.8, marginBottom: 20, margin: '0 0 20px' }}>{cap.desc}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {cap.tags.map((t) => (
-                    <span key={t} style={{ padding: '3px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6B7280', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{t}</span>
+                    <span key={t} style={{ padding: '3px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4B5563', border: '1px solid #E5E7EB', fontFamily: 'var(--font-mono)' }}>{t}</span>
                   ))}
                 </div>
               </Link>
@@ -142,17 +118,19 @@ const Platform = () => {
       {/* ── Tech Stack ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Technology</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, marginBottom: 56 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, margin: '0 auto 16px' }}>
             Platform Technology Stack
           </h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {stack.map((s) => (
               <div key={s.layer} style={{ background: '#FFFFFF', padding: '28px 28px' }}>
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9CA3AF', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>{s.layer}</div>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>{s.layer}</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {s.items.map((item) => (
-                    <span key={item} style={{ padding: '4px 10px', background: '#F1F3F5', border: '1px solid #E5E7EB', fontSize: 11, fontWeight: 600, color: '#374151', fontFamily: 'var(--font-mono)' }}>{item}</span>
+                    <span key={item} style={{ padding: '4px 10px', background: '#F1F3F5', border: '1px solid #E5E7EB', fontSize: 11, fontWeight: 600, color: '#1F2937', fontFamily: 'var(--font-mono)' }}>{item}</span>
                   ))}
                 </div>
               </div>

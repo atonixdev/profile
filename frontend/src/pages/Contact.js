@@ -150,28 +150,12 @@ const Contact = () => {
 
   const labelStyle = {
     display: 'block', fontSize: '12px', fontWeight: 600,
-    color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em',
+    color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.08em',
     marginBottom: '6px',
   };
 
   return (
     <div style={{ background: '#FFFFFF' }} className="min-h-screen">
-
-      {/* Page Hero */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px', borderBottom: '1px solid #E5E7EB' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Get In Touch</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, color: '#111827', lineHeight: 1.1, maxWidth: 720, margin: '0 auto 24px' }}>
-            Let's Build Together
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 560, lineHeight: 1.7, margin: '0 auto' }}>
-            Enterprise-grade technology solutions and digital transformation at scale.
-            Our team responds within 24 hours.
-          </p>
-        </div>
-      </section>
 
       {/* Main Content */}
       <section className="gsw-section">
@@ -197,8 +181,8 @@ const Contact = () => {
               )}
 
               <div style={{ marginBottom: '24px', background: '#F1F3F5', border: '1px solid #E5E7EB', padding: '14px 18px' }}>
-                <p style={{ fontSize: '13px', color: '#6B7280', margin: 0 }}>
-                  Provide your <strong style={{ color: '#374151' }}>Email</strong> and <strong style={{ color: '#374151' }}>Phone Number</strong> for the fastest response.
+                <p style={{ fontSize: '13px', color: '#4B5563', margin: 0 }}>
+                  Provide your <strong style={{ color: '#1F2937' }}>Email</strong> and <strong style={{ color: '#1F2937' }}>Phone Number</strong> for the fastest response.
                 </p>
               </div>
 
@@ -218,7 +202,7 @@ const Contact = () => {
                   <div>
                     <label style={labelStyle}>Phone Number</label>
                     <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+27 123 456 7890" style={inputStyle} />
-                    <p style={{ fontSize: '11px', color: '#6B7280', marginTop: '4px' }}>Recommended for faster response</p>
+                    <p style={{ fontSize: '11px', color: '#4B5563', marginTop: '4px' }}>Recommended for faster response</p>
                   </div>
                   <div>
                     <label style={labelStyle}>Country</label>
@@ -322,10 +306,10 @@ const Contact = () => {
                     { label: 'Response Time', value: 'Within 24 hours' },
                   ].map((item, i) => (
                     <div key={i}>
-                      <div style={{ fontSize: '11px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>{item.label}</div>
+                      <div style={{ fontSize: '11px', color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>{item.label}</div>
                       {item.href
                         ? <a href={item.href} style={{ color: '#A81D37', fontSize: '14px', textDecoration: 'none' }}>{item.value}</a>
-                        : <div style={{ color: '#374151', fontSize: '14px' }}>{item.value}</div>
+                        : <div style={{ color: '#1F2937', fontSize: '14px' }}>{item.value}</div>
                       }
                     </div>
                   ))}

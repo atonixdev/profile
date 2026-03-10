@@ -32,48 +32,24 @@ const DataProtection = () => {
   return (
     <div style={{ background: '#FFFFFF' }}>
 
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', background: '#FFFFFF', overflow: 'hidden', padding: '80px 0 96px' }}>
-        <div className="hero-grid-bg" />
-        <div className="hero-accent-bar" />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <span className="gsw-eyebrow">Trust & Compliance</span>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, color: '#111827', lineHeight: 1.08, maxWidth: 760, margin: '0 auto 24px' }}>
-            Data Protection
-          </h1>
-          <p style={{ fontSize: 18, color: '#6B7280', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 32px' }}>
-            AtonixDev processes personal data responsibly and in full alignment with GDPR principles,
-            international privacy standards, and the expectations of enterprise and government clients.
-          </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link to="/privacy" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', background: '#A81D37', color: '#FFFFFF', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
-              Privacy Policy
-            </Link>
-            <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', padding: '11px 28px', border: '1px solid #D1D5DB', color: '#374151', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
-              Data Request
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <hr className="gsw-divider" />
-
       {/* ── Principles ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">GDPR Principles</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, marginBottom: 16 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 600, margin: '0 auto 16px' }}>
             How We Handle Your Data
           </h2>
-          <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.75, maxWidth: 660, marginBottom: 56 }}>
+          <p style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.75, maxWidth: 660, margin: '0 auto 56px' }}>
             Our data processing is grounded in the six core GDPR principles, applied across every system that handles personal information.
           </p>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {principles.map((p) => (
               <div key={p.title} style={{ background: '#FFFFFF', padding: '32px 28px' }}>
                 <div style={{ width: 32, height: 2, background: '#A81D37', marginBottom: 20 }} />
                 <h3 style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 12 }}>{p.title}</h3>
-                <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.8, margin: 0 }}>{p.desc}</p>
+                <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.8, margin: 0 }}>{p.desc}</p>
               </div>
             ))}
           </div>
@@ -85,10 +61,12 @@ const DataProtection = () => {
       {/* ── Data Categories ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Data Register</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, marginBottom: 56 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, margin: '0 auto 56px' }}>
             Personal Data We Process
           </h2>
+          </div>
           <div style={{ overflowX: 'auto' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 2fr 1.5fr 1.8fr', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', minWidth: 720 }}>
               {/* Header */}
@@ -101,9 +79,9 @@ const DataProtection = () => {
               {categories.map((row) => (
                 <React.Fragment key={row.category}>
                   <div style={{ background: '#FFFFFF', padding: '16px 16px', fontSize: 13, fontWeight: 700, color: '#111827' }}>{row.category}</div>
-                  <div style={{ background: '#FFFFFF', padding: '16px 16px', fontSize: 13, color: '#6B7280', lineHeight: 1.6 }}>{row.examples}</div>
-                  <div style={{ background: '#FFFFFF', padding: '16px 16px', fontSize: 12, color: '#374151' }}>{row.basis}</div>
-                  <div style={{ background: '#FFFFFF', padding: '16px 16px', fontSize: 12, color: '#374151' }}>{row.retention}</div>
+                  <div style={{ background: '#FFFFFF', padding: '16px 16px', fontSize: 13, color: '#4B5563', lineHeight: 1.6 }}>{row.examples}</div>
+                  <div style={{ background: '#FFFFFF', padding: '16px 16px', fontSize: 12, color: '#1F2937' }}>{row.basis}</div>
+                  <div style={{ background: '#FFFFFF', padding: '16px 16px', fontSize: 12, color: '#1F2937' }}>{row.retention}</div>
                 </React.Fragment>
               ))}
             </div>
@@ -116,23 +94,25 @@ const DataProtection = () => {
       {/* ── Rights ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
+          <div className="gsw-section-header">
           <span className="gsw-eyebrow">Your Rights</span>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, marginBottom: 56 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 800, color: '#111827', lineHeight: 1.12, maxWidth: 560, margin: '0 auto 56px' }}>
             Data Subject Rights
           </h2>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 840 }}>
             {rights.map((r) => (
               <div key={r.right} style={{ background: '#FFFFFF', padding: '20px 28px', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
                 <div style={{ width: 3, height: 20, background: '#A81D37', flexShrink: 0, marginTop: 2 }} />
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 6 }}>{r.right}</div>
-                  <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.75, margin: 0 }}>{r.desc}</p>
+                  <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, margin: 0 }}>{r.desc}</p>
                 </div>
               </div>
             ))}
           </div>
           <div style={{ marginTop: 32, padding: '20px 24px', background: '#F1F3F5', border: '1px solid #E5E7EB', maxWidth: 840 }}>
-            <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.75, margin: 0 }}>
+            <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.75, margin: 0 }}>
               To exercise any of these rights, contact our Data Protection team via the{' '}
               <Link to="/contact" style={{ color: '#A81D37', textDecoration: 'none', fontWeight: 600 }}>Contact page</Link>.
               We will respond within 30 days. Identity verification may be required.

@@ -58,7 +58,7 @@ export default function EmailSMTP() {
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>SMP — SMTP Configuration</div>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>SMTP Settings</h1>
-        <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>Outbound mail server credentials and delivery configuration.</p>
+        <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>Outbound mail server credentials and delivery configuration.</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24 }}>
@@ -69,7 +69,7 @@ export default function EmailSMTP() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
             {FIELDS.map((f) => (
               <div key={f.key} style={f.key === 'api_key' ? { gridColumn: '1 / -1' } : {}}>
-                <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>{f.label}</label>
+                <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>{f.label}</label>
                 <input
                   type={f.type}
                   defaultValue={f.value}
@@ -99,7 +99,7 @@ export default function EmailSMTP() {
               { label: 'Port 587',         status: 'Open',        ok: true },
             ].map((r) => (
               <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 0', borderBottom: BD }}>
-                <span style={{ fontSize: 12, color: '#374151' }}>{r.label}</span>
+                <span style={{ fontSize: 12, color: '#1F2937' }}>{r.label}</span>
                 <span style={{ fontSize: 10, fontWeight: 700, color: r.ok ? '#22C55E' : '#EF4444', fontFamily: 'var(--font-mono)', background: r.ok ? 'rgba(34,197,94,0.08)' : 'rgba(239,68,68,0.08)', padding: '2px 7px' }}>{r.status}</span>
               </div>
             ))}
@@ -108,7 +108,7 @@ export default function EmailSMTP() {
           {/* Send test email */}
           <div style={{ background: '#FFFFFF', border: BD, padding: '20px 24px' }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 14, fontFamily: 'var(--font-mono)' }}>Send Test Email</div>
-            <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Recipient Address</label>
+            <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Recipient Address</label>
             <input
               type="email"
               value={testEmail}
@@ -116,7 +116,7 @@ export default function EmailSMTP() {
               placeholder="you@example.com"
               style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 10 }}
             />
-            <button onClick={handleTest} disabled={testing || !testEmail} style={{ width: '100%', padding: '9px 0', background: testing ? '#E5E7EB' : 'transparent', border: `1px solid ${A}`, color: testing ? '#9CA3AF' : A, fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: testing ? 'wait' : 'pointer', fontFamily: 'inherit' }}>
+            <button onClick={handleTest} disabled={testing || !testEmail} style={{ width: '100%', padding: '9px 0', background: testing ? '#E5E7EB' : 'transparent', border: `1px solid ${A}`, color: testing ? '#4B5563' : A, fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: testing ? 'wait' : 'pointer', fontFamily: 'inherit' }}>
               {testing ? 'Sending…' : 'Send Test'}
             </button>
             {testResult && (
@@ -126,9 +126,9 @@ export default function EmailSMTP() {
 
           {/* Provider info */}
           <div style={{ background: '#F9FAFB', border: BD, padding: '16px 20px' }}>
-            <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Provider</div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Provider</div>
             <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', marginBottom: 4 }}>SendGrid</div>
-            <div style={{ fontSize: 11, color: '#6B7280', lineHeight: 1.6 }}>Transactional &amp; marketing email delivery. 99.95% uptime SLA.</div>
+            <div style={{ fontSize: 11, color: '#4B5563', lineHeight: 1.6 }}>Transactional &amp; marketing email delivery. 99.95% uptime SLA.</div>
           </div>
         </div>
       </div>

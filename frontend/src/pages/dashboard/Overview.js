@@ -38,7 +38,7 @@ const Overview = () => {
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.2 }}>
           Welcome, {name}
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7 }}>
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7 }}>
           Manage your projects, pipelines, environments, and deployments from a single control plane.
         </p>
       </div>
@@ -64,7 +64,7 @@ const Overview = () => {
             <div
               style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: '0.12em',
-                textTransform: 'uppercase', color: '#9CA3AF',
+                textTransform: 'uppercase', color: '#4B5563',
                 fontFamily: 'var(--font-mono)', marginBottom: 8,
               }}
             >
@@ -73,7 +73,7 @@ const Overview = () => {
             <div style={{ fontSize: 36, fontWeight: 900, color: '#111827', lineHeight: 1, marginBottom: 6 }}>
               {s.value}
             </div>
-            <div style={{ fontSize: 12, color: '#9CA3AF' }}>{s.sub}</div>
+            <div style={{ fontSize: 12, color: '#4B5563' }}>{s.sub}</div>
           </div>
         ))}
       </div>
@@ -83,7 +83,7 @@ const Overview = () => {
         <div
           style={{
             fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
-            textTransform: 'uppercase', color: '#374151',
+            textTransform: 'uppercase', color: '#1F2937',
             fontFamily: 'var(--font-mono)', marginBottom: 16,
           }}
         >
@@ -106,7 +106,7 @@ const Overview = () => {
               onMouseLeave={(e) => { e.currentTarget.style.borderLeftColor = 'transparent'; }}
             >
               <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{q.label}</div>
-              <div style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.6 }}>{q.desc}</div>
+              <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.6 }}>{q.desc}</div>
             </Link>
           ))}
         </div>
@@ -117,7 +117,7 @@ const Overview = () => {
         <div
           style={{
             fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
-            textTransform: 'uppercase', color: '#374151',
+            textTransform: 'uppercase', color: '#1F2937',
             fontFamily: 'var(--font-mono)', marginBottom: 16,
           }}
         >
@@ -129,7 +129,7 @@ const Overview = () => {
             padding: '48px 24px', textAlign: 'center',
           }}
         >
-          <p style={{ fontSize: 14, color: '#9CA3AF', marginBottom: 16 }}>
+          <p style={{ fontSize: 14, color: '#4B5563', marginBottom: 16 }}>
             No recent activity. Create your first project to get started.
           </p>
           <Link

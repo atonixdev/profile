@@ -40,8 +40,8 @@ const Discussions = () => {
         aria-label="Discussions"
       >
         <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-          <nav style={{ fontSize: 12, color: '#9CA3AF', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>
-            <Link to="/community" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Community</Link>
+          <nav style={{ fontSize: 12, color: '#4B5563', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>
+            <Link to="/community" style={{ color: '#4B5563', textDecoration: 'none' }}>Community</Link>
             {' / '}
             <span style={{ color: '#111827' }}>Discussions</span>
           </nav>
@@ -86,7 +86,7 @@ const Discussions = () => {
           <div
             style={{
               fontSize: 10, fontWeight: 700, letterSpacing: '0.14em',
-              textTransform: 'uppercase', color: '#9CA3AF',
+              textTransform: 'uppercase', color: '#4B5563',
               fontFamily: 'var(--font-mono)', marginBottom: 12, paddingLeft: 14,
             }}
           >
@@ -103,7 +103,7 @@ const Discussions = () => {
                   padding: '10px 14px', background: 'none', border: 'none',
                   borderLeft: active ? '2px solid #A81D37' : '2px solid transparent',
                   fontSize: 13, fontWeight: active ? 700 : 400,
-                  color: active ? '#111827' : '#6B7280',
+                  color: active ? '#111827' : '#4B5563',
                   cursor: 'pointer', fontFamily: 'inherit', marginBottom: 2,
                   transition: 'color 0.15s',
                 }}
@@ -125,7 +125,7 @@ const Discussions = () => {
             <h2 style={{ fontSize: 18, fontWeight: 800, color: '#111827' }}>{current.name}</h2>
             <span
               style={{
-                fontSize: 10, fontWeight: 700, color: '#9CA3AF',
+                fontSize: 10, fontWeight: 700, color: '#4B5563',
                 fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase',
               }}
             >
@@ -141,12 +141,12 @@ const Discussions = () => {
             }}
           >
             <div style={{ width: 32, height: 2, background: '#E5E7EB', margin: '0 auto 20px' }} />
-            <p style={{ fontSize: 15, fontWeight: 700, color: '#374151', marginBottom: 8 }}>
+            <p style={{ fontSize: 15, fontWeight: 700, color: '#1F2937', marginBottom: 8 }}>
               No discussions yet in {current.name === 'All Discussions' ? 'this community' : current.name}
             </p>
             <p
               style={{
-                fontSize: 13, color: '#9CA3AF', lineHeight: 1.7,
+                fontSize: 13, color: '#4B5563', lineHeight: 1.7,
                 maxWidth: 420, margin: '0 auto 28px',
               }}
             >
