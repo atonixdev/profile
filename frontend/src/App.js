@@ -40,6 +40,20 @@ import DashboardMonitoring from './pages/dashboard/Monitoring';
 import DashboardSupport from './pages/dashboard/Support';
 import Networking from './pages/platform/Networking';
 import PlatformSecurity from './pages/platform/Security';
+import Careers from './pages/Careers';
+import GovernmentContracting from './pages/GovernmentContracting';
+import CapabilitiesStatement from './pages/CapabilitiesStatement';
+import Platform from './pages/Platform';
+import SecurityCompliance from './pages/SecurityCompliance';
+import DataProtection from './pages/DataProtection';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Legal from './pages/Legal';
+import EnterpriseSoftware from './pages/EnterpriseSoftware';
+import AIAutomation from './pages/AIAutomation';
+import CloudEngineering from './pages/CloudEngineering';
+import DevOpsSecurity from './pages/DevOpsSecurity';
+import CaseStudies from './pages/CaseStudies';
 import SettingsLayout from './components/Layout/SettingsLayout';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
@@ -83,6 +97,30 @@ function App() {
             {/* Platform capability pages */}
             <Route path="platform/networking" element={<Networking />} />
             <Route path="platform/security"   element={<PlatformSecurity />} />
+
+            {/* Company Pages */}
+            <Route path="careers" element={<Careers />} />
+            <Route path="government" element={<GovernmentContracting />} />
+            <Route path="capabilities" element={<CapabilitiesStatement />} />
+
+            {/* Platform Hub */}
+            <Route path="platform" element={<Platform />} />
+
+            {/* Trust & Compliance */}
+            <Route path="security" element={<SecurityCompliance />} />
+            <Route path="data-protection" element={<DataProtection />} />
+
+            {/* Legal */}
+            <Route path="legal" element={<Legal />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="terms" element={<Terms />} />
+
+            {/* Corporate Solutions */}
+            <Route path="enterprise-software" element={<EnterpriseSoftware />} />
+            <Route path="ai-automation" element={<AIAutomation />} />
+            <Route path="cloud-engineering" element={<CloudEngineering />} />
+            <Route path="devops-security" element={<DevOpsSecurity />} />
+            <Route path="case-studies" element={<CaseStudies />} />
 
             {/* Community Platform — Public */}
             <Route path="community" element={<CommunityHome />} />

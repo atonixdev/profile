@@ -41,11 +41,11 @@ const Footer = () => {
     {
       title: 'Corporate Solutions',
       links: [
-        { label: 'Enterprise Software',   to: '/solutions' },
-        { label: 'AI & Automation',       to: '/software' },
-        { label: 'Cloud Engineering',     to: '/infrastructure' },
-        { label: 'DevOps & Security',     to: '/software' },
-        { label: 'Case Studies',          to: '/infrastructure' },
+        { label: 'Enterprise Software',   to: '/enterprise-software' },
+        { label: 'AI & Automation',       to: '/ai-automation' },
+        { label: 'Cloud Engineering',     to: '/cloud-engineering' },
+        { label: 'DevOps & Security',     to: '/devops-security' },
+        { label: 'Case Studies',          to: '/case-studies' },
       ],
     },
   ];
