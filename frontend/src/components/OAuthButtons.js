@@ -39,9 +39,10 @@ const PROVIDERS = [
  * OAuthButtons
  *
  * Props:
- *   mode — 'signin' | 'signup'  (affects button label prefix)
+ *   mode   — 'signin' | 'signup'  (affects button label prefix)
+ *   layout — 'icon' (default, 2×2 grid) | 'stacked' (full-width buttons)
  */
-export default function OAuthButtons({ mode = 'signin' }) {
+export default function OAuthButtons({ mode = 'signin', layout = 'icon' }) {
   const [loading, setLoading] = useState(null); // provider key while redirecting
   const [error, setError]     = useState('');
   const verb = mode === 'signup' ? 'Sign up with' : 'Continue with';
@@ -100,53 +101,64 @@ export default function OAuthButtons({ mode = 'signin' }) {
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
-        {PROVIDERS.map((p) => (
-          <button
-            key={p.key}
-            onClick={() => handleOAuth(p.key)}
-            disabled={!!loading}
-            title={`${verb} ${p.label}`}
-            style={{
-              display:        'flex',
-              alignItems:     'center',
-              justifyContent: 'center',
-              background:     'transparent',
-              border:         `1px solid ${p.border}`,
-              borderRadius:   '8px',
-              padding:        '10px',
-              cursor:         loading ? 'not-allowed' : 'pointer',
-              opacity:        loading && loading !== p.key ? 0.4 : 1,
-              transition:     'background 0.15s, border-color 0.15s',
-            }}
-            onMouseEnter={(e) => {
-              if (!loading) {
-                e.currentTarget.style.background = p.hoverBg;
-                e.currentTarget.style.borderColor = '#9CA3AF';
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = p.border;
-            }}
-            aria-label={`${verb} ${p.label}`}
-          >
-            {loading === p.key ? (
-              <span
-                style={{
-                  width:          '20px',
-                  height:         '20px',
-                  border:         '2px solid #D1D5DB',
-                  borderTopColor: '#6B7280',
-                  borderRadius:   '50%',
-                  animation:      'spin 0.7s linear infinite',
-                  display:        'inline-block',
-                }}
-              />
-            ) : ICONS[p.key]}
-          </button>
-        ))}
-      </div>
+      {layout === 'stacked' ? (
+        /* ── Full-width stacked buttons (Docker-style) ── */
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '4px' }}>
+          {PROVIDERS.map((p) => (
+            <button
+              key={p.key}
+              onClick={() => handleOAuth(p.key)}
+              disabled={!!loading}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+                width: '100%', padding: '11px 14px',
+                background: 'transparent',
+                border: '1px solid #D1D5DB',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading && loading !== p.key ? 0.4 : 1,
+                fontFamily: 'inherit', fontSize: '13px', fontWeight: 600,
+                color: '#374151', letterSpacing: '0.01em',
+                transition: 'background 0.15s, border-color 0.15s',
+              }}
+              onMouseEnter={(e) => { if (!loading) { e.currentTarget.style.background = p.hoverBg; e.currentTarget.style.borderColor = '#9CA3AF'; } }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = '#D1D5DB'; }}
+              aria-label={`${verb} ${p.label}`}
+            >
+              {loading === p.key ? (
+                <span style={{ width: 20, height: 20, border: '2px solid #D1D5DB', borderTopColor: '#6B7280', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
+              ) : ICONS[p.key]}
+              <span>{verb} {p.label}</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        /* ── Icon grid (original) ── */
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
+          {PROVIDERS.map((p) => (
+            <button
+              key={p.key}
+              onClick={() => handleOAuth(p.key)}
+              disabled={!!loading}
+              title={`${verb} ${p.label}`}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: 'transparent', border: `1px solid ${p.border}`,
+                borderRadius: '8px', padding: '10px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading && loading !== p.key ? 0.4 : 1,
+                transition: 'background 0.15s, border-color 0.15s',
+              }}
+              onMouseEnter={(e) => { if (!loading) { e.currentTarget.style.background = p.hoverBg; e.currentTarget.style.borderColor = '#9CA3AF'; } }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = p.border; }}
+              aria-label={`${verb} ${p.label}`}
+            >
+              {loading === p.key ? (
+                <span style={{ width: 20, height: 20, border: '2px solid #D1D5DB', borderTopColor: '#6B7280', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
+              ) : ICONS[p.key]}
+            </button>
+          ))}
+        </div>
+      )}
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }

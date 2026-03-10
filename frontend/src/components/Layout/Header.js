@@ -297,7 +297,6 @@ const Header = () => {
         style={{
           height: 48,
           background: '#FFFFFF',
-          borderBottom: '1px solid #E5E7EB',
         }}
       >
         <nav

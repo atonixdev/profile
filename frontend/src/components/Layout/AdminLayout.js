@@ -12,8 +12,8 @@ const NAV_ITEMS = [
   { path: '/admin-console/audit',     exact: false, label: 'Audit Logs',            code: 'AUD' },
   { path: '/admin-console/billing',   exact: false, label: 'Billing & Subscriptions', code: 'BIL' },
   { path: '/admin-console/api',       exact: false, label: 'Developer Tools & API', code: 'API' },
-  { path: '/admin-console/email',     exact: false, label: 'Email & Domain',        code: 'EML' },
-  { path: '/admin-console/settings',  exact: false, label: 'System Settings',       code: 'SYS' },
+  { path: '/admin-console/email',           exact: false, label: 'Email & Domain',        code: 'EML' },
+  { path: '/admin-console/settings',        exact: false, label: 'System Settings',       code: 'SYS' },
   { path: '/admin-console/activity',  exact: false, label: 'Admin Activity',        code: 'ACT' },
   { path: '/admin-console/features',   exact: false, label: 'Feature Flags',         code: 'FLG' },
   { path: '/admin-console/campaigns',  exact: false, label: 'Campaigns',              code: 'CMP' },
@@ -113,8 +113,8 @@ const AdminLayout = () => {
                 onClick={() => setSidebarOpen(false)}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10,
-                  padding: '9px 20px',
-                  fontSize: 12,
+                  padding: item.sub ? '7px 20px 7px 36px' : '9px 20px',
+                  fontSize: item.sub ? 11 : 12,
                   fontWeight: active ? 700 : 400,
                   color: active ? '#FFFFFF' : 'rgba(255,255,255,0.65)',
                   textDecoration: 'none',
@@ -142,7 +142,7 @@ const AdminLayout = () => {
 
         {/* Console crosslinks */}
         <div style={{ padding: '10px 16px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
             <Link
               to="/ops"
               style={{
@@ -156,18 +156,30 @@ const AdminLayout = () => {
               OPS CTRL
             </Link>
             <Link
-              to="/dashboard"
+              to="/email-console"
               style={{
                 flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700,
-                letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)',
-                textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)',
-                background: 'rgba(255,255,255,0.06)', textAlign: 'center',
+                letterSpacing: '0.1em', textTransform: 'uppercase', color: '#FFFFFF',
+                textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)',
+                background: 'rgba(255,255,255,0.1)', textAlign: 'center',
                 fontFamily: 'var(--font-mono)',
               }}
             >
-              DEV CON.
+              EMAIL
             </Link>
           </div>
+          <Link
+            to="/dashboard"
+            style={{
+              display: 'block', padding: '7px 6px', fontSize: 9, fontWeight: 700,
+              letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)',
+              textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)',
+              background: 'rgba(255,255,255,0.06)', textAlign: 'center',
+              fontFamily: 'var(--font-mono)',
+            }}
+          >
+            DEV CON.
+          </Link>
         </div>
 
         {/* User section */}

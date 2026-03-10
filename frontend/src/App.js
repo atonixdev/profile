@@ -81,6 +81,15 @@ import AdminActivity from './pages/admin-console/Activity';
 import AdminFeatures from './pages/admin-console/Features';
 import AdminCampaigns from './pages/admin-console/Campaigns';
 import AdminSupport from './pages/admin-console/Support';
+import EmailConsoleLayout from './components/Layout/EmailConsoleLayout';
+import EmailOverview from './pages/email-console/Overview';
+import EmailDomains from './pages/email-console/Domains';
+import EmailSMTP from './pages/email-console/SMTP';
+import EmailTemplates from './pages/email-console/Templates';
+import EmailLogs from './pages/email-console/Logs';
+import EmailMarketing from './pages/email-console/Marketing';
+import EmailCampaigns from './pages/email-console/Campaigns';
+import EmailSenders from './pages/email-console/Senders';
 import Support from './pages/Support';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
@@ -234,6 +243,20 @@ function App() {
             </Route>
           </Route>
 
+          {/* Email Console — Staff Only */}
+          <Route element={<StaffRoute />}>
+            <Route path="/email-console" element={<EmailConsoleLayout />}>
+              <Route index element={<EmailOverview />} />
+              <Route path="marketing" element={<EmailMarketing />} />
+              <Route path="campaigns" element={<EmailCampaigns />} />
+              <Route path="templates" element={<EmailTemplates />} />
+              <Route path="logs"      element={<EmailLogs />} />
+              <Route path="domains"   element={<EmailDomains />} />
+              <Route path="smtp"      element={<EmailSMTP />} />
+              <Route path="senders"   element={<EmailSenders />} />
+            </Route>
+          </Route>
+
           {/* Admin Console — Staff Only */}
           <Route element={<StaffRoute />}>
             <Route path="/admin-console" element={<AdminLayout />}>
@@ -244,7 +267,7 @@ function App() {
               <Route path="audit"    element={<AdminAudit />} />
               <Route path="billing"  element={<AdminBilling />} />
               <Route path="api"      element={<AdminAPI />} />
-              <Route path="email"    element={<AdminEmail />} />
+              <Route path="email" element={<AdminEmail />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="activity" element={<AdminActivity />} />
               <Route path="features"   element={<AdminFeatures />} />

@@ -265,15 +265,17 @@ export default function Email() {
             Configure sending domains, DKIM/SPF/DMARC records, and transactional email templates.
           </p>
         </div>
-        <button
-          style={{
-            padding: '9px 20px', background: A, border: 'none', color: '#06080D',
-            fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
-            cursor: 'pointer', fontFamily: 'inherit',
-          }}
-        >
-          + Add Domain
-        </button>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button
+            style={{
+              padding: '9px 20px', background: A, border: 'none', color: '#06080D',
+              fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
+              cursor: 'pointer', fontFamily: 'inherit',
+            }}
+          >
+            + Add Domain
+          </button>
+        </div>
       </div>
 
       {/* Stats */}
