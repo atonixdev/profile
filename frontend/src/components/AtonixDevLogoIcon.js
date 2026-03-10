@@ -1,14 +1,23 @@
 import React from 'react';
 
 /**
- * AtonixDev canonical icon — Enterprise Icon Specification v1.0
+ * AtonixDev canonical icon — Triangle Frame Edition (Directive v2.0)
  *
- * Grid:     64×64 unit viewBox, 12.5% padding (8px each side)
- * Glyph:    Geometric "A" — two filled polygon legs + Electric Cyan crossbar
- * Geometry: 45° diagonals, 8px stroke weight (12.5% of 64), no transforms
- * Strokes:  Converted to filled polygon outlines — no stroke attributes
- * Colors:   #1456F0 Atonix Blue (legs) · #22D3EE Electric Cyan (crossbar)
- * Container: Sharp square tile — no rx, 45°/90° angles only
+ * Concept:   OpenStack-style geometric frame, re-imagined as a triangle.
+ * Grid:      100×100 viewBox
+ * Shape:     Outer equilateral △ with concentric inner △ cut-out (evenodd fill rule).
+ *            Creates a clean "frame" — uniform stroke mass, balanced negative space.
+ *
+ * Geometry:
+ *   Outer △  — circumradius 41, centroid (50,53)
+ *               Top (50,12) · Bottom-right (86,74) · Bottom-left (14,74)
+ *   Inner △  — circumradius 17, same centroid
+ *               Top (50,36) · Bottom-left (35,62) · Bottom-right (65,62)
+ *   Frame thickness ≈ 13% of viewBox width (within 12–16% spec)
+ *   Negative space ≈ 24% of viewBox width (within 20–28% spec)
+ *
+ * Colors:    #A81D37 AtonixDev brand red on dark/light tile
+ * Container: Circle tile — crisp at all sizes
  *
  * Variants:
  *   dark  (default) — Deep Graphite #111827 tile, for dark/colored surfaces
@@ -16,41 +25,38 @@ import React from 'react';
  *
  * @param {{ size?: number, variant?: 'dark' | 'light' }} props
  */
-function AtonixDevLogoIcon({ size = 32, variant = 'dark' }) {
-  const bg      = variant === 'light' ? '#FFFFFF' : '#111827';
-  const primary = '#A81D37';  // AtonixDev brand red
-  const accent  = '#A81D37';  // same — full A in one colour
+function AtonixDevLogoIcon({ size = 32, variant = 'dark', showBg = true }) {
+  const bg    = variant === 'light' ? '#FFFFFF' : '#111827';
+  const color = '#A81D37';  // AtonixDev brand red
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 64 64"
+      viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
+      fill="none"
       role="img"
       aria-label="AtonixDev"
       style={{ display: 'block', flexShrink: 0 }}
     >
-      {/* Circular container */}
-      <circle cx="32" cy="32" r="32" fill={bg} />
+      {showBg && <circle cx="50" cy="50" r="50" fill={bg} />}
 
       {/*
-        Left leg — thick trapezoid (10px wide at top, 14px wide at base)
-        Apex outer (20,8) · apex inner (32,8) · inner foot (18,56) · outer foot (4,56)
-      */}
-      <polygon points="32,8 20,8 4,56 18,56" fill={primary} />
+        Triangle frame — outer equilateral △ with inner equilateral △ cut-out.
+        Both triangles are concentric (centroid ≈ 50,53).
+        SVG evenodd fill rule makes the inner △ transparent, creating the "frame".
 
-      {/*
-        Right leg — mirror trapezoid
-        Apex inner (32,8) · apex outer (44,8) · outer foot (60,56) · inner foot (46,56)
+        Outer equilateral △ (circumradius 41):
+          Top (50,12) · Bottom-right (86,74) · Bottom-left (14,74)
+        Inner equilateral △ (circumradius 17, cut-out):
+          Top (50,36) · Bottom-left (35,62) · Bottom-right (65,62)
       */}
-      <polygon points="32,8 44,8 60,56 46,56" fill={primary} />
-
-      {/*
-        Crossbar — Electric Cyan accent
-        At y=28, inner edges of both legs meet at x≈24 and x≈40 — width=22, height=7
-      */}
-      <rect x="22" y="28" width="20" height="7" fill={accent} />
+      <path
+        d="M50,12 L86,74 L14,74 Z M50,36 L35,62 L65,62 Z"
+        fill={color}
+        fillRule="evenodd"
+      />
     </svg>
   );
 }

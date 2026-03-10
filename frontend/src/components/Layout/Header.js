@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AtonixDevLogo from '../AtonixDevLogo';
+import AtonixDevLogoIcon from '../AtonixDevLogoIcon';
 
 // GS-WSF §3 — Global Header — two-tier: brand/auth bar + nav bar
 const Header = () => {
@@ -54,7 +55,8 @@ const Header = () => {
             to="/"
             style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', flexShrink: 0 }}
           >
-            <AtonixDevLogo size={30} variant="dark" textColor="#FFFFFF" />
+            <AtonixDevLogoIcon size={30} variant="dark" showBg={false} />
+            <span style={{ fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, fontSize: 17, color: '#FFFFFF', letterSpacing: 0, lineHeight: 1, userSelect: 'none' }}>AtonixDev</span>
           </Link>
 
           {/* Desktop auth */}
@@ -139,32 +141,19 @@ const Header = () => {
               <>
                 <Link
                   to="/login"
-                  style={{
-                    color: '#FFFFFF', fontSize: 11, fontWeight: 700,
-                    letterSpacing: '0.08em', textTransform: 'uppercase',
-                    textDecoration: 'none', padding: '6px 0',
-                    borderBottom: '1px solid transparent',
-                    transition: 'border-color 0.15s',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderBottomColor = '#A81D37'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; }}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  to="/register"
-                  style={{
+        style={{
                     display: 'inline-flex', alignItems: 'center',
                     padding: '6px 18px', background: '#A81D37',
                     color: '#FFFFFF', fontSize: 11, fontWeight: 700,
                     letterSpacing: '0.08em', textTransform: 'uppercase',
                     textDecoration: 'none', transition: 'background 0.15s',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = '#7A1528'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = '#A81D37'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderBottomColor = '#A81D37'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; }}
                 >
-                  Console
+                  Portal
                 </Link>
+                
               </>
             )}
           </div>

@@ -14,7 +14,7 @@ import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Register from './pages/Register';
-import Login from './pages/Login';
+import Portal from './pages/Login';
 import AdminLogin from './pages/Admin/Login';
 import AdminDashboard from './pages/Admin/Dashboard';
 import AdminProjects from './pages/Admin/Projects';
@@ -143,7 +143,7 @@ function App() {
 
           {/* Auth Routes */}
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Portal />} />
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
