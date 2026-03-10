@@ -65,7 +65,7 @@ export default function Campaigns() {
     try {
       const params = new URLSearchParams();
       if (filter) params.set('status', filter);
-      const res = await fetch(`/api/admin/campaigns/?${params}`, { credentials: 'include' });
+      const res = await fetch(`/api/admin/campaigns/?${params}`, { credentials: 'include', headers: { Accept: 'application/json' } });
       const ct = res.headers.get('content-type') || '';
       if (!ct.includes('application/json')) throw new Error(`Backend not reachable (got ${res.status} ${res.statusText || 'non-JSON'})`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -80,9 +80,10 @@ export default function Campaigns() {
 
   const fetchMeta = useCallback(async () => {
     try {
+      const JSON_HEADERS = { Accept: 'application/json' };
       const [tRes, sRes] = await Promise.all([
-        fetch('/api/admin/templates/?page_size=200', { credentials: 'include' }),
-        fetch('/api/admin/senders/', { credentials: 'include' }),
+        fetch('/api/admin/templates/?page_size=200', { credentials: 'include', headers: JSON_HEADERS }),
+        fetch('/api/admin/senders/', { credentials: 'include', headers: JSON_HEADERS }),
       ]);
       if (tRes.ok) {
         const d = await tRes.json();
@@ -99,7 +100,7 @@ export default function Campaigns() {
     setLogsLoading(true);
     setLogs([]);
     try {
-      const res = await fetch(`/api/admin/campaigns/${campaignId}/logs/`, { credentials: 'include' });
+      const res = await fetch(`/api/admin/campaigns/${campaignId}/logs/`, { credentials: 'include', headers: { Accept: 'application/json' } });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setLogs(data.results || data);

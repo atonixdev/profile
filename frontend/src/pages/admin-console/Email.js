@@ -73,7 +73,7 @@ export default function Email() {
     try {
       const params = new URLSearchParams({ page, page_size: 20 });
       if (filter) params.set('email_type', filter);
-      const res = await fetch(`/api/admin/email-logs/?${params}`, { credentials: 'include' });
+      const res = await fetch(`/api/admin/email-logs/?${params}`, { credentials: 'include', headers: { Accept: 'application/json' } });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setLogs(data.results || data);
@@ -91,7 +91,7 @@ export default function Email() {
     try {
       const params = new URLSearchParams();
       if (filter) params.set('category', filter);
-      const res = await fetch(`/api/admin/templates/?${params}`, { credentials: 'include' });
+      const res = await fetch(`/api/admin/templates/?${params}`, { credentials: 'include', headers: { Accept: 'application/json' } });
       const ct = res.headers.get('content-type') || '';
       if (!ct.includes('application/json')) throw new Error(`Backend not reachable (got ${res.status} ${res.statusText || 'non-JSON'})`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
