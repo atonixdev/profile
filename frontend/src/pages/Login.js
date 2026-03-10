@@ -448,7 +448,6 @@ const Portal = () => {
             )}
 
             {/* Form */}
-            <OAuthButtons mode="signin" />
             <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
                 <label style={labelStyle}>Username or Email</label>
@@ -557,6 +556,7 @@ const Portal = () => {
                 {signInLoading ? 'Signing In…' : 'Sign In'}
               </button>
             </form>
+            <OAuthButtons mode="signin" />
 
             {/* Footer links */}
             <div style={{ marginTop: '16px', fontSize: '11px', color: '#9CA3AF', textAlign: 'center' }}>
@@ -676,7 +676,6 @@ const Portal = () => {
             )}
 
             {/* Form */}
-            <OAuthButtons mode="signup" />
             <form onSubmit={handleSignUpSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
@@ -835,6 +834,7 @@ const Portal = () => {
                 {signUpLoading ? 'Creating Account…' : 'Create Account'}
               </button>
             </form>
+            <OAuthButtons mode="signup" />
 
             {/* Footer */}
             <div style={{ marginTop: '12px', fontSize: '11px', color: '#9CA3AF', textAlign: 'center' }}>
