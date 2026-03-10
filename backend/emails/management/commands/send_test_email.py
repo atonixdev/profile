@@ -16,7 +16,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--to',   required=True, help='Recipient email address')
         parser.add_argument('--type', default='new_login',
-                            help='Email type (default: new_login). Options: new_login, account_created, password_reset, security_alert, email_verification')
+                            help='Email type (default: new_login). Options: new_login, account_created, password_reset, security_alert, email_verification, campaign')
         parser.add_argument('--name', default='AtonixDev Test User', help='Display name in the email')
 
     def handle(self, *args, **options):
@@ -47,8 +47,9 @@ class Command(BaseCommand):
                 'ip_address': '127.0.0.1 (test)',
             },
             'email_verification': {
-                'name':             name,
-                'verification_url': 'https://atonixdev.org/verify-email?token=TEST_TOKEN',
+                'name':              name,
+                'verification_url':  'https://atonixdev.org/verify-email?token=TEST_TOKEN',
+                'verification_code': '847291',
             },
             'security_alert': {
                 'name':        name,
@@ -58,6 +59,19 @@ class Command(BaseCommand):
                 'event_time':  now,
                 'action_url':  'https://atonixdev.org/settings/security',
                 'action_label': 'Review Security',
+            },
+            'campaign': {
+                'name':             name,
+                'campaign_title':   'AtonixDev Update',
+                'campaign_subtitle': 'What\'s New',
+                'preview_text':     'See what\'s new on AtonixDev.',
+                'campaign_label':   'Newsletter',
+                'body':             'We have been hard at work improving the platform. Explore the latest features and resources available to you.',
+                'highlights':       ['New dashboard experience', 'Improved performance', 'Enhanced security'],
+                'cta_url':          'https://atonixdev.org/blog',
+                'cta_label':        'Read the Blog',
+                'website_url':      'https://atonixdev.org',
+                'unsubscribe_url':  'https://atonixdev.org/unsubscribe',
             },
         }
 

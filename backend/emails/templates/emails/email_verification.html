@@ -1,7 +1,7 @@
 {% extends "emails/base.html" %}
 
 {% block title %}Verify Your Email{% endblock %}
-{% block preheader %}Confirm your AtonixDev email address to activate your account.{% endblock %}
+{% block preheader %}Your AtonixDev verification code: {{ verification_code }}{% endblock %}
 {% block header_label %}Email Verification{% endblock %}
 
 {% block body %}
@@ -12,32 +12,34 @@
     CONFIRM YOUR ADDRESS
   </p>
 
-  <p style="margin:0 0 20px;font-size:14px;color:#D1D5DB;line-height:1.7;">
-    Hi {{ name }},
-  </p>
-  <p style="margin:0 0 28px;font-size:14px;color:#D1D5DB;line-height:1.7;">
-    Please confirm your email address to complete your AtonixDev account setup. This verification link is valid for <strong style="color:#FFFFFF;">24 hours</strong>.
+  <p style="margin:0 0 24px;font-size:14px;color:#D1D5DB;line-height:1.7;">
+    Hi {{ name }},<br />
+    Use the code below or click the button to verify your AtonixDev account.
   </p>
 
-  <!-- CTA Button -->
+  <!-- Verification Code Block -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 32px;">
+    <tr>
+      <td style="background-color:#0D1117;border:1px solid #A81D37;padding:24px;text-align:center;">
+        <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6B7280;letter-spacing:0.15em;font-family:monospace;text-transform:uppercase;">Verification Code</p>
+        <p style="margin:0;font-size:36px;font-weight:900;color:#FFFFFF;letter-spacing:0.25em;font-family:monospace;">{{ verification_code }}</p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6B7280;">Valid for 24 hours</p>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Verify Button -->
   <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin:0 0 32px;">
     <tr>
-      <td style="background-color:#A81D37;padding:14px 32px;">
+      <td style="background-color:#A81D37;padding:14px 40px;">
         <a href="{{ verification_url }}" style="font-size:13px;font-weight:700;color:#FFFFFF;text-decoration:none;font-family:monospace;letter-spacing:0.1em;text-transform:uppercase;">
-          Verify Email Address →
+          Verify Email Address &rarr;
         </a>
       </td>
     </tr>
   </table>
 
-  <p style="margin:0 0 16px;font-size:14px;color:#D1D5DB;line-height:1.7;">
-    Or copy and paste this link into your browser:
-  </p>
-  <p style="margin:0 0 28px;font-size:12px;color:#6B7280;word-break:break-all;font-family:monospace;background-color:#0D1117;padding:12px 16px;border-left:2px solid #A81D37;">
-    {{ verification_url }}
-  </p>
-
   <p style="margin:0;font-size:12px;color:#374151;line-height:1.6;">
-    If you did not create an AtonixDev account, please ignore this email or contact <a href="mailto:security@atonixdev.com" style="color:#A81D37;text-decoration:none;">security@atonixdev.com</a>.
+    If you did not create an AtonixDev account, you can safely ignore this email.
   </p>
 {% endblock %}

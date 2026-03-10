@@ -8,9 +8,11 @@ from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from django.db import transaction, IntegrityError, DatabaseError
 from django.db.transaction import TransactionManagementError
-from .models import Profile
+from django.conf import settings
+from .models import Profile, EmailVerificationToken
 from .serializers import ProfileSerializer, CurrentUserProfileSerializer, RegisterSerializer
 from community.models import CommunityMember
+from emails.service import EmailService
 
 import pyotp
 
@@ -94,6 +96,23 @@ class RegisterView(APIView):
                 status=status.HTTP_503_SERVICE_UNAVAILABLE,
             )
 
+        # Send email verification
+        try:
+            token_obj = EmailVerificationToken.objects.create(user=user)
+            frontend_url = getattr(settings, 'FRONTEND_URL', 'https://atonixdev.org').rstrip('/')
+            verification_url = f"{frontend_url}/verify-email?token={token_obj.token}"
+            EmailService.send(
+                email_type='email_verification',
+                recipient=user.email,
+                context={
+                    'name': user.first_name or user.username,
+                    'verification_url': verification_url,
+                    'verification_code': token_obj.code,
+                },
+            )
+        except Exception:
+            logger.exception("Failed to send verification email to %s", user.email)
+
         return Response(
             {
                 'id': user.id,
@@ -101,10 +120,32 @@ class RegisterView(APIView):
                 'email': user.email,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'message': 'User registered successfully',
+                'message': 'User registered successfully. Please check your email to verify your account.',
             },
             status=status.HTTP_201_CREATED,
         )
+
+
+class EmailVerifyView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        token_str = request.data.get('token', '').strip()
+        code_str = request.data.get('code', '').strip()
+        if not token_str and not code_str:
+            return Response({'detail': 'Token or code is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            if token_str:
+                token_obj = EmailVerificationToken.objects.select_related('user').get(token=token_str)
+            else:
+                token_obj = EmailVerificationToken.objects.select_related('user').get(code=code_str)
+        except (EmailVerificationToken.DoesNotExist, ValueError):
+            return Response({'detail': 'Invalid or expired token.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not token_obj.is_valid():
+            token_obj.delete()
+            return Response({'detail': 'Token has expired. Please register again or contact support.'}, status=status.HTTP_400_BAD_REQUEST)
+        token_obj.delete()
+        return Response({'detail': 'Email verified successfully. You can now log in.'}, status=status.HTTP_200_OK)
 
 
 class MFASetupView(APIView):

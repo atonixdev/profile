@@ -1,5 +1,10 @@
+import uuid
+import secrets
+from datetime import timedelta
+
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from config.crypto import decrypt_text, encrypt_text
 
@@ -70,3 +75,24 @@ class Profile(models.Model):
                 return ''
         # Legacy plaintext value (pre-encryption)
         return raw
+
+
+def _gen_verification_code():
+    """Generate a cryptographically random 6-digit code."""
+    return str(secrets.randbelow(900000) + 100000)  # 100000–999999
+
+
+class EmailVerificationToken(models.Model):
+    """One-time token sent to users after registration to verify their email address."""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='email_verification_token')
+    token = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True)
+    code = models.CharField(max_length=6, default=_gen_verification_code)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    _EXPIRY_HOURS = 24
+
+    def is_valid(self) -> bool:
+        return timezone.now() < self.created_at + timedelta(hours=self._EXPIRY_HOURS)
+
+    def __str__(self):
+        return f'VerificationToken({self.user.username})'

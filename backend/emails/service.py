@@ -37,9 +37,9 @@ logger = logging.getLogger(__name__)
 
 TEMPLATE_REGISTRY: dict[str, tuple[str, str, str]] = {
     # Auth
-    'account_created':    ('emails/account_created.html',   'Welcome to AtonixDev — Your Account is Ready',           'no-reply@atonixdev.com'),
-    'email_verification': ('emails/email_verification.html','Verify your AtonixDev email address',                    'no-reply@atonixdev.com'),
-    'password_reset':     ('emails/password_reset.html',    'Reset your AtonixDev password',                          'no-reply@atonixdev.com'),
+    'account_created':    ('emails/account_created.html',   'Welcome to AtonixDev — Your Account is Ready',           'noreply@atonixdev.org'),
+    'email_verification': ('emails/email_verification.html','Verify your AtonixDev email address',                    'noreply@atonixdev.org'),
+    'password_reset':     ('emails/password_reset.html',    'Reset your AtonixDev password',                          'noreply@atonixdev.org'),
     'new_login':          ('emails/new_login.html',         'New login to your AtonixDev account',                    'security@atonixdev.com'),
     'new_device_login':   ('emails/new_login.html',         'New device login detected — AtonixDev',                  'security@atonixdev.com'),
     # Security
@@ -56,12 +56,15 @@ TEMPLATE_REGISTRY: dict[str, tuple[str, str, str]] = {
     'pipeline_failure':       ('emails/incident_alert.html', '[Alert] Pipeline failure — AtonixDev',                 'alerts@atonixdev.com'),
     'degraded_performance':   ('emails/incident_alert.html', '[Notice] Degraded performance — AtonixDev',            'alerts@atonixdev.com'),
     # Billing
-    'billing_change':  ('emails/billing_alert.html', 'Your AtonixDev subscription has changed',           'no-reply@atonixdev.com'),
-    'payment_failed':  ('emails/billing_alert.html', 'Action required: Payment failed — AtonixDev',      'no-reply@atonixdev.com'),
-    'invoice_issued':  ('emails/billing_alert.html', 'Your AtonixDev invoice is ready',                  'no-reply@atonixdev.com'),
+    'billing_change':  ('emails/billing_alert.html', 'Your AtonixDev subscription has changed',           'noreply@atonixdev.org'),
+    'payment_failed':  ('emails/billing_alert.html', 'Action required: Payment failed — AtonixDev',      'noreply@atonixdev.org'),
+    'invoice_issued':  ('emails/billing_alert.html', 'Your AtonixDev invoice is ready',                  'noreply@atonixdev.org'),
+    # Marketing / campaigns
+    'campaign':      ('emails/campaign.html',      'A message from AtonixDev',                 'noreply@atonixdev.org'),
+    'announcement':  ('emails/announcement.html',  'AtonixDev announcement',                   'noreply@atonixdev.org'),
     # System / admin
     'admin_action': ('emails/security_alert.html', 'Admin action on your account — AtonixDev', 'security@atonixdev.com'),
-    'compliance':   ('emails/security_alert.html', 'Important compliance notice — AtonixDev',  'no-reply@atonixdev.com'),
+    'compliance':   ('emails/security_alert.html', 'Important compliance notice — AtonixDev',  'noreply@atonixdev.org'),
 }
 
 
@@ -127,7 +130,7 @@ class EmailService:
                 body=text_body,
                 from_email=from_email,
                 to=[recipient],
-                reply_to=[getattr(settings, 'EMAIL_REPLY_TO', 'support@atonixdev.com')],
+                reply_to=[getattr(settings, 'EMAIL_REPLY_TO', 'atonixcorpenterprise@gmail.com')],
             )
             msg.attach_alternative(html_body, 'text/html')
             msg.send(fail_silently=False)
@@ -190,7 +193,7 @@ class EmailService:
         base = {
             'platform_name':    'AtonixDev',
             'platform_url':     getattr(settings, 'FRONTEND_URL', 'https://atonixdev.com'),
-            'support_email':    'support@atonixdev.com',
+            'support_email':    'atonixcorpenterprise@gmail.com',
             'year':             timezone.now().year,
             'email_type':       email_type,
         }
@@ -272,9 +275,9 @@ class EmailService:
             logger.error('EmailService: missing variable %s in template %s', exc, template_id)
             return False
 
-        from_email  = sender_identity.email if sender_identity else getattr(settings, 'DEFAULT_FROM_EMAIL', 'no-reply@atonixdev.com')
+        from_email  = sender_identity.email if sender_identity else getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@atonixdev.org')
         from_name   = sender_identity.display_name if sender_identity else 'AtonixDev'
-        reply_to    = [sender_identity.reply_to] if sender_identity and sender_identity.reply_to else [getattr(settings, 'EMAIL_REPLY_TO', 'support@atonixdev.com')]
+        reply_to    = [sender_identity.reply_to] if sender_identity and sender_identity.reply_to else [getattr(settings, 'EMAIL_REPLY_TO', 'atonixcorpenterprise@gmail.com')]
         from_header = f'{from_name} <{from_email}>'
 
         log = EmailLog(

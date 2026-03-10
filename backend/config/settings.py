@@ -421,7 +421,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_TIMEOUT = 10  # seconds
 
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='no-reply@atonixdev.com')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@atonixdev.org')
 EMAIL_REPLY_TO = config('EMAIL_REPLY_TO', default='support@atonixdev.com')
 SERVER_EMAIL = config('SERVER_EMAIL', default='errors@atonixdev.com')
 
