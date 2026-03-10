@@ -15,13 +15,6 @@ import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Register from './pages/Register';
 import Portal from './pages/Login';
-import AdminLogin from './pages/Admin/Login';
-import AdminDashboard from './pages/Admin/Dashboard';
-import AdminProjects from './pages/Admin/Projects';
-import AdminServices from './pages/Admin/Services';
-import AdminTestimonials from './pages/Admin/Testimonials';
-import AdminInquiries from './pages/Admin/Inquiries';
-import AdminProfile from './pages/Admin/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
 import StaffRoute from './components/StaffRoute';
 import { AuthProvider } from './context/AuthContext';
@@ -67,6 +60,18 @@ import OpsModels from './pages/ops/OpsModels';
 import OpsEnvironments from './pages/ops/OpsEnvironments';
 import OpsIncidents from './pages/ops/OpsIncidents';
 import OpsAudit from './pages/ops/OpsAudit';
+import AdminLayout from './components/Layout/AdminLayout';
+import AdminUsers from './pages/admin-console/Users';
+import AdminRoles from './pages/admin-console/Roles';
+import AdminConfig from './pages/admin-console/Config';
+import AdminSecurity from './pages/admin-console/Security';
+import AdminAudit from './pages/admin-console/Audit';
+import AdminBilling from './pages/admin-console/Billing';
+import AdminAPI from './pages/admin-console/API';
+import AdminEmail from './pages/admin-console/Email';
+import AdminSettings from './pages/admin-console/Settings';
+import AdminActivity from './pages/admin-console/Activity';
+import AdminFeatures from './pages/admin-console/Features';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
 import SettingsGPGKeys from './pages/settings/GPGKeys';
@@ -157,17 +162,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Portal />} />
 
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/projects" element={<AdminProjects />} />
-            <Route path="/admin/services" element={<AdminServices />} />
-            <Route path="/admin/testimonials" element={<AdminTestimonials />} />
-            <Route path="/admin/inquiries" element={<AdminInquiries />} />
-            <Route path="/admin/profile" element={<AdminProfile />} />
-          </Route>
-
           {/* Developer Dashboard — Protected */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<DashboardLayout />}>
@@ -225,6 +219,23 @@ function App() {
               <Route path="environments" element={<OpsEnvironments />} />
               <Route path="incidents"   element={<OpsIncidents />} />
               <Route path="audit"       element={<OpsAudit />} />
+            </Route>
+          </Route>
+
+          {/* Admin Console — Staff Only */}
+          <Route element={<StaffRoute />}>
+            <Route path="/admin-console" element={<AdminLayout />}>
+              <Route index element={<AdminUsers />} />
+              <Route path="roles"    element={<AdminRoles />} />
+              <Route path="config"   element={<AdminConfig />} />
+              <Route path="security" element={<AdminSecurity />} />
+              <Route path="audit"    element={<AdminAudit />} />
+              <Route path="billing"  element={<AdminBilling />} />
+              <Route path="api"      element={<AdminAPI />} />
+              <Route path="email"    element={<AdminEmail />} />
+              <Route path="settings" element={<AdminSettings />} />
+              <Route path="activity" element={<AdminActivity />} />
+              <Route path="features" element={<AdminFeatures />} />
             </Route>
           </Route>
 

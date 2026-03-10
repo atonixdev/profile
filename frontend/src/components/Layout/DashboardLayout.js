@@ -118,9 +118,44 @@ const DashboardLayout = () => {
           })}
         </nav>
 
-        {/* Ops Control — staff only */}
+        {/* Staff consoles */}
         {user?.is_staff && (
-          <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <Link
+              to="/admin-console"
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '9px 12px',
+                background: 'rgba(212,175,55,0.1)',
+                border: '1px solid rgba(212,175,55,0.3)',
+                textDecoration: 'none',
+                transition: 'background 0.15s, border-color 0.15s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(212,175,55,0.22)';
+                e.currentTarget.style.borderColor = 'rgba(212,175,55,0.6)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(212,175,55,0.1)';
+                e.currentTarget.style.borderColor = 'rgba(212,175,55,0.3)';
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: 9, fontWeight: 700, letterSpacing: '0.12em',
+                    textTransform: 'uppercase', color: '#D4AF37',
+                    fontFamily: 'var(--font-mono)', marginBottom: 2,
+                  }}
+                >
+                  Admin
+                </div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#FFFFFF' }}>
+                  Admin Console
+                </div>
+              </div>
+              <span style={{ fontSize: 12, color: '#D4AF37' }}>→</span>
+            </Link>
             <Link
               to="/ops"
               style={{
@@ -244,30 +279,54 @@ const DashboardLayout = () => {
               </span>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             {user?.is_staff && (
-              <Link
-                to="/ops"
-                style={{
-                  fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                  textTransform: 'uppercase', color: '#A81D37',
-                  textDecoration: 'none', fontFamily: 'var(--font-mono)',
-                  padding: '4px 10px',
-                  border: '1px solid rgba(168,29,55,0.4)',
-                  background: 'rgba(168,29,55,0.1)',
-                  transition: 'background 0.15s, border-color 0.15s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(168,29,55,0.25)';
-                  e.currentTarget.style.borderColor = '#A81D37';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(168,29,55,0.1)';
-                  e.currentTarget.style.borderColor = 'rgba(168,29,55,0.4)';
-                }}
-              >
-                OPS CONTROL
-              </Link>
+              <>
+                <Link
+                  to="/admin-console"
+                  style={{
+                    fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
+                    textTransform: 'uppercase', color: '#D4AF37',
+                    textDecoration: 'none', fontFamily: 'var(--font-mono)',
+                    padding: '4px 10px',
+                    border: '1px solid rgba(212,175,55,0.35)',
+                    background: 'rgba(212,175,55,0.08)',
+                    transition: 'background 0.15s, border-color 0.15s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(212,175,55,0.2)';
+                    e.currentTarget.style.borderColor = '#D4AF37';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(212,175,55,0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(212,175,55,0.35)';
+                  }}
+                >
+                  ADMIN
+                </Link>
+                <Link
+                  to="/ops"
+                  style={{
+                    fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
+                    textTransform: 'uppercase', color: '#A81D37',
+                    textDecoration: 'none', fontFamily: 'var(--font-mono)',
+                    padding: '4px 10px',
+                    border: '1px solid rgba(168,29,55,0.4)',
+                    background: 'rgba(168,29,55,0.1)',
+                    transition: 'background 0.15s, border-color 0.15s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(168,29,55,0.25)';
+                    e.currentTarget.style.borderColor = '#A81D37';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(168,29,55,0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(168,29,55,0.4)';
+                  }}
+                >
+                  OPS
+                </Link>
+              </>
             )}
             <Link
               to="/"
