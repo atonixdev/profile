@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import FloatingChatbot from './components/FloatingChatbot';
 import Home from './pages/Home';
 import Software from './pages/Software';
 import Solutions from './pages/Solutions';
@@ -23,16 +22,41 @@ import AdminServices from './pages/Admin/Services';
 import AdminTestimonials from './pages/Admin/Testimonials';
 import AdminInquiries from './pages/Admin/Inquiries';
 import AdminProfile from './pages/Admin/Profile';
-import ChatbotAdmin from './pages/Admin/ChatbotAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+import CommunityHome from './pages/community/CommunityHome';
+import Discussions from './pages/community/Discussions';
+import Tutorials from './pages/community/Tutorials';
+import Announcements from './pages/community/Announcements';
+import CommunityRules from './pages/community/CommunityRules';
+import DashboardLayout from './components/Layout/DashboardLayout';
+import DashboardOverview from './pages/dashboard/Overview';
+import DashboardProjects from './pages/dashboard/Projects';
+import DashboardWorkspaces from './pages/dashboard/Workspaces';
+import DashboardPipelines from './pages/dashboard/Pipelines';
+import DashboardEnvironments from './pages/dashboard/Environments';
+import DashboardRegistries from './pages/dashboard/Registries';
+import DashboardMonitoring from './pages/dashboard/Monitoring';
+import DashboardSupport from './pages/dashboard/Support';
+import Networking from './pages/platform/Networking';
+import PlatformSecurity from './pages/platform/Security';
+import SettingsLayout from './components/Layout/SettingsLayout';
+import SettingsProfile from './pages/settings/Profile';
+import SettingsSSHKeys from './pages/settings/SSHKeys';
+import SettingsGPGKeys from './pages/settings/GPGKeys';
+import {
+  Account as SettingsAccount,
+  Security as SettingsSecurity,
+  AccessTokens as SettingsAccessTokens,
+  Sessions as SettingsSessions,
+  Notifications as SettingsNotifications,
+} from './pages/settings/Placeholders';
 
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <FloatingChatbot />
         <Routes>
           {/* Public + Layout Routes */}
           <Route path="/" element={<Layout />}>
@@ -55,6 +79,18 @@ function App() {
 
             {/* Lab removed — redirect to home */}}
             <Route path="lab/*" element={<Navigate to="/" replace />} />
+
+            {/* Platform capability pages */}
+            <Route path="platform/networking" element={<Networking />} />
+            <Route path="platform/security"   element={<PlatformSecurity />} />
+
+            {/* Community Platform — Public */}
+            <Route path="community" element={<CommunityHome />} />
+            <Route path="community/discussions" element={<Discussions />} />
+            <Route path="community/discussions/:category" element={<Discussions />} />
+            <Route path="community/tutorials" element={<Tutorials />} />
+            <Route path="community/announcements" element={<Announcements />} />
+            <Route path="community/rules" element={<CommunityRules />} />
           </Route>
 
           {/* Auth Routes */}
@@ -70,7 +106,35 @@ function App() {
             <Route path="/admin/testimonials" element={<AdminTestimonials />} />
             <Route path="/admin/inquiries" element={<AdminInquiries />} />
             <Route path="/admin/profile" element={<AdminProfile />} />
-            <Route path="/admin/chat" element={<ChatbotAdmin />} />
+          </Route>
+
+          {/* Developer Dashboard — Protected */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<DashboardOverview />} />
+              <Route path="projects" element={<DashboardProjects />} />
+              <Route path="workspaces" element={<DashboardWorkspaces />} />
+              <Route path="pipelines" element={<DashboardPipelines />} />
+              <Route path="environments" element={<DashboardEnvironments />} />
+              <Route path="registries" element={<DashboardRegistries />} />
+              <Route path="monitoring" element={<DashboardMonitoring />} />
+              <Route path="support" element={<DashboardSupport />} />
+            </Route>
+          </Route>
+
+          {/* Developer Settings — Protected */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/settings" element={<SettingsLayout />}>
+              <Route index element={<Navigate to="/settings/profile" replace />} />
+              <Route path="profile"       element={<SettingsProfile />} />
+              <Route path="account"       element={<SettingsAccount />} />
+              <Route path="security"      element={<SettingsSecurity />} />
+              <Route path="ssh-keys"      element={<SettingsSSHKeys />} />
+              <Route path="gpg-keys"      element={<SettingsGPGKeys />} />
+              <Route path="access-tokens" element={<SettingsAccessTokens />} />
+              <Route path="sessions"      element={<SettingsSessions />} />
+              <Route path="notifications" element={<SettingsNotifications />} />
+            </Route>
           </Route>
 
           {/* Catch all - redirect to home */}

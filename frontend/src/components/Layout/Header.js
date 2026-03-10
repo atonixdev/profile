@@ -16,6 +16,9 @@ const Header = () => {
     { name: 'Infrastructure', path: '/infrastructure' },
     { name: 'Solutions',      path: '/solutions' },
     { name: 'Industries',     path: '/industries' },
+    { name: 'Networking',     path: '/platform/networking' },
+    { name: 'Security',       path: '/platform/security' },
+    { name: 'Community',      path: '/community' },
     { name: 'Contact',        path: '/contact' },
   ];
 
@@ -87,6 +90,34 @@ const Header = () => {
                     >
                       {user.user?.email || user.email || ''}
                     </div>
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setIsUserMenuOpen(false)}
+                      style={{
+                        display: 'block', padding: '12px 16px',
+                        color: '#FFFFFF', textDecoration: 'none',
+                        fontSize: 12, fontWeight: 600,
+                        letterSpacing: '0.08em', textTransform: 'uppercase',
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
+                      to="/settings"
+                      onClick={() => setIsUserMenuOpen(false)}
+                      style={{
+                        display: 'block', padding: '12px 16px',
+                        color: '#FFFFFF', textDecoration: 'none',
+                        fontSize: 12, fontWeight: 600,
+                        letterSpacing: '0.08em', textTransform: 'uppercase',
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
+                    >
+                      Settings
+                    </Link>
                     <button
                       onClick={handleLogout}
                       style={{

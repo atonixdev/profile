@@ -103,6 +103,8 @@ api.interceptors.response.use(
           const isProtectedPath =
             path.startsWith('/community') ||
             path.startsWith('/admin') ||
+            path.startsWith('/dashboard') ||
+            path.startsWith('/settings') ||
             path.startsWith('/lab');
           const isAuthPage = path.startsWith('/login') || path.startsWith('/register');
           if (isProtectedPath && !isAuthPage) {
