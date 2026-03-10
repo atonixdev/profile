@@ -55,6 +55,17 @@ import CloudEngineering from './pages/CloudEngineering';
 import DevOpsSecurity from './pages/DevOpsSecurity';
 import CaseStudies from './pages/CaseStudies';
 import SettingsLayout from './components/Layout/SettingsLayout';
+import OpsLayout from './components/Layout/OpsLayout';
+import OpsOverview from './pages/ops/OpsOverview';
+import OpsServices from './pages/ops/OpsServices';
+import OpsLogs from './pages/ops/OpsLogs';
+import OpsSecurity from './pages/ops/OpsSecurity';
+import OpsResources from './pages/ops/OpsResources';
+import OpsPipelines from './pages/ops/OpsPipelines';
+import OpsModels from './pages/ops/OpsModels';
+import OpsEnvironments from './pages/ops/OpsEnvironments';
+import OpsIncidents from './pages/ops/OpsIncidents';
+import OpsAudit from './pages/ops/OpsAudit';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
 import SettingsGPGKeys from './pages/settings/GPGKeys';
@@ -197,6 +208,22 @@ function App() {
               <Route path="access-tokens" element={<SettingsAccessTokens />} />
               <Route path="sessions"      element={<SettingsSessions />} />
               <Route path="notifications" element={<SettingsNotifications />} />
+            </Route>
+          </Route>
+
+          {/* Operational Control — Protected */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/ops" element={<OpsLayout />}>
+              <Route index element={<OpsOverview />} />
+              <Route path="services"    element={<OpsServices />} />
+              <Route path="logs"        element={<OpsLogs />} />
+              <Route path="security"    element={<OpsSecurity />} />
+              <Route path="resources"   element={<OpsResources />} />
+              <Route path="pipelines"   element={<OpsPipelines />} />
+              <Route path="models"      element={<OpsModels />} />
+              <Route path="environments" element={<OpsEnvironments />} />
+              <Route path="incidents"   element={<OpsIncidents />} />
+              <Route path="audit"       element={<OpsAudit />} />
             </Route>
           </Route>
 
