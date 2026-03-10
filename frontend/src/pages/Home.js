@@ -84,9 +84,9 @@ const Home = () => {
             </span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(36px, 5.5vw, 68px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: 24, textAlign: 'center' }}>
-            <span style={{ display: 'block', color: '#111827' }}>AtonixDev — Enterprise Technology</span>
-            <span style={{ display: 'block', color: '#A81D37' }}>Engineering Company</span>
+          <h1 style={{ fontSize: 'clamp(24px, 3.5vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 24, textAlign: 'center' }}>
+            <span style={{ display: 'block', color: '#111827' }}>Engineering the Future of Cloud,</span>
+            <span style={{ display: 'block', color: '#A81D37' }}>Automation, and Intelligent Infrastructure.</span>
           </h1>
 
           <p style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', color: '#6B7280', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
