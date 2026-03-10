@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const DOMAINS = [
   { domain: 'atonix.io',       mx: 'Configured', spf: 'Pass', dkim: 'Pass',  dmarc: 'Pass',   status: 'Verified' },
@@ -221,18 +221,17 @@ export default function Email() {
   }, []);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Preview Modal */}
       {previewOpen && (
         <div
           onClick={(e) => { if (e.target === e.currentTarget) setPreviewOpen(false); }}
-          style={{
-            position: 'fixed', inset: 0, background: 'rgba(6,8,13,0.88)', zIndex: 9999,
+          style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', zIndex: 9999,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
-          <div ref={previewRef} style={{ width: '820px', maxWidth: '96vw', maxHeight: '90vh', background: '#0D1117', border: BD, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          <div ref={previewRef} style={{ width: '820px', maxWidth: '96vw', maxHeight: '90vh', background: '#FFFFFF', border: BD, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
             <div style={{ padding: '14px 20px', borderBottom: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: 12, fontWeight: 700, color: A, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>
                 PREVIEW — {previewTitle}
@@ -261,7 +260,7 @@ export default function Email() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             EML — Email & Domain Configuration
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Email & Domain</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Email & Domain</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Configure sending domains, DKIM/SPF/DMARC records, and transactional email templates.
           </p>
@@ -287,7 +286,7 @@ export default function Email() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -313,7 +312,7 @@ export default function Email() {
 
       {/* Domains */}
       {tab === 'domains' && (
-        <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+        <div style={{ background: '#FFFFFF', border: BD }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
@@ -327,10 +326,10 @@ export default function Email() {
             <tbody>
               {DOMAINS.map((d) => (
                 <tr key={d.domain} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <td style={{ padding: '12px 20px', fontSize: 13, fontWeight: 600, color: '#FFFFFF', fontFamily: 'var(--font-mono)' }}>{d.domain}</td>
+                  <td style={{ padding: '12px 20px', fontSize: 13, fontWeight: 600, color: '#111827', fontFamily: 'var(--font-mono)' }}>{d.domain}</td>
                   {[d.mx, d.spf, d.dkim, d.dmarc].map((v, i) => (
                     <td key={i} style={{ padding: '12px 20px' }}>
                       <span style={{ fontSize: 10, fontWeight: 700, color: v === 'Pass' || v === 'Configured' ? '#22C55E' : '#F59E0B', fontFamily: 'var(--font-mono)' }}>{v}</span>
@@ -348,7 +347,7 @@ export default function Email() {
 
       {/* SMTP */}
       {tab === 'smtp' && (
-        <div style={{ background: 'rgba(255,255,255,0.015)', border: BD, padding: '28px 32px' }}>
+        <div style={{ background: '#FFFFFF', border: BD, padding: '28px 32px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             {[
               { label: 'SMTP Host',    value: 'smtp.sendgrid.net' },
@@ -364,7 +363,7 @@ export default function Email() {
                 </label>
                 <input
                   defaultValue={f.value}
-                  style={{ width: '100%', padding: '9px 12px', background: 'rgba(255,255,255,0.03)', border: BD, color: '#FFFFFF', fontSize: 13, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                  style={{ width: '100%', padding: '9px 12px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 13, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
                 />
               </div>
             ))}
@@ -389,7 +388,7 @@ export default function Email() {
             <select
               value={tmplFilter}
               onChange={(e) => setTmplFilter(e.target.value)}
-              style={{ padding: '7px 12px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#D1D5DB', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}
+              style={{ padding: '7px 12px', background: '#FFFFFF', border: BD, color: '#D1D5DB', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}
             >
               <option value=''>All Categories</option>
               {['system','security','notification','marketing','custom'].map((c) => (
@@ -434,21 +433,21 @@ export default function Email() {
                       value={newTmpl[key]}
                       onChange={(e) => setNewTmpl((p) => ({ ...p, [key]: e.target.value }))}
                       placeholder={placeholder}
-                      style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', boxSizing: 'border-box' }}
+                      style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', boxSizing: 'border-box' }}
                     />
                   </div>
                 ))}
                 <div>
                   <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Category</label>
                   <select value={newTmpl.category} onChange={(e) => setNewTmpl((p) => ({ ...p, category: e.target.value }))}
-                    style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>
+                    style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>
                     {['system','security','notification','marketing','custom'].map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
                   <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>Permission</label>
                   <select value={newTmpl.permission} onChange={(e) => setNewTmpl((p) => ({ ...p, permission: e.target.value }))}
-                    style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>
+                    style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>
                     {['global','personal','marketing'].map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
@@ -458,7 +457,7 @@ export default function Email() {
                     value={newTmpl.subject}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, subject: e.target.value }))}
                     placeholder="e.g. Hello {{name}}, here's your update"
-                    style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
@@ -467,7 +466,7 @@ export default function Email() {
                     value={newTmpl.variables}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, variables: e.target.value }))}
                     placeholder="name, cta_url, unsubscribe_url"
-                    style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
@@ -476,7 +475,7 @@ export default function Email() {
                     value={newTmpl.preview_text}
                     onChange={(e) => setNewTmpl((p) => ({ ...p, preview_text: e.target.value }))}
                     placeholder="Short preview shown in inbox list"
-                    style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
@@ -486,7 +485,7 @@ export default function Email() {
                     onChange={(e) => setNewTmpl((p) => ({ ...p, html_body: e.target.value }))}
                     rows={10}
                     placeholder="Full HTML email body. Use {{variable}} for substitutions."
-                    style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 11, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
+                    style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 11, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
                   />
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
@@ -496,7 +495,7 @@ export default function Email() {
                     onChange={(e) => setNewTmpl((p) => ({ ...p, text_body: e.target.value }))}
                     rows={4}
                     placeholder="Fallback plain text version."
-                    style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 11, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
+                    style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 11, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
                   />
                 </div>
               </div>
@@ -536,29 +535,29 @@ export default function Email() {
                         <div>
                           <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Name</label>
                           <input value={editForm.name || ''} onChange={(e) => setEditForm((p) => ({ ...p, name: e.target.value }))}
-                            style={{ width: '100%', padding: '7px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                            style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
                         </div>
                         <div>
                           <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
                           <input value={editForm.subject || ''} onChange={(e) => setEditForm((p) => ({ ...p, subject: e.target.value }))}
-                            style={{ width: '100%', padding: '7px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                            style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
                         </div>
                         <div>
                           <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Variables (comma-separated)</label>
                           <input
                             value={typeof editForm.variables === 'string' ? editForm.variables : (editForm.variables || []).join(', ')}
                             onChange={(e) => setEditForm((p) => ({ ...p, variables: e.target.value }))}
-                            style={{ width: '100%', padding: '7px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', boxSizing: 'border-box' }} />
+                            style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', boxSizing: 'border-box' }} />
                         </div>
                         <div>
                           <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Preview Text</label>
                           <input value={editForm.preview_text || ''} onChange={(e) => setEditForm((p) => ({ ...p, preview_text: e.target.value }))}
-                            style={{ width: '100%', padding: '7px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                            style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
                         </div>
                         <div style={{ gridColumn: '1/-1' }}>
                           <label style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>HTML Body</label>
                           <textarea value={editForm.html_body || ''} onChange={(e) => setEditForm((p) => ({ ...p, html_body: e.target.value }))} rows={10}
-                            style={{ width: '100%', padding: '7px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 11, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box' }} />
+                            style={{ width: '100%', padding: '7px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 11, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box' }} />
                         </div>
                       </div>
                       <div style={{ display: 'flex', gap: 8 }}>
@@ -577,7 +576,7 @@ export default function Email() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
-                          <span style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF' }}>{t.name}</span>
+                          <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{t.name}</span>
                           <span style={{ fontSize: 9, fontWeight: 700, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', padding: '2px 7px', background: `${CAT_COLOR[t.category] || '#6B7280'}22`, color: CAT_COLOR[t.category] || '#6B7280', textTransform: 'uppercase' }}>
                             {t.category}
                           </span>
@@ -588,7 +587,7 @@ export default function Email() {
                         {t.variables && t.variables.length > 0 && (
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                             {t.variables.map((v) => (
-                              <span key={v} style={{ fontSize: 9, padding: '2px 6px', background: 'rgba(255,255,255,0.06)', color: '#9CA3AF', fontFamily: 'var(--font-mono)' }}>{'{{'+v+'}}'}</span>
+                              <span key={v} style={{ fontSize: 9, padding: '2px 6px', background: '#F1F5F9', color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{'{{'+v+'}}'}</span>
                             ))}
                           </div>
                         )}
@@ -630,7 +629,7 @@ export default function Email() {
             <select
               value={logsFilter}
               onChange={(e) => { setLogsFilter(e.target.value); setLogsPage(1); }}
-              style={{ padding: '7px 12px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#D1D5DB', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}
+              style={{ padding: '7px 12px', background: '#FFFFFF', border: BD, color: '#D1D5DB', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}
             >
               <option value=''>All Types</option>
               {Object.entries(TYPE_LABELS).map(([k, v]) => (
@@ -654,7 +653,7 @@ export default function Email() {
             </div>
           )}
 
-          <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+          <div style={{ background: '#FFFFFF', border: BD }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
@@ -679,7 +678,7 @@ export default function Email() {
                     <tr
                       key={log.id || i}
                       style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
-                      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                       onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                     >
                       <td style={{ padding: '10px 16px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
@@ -690,10 +689,10 @@ export default function Email() {
                           {TYPE_LABELS[log.email_type] || log.email_type || '—'}
                         </span>
                       </td>
-                      <td style={{ padding: '10px 16px', fontSize: 12, color: '#D1D5DB', fontFamily: 'var(--font-mono)' }}>
+                      <td style={{ padding: '10px 16px', fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>
                         {log.recipient || '—'}
                       </td>
-                      <td style={{ padding: '10px 16px', fontSize: 12, color: '#9CA3AF', maxWidth: 260, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <td style={{ padding: '10px 16px', fontSize: 12, color: '#4B5563', maxWidth: 260, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {log.subject || '—'}
                       </td>
                       <td style={{ padding: '10px 16px' }}>

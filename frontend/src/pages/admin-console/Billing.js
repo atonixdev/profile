@@ -1,8 +1,8 @@
 import React from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const PLANS = [
   { id: 'SUB-001', user: 'clara.m@atonix.io',    plan: 'Pro',        status: 'Active',  mrr: '$49',  next: '2026-04-01' },
@@ -18,7 +18,7 @@ const STATUS_COLOR = { Active: '#22C55E', 'Past Due': '#EF4444', Cancelled: '#6B
 
 export default function Billing() {
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -26,7 +26,7 @@ export default function Billing() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             BIL — Billing & Subscription Management
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Financial Operations</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Financial Operations</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Manage subscription plans, invoices, payment methods, and revenue metrics.
           </p>
@@ -66,7 +66,7 @@ export default function Billing() {
           { plan: 'Enterprise', price: '$249/mo', seats: 16,   color: A         },
         ].map((p) => (
           <div key={p.plan} style={{ ...CARD, borderColor: `${p.color}33` }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#FFFFFF', marginBottom: 4 }}>{p.plan}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{p.plan}</div>
             <div style={{ fontSize: 22, fontWeight: 700, color: p.color, marginBottom: 6 }}>{p.price}</div>
             <div style={{ fontSize: 11, color: '#6B7280' }}>{p.seats} active seats</div>
           </div>
@@ -74,9 +74,9 @@ export default function Billing() {
       </div>
 
       {/* Subscriptions table */}
-      <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+      <div style={{ background: '#FFFFFF', border: BD }}>
         <div style={{ padding: '14px 20px', borderBottom: BD }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF' }}>Active Subscriptions (top 6)</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>Active Subscriptions (top 6)</span>
         </div>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
@@ -93,7 +93,7 @@ export default function Billing() {
               <tr
                 key={s.id}
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{s.id}</td>
@@ -104,7 +104,7 @@ export default function Billing() {
                 <td style={{ padding: '11px 20px' }}>
                   <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[s.status] || '#6B7280', fontFamily: 'var(--font-mono)' }}>{s.status}</span>
                 </td>
-                <td style={{ padding: '11px 20px', fontSize: 12, color: '#FFFFFF', fontWeight: 700 }}>{s.mrr}</td>
+                <td style={{ padding: '11px 20px', fontSize: 12, color: '#111827', fontWeight: 700 }}>{s.mrr}</td>
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563' }}>{s.next}</td>
                 <td style={{ padding: '11px 20px' }}>
                   <button style={{ fontSize: 10, padding: '4px 10px', cursor: 'pointer', background: 'transparent', border: BD, color: A, fontFamily: 'var(--font-mono)', fontWeight: 700, letterSpacing: '0.06em' }}>

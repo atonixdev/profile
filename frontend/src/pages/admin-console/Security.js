@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const EVENTS = [
   { id: 'EVT-8821', time: '2026-03-09 11:42', user: 'ofidohub@gmail.com', type: 'AUTH',    severity: 'Info',     msg: 'Admin login from 41.77.12.8' },
@@ -27,14 +27,14 @@ export default function Security() {
   const filtered = filter === 'All' ? EVENTS : EVENTS.filter((e) => e.severity === filter);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
           SEC — Security & Access Control
         </div>
-        <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Security Events</h1>
+        <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Security Events</h1>
         <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
           Real-time visibility into authentication, access, and threat events across the platform.
         </p>
@@ -43,7 +43,7 @@ export default function Security() {
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
-          { label: 'Events (24h)',    value: '142',  color: '#F9FAFB' },
+          { label: 'Events (24h)',    value: '142',  color: '#111827' },
           { label: 'Failed Logins',   value: '18',   color: '#F59E0B' },
           { label: 'Critical Alerts', value: '2',    color: '#EF4444' },
           { label: 'Blocked IPs',     value: '5',    color: '#A81D37' },
@@ -64,7 +64,7 @@ export default function Security() {
         ].map((p) => (
           <div key={p.label} style={{ ...CARD, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 4 }}>{p.label}</div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: '#111827', marginBottom: 4 }}>{p.label}</div>
               <div style={{ fontSize: 11, color: '#4B5563' }}>{p.detail}</div>
             </div>
             <span style={{ fontSize: 10, fontWeight: 700, color: '#22C55E', fontFamily: 'var(--font-mono)' }}>{p.status}</span>
@@ -73,9 +73,9 @@ export default function Security() {
       </div>
 
       {/* Event log */}
-      <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+      <div style={{ background: '#FFFFFF', border: BD }}>
         <div style={{ padding: '14px 20px', borderBottom: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF' }}>Event Log</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>Event Log</span>
           <div style={{ display: 'flex', gap: 8 }}>
             {['All', 'Info', 'Warning', 'Critical'].map((f) => (
               <button

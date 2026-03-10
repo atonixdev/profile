@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const USERS = [
   { id: 'USR-001', name: 'Samuel Realm',     email: 'ofidohub@gmail.com',    role: 'Superadmin', status: 'Active',    joined: '2024-01-10' },
@@ -36,7 +36,7 @@ export default function Users() {
   );
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -44,7 +44,7 @@ export default function Users() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             USM — User Management
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Platform Users</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Platform Users</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Full lifecycle management of all registered platform accounts.
           </p>
@@ -72,23 +72,23 @@ export default function Users() {
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>
               {s.label}
             </div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
             <div style={{ fontSize: 11, color: '#4B5563', marginTop: 4 }}>{s.delta}</div>
           </div>
         ))}
       </div>
 
       {/* Search + Table */}
-      <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+      <div style={{ background: '#FFFFFF', border: BD }}>
         <div style={{ padding: '14px 20px', borderBottom: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF' }}>All Users</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>All Users</span>
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search users…"
             style={{
-              background: 'rgba(255,255,255,0.04)', border: BD,
-              color: '#FFFFFF', fontSize: 12, padding: '6px 12px',
+              background: '#FFFFFF', border: BD,
+              color: '#374151', fontSize: 12, padding: '6px 12px',
               outline: 'none', fontFamily: 'inherit', width: 220,
             }}
           />
@@ -115,11 +115,11 @@ export default function Users() {
               <tr
                 key={u.id}
                 style={{ borderBottom: 'rgba(255,255,255,0.04) solid 1px' }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
                 <td style={{ padding: '12px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{u.id}</td>
-                <td style={{ padding: '12px 20px', fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>{u.name}</td>
+                <td style={{ padding: '12px 20px', fontSize: 13, fontWeight: 600, color: '#111827' }}>{u.name}</td>
                 <td style={{ padding: '12px 20px', fontSize: 12, color: '#6B7280' }}>{u.email}</td>
                 <td style={{ padding: '12px 20px' }}>
                   <span style={{ fontSize: 10, fontWeight: 700, color: ROLE_COLOR[u.role] || '#6B7280', letterSpacing: '0.08em', textTransform: 'uppercase' }}>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const KEYS = [
   { id: 'key-0041', name: 'Production API',      scope: 'read:all write:projects', created: '2025-12-01', last_used: '2026-03-09', status: 'Active'   },
@@ -22,7 +22,7 @@ export default function API() {
   const [tab, setTab] = useState('keys');
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -30,7 +30,7 @@ export default function API() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             API — Developer Tools & API Management
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>API & Developer Tools</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>API & Developer Tools</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Manage API keys, webhooks, rate limits, and developer integrations.
           </p>
@@ -56,7 +56,7 @@ export default function API() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -82,7 +82,7 @@ export default function API() {
 
       {/* API Keys */}
       {tab === 'keys' && (
-        <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+        <div style={{ background: '#FFFFFF', border: BD }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
@@ -96,11 +96,11 @@ export default function API() {
             <tbody>
               {KEYS.map((k) => (
                 <tr key={k.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                 >
                   <td style={{ padding: '11px 20px', fontSize: 11, color: A, fontFamily: 'var(--font-mono)' }}>{k.id}</td>
-                  <td style={{ padding: '11px 20px', fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>{k.name}</td>
+                  <td style={{ padding: '11px 20px', fontSize: 13, fontWeight: 600, color: '#111827' }}>{k.name}</td>
                   <td style={{ padding: '11px 20px', fontSize: 11, color: '#6B7280', fontFamily: 'var(--font-mono)' }}>{k.scope}</td>
                   <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563' }}>{k.created}</td>
                   <td style={{ padding: '11px 20px', fontSize: 11, color: '#4B5563' }}>{k.last_used}</td>
@@ -127,7 +127,7 @@ export default function API() {
           {WEBHOOKS.map((w) => (
             <div key={w.id} style={{ ...CARD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF', marginBottom: 4, fontFamily: 'var(--font-mono)' }}>{w.url}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#111827', marginBottom: 4, fontFamily: 'var(--font-mono)' }}>{w.url}</div>
                 <div style={{ fontSize: 11, color: '#6B7280' }}>Events: {w.events}</div>
               </div>
               <span style={{ fontSize: 10, fontWeight: 700, color: w.status === 'Active' ? '#22C55E' : '#6B7280', fontFamily: 'var(--font-mono)' }}>{w.status}</span>

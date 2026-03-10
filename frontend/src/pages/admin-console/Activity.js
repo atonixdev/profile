@@ -1,8 +1,8 @@
 import React from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const ACTIVITY = [
   { id: 'ADM-2091', ts: '2026-03-09 11:42', admin: 'Samuel Realm',   action: 'Suspended user account',      target: 'zara.a@atonix.io',   context: 'Policy violation'      },
@@ -17,14 +17,14 @@ const ACTIVITY = [
 
 export default function Activity() {
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
           ACT — Admin Activity Logs
         </div>
-        <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Admin Activity</h1>
+        <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Admin Activity</h1>
         <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
           All administrator actions, tagged by actor, resource, and context. Used for internal accountability.
         </p>
@@ -40,7 +40,7 @@ export default function Activity() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -55,7 +55,7 @@ export default function Activity() {
         ].map((a) => (
           <div key={a.name} style={{ ...CARD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF', marginBottom: 3 }}>{a.name}</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', marginBottom: 3 }}>{a.name}</div>
               <div style={{ fontSize: 11, color: '#4B5563' }}>{a.role} · Last active: {a.last}</div>
             </div>
             <span style={{ fontSize: 20, fontWeight: 700, color: A }}>{a.actions}</span>
@@ -64,9 +64,9 @@ export default function Activity() {
       </div>
 
       {/* Activity log */}
-      <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+      <div style={{ background: '#FFFFFF', border: BD }}>
         <div style={{ padding: '14px 20px', borderBottom: BD }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF' }}>Recent Activity</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>Recent Activity</span>
         </div>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
@@ -83,7 +83,7 @@ export default function Activity() {
               <tr
                 key={a.id}
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{a.id}</td>

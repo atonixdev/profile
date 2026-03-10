@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const SECTIONS = [
   {
@@ -59,7 +59,7 @@ export default function Config() {
   };
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -67,7 +67,7 @@ export default function Config() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             CFG — Platform Configuration
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Global Platform Settings</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Global Platform Settings</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Manage branding, authentication, integrations, and resource constraints.
           </p>
@@ -99,7 +99,7 @@ export default function Config() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -125,7 +125,7 @@ export default function Config() {
           ))}
         </div>
 
-        <div style={{ background: 'rgba(255,255,255,0.015)', border: BD, padding: '28px 32px' }}>
+        <div style={{ background: '#FFFFFF', border: BD, padding: '28px 32px' }}>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.12em', color: A, textTransform: 'uppercase', marginBottom: 20 }}>
             {section.label} Configuration
           </div>
@@ -139,8 +139,8 @@ export default function Config() {
                   defaultValue={f.value}
                   style={{
                     width: '100%', padding: '9px 12px',
-                    background: 'rgba(255,255,255,0.03)',
-                    border: BD, color: '#FFFFFF', fontSize: 13,
+                    background: '#FFFFFF',
+                    border: BD, color: '#111827', fontSize: 13,
                     outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
                   }}
                 />

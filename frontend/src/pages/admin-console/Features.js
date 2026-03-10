@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const INITIAL_FLAGS = [
   { id: 'ff-01', key: 'ai_chatbot',           name: 'AI Chatbot',             env: 'production',  enabled: true,  rollout: 100, desc: 'Enables the AI assistant widget across all user-facing views.' },
@@ -29,7 +29,7 @@ export default function Features() {
   const visible = filter === 'All' ? flags : flags.filter((f) => f.env === filter);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -37,7 +37,7 @@ export default function Features() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             FLG — Feature Flags & Internal Tools
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Feature Flags</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Feature Flags</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Control feature availability per environment. Toggle flags, adjust rollout percentage, and stage releases.
           </p>
@@ -63,7 +63,7 @@ export default function Features() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -101,7 +101,7 @@ export default function Features() {
           >
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF' }}>{flag.name}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{flag.name}</span>
                 <span style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: ENV_COLOR[flag.env] || '#6B7280', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                   {flag.env}
                 </span>

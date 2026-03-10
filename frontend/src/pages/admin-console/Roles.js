@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const ROLES = [
   {
@@ -51,7 +51,7 @@ export default function Roles() {
   const [selected, setSelected] = useState(ROLES[0]);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -59,7 +59,7 @@ export default function Roles() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             RPM — Roles & Permissions
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Access Control</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Access Control</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Define roles, assign permissions, and enforce least-privilege access across the platform.
           </p>
@@ -85,7 +85,7 @@ export default function Roles() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -106,7 +106,7 @@ export default function Roles() {
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF' }}>{role.name}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{role.name}</span>
                 <span style={{ fontSize: 10, fontWeight: 700, color: role.color, fontFamily: 'var(--font-mono)' }}>
                   {role.users} users
                 </span>
@@ -117,13 +117,13 @@ export default function Roles() {
         </div>
 
         {/* Role detail */}
-        <div style={{ background: 'rgba(255,255,255,0.015)', border: BD, padding: '24px 28px' }}>
+        <div style={{ background: '#FFFFFF', border: BD, padding: '24px 28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
             <div>
               <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.12em', color: selected.color, textTransform: 'uppercase', marginBottom: 4 }}>
                 Role Detail
               </div>
-              <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>{selected.name}</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: '#111827' }}>{selected.name}</h2>
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button style={{ padding: '7px 16px', background: 'transparent', border: BD, color: A, fontSize: 11, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.08em' }}>

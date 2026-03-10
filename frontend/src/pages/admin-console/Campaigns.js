@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const STATUS_CONFIG = {
   draft:      { color: '#6B7280', label: 'Draft'     },
@@ -202,15 +202,15 @@ export default function Campaigns() {
   };
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Logs drawer */}
       {logsOpen && logsCampaign && (
         <div
           onClick={(e) => { if (e.target === e.currentTarget) setLogsOpen(false); }}
-          style={{ position: 'fixed', inset: 0, background: 'rgba(6,8,13,0.85)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          <div style={{ width: 900, maxWidth: '96vw', maxHeight: '88vh', background: '#0D1117', border: BD, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          <div style={{ width: 900, maxWidth: '96vw', maxHeight: '88vh', background: '#FFFFFF', border: BD, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
             <div style={{ padding: '14px 20px', borderBottom: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <span style={{ fontSize: 12, fontWeight: 700, color: A, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>
@@ -239,7 +239,7 @@ export default function Campaigns() {
                   <tbody>
                     {logs.map((l, i) => (
                       <tr key={l.id || i} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                        <td style={{ padding: '9px 16px', fontSize: 12, color: '#D1D5DB', fontFamily: 'var(--font-mono)' }}>{l.recipient}</td>
+                        <td style={{ padding: '9px 16px', fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)' }}>{l.recipient}</td>
                         <td style={{ padding: '9px 16px' }}>
                           <span style={{ fontSize: 10, fontWeight: 700, color: LOG_STATUS_COLOR[l.status] || '#6B7280', fontFamily: 'var(--font-mono)' }}>
                             {(l.status || '').toUpperCase()}
@@ -267,7 +267,7 @@ export default function Campaigns() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             CMP — Marketing Campaign Management
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Campaigns</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Campaigns</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Create, schedule, and dispatch email marketing campaigns.
           </p>
@@ -295,7 +295,7 @@ export default function Campaigns() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -317,7 +317,7 @@ export default function Campaigns() {
                 value={newCampaign.name}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, name: e.target.value }))}
                 placeholder="e.g. Spring 2026 Promo"
-                style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
               />
             </div>
             <div>
@@ -326,7 +326,7 @@ export default function Campaigns() {
                 value={newCampaign.subject}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, subject: e.target.value }))}
                 placeholder="e.g. Exclusive deal inside 🎉"
-                style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
               />
             </div>
             <div>
@@ -334,7 +334,7 @@ export default function Campaigns() {
               <select
                 value={newCampaign.template}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, template: e.target.value }))}
-                style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', cursor: 'pointer', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', cursor: 'pointer', boxSizing: 'border-box' }}
               >
                 <option value=''>— Select template —</option>
                 {templates.map((t) => (
@@ -347,7 +347,7 @@ export default function Campaigns() {
               <select
                 value={newCampaign.sender_identity}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, sender_identity: e.target.value }))}
-                style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', cursor: 'pointer', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', cursor: 'pointer', boxSizing: 'border-box' }}
               >
                 <option value=''>— Default sender —</option>
                 {senders.map((s) => (
@@ -361,7 +361,7 @@ export default function Campaigns() {
                 type="datetime-local"
                 value={newCampaign.scheduled_at}
                 onChange={(e) => setNewCampaign((p) => ({ ...p, scheduled_at: e.target.value }))}
-                style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', colorScheme: 'dark' }}
+                style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', colorScheme: 'dark' }}
               />
             </div>
             <div style={{ gridColumn: '1 / -1' }}>
@@ -373,7 +373,7 @@ export default function Campaigns() {
                 onChange={(e) => setNewCampaign((p) => ({ ...p, recipients: e.target.value }))}
                 rows={3}
                 placeholder="user@example.com, another@example.com, ..."
-                style={{ width: '100%', padding: '8px 10px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
+                style={{ width: '100%', padding: '8px 10px', background: '#FFFFFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'var(--font-mono)', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
               />
               <div style={{ fontSize: 10, color: '#374151', marginTop: 4, fontFamily: 'var(--font-mono)' }}>
                 {newCampaign.recipients
@@ -399,7 +399,7 @@ export default function Campaigns() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          style={{ padding: '7px 12px', background: 'rgba(255,255,255,0.04)', border: BD, color: '#D1D5DB', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}
+          style={{ padding: '7px 12px', background: '#FFFFFF', border: BD, color: '#D1D5DB', fontSize: 12, fontFamily: 'var(--font-mono)', outline: 'none', cursor: 'pointer' }}
         >
           <option value=''>All Statuses</option>
           {Object.entries(STATUS_CONFIG).map(([k, v]) => (
@@ -432,7 +432,7 @@ export default function Campaigns() {
           No campaigns found. Create one with the button above.
         </div>
       ) : (
-        <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+        <div style={{ background: '#FFFFFF', border: BD }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
@@ -448,11 +448,11 @@ export default function Campaigns() {
                 return (
                   <tr key={c.id}
                     style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                     onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                   >
                     <td style={{ padding: '12px 14px', maxWidth: 200 }}>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#111827', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</div>
                       <div style={{ fontSize: 10, color: '#374151', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
                         {c.sent_at ? `Sent ${new Date(c.sent_at).toLocaleDateString()}` : c.scheduled_at ? `Sched. ${new Date(c.scheduled_at).toLocaleDateString()}` : 'Not scheduled'}
                       </div>
@@ -470,7 +470,7 @@ export default function Campaigns() {
                         {sc.label.toUpperCase()}
                       </span>
                     </td>
-                    <td style={{ padding: '12px 14px', fontSize: 12, color: '#D1D5DB', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
+                    <td style={{ padding: '12px 14px', fontSize: 12, color: '#374151', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
                       {c.recipient_count ?? '—'}
                     </td>
                     <td style={{ padding: '12px 14px', fontSize: 12, color: '#22C55E', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>

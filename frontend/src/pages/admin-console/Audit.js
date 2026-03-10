@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const LOGS = [
   { id: 'LOG-19041', ts: '2026-03-09 11:42:08', actor: 'ofidohub@gmail.com',  action: 'user.update',           target: 'zara.a@atonix.io',     result: 'Success' },
@@ -28,7 +28,7 @@ export default function Audit() {
   );
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -36,7 +36,7 @@ export default function Audit() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             AUD — Audit Logs & Compliance
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>Audit Trail</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>Audit Trail</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Immutable record of all administrative and platform actions. Every entry is append-only.
           </p>
@@ -62,22 +62,22 @@ export default function Audit() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
 
       {/* Filter + Table */}
-      <div style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+      <div style={{ background: '#FFFFFF', border: BD }}>
         <div style={{ padding: '14px 20px', borderBottom: BD, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#FFFFFF' }}>Audit Log</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>Audit Log</span>
           <div style={{ display: 'flex', gap: 10 }}>
             <input
               value={dateFilter}
               onChange={(e) => setDateFilter(e.target.value)}
               placeholder="Filter by date…"
               style={{
-                background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF',
+                background: '#FFFFFF', border: BD, color: '#111827',
                 fontSize: 12, padding: '6px 12px', outline: 'none', fontFamily: 'inherit', width: 160,
               }}
             />
@@ -86,7 +86,7 @@ export default function Audit() {
               onChange={(e) => setActionFilter(e.target.value)}
               placeholder="Filter by action…"
               style={{
-                background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF',
+                background: '#FFFFFF', border: BD, color: '#111827',
                 fontSize: 12, padding: '6px 12px', outline: 'none', fontFamily: 'inherit', width: 160,
               }}
             />
@@ -107,7 +107,7 @@ export default function Audit() {
               <tr
                 key={l.id}
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#F0F9FF')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
                 <td style={{ padding: '11px 20px', fontSize: 11, color: '#374151', fontFamily: 'var(--font-mono)' }}>{l.id}</td>

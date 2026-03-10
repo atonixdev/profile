@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const A = '#D4AF37';
-const BD = '1px solid rgba(212,175,55,0.12)';
-const CARD = { background: 'rgba(255,255,255,0.02)', border: BD, padding: '20px 24px' };
+const BD = '1px solid #E5E7EB';
+const CARD = { background: '#F9FAFB', border: BD, padding: '20px 24px' };
 
 const SETTINGS = [
   {
@@ -52,7 +52,7 @@ export default function Settings() {
   const flip = (key) => setToggles((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (
-    <div style={{ padding: '32px 36px', color: '#F9FAFB', minHeight: '100%' }}>
+    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -60,7 +60,7 @@ export default function Settings() {
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>
             SYS — System Settings
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#FFFFFF' }}>System Configuration</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>System Configuration</h1>
           <p style={{ fontSize: 13, color: '#6B7280', margin: '6px 0 0' }}>
             Low-level platform controls: caching, storage, jobs, maintenance, and debug flags.
           </p>
@@ -90,7 +90,7 @@ export default function Settings() {
         ].map((s) => (
           <div key={s.label} style={CARD}>
             <div style={{ fontSize: 11, color: '#6B7280', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: '#FFFFFF' }}>{s.value}</div>
+            <div style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -98,7 +98,7 @@ export default function Settings() {
       {/* Setting sections */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {SETTINGS.map((sec) => (
-          <div key={sec.section} style={{ background: 'rgba(255,255,255,0.015)', border: BD }}>
+          <div key={sec.section} style={{ background: '#FFFFFF', border: BD }}>
             <div style={{ padding: '12px 20px', borderBottom: BD }}>
               <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: A, fontFamily: 'var(--font-mono)' }}>
                 {sec.section}
@@ -137,7 +137,7 @@ export default function Settings() {
                     <input
                       defaultValue={item.value}
                       style={{
-                        background: 'rgba(255,255,255,0.04)', border: BD, color: '#FFFFFF',
+                        background: '#FFFFFF', border: BD, color: '#111827',
                         fontSize: 12, padding: '5px 10px', outline: 'none',
                         fontFamily: 'var(--font-mono)', width: 160, textAlign: 'right',
                       }}
