@@ -55,8 +55,11 @@ const Header = () => {
             to="/"
             style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', flexShrink: 0 }}
           >
-            <AtonixDevLogoIcon size={30} variant="dark" showBg={false} />
-            <span style={{ fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, fontSize: 17, color: '#FFFFFF', letterSpacing: 0, lineHeight: 1, userSelect: 'none' }}>AtonixDev</span>
+            <AtonixDevLogoIcon size={42} variant="dark" showBg={false} />
+            <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 1, userSelect: 'none', lineHeight: 1 }}>
+              <span style={{ fontFamily: "'Space Grotesk', 'Inter', system-ui, sans-serif", fontWeight: 700, fontSize: 20, color: '#FFFFFF', letterSpacing: '-0.02em' }}>Atonix</span>
+              <span style={{ fontFamily: "'Space Grotesk', 'Inter', system-ui, sans-serif", fontWeight: 700, fontSize: 20, color: '#A81D37', letterSpacing: '-0.02em' }}>Dev</span>
+            </span>
           </Link>
 
           {/* Desktop auth */}
