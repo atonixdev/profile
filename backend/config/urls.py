@@ -44,6 +44,7 @@ urlpatterns = [
     path('api/v1/settings/', include('developer_settings.urls')),
     path('api/v1/flow/', include('model_flow.urls')),
     path('api/admin/', include('emails.urls')),
+    path('api/support/', include('support.urls')),
 ]
 
 # Serve media files in development

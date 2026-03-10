@@ -51,6 +51,12 @@ import DevOpsSecurity from './pages/DevOpsSecurity';
 import CaseStudies from './pages/CaseStudies';
 import SettingsLayout from './components/Layout/SettingsLayout';
 import OpsLayout from './components/Layout/OpsLayout';
+import SupportConsoleLayout from './components/Layout/SupportConsoleLayout';
+import SupportInbox from './pages/support-console/Inbox';
+import SupportEscalated from './pages/support-console/Escalated';
+import SupportPending from './pages/support-console/Pending';
+import SupportResolved from './pages/support-console/Resolved';
+import SupportOverview from './pages/support-console/Overview';
 import OpsOverview from './pages/ops/OpsOverview';
 import OpsServices from './pages/ops/OpsServices';
 import OpsLogs from './pages/ops/OpsLogs';
@@ -74,6 +80,8 @@ import AdminSettings from './pages/admin-console/Settings';
 import AdminActivity from './pages/admin-console/Activity';
 import AdminFeatures from './pages/admin-console/Features';
 import AdminCampaigns from './pages/admin-console/Campaigns';
+import AdminSupport from './pages/admin-console/Support';
+import Support from './pages/Support';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
 import SettingsGPGKeys from './pages/settings/GPGKeys';
@@ -117,6 +125,7 @@ function App() {
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="support" element={<Support />} />
             <Route path="help" element={<FAQ />} />
             <Route path="faq" element={<FAQ />} />
 
@@ -240,6 +249,18 @@ function App() {
               <Route path="activity" element={<AdminActivity />} />
               <Route path="features"   element={<AdminFeatures />} />
               <Route path="campaigns"  element={<AdminCampaigns />} />
+              <Route path="support"    element={<AdminSupport />} />
+            </Route>
+          </Route>
+
+          {/* Support Console — Staff Only */}
+          <Route element={<StaffRoute />}>
+            <Route path="/support-console" element={<SupportConsoleLayout />}>
+              <Route index element={<SupportInbox />} />
+              <Route path="escalated" element={<SupportEscalated />} />
+              <Route path="pending"   element={<SupportPending />} />
+              <Route path="resolved"  element={<SupportResolved />} />
+              <Route path="overview"  element={<SupportOverview />} />
             </Route>
           </Route>
 

@@ -65,6 +65,9 @@ TEMPLATE_REGISTRY: dict[str, tuple[str, str, str]] = {
     # System / admin
     'admin_action': ('emails/security_alert.html', 'Admin action on your account — AtonixDev', 'security@atonixdev.com'),
     'compliance':   ('emails/security_alert.html', 'Important compliance notice — AtonixDev',  'noreply@atonixdev.org'),
+    # Support
+    'support_confirmation': ('emails/support_confirmation.html', 'Your support request has been received — AtonixDev', 'noreply@atonixdev.org'),
+    'support_reply':        ('emails/support_reply.html',        'Update on your support request — AtonixDev',         'noreply@atonixdev.org'),
 }
 
 

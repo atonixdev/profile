@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { path: '/admin-console/activity',  exact: false, label: 'Admin Activity',        code: 'ACT' },
   { path: '/admin-console/features',   exact: false, label: 'Feature Flags',         code: 'FLG' },
   { path: '/admin-console/campaigns',  exact: false, label: 'Campaigns',              code: 'CMP' },
+  { path: '/admin-console/support',    exact: false, label: 'Support Inbox',           code: 'SUP' },
 ];
 
 const ACCENT = '#D4AF37';

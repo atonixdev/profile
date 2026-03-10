@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'developer_settings',
     'model_flow',
     'emails',
+    'support',
 ]
 
 MIDDLEWARE = [
@@ -258,12 +259,16 @@ REST_FRAMEWORK = {
         # Auth endpoints
         'login': config('DRF_THROTTLE_LOGIN', default='10/min'),
         'register': config('DRF_THROTTLE_REGISTER', default='5/min'),
+        'support_create': config('DRF_THROTTLE_SUPPORT_CREATE', default='10/hour'),
     },
 }
 
 # Third-party integrations
 # OpenWeather API key (keep in environment; do not hardcode)
 OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY', default='').strip()
+
+# Support system
+SUPPORT_ATTACHMENT_MAX_MB = config('SUPPORT_ATTACHMENT_MAX_MB', default=10, cast=int)
 
 # JWT Settings
 SIMPLE_JWT = {
