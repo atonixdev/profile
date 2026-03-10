@@ -118,6 +118,47 @@ const DashboardLayout = () => {
           })}
         </nav>
 
+        {/* Ops Control — staff only */}
+        {user?.is_staff && (
+          <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <Link
+              to="/ops"
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '9px 12px',
+                background: 'rgba(168,29,55,0.15)',
+                border: '1px solid rgba(168,29,55,0.35)',
+                textDecoration: 'none',
+                transition: 'background 0.15s, border-color 0.15s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(168,29,55,0.28)';
+                e.currentTarget.style.borderColor = 'rgba(168,29,55,0.7)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(168,29,55,0.15)';
+                e.currentTarget.style.borderColor = 'rgba(168,29,55,0.35)';
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: 9, fontWeight: 700, letterSpacing: '0.12em',
+                    textTransform: 'uppercase', color: '#A81D37',
+                    fontFamily: 'var(--font-mono)', marginBottom: 2,
+                  }}
+                >
+                  Staff Access
+                </div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#FFFFFF' }}>
+                  Operational Control
+                </div>
+              </div>
+              <span style={{ fontSize: 12, color: '#A81D37' }}>→</span>
+            </Link>
+          </div>
+        )}
+
         {/* User section */}
         <div
           style={{
@@ -203,18 +244,44 @@ const DashboardLayout = () => {
               </span>
             </div>
           </div>
-          <Link
-            to="/"
-            style={{
-              fontSize: 11, color: '#6B7280', textDecoration: 'none',
-              fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-              transition: 'color 0.15s',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
-          >
-            ← Back to Site
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            {user?.is_staff && (
+              <Link
+                to="/ops"
+                style={{
+                  fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
+                  textTransform: 'uppercase', color: '#A81D37',
+                  textDecoration: 'none', fontFamily: 'var(--font-mono)',
+                  padding: '4px 10px',
+                  border: '1px solid rgba(168,29,55,0.4)',
+                  background: 'rgba(168,29,55,0.1)',
+                  transition: 'background 0.15s, border-color 0.15s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(168,29,55,0.25)';
+                  e.currentTarget.style.borderColor = '#A81D37';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(168,29,55,0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(168,29,55,0.4)';
+                }}
+              >
+                OPS CONTROL
+              </Link>
+            )}
+            <Link
+              to="/"
+              style={{
+                fontSize: 11, color: '#6B7280', textDecoration: 'none',
+                fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+                transition: 'color 0.15s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+            >
+              ← Back to Site
+            </Link>
+          </div>
         </div>
 
         {/* Page content */}
