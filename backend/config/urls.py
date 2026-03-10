@@ -36,9 +36,9 @@ urlpatterns = [
     path('api/blog/', include('blog.urls')),
     path('api/community/', include('community.urls')),
     path('api/', include('activity.urls')),
-    path('api/chatbot/', include('chatbot_service.urls')),
+    # path('api/chatbot/', include('chatbot_service.urls')),  # module removed
     path('api/research-lab/', include('research_lab.urls')),
-    path('api/ai-lab/', include('ai_lab.urls')),
+    # path('api/ai-lab/', include('ai_lab.urls')),  # module removed
     path('api/iot-lab/', include('iot_lab.urls')),
     path('api/self-lab/', include('self_lab.urls')),
     path('api/v1/settings/', include('developer_settings.urls')),
