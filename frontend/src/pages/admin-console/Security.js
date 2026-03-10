@@ -41,7 +41,7 @@ export default function Security() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Events (24h)',    value: '142',  color: '#111827' },
           { label: 'Failed Logins',   value: '18',   color: '#F59E0B' },
@@ -56,7 +56,7 @@ export default function Security() {
       </div>
 
       {/* Policies row */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Password Policy',   status: 'Active', detail: 'Min 12 chars, mixed case, special' },
           { label: 'MFA Enforcement',   status: 'Optional', detail: 'Enabled for: Admin, Staff roles' },

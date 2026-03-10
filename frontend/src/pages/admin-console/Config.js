@@ -90,7 +90,7 @@ export default function Config() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Config Keys',      value: '36'  },
           { label: 'Active Integrations', value: '4' },
@@ -105,7 +105,7 @@ export default function Config() {
       </div>
 
       {/* Section tabs + form */}
-      <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 16 }}>
+      <div className="console-sidebar-grid" style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 16 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {SECTIONS.map((s) => (
             <button

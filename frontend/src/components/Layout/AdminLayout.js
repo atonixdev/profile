@@ -257,7 +257,7 @@ const AdminLayout = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 10, fontFamily: 'var(--font-mono)' }}>
               <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: 'rgba(255,255,255,0.7)' }} />
               <span style={{ color: 'rgba(255,255,255,0.65)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
@@ -288,7 +288,7 @@ const AdminLayout = () => {
         </div>
 
         {/* Page content */}
-        <div style={{ flex: 1, overflowY: 'auto', background: '#FFFFFF' }}>
+        <div className="console-content" style={{ flex: 1, overflowY: 'auto', background: '#FFFFFF' }}>
           <Outlet />
         </div>
       </div>

@@ -61,7 +61,7 @@ export default function Users() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Total Users',     value: '847',  delta: '+12 this month' },
           { label: 'Active',          value: '791',  delta: '93.4% of total' },

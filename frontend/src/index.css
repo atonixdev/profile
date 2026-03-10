@@ -440,3 +440,65 @@ code, pre, kbd, samp {
   }
   .app-sidebar-overlay { display: none !important; }
 }
+
+/* ── Console layouts (Admin & OPS) — Responsive ──────────── */
+
+/* Tables: always allow horizontal scroll inside console pages */
+.console-content div:has(> table) {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.console-content table {
+  min-width: 520px;
+}
+
+/* OPS content area — base padding (overridden by @media below) */
+.ops-content {
+  padding: 32px 32px 48px;
+}
+
+@media (max-width: 767px) {
+  /* Stat grids (4-col & 3-col) → 2-col on phones */
+  .console-stat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Sidebar/detail split grids → stack on phones */
+  .console-sidebar-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* OPS page content padding */
+  .ops-content {
+    padding: 20px 16px 32px;
+  }
+
+  /* Prevent admin page headers from overflowing */
+  .console-content > div {
+    min-width: 0;
+  }
+
+  /* Modal panels: full-width on small screens */
+  .console-modal {
+    width: 96vw !important;
+    max-width: 96vw !important;
+  }
+}
+
+@media (max-width: 479px) {
+  .ops-content {
+    padding: 16px 12px 24px;
+  }
+  /* Allow space-between flex rows to wrap on very small phones */
+  .console-content [style*="space-between"] {
+    flex-wrap: wrap !important;
+  }
+  /* Constrain fixed-width search inputs on very small screens */
+  .console-content input {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* ── md:hidden / hidden utility (mirrors Tailwind for non-Tailwind usage) ─ */
+/* Note: Tailwind handles .hidden and .md:flex already via @tailwind utilities */

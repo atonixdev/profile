@@ -190,7 +190,7 @@ const OpsLayout = () => {
           </div>
 
           {/* Right controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 16 }}>
             <div
               style={{
                 display: 'flex', alignItems: 'center', gap: 6,
@@ -227,7 +227,7 @@ const OpsLayout = () => {
         </div>
 
         {/* Content area */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '32px 32px 48px' }}>
+        <div className="ops-content" style={{ flex: 1, overflowY: 'auto' }}>
           <Outlet />
         </div>
       </div>

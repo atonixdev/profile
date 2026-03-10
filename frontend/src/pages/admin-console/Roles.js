@@ -76,7 +76,7 @@ export default function Roles() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Total Roles',       value: '5'  },
           { label: 'Active Assignments', value: '847' },
@@ -91,7 +91,7 @@ export default function Roles() {
       </div>
 
       {/* Role grid + detail */}
-      <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 16 }}>
+      <div className="console-sidebar-grid" style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 16 }}>
         {/* Role list */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {ROLES.map((role) => (
