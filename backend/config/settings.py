@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'developer_settings',
     'emails',
     'support',
+    'billing',
 ]
 
 MIDDLEWARE = [
@@ -254,6 +255,13 @@ REST_FRAMEWORK = {
         'login': config('DRF_THROTTLE_LOGIN', default='10/min'),
         'register': config('DRF_THROTTLE_REGISTER', default='5/min'),
         'support_create': config('DRF_THROTTLE_SUPPORT_CREATE', default='10/hour'),
+
+        # Billing — ingest is high-throughput but admin-only; generous ceiling
+        # so automated SDKs (§3.2) are not blocked in normal operation.
+        # Override in production via env: BILLING_THROTTLE_INGEST=6000/min
+        'billing_ingest':  config('BILLING_THROTTLE_INGEST',  default='2000/min'),
+        # Read endpoints (dashboard polling, etc.)
+        'billing_read':    config('BILLING_THROTTLE_READ',    default='300/min'),
     },
 }
 

@@ -81,6 +81,16 @@ import AdminActivity from './pages/admin-console/Activity';
 import AdminFeatures from './pages/admin-console/Features';
 import AdminCampaigns from './pages/admin-console/Campaigns';
 import AdminSupport from './pages/admin-console/Support';
+import BillingConsoleLayout from './components/Layout/BillingConsoleLayout';
+import BillingOverview from './pages/billing-console/Overview';
+import BillingOrgs from './pages/billing-console/Organizations';
+import BillingServices from './pages/billing-console/Services';
+import BillingEvents from './pages/billing-console/EventStream';
+import BillingInvoices from './pages/billing-console/Invoices';
+import BillingCredits from './pages/billing-console/Credits';
+import BillingLedger from './pages/billing-console/Ledger';
+import BillingCompliance from './pages/billing-console/Compliance';
+import BillingUserAnalytics from './pages/billing-console/UserAnalytics';
 import EmailConsoleLayout from './components/Layout/EmailConsoleLayout';
 import EmailOverview from './pages/email-console/Overview';
 import EmailDomains from './pages/email-console/Domains';
@@ -286,6 +296,20 @@ function App() {
               <Route path="pending"   element={<SupportPending />} />
               <Route path="resolved"  element={<SupportResolved />} />
               <Route path="overview"  element={<SupportOverview />} />
+            </Route>
+          </Route>
+
+          <Route element={<StaffRoute />}>
+            <Route path="/billing-console" element={<BillingConsoleLayout />}>
+              <Route index element={<BillingOverview />} />
+              <Route path="organizations" element={<BillingOrgs />} />
+              <Route path="services"       element={<BillingServices />} />
+              <Route path="events"         element={<BillingEvents />} />
+              <Route path="invoices"       element={<BillingInvoices />} />
+              <Route path="credits"        element={<BillingCredits />} />
+              <Route path="ledger"         element={<BillingLedger />} />
+              <Route path="compliance"     element={<BillingCompliance />} />
+              <Route path="users"          element={<BillingUserAnalytics />} />
             </Route>
           </Route>
 

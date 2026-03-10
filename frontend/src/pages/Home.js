@@ -37,13 +37,6 @@ const Home = () => {
     { name: 'Technology', desc: 'SaaS platforms, developer tools, cloud services, and technology infrastructure.' },
   ];
 
-  const stats = [
-    { value: '8+',   label: 'Years Delivering' },
-    { value: '50+',  label: 'Enterprise Projects' },
-    { value: '100%', label: 'Client Retention' },
-    { value: '24/7', label: 'Production Support' },
-  ];
-
   return (
     <div style={{ background: '#FFFFFF' }}>
 
@@ -68,7 +61,7 @@ const Home = () => {
           `,
           backgroundSize: '60px 60px',
         }} />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, padding: '72px 24px 48px', textAlign: 'center' }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, padding: '72px 24px 32px', textAlign: 'center' }}>
 
           <h1 style={{ fontSize: 'clamp(24px, 3.5vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 24, textAlign: 'center' }}>
             <span style={{ display: 'block', color: '#111827' }}>Engineering the Future of Cloud,</span>
@@ -108,27 +101,11 @@ const Home = () => {
               Explore Solutions
             </Link>
           </div>
-
-          {/* Stats */}
-          <div
-            className="grid grid-cols-2 md:grid-cols-4"
-            style={{
-              borderTop: '1px solid #E5E7EB', borderLeft: '1px solid #E5E7EB',
-              maxWidth: 720, margin: '0 auto',
-            }}
-          >
-            {stats.map((s) => (
-              <div key={s.label} style={{ padding: '22px 16px', borderRight: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB', textAlign: 'center' }}>
-                <div style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 900, color: '#111827', letterSpacing: '-0.02em', marginBottom: 4 }}>{s.value}</div>
-                <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)' }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* ── Core Capabilities ──────────────────────────────── */}
-      <section className="gsw-section" style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB' }}>
+      <section className="gsw-section" style={{ background: '#F8F9FA', borderTop: '1px solid #E5E7EB', paddingTop: 64, paddingBottom: 120 }}>
         <div className="gsw-container">
           <div style={{ marginBottom: 56, textAlign: 'center' }}>
             <span className="gsw-eyebrow">Core Capabilities</span>
