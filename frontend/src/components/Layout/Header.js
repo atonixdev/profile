@@ -1,19 +1,348 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AtonixDevLogo from '../AtonixDevLogo';
 import AtonixDevLogoIcon from '../AtonixDevLogoIcon';
 import SOCIALS from '../../constants/socials';
 
+// ─────────────────────────────────────────────────────
+// Mega-dropdown content — §5 of spec
+// ─────────────────────────────────────────────────────
+const MEGA_MENUS = {
+  Software: [
+    {
+      title: 'Developer Tools',
+      items: ['Code Editor', 'API Gateway', 'SDKs', 'CLI Tools', 'Developer Portal', 'Secrets Manager'],
+    },
+    {
+      title: 'Application Services',
+      items: ['App Hosting', 'Serverless Functions', 'Containers Runtime', 'Microservices Engine', 'Job Scheduler'],
+    },
+    {
+      title: 'DevOps & Automation',
+      items: ['CI/CD Pipelines', 'GitOps Engine', 'Artifact Registry', 'IaC Management', 'Deployment Orchestration'],
+    },
+    {
+      title: 'AI & Intelligence',
+      items: ['AI Code Assistant', 'AI Automation', 'AI Deployment Insights', 'AI Test Automation'],
+    },
+  ],
+  Infrastructure: [
+    {
+      title: 'Compute',
+      items: ['VMs', 'Kubernetes', 'GPU Compute', 'Autoscaling', 'Serverless Compute'],
+    },
+    {
+      title: 'Storage',
+      items: ['Object Storage', 'Block Storage', 'File Storage', 'Backup & Restore'],
+    },
+    {
+      title: 'Databases',
+      items: ['SQL', 'NoSQL', 'Redis', 'Data Warehouse', 'Search Engine'],
+    },
+    {
+      title: 'Networking',
+      items: ['VPC', 'Subnets', 'Load Balancers', 'DNS', 'VPN', 'Firewall Rules'],
+    },
+  ],
+  Solutions: [
+    {
+      title: 'By Use Case',
+      items: ['DevOps Modernization', 'Cloud Migration', 'AI Transformation'],
+    },
+    {
+      title: 'By Team',
+      items: ['Developers', 'DevOps', 'IT Ops', 'Security Teams'],
+    },
+    {
+      title: 'By Industry Need',
+      items: ['High Availability', 'Cost Optimization', 'Compliance Automation'],
+    },
+    {
+      title: 'Featured Solutions',
+      items: ['Digital Infrastructure', 'Intelligent Automation'],
+    },
+  ],
+  Industries: [
+    {
+      title: 'Government',
+      items: ['Secure Cloud', 'Digital Identity'],
+    },
+    {
+      title: 'Finance',
+      items: ['Banking Cloud', 'Compliance Automation'],
+    },
+    {
+      title: 'Healthcare',
+      items: ['Secure Data Exchange', 'Medical Cloud'],
+    },
+    {
+      title: 'Telecom',
+      items: ['Network Automation', 'Edge Computing'],
+    },
+  ],
+  Networking: [
+    {
+      title: 'Core Networking',
+      items: ['VPC', 'Routing', 'Load Balancing'],
+    },
+    {
+      title: 'Security Networking',
+      items: ['WAF', 'API Protection', 'DDoS Protection'],
+    },
+    {
+      title: 'Connectivity',
+      items: ['VPN', 'Direct Connect', 'Edge Locations'],
+    },
+    {
+      title: 'Tools',
+      items: ['Network Monitoring', 'Traffic Analytics'],
+    },
+  ],
+  Security: [
+    {
+      title: 'Application Security',
+      items: ['App Scanning', 'API Security', 'Code Security'],
+    },
+    {
+      title: 'Cloud Security',
+      items: ['IAM', 'Secrets Management', 'Zero Trust'],
+    },
+    {
+      title: 'Monitoring',
+      items: ['SIEM', 'Threat Detection', 'Incident Response'],
+    },
+    {
+      title: 'Compliance',
+      items: ['Compliance Engine', 'Audit Automation'],
+    },
+  ],
+  Community: [
+    {
+      title: 'Developer Resources',
+      items: ['Docs', 'API Reference', 'Tutorials', 'Training'],
+    },
+    {
+      title: 'Community',
+      items: ['Forums', 'Events', 'Meetups'],
+    },
+    {
+      title: 'Open Source',
+      items: ['GitHub Repos', 'Contributions'],
+    },
+    {
+      title: 'Programs',
+      items: ['Ambassador Program', 'Beta Access'],
+    },
+  ],
+};
+
+// Slugify a product name for URL
+const toSlug = (str) => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+// ─────────────────────────────────────────────────────
+// MegaDropdown — one panel for a nav item
+// ─────────────────────────────────────────────────────
+const MegaDropdown = ({ columns, isOpen, onClose, onMouseEnter, onMouseLeave }) => {
+  if (!isOpen) return null;
+  return (
+    <div
+      role="menu"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      style={{
+        position: 'fixed',
+        top: 104,
+        left: 0,
+        right: 0,
+        background: '#FFFFFF',
+        borderTop: '2px solid #A81D37',
+        borderBottom: '1px solid #E5E7EB',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+        zIndex: 200,
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1440,
+          margin: '0 auto',
+          padding: '32px 40px',
+          display: 'grid',
+          gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
+          gap: 16,
+        }}
+      >
+        {columns.map((col) => (
+          <div key={col.title}>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                color: '#111827',
+                letterSpacing: '0.07em',
+                textTransform: 'uppercase',
+                marginBottom: 12,
+                paddingBottom: 8,
+                borderBottom: '1px solid #F3F4F6',
+              }}
+            >
+              {col.title}
+            </div>
+            <ul role="none" style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {col.items.map((item) => (
+                <li key={item} role="none">
+                  <Link
+                    role="menuitem"
+                    to={`/platform/${toSlug(item)}`}
+                    onClick={onClose}
+                    style={{
+                      display: 'block',
+                      padding: '6px 0',
+                      fontSize: 14,
+                      color: '#374151',
+                      textDecoration: 'none',
+                      fontWeight: 400,
+                      lineHeight: 1.4,
+                      transition: 'color 0.12s',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+                    onFocus={(e) => { e.currentTarget.style.color = '#A81D37'; }}
+                    onBlur={(e) => { e.currentTarget.style.color = '#374151'; }}
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────
+// SearchBar — expands on focus
+// ─────────────────────────────────────────────────────
+const SearchBar = () => {
+  const [focused, setFocused] = useState(false);
+  const inputRef = useRef(null);
+
+  // Global "/" shortcut
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === '/' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, []);
+
+  return (
+    <div
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        transition: 'width 0.2s ease',
+        width: focused ? 280 : 200,
+      }}
+    >
+      <span
+        style={{
+          position: 'absolute',
+          left: 10,
+          color: '#9CA3AF',
+          fontSize: 13,
+          pointerEvents: 'none',
+          lineHeight: 1,
+        }}
+        aria-hidden="true"
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <circle cx="6.5" cy="6.5" r="5" />
+          <path d="M10.5 10.5L14 14" strokeLinecap="round" />
+        </svg>
+      </span>
+      <input
+        ref={inputRef}
+        type="search"
+        aria-label="Search"
+        placeholder="Search…"
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        style={{
+          width: '100%',
+          height: 28,
+          paddingLeft: 30,
+          paddingRight: focused ? 10 : 32,
+          background: '#F3F4F6',
+          border: `1px solid ${focused ? '#A81D37' : '#E5E7EB'}`,
+          borderRadius: 4,
+          fontSize: 12,
+          color: '#111827',
+          outline: 'none',
+          fontFamily: 'inherit',
+          transition: 'border-color 0.15s, background 0.15s',
+        }}
+      />
+      {!focused && (
+        <span
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: 8,
+            fontSize: 10,
+            fontWeight: 600,
+            color: '#9CA3AF',
+            background: '#E5E7EB',
+            padding: '1px 5px',
+            borderRadius: 3,
+            letterSpacing: '0.04em',
+            pointerEvents: 'none',
+          }}
+        >
+          /
+        </span>
+      )}
+    </div>
+  );
+};
+
 // GS-WSF §3 — Global Header — two-tier: brand/auth bar + nav bar
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState(null);
+  const closeTimerRef = useRef(null);
+  const [portalUsername, setPortalUsername] = useState('');
+  const [portalPassword, setPortalPassword] = useState('');
+  const [portalError, setPortalError] = useState('');
+  const [portalLoading, setPortalLoading] = useState(false);
   const portalRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user, logout, login } = useAuth();
+
+  const handlePortalLogin = async (e) => {
+    e.preventDefault();
+    setPortalError('');
+    setPortalLoading(true);
+    const result = await login(portalUsername, portalPassword);
+    setPortalLoading(false);
+    if (result.success) {
+      setIsPortalOpen(false);
+      setPortalUsername('');
+      setPortalPassword('');
+    } else {
+      setPortalError(result.error || 'Login failed');
+    }
+  };
 
   useEffect(() => {
     if (!isPortalOpen) return;
@@ -38,6 +367,43 @@ const Header = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const handleNavHover = (name) => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setOpenDropdown(name);
+  };
+
+  const handleNavLeave = () => {
+    closeTimerRef.current = setTimeout(() => setOpenDropdown(null), 150);
+  };
+
+  const cancelDropdownClose = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+  };
+
+  const handleNavClick = (name) => {
+    setOpenDropdown(openDropdown === name ? null : name);
+  };
+
+  const handleNavKeyDown = (e, name, index) => {
+    if (e.key === 'ArrowDown') {
+      setOpenDropdown(name);
+    } else if (e.key === 'Escape') {
+      setOpenDropdown(null);
+    } else if (e.key === 'ArrowRight') {
+      e.currentTarget.parentElement.nextElementSibling?.querySelector('a')?.focus();
+    } else if (e.key === 'ArrowLeft') {
+      e.currentTarget.parentElement.previousElementSibling?.querySelector('a')?.focus();
+    }
+  };
+
+  const closeDropdown = () => {
+    setOpenDropdown(null);
+  };
+
+  const handleMobileNavClick = (name) => {
+    setMobileOpenDropdown(mobileOpenDropdown === name ? null : name);
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -48,12 +414,12 @@ const Header = () => {
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 100, width: '100%' }}>
 
-      {/* ══ TOP BAR — Logo + Auth ══════════════════════════════ */}
+      {/* ══ TOP UTILITY HEADER (Tier 1) ═══════════════════════ */}
       <div
         style={{
-          height: 52,
-          background: '#000000',
-          borderBottom: '1px solid rgba(255,255,255,0.12)',
+          height: 40,
+          background: '#FFFFFF',
+          borderBottom: '1px solid #E5E7EB',
         }}
       >
         <div
@@ -63,143 +429,127 @@ const Header = () => {
             justifyContent: 'space-between',
           }}
         >
-          {/* Logo + wordmark */}
-          <Link
-            to="/"
-            style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', flexShrink: 0 }}
-          >
-            <AtonixDevLogoIcon size={42} variant="dark" showBg={false} />
-            <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 1, userSelect: 'none', lineHeight: 1 }}>
-              <span style={{ fontFamily: "'IBM Plex Sans', 'Inter', system-ui, sans-serif", fontWeight: 700, fontSize: 20, color: '#FFFFFF', letterSpacing: '-0.02em' }}>Atonix</span>
-              <span style={{ fontFamily: "'IBM Plex Sans', 'Inter', system-ui, sans-serif", fontWeight: 700, fontSize: 20, color: '#A81D37', letterSpacing: '-0.02em' }}>Dev</span>
-            </span>
-          </Link>
+          {/* Left: Region + Language */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <select
+              aria-label="Region"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontSize: 12,
+                color: '#374151',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+              }}
+            >
+              <option>Global</option>
+              <option>US East</option>
+              <option>EU West</option>
+              <option>Asia Pacific</option>
+            </select>
+            <span style={{ color: '#D1D5DB', fontSize: 12 }}>•</span>
+            <select
+              aria-label="Language"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontSize: 12,
+                color: '#374151',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+              }}
+            >
+              <option>English</option>
+              <option>Español</option>
+              <option>Français</option>
+              <option>Deutsch</option>
+            </select>
+          </div>
 
-          {/* Desktop auth */}
-          <div className="hidden md:flex items-center" style={{ gap: 12 }}>
+          {/* Center: Global Search */}
+          <div style={{ flex: 1, maxWidth: 320, margin: '0 40px' }}>
+            <SearchBar />
+          </div>
+
+          {/* Right: Links */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+            <Link
+              to="/pricing"
+              style={{
+                fontSize: 12,
+                color: '#374151',
+                textDecoration: 'none',
+                fontWeight: 500,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+            >
+              Pricing
+            </Link>
+            <Link
+              to="/docs"
+              style={{
+                fontSize: 12,
+                color: '#374151',
+                textDecoration: 'none',
+                fontWeight: 500,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+            >
+              Documentation
+            </Link>
+            <Link
+              to="/support"
+              style={{
+                fontSize: 12,
+                color: '#374151',
+                textDecoration: 'none',
+                fontWeight: 500,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#374151'; }}
+            >
+              Support
+            </Link>
             {user ? (
-              <div style={{ position: 'relative' }}>
-                <button
-                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.25)',
-                    color: '#FFFFFF', padding: '4px',
-                    fontFamily: 'inherit', fontWeight: 700,
-                    fontSize: 11, letterSpacing: '0.08em',
-                    cursor: 'pointer',
-                    borderRadius: '50%',
-                    width: 36, height: 36,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    overflow: 'hidden', flexShrink: 0,
-                  }}
-                  title={user.user?.first_name || user.username || 'Account'}
-                  aria-label="User menu"
-                >
-                  {user.oauth_avatar ? (
-                    <img
-                      src={user.oauth_avatar}
-                      alt=""
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
-                    />
-                  ) : (
-                    <span style={{ fontSize: 14, fontWeight: 700, lineHeight: 1, userSelect: 'none' }}>
-                      {(user.user?.first_name || user.username || 'A')[0].toUpperCase()}
-                    </span>
-                  )}
-                </button>
-                {isUserMenuOpen && (
-                  <div
-                    style={{
-                      position: 'absolute', right: 0, top: 'calc(100% + 4px)',
-                      background: '#2C2C2C', border: '1px solid rgba(255,255,255,0.1)',
-                      minWidth: 220, zIndex: 300,
-                    }}
-                  >
-                    <div
-                      style={{
-                        padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)',
-                        fontSize: 12, color: '#4B5563',
-                      }}
-                    >
-                      {user.user?.email || user.email || ''}
-                    </div>
-                    <Link
-                      to="/dashboard"
-                      onClick={() => setIsUserMenuOpen(false)}
-                      style={{
-                        display: 'block', padding: '12px 16px',
-                        color: '#FFFFFF', textDecoration: 'none',
-                        fontSize: 12, fontWeight: 600,
-                        letterSpacing: '0.08em', textTransform: 'uppercase',
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
-                    >
-                      Dashboard
-                    </Link>
-                    <Link
-                      to="/settings"
-                      onClick={() => setIsUserMenuOpen(false)}
-                      style={{
-                        display: 'block', padding: '12px 16px',
-                        color: '#FFFFFF', textDecoration: 'none',
-                        fontSize: 12, fontWeight: 600,
-                        letterSpacing: '0.08em', textTransform: 'uppercase',
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
-                    >
-                      Settings
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      style={{
-                        display: 'block', width: '100%', textAlign: 'left',
-                        padding: '12px 16px', background: 'none', border: 'none',
-                        color: '#FFFFFF', fontFamily: 'inherit', fontWeight: 600,
-                        fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase',
-                        cursor: 'pointer',
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.background = 'none'; }}
-                    >
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
+              <Link
+                to="/dashboard"
+                style={{
+                  fontSize: 12,
+                  color: '#A81D37',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                }}
+              >
+                Dashboard
+              </Link>
             ) : (
               <div ref={portalRef} style={{ position: 'relative' }}>
                 <button
-                  onClick={() => setIsPortalOpen((v) => !v)}
+                  onClick={() => { setIsPortalOpen((v) => !v); setPortalError(''); }}
                   style={{
-                    display: 'inline-flex', alignItems: 'center',
-                    padding: '6px 18px', background: '#A81D37',
-                    color: '#FFFFFF', fontSize: 11, fontWeight: 700,
-                    letterSpacing: '0.08em', textTransform: 'uppercase',
-                    border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-                    transition: 'background 0.15s',
+                    fontSize: 12, color: '#A81D37', fontWeight: 600,
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    fontFamily: 'inherit', padding: 0,
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = '#7C1626'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = '#A81D37'; }}
                 >
                   Portal
                 </button>
-
                 {isPortalOpen && (
                   <div
                     style={{
-                      position: 'absolute', right: 0, top: 'calc(100% + 8px)',
+                      position: 'absolute', right: 0, top: 'calc(100% + 10px)',
                       background: '#FFFFFF', border: '1px solid #E5E7EB',
                       borderRadius: 14, padding: '24px 20px',
-                      boxShadow: '0 8px 32px rgba(0,0,0,0.16)', zIndex: 300,
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.16)', zIndex: 400,
                       width: 264,
                     }}
                   >
                     {/* Logo */}
                     <div style={{ textAlign: 'center', marginBottom: 20 }}>
-                      <AtonixDevLogo size={24} variant="dark" textColor="#111827" />
+                      <span style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 700, fontSize: 20, color: '#111827' }}>Atonix</span>
+                      <span style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 700, fontSize: 20, color: '#A81D37' }}>Dev</span>
                     </div>
 
                     {/* Action buttons */}
@@ -219,7 +569,7 @@ const Header = () => {
                         Console
                       </button>
                       <button
-                        onClick={() => { setIsPortalOpen(false); navigate('/login', { state: { mode: 'signup' } }); }}
+                        onClick={() => { setIsPortalOpen(false); navigate('/register'); }}
                         style={{
                           width: '100%', padding: '11px 0',
                           background: 'transparent', color: '#111827',
@@ -233,16 +583,16 @@ const Header = () => {
                         Sign Up
                       </button>
                       <button
-                        onClick={() => { setIsPortalOpen(false); navigate('/login', { state: { mode: 'contact' } }); }}
+                        onClick={() => { setIsPortalOpen(false); navigate('/contact'); }}
                         style={{
                           width: '100%', padding: '11px 0',
-                          background: 'transparent', color: '#4B5563',
-                          border: 'none', fontSize: 11, fontWeight: 600,
+                          background: 'transparent', color: '#111827',
+                          border: '1px solid #D1D5DB', fontSize: 11, fontWeight: 700,
                           cursor: 'pointer', fontFamily: 'inherit',
-                          letterSpacing: '0.06em',
+                          letterSpacing: '0.08em', textTransform: 'uppercase',
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = '#1F2937'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.color = '#4B5563'; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A81D37'; e.currentTarget.style.color = '#A81D37'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#D1D5DB'; e.currentTarget.style.color = '#111827'; }}
                       >
                         Contact
                       </button>
@@ -273,6 +623,77 @@ const Header = () => {
                 )}
               </div>
             )}
+
+          </div>
+        </div>
+      </div>
+
+      {/* ══ PRIMARY NAVIGATION HEADER (Tier 2) ═══════════════ */}
+      <div
+        style={{
+          height: 64,
+          background: '#FFFFFF',
+          borderBottom: '1px solid #E5E7EB',
+        }}
+      >
+        <nav
+          style={{
+            maxWidth: 1440, margin: '0 auto', padding: '0 24px',
+            height: '100%', display: 'flex', alignItems: 'center',
+            justifyContent: 'space-between', position: 'relative',
+          }}
+        >
+          {/* Logo */}
+          <Link
+            to="/"
+            style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', flexShrink: 0 }}
+          >
+            <AtonixDevLogoIcon size={42} variant="light" showBg={false} />
+            <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 1, userSelect: 'none', lineHeight: 1 }}>
+              <span style={{ fontFamily: "'IBM Plex Sans', 'Inter', system-ui, sans-serif", fontWeight: 700, fontSize: 20, color: '#111827', letterSpacing: '-0.02em' }}>Atonix</span>
+              <span style={{ fontFamily: "'IBM Plex Sans', 'Inter', system-ui, sans-serif", fontWeight: 700, fontSize: 20, color: '#A81D37', letterSpacing: '-0.02em' }}>Dev</span>
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center" style={{ gap: 0, position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+            {navigation.map((item, index) => (
+              <div
+                key={item.name}
+                onMouseEnter={() => handleNavHover(item.name)}
+                onMouseLeave={handleNavLeave}
+              >
+                <Link
+                  data-nav={item.name}
+                  to={item.path}
+                  onClick={() => handleNavClick(item.name)}
+                  onKeyDown={(e) => handleNavKeyDown(e, item.name, index)}
+                  style={{
+                    display: 'block',
+                    padding: '20px 16px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: isActive(item.path) || openDropdown === item.name ? '#A81D37' : '#111827',
+                    textDecoration: 'none',
+                    letterSpacing: '0.02em',
+                    transition: 'color 0.12s',
+                    cursor: 'pointer',
+                  }}
+                  aria-haspopup="true"
+                  aria-expanded={openDropdown === item.name}
+                >
+                  {item.name}
+                </Link>
+                {/* Mega Dropdown */}
+                <MegaDropdown
+                  columns={MEGA_MENUS[item.name] || []}
+                  isOpen={openDropdown === item.name}
+                  onClose={closeDropdown}
+                  onMouseEnter={cancelDropdownClose}
+                  onMouseLeave={handleNavLeave}
+                />
+              </div>
+            ))}
           </div>
 
           {/* Mobile hamburger */}
@@ -285,111 +706,137 @@ const Header = () => {
             }}
             aria-label="Toggle navigation"
           >
-            <span style={{ display: 'block', width: 22, height: 2, background: '#FFFFFF', transition: 'opacity 0.15s' }} />
-            <span style={{ display: 'block', width: 22, height: 2, background: '#FFFFFF', opacity: isMenuOpen ? 0 : 1, transition: 'opacity 0.15s' }} />
-            <span style={{ display: 'block', width: 22, height: 2, background: '#FFFFFF', transition: 'opacity 0.15s' }} />
+            <span style={{ display: 'block', width: 22, height: 2, background: '#111827', transition: 'opacity 0.15s' }} />
+            <span style={{ display: 'block', width: 22, height: 2, background: '#111827', opacity: isMenuOpen ? 0 : 1, transition: 'opacity 0.15s' }} />
+            <span style={{ display: 'block', width: 22, height: 2, background: '#111827', transition: 'opacity 0.15s' }} />
           </button>
-        </div>
-      </div>
-
-      {/* ══ NAV BAR — Page links ═══════════════════════════════ */}
-      <div
-        style={{
-          height: 48,
-          background: '#FFFFFF',
-        }}
-      >
-        <nav
-          style={{
-            maxWidth: 1440, margin: '0 auto', padding: '0 24px',
-            height: '100%', display: 'flex', alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center" style={{ gap: 28 }}>
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`nav-link${isActive(item.path) ? ' nav-active' : ''}`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
         </nav>
       </div>
 
-      {/* ══ Mobile Drawer ══════════════════════════════════════ */}
+      {/* ══ MOBILE MENU DRAWER ═════════════════════════════════ */}
       {isMenuOpen && (
         <div
           style={{
-            position: 'absolute', top: '100px', left: 0, right: 0,
-            background: '#2C2C2C', borderBottom: '1px solid rgba(255,255,255,0.1)',
-            zIndex: 99,
+            position: 'fixed', top: 104, left: 0, right: 0, bottom: 0, zIndex: 90,
+            background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'flex-end',
           }}
+          onClick={() => setIsMenuOpen(false)}
         >
-          <div style={{ maxWidth: 1440, margin: '0 auto', padding: '8px 24px 24px' }}>
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                onClick={() => setIsMenuOpen(false)}
-                style={{
-                  display: 'block', padding: '14px 0',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)',
-                  color: isActive(item.path) ? '#A81D37' : '#FFFFFF',
-                  fontSize: 12, fontWeight: 700,
-                  letterSpacing: '0.1em', textTransform: 'uppercase',
-                  textDecoration: 'none',
-                }}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div
+            style={{
+              width: '85%', maxWidth: 320, background: '#FFFFFF',
+              height: '100%', padding: 24, overflowY: 'auto',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Mobile Navigation */}
+            <nav style={{ marginBottom: 32 }}>
+              {navigation.map((item) => (
+                <div key={item.name}>
+                  <button
+                    onClick={() => handleMobileNavClick(item.name)}
+                    style={{
+                      width: '100%', textAlign: 'left', padding: '16px 0',
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      fontSize: 16, fontWeight: 600, color: '#111827',
+                      borderBottom: '1px solid #E5E7EB',
+                    }}
+                  >
+                    {item.name}
+                  </button>
+                  {mobileOpenDropdown === item.name && (
+                    <div style={{ padding: '16px 0 24px 16px' }}>
+                      {(MEGA_MENUS[item.name] || []).map((column, colIndex) => (
+                        <div key={colIndex} style={{ marginBottom: 24 }}>
+                          <h4 style={{ fontSize: 14, fontWeight: 600, color: '#374151', marginBottom: 12 }}>
+                            {column.title}
+                          </h4>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                            {column.items.map((item, linkIndex) => (
+                              <Link
+                                key={linkIndex}
+                                to={`/platform/${toSlug(item)}`}
+                                onClick={() => setIsMenuOpen(false)}
+                                style={{
+                                  fontSize: 14, color: '#6B7280', textDecoration: 'none',
+                                  padding: '4px 0',
+                                }}
+                                onMouseEnter={(e) => { e.currentTarget.style.color = '#A81D37'; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; }}
+                              >
+                                {item}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            {/* Mobile Auth */}
+            <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: 24 }}>
               {user ? (
-                <button
-                  onClick={handleLogout}
-                  style={{
-                    padding: '10px 24px', background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF',
-                    fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
-                    textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit',
-                  }}
-                >
-                  Sign Out
-                </button>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#A81D37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontSize: 16, fontWeight: 600 }}>
+                      {user.first_name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 16, fontWeight: 600, color: '#111827' }}>
+                        {user.first_name || user.email?.split('@')[0] || 'User'}
+                      </div>
+                      <div style={{ fontSize: 14, color: '#6B7280' }}>{user.email}</div>
+                    </div>
+                  </div>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setIsMenuOpen(false)}
+                    style={{
+                      display: 'block', padding: '12px 0', fontSize: 16, color: '#111827',
+                      textDecoration: 'none', borderBottom: '1px solid #E5E7EB',
+                    }}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/profile"
+                    onClick={() => setIsMenuOpen(false)}
+                    style={{
+                      display: 'block', padding: '12px 0', fontSize: 16, color: '#111827',
+                      textDecoration: 'none', borderBottom: '1px solid #E5E7EB',
+                    }}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={() => { setIsMenuOpen(false); logout(); }}
+                    style={{
+                      width: '100%', textAlign: 'left', padding: '12px 0',
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      fontSize: 16, color: '#DC2626',
+                    }}
+                  >
+                    Sign Out
+                  </button>
+                </div>
               ) : (
-                <>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <Link
                     to="/login"
                     onClick={() => setIsMenuOpen(false)}
                     style={{
-                      display: 'inline-flex', alignItems: 'center',
-                      padding: '10px 24px', border: '1px solid rgba(255,255,255,0.3)',
-                      color: '#FFFFFF', fontSize: 12, fontWeight: 700,
-                      letterSpacing: '0.1em', textTransform: 'uppercase',
-                      textDecoration: 'none',
+                      padding: '12px 0', textAlign: 'center', borderRadius: 6,
+                      fontSize: 16, fontWeight: 500, color: '#111827',
+                      textDecoration: 'none', background: 'none', border: '1px solid #D1D5DB',
                     }}
                   >
-                    Sign In
+                    Portal
                   </Link>
-                  <Link
-                    to="/register"
-                    onClick={() => setIsMenuOpen(false)}
-                    style={{
-                      display: 'inline-flex', alignItems: 'center',
-                      padding: '10px 24px', background: '#A81D37',
-                      color: '#FFFFFF', fontSize: 12, fontWeight: 700,
-                      letterSpacing: '0.1em', textTransform: 'uppercase',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Console
-                  </Link>
-                </>
+
+                </div>
               )}
             </div>
           </div>
