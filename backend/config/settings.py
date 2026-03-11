@@ -372,6 +372,8 @@ CSRF_FAILURE_VIEW = 'config.csrf.csrf_failure'
 # Share cookies across subdomains when needed (e.g. atonixdev.org + api.atonixdev.org).
 # Set COOKIE_DOMAIN=.atonixdev.org in production if the frontend needs to read csrftoken.
 COOKIE_DOMAIN = config('COOKIE_DOMAIN', default='').strip() or None
+if COOKIE_DOMAIN is None and not DEBUG:
+    COOKIE_DOMAIN = '.atonixdev.org'
 if COOKIE_DOMAIN:
     SESSION_COOKIE_DOMAIN = COOKIE_DOMAIN
     CSRF_COOKIE_DOMAIN = COOKIE_DOMAIN

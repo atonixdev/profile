@@ -761,17 +761,59 @@ const Header = () => {
             <nav style={{ marginBottom: 32 }}>
               {navigation.map((item) => (
                 <div key={item.name}>
-                  <button
-                    onClick={() => handleMobileNavClick(item.name)}
+                  <div
                     style={{
-                      width: '100%', textAlign: 'left', padding: '16px 0',
-                      background: 'none', border: 'none', cursor: 'pointer',
-                      fontSize: 16, fontWeight: 600, color: '#111827',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 12,
                       borderBottom: '1px solid #E5E7EB',
                     }}
                   >
-                    {item.name}
-                  </button>
+                    <Link
+                      to={item.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      style={{
+                        flex: 1,
+                        padding: '16px 0',
+                        fontSize: 16,
+                        fontWeight: 600,
+                        color: '#111827',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {item.name}
+                    </Link>
+                    <button
+                      onClick={() => handleMobileNavClick(item.name)}
+                      aria-label={`Toggle ${item.name} menu`}
+                      aria-expanded={mobileOpenDropdown === item.name}
+                      style={{
+                        width: 36,
+                        height: 36,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#6B7280',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          fontSize: 16,
+                          lineHeight: 1,
+                          transform: mobileOpenDropdown === item.name ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.15s ease',
+                        }}
+                      >
+                        ▾
+                      </span>
+                    </button>
+                  </div>
                   {mobileOpenDropdown === item.name && (
                     <div style={{ padding: '16px 0 24px 16px' }}>
                       {(MEGA_MENUS[item.name] || []).map((column, colIndex) => (

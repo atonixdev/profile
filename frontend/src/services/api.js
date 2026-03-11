@@ -22,8 +22,8 @@ export function setCsrfToken(token) {
   csrfTokenMemory = token || null;
 }
 
-async function ensureCsrfToken() {
-  const existing = getCookie('csrftoken') || csrfTokenMemory;
+async function ensureCsrfToken(forceRefresh = false) {
+  const existing = forceRefresh ? null : (getCookie('csrftoken') || csrfTokenMemory);
   if (existing) return existing;
 
   try {
@@ -78,7 +78,7 @@ api.interceptors.response.use(
       const text = typeof data === 'string' ? data : (data?.detail || '');
       if (String(text).toLowerCase().includes('csrf')) {
         originalRequest._csrfRetry = true;
-        await ensureCsrfToken();
+        await ensureCsrfToken(true);
         return api(originalRequest);
       }
     }
