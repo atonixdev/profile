@@ -226,24 +226,17 @@ const OpsLayout = () => {
               />
               <span style={{ color: 'rgba(255,255,255,0.65)', letterSpacing: '0.08em' }}>ALL SYSTEMS NOMINAL</span>
             </div>
-            <Link
-              to="/admin-console"
-              style={{
-                fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.85)', textDecoration: 'none',
-                fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase',
-              }}
-            >
-              ADMIN →
-            </Link>
-            <Link
-              to="/dashboard"
-              style={{
-                fontSize: 11, color: 'rgba(255,255,255,0.65)', textDecoration: 'none',
-                fontFamily: 'var(--font-mono)', letterSpacing: '0.08em',
-              }}
-            >
-              DEV CONSOLE →
-            </Link>
+            {user?.is_staff && (
+              <Link
+                to="/founder-portal"
+                style={{
+                  fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.85)', textDecoration: 'none',
+                  fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase',
+                }}
+              >
+                FOUNDER PORTAL →
+              </Link>
+            )}
           </div>
         </div>
 

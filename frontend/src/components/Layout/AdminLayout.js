@@ -140,47 +140,23 @@ const AdminLayout = () => {
           })}
         </nav>
 
-        {/* Console crosslinks */}
-        <div style={{ padding: '10px 16px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
-          <div style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
+        {/* Founder Portal link — admin only */}
+        {user?.is_staff && (
+          <div style={{ padding: '10px 16px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
             <Link
-              to="/ops"
+              to="/founder-portal"
               style={{
-                flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700,
+                display: 'block', padding: '7px 6px', fontSize: 9, fontWeight: 700,
                 letterSpacing: '0.1em', textTransform: 'uppercase', color: '#FFFFFF',
                 textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)',
                 background: 'rgba(255,255,255,0.1)', textAlign: 'center',
                 fontFamily: 'var(--font-mono)',
               }}
             >
-              OPS CTRL
-            </Link>
-            <Link
-              to="/email-console"
-              style={{
-                flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700,
-                letterSpacing: '0.1em', textTransform: 'uppercase', color: '#FFFFFF',
-                textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)',
-                background: 'rgba(255,255,255,0.1)', textAlign: 'center',
-                fontFamily: 'var(--font-mono)',
-              }}
-            >
-              EMAIL
+              ← FOUNDER PORTAL
             </Link>
           </div>
-          <Link
-            to="/dashboard"
-            style={{
-              display: 'block', padding: '7px 6px', fontSize: 9, fontWeight: 700,
-              letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)',
-              textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)',
-              background: 'rgba(255,255,255,0.06)', textAlign: 'center',
-              fontFamily: 'var(--font-mono)',
-            }}
-          >
-            DEV CON.
-          </Link>
-        </div>
+        )}
 
         {/* User section */}
         <div style={{ padding: '14px 20px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
@@ -295,26 +271,18 @@ const AdminLayout = () => {
                 Governance Active
               </span>
             </div>
-            <Link
-              to="/ops"
-              style={{
-                fontSize: 10, color: '#FFB3BF', textDecoration: 'none',
-                fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', fontWeight: 700,
-                textTransform: 'uppercase', opacity: 0.9,
-              }}
-            >
-              OPS →
-            </Link>
-            <Link
-              to="/dashboard"
-              style={{
-                fontSize: 10, color: 'rgba(255,255,255,0.75)', textDecoration: 'none',
-                fontFamily: 'var(--font-mono)', letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-              }}
-            >
-              DEV CONSOLE →
-            </Link>
+            {user?.is_staff && (
+              <Link
+                to="/founder-portal"
+                style={{
+                  fontSize: 10, color: '#FFB3BF', textDecoration: 'none',
+                  fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', fontWeight: 700,
+                  textTransform: 'uppercase', opacity: 0.9,
+                }}
+              >
+                FOUNDER PORTAL →
+              </Link>
+            )}
           </div>
         </div>
 

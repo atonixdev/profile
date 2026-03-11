@@ -87,20 +87,14 @@ const SupportConsoleLayout = () => {
           })}
         </nav>
 
-        {/* Console crosslinks */}
-        <div style={{ padding: '10px 16px', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <Link to="/admin-console" style={{ flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#FFFFFF', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.25)', background: 'rgba(255,255,255,0.08)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-              ADMIN
-            </Link>
-            <Link to="/ops" style={{ flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-              OPS
-            </Link>
-            <Link to="/dashboard" style={{ flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-              DEV
+        {/* Founder Portal link — admin only */}
+        {user?.is_staff && (
+          <div style={{ padding: '10px 16px', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+            <Link to="/founder-portal" style={{ display: 'block', padding: '7px 10px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#A81D37', textDecoration: 'none', border: '1px solid rgba(168,29,55,0.4)', background: 'rgba(168,29,55,0.08)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+              ← FOUNDER PORTAL
             </Link>
           </div>
-        </div>
+        )}
 
         {/* User section */}
         <div style={{ padding: '14px 20px', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
@@ -165,9 +159,7 @@ const SupportConsoleLayout = () => {
             <Link to="/support" style={{ fontSize: 10, color: '#86EFAC', textDecoration: 'none', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', fontWeight: 700, textTransform: 'uppercase' }}>
               PUBLIC FORM →
             </Link>
-            <Link to="/admin-console" style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              ADMIN →
-            </Link>
+
           </div>
         </div>
 

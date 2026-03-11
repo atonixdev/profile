@@ -162,26 +162,14 @@ const SocialHubLayout = () => {
           </div>
         </div>
 
-        {/* Console crosslinks */}
-        <div style={{ padding: '8px 14px', borderTop: BD }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 5 }}>
-            {[
-              { to: '/dashboard',        label: 'DEV' },
-              { to: '/admin-console',    label: 'ADMIN' },
-            ].map(({ to, label }) => (
-              <Link key={to} to={to} style={{
-                padding: '6px 4px', fontSize: 9, fontWeight: 700,
-                letterSpacing: '0.10em', textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.60)',
-                textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)',
-                background: 'rgba(255,255,255,0.05)', textAlign: 'center',
-                fontFamily: 'var(--font-mono)',
-              }}>
-                {label}
-              </Link>
-            ))}
+        {/* Founder Portal link — admin only */}
+        {user?.is_staff && (
+          <div style={{ padding: '8px 14px', borderTop: BD }}>
+            <Link to="/founder-portal" style={{ display: 'block', padding: '7px 10px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#A81D37', textDecoration: 'none', border: '1px solid rgba(168,29,55,0.4)', background: 'rgba(168,29,55,0.08)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+              ← FOUNDER PORTAL
+            </Link>
           </div>
-        </div>
+        )}
 
         {/* User section */}
         <div style={{ padding: '14px 20px', borderTop: BD }}>

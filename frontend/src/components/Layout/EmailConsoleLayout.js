@@ -95,20 +95,14 @@ const EmailConsoleLayout = () => {
           })}
         </nav>
 
-        {/* Crosslinks */}
-        <div style={{ padding: '10px 16px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <Link to="/admin-console" style={{ flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.06)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-              ADMIN
-            </Link>
-            <Link to="/ops" style={{ flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.06)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-              OPS
-            </Link>
-            <Link to="/dashboard" style={{ flex: 1, padding: '7px 6px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.06)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-              DEV
+        {/* Founder Portal link — admin only */}
+        {user?.is_staff && (
+          <div style={{ padding: '10px 16px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
+            <Link to="/founder-portal" style={{ display: 'block', padding: '7px 10px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#A81D37', textDecoration: 'none', border: '1px solid rgba(168,29,55,0.4)', background: 'rgba(168,29,55,0.08)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+              ← FOUNDER PORTAL
             </Link>
           </div>
-        </div>
+        )}
 
         {/* User section */}
         <div style={{ padding: '14px 20px', borderTop: `1px solid rgba(255,255,255,0.15)` }}>
