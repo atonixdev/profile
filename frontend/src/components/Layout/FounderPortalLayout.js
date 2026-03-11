@@ -5,6 +5,7 @@ import AtonixDevLogo from '../AtonixDevLogo';
 
 const NAV_ITEMS = [
   { path: '/founder-portal',                   exact: true,  label: 'Executive Dashboard',    code: 'EXC' },
+  { path: '/founder-portal/working-dashboard', exact: false, label: 'Working Dashboard',      code: 'WRK' },
   { path: '/founder-portal/investor',          exact: false, label: 'Investor Hub',            code: 'INV' },
   { path: '/founder-portal/team',              exact: false, label: 'Team Management',         code: 'TEM' },
   { path: '/founder-portal/financial',         exact: false, label: 'Financial & Compliance',  code: 'FIN' },

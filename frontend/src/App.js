@@ -101,6 +101,7 @@ import DepartmentFinancialView from './pages/financial-dashboard/Department';
 import VendorProcurementView from './pages/financial-dashboard/Vendor';
 import ComplianceAuditView from './pages/financial-dashboard/Compliance';
 import FounderPortalLayout from './components/Layout/FounderPortalLayout';
+import FounderModuleLayout from './components/Layout/FounderModuleLayout';
 import ExecutiveDashboard from './pages/founder-portal/ExecutiveDashboard';
 import InvestorHub from './pages/founder-portal/InvestorHub';
 import TeamManagement from './pages/founder-portal/TeamManagement';
@@ -109,6 +110,7 @@ import VisionNarrative from './pages/founder-portal/VisionNarrative';
 import DeveloperDashboard from './pages/founder-portal/DeveloperDashboard';
 import MarketingDashboard from './pages/founder-portal/MarketingDashboard';
 import BrandingSystems from './pages/founder-portal/BrandingSystems';
+import WorkingDashboard from './pages/founder-portal/WorkingDashboard';
 import ApplicationConsoleLayout from './components/Layout/ApplicationConsoleLayout';
 import ApplicationConsoleDashboard from './pages/application-console/Dashboard';
 import JobPostings from './pages/application-console/JobPostings';
@@ -372,6 +374,13 @@ function App() {
           <Route element={<StaffRoute />}>
             <Route path="/founder-portal" element={<FounderPortalLayout />}>
               <Route index element={<ExecutiveDashboard />} />
+            </Route>
+          </Route>
+
+          {/* Founder Portal Sub-Dashboards — standalone (no sidebar) */}
+          <Route element={<StaffRoute />}>
+            <Route path="/founder-portal" element={<FounderModuleLayout />}>
+              <Route path="working-dashboard" element={<WorkingDashboard />} />
               <Route path="investor"      element={<InvestorHub />} />
               <Route path="team"          element={<TeamManagement />} />
               <Route path="financial"     element={<FinancialCompliance />} />

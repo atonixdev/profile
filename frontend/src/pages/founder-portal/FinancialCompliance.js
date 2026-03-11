@@ -23,12 +23,12 @@ const FinancialCompliance = () => {
   if (error) return <div style={{ padding: '40px 32px', color: '#DC2626', ...MONO, fontSize: 12 }}>Error: {error}</div>;
   if (!data) return null;
 
-  const budget = data.budget_summary || {};
+  const budget = data.budgets || {};
   const compliance = data.compliance || {};
   const payments = data.payments || {};
 
   const statusColor = { compliant: '#16A34A', non_compliant: '#DC2626', in_review: '#D97706' };
-  const utilization = budget.allocated ? ((budget.spent / budget.allocated) * 100).toFixed(1) : '0.0';
+  const utilization = budget.total_allocated ? ((budget.total_spent / budget.total_allocated) * 100).toFixed(1) : '0.0';
 
   return (
     <div style={{ padding: 'clamp(16px, 4vw, 28px) clamp(16px, 4vw, 32px)', maxWidth: 1440 }}>
@@ -45,11 +45,11 @@ const FinancialCompliance = () => {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 14, marginBottom: 28 }}>
         <div style={{ ...CARD, borderTop: '3px solid #2563EB' }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', ...MONO, marginBottom: 6 }}>Total Allocated</div>
-          <div style={{ fontSize: 22, fontWeight: 700, color: '#111827' }}>{fmt(budget.allocated)}</div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: '#111827' }}>{fmt(budget.total_allocated)}</div>
         </div>
         <div style={{ ...CARD, borderTop: `3px solid ${A}` }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', ...MONO, marginBottom: 6 }}>Total Spent</div>
-          <div style={{ fontSize: 22, fontWeight: 700, color: '#111827' }}>{fmt(budget.spent)}</div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: '#111827' }}>{fmt(budget.total_spent)}</div>
         </div>
         <div style={{ ...CARD, borderTop: '3px solid #16A34A' }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B7280', ...MONO, marginBottom: 6 }}>Remaining</div>
@@ -85,7 +85,7 @@ const FinancialCompliance = () => {
             ))}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 4 }}>
               <span style={{ fontSize: 12, fontWeight: 600, color: '#374151' }}>Total Checks</span>
-              <span style={{ fontSize: 18, fontWeight: 700, color: '#111827', ...MONO }}>{compliance.total_checks || 0}</span>
+              <span style={{ fontSize: 18, fontWeight: 700, color: '#111827', ...MONO }}>{(compliance.compliant || 0) + (compliance.non_compliant || 0) + (compliance.in_review || 0)}</span>
             </div>
           </div>
         </div>
@@ -101,20 +101,16 @@ const FinancialCompliance = () => {
               <span style={{ fontSize: 15, fontWeight: 700, color: '#111827', ...MONO }}>{payments.total || 0}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: BD, paddingBottom: 10 }}>
-              <span style={{ fontSize: 12, color: '#6B7280' }}>Successful</span>
-              <span style={{ fontSize: 15, fontWeight: 700, color: '#16A34A', ...MONO }}>{payments.successful || 0}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: BD, paddingBottom: 10 }}>
-              <span style={{ fontSize: 12, color: '#6B7280' }}>Failed</span>
-              <span style={{ fontSize: 15, fontWeight: 700, color: '#DC2626', ...MONO }}>{payments.failed || 0}</span>
+              <span style={{ fontSize: 12, color: '#6B7280' }}>Cleared</span>
+              <span style={{ fontSize: 15, fontWeight: 700, color: '#16A34A', ...MONO }}>{payments.cleared || 0}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: 4 }}>
               <span style={{ fontSize: 12, fontWeight: 600, color: '#374151' }}>Success Rate</span>
               <span style={{
                 fontSize: 15, fontWeight: 700, ...MONO,
-                color: (payments.success_rate || 0) >= 95 ? '#16A34A' : (payments.success_rate || 0) >= 80 ? '#D97706' : '#DC2626',
+                color: parseFloat(payments.success_rate || 0) >= 95 ? '#16A34A' : parseFloat(payments.success_rate || 0) >= 80 ? '#D97706' : '#DC2626',
               }}>
-                {(payments.success_rate || 0).toFixed(1)}%
+                {parseFloat(payments.success_rate || 0).toFixed(1)}%
               </span>
             </div>
           </div>

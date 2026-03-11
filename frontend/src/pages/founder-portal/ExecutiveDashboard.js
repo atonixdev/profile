@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const A    = '#A81D37';
@@ -17,6 +17,7 @@ const KPI = ({ label, value, sub, accent }) => (
 );
 
 const MODULES = [
+  { code: 'WRK', label: 'Working Dashboard',         path: '/founder-portal/working-dashboard', accent: A,         desc: 'Centralized hub listing all platform dashboards. Founders manage per-user access and RBAC.' },
   { code: 'INV', label: 'Investor Hub',           path: '/founder-portal/investor',   accent: '#2563EB', desc: 'Secure document repository, pitch decks, stakeholder management and investor updates.' },
   { code: 'TEM', label: 'Team Management',        path: '/founder-portal/team',       accent: '#16A34A', desc: 'Hiring pipelines, task assignment, performance tracking, departments and access control.' },
   { code: 'FIN', label: 'Financial & Compliance',  path: '/founder-portal/financial',  accent: '#D97706', desc: 'Budgeting dashboards, vendor workflows, compliance audit logs with exportable reports.' },
@@ -26,19 +27,44 @@ const MODULES = [
   { code: 'BRD', label: 'Branding Systems',       path: '/founder-portal/branding',   accent: '#DC2626', desc: 'Color token management, UI/UX standards, typography and design integration.' },
 ];
 
-const ExecutiveDashboard = () => {
-  const [data, setData]       = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState(null);
-  const [hovered, setHovered] = useState(null);
+const DEFAULT_WIDGETS = ['finance', 'growth', 'product', 'governance', 'modules'];
+const STORAGE_KEY = 'fp_exec_widgets';
 
-  useEffect(() => {
-    setLoading(true);
+const loadWidgets = () => {
+  try { const v = localStorage.getItem(STORAGE_KEY); return v ? JSON.parse(v) : DEFAULT_WIDGETS; }
+  catch { return DEFAULT_WIDGETS; }
+};
+const saveWidgets = w => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(w)); } catch {} };
+
+const ExecutiveDashboard = () => {
+  const [data, setData]           = useState(null);
+  const [loading, setLoading]     = useState(true);
+  const [error, setError]         = useState(null);
+  const [hovered, setHovered]     = useState(null);
+  const [widgets, setWidgets]     = useState(loadWidgets);
+  const [showConfig, setShowConfig] = useState(false);
+  const [lastPoll, setLastPoll]   = useState(null);
+  const timerRef = useRef(null);
+
+  const fetchData = useCallback(() => {
     fetch('/api/portal/dashboard/executive/', { credentials: 'include', headers: { Accept: 'application/json' } })
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-      .then(d => { setData(d); setLoading(false); })
+      .then(d => { setData(d); setLoading(false); setError(null); setLastPoll(new Date()); })
       .catch(e => { setError(e.message); setLoading(false); });
   }, []);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
+
+  useEffect(() => {
+    timerRef.current = setInterval(fetchData, 30000);
+    return () => clearInterval(timerRef.current);
+  }, [fetchData]);
+
+  const toggleWidget = key => {
+    const next = widgets.includes(key) ? widgets.filter(w => w !== key) : [...widgets, key];
+    setWidgets(next);
+    saveWidgets(next);
+  };
 
   if (loading) return <div style={{ padding: '40px 32px', color: '#6B7280', ...MONO, fontSize: 12 }}>Loading…</div>;
   if (error) return <div style={{ padding: '40px 32px', color: '#DC2626', ...MONO, fontSize: 12 }}>Error: {error}</div>;
@@ -48,6 +74,14 @@ const ExecutiveDashboard = () => {
   const gr  = data.growth || {};
   const pr  = data.product || {};
   const gov = data.governance || {};
+
+  const WIDGET_MAP = {
+    finance: { label: 'Financial KPIs', accent: A },
+    growth: { label: 'Growth Metrics', accent: '#2563EB' },
+    product: { label: 'Product & Ops', accent: '#D97706' },
+    governance: { label: 'Governance', accent: '#7C3AED' },
+    modules: { label: 'Portal Modules', accent: '#0891B2' },
+  };
 
   return (
     <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: 1440 }}>
@@ -85,69 +119,117 @@ const ExecutiveDashboard = () => {
         </div>
       </div>
 
-      {/* ── KPI STRIP ───────────────────────────────────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 14, marginBottom: 14 }}>
-        <KPI label="MTD Revenue"   value={fmt$(fin.mtd_revenue)}       sub="Month-to-date"           accent={A} />
-        <KPI label="YTD Revenue"   value={fmt$(fin.ytd_revenue)}       sub="Year-to-date"            accent="#2563EB" />
-        <KPI label="Outstanding"   value={fmt$(fin.outstanding_balance)} sub="Pending collection"    accent="#DC2626" />
-        <KPI label="Active Orgs"   value={gr.active_organizations?.toLocaleString() || '0'} sub={`of ${gr.total_organizations || 0} total`} accent="#16A34A" />
+      {/* ── TOOLBAR ─────────────────────────────────────────── */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
+        <div style={{ fontSize: 10, color: '#9CA3AF', ...MONO }}>
+          Auto-refresh: 30s {lastPoll && `· Last: ${lastPoll.toLocaleTimeString()}`}
+        </div>
+        <button
+          onClick={() => setShowConfig(!showConfig)}
+          style={{
+            fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', padding: '5px 14px',
+            border: BD, borderRadius: 3, background: showConfig ? '#F3F4F6' : '#FFFFFF',
+            color: '#374151', cursor: 'pointer', ...MONO,
+          }}
+        >{showConfig ? 'Done' : 'Customize Widgets'}</button>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14, marginBottom: 32 }}>
-        <KPI label="Total Users"       value={gr.total_users?.toLocaleString() || '0'}       sub="Active accounts"    accent="#0891B2" />
-        <KPI label="Staff"             value={gr.staff_count?.toLocaleString() || '0'}       sub="Staff members"      accent="#7C3AED" />
-        <KPI label="Departments"       value={pr.departments?.toLocaleString() || '0'}       sub="Active units"       accent="#D97706" />
-        <KPI label="Vendors"           value={pr.active_vendors?.toLocaleString() || '0'}    sub="Active partners"    accent="#EA580C" />
-        <KPI label="Budgets"           value={pr.active_budgets?.toLocaleString() || '0'}    sub="Active/Approved"    accent="#16A34A" />
-        <KPI label="Directives"        value={gov.pinned_directives?.toLocaleString() || '0'} sub="Pinned & active"   accent={A} />
-        <KPI label="Stakeholders"      value={gov.stakeholders?.toLocaleString() || '0'}     sub="Active registry"    accent="#2563EB" />
-      </div>
+
+      {showConfig && (
+        <div style={{ ...CARD, marginBottom: 20, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          {Object.entries(WIDGET_MAP).map(([key, w]) => (
+            <button key={key} onClick={() => toggleWidget(key)} style={{
+              fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', padding: '6px 14px',
+              borderRadius: 3, cursor: 'pointer', ...MONO,
+              background: widgets.includes(key) ? `${w.accent}18` : '#F9FAFB',
+              border: `1px solid ${widgets.includes(key) ? w.accent : '#E5E7EB'}`,
+              color: widgets.includes(key) ? w.accent : '#9CA3AF',
+            }}>{widgets.includes(key) ? '✓ ' : ''}{w.label}</button>
+          ))}
+        </div>
+      )}
+
+      {/* ── KPI STRIPS ──────────────────────────────────────── */}
+      {widgets.includes('finance') && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 14, marginBottom: 14 }}>
+          <KPI label="MTD Revenue"   value={fmt$(fin.mtd_revenue)}       sub="Month-to-date"           accent={A} />
+          <KPI label="YTD Revenue"   value={fmt$(fin.ytd_revenue)}       sub="Year-to-date"            accent="#2563EB" />
+          <KPI label="Outstanding"   value={fmt$(fin.outstanding_balance)} sub="Pending collection"    accent="#DC2626" />
+        </div>
+      )}
+
+      {widgets.includes('growth') && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14, marginBottom: 14 }}>
+          <KPI label="Active Orgs"   value={gr.active_organizations?.toLocaleString() || '0'} sub={`of ${gr.total_organizations || 0} total`} accent="#16A34A" />
+          <KPI label="Total Users"   value={gr.total_users?.toLocaleString() || '0'}       sub="Active accounts"    accent="#0891B2" />
+          <KPI label="Staff"         value={gr.staff_count?.toLocaleString() || '0'}       sub="Staff members"      accent="#7C3AED" />
+        </div>
+      )}
+
+      {widgets.includes('product') && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14, marginBottom: 14 }}>
+          <KPI label="Departments"       value={pr.departments?.toLocaleString() || '0'}       sub="Active units"       accent="#D97706" />
+          <KPI label="Vendors"           value={pr.active_vendors?.toLocaleString() || '0'}    sub="Active partners"    accent="#EA580C" />
+          <KPI label="Budgets"           value={pr.active_budgets?.toLocaleString() || '0'}    sub="Active/Approved"    accent="#16A34A" />
+        </div>
+      )}
+
+      {widgets.includes('governance') && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14, marginBottom: 32 }}>
+          <KPI label="Directives"        value={gov.pinned_directives?.toLocaleString() || '0'} sub="Pinned & active"   accent={A} />
+          <KPI label="Stakeholders"      value={gov.stakeholders?.toLocaleString() || '0'}     sub="Active registry"    accent="#2563EB" />
+        </div>
+      )}
 
       {/* ── MODULE GRID ─────────────────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
-        <div style={{ width: 3, height: 16, background: A, borderRadius: 1 }} />
-        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#374151', ...MONO }}>
-          Portal Modules — 7 Active Consoles
-        </span>
-        <div style={{ flex: 1, height: 1, background: '#E5E7EB' }} />
-      </div>
+      {widgets.includes('modules') && (
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
+            <div style={{ width: 3, height: 16, background: A, borderRadius: 1 }} />
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#374151', ...MONO }}>
+              Portal Modules — 8 Active Consoles
+            </span>
+            <div style={{ flex: 1, height: 1, background: '#E5E7EB' }} />
+          </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: 14 }}>
-        {MODULES.map(m => (
-          <Link
-            key={m.code}
-            to={m.path}
-            onMouseEnter={() => setHovered(m.code)}
-            onMouseLeave={() => setHovered(null)}
-            style={{
-              textDecoration: 'none', display: 'block',
-              background: '#FFFFFF',
-              border: `1px solid ${hovered === m.code ? m.accent : '#E5E7EB'}`,
-              borderTop: `3px solid ${m.accent}`,
-              borderRadius: 4, padding: '16px 18px',
-              transition: 'border-color 0.15s, box-shadow 0.15s',
-              boxShadow: hovered === m.code ? '0 4px 14px rgba(0,0,0,0.06)' : 'none',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-              <span style={{
-                fontSize: 8, fontWeight: 700, letterSpacing: '0.10em',
-                color: '#FFFFFF', background: m.accent,
-                padding: '3px 7px', borderRadius: 2, ...MONO,
-              }}>{m.code}</span>
-              <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{m.label}</span>
-            </div>
-            <p style={{ fontSize: 12, color: '#6B7280', margin: '0 0 12px', lineHeight: 1.6 }}>{m.desc}</p>
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 5,
-              fontSize: 10, fontWeight: 700, letterSpacing: '0.10em',
-              textTransform: 'uppercase', color: m.accent, ...MONO,
-            }}>
-              <span>Open Console</span>
-              <span style={{ fontSize: 12 }}>→</span>
-            </div>
-          </Link>
-        ))}
-      </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: 14 }}>
+            {MODULES.map(m => (
+              <Link
+                key={m.code}
+                to={m.path}
+                onMouseEnter={() => setHovered(m.code)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  textDecoration: 'none', display: 'block',
+                  background: '#FFFFFF',
+                  border: `1px solid ${hovered === m.code ? m.accent : '#E5E7EB'}`,
+                  borderTop: `3px solid ${m.accent}`,
+                  borderRadius: 4, padding: '16px 18px',
+                  transition: 'border-color 0.15s, box-shadow 0.15s',
+                  boxShadow: hovered === m.code ? '0 4px 14px rgba(0,0,0,0.06)' : 'none',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                  <span style={{
+                    fontSize: 8, fontWeight: 700, letterSpacing: '0.10em',
+                    color: '#FFFFFF', background: m.accent,
+                    padding: '3px 7px', borderRadius: 2, ...MONO,
+                  }}>{m.code}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{m.label}</span>
+                </div>
+                <p style={{ fontSize: 12, color: '#6B7280', margin: '0 0 12px', lineHeight: 1.6 }}>{m.desc}</p>
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 5,
+                  fontSize: 10, fontWeight: 700, letterSpacing: '0.10em',
+                  textTransform: 'uppercase', color: m.accent, ...MONO,
+                }}>
+                  <span>Open Console</span>
+                  <span style={{ fontSize: 12 }}>→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* ── FOOTER ──────────────────────────────────────────── */}
       <div style={{ marginTop: 32, borderTop: BD, paddingTop: 18, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
