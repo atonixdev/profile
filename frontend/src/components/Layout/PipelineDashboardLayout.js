@@ -9,6 +9,7 @@ const PipelineDashboardLayout = () => {
   const navigate  = useNavigate();
   const { pipelineId } = useParams();
   const { user, logout } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [running, setRunning] = useState(false);
 
   const base = `/pipelines/${pipelineId}`;
@@ -51,11 +52,20 @@ const PipelineDashboardLayout = () => {
     <div
       style={{
         display: 'flex', height: '100vh', overflow: 'hidden',
-        background: '#F8FAFC', fontFamily: 'inherit',
+        background: '#F8FAFC', fontFamily: 'inherit', position: 'relative',
       }}
     >
+      {sidebarOpen && (
+        <div
+          className="app-sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 49 }}
+        />
+      )}
+
       {/* ══ SIDEBAR ═════════════════════════════════════════ */}
       <aside
+        className={`app-sidebar${sidebarOpen ? ' sidebar-open' : ''}`}
         style={{
           width: 224, flexShrink: 0, background: '#393E41',
           display: 'flex', flexDirection: 'column',
@@ -121,6 +131,7 @@ const PipelineDashboardLayout = () => {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={() => setSidebarOpen(false)}
                 style={{
                   display: 'flex', alignItems: 'center',
                   padding: '10px 20px', fontSize: 13,
@@ -211,7 +222,7 @@ const PipelineDashboardLayout = () => {
       </aside>
 
       {/* ══ MAIN ════════════════════════════════════════════ */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minWidth: 0 }}>
 
         {/* Top bar */}
         <div
@@ -231,6 +242,19 @@ const PipelineDashboardLayout = () => {
               letterSpacing: '0.06em',
             }}
           >
+            <button
+              onClick={() => setSidebarOpen((v) => !v)}
+              className="sidebar-toggle"
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                padding: 6, flexDirection: 'column', gap: 4,
+              }}
+              aria-label="Toggle sidebar"
+            >
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: 'rgba(255,255,255,0.8)' }} />
+            </button>
             <Link
               to="/dashboard"
               style={{ color: '#4B5563', textDecoration: 'none', transition: 'color 0.15s' }}
@@ -262,7 +286,7 @@ const PipelineDashboardLayout = () => {
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
             <div style={{ fontSize: 11, color: '#4B5563', fontFamily: 'var(--font-mono)' }}>
               <span style={{ color: '#4B5563' }}>run #47</span>
               <span style={{ margin: '0 8px', color: '#1F2937' }}>|</span>
@@ -283,7 +307,7 @@ const PipelineDashboardLayout = () => {
         </div>
 
         {/* Page content */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '32px 36px' }}>
+        <div className="console-content console-padded-content" style={{ flex: 1, overflowY: 'auto' }}>
           <Outlet />
         </div>
       </div>

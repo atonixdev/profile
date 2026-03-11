@@ -365,7 +365,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* Page content */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: 32 }}>
+        <div className="console-content console-padded-content" style={{ flex: 1, overflowY: 'auto' }}>
           <Outlet />
         </div>
       </div>

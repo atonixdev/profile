@@ -181,29 +181,35 @@ const ApplicationConsoleLayout = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-          <div style={{
-            fontSize: 18, fontWeight: 700, color: '#1A202C',
-            fontFamily: 'var(--font-mono)', letterSpacing: '0.02em',
-          }}>
-            {currentItem?.label || 'Employment Console'}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <button
+              onClick={() => setSidebarOpen((v) => !v)}
+              className="sidebar-toggle"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 4,
+                flexDirection: 'column',
+                gap: 4,
+              }}
+              aria-label="Toggle sidebar"
+            >
+              <span style={{ display: 'block', width: 18, height: 2, background: '#1A202C' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#1A202C' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: '#1A202C' }} />
+            </button>
+            <div style={{
+              fontSize: 18, fontWeight: 700, color: '#1A202C',
+              fontFamily: 'var(--font-mono)', letterSpacing: '0.02em',
+            }}>
+              {currentItem?.label || 'Employment Console'}
+            </div>
           </div>
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            style={{
-              display: 'none',
-              background: 'none',
-              border: 'none',
-              fontSize: 24,
-              cursor: 'pointer',
-              '@media (max-width: 768px)': { display: 'block' },
-            }}
-          >
-            ☰
-          </button>
         </header>
 
         {/* Content */}
-        <main style={{ flex: 1, overflow: 'auto', padding: 32 }}>
+        <main className="console-content console-padded-content" style={{ flex: 1, overflow: 'auto' }}>
           <Outlet />
         </main>
       </div>

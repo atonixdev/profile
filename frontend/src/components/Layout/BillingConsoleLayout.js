@@ -201,7 +201,7 @@ const BillingConsoleLayout = () => {
           <button
             className="sidebar-toggle"
             onClick={() => setSidebarOpen(true)}
-            style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
           >
             <div style={{ width: 18, height: 2, background: '#111827', marginBottom: 4 }} />
             <div style={{ width: 18, height: 2, background: '#111827', marginBottom: 4 }} />
@@ -233,7 +233,7 @@ const BillingConsoleLayout = () => {
         </header>
 
         {/* Page content */}
-        <main style={{ flex: 1, overflowY: 'auto', background: '#F8FAFC' }}>
+        <main className="console-content console-padded-content" style={{ flex: 1, overflowY: 'auto', background: '#F8FAFC' }}>
           <Outlet />
         </main>
       </div>
