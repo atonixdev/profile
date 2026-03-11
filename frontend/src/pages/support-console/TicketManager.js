@@ -232,7 +232,7 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
   };
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
@@ -258,7 +258,7 @@ export default function TicketManager({ defaultFilter = '', title = 'Ticket Inbo
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 14, marginBottom: 24 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 160px), 1fr))', gap: 14, marginBottom: 24 }}>
         {[
           { label: 'Open',      key: 'open',      color: '#22C55E' },
           { label: 'Pending',   key: 'pending',   color: '#F59E0B' },

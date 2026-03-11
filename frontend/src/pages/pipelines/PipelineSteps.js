@@ -80,7 +80,7 @@ const PipelineSteps = () => {
               ✕
             </button>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16 }}>
             {[
               { l: 'Image', v: detail.image },
               { l: 'Exit Code', v: detail.exit_code !== null ? String(detail.exit_code) : 'N/A' },

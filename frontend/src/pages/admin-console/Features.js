@@ -29,7 +29,7 @@ export default function Features() {
   const visible = filter === 'All' ? flags : flags.filter((f) => f.env === filter);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -54,7 +54,7 @@ export default function Features() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Total Flags',   value: flags.length },
           { label: 'Active',        value: flags.filter((f) => f.enabled).length },

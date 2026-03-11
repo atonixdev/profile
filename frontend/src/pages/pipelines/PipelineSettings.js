@@ -120,7 +120,7 @@ const PipelineSettings = () => {
         <h2 style={{ fontSize: 15, fontWeight: 700, color: '#111827', marginBottom: 16 }}>
           Pipeline-Level Resources
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16 }}>
           {[
             { l: 'CPU Cores',     v: '4 vCPU',   note: 'Overridable per-step' },
             { l: 'Memory',        v: '8,192 MB',  note: 'Overridable per-step' },

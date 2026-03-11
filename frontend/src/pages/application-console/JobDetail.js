@@ -173,7 +173,7 @@ export default function JobDetail() {
 
   return (
     <ApplicationConsoleLayout>
-      <div style={{ padding: '20px 40px', background: '#060e1a', minHeight: '100vh', color: '#e2e8f0' }}>
+      <div style={{ padding: 'clamp(12px, 3vw, 20px) clamp(16px, 5vw, 40px)', background: '#060e1a', minHeight: '100vh', color: '#e2e8f0' }}>
         {/* Header */}
         <div style={{ marginBottom: 32 }}>
           <Link to="/application-console/jobs" style={{ color: '#64748b', textDecoration: 'none', fontSize: 14, marginBottom: 12, display: 'inline-block' }}>

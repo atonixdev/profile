@@ -73,7 +73,7 @@ const UserAnalytics = () => {
   if (error)   return <div style={{ padding: '40px 32px', color: '#DC2626', ...MONO, fontSize: 12 }}>Error: {error}</div>;
 
   return (
-    <div style={{ padding: '28px 32px', maxWidth: 1280 }}>
+    <div style={{ padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', maxWidth: 1280 }}>
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
@@ -146,7 +146,7 @@ const UserAnalytics = () => {
               </div>
 
               {/* KPIs */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 12, marginBottom: 16 }}>
                 <div style={{ ...CARD, borderTop: `3px solid ${A}` }}>
                   <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9CA3AF', ...MONO }}>Current Month</div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginTop: 4 }}>{fmt$(userDetail.usage.mtd_cost)}</div>

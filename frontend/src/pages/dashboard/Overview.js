@@ -46,7 +46,7 @@ const Overview = () => {
       {/* Stats */}
       <div
         style={{
-          display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
           border: '1px solid #E5E7EB', borderRight: 'none', borderBottom: 'none',
           marginBottom: 36,
         }}
@@ -89,7 +89,7 @@ const Overview = () => {
         >
           Quick Actions
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 12 }}>
           {QUICK_ACTIONS.map((q) => (
             <Link
               key={q.label}

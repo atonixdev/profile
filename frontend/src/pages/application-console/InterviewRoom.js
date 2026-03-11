@@ -238,7 +238,7 @@ function VideoTab({ wsRef, interviewId }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#060e1a' }}>
-      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: 16 }}>
+      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 8, padding: 16 }}>
         {/* Local video */}
         <div style={{ position: 'relative', background: '#0a1628', borderRadius: 8, overflow: 'hidden', minHeight: 240 }}>
           <video

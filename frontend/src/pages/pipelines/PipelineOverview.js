@@ -61,7 +61,7 @@ const PipelineOverview = () => {
       {/* Stats grid */}
       <div
         style={{
-          display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
           gap: 16, marginBottom: 28,
         }}
       >
@@ -95,7 +95,8 @@ const PipelineOverview = () => {
             View Steps →
           </Link>
         </div>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 540 }}>
           <thead>
             <tr>
               <th style={th}>Run ID</th>
@@ -144,13 +145,14 @@ const PipelineOverview = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* Last run step summary */}
       <div style={card}>
         <div style={eyebrow}>Last Run — run #47</div>
         <h2 style={{ fontSize: 15, fontWeight: 700, color: '#111827', marginBottom: 16 }}>Step Summary</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 12 }}>
           {STEPS.map((step) => (
             <div
               key={step.name}

@@ -175,7 +175,7 @@ const EmailConsoleLayout = () => {
         </div>
 
         {/* Page content */}
-        <div style={{ flex: 1, overflowY: 'auto' }}>
+        <div className="console-content console-padded-content" style={{ flex: 1, overflowY: 'auto' }}>
           <Outlet />
         </div>
       </div>

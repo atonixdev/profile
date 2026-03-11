@@ -113,7 +113,7 @@ const PipelineContainers = () => (
     {/* Summary row */}
     <div
       style={{
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
         gap: 16, marginBottom: 28,
       }}
     >

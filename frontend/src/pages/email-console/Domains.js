@@ -17,7 +17,7 @@ export default function EmailDomains() {
   const [newDomain, setNewDomain] = useState('');
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>DOM — Sending Domains</div>
@@ -53,7 +53,7 @@ export default function EmailDomains() {
       )}
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Total Domains',    value: DOMAINS.length },
           { label: 'Verified',         value: DOMAINS.filter((d) => d.status === 'Verified').length },
@@ -106,7 +106,7 @@ export default function EmailDomains() {
       {/* Info panel */}
       <div style={{ marginTop: 24, ...CARD, background: '#F9FAFB' }}>
         <div style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>Required DNS Records</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16 }}>
           {[
             { type: 'SPF', record: 'TXT', value: '"v=spf1 include:sendgrid.net ~all"', desc: 'Authorises SendGrid to send on your behalf.' },
             { type: 'DKIM', record: 'CNAME', value: 'em1234._domainkey → sendgrid.net', desc: 'Cryptographic signature to authenticate emails.' },

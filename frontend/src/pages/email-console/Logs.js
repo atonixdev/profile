@@ -52,7 +52,7 @@ export default function EmailLogs() {
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Log detail drawer */}
       {selected && (

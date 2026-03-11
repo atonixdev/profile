@@ -55,7 +55,7 @@ const OpsResources = () => (
     {/* Top metrics */}
     <div
       style={{
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
         border: '1px solid #E5E7EB', borderRight: 'none',
         marginBottom: 36,
       }}

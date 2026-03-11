@@ -140,7 +140,7 @@ export default function Support() {
         <div className="gsw-container" style={{ maxWidth: 720 }}>
         <form onSubmit={handleSubmit}>
           {/* Row: name + email */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 20, marginBottom: 20 }}>
             <div>
               <label style={LABEL} htmlFor="sup-name">Full Name</label>
               <input id="sup-name" name="name" value={form.name} onChange={handleChange} required placeholder="Your full name" style={INPUT} />
@@ -152,7 +152,7 @@ export default function Support() {
           </div>
 
           {/* Row: category + priority */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 20, marginBottom: 20 }}>
             <div>
               <label style={LABEL} htmlFor="sup-cat">Category</label>
               <select id="sup-cat" name="category" value={form.category} onChange={handleChange} style={INPUT}>

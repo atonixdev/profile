@@ -54,7 +54,7 @@ const OpsOverview = () => (
     {/* Health stats */}
     <div
       style={{
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
         border: '1px solid #E5E7EB', borderRight: 'none', borderBottom: 'none',
         marginBottom: 36,
       }}
@@ -93,7 +93,7 @@ const OpsOverview = () => (
       ))}
     </div>
 
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 36 }} className="ops-two-col">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))', gap: 24, marginBottom: 36 }} className="ops-two-col">
 
       {/* Subsystem status */}
       <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>

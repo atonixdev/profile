@@ -39,7 +39,7 @@ export default function Overview() {
     : 0;
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 32 }}>
@@ -57,7 +57,7 @@ export default function Overview() {
       ) : (
         <>
           {/* Top stats */}
-          <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 32 }}>
+          <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 32 }}>
             {[
               { label: 'Total Tickets',      value: stats.total     ?? 0, color: '#1B3A4B' },
               { label: 'Open Right Now',     value: stats.open      ?? 0, color: '#22C55E' },
@@ -76,7 +76,7 @@ export default function Overview() {
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#1F2937', fontFamily: 'var(--font-mono)', marginBottom: 16 }}>
               Status Breakdown
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 14 }}>
               {statusBreakdown.map((s) => {
                 const count = stats[s.key] || 0;
                 const pct   = total > 0 ? Math.round(count / total * 100) : 0;

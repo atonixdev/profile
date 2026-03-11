@@ -187,7 +187,7 @@ const Contact = () => {
               </div>
 
               <form onSubmit={handleSubmit}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px', marginBottom: '20px' }}>
                   <div>
                     <label style={labelStyle}>Full Name *</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required style={inputStyle} />
@@ -198,7 +198,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px', marginBottom: '20px' }}>
                   <div>
                     <label style={labelStyle}>Phone Number</label>
                     <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+27 123 456 7890" style={inputStyle} />
@@ -213,7 +213,7 @@ const Contact = () => {
                 </div>
 
                 {formData.country && (
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px', marginBottom: '20px' }}>
                     <div>
                       <label style={labelStyle}>Country Code</label>
                       <div style={{ ...inputStyle, color: '#aaa' }}>{formData.country_code}</div>
@@ -230,7 +230,7 @@ const Contact = () => {
                   <input type="text" name="company" value={formData.company} onChange={handleChange} style={inputStyle} />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px', marginBottom: '20px' }}>
                   <div>
                     <label style={labelStyle}>Inquiry Type *</label>
                     <select name="inquiry_type" value={formData.inquiry_type} onChange={handleChange} style={inputStyle}>
@@ -245,7 +245,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px', marginBottom: '20px' }}>
                   <div>
                     <label style={labelStyle}>Budget</label>
                     <select name="budget" value={formData.budget} onChange={handleChange} style={inputStyle}>

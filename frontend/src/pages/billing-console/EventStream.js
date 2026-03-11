@@ -63,7 +63,7 @@ const EventStream = () => {
   for (const ev of events) { if (counts[ev.status] !== undefined) counts[ev.status]++; }
 
   return (
-    <div style={{ padding: '28px 32px', maxWidth: 1280 }}>
+    <div style={{ padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', maxWidth: 1280 }}>
       {/* Header */}
       <div style={{ marginBottom: 20 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>

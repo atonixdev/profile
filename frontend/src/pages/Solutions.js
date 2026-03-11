@@ -62,7 +62,7 @@ const Solutions = () => {
       <section style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 24px 80px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
           {solutions.map((sol) => (
-            <div key={sol.title} style={{ background: '#FFFFFF', padding: '48px 44px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px 56px' }}>
+            <div key={sol.title} style={{ background: '#FFFFFF', padding: '48px 44px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '40px 56px' }}>
               <div>
                 <div style={{ width: 32, height: 2, background: '#A81D37', marginBottom: 20 }} />
                 <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111827', letterSpacing: '-0.01em', marginBottom: 14, lineHeight: 1.25 }}>{sol.title}</h2>

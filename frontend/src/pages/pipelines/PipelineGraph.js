@@ -190,7 +190,7 @@ const PipelineGraph = () => {
         return (
           <div style={{ ...card, borderLeft: `3px solid ${statusColor(step.status)}` }}>
             <div style={eyebrow}>Step Detail</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16 }}>
               {[
                 { l: 'Step ID', v: step.id },
                 { l: 'Name', v: step.name },

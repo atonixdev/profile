@@ -48,7 +48,7 @@ const Ledger = () => {
   if (error)   return <div style={{ padding: '40px 32px', color: '#DC2626', ...MONO, fontSize: 12 }}>Error: {error}</div>;
 
   return (
-    <div style={{ padding: '28px 32px', maxWidth: 1280 }}>
+    <div style={{ padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', maxWidth: 1280 }}>
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
@@ -59,7 +59,7 @@ const Ledger = () => {
       </div>
 
       {/* Summary */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14, marginBottom: 24 }}>
         {[
           { label: 'Total Charges',  value: fmt$(totalCharges),  accent: '#DC2626' },
           { label: 'Total Payments', value: fmt$(totalPayments), accent: '#16A34A' },

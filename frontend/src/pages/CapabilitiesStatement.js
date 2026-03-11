@@ -129,7 +129,7 @@ const CapabilitiesStatement = () => {
       {/* ── Company Overview ── */}
       <section className="gsw-section-sm" style={{ background: '#F8F9FA', borderBottom: '1px solid #E5E7EB' }}>
         <div className="gsw-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '48px 80px', alignItems: 'start' }}>
             <div>
               <span className="gsw-eyebrow">Company Profile</span>
               <h2 style={{ fontSize: 'clamp(22px, 2.5vw, 30px)', fontWeight: 800, color: '#111827', marginBottom: 16 }}>About AtonixDev</h2>
@@ -208,7 +208,7 @@ const CapabilitiesStatement = () => {
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {pastPerformance.map((p) => (
-              <div key={p.title} style={{ background: '#FFFFFF', padding: '28px 32px', display: 'grid', gridTemplateColumns: '1fr auto', gap: '16px 32px', alignItems: 'start' }}>
+              <div key={p.title} style={{ background: '#FFFFFF', padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', display: 'grid', gridTemplateColumns: '1fr auto', gap: '16px 32px', alignItems: 'start' }}>
                 <div>
                   <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.3 }}>{p.title}</h3>
                   <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.75, margin: 0 }}>{p.desc}</p>
@@ -228,7 +228,7 @@ const CapabilitiesStatement = () => {
       {/* ── Certifications & NAICS ── */}
       <section className="gsw-section" style={{ background: '#FFFFFF' }}>
         <div className="gsw-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '48px 80px' }}>
             <div>
               <span className="gsw-eyebrow">Certifications & Standards</span>
               <h2 style={{ fontSize: 'clamp(20px, 2vw, 28px)', fontWeight: 800, color: '#111827', marginBottom: 28 }}>Certifications & Compliance</h2>

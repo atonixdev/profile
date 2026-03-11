@@ -51,7 +51,7 @@ export default function Roles() {
   const [selected, setSelected] = useState(ROLES[0]);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -76,7 +76,7 @@ export default function Roles() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Total Roles',       value: '5'  },
           { label: 'Active Assignments', value: '847' },

@@ -63,7 +63,7 @@ export default function Compliance() {
       {/* Compliance Framework */}
       {/* ──────────────────────────────────────────────────────────────────── */}
       <Section title="Compliance Framework">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 16 }}>
           {[
             { label: 'GDPR', desc: 'Data export & anonymization on request' },
             { label: 'CCPA', desc: 'Candidate privacy & opt-out rights' },
@@ -124,7 +124,7 @@ export default function Compliance() {
             {/* Conversion funnel */}
             <div style={{ marginBottom: 32 }}>
               <h4 style={{ marginBottom: 12, fontSize: 14 }}>Conversion Rates</h4>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16 }}>
                 {Object.entries(metrics.conversion_rates).map(([key, rate]) => (
                   <div key={key} style={{
                     background: '#FFFFFF',

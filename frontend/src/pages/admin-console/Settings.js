@@ -52,7 +52,7 @@ export default function Settings() {
   const flip = (key) => setToggles((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -81,7 +81,7 @@ export default function Settings() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Active Modules',  value: '11'   },
           { label: 'Scheduled Jobs',  value: '4'    },
@@ -104,7 +104,7 @@ export default function Settings() {
                 {sec.section}
               </span>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}>
               {sec.items.map((item, idx) => (
                 <div
                   key={item.key}

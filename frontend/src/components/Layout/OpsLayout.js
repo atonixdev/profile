@@ -248,7 +248,7 @@ const OpsLayout = () => {
         </div>
 
         {/* Content area */}
-        <div className="ops-content" style={{ flex: 1, overflowY: 'auto' }}>
+        <div className="ops-content console-content" style={{ flex: 1, overflowY: 'auto' }}>
           <Outlet />
         </div>
       </div>

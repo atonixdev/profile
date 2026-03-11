@@ -64,7 +64,7 @@ const BillingOverview = () => {
   const maxCost = usage.reduce((m, r) => Math.max(m, parseFloat(r.total_cost) || 0), 1);
 
   return (
-    <div style={{ padding: '28px 32px', maxWidth: 1280 }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 28px) clamp(16px, 4vw, 32px)', maxWidth: 1280 }}>
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
@@ -75,7 +75,7 @@ const BillingOverview = () => {
       </div>
 
       {/* KPI row 1 */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 16 }}>
         <KPI label="MTD Revenue"    value={fmt$(rev.mtd_charges)}             sub={`Net: ${fmt$(rev.net_revenue)}`}              accent={A} />
         <KPI label="Active Orgs"    value={orgs.active}                        sub={`${orgs.new_mtd} onboarded this month`}        accent="#2563EB" />
         <KPI label="Active Users"   value={users.total_active?.toLocaleString()} sub="Across all organizations"                   accent="#7C3AED" />
@@ -83,7 +83,7 @@ const BillingOverview = () => {
       </div>
 
       {/* KPI row 2 */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         <KPI label="Total Payments" value={fmt$(rev.mtd_payments)}  sub="MTD collected"               accent="#16A34A" />
         <KPI label="Overdue Count"  value={invs.overdue_count}       sub="Requires follow-up"          accent="#DC2626" />
         <KPI label="Failed Payments" value={invs.failed_payments}   sub="Retry pending"               accent="#DC2626" />
@@ -91,7 +91,7 @@ const BillingOverview = () => {
       </div>
 
       {/* Two-column: top services + live events */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: 20 }}>
         {/* Service Revenue */}
         <div style={CARD}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#1F2937', ...MONO, marginBottom: 14 }}>

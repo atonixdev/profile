@@ -8,14 +8,19 @@ from datetime import timedelta
 
 from decouple import Csv
 
-# Force a single root-level .env for the whole repo.
-# This avoids needing separate backend/.env and keeps Docker Compose + local dev consistent.
+# Prefer a repo-level .env when the full workspace is mounted, but also support
+# a backend-local .env for Docker/local setups where only /backend is available.
 try:
     from decouple import Config, RepositoryEnv
 
-    _ROOT_ENV = (Path(__file__).resolve().parent.parent.parent / '.env').resolve()
-    if _ROOT_ENV.exists():
-        config = Config(RepositoryEnv(str(_ROOT_ENV)))
+    _SETTINGS_PATH = Path(__file__).resolve()
+    _ENV_CANDIDATES = [
+        (_SETTINGS_PATH.parents[2] / '.env').resolve(),
+        (_SETTINGS_PATH.parents[1] / '.env').resolve(),
+    ]
+    _ENV_FILE = next((path for path in _ENV_CANDIDATES if path.exists()), None)
+    if _ENV_FILE:
+        config = Config(RepositoryEnv(str(_ENV_FILE)))
     else:  # fallback to default decouple behavior (env vars only)
         from decouple import config  # type: ignore
 except Exception:  # pragma: no cover
@@ -439,7 +444,8 @@ SERVER_EMAIL = config('SERVER_EMAIL', default='errors@atonixdev.com')
 INBOUND_WEBHOOK_SECRET = config('INBOUND_WEBHOOK_SECRET', default='')
 
 # Public URL used in email CTAs (no trailing slash)
-FRONTEND_URL = config('FRONTEND_URL', default='https://atonixdev.org').rstrip('/')
+_default_frontend_url = 'http://localhost:3000' if DEBUG else 'https://atonixdev.org'
+FRONTEND_URL = config('FRONTEND_URL', default=_default_frontend_url).rstrip('/')
 
 # Set default caching headers for responses
 DEFAULT_CACHE_HEADERS = {

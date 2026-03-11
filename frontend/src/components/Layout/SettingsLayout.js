@@ -266,7 +266,7 @@ const SettingsLayout = () => {
         </div>
 
         {/* Page content */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '40px', maxWidth: 900 }}>
+        <div className="console-content" style={{ flex: 1, overflowY: 'auto', padding: 'clamp(16px, 4vw, 40px)', maxWidth: 900 }}>
           <Outlet />
         </div>
       </div>

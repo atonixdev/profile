@@ -27,7 +27,7 @@ export default function Security() {
   const filtered = filter === 'All' ? EVENTS : EVENTS.filter((e) => e.severity === filter);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28 }}>
@@ -41,7 +41,7 @@ export default function Security() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Events (24h)',    value: '142',  color: '#111827' },
           { label: 'Failed Logins',   value: '18',   color: '#F59E0B' },
@@ -56,7 +56,7 @@ export default function Security() {
       </div>
 
       {/* Policies row */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Password Policy',   status: 'Active', detail: 'Min 12 chars, mixed case, special' },
           { label: 'MFA Enforcement',   status: 'Optional', detail: 'Enabled for: Admin, Staff roles' },

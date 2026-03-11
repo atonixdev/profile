@@ -24,7 +24,7 @@ export default function ApplicationConsoleDashboard() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, marginTop: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: 24, marginTop: 32 }}>
           <Card title="Active Job Postings" value={stats?.active_jobs || 0} />
           <Card title="Total Openings" value={stats?.total_jobs || 0} />
           <Card title="Pending Applications" value="—" />

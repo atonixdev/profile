@@ -18,7 +18,7 @@ const STATUS_COLOR = { Active: '#22C55E', 'Past Due': '#EF4444', Cancelled: '#4B
 
 export default function Billing() {
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -43,7 +43,7 @@ export default function Billing() {
       </div>
 
       {/* MRR + stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Monthly Recurring',  value: '$2,418',  delta: '↑ 14% MoM',   color: A      },
           { label: 'Active Subscriptions', value: '312',   delta: '98.1% healthy', color: '#22C55E' },
@@ -59,7 +59,7 @@ export default function Billing() {
       </div>
 
       {/* Plan breakdown */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { plan: 'Starter',    price: '$12/mo',  seats: 187,  color: '#38BDF8' },
           { plan: 'Pro',        price: '$49/mo',  seats: 109,  color: '#A78BFA' },

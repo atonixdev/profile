@@ -22,7 +22,7 @@ export default function API() {
   const [tab, setTab] = useState('keys');
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -47,7 +47,7 @@ export default function API() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Active API Keys',    value: '4'      },
           { label: 'API Calls (24h)',    value: '18,442' },
@@ -138,7 +138,7 @@ export default function API() {
 
       {/* Docs */}
       {tab === 'docs' && (
-        <div style={{ ...CARD, padding: '28px 32px' }}>
+        <div style={{ ...CARD, padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)' }}>
           <div style={{ fontSize: 13, color: '#4B5563', marginBottom: 16 }}>
             Access the AtonixDev REST API documentation to integrate third-party systems.
           </div>

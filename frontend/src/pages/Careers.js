@@ -113,7 +113,7 @@ const Careers = () => {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
             {filtered.map((role) => (
-              <div key={role.title} style={{ background: '#FFFFFF', padding: '28px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}
+              <div key={role.title} style={{ background: '#FFFFFF', padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = '#FAFAFA'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = '#FFFFFF'; }}>
                 <div style={{ flex: 1, minWidth: 280 }}>
@@ -147,7 +147,7 @@ const Careers = () => {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB', maxWidth: 800 }}>
             {process.map((p) => (
-              <div key={p.step} style={{ background: '#FFFFFF', padding: '28px 32px', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+              <div key={p.step} style={{ background: '#FFFFFF', padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
                 <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, background: '#A81D37', fontSize: 11, fontWeight: 800, color: '#FFFFFF', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{p.step}</span>
                 <div>
                   <h3 style={{ fontSize: 15, fontWeight: 800, color: '#111827', marginBottom: 8, lineHeight: 1.3 }}>{p.title}</h3>

@@ -57,7 +57,7 @@ export default function EmailOverview() {
   const deliverRate = stats.total > 0 ? ((stats.sent / Math.max(stats.sent + stats.failed, 1)) * 100).toFixed(1) : '—';
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
@@ -77,7 +77,7 @@ export default function EmailOverview() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Emails Tracked', value: stats.total,  accent: '#3B82F6' },
           { label: 'Delivered',       value: stats.sent,   accent: '#22C55E' },
@@ -95,7 +95,7 @@ export default function EmailOverview() {
       </div>
 
       {/* Two-column panels */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 28 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))', gap: 20, marginBottom: 28 }}>
 
         {/* SMTP Health */}
         <div style={CARD}>
@@ -120,7 +120,8 @@ export default function EmailOverview() {
         {/* Domain Health */}
         <div style={CARD}>
           <div style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>Domain Health</div>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 400 }}>
             <thead>
               <tr>{['Domain', 'SPF', 'DKIM', 'Status'].map((h) => (
                 <th key={h} style={{ padding: '6px 8px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
@@ -139,6 +140,7 @@ export default function EmailOverview() {
               ))}
             </tbody>
           </table>
+          </div>
           <div style={{ marginTop: 16, padding: '12px 14px', background: '#F9FAFB', border: BD }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Deliverability Score</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -162,7 +164,8 @@ export default function EmailOverview() {
         ) : logs.length === 0 ? (
           <div style={{ padding: 32, textAlign: 'center', color: '#4B5563', fontSize: 13, border: BD }}>No recent activity.</div>
         ) : (
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 560 }}>
             <thead>
               <tr>{['Time', 'Type', 'Recipient', 'Subject', 'Status'].map((h) => (
                 <th key={h} style={{ padding: '8px 14px', textAlign: 'left', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4B5563', borderBottom: BD, fontFamily: 'var(--font-mono)' }}>{h}</th>
@@ -184,11 +187,12 @@ export default function EmailOverview() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 
       {/* Quick links */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14 }}>
         {[
           { label: 'Marketing',   desc: 'Campaigns & audience targeting', to: '/email-console/marketing',  code: 'MKT' },
           { label: 'Campaigns',   desc: 'Send & track email campaigns',   to: '/email-console/campaigns',  code: 'CMP' },

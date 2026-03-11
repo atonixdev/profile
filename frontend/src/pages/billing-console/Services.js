@@ -44,7 +44,7 @@ const ServiceAnalytics = () => {
   const maxCost      = services.reduce((m, r) => Math.max(m, r.total_cost), 1);
 
   return (
-    <div style={{ padding: '28px 32px', maxWidth: 1280 }}>
+    <div style={{ padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', maxWidth: 1280 }}>
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
@@ -55,7 +55,7 @@ const ServiceAnalytics = () => {
       </div>
 
       {/* Summary row */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14, marginBottom: 24 }}>
         {[
           { label: 'Total Revenue',     value: fmt$(totalRevenue),                       accent: A },
           { label: 'Active Services',   value: services.length,                          accent: '#2563EB' },

@@ -150,7 +150,7 @@ function EvaluationCard({ evaluation }) {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(5, 1fr)',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 160px), 1fr))',
         gap: 8,
         marginBottom: 12,
       }}>
@@ -287,7 +287,7 @@ export default function ApplicationDetail() {
 
   return (
     <ApplicationConsoleLayout>
-      <div style={{ padding: '20px 40px', background: '#060e1a', minHeight: '100vh', color: '#e2e8f0' }}>
+      <div style={{ padding: 'clamp(12px, 3vw, 20px) clamp(16px, 5vw, 40px)', background: '#060e1a', minHeight: '100vh', color: '#e2e8f0' }}>
         {/* Header */}
         <div style={{ marginBottom: 32 }}>
           <Link to="/application-console/ats" style={{ color: '#64748b', textDecoration: 'none', fontSize: 14, marginBottom: 12, display: 'inline-block' }}>
@@ -431,7 +431,7 @@ export default function ApplicationDetail() {
           <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 14, color: '#93c5fd' }}>Candidate Information</h2>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: 16,
             background: '#112240',
             border: '1px solid #1e3a5f',

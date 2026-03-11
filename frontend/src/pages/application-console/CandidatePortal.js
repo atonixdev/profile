@@ -221,7 +221,7 @@ export default function CandidatePortal() {
             <div style={{ marginBottom: 24 }}>
               <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 14, color: '#93c5fd' }}>📋 Your Information</h3>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 12, marginBottom: 12 }}>
                 <input
                   type="text"
                   name="first_name"

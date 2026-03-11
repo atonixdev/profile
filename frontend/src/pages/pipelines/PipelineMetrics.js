@@ -200,7 +200,7 @@ const PipelineMetrics = () => {
               );
             })}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 160px), 1fr))', gap: 10 }}>
             {[
               { l: 'Min', v: Math.min(...detail.history).toFixed(4) + detail.unit },
               { l: 'Max', v: Math.max(...detail.history).toFixed(4) + detail.unit },

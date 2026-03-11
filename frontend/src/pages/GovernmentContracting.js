@@ -98,7 +98,7 @@ const GovernmentContracting = () => {
       {/* ── NAICS & Contract Vehicles ── */}
       <section className="gsw-section" style={{ background: '#F8F9FA' }}>
         <div className="gsw-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px 80px', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '64px 80px', alignItems: 'start' }}>
             <div>
               <span className="gsw-eyebrow">NAICS Codes</span>
               <h2 style={{ fontSize: 'clamp(22px, 2.5vw, 32px)', fontWeight: 800, color: '#111827', lineHeight: 1.2, marginBottom: 32 }}>

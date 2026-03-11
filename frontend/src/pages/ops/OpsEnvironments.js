@@ -41,7 +41,7 @@ const OpsEnvironments = () => (
     {/* Summary */}
     <div
       style={{
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
         border: '1px solid #E5E7EB', borderRight: 'none',
         marginBottom: 36,
       }}
@@ -69,7 +69,7 @@ const OpsEnvironments = () => (
     </div>
 
     {/* Environment cards */}
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }} className="ops-two-col">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 20 }} className="ops-two-col">
       {ENVIRONMENTS.map((env) => {
         const tc = TYPE_STYLES[env.type] || { bg: '#F9FAFB', color: '#4B5563' };
         return (
@@ -118,7 +118,7 @@ const OpsEnvironments = () => (
             <div style={{ padding: '16px 20px' }}>
               <div
                 style={{
-                  display: 'grid', gridTemplateColumns: '1fr 1fr',
+                  display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                   gap: '12px 24px',
                 }}
               >

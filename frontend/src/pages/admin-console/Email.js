@@ -221,7 +221,7 @@ export default function Email() {
   }, []);
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Preview Modal */}
       {previewOpen && (
@@ -279,7 +279,7 @@ export default function Email() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Verified Domains',   value: '2'    },
           { label: 'Deliverability',     value: '98.7%' },
@@ -349,8 +349,8 @@ export default function Email() {
 
       {/* SMTP */}
       {tab === 'smtp' && (
-        <div style={{ background: '#FFFFFF', border: BD, padding: '28px 32px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+        <div style={{ background: '#FFFFFF', border: BD, padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 20 }}>
             {[
               { label: 'SMTP Host',    value: 'smtp.sendgrid.net' },
               { label: 'SMTP Port',    value: '587' },
@@ -424,7 +424,7 @@ export default function Email() {
           {showNewTmpl && (
             <div style={{ ...CARD, marginBottom: 20, border: `1px solid rgba(212,175,55,0.3)` }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>New Template</div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 14 }}>
                 {[
                   { key: 'template_id', label: 'Template ID (slug)', placeholder: 'e.g. MKT-PROMO-02' },
                   { key: 'name',        label: 'Display Name',       placeholder: 'e.g. Promo Email' },
@@ -533,7 +533,7 @@ export default function Email() {
                   {editingTmpl === t.template_id ? (
                     /* Inline Edit Form */
                     <div>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 12, marginBottom: 12 }}>
                         <div>
                           <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 4, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Name</label>
                           <input value={editForm.name || ''} onChange={(e) => setEditForm((p) => ({ ...p, name: e.target.value }))}

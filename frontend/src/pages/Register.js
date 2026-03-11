@@ -132,7 +132,7 @@ const Register = () => {
           )}
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '16px' }}>
               <div>
                 <label style={labelStyle}>First Name</label>
                 <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required placeholder="John" style={inputStyle} />

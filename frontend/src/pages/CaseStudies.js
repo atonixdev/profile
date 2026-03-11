@@ -177,7 +177,7 @@ const CaseStudies = () => {
           </div>
 
           {/* ── Outcome ── */}
-          <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '28px 32px' }}>
+          <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)' }}>
             <h3 style={{ fontSize: 14, fontWeight: 800, color: '#111827', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Ongoing Impact</h3>
             <p style={{ fontSize: 14, color: '#1F2937', lineHeight: 1.8, margin: 0 }}>{study.outcome}</p>
           </div>

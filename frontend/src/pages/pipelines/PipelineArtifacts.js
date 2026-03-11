@@ -57,7 +57,7 @@ const PipelineArtifacts = () => {
 
       {/* Stats */}
       <div
-        style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}
       >
         {[
           { label: 'Total Artifacts', value: ARTIFACTS.length },

@@ -66,7 +66,7 @@ const PipelineReports = () => (
     </div>
 
     {/* Metrics grid */}
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 24 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16, marginBottom: 24 }}>
       {METRICS.map((m) => (
         <div
           key={m.label}
@@ -84,7 +84,7 @@ const PipelineReports = () => (
     </div>
 
     {/* Confusion matrix + ROC curve side by side */}
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 24 }}>
       {/* Confusion matrix */}
       <div style={card}>
         <div style={eyebrow}>Confusion Matrix</div>

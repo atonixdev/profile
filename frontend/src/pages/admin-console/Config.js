@@ -59,7 +59,7 @@ export default function Config() {
   };
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -90,7 +90,7 @@ export default function Config() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Config Keys',      value: '36'  },
           { label: 'Active Integrations', value: '4' },
@@ -125,11 +125,11 @@ export default function Config() {
           ))}
         </div>
 
-        <div style={{ background: '#FFFFFF', border: BD, padding: '28px 32px' }}>
+        <div style={{ background: '#FFFFFF', border: BD, padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)' }}>
           <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.12em', color: A, textTransform: 'uppercase', marginBottom: 20 }}>
             {section.label} Configuration
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 20 }}>
             {section.fields.map((f) => (
               <div key={f.key}>
                 <label style={{ fontSize: 11, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6, fontFamily: 'var(--font-mono)' }}>

@@ -498,11 +498,15 @@ code, pre, kbd, samp {
 /* ── Console layouts (Admin & OPS) — Responsive ──────────── */
 
 /* Tables: always allow horizontal scroll inside console pages */
-.console-content div:has(> table) {
+.console-content div:has(> table),
+.console-padded-content div:has(> table),
+.ops-content div:has(> table) {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-.console-content table {
+.console-content table,
+.console-padded-content table,
+.ops-content table {
   min-width: 520px;
 }
 
@@ -512,9 +516,9 @@ code, pre, kbd, samp {
 }
 
 @media (max-width: 767px) {
-  /* Stat grids (4-col & 3-col) → 2-col on phones */
+  /* Stat grids → responsive auto-fit on phones */
   .console-stat-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 155px), 1fr)) !important;
   }
 
   /* Sidebar/detail split grids → stack on phones */
@@ -537,6 +541,20 @@ code, pre, kbd, samp {
     width: 96vw !important;
     max-width: 96vw !important;
   }
+
+  /* Dashboard/console landing page padding */
+  .console-padded-content > div,
+  .console-content > div {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* Any inline flex header rows inside dashboards should wrap */
+  .console-padded-content [style*="justifyContent: 'space-between'"],
+  .console-padded-content [style*="justify-content: space-between"] {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 479px) {
@@ -551,6 +569,10 @@ code, pre, kbd, samp {
   .console-content input {
     max-width: 100% !important;
     box-sizing: border-box !important;
+  }
+  /* Prevent any dashboard page from creating horizontal scroll */
+  .console-padded-content {
+    overflow-x: hidden;
   }
 }
 

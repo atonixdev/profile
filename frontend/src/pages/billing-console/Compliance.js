@@ -48,7 +48,7 @@ const Compliance = () => {
   const compliCount = COMPLIANCE_ITEMS.filter(c => c.status === 'compliant').length;
 
   return (
-    <div style={{ padding: '28px 32px', maxWidth: 1280 }}>
+    <div style={{ padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', maxWidth: 1280 }}>
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
@@ -59,7 +59,7 @@ const Compliance = () => {
       </div>
 
       {/* KPI row */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 14, marginBottom: 24 }}>
         {[
           { label: 'Audit Events',       value: loading ? '…' : auditLog.length, accent: '#2563EB' },
           { label: 'High Severity',      value: loading ? '…' : highCount,       accent: '#DC2626' },

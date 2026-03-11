@@ -54,7 +54,7 @@ export default function EmailSMTP() {
   };
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.14em', color: A, textTransform: 'uppercase', marginBottom: 6 }}>SMP — SMTP Configuration</div>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111827' }}>SMTP Settings</h1>
@@ -64,9 +64,9 @@ export default function EmailSMTP() {
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24 }}>
 
         {/* Config form */}
-        <div style={{ background: '#FFFFFF', border: BD, padding: '28px 32px' }}>
+        <div style={{ background: '#FFFFFF', border: BD, padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)' }}>
           <div style={{ fontSize: 10, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 20, fontFamily: 'var(--font-mono)' }}>Outbound Mail Server</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 18 }}>
             {FIELDS.map((f) => (
               <div key={f.key} style={f.key === 'api_key' ? { gridColumn: '1 / -1' } : {}}>
                 <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)' }}>{f.label}</label>

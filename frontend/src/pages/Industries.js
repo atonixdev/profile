@@ -77,7 +77,7 @@ const Industries = () => {
                   <h2 style={{ fontSize: 24, fontWeight: 900, color: '#111827', letterSpacing: '-0.02em', marginBottom: 0 }}>{ind.name}</h2>
                 </div>
                 {/* Right — Details */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px 40px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '24px 40px' }}>
                   <div>
                     <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>Challenges</div>
                     <p style={{ fontSize: 13, color: '#1F2937', lineHeight: 1.72, margin: 0 }}>{ind.challenges}</p>

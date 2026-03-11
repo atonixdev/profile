@@ -57,7 +57,7 @@ export default function EmailMarketing() {
   ];
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -74,7 +74,7 @@ export default function EmailMarketing() {
       {error && <div style={{ padding: '12px 16px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#EF4444', fontSize: 12, marginBottom: 20 }}>Failed to load: {error}</div>}
 
       {/* Key Metrics */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 16, marginBottom: 32 }}>
         {METRICS.map((m) => (
           <div key={m.label} style={CARD}>
             <div style={{ fontSize: 10, color: '#4B5563', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)' }}>{m.label}</div>
@@ -128,7 +128,7 @@ export default function EmailMarketing() {
       </div>
 
       {/* Quick Links */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 14 }}>
         {[
           { title: 'Manage Campaigns', desc: 'Create, schedule, and dispatch email campaigns.', href: '/email-console/campaigns', icon: '📣' },
           { title: 'Email Templates', desc: 'Library of reusable templates for your campaigns.', href: '/email-console/templates', icon: '📝' },

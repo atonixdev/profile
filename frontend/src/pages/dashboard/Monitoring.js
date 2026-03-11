@@ -26,7 +26,7 @@ const Monitoring = () => {
       </div>
 
       {/* Metric cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 32 }}>
         {METRICS.map((m) => (
           <div key={m.label} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '22px 20px' }}>
             <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4B5563', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>

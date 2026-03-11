@@ -62,7 +62,7 @@ export default function EmailSenders() {
   const inp = { width: '100%', padding: '8px 10px', background: '#FFF', border: BD, color: '#111827', fontSize: 12, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' };
 
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       <div style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
@@ -80,7 +80,7 @@ export default function EmailSenders() {
       {showNew && (
         <div style={{ ...CARD, marginBottom: 20, border: '1px solid rgba(212,175,55,0.3)' }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: A, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 16, fontFamily: 'var(--font-mono)' }}>New Sender Identity</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 14 }}>
             {[{ k: 'from_name', l: 'From Name', ph: 'AtonixDev Notifications' }, { k: 'from_email', l: 'From Email', ph: 'noreply@atonixdev.com' }, { k: 'reply_to', l: 'Reply-To (optional)', ph: 'support@atonixdev.com' }, { k: 'description', l: 'Description (optional)', ph: 'Transactional emails' }].map(({ k, l, ph }) => (
               <div key={k}>
                 <label style={{ fontSize: 10, fontWeight: 700, color: '#4B5563', display: 'block', marginBottom: 5, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{l}</label>

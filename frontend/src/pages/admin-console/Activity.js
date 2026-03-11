@@ -17,7 +17,7 @@ const ACTIVITY = [
 
 export default function Activity() {
   return (
-    <div style={{ padding: '32px 36px', color: '#1F2937', minHeight: '100%' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px) clamp(16px, 4vw, 36px)', color: '#1F2937', minHeight: '100%' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 28 }}>
@@ -31,7 +31,7 @@ export default function Activity() {
       </div>
 
       {/* Stats */}
-      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="console-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Actions Today',   value: '14'  },
           { label: 'Active Admins',   value: '4'   },
@@ -46,7 +46,7 @@ export default function Activity() {
       </div>
 
       {/* Admin overview */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 16, marginBottom: 28 }}>
         {[
           { name: 'Samuel Realm',  role: 'Superadmin', actions: 312, last: '11:42 today' },
           { name: 'Atonix Dev',    role: 'Admin',       actions: 148, last: '11:30 today' },

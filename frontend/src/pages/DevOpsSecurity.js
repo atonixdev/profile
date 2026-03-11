@@ -107,7 +107,7 @@ const DevOpsSecurity = () => (
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: '#E5E7EB', border: '1px solid #E5E7EB' }}>
           {maturity.map((m, i) => (
-            <div key={i} style={{ background: '#FFFFFF', padding: '28px 32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px 48px', alignItems: 'start' }}>
+            <div key={i} style={{ background: '#FFFFFF', padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px 48px', alignItems: 'start' }}>
               <div>
                 <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#A81D37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{m.level}</div>
                 <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.7, margin: 0 }}><strong style={{ color: '#111827' }}>Current state: </strong>{m.desc}</p>
