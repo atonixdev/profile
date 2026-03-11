@@ -91,6 +91,24 @@ import BillingCredits from './pages/billing-console/Credits';
 import BillingLedger from './pages/billing-console/Ledger';
 import BillingCompliance from './pages/billing-console/Compliance';
 import BillingUserAnalytics from './pages/billing-console/UserAnalytics';
+import FinancialDashboardLayout from './components/Layout/FinancialDashboardLayout';
+import MasterFinanceDashboard from './pages/financial-dashboard/MasterDashboard';
+import ProductRevenueView from './pages/financial-dashboard/Revenue';
+import ProductCostView from './pages/financial-dashboard/Cost';
+import BudgetForecastingView from './pages/financial-dashboard/Budget';
+import BillingPaymentsView from './pages/financial-dashboard/Billing';
+import DepartmentFinancialView from './pages/financial-dashboard/Department';
+import VendorProcurementView from './pages/financial-dashboard/Vendor';
+import ComplianceAuditView from './pages/financial-dashboard/Compliance';
+import FounderPortalLayout from './components/Layout/FounderPortalLayout';
+import ExecutiveDashboard from './pages/founder-portal/ExecutiveDashboard';
+import InvestorHub from './pages/founder-portal/InvestorHub';
+import TeamManagement from './pages/founder-portal/TeamManagement';
+import FinancialCompliance from './pages/founder-portal/FinancialCompliance';
+import VisionNarrative from './pages/founder-portal/VisionNarrative';
+import DeveloperDashboard from './pages/founder-portal/DeveloperDashboard';
+import MarketingDashboard from './pages/founder-portal/MarketingDashboard';
+import BrandingSystems from './pages/founder-portal/BrandingSystems';
 import ApplicationConsoleLayout from './components/Layout/ApplicationConsoleLayout';
 import ApplicationConsoleDashboard from './pages/application-console/Dashboard';
 import JobPostings from './pages/application-console/JobPostings';
@@ -333,6 +351,34 @@ function App() {
               <Route path="ledger"         element={<BillingLedger />} />
               <Route path="compliance"     element={<BillingCompliance />} />
               <Route path="users"          element={<BillingUserAnalytics />} />
+            </Route>
+          </Route>
+
+          {/* Financial Dashboard — Staff Only */}
+          <Route element={<StaffRoute />}>
+            <Route path="/financial-dashboard" element={<FinancialDashboardLayout />}>
+              <Route index element={<MasterFinanceDashboard />} />
+              <Route path="revenue"       element={<ProductRevenueView />} />
+              <Route path="cost"          element={<ProductCostView />} />
+              <Route path="budget"        element={<BudgetForecastingView />} />
+              <Route path="billing"       element={<BillingPaymentsView />} />
+              <Route path="department"    element={<DepartmentFinancialView />} />
+              <Route path="vendor"        element={<VendorProcurementView />} />
+              <Route path="compliance"    element={<ComplianceAuditView />} />
+            </Route>
+          </Route>
+
+          {/* Founder Portal — Staff Only */}
+          <Route element={<StaffRoute />}>
+            <Route path="/founder-portal" element={<FounderPortalLayout />}>
+              <Route index element={<ExecutiveDashboard />} />
+              <Route path="investor"      element={<InvestorHub />} />
+              <Route path="team"          element={<TeamManagement />} />
+              <Route path="financial"     element={<FinancialCompliance />} />
+              <Route path="vision"        element={<VisionNarrative />} />
+              <Route path="developer"     element={<DeveloperDashboard />} />
+              <Route path="marketing"     element={<MarketingDashboard />} />
+              <Route path="branding"      element={<BrandingSystems />} />
             </Route>
           </Route>
 

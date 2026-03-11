@@ -79,8 +79,10 @@ INSTALLED_APPS = [
     'emails',
     'support',
     'billing',
+    'finance',  # Financial Dashboard
     'employment',
     'social_hub',
+    'founder_portal',
 ]
 
 MIDDLEWARE = [
