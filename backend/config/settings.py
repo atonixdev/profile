@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'support',
     'billing',
     'employment',
+    'social_hub',
 ]
 
 MIDDLEWARE = [
@@ -277,6 +278,32 @@ OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY', default='').strip()
 
 # Support system
 SUPPORT_ATTACHMENT_MAX_MB = config('SUPPORT_ATTACHMENT_MAX_MB', default=10, cast=int)
+
+# ── Social Hub OAuth credentials ──────────────────────────────────────────
+# All values must be set in the environment (or .env file) — never hardcoded.
+SOCIAL_OAUTH = {
+    'linkedin':  {
+        'client_id':     config('LINKEDIN_CLIENT_ID',     default=''),
+        'client_secret': config('LINKEDIN_CLIENT_SECRET', default=''),
+    },
+    'facebook':  {
+        'client_id':     config('FACEBOOK_CLIENT_ID',     default=''),
+        'client_secret': config('FACEBOOK_CLIENT_SECRET', default=''),
+    },
+    'twitter':   {
+        'client_id':     config('TWITTER_CLIENT_ID',      default=''),
+        'client_secret': config('TWITTER_CLIENT_SECRET',  default=''),
+    },
+    'tiktok':    {
+        'client_id':     config('TIKTOK_CLIENT_ID',       default=''),
+        'client_secret': config('TIKTOK_CLIENT_SECRET',   default=''),
+    },
+    'youtube':   {
+        'client_id':     config('GOOGLE_CLIENT_ID',       default=''),
+        'client_secret': config('GOOGLE_CLIENT_SECRET',   default=''),
+    },
+}
+
 
 # JWT Settings
 SIMPLE_JWT = {

@@ -112,6 +112,37 @@ const Overview = () => {
         </div>
       </div>
 
+      {/* Portals */}
+      <div style={{ marginBottom: 36 }}>
+        <div
+          style={{
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+            textTransform: 'uppercase', color: '#1F2937',
+            fontFamily: 'var(--font-mono)', marginBottom: 16,
+          }}
+        >
+          Portals
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: 12 }}>
+          <Link
+            to="/social-hub"
+            style={{
+              display: 'block', padding: '20px 24px',
+              background: '#FFFFFF', border: '1px solid #E5E7EB',
+              borderTop: '3px solid #D4AF37',
+              textDecoration: 'none',
+              transition: 'box-shadow 0.15s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 2px 10px rgba(212,175,55,0.18)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
+          >
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#D4AF37', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>Marketing</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: '#111827', marginBottom: 4 }}>Social Hub</div>
+            <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.6 }}>Manage posts, schedules, and analytics across LinkedIn, Instagram, X, TikTok and more.</div>
+          </Link>
+        </div>
+      </div>
+
       {/* Recent Activity */}
       <div>
         <div

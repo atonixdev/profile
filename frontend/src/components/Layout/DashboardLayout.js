@@ -118,6 +118,43 @@ const DashboardLayout = () => {
           })}
         </nav>
 
+        {/* Social Hub portal — all users */}
+        <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <Link
+            to="/social-hub"
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: '9px 12px',
+              background: 'rgba(212,175,55,0.08)',
+              border: '1px solid rgba(212,175,55,0.28)',
+              textDecoration: 'none',
+              transition: 'background 0.15s, border-color 0.15s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(212,175,55,0.2)';
+              e.currentTarget.style.borderColor = 'rgba(212,175,55,0.6)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(212,175,55,0.08)';
+              e.currentTarget.style.borderColor = 'rgba(212,175,55,0.28)';
+            }}
+          >
+            <div>
+              <div style={{
+                fontSize: 9, fontWeight: 700, letterSpacing: '0.12em',
+                textTransform: 'uppercase', color: '#D4AF37',
+                fontFamily: 'var(--font-mono)', marginBottom: 2,
+              }}>
+                Marketing
+              </div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#FFFFFF' }}>
+                Social Hub
+              </div>
+            </div>
+            <span style={{ fontSize: 12, color: '#D4AF37' }}>→</span>
+          </Link>
+        </div>
+
         {/* Staff consoles */}
         {user?.is_staff && (
           <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column', gap: 8 }}>

@@ -120,6 +120,14 @@ import Support from './pages/Support';
 import SettingsProfile from './pages/settings/Profile';
 import SettingsSSHKeys from './pages/settings/SSHKeys';
 import SettingsGPGKeys from './pages/settings/GPGKeys';
+import SocialHubLayout from './components/Layout/SocialHubLayout';
+import SocialHubOverview from './pages/social-hub/Overview';
+import SocialHubAccounts from './pages/social-hub/Accounts';
+import SocialHubPosts from './pages/social-hub/Posts';
+import SocialHubComposer from './pages/social-hub/Composer';
+import SocialHubCalendar from './pages/social-hub/Calendar';
+import SocialHubMediaLibrary from './pages/social-hub/MediaLibrary';
+import SocialHubAnalytics from './pages/social-hub/Analytics';
 import PipelineDashboardLayout from './components/Layout/PipelineDashboardLayout';
 import PipelineOverview from './pages/pipelines/PipelineOverview';
 import PipelineGraph from './pages/pipelines/PipelineGraph';
@@ -342,6 +350,19 @@ function App() {
               <Route path="evaluations"   element={<Evaluations />} />
               <Route path="employees"     element={<EmployeeDirectory />} />
               <Route path="compliance"    element={<ApplicationCompliance />} />
+            </Route>
+          </Route>
+
+          {/* Social Hub — Protected (all authenticated users) */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/social-hub" element={<SocialHubLayout />}>
+              <Route index element={<SocialHubOverview />} />
+              <Route path="posts" element={<SocialHubPosts />} />
+              <Route path="posts/new" element={<SocialHubComposer />} />
+              <Route path="calendar" element={<SocialHubCalendar />} />
+              <Route path="media" element={<SocialHubMediaLibrary />} />
+              <Route path="accounts" element={<SocialHubAccounts />} />
+              <Route path="analytics" element={<SocialHubAnalytics />} />
             </Route>
           </Route>
 
