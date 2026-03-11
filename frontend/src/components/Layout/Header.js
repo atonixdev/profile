@@ -431,7 +431,7 @@ const Header = () => {
 
       {/* ══ TOP UTILITY HEADER (Tier 1) ═══════════════════════ */}
       <div
-        className="hidden md:block"
+        className="hidden md:block header-utility-bar"
         style={{
           height: 40,
           background: '#02010a',
@@ -684,7 +684,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center" style={{ gap: 0, position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+          <div className="hidden md:flex items-center header-desktop-nav" style={{ gap: 0, position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
             {navigation.map((item, index) => (
               <div
                 key={item.name}
@@ -726,7 +726,7 @@ const Header = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="flex md:hidden"
+            className="flex md:hidden header-mobile-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             style={{
               background: 'none', border: 'none', cursor: 'pointer',

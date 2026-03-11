@@ -422,6 +422,26 @@ code, pre, kbd, samp {
   .grid { width: 100%; }
 }
 
+@media (max-width: 1100px) {
+  .header-utility-bar {
+    display: none !important;
+  }
+
+  .header-desktop-nav {
+    display: none !important;
+  }
+
+  .header-mobile-toggle {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1101px) {
+  .header-mobile-toggle {
+    display: none !important;
+  }
+}
+
 /* ── Legacy / backward-compat for classes still used ─────── */
 .animate-fade-in-up  { animation: fadeInUp 0.6s ease forwards; }
 .animate-slide-in-up { animation: fadeInUp 0.6s ease forwards; }
