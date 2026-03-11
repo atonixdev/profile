@@ -59,7 +59,7 @@ const Support = () => {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 24, alignItems: 'flex-start' }}>
+      <div className="form-grid-sidebar form-grid-support" style={{ gap: 24 }}>
 
         {/* Ticket form */}
         <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '32px' }}>

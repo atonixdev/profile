@@ -61,7 +61,7 @@ export default function EmailSMTP() {
         <p style={{ fontSize: 13, color: '#4B5563', margin: '6px 0 0' }}>Outbound mail server credentials and delivery configuration.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24 }}>
+      <div className="form-grid-sidebar form-grid-smtp">
 
         {/* Config form */}
         <div style={{ background: '#FFFFFF', border: BD, padding: 'clamp(14px, 3.5vw, 28px) clamp(14px, 3.5vw, 32px)' }}>

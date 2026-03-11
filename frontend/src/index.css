@@ -577,4 +577,56 @@ code, pre, kbd, samp {
 }
 
 /* ── md:hidden / hidden utility (mirrors Tailwind for non-Tailwind usage) ─ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FORM MOBILE RESPONSIVENESS  — shared across public & console pages
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Responsive 2-column: form panel + info/status sidebar */
+.form-grid-sidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  /* Contact page: wide form + narrow info panel */
+  .form-grid-contact  { grid-template-columns: 1fr 340px; gap: 64px; }
+  /* Dashboard Support: form + resources sidebar */
+  .form-grid-support  { grid-template-columns: 1fr 320px; align-items: flex-start; }
+  /* SMTP config: config panel + status/test sidebar */
+  .form-grid-smtp     { grid-template-columns: 2fr 1fr; gap: 24px; }
+  /* User analytics: user list + detail panel */
+  .form-grid-user-analytics { grid-template-columns: 1fr 2fr; gap: 24px; }
+}
+
+/* Responsive sidebar nav + content grid (e.g. Discussions page) */
+.page-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .page-content-grid-discussions { grid-template-columns: 220px 1fr; gap: 32px; }
+}
+
+/* Scrollable key listing tables (SSH / GPG keys) */
+.keys-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.keys-table-scroll > div {
+  min-width: 640px;
+}
+
+/* Ensure search/filter inputs in form toolbars never overflow on mobile */
+@media (max-width: 767px) {
+  .form-search-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
 /* Note: Tailwind handles .hidden and .md:flex already via @tailwind utilities */

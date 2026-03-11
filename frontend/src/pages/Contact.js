@@ -160,10 +160,10 @@ const Contact = () => {
       {/* Main Content */}
       <section className="gsw-section">
         <div className="gsw-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '64px', alignItems: 'start' }}>
+          <div className="form-grid-sidebar form-grid-contact">
 
             {/* Form Panel */}
-            <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: '48px' }}>
+            <div style={{ background: '#F8F9FA', border: '1px solid #E5E7EB', padding: 'clamp(20px, 5vw, 48px)' }}>
               <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#111827', marginBottom: '32px', letterSpacing: '-0.01em' }}>
                 Send Message
               </h2>

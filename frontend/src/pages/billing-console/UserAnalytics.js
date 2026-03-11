@@ -83,7 +83,7 @@ const UserAnalytics = () => {
         <p style={{ fontSize: 13, color: '#6B7280', margin: 0 }}>Usage and billing activity per individual user.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24 }}>
+      <div className="form-grid-sidebar form-grid-user-analytics">
         {/* Left: User list */}
         <div>
           <div style={{ ...CARD, marginBottom: 16 }}>

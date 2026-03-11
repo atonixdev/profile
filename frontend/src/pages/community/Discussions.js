@@ -58,7 +58,8 @@ const Discussions = () => {
               style={{
                 padding: '10px 16px', border: '1px solid #D1D5DB',
                 fontSize: 13, fontFamily: 'inherit', outline: 'none',
-                width: 300, color: '#111827', background: '#FFFFFF',
+                width: '100%', maxWidth: 300, boxSizing: 'border-box',
+                color: '#111827', background: '#FFFFFF',
               }}
             />
             <button
@@ -76,9 +77,9 @@ const Discussions = () => {
 
       {/* Main layout */}
       <div
+        className="page-content-grid page-content-grid-discussions"
         style={{
           maxWidth: 1440, margin: '0 auto', padding: '40px 24px',
-          display: 'grid', gridTemplateColumns: '220px 1fr', gap: 32,
         }}
       >
         {/* Sidebar */}

@@ -314,6 +314,7 @@ const SSHKeys = () => {
         </div>
 
         {/* Table header */}
+        <div className="keys-table-scroll">
         <div
           style={{
             display: 'grid', gridTemplateColumns: COL_WIDTHS,
@@ -424,6 +425,7 @@ const SSHKeys = () => {
             </div>
           ))
         )}
+        </div>{/* end keys-table-scroll */}
       </div>
     </div>
   );

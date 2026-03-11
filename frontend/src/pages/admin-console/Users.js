@@ -86,10 +86,11 @@ export default function Users() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search users…"
+            className="form-search-input"
             style={{
               background: '#FFFFFF', border: BD,
               color: '#1F2937', fontSize: 12, padding: '6px 12px',
-              outline: 'none', fontFamily: 'inherit', width: 220,
+              outline: 'none', fontFamily: 'inherit', width: '100%', maxWidth: 220, boxSizing: 'border-box',
             }}
           />
         </div>

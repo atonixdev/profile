@@ -283,6 +283,7 @@ const GPGKeys = () => {
         </div>
 
         {/* Table header */}
+        <div className="keys-table-scroll">
         <div
           style={{
             display: 'grid', gridTemplateColumns: COL_WIDTHS,
@@ -405,6 +406,7 @@ const GPGKeys = () => {
             </div>
           ))
         )}
+        </div>{/* end keys-table-scroll */}
       </div>
     </div>
   );
