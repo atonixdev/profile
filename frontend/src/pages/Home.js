@@ -1,6 +1,101 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { testimonialService } from '../services';
+
+// ── Animated Network Diagram ───────────────────────────────────────────────
+const NetworkCanvas = () => {
+  const canvasRef = useRef(null);
+  const animRef = useRef(null);
+  const nodesRef = useRef([]);
+
+  const initNodes = useCallback((w, h) => {
+    const count = Math.floor((w * h) / 14000);
+    return Array.from({ length: Math.max(count, 18) }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.45,
+      vy: (Math.random() - 0.5) * 0.45,
+      r: Math.random() * 1.8 + 1.2,
+    }));
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const MAX_DIST = 160;
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      nodesRef.current = initNodes(canvas.width, canvas.height);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const draw = () => {
+      const { width: W, height: H } = canvas;
+      ctx.clearRect(0, 0, W, H);
+      const nodes = nodesRef.current;
+
+      // move
+      nodes.forEach((n) => {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+      });
+
+      // edges
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAX_DIST) {
+            const alpha = (1 - dist / MAX_DIST) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(168,29,55,${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // nodes
+      nodes.forEach((n) => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(168,29,55,0.7)';
+        ctx.fill();
+      });
+
+      animRef.current = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animRef.current);
+    };
+  }, [initNodes]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        display: 'block',
+        zIndex: 0,
+      }}
+    />
+  );
+};
 
 // Corporate Homepage — AtonixDev Enterprise Technology Company
 const Home = () => {
@@ -44,7 +139,7 @@ const Home = () => {
       <section
         style={{
           position: 'relative',
-          background: '#FFFFFF',
+          background: '#07090f',
           overflow: 'hidden',
           minHeight: '72vh',
           display: 'flex',
@@ -53,22 +148,21 @@ const Home = () => {
           justifyContent: 'center',
         }}
       >
+        <NetworkCanvas />
+        {/* subtle vignette overlay */}
         <div style={{
-          position: 'absolute', inset: 0, zIndex: 0,
-          backgroundImage: `
-            linear-gradient(rgba(168,29,55,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(168,29,55,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
+          position: 'absolute', inset: 0, zIndex: 1,
+          background: 'radial-gradient(ellipse at 50% 40%, rgba(7,9,15,0) 30%, rgba(7,9,15,0.72) 100%)',
+          pointerEvents: 'none',
         }} />
-        <div className="gsw-container" style={{ position: 'relative', zIndex: 1, padding: '72px 24px 32px', textAlign: 'center' }}>
+        <div className="gsw-container" style={{ position: 'relative', zIndex: 2, padding: '72px 24px 32px', textAlign: 'center' }}>
 
           <h1 style={{ fontSize: 'clamp(24px, 3.5vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 24, textAlign: 'center' }}>
-            <span style={{ display: 'block', color: '#111827' }}>Engineering the Future of Cloud,</span>
-            <span style={{ display: 'block', color: '#A81D37' }}>Automation, and Intelligent Infrastructure.</span>
+            <span style={{ display: 'block', color: '#FFFFFF' }}>Engineering the Future of Cloud,</span>
+            <span style={{ display: 'block', color: '#E8637A' }}>Automation, and Intelligent Infrastructure.</span>
           </h1>
 
-          <p style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', color: '#4B5563', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
+          <p style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', color: 'rgba(255,255,255,0.65)', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
             Delivering secure, scalable, and intelligent technology solutions for governments,
             enterprises, and global organisations across software, cloud, AI, and infrastructure.
           </p>
@@ -91,12 +185,12 @@ const Home = () => {
               to="/solutions"
               style={{
                 display: 'inline-flex', alignItems: 'center', padding: '13px 36px',
-                background: 'transparent', color: '#111827',
+                background: 'transparent', color: '#FFFFFF',
                 fontWeight: 700, fontSize: 12, letterSpacing: '0.10em', textTransform: 'uppercase',
-                textDecoration: 'none', border: '1px solid #D1D5DB', transition: 'border-color 0.2s, color 0.2s',
+                textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)', transition: 'border-color 0.2s, color 0.2s',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A81D37'; e.currentTarget.style.color = '#A81D37'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#D1D5DB'; e.currentTarget.style.color = '#111827'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#E8637A'; e.currentTarget.style.color = '#E8637A'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.color = '#FFFFFF'; }}
             >
               Explore Solutions
             </Link>

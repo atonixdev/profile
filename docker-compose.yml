@@ -40,6 +40,7 @@ services:
       - ./backend:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/media
+      - sessions_volume:/app/sessions
     ports:
       - "${BACKEND_PORT:-8000}:8000"
     healthcheck:
@@ -100,6 +101,7 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
+  sessions_volume:
 
 networks:
   app-network:
