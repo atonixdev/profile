@@ -431,6 +431,7 @@ const Header = () => {
 
       {/* ══ TOP UTILITY HEADER (Tier 1) ═══════════════════════ */}
       <div
+        className="hidden md:block"
         style={{
           height: 40,
           background: '#02010a',
@@ -744,7 +745,7 @@ const Header = () => {
       {isMenuOpen && (
         <div
           style={{
-            position: 'fixed', top: 104, left: 0, right: 0, bottom: 0, zIndex: 90,
+            position: 'fixed', top: 64, left: 0, right: 0, bottom: 0, zIndex: 90,
             background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'flex-end',
           }}
           onClick={() => setIsMenuOpen(false)}

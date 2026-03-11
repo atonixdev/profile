@@ -126,9 +126,9 @@ const ArchitectureSection = ({ eyebrow, title, description, subsections }) => (
             key={sub.id}
             style={{
               background: idx % 2 === 0 ? '#FFFFFF' : '#FAFAFA',
-              padding: '48px 44px',
+              padding: 'clamp(24px, 4vw, 48px) clamp(20px, 4vw, 44px)',
               display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
               gap: '40px 64px',
               alignItems: 'start',
             }}

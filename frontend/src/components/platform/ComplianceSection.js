@@ -24,7 +24,7 @@ const ComplianceSection = ({ eyebrow, title, description, items }) => (
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
           gap: 1,
           background: '#E5E7EB',
           border: '1px solid #E5E7EB',

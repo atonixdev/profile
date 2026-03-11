@@ -24,7 +24,7 @@ const ScenarioBlock = ({ eyebrow, title, description, scenarios }) => (
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
           gap: 1,
           background: '#E5E7EB',
           border: '1px solid #E5E7EB',
@@ -35,7 +35,7 @@ const ScenarioBlock = ({ eyebrow, title, description, scenarios }) => (
             key={sc.title}
             style={{
               background: '#FFFFFF',
-              padding: '36px 32px',
+              padding: 'clamp(24px, 4vw, 36px) clamp(20px, 4vw, 32px)',
               borderLeft: '3px solid #A81D37',
               transition: 'background 0.15s',
             }}
