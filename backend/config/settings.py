@@ -439,7 +439,7 @@ SERVER_EMAIL = config('SERVER_EMAIL', default='errors@atonixdev.com')
 INBOUND_WEBHOOK_SECRET = config('INBOUND_WEBHOOK_SECRET', default='')
 
 # Public URL used in email CTAs (no trailing slash)
-FRONTEND_URL = config('FRONTEND_URL', default='https://atonixdev.com').rstrip('/')
+FRONTEND_URL = config('FRONTEND_URL', default='https://atonixdev.org').rstrip('/')
 
 # Set default caching headers for responses
 DEFAULT_CACHE_HEADERS = {

@@ -195,7 +195,7 @@ class EmailService:
     def _build_context(ctx: dict, email_type: str) -> dict:
         base = {
             'platform_name':    'AtonixDev',
-            'platform_url':     getattr(settings, 'FRONTEND_URL', 'https://atonixdev.com'),
+            'platform_url':     getattr(settings, 'FRONTEND_URL', 'https://atonixdev.org'),
             'support_email':    'atonixcorpenterprise@gmail.com',
             'year':             timezone.now().year,
             'email_type':       email_type,
@@ -349,7 +349,7 @@ class EmailService:
             if not email:
                 continue
 
-            variables = {'name': name or email, 'unsubscribe_url': f"{getattr(settings, 'FRONTEND_URL', 'https://atonixdev.com')}/unsubscribe?email={email}"}
+            variables = {'name': name or email, 'unsubscribe_url': f"{getattr(settings, 'FRONTEND_URL', 'https://atonixdev.org')}/unsubscribe?email={email}"}
 
             ok = cls.send_from_db_template(
                 template_id=campaign.template.template_id if campaign.template else '',
