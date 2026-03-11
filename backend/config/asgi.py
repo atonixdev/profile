@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 """
 
 import os
+from importlib import import_module
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
@@ -17,9 +18,24 @@ from django.core.asgi import get_asgi_application
 
 django_asgi_app = get_asgi_application()
 
-import iot_lab.routing  # noqa: E402
-import employment.routing  # noqa: E402
 from accounts.ws_auth import JwtCookieAuthMiddleware  # noqa: E402
+
+
+def load_websocket_urlpatterns(module_names):
+	patterns = []
+	for module_name in module_names:
+		try:
+			module = import_module(module_name)
+		except ModuleNotFoundError:
+			continue
+		patterns.extend(getattr(module, 'websocket_urlpatterns', []))
+	return patterns
+
+
+websocket_urlpatterns = load_websocket_urlpatterns([
+	'employment.routing',
+	'iot_lab.routing',
+])
 
 application = ProtocolTypeRouter(
 	{
@@ -27,8 +43,7 @@ application = ProtocolTypeRouter(
 		'websocket': AllowedHostsOriginValidator(
 			JwtCookieAuthMiddleware(
 				URLRouter(
-					iot_lab.routing.websocket_urlpatterns +
-					employment.routing.websocket_urlpatterns,
+					websocket_urlpatterns,
 				)
 			)
 		),
